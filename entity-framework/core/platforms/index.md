@@ -3,12 +3,12 @@ title: Implémentations de .NET prises en charge - EF Core
 author: bricelam
 ms.date: 03/03/2020
 uid: core/platforms/index
-ms.openlocfilehash: 693d4cae85eddf86d01e17084415147c52a008c7
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 2738645596a325a1a43fd5b2164e370dd8c5893e
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413064"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434121"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Implémentations de .NET prises en charge par EF Core
 
