@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 915aaa41beb495a046f2d6260e9c3b174d5f3031
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: bfd6e161ed7f7bf96e61946f94c8eeadd24a72f5
+ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417676"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81434186"
 ---
 # <a name="loading-related-data"></a>Chargement des données associées
 
@@ -55,6 +55,27 @@ Vous pourriez souhaiter inclure plusieurs entités associées pour une entité q
 
 > [!CAUTION]
 > Depuis la version 3.0.0, chacune `Include` entraînera l’ajout d’un JOIN supplémentaire aux requêtes SQL produites par les fournisseurs relationnels, alors que les versions précédentes ont généré d’autres requêtes SQL. Cela peut changer considérablement les performances de vos requêtes, pour le meilleur ou pour le pire. En particulier, les requêtes de LINQ `Include` avec un nombre extrêmement élevé d’opérateurs peuvent devoir être décomposées en multiples requêtes distinctes de LINQ afin d’éviter le problème d’explosion cartésienne.
+
+### <a name="filtered-include"></a>Filtrés comprennent
+
+> [!NOTE]
+> Cette fonctionnalité est introduite dans EF Core 5.0.
+
+Lors de l’application Inclure à la charge des données connexes, vous pouvez appliquer certaines opérations enumérables sur la navigation de collecte incluse, ce qui permet de filtrer et de trier les résultats.
+
+Les opérations `Where`soutenues sont `ThenByDescending` `Skip`: `Take`, `OrderBy`, `OrderByDescending`, `ThenBy`, , et .
+
+De telles opérations devraient être appliquées sur la navigation de collecte dans le lambda passé à la méthode Inclure, comme indiqué dans l’exemple ci-dessous:
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#FilteredInclude)]
+
+Chaque navigation incluse ne permet qu’un seul ensemble unique d’opérations de filtre. Dans les cas où plusieurs opérations comprennent`blog.Posts` sont appliquées pour une navigation de collecte donnée (dans les exemples ci-dessous), les opérations de filtre ne peuvent être spécifiées que sur l’une d’entre elles : 
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered1)]
+
+Alternativement, des opérations identiques peuvent être appliquées pour chaque navigation qui est incluse plusieurs fois :
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
 
 ### <a name="include-on-derived-types"></a>Inclure des types dérivés
 
