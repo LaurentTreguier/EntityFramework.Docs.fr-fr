@@ -1,5 +1,5 @@
 - name: Entity Framework
-  href: index.md
+  href: index.yml
   items:
     - name: EF Core & EF6
       items:
@@ -7,7 +7,7 @@
           href: efcore-and-ef6/index.md
         - name: Déplacer d’EF6 vers EF Core
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: efcore-and-ef6/porting/index.md
             - name: Portage d’un modèle basé sur le format EDMX
               href: efcore-and-ef6/porting/port-edmx.md
@@ -17,7 +17,7 @@
           href: efcore-and-ef6/side-by-side.md
     - name: Entity Framework Core
       items:
-        - name: Vue d’ensemble
+        - name: Vue d'ensemble
           href: core/index.md
         - name: Mises en production et planification (feuille de route)
           items:
@@ -35,7 +35,7 @@
               items:
                 - name: Nouvelles fonctionnalités
                   href: core/what-is-new/ef-core-3.0/index.md
-                - name: Changements cassants
+                - name: Modifications avec rupture
                   href: core/what-is-new/ef-core-3.0/breaking-changes.md
             - name: "EF Core\_2.2"
               href: core/what-is-new/ef-core-2.2.md
@@ -55,7 +55,7 @@
                   href: core/miscellaneous/rc2-rtm-upgrade.md
                 - name: De 1.x vers 2.0
                   href: core/miscellaneous/1x-2x-upgrade.md
-        - name: Bien démarrer
+        - name: Prise en main
           items:
             - name: Tutoriel EF Core
               href: core/get-started/index.md
@@ -69,11 +69,11 @@
               href: core/miscellaneous/connection-strings.md
             - name: Journalisation
               href: core/miscellaneous/logging.md
-            - name: Résilience de connexion
+            - name: Résilience de la connexion
               href: core/miscellaneous/connection-resiliency.md
             - name: Test
               items:
-                - name: Vue d’ensemble
+                - name: Vue d'ensemble
                   href: core/miscellaneous/testing/index.md
                 - name: Tester avec SQLite
                   href: core/miscellaneous/testing/sqlite.md
@@ -85,13 +85,13 @@
               href: core/miscellaneous/nullable-reference-types.md
         - name: Créer un modèle
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: core/modeling/index.md
-            - name: Types d’entités
+            - name: Types d'entité
               href: core/modeling/entity-types.md
             - name: Propriétés d'entité
               href: core/modeling/entity-properties.md
-            - name: Keys
+            - name: Touches
               href: core/modeling/keys.md
             - name: Valeurs générées
               href: core/modeling/generated-properties.md
@@ -128,11 +128,11 @@
               href: core/modeling/spatial.md
         - name: Gérer des schémas de base de données
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: core/managing-schemas/index.md
             - name: Migrations
               items:
-                - name: Vue d’ensemble
+                - name: Vue d'ensemble
                   href: core/managing-schemas/migrations/index.md
                 - name: Environnements d’équipe
                   href: core/managing-schemas/migrations/teams.md
@@ -150,7 +150,7 @@
               href: core/managing-schemas/scaffolding.md
         - name: Interroger des données
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: core/querying/index.md
             - name: Évaluation du client/serveur
               href: core/querying/client-eval.md
@@ -172,7 +172,7 @@
               href: core/querying/how-query-works.md
         - name: Enregistrer les données
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: core/saving/index.md
             - name: Enregistrement de base
               href: core/saving/basic.md
@@ -194,11 +194,11 @@
           href: core/platforms/index.md
         - name: Fournisseurs de bases de données
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: core/providers/index.md
-            - name: "Microsoft SQL\_Server"
+            - name: Microsoft SQL Server
               items:
-                - name: Vue d’ensemble
+                - name: Vue d'ensemble
                   href: core/providers/sql-server/index.md
                 - name: Tables optimisées en mémoire
                   href: core/providers/sql-server/memory-optimized-tables.md
@@ -206,13 +206,13 @@
                   href: core/providers/sql-server/azure-sql-database.md
             - name: SQLite
               items:
-                - name: Vue d’ensemble
+                - name: Vue d'ensemble
                   href: core/providers/sqlite/index.md
                 - name: Limitations de SQLite
                   href: core/providers/sqlite/limitations.md
             - name: Cosmos
               items:
-                - name: Vue d’ensemble
+                - name: Vue d'ensemble
                   href: core/providers/cosmos/index.md
                 - name: Utiliser des données non structurées
                   href: core/providers/cosmos/unstructured-data.md
@@ -228,7 +228,7 @@
           href: core/extensions/index.md
         - name: Informations de référence sur la ligne de commande
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: core/miscellaneous/cli/index.md
             - name: Console du Gestionnaire de package (Visual Studio)
               href: core/miscellaneous/cli/powershell.md
@@ -242,11 +242,11 @@
           href: /dotnet/api/?view=efcore-3.1
     - name: Entity Framework 6
       items:
-        - name: Vue d’ensemble
+        - name: Vue d'ensemble
           href: ef6/index.md
         - name: Nouveautés
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: ef6/what-is-new/index.md
             - name: Versions précédentes
               href: ef6/what-is-new/past-releases.md
@@ -254,7 +254,7 @@
               href: ef6/what-is-new/upgrading-to-ef6.md
             - name: Versions de Visual Studio
               href: ef6/what-is-new/visual-studio.md
-        - name: Bien démarrer
+        - name: Prise en main
           href: ef6/get-started.md
         - name: Notions de base
           items:
@@ -278,7 +278,7 @@
                   href: ef6/fundamentals/configuring/dependency-resolution.md
             - name: Gestion des connexions
               href: ef6/fundamentals/connection-management.md
-            - name: Résilience de connexion
+            - name: Résilience de la connexion
               items:
                 - name: Logique de nouvelle tentative
                   href: ef6/fundamentals/connection-resiliency/retry-logic.md
@@ -292,11 +292,11 @@
                   href: ef6/fundamentals/databinding/wpf.md
             - name: Entités déconnectées
               items:
-                - name: Vue d’ensemble
+                - name: Vue d'ensemble
                   href: ef6/fundamentals/disconnected-entities/index.md
                 - name: Entités de suivi automatique
                   items:
-                    - name: Vue d’ensemble
+                    - name: Vue d'ensemble
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md
                     - name: Procédure pas à pas
                       href: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md
@@ -312,7 +312,7 @@
                   href: ef6/fundamentals/performance/pre-generated-views.md
             - name: Fournisseurs
               items:
-                - name: Vue d’ensemble
+                - name: Vue d'ensemble
                   href: ef6/fundamentals/providers/index.md
                 - name: Modèle de fournisseur EF6
                   href: ef6/fundamentals/providers/provider-model.md
@@ -330,11 +330,11 @@
                   href: ef6/fundamentals/testing/testability-article.md
         - name: Créer un modèle
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: ef6/modeling/index.md
             - name: Utiliser Code First
               items:
-                - name: Workflows
+                - name: Flux de travail
                   items:
                     - name: Avec une nouvelle base de données
                       href: ef6/modeling/code-first/workflows/new-database.md
@@ -348,7 +348,7 @@
                   items:
                     - name: Enums
                       href: ef6/modeling/code-first/data-types/enums.md
-                    - name: spatial
+                    - name: Spatial
                       href: ef6/modeling/code-first/data-types/spatial.md
                 - name: Conventions
                   items:
@@ -370,7 +370,7 @@
                       href: ef6/modeling/code-first/fluent/cud-stored-procedures.md
                 - name: Migrations
                   items:
-                    - name: Vue d’ensemble
+                    - name: Vue d'ensemble
                       href: ef6/modeling/code-first/migrations/index.md
                     - name: Migrations automatiques
                       href: ef6/modeling/code-first/migrations/automatic.md
@@ -384,7 +384,7 @@
                       href: ef6/modeling/code-first/migrations/teams.md
             - name: Utiliser EF Designer
               items:
-                - name: Workflows
+                - name: Flux de travail
                   items:
                     - name: Model-First
                       href: ef6/modeling/designer/workflows/model-first.md
@@ -396,7 +396,7 @@
                       href: ef6/modeling/designer/data-types/complex-types.md
                     - name: Enums
                       href: ef6/modeling/designer/data-types/enums.md
-                    - name: spatial
+                    - name: Spatial
                       href: ef6/modeling/designer/data-types/spatial.md
                 - name: Fractionner les mappages
                   items:
@@ -412,9 +412,9 @@
                       href: ef6/modeling/designer/inheritance/tpt.md
                 - name: Mapper les procédures stockées
                   items:
-                    - name: Requête
+                    - name: Query
                       href: ef6/modeling/designer/stored-procedures/query.md
-                    - name: Update
+                    - name: Mise à jour
                       href: ef6/modeling/designer/stored-procedures/cud.md
                 - name: Mapper les relations
                   href: ef6/modeling/designer/relationships.md
@@ -424,7 +424,7 @@
                   href: ef6/modeling/designer/select-runtime-version.md
                 - name: Génération de code
                   items:
-                    - name: Vue d’ensemble
+                    - name: Vue d'ensemble
                       href: ef6/modeling/designer/codegen/index.md
                     - name: ObjectContext hérité
                       href: ef6/modeling/designer/codegen/legacy-objectcontext.md
@@ -448,7 +448,7 @@
                   href: ef6/modeling/designer/keyboard-shortcuts.md
         - name: Interroger des données
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: ef6/querying/index.md
             - name: Charger une méthode
               href: ef6/querying/load-method.md
@@ -462,15 +462,15 @@
               href: ef6/querying/related-data.md
         - name: Enregistrer les données
           items:
-            - name: Vue d’ensemble
+            - name: Vue d'ensemble
               href: ef6/saving/index.md
-            - name: Suivi des modifications
+            - name: Change tracking
               items:
                 - name: Détecter automatiquement les changements
                   href: ef6/saving/change-tracking/auto-detect-changes.md
                 - name: État des entités
                   href: ef6/saving/change-tracking/entity-state.md
-                - name: Valeurs de propriétés
+                - name: Valeurs de propriété
                   href: ef6/saving/change-tracking/property-values.md
             - name: Gérer les conflits d’accès concurrentiel
               href: ef6/saving/concurrency.md
@@ -484,7 +484,7 @@
               href: ef6/resources/blogs.md
             - name: Études de cas
               href: ef6/resources/case-studies.md
-            - name: Participez
+            - name: Collaboration
               href: ef6/resources/contribute.md
             - name: Obtenir de l’aide
               href: ef6/resources/get-help.md
