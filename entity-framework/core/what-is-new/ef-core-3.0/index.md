@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/index
-ms.openlocfilehash: ebc676930ffc396aa70bb8afb91cf5a0cd43e04d
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 39684cdcc17e3baa4b77cf29d54b626294771332
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413194"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103137"
 ---
 # <a name="new-features-in-entity-framework-core-30"></a>Nouvelles fonctionnalités d’Entity Framework Core 3.0
 
@@ -113,15 +113,15 @@ La nouvelle API d’interception dans EF Core 3.0 permet de fournir une logique 
 
 Similairement aux fonctionnalités d’interception qui existaient dans EF 6, les intercepteurs vous permettent d’intercepter des opérations avant ou après leur exécution. Lorsque vous les interceptez avant leur exécution, vous êtes autorisé à contourner l’exécution et à fournir d’autres résultats provenant de la logique d’interception.
 
-Par exemple, pour manipuler un texte de commande, vous pouvez créer un `IDbCommandInterceptor` :
+Par exemple, pour manipuler un texte de commande, vous pouvez créer un `DbCommandInterceptor` :
 
 ``` csharp
 public class HintCommandInterceptor : DbCommandInterceptor
 {
-    public override InterceptionResult ReaderExecuting(
+    public override InterceptionResult<DbDataReader> ReaderExecuting(
         DbCommand command,
         CommandEventData eventData,
-        InterceptionResult result)
+        InterceptionResult<DbDataReader> result)
     {
         // Manipulate the command text, etc. here...
         command.CommandText += " OPTION (OPTIMIZE FOR UNKNOWN)";

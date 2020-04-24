@@ -1,6 +1,6 @@
 ### YamlMime:Hub
 title: Documentation Entity Framework
-summary: Entity Framework Core est un mappeur de base de données objet moderne pour .NET. Il prend en charge les requêtes LINQ, le suivi des modifications, les mises à jour et les migrations de schéma. EF Core fonctionne avec SQL Server, Azure SQL Database, SQLite, Azure Cosmos.
+summary: Entity Framework Core est un mappeur de base de données objet moderne pour .NET. Il prend en charge les requêtes LINQ, le suivi des modifications, les mises à jour et les migrations de schéma. EF Core fonctionne avec de nombreuses bases de données, notamment SQL Database (local et Azure), SQLite, MySQL, PostgreSQL et Azure Cosmos DB.
 brand: dotnet
 metadata:
   title: Documentation Entity Framework
@@ -9,13 +9,13 @@ metadata:
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 04/14/2020
-  ms.openlocfilehash: b5f82a93e767da1230795895c24fabd17448157a
-  ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+  ms.date: 04/15/2020
+  ms.openlocfilehash: bfb96b06a2832b489e194fede0c04efebcc7496d
+  ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/16/2020
-  ms.locfileid: "81434349"
+  ms.lasthandoff: 04/23/2020
+  ms.locfileid: "82103098"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -143,11 +143,15 @@ additionalContent:
       - url: core/providers/sql-server/index.md
         text: SQL Server
       - url: core/providers/sqlite/index.md
-        text: SQL Lite
+        text: SQLite
+      - url: http://www.npgsql.org/efcore/index.html
+        text: PostgreSQL
+      - url: https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql
+        text: MySQL et MariaDB
       - url: core/providers/cosmos/index.md
-        text: Cosmos
+        text: API SQL Azure Cosmos DB
       - url: core/providers/in-memory/index.md
-        text: En mémoire pour les tests
+        text: En mémoire (test)
       - url: core/providers/index.md
         text: Tous les fournisseurs de bases de données actuels
     - title: Informations de référence sur la ligne de commande
