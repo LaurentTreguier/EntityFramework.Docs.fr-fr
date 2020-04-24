@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 7727229fc50a4bfd39e05481399e392037402396
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 3fa407ca36d32a33a6bc889cd54ff88537510e9c
+ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434108"
+ms.lasthandoff: 04/23/2020
+ms.locfileid: "82103111"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -22,7 +22,7 @@ Ces outils et extensions fournissent des fonctionnalités supplémentaires pour 
 
 ### <a name="llblgen-pro"></a>LLBLGen Pro
 
-LLBLGen Pro est une solution de modélisation d’entités qui prend en charge Entity Framework et Entity Framework Core. Il vous permet de définir facilement votre modèle d’entités et de le mapper à votre base de données, en utilisant Database First ou Model First : vous pouvez donc commencer à écrire des requêtes immédiatement. Pour EF Core : 2.
+LLBLGen Pro est une solution de modélisation d’entités qui prend en charge Entity Framework et Entity Framework Core. Il vous permet de définir facilement votre modèle d’entités et de le mapper à votre base de données, en utilisant Database First ou Model First : vous pouvez donc commencer à écrire des requêtes immédiatement. Pour EF Core : 2, 3
 
 [Site web](https://www.llblgen.com/)
 
