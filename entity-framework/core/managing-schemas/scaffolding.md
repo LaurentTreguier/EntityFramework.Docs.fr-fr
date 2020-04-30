@@ -5,18 +5,18 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 1ba9352d261f1c131b0d70f8cdad2128d9afaefe
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 41204de8cd8c4f292afa16b209eb5302eaf74905
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416762"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538443"
 ---
-# <a name="reverse-engineering"></a>Rétroconception
+# <a name="reverse-engineering"></a> Reconstitution de la logique des produits
 
-L’ingénierie à rebours est le processus de génération de modèles automatique des classes de type d’entité et une classe DbContext basée sur un schéma de base de données. Il peut être effectué à l’aide de la commande `Scaffold-DbContext` des outils de la console du gestionnaire de package EF Core (PMC) ou de la commande `dotnet ef dbcontext scaffold` des outils de l’interface de ligne de commande (CLI) .NET.
+L’ingénierie à rebours est le processus de génération de modèles automatique des classes de type d’entité et une classe DbContext basée sur un schéma de base de données. Il peut être effectué à l' `Scaffold-DbContext` aide de la commande des outils de la console du gestionnaire de package `dotnet ef dbcontext scaffold` (PMC) EF Core ou de la commande des outils de l’interface de ligne de commande (CLI) .net.
 
-## <a name="installing"></a>Installation
+## <a name="installing"></a>En cours d'installation
 
 Avant l’ingénierie à rebours, vous devez installer les [Outils PMC](xref:core/miscellaneous/cli/powershell) (Visual Studio uniquement) ou les [Outils CLI](xref:core/miscellaneous/cli/dotnet). Pour plus d’informations, consultez les liens.
 
@@ -26,7 +26,7 @@ Vous devez également installer un [fournisseur de base de données](xref:core/p
 
 Le premier argument de la commande est une chaîne de connexion à la base de données. Les outils utilisent cette chaîne de connexion pour lire le schéma de la base de données.
 
-La façon dont vous utilisez les guillemets et les séquences d’échappement de la chaîne de connexion dépend du shell que vous utilisez pour exécuter la commande. Reportez-vous à la documentation de votre shell pour obtenir des informations spécifiques. Par exemple, PowerShell vous oblige à échapper le caractère `$`, mais pas `\`.
+La façon dont vous utilisez les guillemets et les séquences d’échappement de la chaîne de connexion dépend du shell que vous utilisez pour exécuter la commande. Reportez-vous à la documentation de votre shell pour obtenir des informations spécifiques. Par exemple, PowerShell vous oblige à placer le `$` caractère dans une séquence `\`d’échappement, mais pas.
 
 ``` powershell
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer
@@ -38,7 +38,7 @@ dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog
 
 ### <a name="configuration-and-user-secrets"></a>Configuration et secrets de l’utilisateur
 
-Si vous avez un projet ASP.NET Core, vous pouvez utiliser la syntaxe `Name=<connection-string>` pour lire la chaîne de connexion à partir de la configuration.
+Si vous avez un projet ASP.NET Core, vous pouvez utiliser la `Name=<connection-string>` syntaxe pour lire la chaîne de connexion à partir de la configuration.
 
 Cela fonctionne bien avec l' [outil secret Manager](https://docs.microsoft.com/aspnet/core/security/app-secrets#secret-manager) pour conserver le mot de passe de votre base de données distinct de votre code base.
 
@@ -55,9 +55,9 @@ Le deuxième argument est le nom du fournisseur. Le nom du fournisseur est gén�
 
 Toutes les tables du schéma de base de données sont rétroconçues dans les types d’entités par défaut. Vous pouvez limiter les tables qui sont rétroconçues en spécifiant des schémas et des tables.
 
-Le paramètre `-Schemas` dans PMC et l’option `--schema` de l’interface CLI peuvent être utilisés pour inclure chaque table dans un schéma.
+Le `-Schemas` paramètre dans PMC et l' `--schema` option dans l’interface CLI peuvent être utilisés pour inclure chaque table dans un schéma.
 
-`-Tables` (PMC) et `--table` (CLI) peuvent être utilisés pour inclure des tables spécifiques.
+`-Tables`(PMC) et `--table` (CLI) peuvent être utilisés pour inclure des tables spécifiques.
 
 Pour inclure plusieurs tables dans PMC, utilisez un tableau.
 
@@ -73,11 +73,11 @@ dotnet ef dbcontext scaffold ... --table Artist --table Album
 
 ## <a name="preserving-names"></a>Préservation des noms
 
-Les noms de table et de colonne sont fixes pour mieux correspondre aux conventions de nommage .NET pour les types et les propriétés par défaut. La spécification du commutateur `-UseDatabaseNames` dans PMC ou de l’option `--use-database-names` dans l’interface CLI désactivera ce comportement en conservant autant que possible les noms de bases de données originaux. Les identificateurs .NET non valides seront toujours fixes et les noms synthétisés, tels que les propriétés de navigation, seront toujours conformes aux conventions d’affectation de noms .NET.
+Les noms de table et de colonne sont fixes pour mieux correspondre aux conventions de nommage .NET pour les types et les propriétés par défaut. La spécification `-UseDatabaseNames` du commutateur dans PMC ou `--use-database-names` de l’option dans l’interface CLI désactivera ce comportement en conservant autant que possible les noms de bases de données originaux. Les identificateurs .NET non valides seront toujours fixes et les noms synthétisés, tels que les propriétés de navigation, seront toujours conformes aux conventions d’affectation de noms .NET.
 
 ## <a name="fluent-api-or-data-annotations"></a>API Fluent ou annotations de données
 
-Par défaut, les types d’entités sont configurés à l’aide de l’API Fluent. Spécifiez `-DataAnnotations` (PMC) ou `--data-annotations` (CLI) pour utiliser à la place des annotations de données lorsque cela est possible.
+Par défaut, les types d’entités sont configurés à l’aide de l’API Fluent. Spécifiez `-DataAnnotations` (PMC) `--data-annotations` ou (CLI) pour utiliser à la place des annotations de données lorsque cela est possible.
 
 Par exemple, l’utilisation de l’API Fluent entraîne l’échafaudage suivant :
 
@@ -101,7 +101,7 @@ Le nom de classe DbContext généré par génération de modèles automatique se
 
 ## <a name="directories-and-namespaces"></a>Répertoires et espaces de noms
 
-Les classes d’entité et une classe DbContext sont intégrées au répertoire racine du projet et utilisent l’espace de noms par défaut du projet. Vous pouvez spécifier le répertoire dans lequel les classes sont échafaudées à l’aide de `-OutputDir` (PMC) ou `--output-dir` (CLI). L’espace de noms sera l’espace de noms racine, ainsi que les noms de tous les sous-répertoires sous le répertoire racine du projet.
+Les classes d’entité et une classe DbContext sont intégrées au répertoire racine du projet et utilisent l’espace de noms par défaut du projet. Vous pouvez spécifier le répertoire dans lequel les classes sont échafaudées à l' `-OutputDir` aide `--output-dir` de (PMC) ou (CLI).
 
 Vous pouvez également utiliser `-ContextDir` (PMC) et `--context-dir` (CLI) pour générer une structure de la classe DbContext dans un répertoire distinct des classes de type d’entité.
 
@@ -111,6 +111,16 @@ Scaffold-DbContext ... -ContextDir Data -OutputDir Models
 
 ```dotnetcli
 dotnet ef dbcontext scaffold ... --context-dir Data --output-dir Models
+```
+
+ Par défaut, l’espace de noms est l’espace de noms racine, ainsi que les noms de tous les sous-répertoires sous le répertoire racine du projet. Toutefois, vous pouvez remplacer l’espace de noms pour toutes les classes `-Namespace` de sortie à l' `--namespace` aide de (PMC) ou (CLI). Vous pouvez également remplacer l’espace de noms uniquement pour la classe DbContext `-ContextNamespace` à l’aide de `--context-namespace` (PMC) ou (CLI).
+
+``` powershell
+Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContext.Namespace
+```
+
+```dotnetcli
+dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace Your.DbContext.Namespace
 ```
 
 ## <a name="how-it-works"></a>Fonctionnement
@@ -126,7 +136,7 @@ Enfin, le modèle est utilisé pour générer le code. Les classes de type d’e
 * Tout ce qui concerne un modèle peut être représenté à l’aide d’un schéma de base de données. Par exemple, les informations sur les [**hiérarchies d’héritage**](../modeling/inheritance.md), les [**types détenus**](../modeling/owned-entities.md)et le [**fractionnement de table**](../modeling/table-splitting.md) ne sont pas présentes dans le schéma de la base de données. Pour cette raison, ces constructions ne feront jamais l’effet d’une rétroconception.
 * En outre, **certains types de colonne** peuvent ne pas être pris en charge par le fournisseur EF Core. Ces colonnes ne sont pas incluses dans le modèle.
 * Vous pouvez définir des [**jetons d’accès concurrentiel**](../modeling/concurrency.md), dans un modèle EF Core pour empêcher deux utilisateurs de mettre à jour la même entité en même temps. Certaines bases de données ont un type spécial pour représenter ce type de colonne (par exemple, rowversion dans SQL Server), auquel cas nous pouvons rétroconcevoir ces informations. Toutefois, les autres jetons d’accès concurrentiel ne feront pas l’être par rétroconception.
-* [La C# fonctionnalité de type référence Nullable 8](/dotnet/csharp/tutorials/nullable-reference-types) n’est actuellement pas prise en charge dans l’ingénierie à C# rebours : EF Core génère toujours du code qui suppose que la fonctionnalité est désactivée. Par exemple, les colonnes de texte Nullable seront échafaudées en tant que propriété de type `string`, et non pas `string?`, avec l’API Fluent ou les annotations de données utilisées pour configurer si une propriété est requise ou non. Vous pouvez modifier le code de génération de modèles automatique et C# les remplacer par des annotations de possibilité de valeur null. La prise en charge de la génération de modèles automatique pour les types de référence Nullable est suivie par le problème [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
+* [La fonctionnalité de type référence Nullable de C# 8](/dotnet/csharp/tutorials/nullable-reference-types) n’est actuellement pas prise en charge dans l’ingénierie à rebours : EF Core génère toujours du code C# qui suppose que la fonctionnalité est désactivée. Par exemple, les colonnes de texte Nullable seront échafaudées en tant que propriété `string` de type `string?`, et non, avec l’API Fluent ou les annotations de données utilisées pour configurer si une propriété est requise ou non. Vous pouvez modifier le code de génération de modèles automatique et les remplacer par des annotations de possibilité de valeur null. La prise en charge de la génération de modèles automatique pour les types de référence Nullable est suivie par le problème [#15520](https://github.com/aspnet/EntityFrameworkCore/issues/15520).
 
 ## <a name="customizing-the-model"></a>Personnalisation du modèle
 
@@ -140,7 +150,7 @@ Vous pouvez également ajouter des constructeurs, des méthodes, des propriété
 
 Après avoir apporté des modifications à la base de données, vous devrez peut-être mettre à jour votre modèle de EF Core pour refléter ces modifications. Si les modifications de la base de données sont simples, il peut être plus facile d’apporter manuellement les modifications à votre modèle de EF Core. Par exemple, le fait de renommer une table ou une colonne, de supprimer une colonne ou de mettre à jour le type d’une colonne est une modification triviale dans le code.
 
-Toutefois, les modifications les plus importantes ne sont pas aussi faciles à effectuer manuellement. Un flux de travail courant consiste à reconstituer à nouveau le modèle de la base de données à l’aide d' `-Force` (PMC) ou d' `--force` (CLI) pour remplacer le modèle existant par un modèle mis à jour.
+Toutefois, les modifications les plus importantes ne sont pas aussi faciles à effectuer manuellement. Un flux de travail courant consiste à rétroconcevoir à nouveau le modèle à partir `-Force` de la base de `--force` données en utilisant (PMC) ou (CLI) pour remplacer le modèle existant par un modèle mis à jour.
 
 Une autre fonctionnalité couramment demandée est la possibilité de mettre à jour le modèle à partir de la base de données tout en préservant la personnalisation, comme les renommages, les hiérarchies de types, etc. Utilisez [#831](https://github.com/aspnet/EntityFrameworkCore/issues/831) de problème pour suivre la progression de cette fonctionnalité.
 
