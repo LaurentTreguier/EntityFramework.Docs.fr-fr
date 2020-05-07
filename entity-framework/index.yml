@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: bfb96b06a2832b489e194fede0c04efebcc7496d
-  ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+  ms.openlocfilehash: 54cbd0fcda19c4e2f35a3c3d4f350e3fecf3f597
+  ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
   ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/23/2020
-  ms.locfileid: "82103098"
+  ms.lasthandoff: 04/29/2020
+  ms.locfileid: "82538377"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -48,6 +48,38 @@ additionalContent:
         text: Application web ASP.NET Core Razor Pages accédant à SQL Server LocalDB ou SQLite avec EF Core
       - url: /aspnet/core/data/ef-mvc/
         text: Application web ASP.NET Core MVC accédant à SQL Server avec EF Core
+    - title: Bases de données prises en charge
+      links:
+      - url: core/providers/sql-server/index.md
+        text: SQL Server
+      - url: core/providers/sqlite/index.md
+        text: SQLite
+      - url: http://www.npgsql.org/efcore/index.html
+        text: PostgreSQL
+      - url: https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql
+        text: MySQL et MariaDB
+      - url: core/providers/cosmos/index.md
+        text: API SQL Azure Cosmos DB
+      - url: core/providers/in-memory/index.md
+        text: En mémoire (test)
+      - url: core/providers/index.md
+        text: Tous les fournisseurs de bases de données actuels
+    - title: Plateformes
+      links:
+      - url: https://docs.microsoft.com/ef/core/platforms/
+        text: Toutes les plateformes prises en charge
+      - url: https://docs.microsoft.com/aspnet/core/data/ef-rp/intro
+        text: ASP.NET Core Razor Pages
+      - url: https://docs.microsoft.com/aspnet/core/data/ef-mvc/
+        text: ASP.NET Core MVC
+      - url: https://docs.microsoft.com/aspnet/core/blazor/dependency-injection?#use-of-entity-framework-dbcontext-from-di
+        text: Serveur Blazor
+      - url: https://docs.microsoft.com/ef/ef6/fundamentals/databinding/wpf
+        text: Windows Presentation Foundation (WPF)
+      - url: https://docs.microsoft.com/ef/ef6/fundamentals/databinding/winforms
+        text: Windows Forms (WinForms)
+      - url: https://github.com/dotnet/efcore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin
+        text: Xamarin (prise en charge partielle)
     - title: Notions de base
       links:
       - url: core/miscellaneous/connection-strings.md
@@ -138,22 +170,6 @@ additionalContent:
         text: Enregistrement asynchrone
       - url: core/saving/disconnected-entities.md
         text: Entités déconnectées
-    - title: Bases de données prises en charge
-      links:
-      - url: core/providers/sql-server/index.md
-        text: SQL Server
-      - url: core/providers/sqlite/index.md
-        text: SQLite
-      - url: http://www.npgsql.org/efcore/index.html
-        text: PostgreSQL
-      - url: https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql
-        text: MySQL et MariaDB
-      - url: core/providers/cosmos/index.md
-        text: API SQL Azure Cosmos DB
-      - url: core/providers/in-memory/index.md
-        text: En mémoire (test)
-      - url: core/providers/index.md
-        text: Tous les fournisseurs de bases de données actuels
     - title: Informations de référence sur la ligne de commande
       links:
       - url: core/miscellaneous/cli/index.md

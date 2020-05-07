@@ -1,15 +1,15 @@
 ---
-title: Tester des composants avec EF Core - EF Core
+title: Test de code qui utilise EF Core - EF Core
 description: Différentes approches de test des applications qui utilisent EF Core.
 author: ajcvickers
-ms.date: 03/23/2020
+ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: b1ab37ebb0a3aae09d5d5b225f746cf83dfba170
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 308128b0d51b9e0d1fc1ebb0ed00e803100efb52
+ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80634252"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82538362"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test de code qui utilise EF Core
 
@@ -20,6 +20,9 @@ Pour tester le code qui accède à une base de données, vous devez adopter l’
 
 Ce document décrit les compromis liés à chacun de ces choix, et montre comment utiliser EF Core avec chaque approche.  
 
+> [!TIP]
+> Pour obtenir du code illustrant les concepts introduits ici, consultez l’[exemple de test EF Core](xref:core/miscellaneous/testing/testing-sample). 
+
 ## <a name="all-database-providers-are-not-equal"></a>Tous les fournisseurs de base de données ne sont pas égaux
 
 Il est très important de comprendre qu’EF Core n’est pas conçu pour effectuer l’abstraction de tous les aspects du système de base de données sous-jacent.
@@ -27,10 +30,10 @@ Au lieu de cela, EF Core est un ensemble commun de modèles et de concepts qui p
 Les fournisseurs de base de données EF Core superposent ensuite le comportement et les fonctionnalités propres à la base de données sur ce framework commun.
 Cela permet à chaque système de base de données de faire ce qu’il fait le mieux, tout en maintenant une compatibilité, le cas échéant, avec d’autres systèmes de base de données. 
 
-Fondamentalement, cela signifie que le fait de changer de fournisseur de base de données changera le comportement d’EF Core, et que l’application ne fonctionnera pas correctement à moins de tenir compte explicitement de toutes les différences de comportement.
+Fondamentalement, cela signifie que le fait de changer de fournisseur de base de données changera le comportement d’EF Core, et que l’application ne fonctionnera pas correctement à moins de tenir compte explicitement de toute différence de comportement.
 Cela dit, dans de nombreux cas cela fonctionnera car il existe un degré élevé de normalisation entre les bases de données relationnelles.
 C’est à la fois bien et embêtant.
-Bien, car le passage d’une base de données à une autre peut être relativement simple.
+Bien, car le passage d’un système de base de données à un autre peut être relativement simple.
 Embêtant, car cela risque de procurer un faux sentiment de sécurité si l’application n’est pas entièrement testée sur le nouveau système de base de données.  
 
 ## <a name="approach-1-production-database-system"></a>Approche 1 : système de base de données de production
@@ -45,20 +48,22 @@ Heureusement, dans ce cas la réponse est très facile : utilisez des serveurs 
 SQL Azure et SQL Server sont extrêmement similaires ; exécuter des tests par rapport à SQL Server constitue donc généralement un compromis raisonnable.
 Cela dit, il est toujours prudent d’exécuter des tests par rapport à SQL Azure lui-même avant de passer en production.
  
-### <a name="localdb"></a>LocalDb 
+### <a name="localdb"></a>LocalDB 
 
 Tous les principaux systèmes de base de données ont une forme de « Developer Edition » pour les tests locaux.
-SQL Server offre également une fonctionnalité nommée [LocalDb](/sql/database-engine/configure-windows/sql-server-express-localdb?view=sql-server-ver15).
-Le principal avantage de LocalDb est qu’elle fait tourner l’instance de base de données à la demande.
+SQL Server offre une fonctionnalité nommée [LocalDB](/sql/database-engine/configure-windows/sql-server-express-localdb?view=sql-server-ver15).
+Le principal avantage de LocalDB est qu’elle fait tourner l’instance de base de données à la demande.
 Cela évite d’avoir un service de base de données en cours d’exécution sur votre ordinateur même quand vous n’exécutez pas de tests.
 
-LocalDb n’est pas sans problème :
+LocalDB n’est pas sans problème :
 * Elle ne prend pas en charge tout ce que [SQL Server Developer Edition](/sql/sql-server/editions-and-components-of-sql-server-2016?view=sql-server-ver15) prend en charge
 * Elle n’est pas disponible sur Linux
 * Elle peut entraîner un décalage lors de la première série de tests quand le service est lancé
 
 Personnellement, je n’ai jamais pensé que c’était un problème d’avoir un service de base de données en cours d’exécution sur mon ordinateur de développement, et je recommande généralement d’utiliser Developer Edition à la place.
-Toutefois, cette approche peut convenir à certaines personnes, en particulier sur les ordinateurs de développement moins puissants.  
+Toutefois, LocalDB peut convenir à certaines personnes, en particulier sur les ordinateurs de développement moins puissants.
+
+L’exécution de SQL Server (ou de tout autre système de base de données) dans un conteneur Docker (similaire au système d’exploitation) est une autre façon d’éviter d’exécuter le système de base de données directement sur votre ordinateur de développement.  
 
 ## <a name="approach-2-sqlite"></a>Approche 2 : SQLite
 
@@ -105,8 +110,8 @@ Toutefois, nous n’essayons jamais de simuler DbContext ou IQueryable.
 Ceci est difficile, fastidieux et fragile.
 **Ne le faites pas.**
 
-Au lieu de cela, nous utilisons la base de données en mémoire quand nous exécutons des tests unitaires sur quelque chose qui utilise DbContext.
-Dans ce cas, l’utilisation de la base de données en mémoire est appropriée, car le test ne dépend pas du comportement de la base de données.
+Au lieu de cela, nous utilisons la base de données en mémoire EF quand nous exécutons des tests unitaires sur quelque chose qui utilise DbContext.
+Dans ce cas, l’utilisation de la base de données en mémoire EF est appropriée, car le test ne dépend pas du comportement de la base de données.
 Mais ne procédez pas ainsi pour tester des mises à jour ou des requêtes de base de données réelles.   
 
-Pour obtenir des conseils propres à EF Core sur l’utilisation de la base de données en mémoire pour les tests unitaires, consultez [Test avec le fournisseur en mémoire](xref:core/miscellaneous/testing/in-memory).
+L’[exemple de test EF Core](xref:core/miscellaneous/testing/testing-sample) illustre des tests avec la base de données en mémoire EF, ainsi que SQL Server et SQLite. 

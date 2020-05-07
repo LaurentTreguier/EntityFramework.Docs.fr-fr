@@ -1,11 +1,3 @@
----
-ms.openlocfilehash: 79a2a10cae9f8a5541bca132e407d4abbe95e093
-ms.sourcegitcommit: 87fcaba46535aa351db4bdb1231bd14b40e459b9
-ms.translationtype: HT
-ms.contentlocale: fr-FR
-ms.lasthandoff: 04/22/2019
-ms.locfileid: "59929885"
----
 # <a name="contributing-to-the-entity-framework-documentation"></a>Contribution à la documentation Entity Framework
 
 Le processus d’ajout d’articles et d’exemples de code à la documentation d’Entity Framework est expliqué ci-dessous. Les contributions peuvent aller de la simple correction de fautes de frappe à la rédaction plus complexe de nouveaux articles.
@@ -18,8 +10,8 @@ Les articles sont stockés dans le dépôt sous forme de fichiers Markdown. Pour
 
 Vous devez avoir une connaissance de base de [Git et GitHub.com](https://guides.github.com/activities/hello-world/).
 
-* Ouvrez un [dossier](https://github.com/aspnet/EntityFramework.Docs/issues/new) décrivant ce que vous voulez faire, par exemple modifier un article existant ou en créer un. Attendez l’approbation de l’équipe EF avant de vous investir davantage.
-* Dupliquez (fork) le dépôt [aspnet/EntityFramework.Docs](https://github.com/aspnet/EntityFramework.Docs/) et créez une branche pour vos modifications.
+* Ouvrez un [dossier](https://github.com/dotnet/EntityFramework.Docs/issues/new) décrivant ce que vous voulez faire, par exemple modifier un article existant ou en créer un. Attendez l’approbation de l’équipe EF avant de vous investir davantage.
+* EMBRANCHEZ le référentiel [dotnet/EntityFramework. docs](https://github.com/dotnet/EntityFramework.Docs/) et créez une branche pour vos modifications.
 * Soumettez une demande de tirage dans la branche principale avec vos modifications.
 * Répondez aux commentaires sur la demande de tirage.
 
@@ -35,7 +27,7 @@ Les exemples de code sont stockés dans le dossier racine `samples`. Ils sont or
 
 ## <a name="code-snippets"></a>Extraits de code
 
-Les articles contiennent souvent des extraits de code pour illustrer les points abordés. DFM vous permet de copier du code dans le fichier Markdown ou de faire référence à un fichier de code distinct. Dans la mesure du possible, utilisez des fichiers de code distincts pour limiter les risques d’erreurs dans le code. Les fichiers de code doivent être stockés dans le dépôt, conformément à la structure de dossiers décrite ci-dessus pour les exemples de projets.
+Les articles contiennent fréquemment des extraits de code pour illustrer les points abordés. DFM vous permet de copier du code dans le fichier Markdown ou de faire référence à un fichier de code distinct. Dans la mesure du possible, utilisez des fichiers de code distincts pour limiter les risques d’erreurs dans le code. Les fichiers de code doivent être stockés dans le dépôt, conformément à la structure de dossiers décrite ci-dessus pour les exemples de projets.
 
 Voici quelques exemples de [syntaxe d’extrait de code DFM](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html#code-snippet).
 
