@@ -4,12 +4,12 @@ description: Différentes approches de test des applications qui utilisent EF Co
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: 308128b0d51b9e0d1fc1ebb0ed00e803100efb52
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: 415769e9c3c664ce49c9308740d39a65a10807ba
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538362"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672891"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test de code qui utilise EF Core
 
@@ -18,7 +18,7 @@ Pour tester le code qui accède à une base de données, vous devez adopter l’
 * Exécuter des requêtes et des mises à jour sur un autre système de base de données plus facile à gérer.
 * Utiliser des doubles de test ou un autre mécanisme pour éviter d’utiliser une base de données.
 
-Ce document décrit les compromis liés à chacun de ces choix, et montre comment utiliser EF Core avec chaque approche.  
+Ce document décrit les compromis liés à chacun de ces choix et montre comment utiliser EF Core avec chaque approche.  
 
 > [!TIP]
 > Pour obtenir du code illustrant les concepts introduits ici, consultez l’[exemple de test EF Core](xref:core/miscellaneous/testing/testing-sample). 
@@ -63,7 +63,7 @@ LocalDB n’est pas sans problème :
 Personnellement, je n’ai jamais pensé que c’était un problème d’avoir un service de base de données en cours d’exécution sur mon ordinateur de développement, et je recommande généralement d’utiliser Developer Edition à la place.
 Toutefois, LocalDB peut convenir à certaines personnes, en particulier sur les ordinateurs de développement moins puissants.
 
-L’exécution de SQL Server (ou de tout autre système de base de données) dans un conteneur Docker (similaire au système d’exploitation) est une autre façon d’éviter d’exécuter le système de base de données directement sur votre ordinateur de développement.  
+L’exécution de SQL Server (ou de tout autre système de base de données) dans un conteneur Docker (ou similaire) est une autre façon d’éviter d’exécuter le système de base de données directement sur votre ordinateur de développement.  
 
 ## <a name="approach-2-sqlite"></a>Approche 2 : SQLite
 
@@ -93,9 +93,9 @@ Pour obtenir des instructions propres à EF Core, consultez [Test avec SQLite](x
 
 EF Core est fourni avec une base de données en mémoire que nous utilisons pour les tests internes d’EF Core lui-même.
 Cette base de données n’est en général **pas appropriée en tant que substitut pour les tests des applications qui utilisent EF Core**. Plus précisément :
-* Il ne s’agit pas d’une base de données relationnelle
-* Elle ne prend pas en charge les transactions
-* Elle n’est pas optimisée pour les performances
+* Il ne s’agit pas d’une base de données relationnelle.
+* Elle ne prend pas en charge les transactions.
+* Elle n’est pas optimisée pour les performances.
 
 Aucun de ces éléments n’est très important lors du test des composants internes d’EF Core, car nous les utilisons spécifiquement là où la base de données n’a pas d’importance pour le test.
 En revanche, ces éléments ont tendance à être très importants lors du test d’une application qui utilise EF Core.
