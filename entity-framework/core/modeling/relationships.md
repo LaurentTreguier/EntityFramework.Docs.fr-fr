@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 6d68e813cec6c989e8e4cb848f8740489645c65c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 8d3df109f34c2a77305db1e2be2eea1694d7ad6b
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/15/2020
-ms.locfileid: "79402165"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672769"
 ---
 # <a name="relationships"></a>Relations
 
@@ -40,23 +40,23 @@ Il existe un certain nombre de termes utilisés pour décrire les relations
   
 * **Relation à référence automatique :** Relation dans laquelle les types d’entités dependent et principal sont identiques.
 
-Le code suivant illustre une relation un-à-plusieurs entre `Blog` et `Post`
+Le code suivant illustre une relation un-à-plusieurs entre `Blog` et`Post`
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Full)]
 
-* `Post` est l’entité dépendante
+* `Post`est l’entité dépendante
 
-* `Blog` est l’entité principale
+* `Blog`est l’entité principale
 
-* `Blog.BlogId` est la clé principale (dans le cas présent, il s’agit d’une clé primaire plutôt que d’une clé secondaire)
+* `Blog.BlogId`est la clé principale (dans le cas présent, il s’agit d’une clé primaire plutôt que d’une clé secondaire)
 
-* `Post.BlogId` est la clé étrangère
+* `Post.BlogId`est la clé étrangère
 
-* `Post.Blog` est une propriété de navigation de référence
+* `Post.Blog`est une propriété de navigation de référence
 
-* `Blog.Posts` est une propriété de navigation de collection
+* `Blog.Posts`est une propriété de navigation de collection
 
-* `Post.Blog` est la propriété de navigation inverse de `Blog.Posts` (et vice versa)
+* `Post.Blog`est la propriété de navigation inverse de `Blog.Posts` (et vice versa)
 
 ## <a name="conventions"></a>Conventions
 
@@ -93,7 +93,7 @@ Bien qu’il soit recommandé d’avoir une propriété de clé étrangère déf
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=NoForeignKey&highlight=6,15)]
 
-Dans cet exemple, la clé étrangère Shadow est `BlogId` car l’attente du nom de navigation est redondante.
+Dans cet exemple, la clé étrangère Shadow est en `BlogId` raison du fait que le nom de navigation est redondant.
 
 > [!NOTE]
 > Si une propriété du même nom existe déjà, le nom de la propriété Shadow sera suivi d’un nombre.
@@ -120,7 +120,7 @@ Pour plus d’informations sur les différents comportements de suppression et l
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
-Pour configurer une relation dans l’API Fluent, commencez par identifier les propriétés de navigation qui composent la relation. `HasOne` ou `HasMany` identifie la propriété de navigation sur le type d’entité sur lequel vous commencez la configuration. Vous enchaînez ensuite un appel à `WithOne` ou `WithMany` pour identifier la navigation inverse. `HasOne`/`WithOne` sont utilisés pour les propriétés de navigation de référence et `HasMany`/`WithMany` sont utilisés pour les propriétés de navigation de collection.
+Pour configurer une relation dans l’API Fluent, commencez par identifier les propriétés de navigation qui composent la relation. `HasOne`ou `HasMany` identifie la propriété de navigation sur le type d’entité sur lequel vous commencez la configuration. Vous enchaînez ensuite un appel à `WithOne` ou `WithMany` pour identifier la navigation inverse. `HasOne`/`WithOne`sont utilisés pour les propriétés de navigation de référence et `HasMany` / `WithMany` sont utilisés pour les propriétés de navigation de collection.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?name=NoForeignKey&highlight=8-10)]
 
@@ -134,15 +134,25 @@ Vous pouvez utiliser les annotations de données pour configurer la combinaison 
 > Vous pouvez uniquement utiliser [required] sur les propriétés de l’entité dépendante pour avoir un impact sur la nécessité de la relation. [Obligatoire] dans la navigation de l’entité principale, est généralement ignoré, mais l’entité peut devenir la dépendante.
 
 > [!NOTE]
-> Les annotations de données `[ForeignKey]` et `[InverseProperty]` sont disponibles dans l’espace de noms `System.ComponentModel.DataAnnotations.Schema`. `[Required]` est disponible dans l’espace de noms `System.ComponentModel.DataAnnotations`.
+> Les annotations `[ForeignKey]` de données et `[InverseProperty]` sont disponibles dans l' `System.ComponentModel.DataAnnotations.Schema` espace de noms. `[Required]`est disponible dans l' `System.ComponentModel.DataAnnotations` espace de noms.
 
 ---
 
 ### <a name="single-navigation-property"></a>Propriété de navigation unique
 
-Si vous n’avez qu’une seule propriété de navigation, il y a des surcharges sans paramètre de `WithOne` et `WithMany`. Cela indique qu’il existe conceptuellement une référence ou une collection à l’autre extrémité de la relation, mais qu’il n’y a aucune propriété de navigation incluse dans la classe d’entité.
+Si vous n’avez qu’une seule propriété de navigation, il y a des surcharges sans paramètre de `WithOne` et `WithMany` . Cela indique qu’il existe conceptuellement une référence ou une collection à l’autre extrémité de la relation, mais qu’il n’y a aucune propriété de navigation incluse dans la classe d’entité.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneNavigation.cs?name=OneNavigation&highlight=8-10)]
+
+---
+
+### <a name="configuring-navigation-properties"></a>Configuration des propriétés de navigation
+
+Une fois la propriété de navigation créée, vous devrez peut-être la configurer ultérieurement. Dans EFCore 5,0, une nouvelle API Fluent est ajoutée pour vous permettre d’effectuer cette configuration.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
+
+[!NOTE] Cet appel ne peut pas être utilisé pour créer une propriété de navigation. Elle est utilisée uniquement pour configurer une propriété de navigation qui a été créée précédemment en définissant une relation ou à partir d’une convention.
 
 ### <a name="foreign-key"></a>Clé étrangère
 
@@ -165,10 +175,10 @@ Vous pouvez utiliser les annotations de données pour configurer la propriété 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Relationships/ForeignKey.cs?name=ForeignKey&highlight=17)]
 
 > [!TIP]  
-> L’annotation `[ForeignKey]` peut être placée sur l’une des propriétés de navigation de la relation. Elle n’a pas besoin de se trouver dans la propriété de navigation de la classe d’entité dépendante.
+> L' `[ForeignKey]` annotation peut être placée sur l’une des propriétés de navigation de la relation. Elle n’a pas besoin de se trouver dans la propriété de navigation de la classe d’entité dépendante.
 
 > [!NOTE]
-> La propriété spécifiée à l’aide de `[ForeignKey]` sur une propriété de navigation n’a pas besoin d’exister le type dépendant. Dans ce cas, le nom spécifié est utilisé pour créer une clé étrangère cachée.
+> La propriété spécifiée à l’aide `[ForeignKey]` de sur une propriété de navigation n’a pas besoin d’exister le type dépendant. Dans ce cas, le nom spécifié est utilisé pour créer une clé étrangère cachée.
 
 ---
 
@@ -180,7 +190,7 @@ Vous pouvez utiliser la surcharge de chaîne de `HasForeignKey(...)` pour config
 
 #### <a name="foreign-key-constraint-name"></a>Nom de la contrainte de clé étrangère
 
-Par Convention, lorsque vous ciblez une base de données relationnelle, les contraintes de clé étrangère sont nommées FK_<dependent type name> _<principal type name>_ <foreign key property name>. Pour les clés étrangères composites <foreign key property name> devient une liste de noms de propriétés de clé étrangère séparés par un trait de soulignement.
+Par Convention, lorsque vous ciblez une base de données relationnelle, les contraintes de clé étrangère sont nommées FK_ <dependent type name> _<principal type name>_ <foreign key property name> . Pour les clés étrangères composites <foreign key property name> devient une liste de noms de propriétés de clé étrangère séparés par un trait de soulignement.
 
 Vous pouvez également configurer le nom de la contrainte comme suit :
 
@@ -216,7 +226,7 @@ Vous pouvez utiliser l’API Fluent pour déterminer si la relation est obligato
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=6)]
 
 > [!NOTE]
-> L’appel de `IsRequired(false)` rend également la propriété de clé étrangère facultative, sauf si elle est configurée dans le cas contraire.
+> `IsRequired(false)`L’appel rend également la propriété de clé étrangère facultative, sauf si elle est configurée dans le cas contraire.
 
 ### <a name="cascade-delete"></a>Suppression en cascade
 
@@ -237,7 +247,7 @@ Les relations un-à-un ont une propriété de navigation de référence des deux
 > [!NOTE]  
 > EF choisit l’une des entités à dépendre en fonction de sa capacité à détecter une propriété de clé étrangère. Si l’entité incorrecte est choisie comme dépendant, vous pouvez utiliser l’API Fluent pour corriger ce problème.
 
-Quand vous configurez la relation avec l’API Fluent, vous utilisez les méthodes `HasOne` et `WithOne`.
+Quand vous configurez la relation avec l’API Fluent, vous utilisez les `HasOne` `WithOne` méthodes et.
 
 Quand vous configurez la clé étrangère, vous devez spécifier le type d’entité dépendant. Notez le paramètre générique fourni à `HasForeignKey` dans la liste ci-dessous. Dans une relation un-à-plusieurs, il est clair que l’entité avec la navigation de référence est la dépendance et celle avec la collection est le principal. Mais ce n’est pas le cas dans une relation un-à-un, c’est pourquoi il est nécessaire de la définir explicitement.
 

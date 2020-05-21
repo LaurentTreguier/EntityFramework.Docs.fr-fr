@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/20/2018
 ms.assetid: 2CB5809E-0EFB-44F6-AF14-9D5BFFFBFF9D
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 83f6b819409d502dba17a678d44a0746a4a77f4b
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: a3e066056fc67031060920f5f7763007bdc1d2d3
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417495"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672882"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
@@ -38,7 +38,7 @@ Pour plus d’informations sur cette fonctionnalité, lisez la [section sur le f
 
 ### <a name="owned-types"></a>Types détenus
 
-Un type d’entité possédé peut partager le même type .NET avec un autre type d’entité appartenant, mais puisqu’il ne peut pas être identifié juste par le type .NET il doit y avoir une navigation à elle à partir d’un autre type d’entité. L’entité qui contient la navigation définie est le propriétaire. Quand le propriétaire fait l’objet d’une interrogation, les types détenus sont inclus par défaut.
+Un type d’entité détenu peut partager le même type .NET avec un autre type d’entité détenu, mais étant donné qu’il ne peut pas être identifié uniquement par le type .NET, il doit y avoir une navigation à partir d’un autre type d’entité. L’entité qui contient la navigation définie est le propriétaire. Quand le propriétaire fait l’objet d’une interrogation, les types détenus sont inclus par défaut.
 
 Par convention, une clé primaire cachée est créée pour le type détenu et est mappée à la même table que le propriétaire à l’aide du fractionnement de table. Cela permet d’utiliser des types détenus à l’image des types complexes dans EF6 :
 
@@ -96,7 +96,7 @@ public class BloggingContext : DbContext
 }
 ```
 
-Nous définissons un filtre au niveau du modèle qui implémente une architecture multilocataire et une suppression réversible pour des instances du type d’entité `Post`. Notez l’utilisation `DbContext` d’une `TenantId`propriété au niveau de l’instance : . Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte (c’est-à-dire celle qui exécute la requête).
+Nous définissons un filtre au niveau du modèle qui implémente une architecture multilocataire et une suppression réversible pour des instances du type d’entité `Post`. Notez l’utilisation d’une `DbContext` propriété au niveau de l’instance : `TenantId` . Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte (c’est-à-dire celle qui exécute la requête).
 
 Les filtres peuvent être désactivés pour des requêtes LINQ individuelles à l’aide de l’opérateur IgnoreQueryFilters().
 
@@ -135,9 +135,9 @@ var query =
 
 Points à noter :
 
-- Par convention, le nom de la méthode est utilisé comme nom d’une fonction (dans ce cas une fonction définie par l’utilisateur) lors de la génération de la SQL, mais vous pouvez remplacer le nom et le schéma lors de l’enregistrement de la méthode.
+- Par Convention, le nom de la méthode est utilisé comme nom d’une fonction (dans ce cas, une fonction définie par l’utilisateur) lors de la génération du SQL, mais vous pouvez remplacer le nom et le schéma lors de l’inscription de la méthode.
 - Actuellement, seules les fonctions scalaires sont prises en charge.
-- Vous devez créer la fonction mappée dans la base de données. Les migrations EF Core ne s’occuperont pas de sa création.
+- Vous devez créer la fonction mappée dans la base de données. EF Core migrations ne prend pas en charge la création.
 
 ### <a name="self-contained-type-configuration-for-code-first"></a>Configuration du type autonome pour Code First
 
@@ -162,7 +162,7 @@ builder.ApplyConfiguration(new CustomerConfiguration());
 
 ### <a name="dbcontext-pooling"></a>Regroupement DbContext
 
-En règle générale, le modèle de base pour l’utilisation d’EF Core dans une application ASP.NET Core implique l’inscription d’un type DbContext personnalisé dans le système d’injection de dépendances, puis l’obtention d’instances de ce type par le biais de paramètres de constructeur dans les contrôleurs. Cela signifie qu’une instance de DbContext est créée pour chaque demande.
+En règle générale, le modèle de base pour l’utilisation d’EF Core dans une application ASP.NET Core implique l’inscription d’un type DbContext personnalisé dans le système d’injection de dépendances, puis l’obtention d’instances de ce type par le biais de paramètres de constructeur dans les contrôleurs. Cela signifie qu’une nouvelle instance de DbContext est créée pour chaque requête.
 
 La version 2.0 offre une nouvelle façon d’inscrire des types DbContext personnalisés dans l’injection de dépendances, qui introduit en toute transparence un groupe d’instances de DbContext réutilisables. Pour utiliser le regroupement DbContext, utilisez `AddDbContextPool` au lieu d’`AddDbContext` durant l’inscription des services :
 
@@ -180,7 +180,7 @@ Ce regroupement est conceptuellement semblable au regroupement de connexions dan
 La nouvelle méthode présente quelques limitations quant à ce qui peut être effectué dans la méthode `OnConfiguring()` de DbContext.
 
 > [!WARNING]  
-> Évitez d’utiliser le regroupement DbContext si vous gérez votre propre état (par exemple, champs privés) dans votre classe DbContext dérivée qui ne doit pas être partagée entre les requêtes. EF Core réinitialise uniquement l’état dont il a connaissance avant d’ajouter une instance de DbContext au pool.
+> Évitez d’utiliser le regroupement DbContext si vous gérez votre propre état (par exemple, champs privés) dans votre classe DbContext dérivée qui ne doit pas être partagée entre les requêtes. EF Core réinitialisera uniquement l’État dont il a connaissance avant d’ajouter une instance DbContext au pool.
 
 ### <a name="explicitly-compiled-queries"></a>Requêtes compilées explicitement
 
@@ -213,7 +213,7 @@ EF Core prend en charge la génération automatique des valeurs de clés par le 
 
 ## <a name="query"></a>Requête
 
-### <a name="improved-linq-translation"></a>Amélioration de la traduction LINQ
+### <a name="improved-linq-translation"></a>Traduction LINQ améliorée
 
 Permet l’exécution de davantage de requêtes, avec davantage de logique évaluée dans la base de données (plutôt qu’en mémoire) et moins de données inutilement récupérées de la base de données.
 
@@ -223,7 +223,7 @@ Le SQL généré pour les jonctions de groupes est amélioré. Les jonctions de 
 
 ### <a name="string-interpolation-in-fromsql-and-executesqlcommand"></a>Interpolation de chaîne dans FromSql et ExecuteSqlCommand
 
-C# 6 a introduit l’interpolation de chaîne, fonctionnalité qui permet d’incorporer les expressions C# directement dans des littéraux de chaîne, offrant ainsi un moyen agréable de générer des chaînes au moment de l’exécution. Dans EF Core 2.0, nous avons ajouté une prise en charge spéciale pour les chaînes interpolées à nos deux API principales qui acceptent des chaînes SQL brutes : `FromSql` et `ExecuteSqlCommand`. Ce nouveau support permet d’utiliser l’interpolation des chaînes CMD de manière « sûre ». c’est-à-dire d’une façon qui protège contre les erreurs d’injection SQL courantes pouvant se produire pendant la construction dynamique du code SQL au moment de l’exécution.
+C# 6 a introduit l’interpolation de chaîne, fonctionnalité qui permet d’incorporer les expressions C# directement dans des littéraux de chaîne, offrant ainsi un moyen agréable de générer des chaînes au moment de l’exécution. Dans EF Core 2.0, nous avons ajouté une prise en charge spéciale pour les chaînes interpolées à nos deux API principales qui acceptent des chaînes SQL brutes : `FromSql` et `ExecuteSqlCommand`. Cette nouvelle prise en charge permet d’utiliser l’interpolation de chaîne C# en mode « sécurisé ». c’est-à-dire d’une façon qui protège contre les erreurs d’injection SQL courantes pouvant se produire pendant la construction dynamique du code SQL au moment de l’exécution.
 
 Voici un exemple :
 
@@ -270,7 +270,7 @@ Notez que Like() est fourni avec une implémentation en mémoire, ce qui peut ê
 
 ## <a name="database-management"></a>Gestion de bases de données
 
-### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>Crochet de pluralisation pour l’échafaudage DbContext
+### <a name="pluralization-hook-for-dbcontext-scaffolding"></a>Crochet de pluralisation pour la génération de modèles de DbContext
 
 EF Core 2.0 introduit un nouveau service *IPluralizer* qui est utilisé pour singulariser les noms des types d’entité et pluraliser les noms DbSet. L’implémentation par défaut étant l’absence d’opération, il s’agit simplement d’un dispositif permettant à l’utilisateur d’incorporer facilement son propre pluraliseur.
 
@@ -309,9 +309,9 @@ Nous disposons ainsi d’une solution plus fiable dans Microsoft.Data.Sqlite pou
 
 Renforce considérablement les possibilités d’interaction des fournisseurs avec le modèle et simplifie le fonctionnement des conventions, annotations et API Fluent avec les différents fournisseurs.
 
-EF Core 2.0 génère désormais un [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs) différent par fournisseur utilisé. Cela est généralement transparent pour l’application. Cela a facilité une simplification des API métadonnées de niveau inférieur de telle sorte que tout `.SqlServer`accès `.Sqlite`à des *concepts communs de métadonnées relationnelles* est toujours fait par un appel à `.Relational` au lieu de , etc.
+EF Core 2.0 génère désormais un [IModel](https://github.com/aspnet/EntityFramework/blob/master/src/EFCore/Metadata/IModel.cs) différent par fournisseur utilisé. Cela est généralement transparent pour l’application. Cela a facilité la simplification des API de métadonnées de niveau inférieur, de telle sorte que tout accès aux *concepts de métadonnées relationnelles communs* soit toujours effectué via un appel à `.Relational` au lieu de `.SqlServer` , `.Sqlite` , etc.
 
-### <a name="consolidated-logging-and-diagnostics"></a>Exploitation forestière et diagnostic consolidés
+### <a name="consolidated-logging-and-diagnostics"></a>Journalisation et diagnostics consolidés
 
 Les mécanismes de journalisation (basés sur ILogger) et de diagnostics (basés sur DiagnosticSource) partagent désormais plus de code.
 

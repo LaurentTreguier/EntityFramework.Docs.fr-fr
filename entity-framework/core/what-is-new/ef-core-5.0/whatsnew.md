@@ -2,14 +2,14 @@
 title: Nouveautés de EF Core 5,0
 description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
-ms.date: 03/30/2020
+ms.date: 05/11/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: c902988920e3b1a6039808fe0658fc19dee2728a
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103072"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672849"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
@@ -20,6 +20,38 @@ Cette page ne duplique pas le [plan pour EF Core 5,0](plan.md).
 Le plan décrit les thèmes globaux pour EF Core 5,0, y compris tout ce que nous envisageons d’inclure avant d’expédier la version finale.
 
 Nous ajouterons des liens à partir d’ici à la documentation officielle au fur et à mesure de sa publication.
+
+## <a name="preview-4"></a>Preview 4
+
+### <a name="configure-database-precisionscale-in-model"></a>Configurer la précision/l’échelle de la base de données dans le modèle
+
+La précision et l’échelle d’une propriété peuvent désormais être spécifiées à l’aide du générateur de modèles.
+Par exemple :
+
+```CSharp
+modelBuilder
+    .Entity<Blog>()
+    .Property(b => b.Numeric)
+    .HasPrecision(16, 4);
+```
+
+La précision et l’échelle peuvent toujours être définies par le biais du type de base de données complet, par exemple « Decimal (16, 4) ». 
+
+La documentation est suivie d’un problème [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).
+
+### <a name="specify-sql-server-index-fill-factor"></a>Spécifier SQL Server facteur de remplissage d’index
+
+Le facteur de remplissage peut désormais être spécifié lors de la création d’un index sur SQL Server.
+Par exemple :
+
+```CSharp
+modelBuilder
+    .Entity<Customer>()
+    .HasIndex(e => e.Name)
+    .HasFillFactor(90);
+```
+
+La documentation est suivie d’un problème [#2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378).
 
 ## <a name="preview-3"></a>Preview 3
 
@@ -61,7 +93,7 @@ modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 Notez que l' `Navigation` API ne remplace pas la configuration de la relation.
 Au lieu de cela, il permet une configuration supplémentaire des propriétés de navigation dans les relations déjà découvertes ou définies.
 
-La documentation est suivie d’un problème [#2302](https://github.com/dotnet/EntityFramework.Docs/issues/2302).
+Consultez la [documentation](xref:core/modeling/relationships#configuring-navigation-properties)sur la configuration des propriétés de navigation.
 
 ### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a>Nouveaux paramètres de ligne de commande pour les espaces de noms et les chaînes de connexion 
 
@@ -72,22 +104,25 @@ Par exemple, pour rétroconcevoir une base de données en plaçant le contexte e
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
 ```
 
-En outre, une chaîne de connexion peut désormais être passée `database-update` à la commande :
+Pour plus d’informations, consultez la documentation sur les [migrations](xref:core/managing-schemas/migrations/index#namespaces) et l' [ingénierie à rebours](xref:core/managing-schemas/scaffolding#directories-and-namespaces) .
+
+---
+En outre, une chaîne de connexion peut désormais être passée à la `database-update` commande :
 
 ```
 dotnet ef database update --connection "connection string"
 ```
 
-Des paramètres équivalents ont également été ajoutés aux commandes PowerShell utilisées dans la console du gestionnaire de package VS.
+Pour plus d’informations, consultez la documentation sur les [Outils](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) .
 
-La documentation est suivie d’un problème [#2303](https://github.com/dotnet/EntityFramework.Docs/issues/2303).
+Des paramètres équivalents ont également été ajoutés aux commandes PowerShell utilisées dans la console du gestionnaire de package VS.
 
 ### <a name="enabledetailederrors-has-returned"></a>EnableDetailedErrors a retourné
 
 Pour des raisons de performances, EF n’effectue pas de vérifications null supplémentaires lors de la lecture des valeurs de la base de données.
 Cela peut entraîner des exceptions qui sont difficiles à la cause première lorsqu’une valeur Null inattendue est rencontrée.
 
-L' `EnableDetailedErrors` utilisation de permet d’ajouter une vérification de valeur null supplémentaire aux requêtes de sorte que, pour une faible surcharge de performances, ces erreurs sont plus faciles à suivre à une cause racine.  
+L’utilisation de `EnableDetailedErrors` permet d’ajouter une vérification de valeur null supplémentaire aux requêtes de sorte que, pour une faible surcharge de performances, ces erreurs sont plus faciles à suivre à une cause racine.  
 
 Par exemple :
 ```CSharp
@@ -115,7 +150,7 @@ La documentation est suivie d’un problème [#2199](https://github.com/dotnet/E
 
 ### <a name="support-for-the-sql-server-datalength-function"></a>Prise en charge de la fonction DATALENGTH SQL Server
 
-Vous pouvez y accéder à l’aide `EF.Functions.DataLength` de la nouvelle méthode.
+Vous pouvez y accéder à l’aide de la nouvelle `EF.Functions.DataLength` méthode.
 Par exemple :
 ```CSharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
@@ -183,7 +218,7 @@ Ces améliorations se trouvent dans le fournisseur Microsoft. Data. sqlite de AD
 
 ### <a name="simple-logging"></a>Journalisation simple
 
-Cette fonctionnalité ajoute des fonctionnalités similaires `Database.Log` à dans EF6.
+Cette fonctionnalité ajoute des fonctionnalités similaires à `Database.Log` dans EF6.
 Autrement dit, il offre un moyen simple d’obtenir des journaux à partir de EF Core sans avoir besoin de configurer tout type d’infrastructure de journalisation externe.
 
 La documentation préliminaire est incluse dans l' [État EF hebdomadaire du 5 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).
@@ -200,7 +235,7 @@ Une documentation supplémentaire est suivie par le [#1331](https://github.com/d
 
 ### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a>Utiliser un attribut C# pour indiquer qu’une entité n’a pas de clé
 
-Un type d’entité peut désormais être configuré comme n’ayant aucune clé à `KeylessAttribute`l’aide de la nouvelle.
+Un type d’entité peut désormais être configuré comme n’ayant aucune clé à l’aide de la nouvelle `KeylessAttribute` .
 Par exemple :
 
 ```CSharp
@@ -270,7 +305,7 @@ La documentation est suivie d’un problème [#2082](https://github.com/dotnet/E
 
 ### <a name="isrelational"></a>IsRelational
 
-Une nouvelle `IsRelational` méthode a été ajoutée en plus des, `IsSqlServer` `IsSqlite`, et `IsInMemory`existants.
+Une nouvelle `IsRelational` méthode a été ajoutée en plus des `IsSqlServer` , `IsSqlite` , et existants `IsInMemory` .
 Cette méthode peut être utilisée pour tester si DbContext utilise un fournisseur de base de données relationnelle.
 Par exemple :
 
@@ -295,7 +330,7 @@ Utilisez le générateur de modèles de OnModelCreating pour configurer un ETag�
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-SaveChanges lèvera ensuite un `DbUpdateConcurrencyException` en cas de conflit d’accès concurrentiel, qui [peut être géré](https://docs.microsoft.com/ef/core/saving/concurrency) pour implémenter les nouvelles tentatives, etc.
+SaveChanges lèvera ensuite un en cas de `DbUpdateConcurrencyException` conflit d’accès concurrentiel, qui [peut être géré](https://docs.microsoft.com/ef/core/saving/concurrency) pour implémenter les nouvelles tentatives, etc.
 
 La documentation est suivie d’un problème [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).
 
@@ -327,7 +362,7 @@ Une documentation supplémentaire est suivie par le [#2079](https://github.com/d
 
 ### <a name="query-translation-for-reverse"></a>Traduction de requête pour l’inverse
 
-Les requêtes `Reverse` utilisant sont désormais traduites.
+Les requêtes utilisant `Reverse` sont désormais traduites.
 Par exemple :
 
 ```CSharp

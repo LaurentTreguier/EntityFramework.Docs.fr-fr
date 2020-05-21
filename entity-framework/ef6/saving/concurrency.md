@@ -3,12 +3,12 @@ title: Gestion des conflits d’accès concurrentiel-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: 81ae186201fdfac331b1d4e7836b222545fe78b5
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: a99f824fe256a10b84f539a5339a09624315efa4
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419691"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672709"
 ---
 # <a name="handling-concurrency-conflicts"></a>Gestion de conflits d'accès concurrentiel
 L’accès concurrentiel optimiste implique une tentative optimiste d’enregistrer votre entité dans la base de données dans l’espoir que les données n’ont pas été modifiées depuis le chargement de l’entité. S’il s’avère que les données ont changé, une exception est levée et vous devez résoudre le conflit avant de tenter de l’enregistrer à nouveau. Cette rubrique explique comment gérer de telles exceptions dans Entity Framework. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
@@ -52,7 +52,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Un bon moyen de simuler une exception d’accès concurrentiel consiste à définir un point d’arrêt sur l’appel de SaveChanges, puis à modifier une entité qui est enregistrée dans la base de données à l’aide d’un autre outil tel que SQL Management Studio. Vous pouvez également insérer une ligne avant SaveChanges pour mettre à jour la base de données directement à l’aide de SqlCommand. Par exemple :  
+Un bon moyen de simuler une exception d’accès concurrentiel consiste à définir un point d’arrêt sur l’appel de SaveChanges, puis à modifier une entité qui est enregistrée dans la base de données à l’aide d’un autre outil tel que SQL Server Management Studio. Vous pouvez également insérer une ligne avant SaveChanges pour mettre à jour la base de données directement à l’aide de SqlCommand. Par exemple :  
 
 ``` csharp
 context.Database.SqlCommand(

@@ -1,24 +1,22 @@
 ---
-title: Exemple de test de EF Core-EF Core
-description: Exemple illustrant comment tester des applications qui utilisent EF Core
-author: ajcvickers
-ms.date: 04/22/2020
-uid: core/miscellaneous/testing/testing-sample
+title: ''
+description: ''
+author: ''
+ms.date: ''
+uid: ''
 no-loc:
 - Item
 - Tag
 - Items
 - Tags
-- items
-- tags
-ms.openlocfilehash: dda7191df7646aa06aab51d8d7891bd0ba155674
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: ae073fc0b3a99fb9de07a3e0a42c638fe0838a5a
+ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82564286"
+ms.lasthandoff: 05/20/2020
+ms.locfileid: "83672813"
 ---
-# <a name="ef-core-testing-sample"></a>Exemple de test de EF Core
+# <a name="ef-core-testing-sample"></a>Exemple de test EF Core
 
 > [!TIP]
 > Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/).
@@ -34,13 +32,13 @@ L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/
 
 ### <a name="the-model-and-business-rules"></a>Le modèle et les règles d’entreprise
 
-Le modèle qui stocke cette API a deux types d' Items entité Tags: et.
+Le modèle qui stocke cette API a deux types d’entité : Items et Tags .
 
-* Itemsavoir un nom qui respecte la casse et une collection Tagsde.
-* Chacun Tag a une étiquette et un nombre qui représente le nombre de fois où il a été appliqué Itemà l'.
-* Chaque Item doit être Tag associé à un avec une étiquette donnée.
+* Itemsavoir un nom qui respecte la casse et une collection de Tags .
+* Chacun Tag a une étiquette et un nombre qui représente le nombre de fois où il a été appliqué à l' Item .
+* Chaque Item doit être Tag associé à une étiquette donnée.
   * Si un élément est balisé plusieurs fois avec la même étiquette, le décompte de la balise existante avec cette étiquette est incrémenté au lieu d’une nouvelle balise créée. 
-* La suppression Item d’un doit supprimer Tagstous les associés.
+* La suppression d’un Item doit supprimer tous les associés Tags .
 
 #### <a name="the-item-entity-type"></a>Le Item type d’entité
 
@@ -48,7 +46,7 @@ Le `Item` type d’entité :
 
 [!code-csharp[ItemEntityType](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Item.cs?name=ItemEntityType)]
 
-Et sa configuration dans `DbContext.OnModelCreating`:
+Et sa configuration dans `DbContext.OnModelCreating` :
 
 [!code-csharp[ConfigureItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureItem)]
 
@@ -56,14 +54,14 @@ Notez que le type d’entité limite la manière dont il peut être utilisé pou
 - La clé primaire est mappée directement au `_id` champ et n’est pas exposée publiquement
   - EF détecte et utilise le constructeur privé qui accepte la valeur et le nom de la clé primaire.
 - La `Name` propriété est en lecture seule et définie uniquement dans le constructeur. 
-- Tagssont exposés en tant `IReadOnlyList<Tag>` que pour empêcher une modification arbitraire.
-  - EF associe `Tags` la propriété au `_tags` champ de stockage en faisant correspondre leurs noms. 
+- Tagssont exposés en tant que `IReadOnlyList<Tag>` pour empêcher une modification arbitraire.
+  - EF associe la `Tags` propriété au `_tags` champ de stockage en faisant correspondre leurs noms. 
   - La `AddTag` méthode prend une étiquette de balise et implémente la règle d’entreprise décrite ci-dessus.
     Autrement dit, une balise est ajoutée uniquement pour les nouvelles étiquettes.
     Sinon, le nombre sur une étiquette existante est incrémenté.
 - La `Tags` propriété de navigation est configurée pour une relation plusieurs-à-un
-  - Il n’est pas nécessaire d’utiliser une propriété Tag de Itemnavigation de à, donc elle n’est pas incluse.
-  - En outre Tag , ne définit pas une propriété de clé étrangère.
+  - Il n’est pas nécessaire d’utiliser une propriété de navigation de Tag à Item , donc elle n’est pas incluse.
+  - En outre, Tag ne définit pas une propriété de clé étrangère.
     Dans ce cas, EF crée et gère une propriété en état Shadow.
 
 #### <a name="the-tag-entity-type"></a>Le Tag type d’entité
@@ -72,11 +70,11 @@ Le `Tag` type d’entité :
 
 [!code-csharp[TagEntityType](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Tag.cs?name=TagEntityType)]
 
-Et sa configuration dans `DbContext.OnModelCreating`:
+Et sa configuration dans `DbContext.OnModelCreating` :
 
 [!code-csharp[ConfigureTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureTag)]
 
-De même que Item, Tag masque sa clé primaire et définit la `Label` propriété en lecture seule.
+De même Item que, Tag masque sa clé primaire et définit la `Label` propriété en lecture seule.
 
 ### <a name="the-itemscontroller"></a>ItemsController
 
@@ -85,11 +83,11 @@ Elle obtient un `DbContext` à partir du conteneur d’injection de dépendances
 
 [!code-csharp[Constructor](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Constructor)]
 
-Il possède des méthodes pour obtenir Items tout ou Item un avec un nom donné :
+Il possède des méthodes pour obtenir tout Items ou un Item avec un nom donné :
 
 [!code-csharp[Get](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=Get)]
 
-Il a une méthode pour ajouter un nouveau Item:
+Il a une méthode pour ajouter un nouveau Item :
 
 [!code-csharp[PostItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostItem)]
 
@@ -97,7 +95,7 @@ Méthode pour baliser un Item avec une étiquette :
 
 [!code-csharp[PostTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=PostTag)]
 
-Et une méthode pour supprimer un Item et tous les Tagsassociés :
+Et une méthode pour supprimer un Item et tous les associés Tags :
 
 [!code-csharp[DeleteItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/Controllers/ItemsController.cs?name=DeleteItem)]
 
@@ -132,7 +130,7 @@ En outre, XUnit n’exécutera pas de tests dans une classe de test donnée en p
 
 > [!TIP]
 > Cet exemple recrée la base de données pour chaque test.
-> Cela fonctionne bien pour les tests de base de données en mémoire SQLite et EF, mais peut impliquer une surcharge importante avec d’autres systèmes de base de données, y compris SQL Server.
+> Cela fonctionne bien pour les tests de base de données SQLite et EF en mémoire, mais peut impliquer une surcharge importante avec d’autres systèmes de base de données, y compris SQL Server.
 > Les approches pour réduire cette surcharge sont traitées dans [partage des bases de données entre les tests](xref:core/miscellaneous/testing/sharing-databases).
 
 Quand chaque test est exécuté :
@@ -153,14 +151,14 @@ Par exemple :
 
 Bien que l’application utilise l’injection de dépendances, les tests ne le font pas.
 Il serait intéressant d’utiliser l’injection de dépendances ici, mais le code supplémentaire dont elle a besoin n’a que peu de valeur.
-Au lieu de cela, une DbContext `new` est créée à l’aide de, puis directement transmise en tant que dépendance au contrôleur.
+Au lieu de cela, une DbContext est créée à l’aide de `new` , puis directement transmise en tant que dépendance au contrôleur.
 
 Chaque test exécute ensuite la méthode testée sur le contrôleur et Assert les résultats comme prévu.
 Par exemple :
 
 [!code-csharp[CanGetItems](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
-Notez que différentes instances de DbContext sont utilisées pour amorcer la base de données et exécuter les tests. Cela garantit que le test n’utilise pas (ou ne passe pas) les entités suivies par le contexte lors de l’amorçage.
+Notez que différentes instances de DbContext sont utilisées pour amorcer la base de données et exécuter les tests. Cela permet de s’assurer que le test n’utilise pas (ou ne passe pas) les entités suivies par le contexte lors de l’amorçage.
 Il correspond également mieux à ce qui se passe dans les services et applications Web.
 
 Les tests qui transforment la base de données créent une deuxième instance DbContext dans le test pour des raisons similaires.
@@ -180,9 +178,9 @@ Le test avec un système de base de données différent de celui utilisé dans l
 Celles-ci sont couvertes au niveau conceptuel du [test de code qui utilise EF Core](xref:core/miscellaneous/testing/index).  
 Les sections ci-dessous couvrent deux exemples de tels problèmes démontrés par les tests de cet exemple.
 
-### <a name="test-passes-when-application-is-broken"></a>Le test réussit lorsque l’application est interrompue
+### <a name="test-passes-when-the-application-is-broken"></a>Le test réussit lorsque l’application est interrompue
 
-L’une des exigences de notre application est que «Items a un nom qui respecte la casse et une collection de Tags».
+L’une des exigences de notre application est que « Items a un nom qui respecte la casse et une collection de Tags ».
 Cela est assez simple à tester :
 
 [!code-csharp[CanAddItemCaseInsensitive](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItemCaseInsensitive)]
@@ -204,14 +202,14 @@ System.InvalidOperationException : Sequence contains more than one element
 Cela est dû au fait que la base de données EF en mémoire et la base de données SQLite sont sensibles à la casse par défaut.
 SQL Server, en revanche, ne respecte pas la casse ! 
 
-EF Core, par conception, ne modifie pas ces comportements, car la modification forcée du respect de la casse peut avoir un impact considérable sur les performances.
+EF Core, par conception, ne modifie pas ces comportements, car le fait de forcer une modification du respect de la casse peut avoir un impact considérable sur les performances.
 
 Une fois que nous savons qu’il s’agit d’un problème, nous pouvons corriger l’application et compenser les tests.
 Toutefois, le point ici est que ce bogue peut être manqué en cas de test uniquement avec la base de données en mémoire EF ou les fournisseurs SQLite.
 
-### <a name="test-fails-when-application-is-correct"></a>Le test échoue quand l’application est correcte 
+### <a name="test-fails-when-the-application-is-correct"></a>Le test échoue lorsque l’application est correcte 
 
-Une autre des exigences de notre application est que « la suppression d' Item un doit supprimer tous Tagsles éléments associés ».
+Une autre des exigences de notre application est que « la suppression d’un Item doit supprimer tous les éléments associés Tags ».
 Là encore, facile à tester :
 
 [!code-csharp[DeleteItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=DeleteItem)]
