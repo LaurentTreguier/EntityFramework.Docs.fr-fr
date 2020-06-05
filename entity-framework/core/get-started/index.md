@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: 7ace80bf326395d3b68f3e745100cd45356d7973
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
-ms.translationtype: HT
+ms.openlocfilehash: b45a7e5010dd3ef37ea952aaf483847ae95ea4ef
+ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434095"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84418940"
 ---
 # <a name="getting-started-with-ef-core"></a>Bien démarrer avec EF Core
 
@@ -27,7 +27,7 @@ Installez les logiciels suivants :
 
 * [SDK .NET Core](https://www.microsoft.com/net/download/core).
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Visual Studio 2019 version 16.3 ou ultérieure](https://www.visualstudio.com/downloads/) avec cette charge de travail :
   * **Développement multiplateforme .NET Core** (sous **Autres ensembles d’outils**)
@@ -43,7 +43,7 @@ dotnet new console -o EFGetStarted
 cd EFGetStarted
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Ouvrir Visual Studio
 * Cliquez sur **Créer un nouveau projet**.
@@ -62,10 +62,10 @@ Pour installer EF Core, installez le package pour le ou les fournisseurs de base
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **Outils > Gestionnaire de package NuGet > Console du Gestionnaire de package**
-* Exécutez les commandes suivantes :
+* Exécutez les commandes suivantes :
 
   ``` PowerShell
   Install-Package Microsoft.EntityFrameworkCore.Sqlite
@@ -83,7 +83,7 @@ Définissez une classe de contexte et des classes d’entité qui composent le m
 
 * Dans le répertoire du projet, créez **Model.cs** avec le code suivant.
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Cliquez avec le bouton droit sur le projet, puis sélectionnez **Ajouter > Classe**.
 * Entrez le nom **Model.cs** et cliquez sur **Ajouter**.
