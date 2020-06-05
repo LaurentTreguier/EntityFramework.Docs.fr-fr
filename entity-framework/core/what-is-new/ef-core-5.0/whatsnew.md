@@ -2,14 +2,14 @@
 title: Nouveautés de EF Core 5,0
 description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
-ms.date: 05/11/2020
+ms.date: 06/02/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew.md
-ms.openlocfilehash: fcb2eb8df99a06eaf3459835347a4027a363b86b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 45d851a4b08a26dda0c24e20c79f42964fa4fae4
+ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672849"
+ms.lasthandoff: 06/04/2020
+ms.locfileid: "84418937"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
@@ -20,6 +20,117 @@ Cette page ne duplique pas le [plan pour EF Core 5,0](plan.md).
 Le plan décrit les thèmes globaux pour EF Core 5,0, y compris tout ce que nous envisageons d’inclure avant d’expédier la version finale.
 
 Nous ajouterons des liens à partir d’ici à la documentation officielle au fur et à mesure de sa publication.
+
+## <a name="preview-5"></a>Préversion 5
+
+### <a name="database-collations"></a>Classements de base de données
+
+Le classement par défaut d’une base de données peut désormais être spécifié dans le modèle EF.
+Cela passera à des migrations générées pour définir le classement lors de la création de la base de données.
+Par exemple :
+
+```CSharp
+modelBuilder.UseCollation("German_PhoneBook_CI_AS");
+```
+
+Les migrations génèrent ensuite les éléments suivants pour créer la base de données sur SQL Server :
+
+```sql
+CREATE DATABASE [Test]
+COLLATE German_PhoneBook_CI_AS;
+```
+
+Le classement à utiliser pour des colonnes de base de données spécifiques peut également être spécifié.
+Par exemple :
+
+```CSharp
+ modelBuilder
+     .Entity<User>()
+     .Property(e => e.Name)
+     .UseCollation("German_PhoneBook_CI_AS");
+```
+
+Pour ceux qui n’utilisent pas de migrations, les classements sont à présent rétroconçus de la base de données lors de la génération de modèles automatique.
+
+Enfin, le `EF.Functions.Collate()` autorise les requêtes ad hoc utilisant des classements différents.
+Par exemple :
+
+```CSharp
+context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
+```
+
+La requête suivante est générée pour SQL Server :
+
+```sql
+SELECT TOP(2) [u].[Id], [u].[Name]
+FROM [Users] AS [u]
+WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
+```
+
+Notez que les classements ad hoc doivent être utilisés avec précaution, car ils peuvent avoir un impact négatif sur les performances de la base de données.
+
+La documentation est suivie d’un problème [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).
+
+### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>Transmettre les arguments dans IDesignTimeDbContextFactory
+
+Les arguments sont à présent transmis à partir de la ligne de commande dans la `CreateDbContext` méthode de [IDesignTimeDbContextFactory](https://docs.microsoft.com/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1). Par exemple, pour indiquer qu’il s’agit d’une build dev, un argument personnalisé (par exemple, `dev` ) peut être passé sur la ligne de commande :
+
+```
+dotnet ef migrations add two --verbose --dev
+``` 
+
+Cet argument est ensuite transmis à la fabrique, où il peut être utilisé pour contrôler la façon dont le contexte est créé et initialisé.
+Par exemple :
+
+```CSharp
+public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
+{
+    public SomeDbContext CreateDbContext(string[] args) 
+        => new SomeDbContext(args.Contains("--dev"));
+}
+```
+
+La documentation est suivie d’un problème [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).
+
+### <a name="no-tracking-queries-with-identity-resolution"></a>Requêtes de suivi sans suivi de la résolution d’identité
+
+Les requêtes de non-suivi peuvent maintenant être configurées pour effectuer la résolution d’identité.
+Par exemple, la requête suivante crée une nouvelle instance de blog pour chaque publication, même si chaque blog a la même clé primaire. 
+
+```CSharp
+context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
+```
+
+Toutefois, au détriment d’un peu plus lentement et en utilisant toujours plus de mémoire, cette requête peut être modifiée pour garantir qu’une seule instance de blog est créée :
+
+```CSharp
+context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).ToList();
+```
+
+Notez que cela n’est utile que pour les requêtes sans suivi, car toutes les requêtes de suivi présentent déjà ce comportement. En outre, la syntaxe de l’API suivante `PerformIdentityResolution` sera modifiée.
+Consultez [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).
+
+La documentation est suivie d’un problème [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).
+
+### <a name="stored-persisted-computed-columns"></a>Colonnes calculées (persistantes) stockées
+
+La plupart des bases de données autorisent le stockage des valeurs de colonne calculées après le calcul.
+Bien que cela prenne de l’espace disque, la colonne calculée n’est calculée qu’une seule fois lors de la mise à jour, et non chaque fois que sa valeur est récupérée.
+Cela permet également d’indexer la colonne pour certaines bases de données.
+
+EF Core 5,0 permet de configurer les colonnes calculées comme stockées.
+Par exemple :
+ 
+```CSharp
+modelBuilder
+    .Entity<User>()
+    .Property(e => e.SomethingComputed)
+    .HasComputedColumnSql("my sql", stored: true);
+```
+
+### <a name="sqlite-computed-columns"></a>SQLite colonnes calculées
+
+EF Core prend désormais en charge les colonnes calculées dans les bases de données SQLite.
 
 ## <a name="preview-4"></a>Preview 4
 
@@ -50,8 +161,6 @@ modelBuilder
     .HasIndex(e => e.Name)
     .HasFillFactor(90);
 ```
-
-La documentation est suivie d’un problème [#2378](https://github.com/dotnet/EntityFramework.Docs/issues/2378).
 
 ## <a name="preview-3"></a>Preview 3
 
