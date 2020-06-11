@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 54cbd0fcda19c4e2f35a3c3d4f350e3fecf3f597
-  ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
-  ms.translationtype: HT
+  ms.openlocfilehash: 1411737453563ac5377dbda2804dd0bd058133a7
+  ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+  ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 04/29/2020
-  ms.locfileid: "82538377"
+  ms.lasthandoff: 06/10/2020
+  ms.locfileid: "84664167"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -94,10 +94,12 @@ additionalContent:
         text: Configurer un DbContext
       - url: core/miscellaneous/nullable-reference-types.md
         text: Types références Nullables
+      - url: core/miscellaneous/collations-and-case-sensitivity.md
+        text: Classements et respect de la casse
     - title: Créer un modèle
       links:
       - url: core/modeling/index.md
-        text: Vue d'ensemble
+        text: Vue d’ensemble
       - url: core/modeling/entity-types.md
         text: Types d'entité
       - url: core/modeling/entity-properties.md
@@ -117,7 +119,7 @@ additionalContent:
     - title: Query
       links:
       - url: core/querying/index.md
-        text: Vue d'ensemble
+        text: Vue d’ensemble
       - url: core/querying/client-eval.md
         text: Évaluation du client/serveur
       - url: core/querying/tracking.md
@@ -135,7 +137,7 @@ additionalContent:
     - title: Gérer des schémas de base de données
       links:
       - url: core/managing-schemas/index.md
-        text: Vue d'ensemble
+        text: Vue d’ensemble
       - url: core/managing-schemas/migrations/index.md
         text: Vue d’ensemble de la migration
       - url: core/managing-schemas/migrations/teams.md
@@ -155,7 +157,7 @@ additionalContent:
     - title: Enregistrer les données
       links:
       - url: core/saving/index.md
-        text: Vue d'ensemble
+        text: Vue d’ensemble
       - url: core/saving/basic.md
         text: Enregistrement de base
       - url: core/saving/related-data.md

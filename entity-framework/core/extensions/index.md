@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 246cf687f2a087e9a9a569c875b27712ebe80c5c
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
-ms.translationtype: HT
+ms.openlocfilehash: 41bc403b586c9e67033d6db0dc4418510bc7b061
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538330"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664180"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -216,3 +216,11 @@ Extensions LINQ à Entity Framework Core 3.1 pour prendre en charge l’interro
 Ajoute la prise en charge de hierarchyid au fournisseur SQL Server EF Core. Pour EF Core : 3.
 
 [Dépôt GitHub](https://github.com/efcore/EFCore.SqlServer.HierarchyId)
+
+### <a name="linq2dbentityframeworkcore"></a>linq2db. EntityFrameworkCore
+
+Autre traducteur de requêtes LINQ pour les expressions SQL. Pour EF Core : 3.
+
+Prend en charge les fonctionnalités SQL avancées, telles que les CTE, la copie en bloc, les indicateurs de table, les fonctions de fenêtrage, les tables temporaires et les opérations de création/mise à jour/suppression côté base de données.
+
+[Dépôt GitHub](https://github.com/linq2db/linq2db.EntityFrameworkCore)
