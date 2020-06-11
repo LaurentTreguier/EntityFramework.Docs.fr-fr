@@ -4,12 +4,12 @@ description: Utilisation de comparateurs de valeur pour contrôler la façon don
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 9dfed7b7ef8163f4f5c94a0c81c510807c53c13d
-ms.sourcegitcommit: c3b8386071d64953ee68788ef9d951144881a6ab
+ms.openlocfilehash: 9e33bfb840606b746626daa1da7331904b495ab4
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80148270"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664115"
 ---
 # <a name="value-comparers"></a>Comparateurs de valeurs
 
@@ -94,7 +94,7 @@ Par exemple, le mappage d’une propriété contenant une liste de nombres :
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
-[Classe`List<T>`](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
+La [ `List<T>` classe](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
 * A une égalité de référence ; deux listes contenant les mêmes valeurs sont traitées comme différentes.
 * Est mutable ; les valeurs de la liste peuvent être ajoutées et supprimées.
 
@@ -110,8 +110,8 @@ Cela nécessite alors de définir un `ValueComparer<T>` sur la propriété pour 
 > L’API du générateur de modèles (« Fluent ») pour définir un comparateur de valeur n’a pas encore été implémentée.
 > Au lieu de cela, le code ci-dessus appelle SetValueComparer sur le IMutableProperty de niveau inférieur exposé par le générateur en tant que « Metadata ».
 
-Le constructeur `ValueComparer<T>` accepte trois expressions :
-* Expression pour vérifier la qualité
+Le `ValueComparer<T>` constructeur accepte trois expressions :
+* Expression pour vérifier l’égalité
 * Expression pour la génération d’un code de hachage
 * Expression pour effectuer un instantané d’une valeur  
 

@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 8d3df109f34c2a77305db1e2be2eea1694d7ad6b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 3ed25b752970cf0f55d38f1ce5b8383f1c90edc3
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672769"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664141"
 ---
 # <a name="relationships"></a>Relations
 
@@ -152,7 +152,8 @@ Une fois la propriété de navigation créée, vous devrez peut-être la configu
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
 
-[!NOTE] Cet appel ne peut pas être utilisé pour créer une propriété de navigation. Elle est utilisée uniquement pour configurer une propriété de navigation qui a été créée précédemment en définissant une relation ou à partir d’une convention.
+> [!NOTE]
+> Cet appel ne peut pas être utilisé pour créer une propriété de navigation. Elle est utilisée uniquement pour configurer une propriété de navigation qui a été créée précédemment en définissant une relation ou à partir d’une convention.
 
 ### <a name="foreign-key"></a>Clé étrangère
 
@@ -178,7 +179,7 @@ Vous pouvez utiliser les annotations de données pour configurer la propriété 
 > L' `[ForeignKey]` annotation peut être placée sur l’une des propriétés de navigation de la relation. Elle n’a pas besoin de se trouver dans la propriété de navigation de la classe d’entité dépendante.
 
 > [!NOTE]
-> La propriété spécifiée à l’aide `[ForeignKey]` de sur une propriété de navigation n’a pas besoin d’exister le type dépendant. Dans ce cas, le nom spécifié est utilisé pour créer une clé étrangère cachée.
+> La propriété spécifiée à l’aide `[ForeignKey]` de sur une propriété de navigation n’a pas besoin d’exister sur le type dépendant. Dans ce cas, le nom spécifié est utilisé pour créer une clé étrangère cachée.
 
 ---
 

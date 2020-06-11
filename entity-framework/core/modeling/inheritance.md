@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 10/27/2016
 uid: core/modeling/inheritance
-ms.openlocfilehash: 507854e3acc0347adee612e516b3e2e0b10f55cf
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 0e94013a0b894b162f4bb3ca8e7acb1aca349011
+ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417294"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84664050"
 ---
 # <a name="inheritance"></a>Héritage
 
@@ -23,9 +23,9 @@ Pour le moment, EF Core ne prend en charge que le modèle TPH (table par hiérar
 
 ## <a name="entity-type-hierarchy-mapping"></a>Mappage de la hiérarchie des types d’entités
 
-Par Convention, EF ne configure que l’héritage si au moins deux types hérités sont explicitement inclus dans le modèle. EF ne recherche pas automatiquement les types de base ou dérivés qui ne sont pas inclus dans le modèle.
+Par Convention, EF ne recherche pas automatiquement les types de base ou dérivés ; Cela signifie que si vous souhaitez qu’un type CLR de votre hiérarchie soit mappé, vous devez spécifier explicitement ce type sur votre modèle. Par exemple, si vous spécifiez uniquement le type de base d’une hiérarchie, EF Core n’inclura pas tous ses sous-types de manière implicite.
 
-Vous pouvez inclure des types dans le modèle en exposant un DbSet pour chaque type dans la hiérarchie d’héritage :
+L’exemple suivant expose un DbSet pour `Blog` et sa sous-classe `RssBlog` . Si `Blog` a une autre sous-classe, il ne sera pas inclus dans le modèle.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/InheritanceDbSets.cs?name=InheritanceDbSets&highlight=3-4)]
 
@@ -39,7 +39,7 @@ Ce modèle est mappé au schéma de base de données suivant (Notez la colonne d
 Si vous ne souhaitez pas exposer un DbSet pour une ou plusieurs entités dans la hiérarchie, vous pouvez également utiliser l’API Fluent pour vous assurer qu’elles sont incluses dans le modèle.
 
 > [!TIP]
-> Si vous ne vous fiez pas aux conventions, vous pouvez spécifier explicitement le type de base à l’aide de `HasBaseType`. Vous pouvez également utiliser `.HasBaseType((Type)null)` pour supprimer un type d’entité de la hiérarchie.
+> Si vous ne vous fiez pas aux conventions, vous pouvez spécifier explicitement le type de base à l’aide de `HasBaseType` . Vous pouvez également utiliser `.HasBaseType((Type)null)` pour supprimer un type d’entité de la hiérarchie.
 
 ## <a name="discriminator-configuration"></a>Configuration de discriminateur
 
