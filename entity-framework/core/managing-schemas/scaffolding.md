@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/13/2018
 ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: cb20120154101a9b92b4bf2bc06d20b1dafe88c1
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 2422e7455dc4ef52f0a9d3bdaebfa02f62e6d50f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672969"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370593"
 ---
 # <a name="reverse-engineering"></a> Reconstitution de la logique des produits
 
@@ -71,7 +71,7 @@ Pour inclure plusieurs tables, spécifiez l’option plusieurs fois :
 dotnet ef dbcontext scaffold ... --table Artist --table Album
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 L' `-Schemas` option peut être utilisée pour inclure chaque table dans un schéma, tandis que `-Tables` peut être utilisé pour inclure des tables spécifiques.
 
@@ -85,11 +85,11 @@ Scaffold-DbContext ... -Tables Artist, Album
 
 ## <a name="preserving-names"></a>Préservation des noms
 
-Les noms de table et de colonne sont fixes pour mieux correspondre aux conventions de nommage .NET pour les types et les propriétés par défaut. La spécification du `-UseDatabaseNames` commutateur dans PMC ou `--use-database-names` de l’option dans l’interface CLI désactivera ce comportement en conservant autant que possible les noms de bases de données originaux. Les identificateurs .NET non valides seront toujours fixes et les noms synthétisés, tels que les propriétés de navigation, seront toujours conformes aux conventions d’affectation de noms .NET.
+Les noms de table et de colonne sont fixes pour mieux correspondre aux conventions de nommage .NET pour les types et les propriétés par défaut. Si vous spécifiez le `-UseDatabaseNames` commutateur dans PMC ou l' `--use-database-names` option dans le CLI .net Core désactivez ce comportement en conservant autant que possible les noms de bases de données d’origine. Les identificateurs .NET non valides seront toujours fixes et les noms synthétisés, tels que les propriétés de navigation, seront toujours conformes aux conventions d’affectation de noms .NET.
 
 ## <a name="fluent-api-or-data-annotations"></a>API Fluent ou annotations de données
 
-Par défaut, les types d’entités sont configurés à l’aide de l’API Fluent. Spécifiez `-DataAnnotations` (PMC) ou `--data-annotations` (CLI) pour utiliser à la place des annotations de données lorsque cela est possible.
+Par défaut, les types d’entités sont configurés à l’aide de l’API Fluent. Spécifiez `-DataAnnotations` (PMC) ou `--data-annotations` (CLI .net Core) pour utiliser à la place des annotations de données lorsque cela est possible.
 
 Par exemple, l’utilisation de l’API Fluent entraîne l’échafaudage suivant :
 
@@ -109,7 +109,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Nom de DbContext
 
-Le nom de classe DbContext généré par génération de modèles automatique sera le nom de la base de données suffixée *par défaut* . Pour spécifier un autre, utilisez `-Context` dans PMC et `--context` dans l’interface CLI.
+Le nom de classe DbContext généré par génération de modèles automatique sera le nom de la base de données suffixée *par défaut* . Pour spécifier un autre, utilisez `-Context` dans PMC et `--context` dans le CLI .net core.
 
 ## <a name="directories-and-namespaces"></a>Répertoires et espaces de noms
 
@@ -129,7 +129,7 @@ Par défaut, l’espace de noms est l’espace de noms racine, ainsi que les nom
 dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace Your.DbContext.Namespace
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 Vous pouvez spécifier le répertoire dans lequel les classes sont échafaudées à l’aide de `-OutputDir` , et `-ContextDir` peut être utilisé pour générer un modèle de structure de la classe DbContext dans un répertoire distinct de celui des classes de type d’entité :
 

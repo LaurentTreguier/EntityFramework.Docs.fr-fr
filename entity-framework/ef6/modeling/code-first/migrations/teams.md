@@ -3,12 +3,12 @@ title: Migrations Code First dans les environnements d’équipe-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 46c22c997b8db53bb381d0b528c65733f1766849
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: 7ab66a8ec29b60bb2e0102fbca5745d352b07325
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103163"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370407"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Migrations Code First dans les environnements d’équipe
 > [!NOTE]
@@ -24,7 +24,7 @@ Avant de nous plonger dans la manière de gérer la fusion des migrations géné
 
 ### <a name="each-team-member-should-have-a-local-development-database"></a>Chaque membre de l’équipe doit avoir une base de données de développement local
 
-Migrations utilise la ** \_ \_table MigrationsHistory** pour stocker les migrations qui ont été appliquées à la base de données. Si vous avez plusieurs développeurs qui génèrent des migrations différentes en tentant de cibler la même base de données ** \_ \_** (et donc partager une table MigrationsHistory), les migrations vont être très confuses.
+Migrations utilise la table ** \_ \_ MigrationsHistory** pour stocker les migrations qui ont été appliquées à la base de données. Si vous avez plusieurs développeurs qui génèrent des migrations différentes en tentant de cibler la même base de données (et donc partager une table ** \_ \_ MigrationsHistory** ), les migrations vont être très confuses.
 
 Bien entendu, si vous avez des membres de l’équipe qui ne génèrent pas de migrations, il n’y a aucun problème de partage d’une base de données de développement central.
 
@@ -98,22 +98,22 @@ Nous allons suivre le modèle EF et les migrations à l’aide d’un certain no
 
 ![Point de départ](~/ef6/media/startingpoint.png)
 
-Developer \#1 et \#Developer 2 apporte désormais certaines modifications au modèle EF dans leur base de code locale. Developer \#1 ajoute une propriété **Rating** au **blog** , et génère une migration **AddRating** pour appliquer les modifications à la base de données. Developer \#2 ajoute une propriété **Readers** au **blog** , et génère la migration **AddReaders** correspondante. Les deux développeurs exécutent **Update-Database**pour appliquer les modifications à leurs bases de données locales, puis poursuivre le développement de l’application.
+Developer \# 1 et Developer \# 2 apporte désormais certaines modifications au modèle EF dans leur base de code locale. Developer \# 1 ajoute une propriété **Rating** au **blog** , et génère une migration **AddRating** pour appliquer les modifications à la base de données. Developer \# 2 ajoute une propriété **Readers** au **blog** , et génère la migration **AddReaders** correspondante. Les deux développeurs exécutent **Update-Database**pour appliquer les modifications à leurs bases de données locales, puis poursuivre le développement de l’application.
 
 > [!NOTE]
-> Les migrations sont précédées d’un horodateur. notre graphique représente donc que la migration AddReaders \#de Developer 2 vient après la migration \#de AddRating de Developer 1. La première \#fois que \#le développeur 1 ou 2 a généré la migration, il ne fait aucune différence entre les problèmes de travail d’une équipe ou le processus de fusion que nous allons examiner dans la section suivante.
+> Les migrations sont précédées d’un horodateur. notre graphique représente donc que la migration AddReaders de Developer \# 2 vient après la migration de AddRating de Developer \# 1. La \# première fois que le développeur 1 ou \# 2 a généré la migration, il ne fait aucune différence entre les problèmes de travail d’une équipe ou le processus de fusion que nous allons examiner dans la section suivante.
 
 ![Modifications locales](~/ef6/media/localchanges.png)
 
-C’est un jour de chance pour \#le développeur 1, car il s’agit d’envoyer les modifications en premier. Étant donné que personne d’autre n’a archivé depuis qu’il a synchronisé son référentiel, il peut simplement envoyer les modifications sans effectuer de fusion.
+C’est un jour de chance pour le développeur \# 1, car il s’agit d’envoyer les modifications en premier. Étant donné que personne d’autre n’a archivé depuis qu’il a synchronisé son référentiel, il peut simplement envoyer les modifications sans effectuer de fusion.
 
-![Submit](~/ef6/media/submit.png)
+![Envoyer](~/ef6/media/submit.png)
 
-Maintenant, il est temps pour \#le développeur 2 de l’envoyer. Ils ne sont pas si heureux. Étant donné qu’un autre utilisateur a soumis des modifications depuis qu’il a été synchronisé, il devra extraire les modifications et les fusionner. Le système de contrôle de code source sera probablement en mesure de fusionner automatiquement les modifications au niveau du code, car elles sont très simples. L’état du référentiel \#local du développeur 2 après la synchronisation est illustré dans le graphique suivant. 
+Maintenant, il est temps pour le développeur \# 2 de l’envoyer. Ils ne sont pas si heureux. Étant donné qu’un autre utilisateur a soumis des modifications depuis qu’il a été synchronisé, il devra extraire les modifications et les fusionner. Le système de contrôle de code source sera probablement en mesure de fusionner automatiquement les modifications au niveau du code, car elles sont très simples. L’état du \# référentiel local du développeur 2 après la synchronisation est illustré dans le graphique suivant. 
 
 ![Extraction](~/ef6/media/pull.png)
 
-À ce niveau, \#Developer 2 peut exécuter **Update-Database** , qui détectera la nouvelle migration **AddRating** (qui n’a \#pas été appliquée à la base de données de Developer 2) et l’appliquera. À présent, la colonne **Rating** est ajoutée à la table **blogs** et la base de données est synchronisée avec le modèle.
+À ce niveau, Developer \# 2 peut exécuter **Update-Database** , qui détectera la nouvelle migration **AddRating** (qui n’a pas été appliquée à la \# base de données de Developer 2) et l’appliquera. À présent, la colonne **Rating** est ajoutée à la table **blogs** et la base de données est synchronisée avec le modèle.
 
 Toutefois, il existe quelques problèmes :
 
@@ -133,7 +133,7 @@ Il existe deux options : la plus simple consiste à générer une migration vid
 
 Dans cette option, nous générons une migration vierge uniquement dans le but de vérifier que la dernière migration est stockée dans l’instantané de modèle approprié.
 
-Cette option peut être utilisée, quelle que soit la personne qui a généré la dernière migration. Dans l’exemple, nous avons suivi le \#développement de la dernière migration, et cela a pris en charge la fusion. Toutefois, ces mêmes étapes peuvent être utilisées si \#le développeur 1 a généré la dernière migration. Les étapes s’appliquent également si plusieurs migrations sont impliquées : nous avons juste cherché deux pour la conserver simple.
+Cette option peut être utilisée, quelle que soit la personne qui a généré la dernière migration. Dans l’exemple, nous avons suivi \# le développement de la dernière migration, et cela a pris en charge la fusion. Toutefois, ces mêmes étapes peuvent être utilisées si \# le développeur 1 a généré la dernière migration. Les étapes s’appliquent également si plusieurs migrations sont impliquées : nous avons juste cherché deux pour la conserver simple.
 
 Le processus suivant peut être utilisé pour cette approche, à partir du moment où vous réalisez que vous réalisez des modifications qui doivent être synchronisées à partir du contrôle de code source.
 
@@ -141,11 +141,11 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 2.  Synchroniser avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer toutes les nouvelles migrations archivées par d’autres développeurs.
     **_Remarque :_** *si vous ne recevez aucun avertissement de la commande Update-Database, aucune nouvelle migration n’a été effectuée par les autres développeurs et il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
-4.  Exécutez **Add-migration &lt;pick\_a\_name&gt; – IgnoreChanges** (par exemple, **Add-migration Merge – IgnoreChanges**). Cela génère une migration avec toutes les métadonnées (y compris un instantané du modèle actuel), mais ignore toutes les modifications détectées lors de la comparaison du modèle actuel à l’instantané dans les dernières migrations (ce qui signifie que vous recevez une méthode de **mise** en forme et de **réduction** de l’espace).
+4.  Exécutez **Add-migration &lt; pick \_ a \_ name &gt; – IgnoreChanges** (par exemple, **Add-migration Merge – IgnoreChanges**). Cela génère une migration avec toutes les métadonnées (y compris un instantané du modèle actuel), mais ignore toutes les modifications détectées lors de la comparaison du modèle actuel à l’instantané dans les dernières migrations (ce qui signifie que vous recevez une méthode de **mise** en forme et de **réduction** de l’espace).
 5.  Exécutez **Update-Database** pour réappliquer la dernière migration avec les métadonnées mises à jour.
 6.  Poursuivez le développement ou envoyez-le au contrôle de code source (après avoir exécuté vos tests unitaires bien sûr).
 
-Voici l’état de base du \#code local du développeur 2 après l’utilisation de cette approche.
+Voici l’état de base du \# code local du développeur 2 après l’utilisation de cette approche.
 
 ![Migration de fusion](~/ef6/media/mergemigration.png)
 
@@ -163,15 +163,15 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 2.  Synchronisez avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer toutes les nouvelles migrations archivées par d’autres développeurs.
     **_Remarque :_** *si vous ne recevez aucun avertissement de la commande Update-Database, aucune nouvelle migration n’a été effectuée par les autres développeurs et il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
-4.  Exécutez **Update-Database – TargetMigration &lt;second\_Last\_dernière&gt; migration** (dans l’exemple, nous avons effectué la **mise à jour-Database – TargetMigration AddRating**). Cela fait passer la base de données à l’état de la deuxième dernière migration, en « désappliquant » la dernière migration à partir de la base de données.
-    **_Remarque :_** *cette étape est requise pour permettre la modification des métadonnées de la migration, car les métadonnées sont également stockées dans \_ \_le MigrationsHistoryTable de la base de données. C’est pourquoi vous ne devez utiliser cette option que si la dernière migration est uniquement dans votre base de code locale. Si la dernière migration a été appliquée à d’autres bases de données, vous devez également les restaurer et réappliquer la dernière migration pour mettre à jour les métadonnées.* 
-5.  Exécutez **Add-migration &lt;Full\_name\_,\_y\_compris\_l'\_horodateur de la dernière migration** &gt; (dans notre exemple, nous avons effectué cette opération, comme **Add\_-migration 201311062215252 AddReaders**).
+4.  Exécutez **Update-Database – TargetMigration &lt; second \_ Last \_ dernière &gt; migration** (dans l’exemple, nous avons effectué la **mise à jour-Database – TargetMigration AddRating**). Cela restaure la base de données à l’état de la deuxième dernière migration, en « désappliquant » la dernière migration de la base de données.
+    **_Remarque :_** *cette étape est requise pour permettre la modification des métadonnées de la migration, car les métadonnées sont également stockées dans le \_ \_ MigrationsHistoryTable de la base de données. C’est pourquoi vous ne devez utiliser cette option que si la dernière migration est uniquement dans votre base de code locale. Si la dernière migration a été appliquée à d’autres bases de données, vous devez également les restaurer et réappliquer la dernière migration pour mettre à jour les métadonnées.* 
+5.  Exécutez **Add-migration &lt; Full \_ name \_ , y compris l' \_ horodateur \_ de la \_ dernière \_ migration** &gt; (dans notre exemple, nous avons effectué cette opération, comme **Add-migration 201311062215252 \_ AddReaders**).
     **_Remarque :_** *vous devez inclure l’horodateur afin que les migrations sachent que vous souhaitez modifier la migration existante plutôt que d’en créer une nouvelle.*
-    Cela permet de mettre à jour les métadonnées de la dernière migration pour correspondre au modèle actuel. Une fois la commande terminée, vous obtenez l’avertissement suivant, mais c’est exactement ce que vous voulez. «*Seul le code du concepteur pour la migration\_«201311062215252 AddReaders » a été recréé. Pour regénérer la structure de l’ensemble de la migration, utilisez le paramètre-force.*
+    Cela permet de mettre à jour les métadonnées de la dernière migration pour correspondre au modèle actuel. Une fois la commande terminée, vous obtenez l’avertissement suivant, mais c’est exactement ce que vous voulez. «*Seul le code du concepteur pour la migration «201311062215252 \_ AddReaders » a été recréé. Pour regénérer la structure de l’ensemble de la migration, utilisez le paramètre-force.*
 6.  Exécutez **Update-Database** pour réappliquer la dernière migration avec les métadonnées mises à jour.
 7.  Poursuivez le développement ou envoyez-le au contrôle de code source (après avoir exécuté vos tests unitaires bien sûr).
 
-Voici l’état de base du \#code local du développeur 2 après l’utilisation de cette approche.
+Voici l’état de base du \# code local du développeur 2 après l’utilisation de cette approche.
 
 ![Métadonnées mises à jour](~/ef6/media/updatedmetadata.png)
 

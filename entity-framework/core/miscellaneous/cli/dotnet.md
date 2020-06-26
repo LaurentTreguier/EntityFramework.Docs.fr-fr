@@ -4,14 +4,14 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: 6eb8b817a809dedf999ccb98307f5d8e2e41c0fb
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: fe378fc962c0d491703a3e77dca4415ad510d673
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672942"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370623"
 ---
-# <a name="entity-framework-core-tools-reference---net-cli"></a>Référence des outils Entity Framework Core - .NET CLI
+# <a name="entity-framework-core-tools-reference---net-core-cli"></a>Informations de référence sur les outils de Entity Framework Core-CLI .NET Core
 
 Les outils de l’interface de ligne de commande (CLI) pour Entity Framework Core effectuer des tâches de développement au moment du Design. Par exemple, ils créent des [migrations](/aspnet/core/data/ef-mvc/migrations?view=aspnetcore-2.0), appliquent des migrations et génèrent du code pour un modèle basé sur une base de données existante. Les commandes sont une extension de la commande [dotnet](/dotnet/core/tools) multiplateforme, qui fait partie du [Kit SDK .net Core](https://www.microsoft.com/net/core). Ces outils fonctionnent avec les projets .NET Core.
 
@@ -69,7 +69,7 @@ Les `dotnet ef` commandes sont incluses dans le kit SDK .net Core, mais pour act
 
 * Installez la version de kit SDK .NET Core 2.1.200. Les versions ultérieures ne sont pas compatibles avec les outils CLI pour EF Core 1,0 et 1,1.
 
-* Configurez l’application pour utiliser la version du kit de développement logiciel (SDK) 2.1.200 en modifiant son fichier [global. JSON](/dotnet/core/tools/global-json) . Ce fichier est normalement inclus dans le répertoire de la solution (l’un au-dessus du projet).
+* Configurez l’application pour utiliser la version du kit de développement logiciel (SDK) 2.1.200 en modifiant son [global.jssur](/dotnet/core/tools/global-json) le fichier. Ce fichier est normalement inclus dans le répertoire de la solution (l’un au-dessus du projet).
 
 * Modifiez le fichier projet et ajoutez `Microsoft.EntityFrameworkCore.Tools.DotNet` en tant qu' `DotNetCliToolReference` élément. Spécifiez la version 1. x la plus récente, par exemple : 1.1.6. Consultez l’exemple de fichier projet à la fin de cette section.
 
@@ -101,7 +101,7 @@ Les `dotnet ef` commandes sont incluses dans le kit SDK .net Core, mais pour act
 
   Une référence de package avec `PrivateAssets="All"` n’est pas exposée aux projets qui font référence à ce projet. Cette restriction est particulièrement utile pour les packages qui sont généralement utilisés uniquement pendant le développement.
 
-### <a name="verify-installation"></a>Vérifier l'installation
+### <a name="verify-installation"></a>Vérifier l’installation
 
 Exécutez les commandes suivantes pour vérifier que EF Core outils CLI sont correctement installés :
 
@@ -228,7 +228,7 @@ Arguments :
 
 | Argument       | Description                                                                                                                                                                                                             |
 |:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<CONNECTION>` | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *name = \< Name of connection string>*. Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. |
+| `<CONNECTION>` | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *name \<name of connection string> =*. Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. |
 | `<PROVIDER>`   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer` .                                                                                           |
 
 Options :
@@ -238,13 +238,14 @@ Options :
 | <nobr>`-d`</nobr> | `--data-annotations`                   | Utilisez des attributs pour configurer le modèle (dans la mesure du possible). Si cette option est omise, seule l’API Fluent est utilisée.                                                                |
 | `-c`            | `--context <NAME>`                       | Nom de la `DbContext` classe à générer.                                                                                                                                 |
 |                 | `--context-dir <PATH>`                   | Répertoire dans lequel placer le `DbContext` fichier de classe. Les chemins d’accès sont relatifs au répertoire du projet. Les espaces de noms sont dérivés des noms de dossiers.                                 |
-|                 | `--context-namespace <NAMESPACE>`        | Espace de noms à utiliser pour la `DbContext` classe générée. Remarque : remplace `--namespace` .                                 |
+|                 | `--context-namespace <NAMESPACE>`        | Espace de noms à utiliser pour la `DbContext` classe générée. Remarque : remplace `--namespace` . (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)        |
 | `-f`            | `--force`                                | Remplacer les fichiers existants.                                                                                                                                                      |
 | `-o`            | `--output-dir <PATH>`                    | Répertoire dans lequel placer les fichiers de classe d’entité. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                       |
-| `-n`            | `--namespace <NAMESPACE>`                | Espace de noms à utiliser pour toutes les classes générées. La valeur par défaut est générée à partir de l’espace de noms racine et du répertoire de sortie.                    |
+| `-n`            | `--namespace <NAMESPACE>`                | Espace de noms à utiliser pour toutes les classes générées. La valeur par défaut est générée à partir de l’espace de noms racine et du répertoire de sortie. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)        |
 |                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | Schémas des tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs schémas, répétez `--schema` l’opération pour chacun d’entre eux. Si cette option est omise, tous les schémas sont inclus.          |
 | `-t`            | `--table <TABLE_NAME>`...                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
 |                 | `--use-database-names`                   | Utilisez les noms de table et de colonne exactement tels qu’ils apparaissent dans la base de données. Si cette option est omise, les noms de base de données sont modifiés pour être plus conformes aux conventions de style de nom C#. |
+|                 | `--no-onconfiguring`                     | Supprime la génération de la `OnConfiguring` méthode dans la `DbContext` classe générée. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)        |
 
 L’exemple suivant génère la structure de tous les schémas et tables et place les nouveaux fichiers dans le dossier *Models* .
 
@@ -273,7 +274,7 @@ Options :
 |                   | Option                             | Description                                                                                                      |
 |:------------------|:-----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
 | <nobr>`-o`</nobr> | <nobr>`--output-dir <PATH>`</nobr> | Répertoire utilisé pour générer les fichiers. Les chemins d’accès sont relatifs au répertoire du projet cible. La valeur par défaut est « migrations ». |
-| <nobr>`-n`</nobr> | <nobr>`--namespace <NAMESPACE>`</nobr> | Espace de noms à utiliser pour les classes générées. La valeur par défaut est générée à partir du répertoire de sortie. |
+| <nobr>`-n`</nobr> | <nobr>`--namespace <NAMESPACE>`</nobr> | Espace de noms à utiliser pour les classes générées. La valeur par défaut est générée à partir du répertoire de sortie. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.) |
 
 ## <a name="dotnet-ef-migrations-list"></a>Liste des migrations dotnet EF
 

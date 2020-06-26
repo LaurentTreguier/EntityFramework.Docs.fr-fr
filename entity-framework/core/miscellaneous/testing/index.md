@@ -4,12 +4,12 @@ description: Différentes approches de test des applications qui utilisent EF Co
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: a5ff85a60af1f56a0924d6fa0646195146a6827e
-ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
+ms.openlocfilehash: 71222f17ac4cc1b71052a2e7e916ebcedd2ae0f4
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84418908"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370537"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test de code qui utilise EF Core
 
@@ -92,7 +92,7 @@ Pour obtenir des instructions propres à EF Core, consultez [Test avec SQLite](x
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>Approche 3 : la base de données en mémoire EF Core
 
 EF Core est fourni avec une base de données en mémoire que nous utilisons pour les tests internes d’EF Core lui-même.
-Cette base de données n’est en général **pas appropriée en tant que substitut pour les tests des applications qui utilisent EF Core**. Plus précisément :
+En règle générale, cette base de données **ne convient pas pour tester des applications qui utilisent EF Core**. Plus précisément :
 
 * Il ne s’agit pas d’une base de données relationnelle.
 * Elle ne prend pas en charge les transactions.

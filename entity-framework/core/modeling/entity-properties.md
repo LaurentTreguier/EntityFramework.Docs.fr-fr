@@ -1,16 +1,16 @@
 ---
 title: Propriétés de l’entité-EF Core
 description: Comment configurer et mapper des propriétés d’entité à l’aide de Entity Framework Core
-author: roji
-ms.date: 12/10/2019
+author: lajones
+ms.date: 05/27/2020
 ms.assetid: e9dff604-3469-4a05-8f9e-18ac281d82a9
 uid: core/modeling/entity-properties
-ms.openlocfilehash: e4a1867a90df1fb277e7dd44b93d6c2d47895030
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: fcf3b0f8480fde2f3ba6b5fd601db115f1d246b8
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664154"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370511"
 ---
 # <a name="entity-properties"></a>Propriétés d'entité
 
@@ -85,6 +85,26 @@ Dans l’exemple suivant, la configuration d’une longueur maximale de 500 entr
 
 ***
 
+### <a name="precision-and-scale"></a>Précision et échelle
+
+À compter de EFCore 5,0, vous pouvez utiliser l’API Fluent pour configurer la précision et l’échelle. Elle indique au fournisseur de base de données la quantité de stockage nécessaire pour une colonne donnée. Elle s’applique uniquement aux types de données où le fournisseur autorise la variation de la précision et de l’échelle, généralement juste `decimal` et `DateTime` .
+
+Pour les `decimal` Propriétés, la précision définit le nombre maximal de chiffres requis pour exprimer toute valeur que la colonne contiendra, et Scale définit le nombre maximal de décimales nécessaires. Pour `DateTime` les propriétés, la précision définit le nombre maximal de chiffres requis pour exprimer des fractions de secondes et l’échelle n’est pas utilisée.
+
+> [!NOTE]
+> Entity Framework n’effectue aucune validation de précision ou d’échelle avant de transmettre des données au fournisseur. Il revient au fournisseur ou au magasin de données de valider le cas échéant. Par exemple, lorsque vous ciblez SQL Server, une colonne de type de données `datetime` n’autorise pas la définition de la précision, tandis que celle d’une colonne `datetime2` peut être comprise entre 0 et 7 inclus.
+
+Dans l’exemple suivant, la configuration de la `Score` propriété pour qu’elle ait la précision 14 et l’échelle 2 entraîne la création d’une colonne de type `decimal(14,2)` sur SQL Server, et la configuration `LastUpdated` de la propriété avec une précision de 3 entraîne la création d’une colonne de type `datetime2(3)` :
+
+#### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/PrecisionAndScale.cs?name=PrecisionAndScale&highlight=3-9)]
+
+> [!NOTE]
+> L’échelle n’étant jamais définie sans définir au préalable la précision, l’API Fluent pour la définition de l’échelle est `HasPrecision(precision, scale)` .
+
+***
+
 ## <a name="required-and-optional-properties"></a>Propriétés obligatoires et facultatives
 
 Une propriété est considérée comme facultative si elle est valide pour contenir `null` . Si `null` n’est pas une valeur valide à assigner à une propriété, elle est considérée comme étant une propriété obligatoire. Lors du mappage à un schéma de base de données relationnelle, les propriétés requises sont créées en tant que colonnes n’acceptant pas les valeurs NULL, et les propriétés facultatives sont créées en tant que colonnes Nullable.
@@ -142,4 +162,4 @@ Un classement peut être défini sur des colonnes de texte, en déterminant comm
 
 Si toutes les colonnes d’une base de données doivent utiliser un classement donné, définissez plutôt le classement au niveau de la base de données.
 
-Vous trouverez des informations générales sur la prise en charge de EF Core pour les classements dans la [page de documentation collation](xref:core/miscellaneous/collations-and-case-sensitivity.md).
+Vous trouverez des informations générales sur la prise en charge de EF Core pour les classements dans la [page de documentation collation](xref:core/miscellaneous/collations-and-case-sensitivity).

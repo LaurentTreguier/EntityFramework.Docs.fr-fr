@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 41bc403b586c9e67033d6db0dc4418510bc7b061
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: 47a5601e996afab9c0aa0538a2a2b47f204f7753
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664180"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370354"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -28,7 +28,7 @@ LLBLGen Pro est une solution de modélisation d’entités qui prend en charge E
 
 ### <a name="devart-entity-developer"></a>Devart Entity Developer
 
-Entity Developer est un concepteur ORM pour ADO.NET Entity Framework, NHibernate, LinqConnect, Telerik Data Access et LINQ to SQL. Il prend en charge la conception visuelle de modèles EF Core, selon une approche Model First ou Database First, et la génération de code C# ou Visual Basic. Pour EF Core : 2.
+Entity Developer est un concepteur ORM pour ADO.NET Entity Framework, NHibernate, LinqConnect, Telerik Data Access et LINQ to SQL. Il prend en charge la conception visuelle de modèles EF Core, selon une approche Model First ou Database First, et la génération de code C# ou Visual Basic. Pour EF Core : 1, 2, 3, 5.
 
 [Site web](https://www.devart.com/entitydeveloper/)
 

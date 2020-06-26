@@ -4,12 +4,12 @@ author: rick-anderson
 ms.date: 09/17/2019
 ms.assetid: 3c88427c-20c6-42ec-a736-22d3eccd5071
 uid: core/get-started/index
-ms.openlocfilehash: b45a7e5010dd3ef37ea952aaf483847ae95ea4ef
-ms.sourcegitcommit: 1f0f93c66b2b50e03fcbed90260e94faa0279c46
+ms.openlocfilehash: 7181df6ee73b09f196940178ffed38d96b075258
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/04/2020
-ms.locfileid: "84418940"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370316"
 ---
 # <a name="getting-started-with-ef-core"></a>Bien démarrer avec EF Core
 
@@ -116,7 +116,7 @@ Les étapes suivantes utilisent des [migrations](xref:core/managing-schemas/migr
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Exécutez les commandes suivantes dans la **Console du gestionnaire de package**.
+* Exécutez les commandes suivantes dans la **console du gestionnaire de package (PMC)** .
 
   ``` PowerShell
   Install-Package Microsoft.EntityFrameworkCore.Tools

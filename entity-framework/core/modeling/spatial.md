@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 5b45f83ca7f02665f52ccfe16b5af506a6046a62
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 2222df84be7bfde3f252766bef1cfab39b476efa
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417404"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370446"
 ---
 # <a name="spatial-data"></a>Données spatiales
 
@@ -19,7 +19,7 @@ ms.locfileid: "78417404"
 
 Les données spatiales représentent l’emplacement physique et la forme des objets. De nombreuses bases de données prennent en charge ce type de données afin qu’elles puissent être indexées et interrogées avec d’autres données. Les scénarios courants incluent l’interrogation d’objets situés à une distance donnée à partir d’un emplacement ou la sélection de l’objet dont la bordure contient un emplacement donné. EF Core prend en charge le mappage aux types de données spatiales à l’aide de la bibliothèque spatiale [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite) .
 
-## <a name="installing"></a>Installation
+## <a name="installing"></a>En cours d'installation
 
 Pour pouvoir utiliser les données spatiales avec EF Core, vous devez installer le package NuGet de prise en charge approprié. Le package que vous devez installer dépend du fournisseur que vous utilisez.
 
@@ -32,7 +32,7 @@ Npgsql.EntityFrameworkCore.PostgreSQL   | [Npgsql. EntityFrameworkCore. PostgreS
 
 ## <a name="reverse-engineering"></a>Rétroconception
 
-Les packages NuGet spatiaux activent également les modèles d' [ingénierie à rebours](../managing-schemas/scaffolding.md) avec des propriétés spatiales, mais vous devez installer le package ***avant*** d’exécuter `Scaffold-DbContext` ou `dotnet ef dbcontext scaffold`. Si vous ne le souhaitez pas, vous recevrez des avertissements sur les mappages de type pour les colonnes et les colonnes seront ignorées.
+Les packages NuGet spatiaux activent également les modèles d' [ingénierie à rebours](../managing-schemas/scaffolding.md) avec des propriétés spatiales, mais vous devez installer le package ***avant*** d’exécuter `Scaffold-DbContext` ou `dotnet ef dbcontext scaffold` . Si vous ne le souhaitez pas, vous recevrez des avertissements sur les mappages de type pour les colonnes et les colonnes seront ignorées.
 
 ## <a name="nettopologysuite-nts"></a>NetTopologySuite (NTS)
 
@@ -46,7 +46,7 @@ optionsBuilder.UseSqlServer(
     x => x.UseNetTopologySuite());
 ```
 
-Il existe plusieurs types de données spatiales. Le type que vous utilisez dépend des types de formes que vous souhaitez autoriser. Voici la hiérarchie des types NTS que vous pouvez utiliser pour les propriétés de votre modèle. Ils sont situés dans l’espace de noms `NetTopologySuite.Geometries`.
+Il existe plusieurs types de données spatiales. Le type que vous utilisez dépend des types de formes que vous souhaitez autoriser. Voici la hiérarchie des types NTS que vous pouvez utiliser pour les propriétés de votre modèle. Ils sont situés dans l' `NetTopologySuite.Geometries` espace de noms.
 
 * Géométrie
   * Point
@@ -89,11 +89,11 @@ class Country
 
 ### <a name="creating-values"></a>Création de valeurs
 
-Vous pouvez utiliser des constructeurs pour créer des objets Geometry ; Toutefois, NTS recommande d’utiliser à la place une fabrique de géométrie. Cela vous permet de spécifier un SRID par défaut (le système de référence spatiale utilisé par les coordonnées) et vous donne le contrôle sur des éléments plus avancés tels que le modèle de précision (utilisé pendant les calculs) et la séquence de coordonnées (détermine les ordonnées-dimensions mesures et disponibles.
+Vous pouvez utiliser des constructeurs pour créer des objets Geometry ; Toutefois, NTS recommande d’utiliser à la place une fabrique de géométrie. Cela vous permet de spécifier un SRID par défaut (le système de référence spatiale utilisé par les coordonnées) et vous donne le contrôle sur des éléments plus avancés tels que le modèle de précision (utilisé lors des calculs) et la séquence de coordonnées (détermine les ordonnées--dimensions et mesures, qui sont disponibles).
 
 ``` csharp
 var geometryFactory = NtsGeometryServices.Instance.CreateGeometryFactory(srid: 4326);
-var currentLocation = geometryFactory.CreatePoint(-122.121512, 47.6739882);
+var currentLocation = geometryFactory.CreatePoint(new Coordinate(-122.121512, 47.6739882));
 ```
 
 > [!NOTE]
@@ -101,7 +101,7 @@ var currentLocation = geometryFactory.CreatePoint(-122.121512, 47.6739882);
 
 ### <a name="longitude-and-latitude"></a>Longitude et Latitude
 
-Les coordonnées en NTS sont exprimées en valeurs X et Y. Pour représenter la longitude et la latitude, utilisez X pour la longitude et Y pour la latitude. Notez que **c’est à partir du format** `latitude, longitude` dans lequel vous voyez généralement ces valeurs.
+Les coordonnées en NTS sont exprimées en valeurs X et Y. Pour représenter la longitude et la latitude, utilisez X pour la longitude et Y pour la latitude. Notez que cette valeur est **retournée** à partir du `latitude, longitude` format dans lequel vous voyez généralement ces valeurs.
 
 ### <a name="srid-ignored-during-client-operations"></a>SRID ignoré pendant les opérations du client
 
@@ -213,15 +213,15 @@ Si vous utilisez SQL Server, vous devez connaître certaines choses supplémenta
 
 ### <a name="geography-or-geometry"></a>Geography ou Geometry
 
-Par défaut, les propriétés spatiales sont mappées à des colonnes `geography` dans SQL Server. Pour utiliser `geometry`, [configurez le type de colonne](xref:core/modeling/entity-properties#column-data-types) dans votre modèle.
+Par défaut, les propriétés spatiales sont mappées aux `geography` colonnes dans SQL Server. Pour `geometry` ce faire, [configurez le type de colonne](xref:core/modeling/entity-properties#column-data-types) dans votre modèle.
 
 ### <a name="geography-polygon-rings"></a>Anneaux de polygone Geography
 
-Lors de l’utilisation du type de colonne `geography`, SQL Server impose des exigences supplémentaires sur l’anneau extérieur (ou l’interpréteur de commandes) et les anneaux intérieurs (ou trous). L’anneau extérieur doit être orienté vers le sens inverse des aiguilles d’une montre et des anneaux intérieurs. NTS valide cette valeur avant d’envoyer des valeurs à la base de données.
+Lors de l’utilisation du `geography` type de colonne, SQL Server impose des exigences supplémentaires sur l’anneau extérieur (ou l’interpréteur de commandes) et les anneaux intérieurs (ou trous). L’anneau extérieur doit être orienté vers le sens inverse des aiguilles d’une montre et des anneaux intérieurs. NTS valide cette valeur avant d’envoyer des valeurs à la base de données.
 
 ### <a name="fullglobe"></a>FullGlobe
 
-SQL Server a un type Geometry non standard pour représenter le globe complet lors de l’utilisation du type de colonne `geography`. Il offre également un moyen de représenter les polygones en fonction du monde entier (sans anneau extérieur). Aucun de ces deux n’est pris en charge par NTS.
+SQL Server a un type Geometry non standard pour représenter le globe complet lors de l’utilisation du `geography` type de colonne. Il offre également un moyen de représenter les polygones en fonction du monde entier (sans anneau extérieur). Aucun de ces deux n’est pris en charge par NTS.
 
 > [!WARNING]
 > Les FullGlobe et les polygones basés sur ce dernier ne sont pas pris en charge par NTS.
@@ -260,7 +260,7 @@ make install
 
 ### <a name="configuring-srid"></a>Configuration de SRID
 
-Dans SpatiaLite, les colonnes doivent spécifier un SRID par colonne. La valeur par défaut de SRID est `0`. Spécifiez un autre SRID à l’aide de la méthode ForSqliteHasSrid.
+Dans SpatiaLite, les colonnes doivent spécifier un SRID par colonne. La valeur par défaut de SRID est `0` . Spécifiez un autre SRID à l’aide de la méthode ForSqliteHasSrid.
 
 ``` csharp
 modelBuilder.Entity<City>().Property(c => c.Location)
@@ -345,7 +345,7 @@ Polygon. NumInteriorRings | ✔ | ✔ | ✔ | ✔
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Données spatiales dans SQL Server](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server)
+* [Données spatiales dans SQL Server](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server)
 * [Page d’accueil SpatiaLite](https://www.gaia-gis.it/fossil/libspatialite)
 * [Documentation spatiale npgsql](https://www.npgsql.org/efcore/mapping/nts.html)
 * [Documentation PostGIS](https://postgis.net/documentation/)

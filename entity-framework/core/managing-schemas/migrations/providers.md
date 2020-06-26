@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 11/08/2017
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: efe95893f7dbfc8e5c4775e86d58abb32eee3c83
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 388829992687e626648889a47130cc61df1c0d1f
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416786"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370616"
 ---
 # <a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
 
@@ -43,7 +43,7 @@ dotnet ef migrations add InitialCreate --context MyDbContext --output-dir Migrat
 dotnet ef migrations add InitialCreate --context MySqliteDbContext --output-dir Migrations/SqliteMigrations
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Add-Migration InitialCreate -Context MyDbContext -OutputDir Migrations\SqlServerMigrations
@@ -68,7 +68,7 @@ Id = table.Column<int>(nullable: false)
     .Annotation("Sqlite:Autoincrement", true),
 ```
 
-Si les opérations ne peuvent être appliquées que sur un fournisseur (ou si elles sont différentes entre les fournisseurs), utilisez la propriété `ActiveProvider` pour indiquer quel fournisseur est actif.
+Si les opérations peuvent être appliquées uniquement pour un fournisseur, ou si elles sont différentes entre les fournisseurs, utilisez la `ActiveProvider` propriété pour déterminer quel fournisseur est actif :
 
 ``` csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")

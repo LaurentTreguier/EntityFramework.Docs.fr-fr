@@ -3,12 +3,12 @@ title: 'Filtres de requête globale : EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: f6c59bcbab31edcbed22079a1320c060ce08c6f7
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: 233289b0c50e15f4555b342bc654211ce04c24d3
+ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664128"
+ms.lasthandoff: 06/25/2020
+ms.locfileid: "85370459"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
 
@@ -52,7 +52,7 @@ Les navigations peuvent être utilisées lors de la définition de filtres de re
 > [!NOTE]
 > Actuellement EF Core ne détecte pas les cycles dans les définitions de filtre de requête globale. vous devez donc être prudent lorsque vous les définissez. Si elle est spécifiée de manière incorrecte, cela peut entraîner des boucles infinies lors de la traduction de la requête.
 
-## <a name="accessing-entity-with-query-filter-using-reqiured-navigation"></a>Accès à une entité avec un filtre de requête à l’aide de la navigation reqiured
+## <a name="accessing-entity-with-query-filter-using-required-navigation"></a>Accès à une entité avec un filtre de requête à l’aide de la navigation requise
 
 > [!CAUTION]
 > L’utilisation de la navigation requise pour accéder à l’entité qui a un filtre de requête global défini peut entraîner des résultats inattendus. 
