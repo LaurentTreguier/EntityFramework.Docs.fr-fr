@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: 86b9d08377ea8295b746e5f0217a408edcfe1517
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: d3a1810599771befb451715d93454fff63949771
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370471"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238305"
 ---
 # <a name="loading-related-data"></a>Chargement des données associées
 
@@ -53,8 +53,53 @@ Vous pourriez souhaiter inclure plusieurs entités associées pour une entité q
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
-> [!CAUTION]
-> Depuis la version 3.0.0, `Include` une jointure supplémentaire sera ajoutée aux requêtes SQL générées par les fournisseurs relationnels, tandis que les versions précédentes généraient des requêtes SQL supplémentaires. Cela peut considérablement modifier les performances de vos requêtes. En particulier, les requêtes LINQ avec un nombre trop élevé d' `Include` opérateurs peuvent devoir être décomposées en plusieurs requêtes LINQ distinctes afin d’éviter le problème d’éclatement cartésien.
+### <a name="single-and-split-queries"></a>Requêtes simples et fractionnées
+
+> [!NOTE]
+> Cette fonctionnalité est introduite dans EF Core 5,0.
+
+Dans les bases de données relationnelles, toutes les entités associées sont chargées par défaut en introduisant des JOINTUREs :
+
+```sql
+SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url], [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title]
+FROM [Blogs] AS [b]
+LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
+ORDER BY [b].[BlogId], [p].[PostId]
+```
+
+Si un blog classique contient plusieurs publications connexes, les lignes de ces publications dupliqueront les informations du blog, ce qui entraînerait un problème de « explosion cartésien ». À mesure que des relations un-à-plusieurs sont chargées, la quantité de données dupliquées peut croître et nuire aux performances de votre application.
+
+EF vous permet de spécifier qu’une requête LINQ donnée doit être *fractionnée* en plusieurs requêtes SQL. Au lieu de JOINTUREs, les requêtes Split effectuent une requête SQL supplémentaire pour chaque navigation un-à-plusieurs incluse :
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+
+Cela produira le code SQL suivant :
+
+```sql
+SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+ORDER BY [b].[BlogId]
+
+SELECT [p].[PostId], [p].[AuthorId], [p].[BlogId], [p].[Content], [p].[Rating], [p].[Title], [b].[BlogId]
+FROM [Blogs] AS [b]
+INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
+ORDER BY [b].[BlogId]
+```
+
+Bien que cela évite les problèmes de performances associés aux JOINTUREs et à l’explosion cartésienne, elle présente également certains inconvénients :
+
+* Alors que la plupart des bases de données garantissent la cohérence des données pour les requêtes uniques, il n’existe pas de garantie de ce type pour plusieurs requêtes. Cela signifie que si la base de données est mise à jour en même temps que vos requêtes en cours d’exécution, les données résultantes peuvent ne pas être cohérentes. Cela peut être atténué en encapsulant les requêtes dans une transaction sérialisable ou d’instantané, bien que cela puisse créer ses propres problèmes de performances. Pour plus d’informations, consultez la documentation de votre base de données.
+* Chaque requête implique actuellement un aller-retour réseau supplémentaire vers votre base de données. Cela peut dégrader les performances, en particulier lorsque la latence est élevée pour la base de données (par exemple, les services Cloud). EF Core l’améliorera à l’avenir en regroupant les requêtes en un seul aller-retour.
+* Bien que certaines bases de données autorisent l’utilisation des résultats de plusieurs requêtes en même temps (SQL Server avec MARS, SQLite), la plupart n’autorisent l’activation que d’une seule requête à un moment donné. Cela signifie que tous les résultats des requêtes antérieures doivent être mis en mémoire tampon dans la mémoire de votre application avant d’exécuter des requêtes ultérieures, ce qui vous permet d’améliorer vos besoins en mémoire de façon potentiellement significative.
+
+Malheureusement, il n’existe aucune stratégie pour charger des entités associées qui s’adaptent à tous les scénarios. Examinez attentivement les avantages et les inconvénients des requêtes simples et fractionnées, puis sélectionnez celle qui répond à vos besoins.
+
+> [!NOTE]
+> Les entités associées à un-à-un sont toujours chargées via des JOINTUREs, car cela n’a aucun impact sur les performances.
+>
+> Pour le moment, l’utilisation du fractionnement des requêtes sur SQL Server requiert des paramètres `MultipleActiveResultSets=true` dans votre chaîne de connexion. Cette exigence sera supprimée dans une prochaine version préliminaire.
+>
+> Les versions préliminaires ultérieures de EF Core 5,0 permettront de spécifier le fractionnement des requêtes comme valeur par défaut pour votre contexte.
 
 ### <a name="filtered-include"></a>Include filtré
 

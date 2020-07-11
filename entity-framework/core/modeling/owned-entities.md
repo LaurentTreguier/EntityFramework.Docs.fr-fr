@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 69bdd5d5a64983d691b5967f3a64dedccbd7c07f
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 6ff98d005c0a868d420509571378756c56edc54a
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672804"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238123"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -71,7 +71,7 @@ Pour configurer un autre appel de PK `HasKey` :
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
 
 > [!NOTE]
-> Avant de EF Core `WithOwner()` méthode 3,0 n’existait pas, cet appel doit être supprimé. En outre, la clé primaire n’a pas été détectée automatiquement. elle a donc toujours été spécifiée.
+> Avant de EF Core `WithOwner()` méthode 3,0 n’existait pas, cet appel doit être supprimé. En outre, la clé primaire n’a pas été détectée automatiquement et doit donc toujours être spécifiée.
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mappage de types détenus avec le fractionnement de table
 

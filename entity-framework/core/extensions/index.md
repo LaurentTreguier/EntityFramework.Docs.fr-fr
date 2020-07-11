@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 47a5601e996afab9c0aa0538a2a2b47f204f7753
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 5b7945bd24ac19a82b08f4d5709555cf53485f4c
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370354"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238253"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -157,6 +157,12 @@ Cache des requêtes de second niveau hautes performances. Pour EF Core : 2.
 
 [Dépôt GitHub](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
+### <a name="entityframeworkcorencache"></a>EntityFrameworkCore. NCache
+
+Le fournisseur de Entity Framework Core NCache est un fournisseur de cache de second niveau distribué pour la mise en cache des résultats de requête. L’architecture distribuée de NCache la rend plus évolutive et hautement disponible. Pour EF Core 2.
+
+[Site web](https://www.alachisoft.com/ncache/ef-core-cache.html)
+
 ### <a name="entity-framework-plus"></a>Entity Framework Plus
 
 Étend votre DbContext avec des fonctionnalités telles que : Include Filter (Inclure le filtre), Auditing (Audit), Caching (Mise en cache), Query Future (Requête ultérieure), Batch Delete (Suppression par lot), Batch Update (Mise à jour par lot), et bien plus encore. Pour EF Core : 2, 3.
@@ -224,3 +230,9 @@ Autre traducteur de requêtes LINQ pour les expressions SQL. Pour EF Core : 3.
 Prend en charge les fonctionnalités SQL avancées, telles que les CTE, la copie en bloc, les indicateurs de table, les fonctions de fenêtrage, les tables temporaires et les opérations de création/mise à jour/suppression côté base de données.
 
 [Dépôt GitHub](https://github.com/linq2db/linq2db.EntityFrameworkCore)
+
+### <a name="efcoresoftdelete"></a>EFCore.SoftDelete
+
+Implémentation pour la suppression réversible d’entités. Pour EF Core : 3.
+
+[NuGet](https://www.nuget.org/packages/EFCore.SoftDelete)

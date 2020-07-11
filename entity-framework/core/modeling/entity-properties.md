@@ -5,12 +5,12 @@ author: lajones
 ms.date: 05/27/2020
 ms.assetid: e9dff604-3469-4a05-8f9e-18ac281d82a9
 uid: core/modeling/entity-properties
-ms.openlocfilehash: fcf3b0f8480fde2f3ba6b5fd601db115f1d246b8
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: d4e4c50d8c7febf5e42e9aa39352c0bb6a6bd409
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370511"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238214"
 ---
 # <a name="entity-properties"></a>Propriétés d'entité
 
@@ -36,7 +36,7 @@ Les propriétés spécifiques peuvent être exclues comme suit :
 
 Par Convention, lors de l’utilisation d’une base de données relationnelle, les propriétés d’entité sont mappées à des colonnes de table portant le même nom que la propriété.
 
-Si vous préférez configurer vos colonnes avec des noms différents, vous pouvez le faire comme suit :
+Si vous préférez configurer vos colonnes avec des noms différents, vous pouvez le faire comme extrait de code suivant :
 
 ### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
@@ -87,7 +87,7 @@ Dans l’exemple suivant, la configuration d’une longueur maximale de 500 entr
 
 ### <a name="precision-and-scale"></a>Précision et échelle
 
-À compter de EFCore 5,0, vous pouvez utiliser l’API Fluent pour configurer la précision et l’échelle. Elle indique au fournisseur de base de données la quantité de stockage nécessaire pour une colonne donnée. Elle s’applique uniquement aux types de données où le fournisseur autorise la variation de la précision et de l’échelle, généralement juste `decimal` et `DateTime` .
+À compter de EFCore 5,0, vous pouvez utiliser l’API Fluent pour configurer la précision et l’échelle. Elle indique au fournisseur de base de données la quantité de stockage nécessaire pour une colonne donnée. Elle s’applique uniquement aux types de données où le fournisseur autorise la variation de la précision et de l’échelle, généralement `decimal` et `DateTime` .
 
 Pour les `decimal` Propriétés, la précision définit le nombre maximal de chiffres requis pour exprimer toute valeur que la colonne contiendra, et Scale définit le nombre maximal de décimales nécessaires. Pour `DateTime` les propriétés, la précision définit le nombre maximal de chiffres requis pour exprimer des fractions de secondes et l’échelle n’est pas utilisée.
 
@@ -95,6 +95,10 @@ Pour les `decimal` Propriétés, la précision définit le nombre maximal de chi
 > Entity Framework n’effectue aucune validation de précision ou d’échelle avant de transmettre des données au fournisseur. Il revient au fournisseur ou au magasin de données de valider le cas échéant. Par exemple, lorsque vous ciblez SQL Server, une colonne de type de données `datetime` n’autorise pas la définition de la précision, tandis que celle d’une colonne `datetime2` peut être comprise entre 0 et 7 inclus.
 
 Dans l’exemple suivant, la configuration de la `Score` propriété pour qu’elle ait la précision 14 et l’échelle 2 entraîne la création d’une colonne de type `decimal(14,2)` sur SQL Server, et la configuration `LastUpdated` de la propriété avec une précision de 3 entraîne la création d’une colonne de type `datetime2(3)` :
+
+#### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+Il n’est actuellement pas possible d’utiliser des annotations de données pour configurer.
 
 #### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -115,8 +119,8 @@ Par Convention, une propriété dont le type .NET peut contenir une valeur null 
 
 C# 8 a introduit une nouvelle fonctionnalité appelée [types de référence Nullable](/dotnet/csharp/tutorials/nullable-reference-types), qui permet d’annoter les types de référence, ce qui indique s’il est valide qu’ils contiennent ou non null. Cette fonctionnalité est désactivée par défaut et, si elle est activée, elle modifie le comportement de EF Core de la façon suivante :
 
-* Si les types de référence Nullable sont désactivés (valeur par défaut), toutes les propriétés avec des types de référence .NET sont configurées comme étant facultatives par convention (par exemple `string` ,).
-* Si les types de référence Nullable sont activés, les propriétés seront configurées en fonction de la possibilité de valeur null C# de leur type .NET : `string?` sera configuré comme étant facultatif, tandis que `string` sera configuré comme requis.
+* Si les types de référence Nullable sont désactivés (valeur par défaut), toutes les propriétés avec des types de référence .NET sont configurées comme étant facultatives par convention (par exemple, `string` ).
+* Si les types de référence Nullable sont activés, les propriétés seront configurées en fonction de la possibilité de valeur null C# de leur type .NET : `string?` sera configuré comme étant facultatif, mais `string` sera configuré comme requis.
 
 L’exemple suivant montre un type d’entité avec des propriétés obligatoires et facultatives, avec la fonctionnalité de référence Nullable désactivée (valeur par défaut) et activée :
 
@@ -156,7 +160,7 @@ Une propriété qui serait facultative par convention peut être configurée com
 > [!NOTE]
 > Cette fonctionnalité est introduite dans EF Core 5,0.
 
-Un classement peut être défini sur des colonnes de texte, en déterminant comment elles sont comparées et triées. Par exemple, le code suivant configure un SQL Server colonne pour qu’il ne respecte pas la casse :
+Un classement peut être défini sur des colonnes de texte, en déterminant comment elles sont comparées et triées. Par exemple, l’extrait de code suivant configure un SQL Server colonne pour qu’il ne respecte pas la casse :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=42-43)]
 

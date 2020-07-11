@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 07/11/2019
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: fe378fc962c0d491703a3e77dca4415ad510d673
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 8ff2f3481c7f0c255def3272ca53370faba33e95
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370623"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238175"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Informations de référence sur les outils de Entity Framework Core-CLI .NET Core
 
@@ -126,11 +126,9 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 <Usage documentation follows, not shown.>
 ```
 
-
 ## <a name="updating-the-tools"></a>Mise à jour des outils
 
 Utilisez `dotnet tool update --global dotnet-ef` pour mettre à jour les outils globaux vers la dernière version disponible, si les outils sont installés localement dans votre projet `dotnet tool update dotnet-ef` . Installez une version spécifique en ajoutant `--version <VERSION>` à votre commande. Pour plus d’informations, consultez la section [mise à jour](/dotnet/core/tools/dotnet-tool-update) de la documentation de l’outil dotnet.
-
 
 ## <a name="using-the-tools"></a>Utilisation des outils
 
@@ -163,19 +161,19 @@ Pour spécifier l’environnement pour les projets ASP.NET Core, définissez la 
 
 ## <a name="common-options"></a>Options courantes
 
-|                   | Option                            | Description                                                                                                                                                                                                                                                   |
-|:------------------|:----------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|                   | `--json`                          | Affichez la sortie JSON.                                                                                                                                                                                                                                             |
-| <nobr>`-c`</nobr> | `--context <DBCONTEXT>`           | Classe `DbContext` à utiliser. Nom de classe uniquement ou qualifié complet avec des espaces de noms.  Si cette option est omise, EF Core trouvera la classe de contexte. S’il existe plusieurs classes de contexte, cette option est obligatoire.                                            |
-| `-p`              | `--project <PROJECT>`             | Chemin d’accès relatif au dossier du projet cible.  La valeur par défaut est le dossier actif.                                                                                                                                                              |
-| `-s`              | `--startup-project <PROJECT>`     | Chemin d’accès relatif au dossier du projet de démarrage. La valeur par défaut est le dossier actif.                                                                                                                                                              |
-|                   | `--framework <FRAMEWORK>`         | [Moniker du Framework cible](/dotnet/standard/frameworks#supported-target-framework-versions) pour la version [cible du .NET Framework](/dotnet/standard/frameworks).  Utilisez lorsque le fichier projet spécifie plusieurs frameworks cibles et que vous souhaitez en sélectionner un. |
-|                   | `--configuration <CONFIGURATION>` | Configuration de build, par exemple : `Debug` ou `Release` .                                                                                                                                                                                                   |
-|                   | `--runtime <IDENTIFIER>`          | Identificateur du runtime cible pour lequel restaurer les packages. Pour connaître les identificateurs de runtime, consultez le [catalogue des identificateurs de runtime](/dotnet/core/rid-catalog).                                                                                                      |
-| `-h`              | `--help`                          | Affichez les informations d’aide.                                                                                                                                                                                                                                        |
-| `-v`              | `--verbose`                       | Affichez la sortie détaillée.                                                                                                                                                                                                                                          |
-|                   | `--no-color`                      | Ne pas colorier la sortie.                                                                                                                                                                                                                                        |
-|                   | `--prefix-output`                 | Sortie de préfixe avec niveau.                                                                                                                                                                                                                                     |
+| Option                                         | Court             | Description                                                                                                                                                                                                                                                   |
+|:-----------------------------------------------|:------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--json`                                       |                   | Affichez la sortie JSON.                                                                                                                                                                                                                                             |
+| `--context <DBCONTEXT>`                        | <nobr>`-c`</nobr> | Classe `DbContext` à utiliser. Nom de classe uniquement ou qualifié complet avec des espaces de noms.  Si cette option est omise, EF Core trouvera la classe de contexte. S’il existe plusieurs classes de contexte, cette option est obligatoire.                                            |
+| `--project <PROJECT>`                          | `-p`              | Chemin d’accès relatif au dossier du projet cible.  La valeur par défaut est le dossier actif.                                                                                                                                                              |
+| `--startup-project <PROJECT>`                  | `-s`              | Chemin d’accès relatif au dossier du projet de démarrage. La valeur par défaut est le dossier actif.                                                                                                                                                              |
+| `--framework <FRAMEWORK>`                      |                   | [Moniker du Framework cible](/dotnet/standard/frameworks#supported-target-framework-versions) pour la version [cible du .NET Framework](/dotnet/standard/frameworks).  Utilisez lorsque le fichier projet spécifie plusieurs frameworks cibles et que vous souhaitez en sélectionner un. |
+| <nobr>`--configuration <CONFIGURATION>`</nobr> |                   | Configuration de build, par exemple : `Debug` ou `Release` .                                                                                                                                                                                                   |
+| `--runtime <IDENTIFIER>`                       |                   | Identificateur du runtime cible pour lequel restaurer les packages. Pour connaître les identificateurs de runtime, consultez le [catalogue des identificateurs de runtime](/dotnet/core/rid-catalog).                                                                                                      |
+| `--help`                                       | `-h`              | Affichez les informations d’aide.                                                                                                                                                                                                                                        |
+| `--verbose`                                    | `-v`              | Affichez la sortie détaillée.                                                                                                                                                                                                                                          |
+| `--no-color`                                   |                   | Ne pas colorier la sortie.                                                                                                                                                                                                                                        |
+| `--prefix-output`                              |                   | Sortie de préfixe avec niveau.                                                                                                                                                                                                                                     |
 
 ## <a name="dotnet-ef-database-drop"></a>dépôt de base de données EF dotnet
 
@@ -183,10 +181,10 @@ Supprime la base de données.
 
 Options :
 
-|                   | Option                   | Description                                              |
-|:------------------|:-------------------------|:---------------------------------------------------------|
-| <nobr>`-f`</nobr> | <nobr>`--force`</nobr>   | Ne pas confirmer.                                           |
-|                   | <nobr>`--dry-run`</nobr> | Affichez la base de données qui sera supprimée, mais ne la supprimez pas. |
+| Option                   | Court             | Description                                              |
+|:-------------------------|:------------------|:---------------------------------------------------------|
+| `--force`                | <nobr>`-f`</nobr> | Ne pas confirmer.                                           |
+| <nobr>`--dry-run`</nobr> |                   | Affichez la base de données qui sera supprimée, mais ne la supprimez pas. |
 
 ## <a name="dotnet-ef-database-update"></a>mise à jour de la base de données dotnet EF
 
@@ -194,16 +192,15 @@ Met à jour la base de données jusqu’à la dernière migration ou à une migr
 
 Arguments :
 
-| Argument      | Description                                                                                                                                                                                                                                                     |
-|:--------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<MIGRATION>` | Migration cible. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration* et entraîne la restauration de toutes les migrations. Si aucune migration n’est spécifiée, la commande prend par défaut la dernière migration. |
+| Argument                   | Description                                                                                                                                                                                                                                                     |
+|:---------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <nobr>`<MIGRATION>`</nobr> | Migration cible. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration* et entraîne la restauration de toutes les migrations. Si aucune migration n’est spécifiée, la commande prend par défaut la dernière migration. |
 
 Options :
 
-|                   | Option                   | Description                                              |
-|:------------------|:-------------------------|:---------------------------------------------------------|
-| <nobr>    </nobr> |  `--connection <CONNECTION>`        | Chaîne de connexion à la base de données. La valeur par défaut est celle spécifiée dans `AddDbContext` ou `OnConfiguring` . |
-
+| Option                                    | Description                                                                                                                                        |
+|:------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------|
+|  <nobr>`--connection <CONNECTION>`</nobr> | Chaîne de connexion à la base de données. La valeur par défaut est celle spécifiée dans `AddDbContext` ou `OnConfiguring` . (Disponible à partir de EF Core 5.0.0 et ultérieur.) |
 
 Les exemples suivants mettent à jour la base de données vers une migration spécifiée. La première utilise le nom de la migration et la seconde utilise l’ID de migration et une connexion spécifiée :
 
@@ -226,26 +223,26 @@ Génère du code pour les `DbContext` types d’entité et pour une base de donn
 
 Arguments :
 
-| Argument       | Description                                                                                                                                                                                                             |
-|:---------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<CONNECTION>` | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *name \<name of connection string> =*. Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. |
-| `<PROVIDER>`   | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer` .                                                                                           |
+| Argument                    | Description                                                                                                                                                                                                             |
+|:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <nobr>`<CONNECTION>`</nobr> | Chaîne de connexion à la base de données. Pour les projets ASP.NET Core 2. x, la valeur peut être *name \<name of connection string> =*. Dans ce cas, le nom provient des sources de configuration qui sont configurées pour le projet. |
+| `<PROVIDER>`                | Fournisseur à utiliser. En général, il s’agit du nom du package NuGet, par exemple : `Microsoft.EntityFrameworkCore.SqlServer` .                                                                                           |
 
 Options :
 
-|                 | Option                                   | Description                                                                                                                                                                    |
-|:----------------|:-----------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| <nobr>`-d`</nobr> | `--data-annotations`                   | Utilisez des attributs pour configurer le modèle (dans la mesure du possible). Si cette option est omise, seule l’API Fluent est utilisée.                                                                |
-| `-c`            | `--context <NAME>`                       | Nom de la `DbContext` classe à générer.                                                                                                                                 |
-|                 | `--context-dir <PATH>`                   | Répertoire dans lequel placer le `DbContext` fichier de classe. Les chemins d’accès sont relatifs au répertoire du projet. Les espaces de noms sont dérivés des noms de dossiers.                                 |
-|                 | `--context-namespace <NAMESPACE>`        | Espace de noms à utiliser pour la `DbContext` classe générée. Remarque : remplace `--namespace` . (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)        |
-| `-f`            | `--force`                                | Remplacer les fichiers existants.                                                                                                                                                      |
-| `-o`            | `--output-dir <PATH>`                    | Répertoire dans lequel placer les fichiers de classe d’entité. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                       |
-| `-n`            | `--namespace <NAMESPACE>`                | Espace de noms à utiliser pour toutes les classes générées. La valeur par défaut est générée à partir de l’espace de noms racine et du répertoire de sortie. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)        |
-|                 | <nobr>`--schema <SCHEMA_NAME>...`</nobr> | Schémas des tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs schémas, répétez `--schema` l’opération pour chacun d’entre eux. Si cette option est omise, tous les schémas sont inclus.          |
-| `-t`            | `--table <TABLE_NAME>`...                | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
-|                 | `--use-database-names`                   | Utilisez les noms de table et de colonne exactement tels qu’ils apparaissent dans la base de données. Si cette option est omise, les noms de base de données sont modifiés pour être plus conformes aux conventions de style de nom C#. |
-|                 | `--no-onconfiguring`                     | Supprime la génération de la `OnConfiguring` méthode dans la `DbContext` classe générée. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)        |
+| Option                                   | Court             | Description                                                                                                                                                                    |
+|:-----------------------------------------|:------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `--data-annotations`                     | <nobr>`-d`</nobr> | Utilisez des attributs pour configurer le modèle (dans la mesure du possible). Si cette option est omise, seule l’API Fluent est utilisée.                                                                |
+| `--context <NAME>`                       | `-c`              | Nom de la `DbContext` classe à générer.                                                                                                                                 |
+| `--context-dir <PATH>`                   |                   | Répertoire dans lequel placer le `DbContext` fichier de classe. Les chemins d’accès sont relatifs au répertoire du projet. Les espaces de noms sont dérivés des noms de dossiers.                                 |
+| `--context-namespace <NAMESPACE>`        |                   | Espace de noms à utiliser pour la `DbContext` classe générée. Remarque : remplace `--namespace` . (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)                                                |
+| `--force`                                | `-f`              | Remplacer les fichiers existants.                                                                                                                                                      |
+| `--output-dir <PATH>`                    | `-o`              | Répertoire dans lequel placer les fichiers de classe d’entité. Les chemins d’accès sont relatifs au répertoire du projet.                                                                                       |
+| `--namespace <NAMESPACE>`                | `-n`              | Espace de noms à utiliser pour toutes les classes générées. La valeur par défaut est générée à partir de l’espace de noms racine et du répertoire de sortie. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)                 |
+| <nobr>`--schema <SCHEMA_NAME>...`</nobr> |                   | Schémas des tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs schémas, répétez `--schema` l’opération pour chacun d’entre eux. Si cette option est omise, tous les schémas sont inclus.          |
+| `--table <TABLE_NAME>`...                | `-t`              | Tables pour lesquelles générer des types d’entité. Pour spécifier plusieurs tables, répétez `-t` ou `--table` pour chacune d’elles. Si cette option est omise, toutes les tables sont incluses.                |
+| `--use-database-names`                   |                   | Utilisez les noms de table et de colonne exactement tels qu’ils apparaissent dans la base de données. Si cette option est omise, les noms de base de données sont modifiés pour être plus conformes aux conventions de style de nom C#. |
+| `--no-onconfiguring`                     |                   | Supprime la génération de la `OnConfiguring` méthode dans la `DbContext` classe générée. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.)                                                 |
 
 L’exemple suivant génère la structure de tous les schémas et tables et place les nouveaux fichiers dans le dossier *Models* .
 
@@ -265,16 +262,16 @@ Ajoute une nouvelle migration.
 
 Arguments :
 
-| Argument | Description                |
-|:---------|:---------------------------|
-| `<NAME>` | Nom de la migration. |
+| Argument              | Description                |
+|:----------------------|:---------------------------|
+| <nobr>`<NAME>`</nobr> | Nom de la migration. |
 
 Options :
 
-|                   | Option                             | Description                                                                                                      |
-|:------------------|:-----------------------------------|:-----------------------------------------------------------------------------------------------------------------|
-| <nobr>`-o`</nobr> | <nobr>`--output-dir <PATH>`</nobr> | Répertoire utilisé pour générer les fichiers. Les chemins d’accès sont relatifs au répertoire du projet cible. La valeur par défaut est « migrations ». |
-| <nobr>`-n`</nobr> | <nobr>`--namespace <NAMESPACE>`</nobr> | Espace de noms à utiliser pour les classes générées. La valeur par défaut est générée à partir du répertoire de sortie. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.) |
+| Option                                 | Court             | Description                                                                                                                             |
+|:---------------------------------------|:------------------|:----------------------------------------------------------------------------------------------------------------------------------------|
+| `--output-dir <PATH>`                  | <nobr>`-o`</nobr> | Répertoire utilisé pour générer les fichiers. Les chemins d’accès sont relatifs au répertoire du projet cible. La valeur par défaut est « migrations ».                    |
+| <nobr>`--namespace <NAMESPACE>`</nobr> | `-n`              | Espace de noms à utiliser pour les classes générées. La valeur par défaut est générée à partir du répertoire de sortie. (Disponible à partir de EFCore 5.0.0 et versions ultérieures.) |
 
 ## <a name="dotnet-ef-migrations-list"></a>Liste des migrations dotnet EF
 
@@ -286,9 +283,9 @@ Supprime la dernière migration (restaure les modifications de code qui ont ét�
 
 Options :
 
-|                   | Option    | Description                                                                     |
-|:------------------|:----------|:--------------------------------------------------------------------------------|
-| <nobr>`-f`</nobr> | `--force` | Rétablissez la migration (annulez les modifications qui ont été appliquées à la base de données). |
+| Option                 | Court             | Description                                                                     |
+|:-----------------------|:------------------|:--------------------------------------------------------------------------------|
+| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Rétablissez la migration (annulez les modifications qui ont été appliquées à la base de données). |
 
 ## <a name="dotnet-ef-migrations-script"></a>script de migrations dotnet EF
 
@@ -296,17 +293,17 @@ Génère un script SQL à partir des migrations.
 
 Arguments :
 
-| Argument | Description                                                                                                                                                   |
-|:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `<FROM>` | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0. |
-| `<TO>`   | Fin de la migration. La valeur par défaut est la dernière migration.                                                                                                         |
+| Argument              | Description                                                                                                                                                   |
+|:----------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <nobr>`<FROM>`</nobr> | Début de la migration. Les migrations peuvent être identifiées par leur nom ou par leur ID. Le nombre 0 est un cas spécial qui signifie *avant la première migration*. La valeur par défaut est 0. |
+| `<TO>`                | Fin de la migration. La valeur par défaut est la dernière migration.                                                                                                         |
 
 Options :
 
-|                   | Option            | Description                                                        |
-|:------------------|:------------------|:-------------------------------------------------------------------|
-| <nobr>`-o`</nobr> | `--output <FILE>` | Fichier dans lequel écrire le script.                                   |
-| `-i`              | `--idempotent`    | Générez un script qui peut être utilisé sur une base de données lors d’une migration. |
+| Option                         | Court             | Description                                                        |
+|:-------------------------------|:------------------|:-------------------------------------------------------------------|
+| <nobr>`--output <FILE>`</nobr> | <nobr>`-o`</nobr> | Fichier dans lequel écrire le script.                                   |
+| `--idempotent`                 | `-i`              | Générez un script qui peut être utilisé sur une base de données lors d’une migration. |
 
 L’exemple suivant crée un script pour la migration InitialCreate :
 

@@ -4,12 +4,12 @@ author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: aeb0f5f8-b212-4f89-ae83-c642a5190ba0
 uid: core/miscellaneous/connection-strings
-ms.openlocfilehash: 062a7f292d16deb3840fd116f270edb11c6e0687
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: e955e93723fc371170641b0b3209cca014ef1c26
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672920"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238149"
 ---
 # <a name="connection-strings"></a>Chaînes de connexion
 
@@ -17,7 +17,7 @@ La plupart des fournisseurs de base de données requièrent une forme de chaîne
 
 ## <a name="winforms--wpf-applications"></a>WinForms & les applications WPF
 
-Les applications WinForms, WPF et ASP.NET 4 ont un modèle de chaîne de connexion essayé et testé. La chaîne de connexion doit être ajoutée au fichier app. config de votre application (Web. config si vous utilisez ASP.NET). Si votre chaîne de connexion contient des informations sensibles, telles que le nom d’utilisateur et le mot de passe, vous pouvez protéger le contenu du fichier de configuration à l’aide de l' [outil Gestionnaire de secret](/aspnet/core/security/app-secrets#secret-manager).
+Les applications WinForms, WPF et ASP.NET 4 ont un modèle de chaîne de connexion essayé et testé. La chaîne de connexion doit être ajoutée au fichier App.config de votre application (Web.config si vous utilisez ASP.NET). Si votre chaîne de connexion contient des informations sensibles, telles que le nom d’utilisateur et le mot de passe, vous pouvez protéger le contenu du fichier de configuration à l’aide de l' [outil Gestionnaire de secret](/aspnet/core/security/app-secrets#secret-manager).
 
 ``` xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -31,7 +31,7 @@ Les applications WinForms, WPF et ASP.NET 4 ont un modèle de chaîne de connexi
 ```
 
 > [!TIP]  
-> Le `providerName` paramètre n’est pas requis sur les chaînes de connexion EF Core stockées dans App. config, car le fournisseur de base de données est configuré par le biais du code.
+> Le `providerName` paramètre n’est pas requis sur les chaînes de connexion EF Core stockées dans App.config, car le fournisseur de base de données est configuré par le biais du code.
 
 Vous pouvez ensuite lire la chaîne de connexion à l’aide `ConfigurationManager` de l’API dans la méthode de votre contexte `OnConfiguring` . Vous devrez peut-être ajouter une référence à l' `System.Configuration` assembly de Framework pour pouvoir utiliser cette API.
 
@@ -73,7 +73,7 @@ Par exemple, vous pouvez utiliser l' [outil secret Manager](/aspnet/core/securit
 
 ```dotnetcli
 dotnet user-secrets set ConnectionStrings.YourDatabaseAlias "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=YourDatabase"
-dotnet ef dbcontext scaffold Name=YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
+dotnet ef dbcontext scaffold Name=ConnectionStrings.YourDatabaseAlias Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 Ou l’exemple suivant illustre la chaîne de connexion stockée dans `appsettings.json` .
@@ -86,7 +86,7 @@ Ou l’exemple suivant illustre la chaîne de connexion stockée dans `appsettin
 }
 ```
 
-Le contexte est alors généralement configuré dans `Startup.cs` avec la chaîne de connexion lue à partir de la configuration. Remarque la `GetConnectionString()` méthode recherche une valeur de configuration dont la clé est `ConnectionStrings:<connection string name>` . Vous devez importer l’espace de noms [Microsoft. extensions. Configuration](/dotnet/api/microsoft.extensions.configuration) pour utiliser cette méthode d’extension.
+Le contexte est alors généralement configuré dans `Startup.cs` avec la chaîne de connexion lue à partir de la configuration. Remarque la `GetConnectionString()` méthode recherche une valeur de configuration dont la clé est `ConnectionStrings:<connection string name>` . Vous devez importer l’espace de noms [Microsoft.Extensions.Configfiguration](/dotnet/api/microsoft.extensions.configuration) pour utiliser cette méthode d’extension.
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)

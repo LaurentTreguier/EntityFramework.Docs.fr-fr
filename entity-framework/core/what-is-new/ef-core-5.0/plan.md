@@ -3,21 +3,23 @@ title: Planifier Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: 249560bc14f72fd524be91bb1670dbaf78ae6b60
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: a107f901b215e7abaa5905852f81c2d9ab094b98
+ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370576"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86238318"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Planifier Entity Framework Core 5,0
 
 Comme décrit dans le [processus de planification](xref:core/what-is-new/release_planning), nous avons rassemblé les entrées des parties prenantes dans un plan provisoire pour la version EF Core 5,0.
 
-> [!IMPORTANT] 
+> [!IMPORTANT]
 > Ce plan est toujours un travail en cours. Rien ici n’est un engagement. Ce plan est un point de départ qui évoluera à mesure que nous en apprendrons davantage. Certains éléments qui ne sont pas actuellement planifiés pour 5,0 peuvent être extraits. Certains éléments actuellement planifiés pour 5,0 peuvent devenir punted.
 
-### <a name="version-number-and-release-date"></a>Numéro de version et date de publication.
+## <a name="general-information"></a>Informations générales
+
+### <a name="version-number-and-release-date"></a>Numéro de version et date de publication
 
 La version de EF Core 5,0 est actuellement planifiée en [même temps que .net 5,0](https://devblogs.microsoft.com/dotnet/introducing-net-5/). La version « 5,0 » a été choisie pour s’aligner sur .NET 5,0.
 
@@ -27,7 +29,7 @@ EF Core 5,0 est planifiée pour s’exécuter sur toute plateforme .NET 5,0 bas�
 
 EF Core 5,0 ne s’exécutera pas sur .NET Framework.
 
-### <a name="breaking-changes"></a>Modifications avec rupture
+### <a name="breaking-changes"></a>Changements cassants
 
 EF Core 5,0 contiendra des [modifications avec rupture](xref:core/what-is-new/ef-core-5.0/breaking-changes), mais celles-ci seront bien moins sévères que dans le cas de EF Core 3,0. Notre objectif est de permettre la mise à jour sans interruption de la grande majorité des applications.
 
@@ -110,7 +112,7 @@ EF Core 3,0 a modifié le comportement par défaut pour créer une requête SQL 
 Cela entraînait des régressions de performances importantes pour les requêtes qui utilisent include pour plusieurs collections.
 
 Dans EF Core 5,0, nous conservons le nouveau comportement par défaut.
-Toutefois, EF Core 5,0 permet désormais la génération de plusieurs requêtes pour la collection, notamment lorsque l’utilisation d’une seule requête entraîne des performances incorrectes. 
+Toutefois, EF Core 5,0 permet désormais la génération de plusieurs requêtes pour la collection, notamment lorsque l’utilisation d’une seule requête entraîne des performances incorrectes.
 
 ## <a name="rationalize-totable-toquery-toview-fromsql-etc"></a>Rationaliser ToTable, ToQuery, ToView, FromSql, etc.
 
@@ -165,7 +167,7 @@ Nous souhaitons offrir une meilleure expérience ici, qui permet de migrer facil
 
 Le résultat est probablement de nombreuses améliorations de EF Core (par exemple, de meilleures migrations sur SQLite), ainsi que des conseils et des collaborations à long terme avec d’autres équipes pour améliorer les expériences de bout en bout qui vont au-delà d’EF.
 
-## <a name="ef-core-platforms-experience"></a>Expérience des plates-formes EF Core 
+## <a name="ef-core-platforms-experience"></a>Expérience des plates-formes EF Core
 
 Développeurs en chef : @roji et@bricelam
 
@@ -247,10 +249,11 @@ Taille de T-shirt : L
 État : en cours
 
 Nous sommes déjà en train de mettre à jour la documentation pour les versions 3,0 et 3,1. Nous travaillons également sur :
-  * Une révision des documents de prise en main pour les rendre plus simples et plus faciles à suivre
-  * Réorganisation de docs pour faciliter la recherche et ajouter des références croisées
-  * Ajout de détails et de clarifications à des documents existants
-  * Mise à jour des exemples et ajout d’autres exemples
+
+* Une révision des documents de prise en main pour les rendre plus simples et plus faciles à suivre
+* Réorganisation de docs pour faciliter la recherche et ajouter des références croisées
+* Ajout de détails et de clarifications à des documents existants
+* Mise à jour des exemples et ajout d’autres exemples
 
 ## <a name="fixing-bugs"></a>Correction des bogues
 
@@ -286,6 +289,6 @@ Ce sont des correctifs de bogues et des améliorations qui **ne sont pas** actue
 
 En outre, nous considérons toujours les [problèmes les plus votés](https://github.com/dotnet/efcore/issues?q=is%3Aissue+is%3Aopen+sort%3Areactions-%2B1-desc) lors de la planification. La réduction de l’un de ces problèmes à partir d’une version est toujours pénible, mais nous avons besoin d’un plan réaliste pour les ressources dont nous disposons.
 
-## <a name="feedback"></a>Commentaires
+## <a name="suggestions"></a>Suggestions
 
 Vos commentaires sur la planification sont importants. La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut) pour ce problème sur GitHub. Ces données sont ensuite chargées dans le [processus de planification](xref:core/what-is-new/release_planning) de la prochaine version.
