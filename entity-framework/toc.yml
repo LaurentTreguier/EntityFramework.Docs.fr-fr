@@ -144,6 +144,10 @@
               items:
                 - name: Vue d'ensemble
                   href: core/managing-schemas/migrations/index.md
+                - name: Gestion des migrations
+                  href: core/managing-schemas/migrations/managing.md
+                - name: Application des migrations
+                  href: core/managing-schemas/migrations/applying.md
                 - name: Environnements d’équipe
                   href: core/managing-schemas/migrations/teams.md
                 - name: Opérations personnalisées
