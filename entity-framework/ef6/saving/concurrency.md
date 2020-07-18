@@ -3,14 +3,15 @@ title: Gestion des conflits d’accès concurrentiel-EF6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: a99f824fe256a10b84f539a5339a09624315efa4
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 4d29fd7a4d9b6003f71bc8411cea2d863a4c5429
+ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672709"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86451240"
 ---
-# <a name="handling-concurrency-conflicts"></a>Gestion de conflits d'accès concurrentiel
+# <a name="handling-concurrency-conflicts-ef6"></a>Gestion des conflits d’accès concurrentiel (EF6)
+
 L’accès concurrentiel optimiste implique une tentative optimiste d’enregistrer votre entité dans la base de données dans l’espoir que les données n’ont pas été modifiées depuis le chargement de l’entité. S’il s’avère que les données ont changé, une exception est levée et vous devez résoudre le conflit avant de tenter de l’enregistrer à nouveau. Cette rubrique explique comment gérer de telles exceptions dans Entity Framework. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
 
 Ce billet n’est pas l’endroit approprié pour une présentation complète de l’accès concurrentiel optimiste. Les sections ci-dessous supposent une connaissance de la résolution de concurrence et présentent des modèles pour les tâches courantes.  

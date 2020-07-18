@@ -1,15 +1,15 @@
 ---
 title: Fournisseur de base de données SQLite-limitations-EF Core
-author: rowanmiller
-ms.date: 04/09/2017
+author: bricelam
+ms.date: 07/16/2020
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 17e97da9dfffefeb507fde744b710e6936bff69b
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: 393f5e80ce2e11dcb11c2048e06effa27e48dc13
+ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672775"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86451227"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limites d’un fournisseur de base de données EF Core SQLite
 
@@ -45,34 +45,36 @@ modelBuilder.Entity<MyEntity>()
 
 Le moteur de base de données SQLite ne prend pas en charge un certain nombre d’opérations de schéma prises en charge par la plupart des autres bases de données relationnelles. Si vous tentez d’appliquer l’une des opérations non prises en charge à une base de données SQLite, une `NotSupportedException` exception est levée.
 
-| Opération            | Pris en charge ? | Version requise |
-|:---------------------|:-----------|:-----------------|
-| AddColumn            | ✔          | 1.0              |
-| AddForeignKey        | ✗          |                  |
-| AddPrimaryKey        | ✗          |                  |
-| AddUniqueConstraint  | ✗          |                  |
-| AlterColumn          | ✗          |                  |
-| CreateIndex          | ✔          | 1.0              |
-| CreateTable          | ✔          | 1.0              |
-| DropColumn           | ✗          |                  |
-| DropForeignKey       | ✗          |                  |
-| DROP index            | ✔          | 1.0              |
-| DropPrimaryKey       | ✗          |                  |
-| DropTable            | ✔          | 1.0              |
-| DropUniqueConstraint | ✗          |                  |
-| RenameColumn         | ✔          | 2.2.2            |
-| RenameIndex          | ✔          | 2.1              |
-| RenameTable          | ✔          | 1.0              |
-| EnsureSchema         | ✔ (aucune opération)  | 2.0              |
-| DropSchema           | ✔ (aucune opération)  | 2.0              |
-| Insérer               | ✔          | 2.0              |
-| Update               | ✔          | 2.0              |
-| Supprimer               | ✔          | 2.0              |
+Une régénération sera tentée afin d’effectuer certaines opérations. Les reconstructions sont possibles uniquement pour les artefacts de base de données qui font partie de votre modèle de EF Core. Si un artefact de base de données ne fait pas partie du modèle, par exemple, s’il a été créé manuellement à l’intérieur d’une migration, alors une `NotSupportedException` est toujours levée.
+
+| Opération            | Pris en charge ?  | Version requise |
+|:---------------------|:------------|:-----------------|
+| AddCheckConstraint   | ✔ (régénération) | 5.0              |
+| AddColumn            | ✔           | 1.0              |
+| AddForeignKey        | ✔ (régénération) | 5.0              |
+| AddPrimaryKey        | ✔ (régénération) | 5.0              |
+| AddUniqueConstraint  | ✔ (régénération) | 5.0              |
+| AlterColumn          | ✔ (régénération) | 5.0              |
+| CreateIndex          | ✔           | 1.0              |
+| CreateTable          | ✔           | 1.0              |
+| DropCheckConstraint  | ✔ (régénération) | 5.0              |
+| DropColumn           | ✔ (régénération) | 5.0              |
+| DropForeignKey       | ✔ (régénération) | 5.0              |
+| DROP index            | ✔           | 1.0              |
+| DropPrimaryKey       | ✔ (régénération) | 5.0              |
+| DropTable            | ✔           | 1.0              |
+| DropUniqueConstraint | ✔ (régénération) | 5.0              |
+| RenameColumn         | ✔           | 2.2.2            |
+| RenameIndex          | ✔ (régénération) | 2.1              |
+| RenameTable          | ✔           | 1.0              |
+| EnsureSchema         | ✔ (aucune opération)   | 2.0              |
+| DropSchema           | ✔ (aucune opération)   | 2.0              |
+| Insérer               | ✔           | 2.0              |
+| Update               | ✔           | 2.0              |
+| DELETE               | ✔           | 2.0              |
 
 ## <a name="migrations-limitations-workaround"></a>Solution de contournement des limitations des migrations
 
-Vous pouvez contourner certaines de ces limitations en écrivant manuellement du code dans vos migrations pour effectuer une reconstruction de table. Une reconstruction de la table implique la modification du nom de la table existante, la création d’une nouvelle table, la copie des données vers la nouvelle table et la suppression de l’ancienne table. Vous devrez utiliser la `Sql(string)` méthode pour effectuer certaines de ces étapes.
+Vous pouvez contourner certaines de ces limitations en écrivant manuellement du code dans vos migrations pour effectuer une reconstruction. Les reconstructions de tables impliquent la création d’une nouvelle table, la copie de données dans la nouvelle table, la suppression de l’ancienne table et la modification du nom de la nouvelle table. Vous devrez utiliser la `Sql(string)` méthode pour effectuer certaines de ces étapes.
 
 Pour plus d’informations, consultez [création d’autres types de modifications de schéma de table](https://sqlite.org/lang_altertable.html#otheralter) dans la documentation sqlite.
-
-À l’avenir, EF peut prendre en charge certaines de ces opérations à l’aide de l’approche de reconstruction de table en coulisses. Vous pouvez [suivre cette fonctionnalité sur notre projet GitHub](https://github.com/aspnet/EntityFrameworkCore/issues/329).
