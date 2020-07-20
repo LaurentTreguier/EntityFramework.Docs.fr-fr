@@ -65,6 +65,8 @@
               href: core/get-started/install/index.md
             - name: Tutoriel ASP.NET Core >>
               href: /aspnet/core/data/ef-rp/intro
+            - name: Tutoriel Xamarin
+              href: core/get-started/xamarin.md
         - name: Notions de base
           items:
             - name: Chaînes de connexion
