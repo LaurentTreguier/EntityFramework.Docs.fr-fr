@@ -2,14 +2,14 @@
 title: Nouveautés de EF Core 5,0
 description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
-ms.date: 06/02/2020
+ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 304ed74fe344b43177525113c70b7be7bb0ac5ed
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: d42b2811d07516e9febedbc51fcb206000d38371
+ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238331"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86873381"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
@@ -18,6 +18,148 @@ EF Core 5,0 est actuellement en cours de développement. Cette page contient une
 Cette page ne duplique pas le [plan pour EF Core 5,0](xref:core/what-is-new/ef-core-5.0/plan). Le plan décrit les thèmes globaux pour EF Core 5,0, y compris tout ce que nous envisageons d’inclure avant d’expédier la version finale.
 
 Nous ajouterons des liens à partir d’ici à la documentation officielle au fur et à mesure de sa publication.
+
+## <a name="preview-7"></a>Version préliminaire 7
+
+### <a name="dbcontextfactory"></a>DbContextFactory
+
+EF Core 5,0 introduit `AddDbContextFactory` et `AddPooledDbContextFactory` pour inscrire une fabrique pour la création d’instances de DbContext dans le conteneur d’injection de dépendances (D.I.) de l’application. Par exemple :
+
+```csharp
+services.AddDbContextFactory<SomeDbContext>(b =>
+    b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test"));
+```
+
+Les services d’application tels que les contrôleurs de ASP.NET Core peuvent ensuite dépendre `IDbContextFactory<TContext>` du constructeur de service. Par exemple :
+
+```csharp
+public class MyController
+{
+    private readonly IDbContextFactory<SomeDbContext> _contextFactory;
+
+    public MyController(IDbContextFactory<SomeDbContext> contextFactory)
+    {
+        _contextFactory = contextFactory;
+    }
+}
+```
+
+Les instances de DbContext peuvent ensuite être créées et utilisées en fonction des besoins. Par exemple :
+
+```csharp
+public void DoSomehing()
+{
+    using (var context = _contextFactory.CreateDbContext())
+    {
+        // ...            
+    }
+}
+```
+
+Notez que les instances de DbContext créées de cette façon _ne sont pas_ gérées par le fournisseur de services de l’application et doivent donc être supprimées par l’application. Ce découplage est très utile pour les applications éblouissantes, où l’utilisation de `IDbContextFactory` est recommandée, mais peut également être utile dans d’autres scénarios.
+
+Les instances de DbContext peuvent être regroupées en appelant `AddPooledDbContextFactory` . Ce regroupement fonctionne de la même façon que pour `AddDbContextPool` et présente également les mêmes limitations.
+
+La documentation est suivie d’un problème [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523).
+
+### <a name="reset-dbcontext-state"></a>Réinitialiser l’état de DbContext
+
+EF Core 5,0 introduit `ChangeTracker.Clear()` , qui efface le DbContext de toutes les entités suivies. Cela ne doit généralement pas être nécessaire lors de l’utilisation de la méthode recommandée pour créer une instance de contexte de courte durée pour chaque unité de travail. Toutefois, s’il est nécessaire de réinitialiser l’état d’une instance de DbContext, l’utilisation de la nouvelle `Clear()` méthode est plus performante et fiable que le détachement en masse de toutes les entités.  
+
+La documentation est suivie d’un problème [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).
+
+### <a name="new-pattern-for-store-generated-defaults"></a>Nouveau modèle pour les valeurs par défaut générées par le magasin
+
+EF Core permet de définir une valeur explicite pour une colonne qui peut également avoir une contrainte de valeur par défaut. EF Core utilise la valeur CLR par défaut de type de propriété comme sentinelle pour ce. Si la valeur n’est pas la valeur CLR par défaut, elle est insérée, sinon la valeur par défaut de la base de données est utilisée.
+
+Cela crée des problèmes pour les types où la valeur CLR par défaut n’est pas une bonne sentinelle, notamment les `bool` Propriétés. EF Core 5,0 autorise désormais la valeur null dans le champ de stockage pour les cas comme celui-ci. Par exemple :
+
+```csharp
+public class Blog
+{
+    private bool? _isValid;
+
+    public bool IsValid
+    {
+        get => _isValid ?? false;
+        set => _isValid = value;
+    }
+}
+```
+
+Notez que le champ de stockage accepte la valeur null, mais pas la propriété exposée publiquement. Cela permet à la valeur de sentinelle de ne pas avoir `null` d’impact sur la surface publique du type d’entité. Dans ce cas, si le `IsValid` n’est jamais défini, la valeur par défaut de la base de données est utilisée, car le champ de stockage conserve la valeur null. Si `true` ou `false` sont définis, cette valeur est enregistrée explicitement dans la base de données.
+
+La documentation est suivie d’un problème [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525).
+
+### <a name="cosmos-partition-keys"></a>Clés de partition Cosmos
+
+EF Core permet d’inclure la clé de partition Cosmos dans le modèle EF. Par exemple :
+
+```csharp
+modelBuilder.Entity<Customer>().HasPartitionKey(b => b.AlternateKey)
+```
+
+À partir de Preview 7, la clé de partition est incluse dans le PK du type d’entité et est utilisée pour améliorer les performances dans certaines requêtes.
+
+La documentation est suivie d’un problème [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).
+
+### <a name="cosmos-configuration"></a>Configuration de Cosmos
+
+EF Core 5,0 améliore la configuration des connexions Cosmos et Cosmos.
+
+Auparavant, EF Core nécessitait la spécification du point de terminaison et de la clé explicitement lors de la connexion à une base de données Cosmos. EF Core 5,0 autorise l’utilisation d’une chaîne de connexion à la place. En outre, EF Core 5,0 permet de définir explicitement l’instance WebProxy. Par exemple :
+
+```csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseCosmos("my-cosmos-connection-string", "MyDb",
+            cosmosOptionsBuilder =>
+            {
+                cosmosOptionsBuilder.WebProxy(myProxyInstance);
+            });
+```
+
+De nombreuses autres valeurs de délai d’attente, limites, etc. peuvent également être configurées. Par exemple :
+
+```csharp
+protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    => optionsBuilder
+        .UseCosmos("my-cosmos-connection-string", "MyDb",
+            cosmosOptionsBuilder =>
+            {
+                cosmosOptionsBuilder.LimitToEndpoint();
+                cosmosOptionsBuilder.RequestTimeout(requestTimeout);
+                cosmosOptionsBuilder.OpenTcpConnectionTimeout(timeout);
+                cosmosOptionsBuilder.IdleTcpConnectionTimeout(timeout);
+                cosmosOptionsBuilder.GatewayModeMaxConnectionLimit(connectionLimit);
+                cosmosOptionsBuilder.MaxTcpConnectionsPerEndpoint(connectionLimit);
+                cosmosOptionsBuilder.MaxRequestsPerTcpConnection(requestLimit);
+            });
+```
+
+Enfin, le mode de connexion par défaut est désormais `ConnectionMode.Gateway` , ce qui est généralement plus compatible.
+
+La documentation est suivie d’un problème [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).
+
+### <a name="scaffold-dbcontext-now-singularizes"></a>Génération de modèles automatique-DbContext Now singularise
+
+Auparavant, lors de la génération de modèles automatique d’une base de données existante, EF Core créera des noms de types d’entité qui correspondent aux noms de table dans la base de données. Par exemple, les tables `People` et ont `Addresses` abouti à des types d’entités nommés `People` et `Addresses` .
+
+Dans les versions précédentes, ce comportement était configurable par l’inscription d’un service de pluralisation. Désormais, dans EF Core 5,0, le package [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) est utilisé comme un service de pluralisation par défaut. Cela signifie que `People` les tables et `Addresses` sont maintenant rétroconçues dans les types d’entités nommés `Person` et `Address` .
+
+### <a name="savepoints"></a>Points
+
+EF Core prend désormais en charge les [points](/SQL/t-sql/language-elements/save-transaction-transact-sql?view=sql-server-ver15#remarks) de contrôle pour un plus grand contrôle sur les transactions qui exécutent plusieurs opérations.
+
+Les points de sauvegarde peuvent être créés, libérés et restaurés manuellement. Par exemple :
+
+```csharp
+context.Database.CreateSavepoint("MySavePoint"); 
+```
+
+En outre, les EF Core sont désormais restaurés jusqu’au dernier point de sauvegarde en cas d’échec de l’exécution `SaveChanges` . Cela permet de faire une nouvelle tentative d’SaveChanges sans retenter l’intégralité de la transaction.
+
+La documentation est suivie d’un problème [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429).
 
 ## <a name="preview-6"></a>Préversion 6
 
