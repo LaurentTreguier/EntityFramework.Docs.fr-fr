@@ -5,12 +5,12 @@ ms.author: bricelam
 ms.date: 11/01/2018
 ms.assetid: 2BDE29FC-4161-41A0-841E-69F51CCD9341
 uid: core/modeling/spatial
-ms.openlocfilehash: 2222df84be7bfde3f252766bef1cfab39b476efa
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 85124b7e252797ccd952d0d332e7309eff97ba56
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370446"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526665"
 ---
 # <a name="spatial-data"></a>Données spatiales
 
@@ -19,7 +19,7 @@ ms.locfileid: "85370446"
 
 Les données spatiales représentent l’emplacement physique et la forme des objets. De nombreuses bases de données prennent en charge ce type de données afin qu’elles puissent être indexées et interrogées avec d’autres données. Les scénarios courants incluent l’interrogation d’objets situés à une distance donnée à partir d’un emplacement ou la sélection de l’objet dont la bordure contient un emplacement donné. EF Core prend en charge le mappage aux types de données spatiales à l’aide de la bibliothèque spatiale [NetTopologySuite](https://github.com/NetTopologySuite/NetTopologySuite) .
 
-## <a name="installing"></a>En cours d'installation
+## <a name="installing"></a>Installing
 
 Pour pouvoir utiliser les données spatiales avec EF Core, vous devez installer le package NuGet de prise en charge approprié. Le package que vous devez installer dépend du fournisseur que vous utilisez.
 
@@ -345,7 +345,7 @@ Polygon. NumInteriorRings | ✔ | ✔ | ✔ | ✔
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
-* [Données spatiales dans SQL Server](https://docs.microsoft.com/sql/relational-databases/spatial/spatial-data-sql-server)
+* [Données spatiales dans SQL Server](/sql/relational-databases/spatial/spatial-data-sql-server)
 * [Page d’accueil SpatiaLite](https://www.gaia-gis.it/fossil/libspatialite)
 * [Documentation spatiale npgsql](https://www.npgsql.org/efcore/mapping/nts.html)
 * [Documentation PostGIS](https://postgis.net/documentation/)

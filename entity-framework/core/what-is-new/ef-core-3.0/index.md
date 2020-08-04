@@ -4,12 +4,12 @@ author: divega
 ms.date: 02/19/2019
 ms.assetid: 2EBE2CCC-E52D-483F-834C-8877F5EB0C0C
 uid: core/what-is-new/ef-core-3.0/index
-ms.openlocfilehash: 39684cdcc17e3baa4b77cf29d54b626294771332
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: ab61716fbf9cd4a256903a99540b6ecea2b5d37c
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103137"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526834"
 ---
 # <a name="new-features-in-entity-framework-core-30"></a>Nouvelles fonctionnalités d’Entity Framework Core 3.0
 
@@ -69,7 +69,7 @@ Consultez la [documentation fournisseur Cosmos DB](xref:core/providers/cosmos/in
 
 ## <a name="c-80-support"></a>Prise en charge de C# 8.0
 
-EF Core 3.0 bénéficie de quelques-unes des [nouvelles fonctionnalités de C# 8.0](https://docs.microsoft.com/dotnet/csharp/whats-new/csharp-8) :
+EF Core 3.0 bénéficie de quelques-unes des [nouvelles fonctionnalités de C# 8.0](/dotnet/csharp/whats-new/csharp-8) :
 
 ### <a name="asynchronous-streams"></a>Flux asynchrones
 
@@ -87,7 +87,7 @@ await foreach(var o in orders.AsAsyncEnumerable())
 }
 ```
 
-Consultez la rubrique [Flux asynchrones dans la documentation C#](https://docs.microsoft.com/dotnet/csharp/whats-new/csharp-8#asynchronous-streams) pour plus de détails.
+Consultez la rubrique [Flux asynchrones dans la documentation C#](/dotnet/csharp/whats-new/csharp-8#asynchronous-streams) pour plus de détails.
 
 ### <a name="nullable-reference-types"></a>Types références Nullables
 

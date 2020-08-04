@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: de24f8903af79ebd7f68e6b74288257883c1fa8d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: e7428bc516a69310b6a6f521acc49aee0ba9f802
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417397"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526497"
 ---
 # <a name="table-splitting"></a>Fractionnement de table
 
@@ -22,20 +22,20 @@ Pour utiliser le fractionnement de table, les types d’entités doivent être m
 
 Un scénario courant de fractionnement de table n’utilise qu’un sous-ensemble des colonnes de la table pour améliorer les performances ou l’encapsulation.
 
-Dans cet exemple `Order` représente un sous-ensemble de `DetailedOrder`.
+Dans cet exemple, `Order` représente un sous-ensemble de `DetailedOrder` .
 
 [!code-csharp[Order](../../../samples/core/Modeling/TableSplitting/Order.cs?name=Order)]
 
 [!code-csharp[DetailedOrder](../../../samples/core/Modeling/TableSplitting/DetailedOrder.cs?name=DetailedOrder)]
 
-Outre la configuration requise, nous appelons `Property(o => o.Status).HasColumnName("Status")` pour mapper `DetailedOrder.Status` à la même colonne que `Order.Status`.
+Outre la configuration requise, nous appelons `Property(o => o.Status).HasColumnName("Status")` pour mapper `DetailedOrder.Status` à la même colonne que `Order.Status` .
 
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
 > Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
 
-## <a name="usage"></a>Usage
+## <a name="usage"></a>Utilisation
 
 L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que les autres entités :
 
@@ -46,7 +46,7 @@ L’enregistrement et l’interrogation d’entités à l’aide du fractionneme
 > [!NOTE]
 > Cette fonctionnalité a été introduite dans EF Core 3,0.
 
-Si toutes les colonnes utilisées par une entité dépendante sont `NULL` dans la base de données, aucune instance n’est créée lors de la requête. Cela permet de modéliser une entité dépendante facultative, où la propriété de relation sur le principal est null. Notez que cela se produit également lorsque toutes les propriétés dépendantes sont facultatives et définies sur `null`, ce qui n’est peut-être pas prévu.
+Si toutes les colonnes utilisées par une entité dépendante se trouvent `NULL` dans la base de données, aucune instance n’est créée lors de la requête. Cela permet de modéliser une entité dépendante facultative, où la propriété de relation sur le principal est null. Notez que cela se produit également si toutes les propriétés dépendantes sont facultatives et ont la valeur `null` , ce qui n’est peut-être pas prévu.
 
 ## <a name="concurrency-tokens"></a>Jetons d’accès concurrentiel
 

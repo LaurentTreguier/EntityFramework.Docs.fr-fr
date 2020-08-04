@@ -4,12 +4,12 @@ description: Utilisation de comparateurs de valeur pour contrôler la façon don
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 9e33bfb840606b746626daa1da7331904b495ab4
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+ms.openlocfilehash: fa5352129977d858d54d4aede746b320c91b0ad3
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664115"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526782"
 ---
 # <a name="value-comparers"></a>Comparateurs de valeurs
 
@@ -59,7 +59,7 @@ Cela est souvent correct, mais il peut être nécessaire de le remplacer lors du
 
 ### <a name="simple-immutable-classes"></a>Classes immuables simples
 
-Considérez une propriété qui utilise un convertisseur de valeur pour mapper une classe simple et immuable.
+Prenons l’exemple d’une propriété qui utilise un convertisseur de valeur pour mapper une classe simple et immuable.
 
 [!code-csharp[SimpleImmutableClass](../../../samples/core/Modeling/ValueConversions/MappingImmutableClassProperty.cs?name=SimpleImmutableClass)]
 

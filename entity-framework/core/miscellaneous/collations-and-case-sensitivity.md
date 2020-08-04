@@ -5,12 +5,12 @@ author: roji
 ms.date: 04/27/2020
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: b3874847922cb39aa57d50813e6e50ff7db72eb9
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 46a13d341c1b721bb243ee2b205bdc2f4d7e7aee
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370563"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526444"
 ---
 # <a name="collations-and-case-sensitivity"></a>Classements et respect de la casse
 
@@ -68,11 +68,11 @@ Notez que certaines bases de données permettent de définir le classement lors 
 
 Dans .NET, l’égalité des chaînes respecte la casse par défaut : `s1 == s2` effectue une comparaison ordinale qui requiert que les chaînes soient identiques. Étant donné que le classement par défaut des bases de données varie et parce qu’il est souhaitable que l’égalité simple utilise des index, EF Core n’effectue aucune tentative de conversion de l’égalité simple en une opération de base de données qui respecte la casse : l’égalité C# est traduite directement en égalité SQL, qui peut ou non respecter la casse, en fonction de la base de données en cours d’utilisation et
 
-En outre, .NET fournit des surcharges de [`string.Equals`](https://docs.microsoft.com/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) l’acceptation d’un [`StringComparison`](https://docs.microsoft.com/dotnet/api/system.stringcomparison) enum, ce qui permet de spécifier le respect de la casse et la culture pour la comparaison. Par défaut, EF Core s’abstient de traduire ces surcharges en SQL, et la tentative de les utiliser entraînera une exception. Pour une chose, EF Core ne sait pas quel classement sensible à la casse ou non sensible à la casse doit être utilisé. Plus important encore, l’application d’un classement dans la plupart des cas empêche l’utilisation de l’index, ce qui a un impact significatif sur les performances d’une construction .NET très basique et couramment utilisée. Pour forcer une requête à utiliser une comparaison qui respecte la casse ou qui ne respecte pas la casse, spécifiez explicitement le classement via `EF.Functions.Collate` comme [détaillé ci-dessus](#explicit-collations-and-indexes).
+En outre, .NET fournit des surcharges de [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) l’acceptation d’un [`StringComparison`](/dotnet/api/system.stringcomparison) enum, ce qui permet de spécifier le respect de la casse et la culture pour la comparaison. Par défaut, EF Core s’abstient de traduire ces surcharges en SQL, et la tentative de les utiliser entraînera une exception. Pour une chose, EF Core ne sait pas quel classement sensible à la casse ou non sensible à la casse doit être utilisé. Plus important encore, l’application d’un classement dans la plupart des cas empêche l’utilisation de l’index, ce qui a un impact significatif sur les performances d’une construction .NET très basique et couramment utilisée. Pour forcer une requête à utiliser une comparaison qui respecte la casse ou qui ne respecte pas la casse, spécifiez explicitement le classement via `EF.Functions.Collate` comme [détaillé ci-dessus](#explicit-collations-and-indexes).
 
 ## <a name="database-specific-information"></a>Informations spécifiques à la base de données
 
-* [SQL Server de la documentation sur les classements](https://docs.microsoft.com/sql/relational-databases/collations/collation-and-unicode-support).
-* [Documentation de Microsoft. Data. sqlite sur les classements](https://docs.microsoft.com/dotnet/standard/data/sqlite/collation).
+* [SQL Server de la documentation sur les classements](/sql/relational-databases/collations/collation-and-unicode-support).
+* [Documentation de Microsoft. Data. sqlite sur les classements](/dotnet/standard/data/sqlite/collation).
 * [Documentation PostgreSQL sur les classements](https://www.postgresql.org/docs/current/collation.html).
 * [Documentation MySQL sur les classements](https://dev.mysql.com/doc/refman/en/charset-general.html).

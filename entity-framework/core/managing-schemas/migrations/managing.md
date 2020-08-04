@@ -4,12 +4,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: e52d3680360a1e83e05f04650c735c5a67680094
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 2097d3cc9232d448191dbebbe3d14d86e80b91fe
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238753"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526431"
 ---
 # <a name="managing-migrations"></a>Gestion des migrations
 
@@ -97,7 +97,7 @@ migrationBuilder.RenameColumn(
 
 ### <a name="adding-raw-sql"></a>Ajout de SQL brut
 
-L’attribution d’un nouveau nom à une colonne peut être obtenue via une API intégrée, dans de nombreux cas, ce qui n’est pas possible. Par exemple, nous pouvons souhaiter remplacer les `FirstName` Propriétés et existantes `LastColumn` par une seule nouvelle `FullName` propriété. La migration générée par EF Core sera la suivante :
+L’attribution d’un nouveau nom à une colonne peut être obtenue via une API intégrée, dans de nombreux cas, ce qui n’est pas possible. Par exemple, nous pouvons souhaiter remplacer les `FirstName` Propriétés et existantes `LastName` par une seule nouvelle `FullName` propriété. La migration générée par EF Core sera la suivante :
 
 ``` csharp
 migrationBuilder.DropColumn(
@@ -109,7 +109,7 @@ migrationBuilder.DropColumn(
     table: "Customer");
 
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 ```
@@ -118,14 +118,14 @@ Comme précédemment, cela entraînerait une perte de données indésirable. Pou
 
 ``` csharp
 migrationBuilder.AddColumn<string>(
-    name: "Name",
+    name: "FullName",
     table: "Customer",
     nullable: true);
 
 migrationBuilder.Sql(
 @"
     UPDATE Customer
-    SET Name = FirstName + ' ' + LastName;
+    SET FullName = FirstName + ' ' + LastName;
 ");
 
 migrationBuilder.DropColumn(
@@ -159,7 +159,7 @@ Cela peut être utilisé pour gérer tous les aspects de votre base de données,
 * Recherche en texte intégral
 * Fonctions
 * Déclencheurs
-* Vues
+* Affichages
 
 Dans la plupart des cas, EF Core encapsule automatiquement chaque migration dans sa propre transaction lors de l’application des migrations. Malheureusement, certaines opérations de migration ne peuvent pas être effectuées au sein d’une transaction dans certaines bases de données ; dans ce cas, vous pouvez refuser la transaction en passant `suppressTransaction: true` à `migrationBuilder.Sql` .
 

@@ -3,12 +3,12 @@ title: 'Filtres de requête globale : EF Core'
 author: anpete
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 233289b0c50e15f4555b342bc654211ce04c24d3
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+ms.openlocfilehash: 57d81919dedb853d2a41066f76ec20685ae41d6b
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370459"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526899"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
 
@@ -43,7 +43,7 @@ Les expressions de prédicat passées aux appels _HasQueryFilter_ seront désorm
 > Notez l’utilisation d’un champ de niveau d’instance DbContext : `_tenantId` permet de définir le client en cours. Les filtres au niveau du modèle utilisent la valeur de l’instance de contexte correcte (c’est-à-dire celle qui exécute la requête).
 
 > [!NOTE]
-> Il n’est actuellement pas possible de définir plusieurs filtres de requête sur la même entité ; seul le dernier sera appliqué. Toutefois, vous pouvez définir un filtre unique avec plusieurs conditions à l’aide de l’opérateur _and_ logique ([ `&&` en C#](https://docs.microsoft.com/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)).
+> Il n’est actuellement pas possible de définir plusieurs filtres de requête sur la même entité ; seul le dernier sera appliqué. Toutefois, vous pouvez définir un filtre unique avec plusieurs conditions à l’aide de l’opérateur _and_ logique ([ `&&` en C#](/dotnet/csharp/language-reference/operators/boolean-logical-operators#conditional-logical-and-operator-)).
 
 ## <a name="use-of-navigations"></a>Utilisation des navigations
 

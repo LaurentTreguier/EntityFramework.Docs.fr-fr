@@ -3,19 +3,19 @@ title: Liaison de liaison avec WPF-EF6
 author: divega
 ms.date: 05/19/2020
 ms.assetid: e90d48e6-bea7785-47ef-b756-7b89cce4daf0
-ms.openlocfilehash: c8e9e9a0810d8192e5184abbc7df2e74e4ee7edb
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+ms.openlocfilehash: baeb75b1ee386ca58013048bcc31ea4074604673
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672907"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526847"
 ---
 # <a name="databinding-with-wpf"></a>Liaison de données avec WPF
 
 > [!IMPORTANT]
 > **Ce document est valide pour WPF sur la .NET Framework uniquement**
 >
-> Ce document décrit la liaison de liaison pour WPF sur le .NET Framework. Pour les nouveaux projets .NET Core, nous vous recommandons d’utiliser [EF Core](/ef/core) au lieu de Entity Framework 6. La documentation relative à la liaison de liaison dans EF Core est suivie dans le [#778 du problème](https://github.com/dotnet/EntityFramework.Docs/issues/778).
+> Ce document décrit la liaison de liaison pour WPF sur le .NET Framework. Pour les nouveaux projets .NET Core, nous vous recommandons d’utiliser [EF Core](/ef/core) au lieu de Entity Framework 6. La documentation relative à la liaison de la liaison de EF Core est ici : [prise en main avec WPF](/ef/core/get-started/wpf).
 
 Cette procédure pas à pas montre comment lier des types POCO à des contrôles WPF dans un formulaire « maître/détail ». L’application utilise les API Entity Framework pour remplir les objets avec les données de la base de données, effectuer le suivi des modifications et conserver les données dans la base de données.
 
@@ -41,7 +41,7 @@ Si vous utilisez Visual Studio 2010, vous devez également installer NuGet. Pour
 
 ## <a name="create-the-application"></a>Création de l’application
 
--   Ouvrir Visual Studio
+-   Ouvrez Visual Studio.
 -   **Fichier- &gt; nouveau- &gt; projet....**
 -   Sélectionnez **fenêtres**   dans le volet gauche et **WPFApplication** dans le volet droit
 -   Entrez **WPFwithEFSample**   comme nom
@@ -202,7 +202,7 @@ Nous allons utiliser Entity Framework Designer, inclus dans le cadre de Visual S
 
     ![Choisir vos objets](~/ef6/media/chooseyourobjects.png)
 
-Une fois le processus d’ingénierie à rebours terminé, le nouveau modèle est ajouté à votre projet et vous est ouvert pour que vous l’affichez dans le Entity Framework Designer. Un fichier app. config a également été ajouté à votre projet avec les détails de connexion de la base de données.
+Une fois le processus d’ingénierie à rebours terminé, le nouveau modèle est ajouté à votre projet et vous est ouvert pour que vous l’affichez dans le Entity Framework Designer. Un fichier de App.config a également été ajouté à votre projet avec les détails de connexion de la base de données.
 
 #### <a name="additional-steps-in-visual-studio-2010"></a>Étapes supplémentaires dans Visual Studio 2010
 
@@ -296,7 +296,7 @@ Maintenant que nous disposons d’une grille pour afficher les catégories, ajou
 
 Le formulaire doit ressembler à ceci :
 
-![Concepteur](~/ef6/media/designer.png) 
+![Designer](~/ef6/media/designer.png) 
 
 ## <a name="add-code-that-handles-data-interaction"></a>Ajouter du code qui gère l’interaction des données
 
