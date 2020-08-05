@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 1411737453563ac5377dbda2804dd0bd058133a7
-  ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
-  ms.translationtype: MT
+  ms.openlocfilehash: 3b8d9979b559dcac71da64634260c93fa7b3dde2
+  ms.sourcegitcommit: c94a356ab03f2031c4b86aa4e4b6271928b7f4c8
+  ms.translationtype: HT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 06/10/2020
-  ms.locfileid: "84664167"
+  ms.lasthandoff: 08/03/2020
+  ms.locfileid: "87538694"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -48,6 +48,10 @@ additionalContent:
         text: Application web ASP.NET Core Razor Pages accédant à SQL Server LocalDB ou SQLite avec EF Core
       - url: /aspnet/core/data/ef-mvc/
         text: Application web ASP.NET Core MVC accédant à SQL Server avec EF Core
+      - url: core/get-started/wpf.md
+        text: Application WPF .NET Core accédant à SQLite avec EF Core
+      - url: core/get-started/xamarin.md
+        text: Application mobile Xamarin accédant à SQLite avec EF Core
     - title: Bases de données prises en charge
       links:
       - url: core/providers/sql-server/index.md
@@ -74,12 +78,12 @@ additionalContent:
         text: ASP.NET Core MVC
       - url: https://docs.microsoft.com/aspnet/core/blazor/dependency-injection?#use-of-entity-framework-dbcontext-from-di
         text: Serveur Blazor
-      - url: https://docs.microsoft.com/ef/ef6/fundamentals/databinding/wpf
+      - url: core/get-started/wpf.md
         text: Windows Presentation Foundation (WPF)
-      - url: https://docs.microsoft.com/ef/ef6/fundamentals/databinding/winforms
+      - url: https://docs.microsoft.com/ef/ef6/fundamentals/databinding/winforms/
         text: Windows Forms (WinForms)
-      - url: https://github.com/dotnet/efcore/issues?q=is%3Aopen+is%3Aissue+label%3Aarea-xamarin
-        text: Xamarin (prise en charge partielle)
+      - url: core/get-started/xamarin.md
+        text: Xamarin
     - title: Notions de base
       links:
       - url: core/miscellaneous/connection-strings.md
@@ -99,7 +103,7 @@ additionalContent:
     - title: Créer un modèle
       links:
       - url: core/modeling/index.md
-        text: Vue d’ensemble
+        text: Vue d'ensemble
       - url: core/modeling/entity-types.md
         text: Types d'entité
       - url: core/modeling/entity-properties.md
@@ -119,7 +123,7 @@ additionalContent:
     - title: Query
       links:
       - url: core/querying/index.md
-        text: Vue d’ensemble
+        text: Vue d'ensemble
       - url: core/querying/client-eval.md
         text: Évaluation du client/serveur
       - url: core/querying/tracking.md
@@ -137,7 +141,7 @@ additionalContent:
     - title: Gérer des schémas de base de données
       links:
       - url: core/managing-schemas/index.md
-        text: Vue d’ensemble
+        text: Vue d'ensemble
       - url: core/managing-schemas/migrations/index.md
         text: Vue d’ensemble de la migration
       - url: core/managing-schemas/migrations/teams.md
@@ -157,7 +161,7 @@ additionalContent:
     - title: Enregistrer les données
       links:
       - url: core/saving/index.md
-        text: Vue d’ensemble
+        text: Vue d'ensemble
       - url: core/saving/basic.md
         text: Enregistrement de base
       - url: core/saving/related-data.md

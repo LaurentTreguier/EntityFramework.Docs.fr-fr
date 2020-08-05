@@ -4,12 +4,12 @@ description: Différentes approches de test des applications qui utilisent EF Co
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/miscellaneous/testing/index
-ms.openlocfilehash: 71222f17ac4cc1b71052a2e7e916ebcedd2ae0f4
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
-ms.translationtype: MT
+ms.openlocfilehash: 7929c284c2794b2fcc95235ae413d56895ebb6e2
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370537"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526808"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test de code qui utilise EF Core
 
@@ -63,7 +63,7 @@ LocalDB n’est pas sans problème :
 Personnellement, je n’ai jamais pensé que c’était un problème d’avoir un service de base de données en cours d’exécution sur mon ordinateur de développement, et je recommande généralement d’utiliser Developer Edition à la place.
 Toutefois, LocalDB peut convenir à certaines personnes, en particulier sur les ordinateurs de développement moins puissants.
 
-L’exécution de SQL Server (ou de tout autre système de base de données) dans un conteneur Docker (ou similaire) est une autre façon d’éviter d’exécuter le système de base de données directement sur votre ordinateur de développement.  
+[L’exécution de SQL Server](/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15) (ou de tout autre système de base de données) dans un conteneur Docker (ou similaire) est une autre façon d’éviter d’exécuter le système de base de données directement sur votre ordinateur de développement.  
 
 ## <a name="approach-2-sqlite"></a>Approche 2 : SQLite
 
@@ -92,11 +92,11 @@ Pour obtenir des instructions propres à EF Core, consultez [Test avec SQLite](x
 ## <a name="approach-3-the-ef-core-in-memory-database"></a>Approche 3 : la base de données en mémoire EF Core
 
 EF Core est fourni avec une base de données en mémoire que nous utilisons pour les tests internes d’EF Core lui-même.
-En règle générale, cette base de données **ne convient pas pour tester des applications qui utilisent EF Core**. Plus précisément :
+Cette base de données n’est en général **pas appropriée pour les tests des applications qui utilisent EF Core**. Plus précisément :
 
 * Il ne s’agit pas d’une base de données relationnelle.
 * Elle ne prend pas en charge les transactions.
-* Il ne peut pas exécuter de requêtes SQL brutes.
+* Elle ne peut pas exécuter de requêtes SQL brutes.
 * Elle n’est pas optimisée pour les performances.
 
 Aucun de ces éléments n’est très important lors du test des composants internes d’EF Core, car nous les utilisons spécifiquement là où la base de données n’a pas d’importance pour le test.

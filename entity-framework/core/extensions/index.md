@@ -4,12 +4,12 @@ author: ErikEJ
 ms.date: 04/11/2020
 ms.assetid: 14fffb6c-a687-4881-a094-af4a1359a296
 uid: core/extensions/index
-ms.openlocfilehash: 5b7945bd24ac19a82b08f4d5709555cf53485f4c
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
-ms.translationtype: MT
+ms.openlocfilehash: f450742b761ef3daf35e32cf87c63a8ee8a7b8c3
+ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.translationtype: HT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238253"
+ms.lasthandoff: 08/03/2020
+ms.locfileid: "87526405"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -40,7 +40,7 @@ ORM qui crée des classes fortement typées et extensibles pour Entity Framework
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
-EF Core Power Tools est une extension Visual Studio qui expose différentes tâches EF Core au moment du design dans une interface utilisateur simple. Elle inclut l’ingénierie à rebours des classes DbContext et d’entité à partir de bases de données existantes et des [packages DAC SQL Server](https://docs.microsoft.com/sql/relational-databases/data-tier-applications/data-tier-applications), la gestion des migrations de base de données et les visualisations de modèles. Pour EF Core : 2, 3.
+EF Core Power Tools est une extension Visual Studio qui expose différentes tâches EF Core au moment du design dans une interface utilisateur simple. Elle inclut l’ingénierie à rebours des classes DbContext et d’entité à partir de bases de données existantes et des [packages DAC SQL Server](/sql/relational-databases/data-tier-applications/data-tier-applications), la gestion des migrations de base de données et les visualisations de modèles. Pour EF Core : 2, 3.
 
 [Wiki GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki)
 
@@ -157,9 +157,9 @@ Cache des requêtes de second niveau hautes performances. Pour EF Core : 2.
 
 [Dépôt GitHub](https://github.com/SteffenMangold/EntityFrameworkCore.Cacheable)
 
-### <a name="entityframeworkcorencache"></a>EntityFrameworkCore. NCache
+### <a name="entityframeworkcorencache"></a>EntityFrameworkCore.NCache
 
-Le fournisseur de Entity Framework Core NCache est un fournisseur de cache de second niveau distribué pour la mise en cache des résultats de requête. L’architecture distribuée de NCache la rend plus évolutive et hautement disponible. Pour EF Core 2.
+Le fournisseur d’Entity Framework Core NCache est un fournisseur de cache de second niveau distribué pour la mise en cache des résultats de requêtes. L’architecture distribuée de NCache la rend plus évolutive et hautement disponible. Pour EF Core 2.
 
 [Site web](https://www.alachisoft.com/ncache/ef-core-cache.html)
 
@@ -223,7 +223,7 @@ Ajoute la prise en charge de hierarchyid au fournisseur SQL Server EF Core. Pour
 
 [Dépôt GitHub](https://github.com/efcore/EFCore.SqlServer.HierarchyId)
 
-### <a name="linq2dbentityframeworkcore"></a>linq2db. EntityFrameworkCore
+### <a name="linq2dbentityframeworkcore"></a>linq2db.EntityFrameworkCore
 
 Autre traducteur de requêtes LINQ pour les expressions SQL. Pour EF Core : 3.
 
