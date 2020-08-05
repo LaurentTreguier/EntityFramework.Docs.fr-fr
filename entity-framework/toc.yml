@@ -65,6 +65,8 @@
               href: core/get-started/install/index.md
             - name: Tutoriel ASP.NET Core >>
               href: /aspnet/core/data/ef-rp/intro
+            - name: Tutoriel WPF .NET Core
+              href: core/get-started/wpf.md
             - name: Tutoriel Xamarin
               href: core/get-started/xamarin.md
         - name: Notions de base
@@ -258,7 +260,7 @@
           href: /dotnet/api/?view=efcore-3.1
     - name: Entity Framework 6
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: ef6/index.md
         - name: Nouveautés
           items:
