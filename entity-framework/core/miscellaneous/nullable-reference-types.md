@@ -4,12 +4,12 @@ author: roji
 ms.date: 09/09/2019
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 3acd446d64a94ffecb12c181e3910528d2293448
-ms.sourcegitcommit: 51148929e3889c48227d96c95c4e310d53a3d2c9
+ms.openlocfilehash: 7d262ab9fb45535b626ce8d503b31a5e9a4630d3
+ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86873355"
+ms.lasthandoff: 08/25/2020
+ms.locfileid: "88847564"
 ---
 # <a name="working-with-nullable-reference-types"></a>Utilisation des types de référence Nullable
 
@@ -26,9 +26,11 @@ La documentation principale sur les propriétés obligatoires et facultatives et
 
 ## <a name="dbcontext-and-dbset"></a>DbContext et DbSet
 
-Lorsque les types de référence Nullable sont activés, le compilateur C# émet des avertissements pour toute propriété non Nullable non initialisée, car elles contiennent NULL. Par conséquent, la pratique courante consistant à avoir des propriétés DbSet non initialisées sur un type de contexte génère désormais un avertissement. Pour résoudre ce problème, définissez vos propriétés DbSet en lecture seule et initialisez-les comme suit :
+Lorsque les types de référence Nullable sont activés, le compilateur C# émet des avertissements pour toute propriété non Nullable non initialisée, car elles contiennent NULL. Par conséquent, la pratique courante consistant à avoir des propriétés DbSet non initialisées sur un type de contexte génère désormais un avertissement. Ce problème peut être résolu comme suit :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/NullableReferenceTypesContext.cs?name=Context&highlight=3-4)]
+
+Une autre stratégie consiste à utiliser des propriétés automatiques qui n’acceptent pas les valeurs NULL, mais à les initialiser avec la valeur null, en utilisant l’opérateur null-indulgent avec ( !) pour interrompre l’avertissement du compilateur. Le constructeur DbContext s’assure que toutes les propriétés DbSet seront initialisées, et NULL ne sera jamais observé sur ces propriétés.
 
 ## <a name="non-nullable-properties-and-initialization"></a>Propriétés et initialisation non Nullable
 
