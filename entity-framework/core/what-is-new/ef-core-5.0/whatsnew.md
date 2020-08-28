@@ -4,12 +4,12 @@ description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 3a1f5c7d44ad0e4d648492c4edcf14678c73538e
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+ms.openlocfilehash: f822e3ae776778749a654377cbd9d9814ca40972
+ms.sourcegitcommit: 12d257db4786487a0c28e9ddd79f176f7cf6edb1
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847591"
+ms.lasthandoff: 08/28/2020
+ms.locfileid: "89043595"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
@@ -21,7 +21,7 @@ Nous ajouterons des liens à partir d’ici à la documentation officielle au fu
 
 ## <a name="preview-8"></a>Version préliminaire 8
 
-## <a name="table-per-type-tpt-mapping"></a>Mappage table par type (TPT)
+### <a name="table-per-type-tpt-mapping"></a>Mappage table par type (TPT)
 
 Par défaut, EF Core mappe une hiérarchie d’héritage de types .NET à une seule table de base de données. C’est ce que l’on appelle le mappage TPH (table par hiérarchie). EF Core 5,0 permet également de mapper chaque type .NET dans une hiérarchie d’héritage à une autre table de base de données. connu sous le nom de mappage table par type (TPT).
 
