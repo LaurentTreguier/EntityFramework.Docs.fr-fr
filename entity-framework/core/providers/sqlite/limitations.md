@@ -1,15 +1,16 @@
 ---
 title: Fournisseur de base de données SQLite-limitations-EF Core
+description: Limitations du fournisseur de base de données Entity Framework Core SQLite par rapport aux autres fournisseurs
 author: bricelam
 ms.date: 07/16/2020
 ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 393f5e80ce2e11dcb11c2048e06effa27e48dc13
-ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
+ms.openlocfilehash: 2657bf03bc5cd0d5fb45c57e7f7605824deb44d2
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86451227"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616538"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limites d’un fournisseur de base de données EF Core SQLite
 
@@ -33,7 +34,7 @@ SQLite ne prend pas en charge en mode natif les types de données suivants. EF C
 
 Au lieu de `DateTimeOffset` , nous vous recommandons d’utiliser des valeurs DateTime. Lors de la gestion de plusieurs fuseaux horaires, nous vous recommandons de convertir les valeurs en temps UTC avant de les enregistrer, puis de les reconvertir dans le fuseau horaire approprié.
 
-Le `Decimal` type fournit un niveau élevé de précision. Toutefois, si vous n’avez pas besoin de ce niveau de précision, nous vous recommandons d’utiliser à la place un double. Vous pouvez utiliser un [convertisseur de valeur](../../modeling/value-conversions.md) pour continuer à utiliser Decimal dans vos classes.
+Le `Decimal` type fournit un niveau élevé de précision. Toutefois, si vous n’avez pas besoin de ce niveau de précision, nous vous recommandons d’utiliser à la place un double. Vous pouvez utiliser un [convertisseur de valeur](xref:core/modeling/value-conversions) pour continuer à utiliser Decimal dans vos classes.
 
 ``` csharp
 modelBuilder.Entity<MyEntity>()
@@ -67,11 +68,11 @@ Une régénération sera tentée afin d’effectuer certaines opérations. Les r
 | RenameColumn         | ✔           | 2.2.2            |
 | RenameIndex          | ✔ (régénération) | 2.1              |
 | RenameTable          | ✔           | 1.0              |
-| EnsureSchema         | ✔ (aucune opération)   | 2.0              |
-| DropSchema           | ✔ (aucune opération)   | 2.0              |
-| Insérer               | ✔           | 2.0              |
-| Update               | ✔           | 2.0              |
-| DELETE               | ✔           | 2.0              |
+| EnsureSchema         | ✔ (aucune opération)   | 2,0              |
+| DropSchema           | ✔ (aucune opération)   | 2,0              |
+| Insert               | ✔           | 2,0              |
+| Update               | ✔           | 2,0              |
+| DELETE               | ✔           | 2,0              |
 
 ## <a name="migrations-limitations-workaround"></a>Solution de contournement des limitations des migrations
 

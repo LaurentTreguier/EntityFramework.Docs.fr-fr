@@ -1,20 +1,21 @@
 ---
 title: 'Entités déconnectées : EF Core'
+description: Utilisation d’entités déconnectées et non suivies sur plusieurs instances de contexte dans Entity Framework Core
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
 ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 421531e68ac98c0553938f1c24892701f22fef3c
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 52ba838c4d54771c51737c3940e5a88659f94144
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417596"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617270"
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
-Une instance de DbContext suit automatiquement les entités retournées à partir de la base de données. Les modifications apportées à ces entités seront ensuite détectées lorsque SaveChanges est appelé, et la base de données sera mise à jour en fonction des besoins. Consultez [Enregistrement de base](basic.md) et [Données associées](related-data.md) pour plus d’informations.
+Une instance de DbContext suit automatiquement les entités retournées à partir de la base de données. Les modifications apportées à ces entités seront ensuite détectées lorsque SaveChanges est appelé, et la base de données sera mise à jour en fonction des besoins. Consultez [Enregistrement de base](xref:core/saving/basic) et [Données associées](xref:core/saving/related-data) pour plus d’informations.
 
 Toutefois, parfois, les entités sont interrogées par une instance de contexte, puis enregistrées à l’aide d’une autre instance. Cela se produit souvent dans les scénarios « déconnectés », par exemple une application web où les entités sont interrogées, envoyées au client, modifiées, envoyées sur le serveur dans une demande et puis enregistrées. Dans ce cas, la deuxième instance de contexte doit savoir si les entités sont nouvelles (doivent être insérées) ou existantes (doivent être mises à jour).
 

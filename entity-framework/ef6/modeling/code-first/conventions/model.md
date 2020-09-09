@@ -1,20 +1,22 @@
 ---
 title: Conventions basées sur les modèles-EF6
+description: Conventions basées sur les modèles dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
-ms.openlocfilehash: c873e9a216bd9bd1934f2149ae6af602072f3608
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/conventions/model
+ms.openlocfilehash: 30a79f505939220b3d4040778397eab972e6a712
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419170"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617187"
 ---
 # <a name="model-based-conventions"></a>Conventions basées sur les modèles
 > [!NOTE]
 > **EF6 et versions ultérieures uniquement** : Les fonctionnalités, les API, etc. décrites dans cette page ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
 
-Les conventions basées sur les modèles sont une méthode avancée de configuration de modèle basée sur une convention. Pour la plupart des scénarios, l' [API de convention d’code First personnalisée sur DbModelBuilder](~/ef6/modeling/code-first/conventions/custom.md) doit être utilisée. Il est recommandé d’avoir une compréhension de l’API DbModelBuilder pour les conventions avant d’utiliser des conventions basées sur les modèles.  
+Les conventions basées sur les modèles sont une méthode avancée de configuration de modèle basée sur une convention. Pour la plupart des scénarios, l' [API de convention d’code First personnalisée sur DbModelBuilder](xref:ef6/modeling/code-first/conventions/custom) doit être utilisée. Il est recommandé d’avoir une compréhension de l’API DbModelBuilder pour les conventions avant d’utiliser des conventions basées sur les modèles.  
 
 Les conventions basées sur les modèles permettent de créer des conventions qui affectent les propriétés et les tables qui ne sont pas configurables par le biais de conventions standard. Voici des exemples de colonnes de discriminateur dans les modèles de table par hiérarchie et les colonnes d’association indépendantes.  
 
@@ -46,7 +48,7 @@ public class BlogContext : DbContext
 }
 ```  
 
-Une convention peut également être ajoutée par rapport à une autre convention à l’aide de conventions. AddBefore\<\> ou conventions. AddAfter\<\> méthodes. Pour plus d’informations sur les conventions que Entity Framework applique, consultez la section Remarques.  
+Une convention peut également être ajoutée par rapport à une autre convention à l’aide des méthodes conventions. AddBefore \<\> ou conventions. AddAfter \<\> . Pour plus d’informations sur les conventions que Entity Framework applique, consultez la section Remarques.  
 
 ``` csharp
 protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -83,7 +85,7 @@ class DiscriminatorRenamingConvention : IStoreModelConvention<EdmProperty>
 
 Un autre exemple plus complexe de conventions basées sur les modèles en action consiste à configurer la façon dont les associations indépendantes (IAs) sont nommées.  Il s’agit d’une situation dans laquelle les conventions de modèle sont applicables, car IAs est généré par EF et n’est pas présent dans le modèle auquel l’API DbModelBuilder peut accéder.  
 
-Quand EF génère une IA, il crée une colonne nommée EntityType_KeyName. Par exemple, pour une association nommée Customer avec une colonne clé nommée CustomerId, elle générerait une colonne nommée Customer_CustomerId. La Convention suivante supprime le caractère «\_» du nom de colonne généré pour l’IA.  
+Quand EF génère une IA, il crée une colonne nommée EntityType_KeyName. Par exemple, pour une association nommée Customer avec une colonne clé nommée CustomerId, elle générerait une colonne nommée Customer_CustomerId. La Convention suivante supprime le \_ caractère «» du nom de la colonne qui est généré pour l’IA.  
 
 ``` csharp
 using System.Data.Entity;
@@ -146,7 +148,7 @@ public class ForeignKeyNamingConvention : IStoreModelConvention<AssociationType>
 
 ## <a name="extending-existing-conventions"></a>Extension des conventions existantes   
 
-Si vous devez écrire une convention qui est semblable à l’une des conventions que Entity Framework applique déjà à votre modèle, vous pouvez toujours étendre cette Convention pour éviter de devoir la réécrire à partir de zéro.  Par exemple, vous pouvez remplacer la Convention de correspondance d’ID existante par une convention personnalisée.   L’un des avantages supplémentaires de la substitution de la Convention de clé est que la méthode substituée sera appelée uniquement si aucune clé n’a été détectée ou explicitement configurée. La liste des conventions utilisées par Entity Framework est disponible ici : [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  
+Si vous devez écrire une convention qui est semblable à l’une des conventions que Entity Framework applique déjà à votre modèle, vous pouvez toujours étendre cette Convention pour éviter de devoir la réécrire à partir de zéro.  Par exemple, vous pouvez remplacer la Convention de correspondance d’ID existante par une convention personnalisée.   L’un des avantages supplémentaires de la substitution de la Convention de clé est que la méthode substituée sera appelée uniquement si aucune clé n’a été détectée ou explicitement configurée. Une liste des conventions utilisées par Entity Framework est disponible ici : [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) .  
 
 ``` csharp
 using System.Data.Entity;
@@ -191,7 +193,7 @@ public class CustomKeyDiscoveryConvention : KeyDiscoveryConvention
 }
 ```  
 
-Nous devons ensuite ajouter la nouvelle convention avant la Convention de clé existante. Après avoir ajouté le CustomKeyDiscoveryConvention, nous pouvons supprimer le IdKeyDiscoveryConvention.  Si nous n’avons pas supprimé le IdKeyDiscoveryConvention existant, cette Convention aura toujours priorité sur la Convention de détection des ID, car elle est exécutée en premier, mais dans le cas où aucune propriété « clé » n’est trouvée, la Convention « ID » s’exécute.  Nous voyons ce comportement, car chaque convention voit le modèle tel qu’il a été mis à jour par la convention précédente (au lieu de s’en servir indépendamment et tout est combiné) de sorte que, si, par exemple, une convention précédente a mis à jour un nom de colonne pour correspondre à un nom de colonne intérêt pour votre convention personnalisée (lorsque le nom ne vous intéresse pas), elle s’applique à cette colonne.  
+Nous devons ensuite ajouter la nouvelle convention avant la Convention de clé existante. Après avoir ajouté le CustomKeyDiscoveryConvention, nous pouvons supprimer le IdKeyDiscoveryConvention.  Si nous n’avons pas supprimé le IdKeyDiscoveryConvention existant, cette Convention aura toujours priorité sur la Convention de détection des ID, car elle est exécutée en premier, mais dans le cas où aucune propriété « clé » n’est trouvée, la Convention « ID » s’exécute.  Nous voyons ce comportement, car chaque convention voit le modèle tel qu’il a été mis à jour par la convention précédente (au lieu de s’en servir indépendamment et tout est combiné). ainsi, si, par exemple, une convention précédente a mis à jour un nom de colonne pour qu’elle corresponde à un intérêt pour votre convention personnalisée (lorsque le nom n’était pas intéressant), elle s’applique  
 
 ``` csharp
 public class BlogContext : DbContext
@@ -209,4 +211,4 @@ public class BlogContext : DbContext
 
 ## <a name="notes"></a>Notes  
 
-Une liste de conventions actuellement appliquées par Entity Framework est disponible dans la documentation MSDN ici : [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx).  Cette liste est extraite directement à partir de notre code source.  Le code source de Entity Framework 6 est disponible sur [GitHub](https://github.com/aspnet/entityframework6/) et la plupart des conventions utilisées par Entity Framework sont de bons points de départ pour les conventions basées sur les modèles personnalisés.  
+Une liste de conventions actuellement appliquées par Entity Framework est disponible dans la documentation MSDN ici : [http://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx](https://msdn.microsoft.com/library/system.data.entity.modelconfiguration.conventions.aspx) .  Cette liste est extraite directement à partir de notre code source.  Le code source de Entity Framework 6 est disponible sur [GitHub](https://github.com/aspnet/entityframework6/) et la plupart des conventions utilisées par Entity Framework sont de bons points de départ pour les conventions basées sur les modèles personnalisés.  

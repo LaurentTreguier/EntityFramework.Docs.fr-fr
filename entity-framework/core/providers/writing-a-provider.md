@@ -1,15 +1,16 @@
 ---
 title: Écriture d’un fournisseur de base de données-EF Core
+description: Informations sur l’écriture d’un nouveau fournisseur de Entity Framework Core
 author: anmiller
 ms.date: 10/27/2016
 ms.assetid: 1165e2ec-e421-43fc-92ab-d92f9ab3c494
 uid: core/providers/writing-a-provider
-ms.openlocfilehash: 662c7e386bbdf0ff1e4e5051349d6a5c56a3df7b
-ms.sourcegitcommit: 79e460f76b6664e1da5886d102bd97f651d2ffff
+ms.openlocfilehash: 6d7a8a03c612eeda4d65917a2713e4570c671002
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82538469"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616512"
 ---
 # <a name="writing-a-database-provider"></a>Écriture d’un fournisseur de base de données
 
@@ -19,13 +20,13 @@ Pour plus d’informations sur l’écriture d’un fournisseur de base de donn�
 > Ces publications n’ont pas été mises à jour depuis EF Core 1,1 et des modifications significatives ont été apportées depuis ce moment.  
 Le [problème 681](https://github.com/dotnet/EntityFramework.Docs/issues/681) est le suivi des mises à jour de cette documentation.
 
-La base de code EF Core est open source et contient plusieurs fournisseurs de bases de données qui peuvent être utilisés comme référence. Vous pouvez trouver le code source à <https://github.com/aspnet/EntityFrameworkCore>l’adresse. Il peut également être utile d’examiner le code pour les fournisseurs tiers couramment utilisés, tels que [npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL), [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)et [SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact). En particulier, ces projets sont configurés pour étendre et exécuter des tests fonctionnels que nous publions sur NuGet. Ce type d’installation est fortement recommandé.
+La base de code EF Core est open source et contient plusieurs fournisseurs de bases de données qui peuvent être utilisés comme référence. Vous pouvez trouver le code source à l’adresse <https://github.com/aspnet/EntityFrameworkCore> . Il peut également être utile d’examiner le code pour les fournisseurs tiers couramment utilisés, tels que [npgsql](https://github.com/npgsql/Npgsql.EntityFrameworkCore.PostgreSQL), [Pomelo MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql)et [SQL Server Compact](https://github.com/ErikEJ/EntityFramework.SqlServerCompact). En particulier, ces projets sont configurés pour étendre et exécuter des tests fonctionnels que nous publions sur NuGet. Ce type d’installation est fortement recommandé.
 
 ## <a name="keeping-up-to-date-with-provider-changes"></a>Tenir à jour les modifications apportées au fournisseur
 
-À compter du travail après la version 2,1, nous avons créé un [Journal des modifications](provider-log.md) qui peut nécessiter des modifications correspondantes dans le code du fournisseur. Cela est destiné à faciliter la mise à jour d’un fournisseur existant pour qu’il fonctionne avec une nouvelle version de EF Core.
+À compter du travail après la version 2,1, nous avons créé un [Journal des modifications](xref:core/providers/provider-log) qui peut nécessiter des modifications correspondantes dans le code du fournisseur. Cela est destiné à faciliter la mise à jour d’un fournisseur existant pour qu’il fonctionne avec une nouvelle version de EF Core.
 
-Avant le 2,1, nous avons utilisé [`providers-beware`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) les [`providers-fyi`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) étiquettes et sur nos problèmes GitHub et les demandes de tirage (pull requests) à des fins similaires. Nous continiue utiliser ces étiquettes sur les problèmes pour donner une indication que les éléments de travail d’une version donnée peuvent également nécessiter un travail dans les fournisseurs. Une `providers-beware` étiquette signifie généralement que l’implémentation d’un élément de travail peut arrêter des fournisseurs, `providers-fyi` tandis qu’une étiquette signifie généralement que les fournisseurs ne seront pas rompus, mais le code devra peut-être être modifié malgré tout, par exemple, pour activer les nouvelles fonctionnalités.
+Avant le 2,1, nous avons utilisé [`providers-beware`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-beware) les [`providers-fyi`](https://github.com/aspnet/EntityFrameworkCore/labels/providers-fyi) étiquettes et sur nos problèmes GitHub et les demandes de tirage (pull requests) à des fins similaires. Nous continiue utiliser ces étiquettes sur les problèmes pour donner une indication que les éléments de travail d’une version donnée peuvent également nécessiter un travail dans les fournisseurs. Une `providers-beware` étiquette signifie généralement que l’implémentation d’un élément de travail peut arrêter des fournisseurs, tandis qu’une `providers-fyi` étiquette signifie généralement que les fournisseurs ne seront pas rompus, mais le code devra peut-être être modifié malgré tout, par exemple, pour activer les nouvelles fonctionnalités.
 
 ## <a name="suggested-naming-of-third-party-providers"></a>Attribution d’un nom suggéré aux fournisseurs tiers
 

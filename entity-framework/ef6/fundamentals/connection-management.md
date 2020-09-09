@@ -1,14 +1,16 @@
 ---
 title: Gestion des connexions-EF6
+description: Gestion des connexions dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ecaa5a27-b19e-4bf9-8142-a3fb00642270
-ms.openlocfilehash: a6352bbbc38c38bd5f30536736ec969056df2c7d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/connection-management
+ms.openlocfilehash: c352e761a9891b5c275f32752f10de13222bf48e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417986"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617227"
 ---
 # <a name="connection-management"></a>Gestion des connexions
 Cette page décrit le comportement de Entity Framework en ce qui concerne le passage des connexions au contexte et les fonctionnalités de l’API **Database. Connection. Open ()** .  
@@ -27,7 +29,7 @@ public DbContext(DbConnection existingConnection, DbCompiledModel model, bool co
 Il est possible d’utiliser ces éléments, mais vous devez contourner deux limitations :  
 
 1. Si vous transmettez une connexion ouverte à l’un de ces deux, la première fois que l’infrastructure tente de l’utiliser, une exception InvalidOperationException est levée, indiquant qu’elle ne peut pas rouvrir une connexion déjà ouverte.  
-2. L’indicateur contextOwnsConnection est interprété pour indiquer si la connexion de la banque sous-jacente doit être supprimée lorsque le contexte est supprimé. Toutefois, quelle que soit la valeur de ce paramètre, la connexion du magasin est toujours fermée lorsque le contexte est supprimé. Par conséquent, si vous avez plusieurs DbContext avec la même connexion quel que soit le contexte supprimé en premier, la connexion est fermée (de même si vous avez mélangé une connexion ADO.NET existante à un DbContext, DbContext fermera toujours la connexion lorsqu’elle sera supprimée) .  
+2. L’indicateur contextOwnsConnection est interprété pour indiquer si la connexion de la banque sous-jacente doit être supprimée lorsque le contexte est supprimé. Toutefois, quelle que soit la valeur de ce paramètre, la connexion du magasin est toujours fermée lorsque le contexte est supprimé. Par conséquent, si vous avez plusieurs DbContext avec la même connexion quel que soit le contexte supprimé en premier, la connexion est fermée (de même si vous avez mélangé une connexion ADO.NET existante à un DbContext, DbContext fermera toujours la connexion lorsqu’elle sera supprimée).  
 
 Il est possible de contourner la première limitation ci-dessus en passant une connexion fermée et en exécutant uniquement le code qui l’ouvre une fois que tous les contextes ont été créés :  
 
@@ -128,7 +130,7 @@ En outre, l’indicateur contextOwnsConnection contrôle désormais si la connex
 Bien entendu, il est toujours possible pour DbContext de prendre le contrôle de la connexion (il suffit de définir contextOwnsConnection sur true ou d’utiliser l’un des autres constructeurs) si vous le souhaitez.  
 
 > [!NOTE]
-> Des considérations supplémentaires sont à prendre en compte lors de l’utilisation de transactions avec ce nouveau modèle. Pour plus d’informations, consultez [utilisation des transactions](~/ef6/saving/transactions.md).  
+> Des considérations supplémentaires sont à prendre en compte lors de l’utilisation de transactions avec ce nouveau modèle. Pour plus d’informations, consultez [utilisation des transactions](xref:ef6/saving/transactions).  
 
 ## <a name="databaseconnectionopen"></a>Database. Connection. Open ()  
 
@@ -140,7 +142,7 @@ Dans EF5 et les versions antérieures, il existe un bogue tel que **ObjectContex
 ((IObjectContextAdapter)context).ObjectContext.Connection.State
 ```  
 
-Séparément, si vous ouvrez la connexion à la base de données en appelant Database. Connection. Open (), elle est ouverte jusqu’à la prochaine exécution d’une requête ou l’appel de tout ce qui nécessite une connexion à la base de données (par exemple, SaveChanges ()) mais après que le magasin sous-jacent la connexion va être fermée. Le contexte réouvre et referme la connexion chaque fois qu’une opération de base de données est requise :  
+Séparément, si vous ouvrez la connexion à la base de données en appelant Database. Connection. Open (), elle est ouverte jusqu’à la prochaine exécution d’une requête ou l’appel de tout ce qui nécessite une connexion à la base de données (par exemple, SaveChanges ()), mais après que la connexion à la banque sous-jacente sera fermée. Le contexte réouvre et referme la connexion chaque fois qu’une opération de base de données est requise :  
 
 ``` csharp
 using System;

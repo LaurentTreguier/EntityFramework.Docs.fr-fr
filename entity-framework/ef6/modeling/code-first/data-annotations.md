@@ -1,14 +1,16 @@
 ---
 title: Annotations de données Code Firstes-EF6
+description: Code First des annotations de données dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 80abefbd-23c9-4fce-9cd3-520e5df9856e
-ms.openlocfilehash: 17370b83aee9974161b1771e8a1dc99c2de27f0f
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+uid: ef6/modeling/code-first/data-annotations
+ms.openlocfilehash: 37b2872b5fb40cf0dc346554b2cbb9e3fffd6bdc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847616"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617355"
 ---
 # <a name="code-first-data-annotations"></a>Annotations de données Code First
 > [!NOTE]
@@ -391,7 +393,7 @@ Les index qui s’étendent sur plusieurs colonnes sont spécifiés en utilisant
 ## <a name="relationship-attributes-inverseproperty-and-foreignkey"></a>Attributs de relation : InverseProperty et ForeignKey
 
 > [!NOTE]
-> Cette page fournit des informations sur la configuration des relations dans votre modèle de Code First à l’aide d’annotations de données. Pour obtenir des informations générales sur les relations dans EF et sur la manière d’accéder aux données et de les manipuler à l’aide de relations, consultez [relations & propriétés de navigation](~/ef6/fundamentals/relationships.md). *
+> Cette page fournit des informations sur la configuration des relations dans votre modèle de Code First à l’aide d’annotations de données. Pour obtenir des informations générales sur les relations dans EF et sur la manière d’accéder aux données et de les manipuler à l’aide de relations, consultez [relations & propriétés de navigation](xref:ef6/fundamentals/relationships). *
 
 La Convention code First s’occupera des relations les plus courantes dans votre modèle, mais dans certains cas, elle a besoin d’aide.
 

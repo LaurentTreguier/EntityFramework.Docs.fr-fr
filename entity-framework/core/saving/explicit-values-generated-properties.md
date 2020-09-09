@@ -1,19 +1,20 @@
 ---
 title: 'Définition de valeurs explicites pour les propriétés générées : EF Core'
+description: Informations sur la définition explicite des valeurs pour les propriétés configurées comme générées avec Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3f1993c2-cdf5-425b-bac2-a2665a20322b
 uid: core/saving/explicit-values-generated-properties
-ms.openlocfilehash: 43c4ab3c2a60645cdeff2a6cc40ce979f832f2fd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 6a10e8d8c056ab66226f229dcb8b032ff83f06fe
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417568"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617255"
 ---
 # <a name="setting-explicit-values-for-generated-properties"></a>Définition de valeurs explicites pour les propriétés générées
 
-Une propriété générée est une propriété dont la valeur est générée (soit par la base de données soit par EF) lorsque l’entité est ajoutée ou mise à jour. Pour plus d’informations, consultez [Propriétés générées](../modeling/generated-properties.md).
+Une propriété générée est une propriété dont la valeur est générée (soit par la base de données soit par EF) lorsque l’entité est ajoutée ou mise à jour. Pour plus d’informations, consultez [Propriétés générées](xref:core/modeling/generated-properties).
 
 Il peut arriver que vous souhaitiez définir une valeur explicite pour une propriété générée, au lieu d’en générer une.
 

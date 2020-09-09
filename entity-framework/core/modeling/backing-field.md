@@ -1,15 +1,16 @@
 ---
 title: Champs de stockage-EF Core
+description: Configuration de champs de stockage pour les propriétés d’un modèle de Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: a628795e-64df-4f24-a5e8-76bc261e7ed8
 uid: core/modeling/backing-field
-ms.openlocfilehash: e015c4f3fca767d25bee179c027813bd9fcf4c07
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 36fc64efa08f2cdeb7005e3fc6335298f2426bde
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526756"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617581"
 ---
 # <a name="backing-fields"></a>Champs de stockage
 
@@ -28,7 +29,7 @@ Dans l’exemple suivant, la `Url` propriété est configurée pour avoir `_url`
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/BackingField.cs#Sample)]
 
-Notez que les champs de stockage sont uniquement détectés pour les propriétés incluses dans le modèle. Pour plus d’informations sur les propriétés incluses dans le modèle, consultez [inclusion de & exclusion de propriétés](included-properties.md).
+Notez que les champs de stockage sont uniquement détectés pour les propriétés incluses dans le modèle. Pour plus d’informations sur les propriétés incluses dans le modèle, consultez [inclusion de & exclusion de propriétés](xref:core/modeling/entity-properties).
 
 Vous pouvez également configurer des champs de stockage à l’aide d’une annotation de données (disponible dans EFCore 5,0) ou de l’API Fluent, par exemple, si le nom du champ ne correspond pas aux conventions ci-dessus :
 
@@ -53,7 +54,7 @@ Consultez l' [énumération PropertyAccessMode](/dotnet/api/microsoft.entityfram
 
 ## <a name="field-only-properties"></a>Propriétés de champ uniquement
 
-Vous pouvez également créer une propriété conceptuelle dans votre modèle qui n’a pas de propriété CLR correspondante dans la classe d’entité, mais utilise à la place un champ pour stocker les données dans l’entité. Cela diffère des [Propriétés Shadow](shadow-properties.md), où les données sont stockées dans le dispositif de suivi des modifications, plutôt que dans le type CLR de l’entité. Les propriétés de champ uniquement sont couramment utilisées lorsque la classe d’entité utilise des méthodes à la place de propriétés pour récupérer/définir des valeurs, ou dans les cas où les champs ne doivent pas être exposés du tout dans le modèle de domaine (par exemple, les clés primaires).
+Vous pouvez également créer une propriété conceptuelle dans votre modèle qui n’a pas de propriété CLR correspondante dans la classe d’entité, mais utilise à la place un champ pour stocker les données dans l’entité. Cela diffère des [Propriétés Shadow](xref:core/modeling/shadow-properties), où les données sont stockées dans le dispositif de suivi des modifications, plutôt que dans le type CLR de l’entité. Les propriétés de champ uniquement sont couramment utilisées lorsque la classe d’entité utilise des méthodes à la place de propriétés pour récupérer/définir des valeurs, ou dans les cas où les champs ne doivent pas être exposés du tout dans le modèle de domaine (par exemple, les clés primaires).
 
 Vous pouvez configurer une propriété de champ uniquement en fournissant un nom dans l' `Property(...)` API :
 

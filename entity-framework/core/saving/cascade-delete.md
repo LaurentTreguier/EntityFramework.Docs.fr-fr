@@ -1,21 +1,22 @@
 ---
 title: 'Suppression en cascade : EF Core'
+description: Configuration des comportements de suppression pour les entités associées lorsqu’une entité principale est supprimée
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 6e92b869d691d0224abf1997d9eb7ea035489c5d
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: cf17e6586b89376b2d7fcc0f9cbfc8e1c4f6ba58
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417613"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617411"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
 La suppression en cascade est couramment utilisée dans la terminologie de base de données pour décrire une caractéristique qui permet à la suppression d’une ligne de déclencher automatiquement la suppression de lignes associées. Un concept étroitement lié également couvert par les comportements de suppression d’EF cœur est la suppression automatique d’une entité enfant lorsque sa relation à un parent a été interrompue. Cela est communément appelé « suppression des orphelins ».
 
-EF Core implémente plusieurs comportements de suppression différents et permet la configuration de comportements de suppression de relations individuelles. EF Core implémente également des conventions qui configurent automatiquement les comportements de suppression par défaut utiles pour chaque relation en fonction de la [nécessité de la relation](../modeling/relationships.md#required-and-optional-relationships).
+EF Core implémente plusieurs comportements de suppression différents et permet la configuration de comportements de suppression de relations individuelles. EF Core implémente également des conventions qui configurent automatiquement les comportements de suppression par défaut utiles pour chaque relation en fonction de la [nécessité de la relation](xref:core/modeling/relationships#required-and-optional-relationships).
 
 ## <a name="delete-behaviors"></a>Comportements de suppression
 
@@ -30,7 +31,7 @@ Il existe trois mesures qu'EF peut prendre lorsqu’une entité principale/paren
 > [!NOTE]  
 > Le comportement de suppression configuré dans le modèle EF Core est uniquement appliqué lorsque l’entité principale est supprimée à l’aide d’EF Core et que les entités dépendantes sont chargées en mémoire (par exemple, pour les suivis dépendants). Un comportement de cascade correspondant doit être configuré dans la base de données pour s’assurer que les données qui ne sont pas suivies par le contexte disposent de la bonne action appliquée. Si vous utilisez EF Core pour créer la base de données, ce comportement en cascade sera configuré pour vous.
 
-Pour la deuxième action ci-dessus, la définition d’une clé étrangère sur la valeur null n’est pas valide si cette clé étrangère n’accepte pas la valeur null. (Une clé étrangère non annulable équivaut à une relation requise.) Dans ces cas, EF Core suit que la propriété clé étrangère a été marquée comme nulle jusqu’à ce que SaveChanges soit appelé, à ce moment-là une exception est jetée parce que le changement ne peut pas être persisté à la base de données. Cela est similaire à une violation de contrainte de la base de données.
+Pour la deuxième action ci-dessus, la définition d’une clé étrangère sur la valeur null n’est pas valide si cette clé étrangère n’accepte pas la valeur null. (Une clé étrangère qui n’accepte pas les valeurs NULL est équivalente à une relation obligatoire.) Dans ce cas, EF Core suit que la propriété de clé étrangère a été marquée comme Null jusqu’à ce que SaveChanges soit appelé, auquel cas une exception est levée, car la modification ne peut pas être rendue persistante dans la base de données. Cela est similaire à une violation de contrainte de la base de données.
 
 Il existe quatre comportements de suppression, répertoriés dans les tableaux ci-dessous.
 
@@ -40,10 +41,10 @@ Pour les relations facultatives (clé étrangère acceptant la valeur null) il _
 
 | Nom du comportement               | Effet sur les entités dépendantes/enfant en mémoire    | Effet sur les entités dépendantes/enfant dans la base de données  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
-| **Cascade**                 | Les entités sont supprimées                   | Les entités sont supprimées                   |
+| **Répercuté**                 | Les entités sont supprimées                   | Les entités sont supprimées                   |
 | **ClientSetNull** (par défaut) | Les propriétés de clé étrangère sont définies avec la valeur null | None                                   |
 | **SetNull**                 | Les propriétés de clé étrangère sont définies avec la valeur null | Les propriétés de clé étrangère sont définies avec la valeur null |
-| **Restreindre**                | None                                   | None                                   |
+| **Identifier**                | None                                   | None                                   |
 
 ### <a name="required-relationships"></a>Relations requises
 
@@ -54,7 +55,7 @@ Pour les relations requises (clé étrangère n’acceptant pas la valeur null) 
 | **Cascade** (par défaut) | Les entités sont supprimées                | Les entités sont supprimées                  |
 | **ClientSetNull**     | Lève une exception SaveChanges                  | None                                  |
 | **SetNull**           | Lève une exception SaveChanges                  | Lève une exception SaveChanges                    |
-| **Restreindre**          | None                                | None                                  |
+| **Identifier**          | None                                | None                                  |
 
 Dans les tableaux ci-dessus, *Aucun* peut entraîner une violation de contrainte. Par exemple, si une entité principale/enfant est supprimée, mais qu’aucune action n’est effectuée pour modifier la clé étrangère d’une entité dépendante/enfant, la base de données lèvera probablement une exception sur SaveChanges en raison d’une violation de contrainte étrangère.
 

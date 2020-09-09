@@ -1,14 +1,16 @@
 ---
 title: Résilience des connexions et logique de nouvelle tentative-EF6
+description: Résilience des connexions et logique de nouvelle tentative dans Entity Framework 6
 author: AndriySvyryd
 ms.date: 11/20/2019
 ms.assetid: 47d68ac1-927e-4842-ab8c-ed8c8698dff2
-ms.openlocfilehash: 50e65bed32d0cfcf42746da0d632f9e990424b97
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/connection-resiliency/retry-logic
+ms.openlocfilehash: 7d05c924f309e410bc457b7e46b0618d38c95569
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/15/2020
-ms.locfileid: "79402158"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616107"
 ---
 # <a name="connection-resiliency-and-retry-logic"></a>Résilience des connexions et logique de nouvelle tentative
 > [!NOTE]
@@ -23,7 +25,7 @@ La résilience de connexion fait référence à la possibilité pour EF de reten
 La nouvelle tentative de connexion est prise en charge par une implémentation de l’interface IDbExecutionStrategy. Les implémentations de IDbExecutionStrategy sont chargées d’accepter une opération et, si une exception se produit, de déterminer si une nouvelle tentative est appropriée et de retenter si elle est. Il existe quatre stratégies d’exécution fournies avec EF :  
 
 1. **DefaultExecutionStrategy**: cette stratégie d’exécution ne réessaye aucune opération, il s’agit de la valeur par défaut pour les bases de données autres que SQL Server.  
-2. **Defaultsqlexecutionstrategy,** : il s’agit d’une stratégie d’exécution interne qui est utilisée par défaut. Cette stratégie ne réessaye pas du tout, mais elle encapsule toutes les exceptions qui peuvent être temporaires pour informer les utilisateurs qu’ils peuvent souhaiter activer la résilience des connexions.  
+2. **Defaultsqlexecutionstrategy,**: il s’agit d’une stratégie d’exécution interne qui est utilisée par défaut. Cette stratégie ne réessaye pas du tout, mais elle encapsule toutes les exceptions qui peuvent être temporaires pour informer les utilisateurs qu’ils peuvent souhaiter activer la résilience des connexions.  
 3. **DbExecutionStrategy**: cette classe est appropriée comme classe de base pour d’autres stratégies d’exécution, y compris celles personnalisées. Il implémente une stratégie de nouvelle tentative exponentielle, où la nouvelle tentative initiale a lieu sans délai et le délai augmente de façon exponentielle jusqu’à ce que le nombre maximal de tentatives soit atteint. Cette classe possède une méthode ShouldRetryOn abstraite qui peut être implémentée dans des stratégies d’exécution dérivées pour contrôler les exceptions qui doivent être retentées.  
 4. **SqlAzureExecutionStrategy**: cette stratégie d’exécution hérite de DbExecutionStrategy et réessaie sur les exceptions connues comme pouvant être transitoires lorsque vous utilisez Azure SQL Database.
 
@@ -32,7 +34,7 @@ La nouvelle tentative de connexion est prise en charge par une implémentation d
 
 ## <a name="enabling-an-execution-strategy"></a>Activation d’une stratégie d’exécution  
 
-Le moyen le plus simple pour indiquer à EF d’utiliser une stratégie d’exécution consiste à utiliser la méthode SetExecutionStrategy de la classe [DbConfiguration](~/ef6/fundamentals/configuring/code-based.md) :  
+Le moyen le plus simple pour indiquer à EF d’utiliser une stratégie d’exécution consiste à utiliser la méthode SetExecutionStrategy de la classe [DbConfiguration](xref:ef6/fundamentals/configuring/code-based) :  
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -66,7 +68,7 @@ public class MyConfiguration : DbConfiguration
 
 Le SqlAzureExecutionStrategy réessaie instantanément la première fois qu’un échec temporaire se produit, mais il retardera entre chaque nouvelle tentative jusqu’à ce que le nombre maximal de nouvelles tentatives soit dépassé ou que le délai total atteigne le délai maximal.  
 
-Les stratégies d’exécution renouvellent uniquement un nombre limité d’exceptions qui sont généralement temporaires, vous devrez toujours gérer d’autres erreurs et intercepter l’exception RetryLimitExceeded pour le cas où une erreur n’est pas temporaire ou prend trop de temps pour être résolue automatiquement.  
+Les stratégies d’exécution renouvellent uniquement un nombre limité d’exceptions qui sont généralement temporaires, vous devrez toujours gérer d’autres erreurs et intercepter l’exception RetryLimitExceeded pour le cas où une erreur n’est pas temporaire ou prend trop de temps pour se résoudre elle-même.  
 
 Il existe des limitations connues en cas d’utilisation d’une stratégie de nouvelle tentative d’exécution :  
 
@@ -84,7 +86,7 @@ using (var db = new BloggingContext())
 }
 ```  
 
-La diffusion en continu n’est pas prise en charge lorsqu’une stratégie d’exécution de nouvelle tentative est inscrite. Cette limitation existe, car la connexion peut supprimer de façon partielle les résultats retournés. Dans ce cas, EF doit réexécuter l’intégralité de la requête, mais n’a pas de moyen fiable de savoir quels résultats ont déjà été retournés (les données ont peut-être été modifiées depuis l’envoi de la requête initiale, les résultats peuvent revenir dans un ordre différent, les résultats peuvent ne pas avoir d’identificateur unique , etc.).  
+La diffusion en continu n’est pas prise en charge lorsqu’une stratégie d’exécution de nouvelle tentative est inscrite. Cette limitation existe, car la connexion peut supprimer de façon partielle les résultats retournés. Dans ce cas, EF doit réexécuter l’intégralité de la requête, mais n’a pas de moyen fiable de savoir quels résultats ont déjà été retournés (les données ont peut-être été modifiées depuis l’envoi de la requête initiale, les résultats peuvent être renvoyés dans un ordre différent, les résultats peuvent ne pas avoir un identificateur unique, etc.).  
 
 ## <a name="user-initiated-transactions-are-not-supported"></a>Les transactions initiées par l’utilisateur ne sont pas prises en charge  
 

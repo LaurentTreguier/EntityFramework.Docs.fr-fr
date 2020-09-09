@@ -1,46 +1,49 @@
 ---
-title: ''
-description: ''
-author: ''
-ms.date: ''
-uid: ''
+title: Exemple de test de EF Core-EF Core
+description: Exemple illustrant comment tester des applications qui utilisent Entity Framework Core
+author: ajcvickers
+ms.date: 04/22/2020
+uid: core/miscellaneous/testing/testing-sample
 no-loc:
 - Item
 - Tag
 - Items
 - Tags
-ms.openlocfilehash: ae073fc0b3a99fb9de07a3e0a42c638fe0838a5a
-ms.sourcegitcommit: 59e3d5ce7dfb284457cf1c991091683b2d1afe9d
+- items
+- tags
+ms.openlocfilehash: 839f932f48e1cc6cb1b4c86d5e1405e888d5227a
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 05/20/2020
-ms.locfileid: "83672813"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617656"
 ---
 # <a name="ef-core-testing-sample"></a>Exemple de test EF Core
 
 > [!TIP]
 > Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/).
-> Notez que certains de ces tests **sont censés échouer**. Les raisons sont expliquées ci-dessous. 
+> Notez que certains de ces tests **sont censés échouer**. Les raisons sont expliquées ci-dessous.
 
 Ce document décrit un exemple de test de code qui utilise EF Core.
 
 ## <a name="the-application"></a>L'application
 
 L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) contient deux projets :
-- ItemsWebApi : [API Web très simple sauvegardée par ASP.net Core](/aspnet/core/tutorials/first-web-api?view=aspnetcore-3.1&tabs=visual-studio) avec un seul contrôleur
+
+- ItemsWebApi : [API Web très simple sauvegardée par ASP.net Core](/aspnet/core/tutorials/first-web-api) avec un seul contrôleur
 - Tests : projet de test [xUnit](https://xunit.net/) pour tester le contrôleur
 
 ### <a name="the-model-and-business-rules"></a>Le modèle et les règles d’entreprise
 
 Le modèle qui stocke cette API a deux types d’entité : Items et Tags .
 
-* Itemsavoir un nom qui respecte la casse et une collection de Tags .
-* Chacun Tag a une étiquette et un nombre qui représente le nombre de fois où il a été appliqué à l' Item .
-* Chaque Item doit être Tag associé à une étiquette donnée.
-  * Si un élément est balisé plusieurs fois avec la même étiquette, le décompte de la balise existante avec cette étiquette est incrémenté au lieu d’une nouvelle balise créée. 
-* La suppression d’un Item doit supprimer tous les associés Tags .
+- Items avoir un nom qui respecte la casse et une collection de Tags .
+- Chacun Tag a une étiquette et un nombre qui représente le nombre de fois où il a été appliqué à l' Item .
+- Chaque Item doit être Tag associé à une étiquette donnée.
+  - Si un élément est balisé plusieurs fois avec la même étiquette, le décompte de la balise existante avec cette étiquette est incrémenté au lieu d’une nouvelle balise créée.
+- La suppression d’un Item doit supprimer tous les associés Tags .
 
-#### <a name="the-item-entity-type"></a>Le Item type d’entité
+#### <a name="the-no-locitem-entity-type"></a>Le Item type d’entité
 
 Le `Item` type d’entité :
 
@@ -51,11 +54,12 @@ Et sa configuration dans `DbContext.OnModelCreating` :
 [!code-csharp[ConfigureItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/ItemsWebApi/ItemsContext.cs?name=ConfigureItem)]
 
 Notez que le type d’entité limite la manière dont il peut être utilisé pour refléter le modèle de domaine et les règles d’entreprise. En particulier :
+
 - La clé primaire est mappée directement au `_id` champ et n’est pas exposée publiquement
   - EF détecte et utilise le constructeur privé qui accepte la valeur et le nom de la clé primaire.
-- La `Name` propriété est en lecture seule et définie uniquement dans le constructeur. 
-- Tagssont exposés en tant que `IReadOnlyList<Tag>` pour empêcher une modification arbitraire.
-  - EF associe la `Tags` propriété au `_tags` champ de stockage en faisant correspondre leurs noms. 
+- La `Name` propriété est en lecture seule et définie uniquement dans le constructeur.
+- Tags sont exposés en tant que `IReadOnlyList<Tag>` pour empêcher une modification arbitraire.
+  - EF associe la `Tags` propriété au `_tags` champ de stockage en faisant correspondre leurs noms.
   - La `AddTag` méthode prend une étiquette de balise et implémente la règle d’entreprise décrite ci-dessus.
     Autrement dit, une balise est ajoutée uniquement pour les nouvelles étiquettes.
     Sinon, le nombre sur une étiquette existante est incrémenté.
@@ -64,7 +68,7 @@ Notez que le type d’entité limite la manière dont il peut être utilisé pou
   - En outre, Tag ne définit pas une propriété de clé étrangère.
     Dans ce cas, EF crée et gère une propriété en état Shadow.
 
-#### <a name="the-tag-entity-type"></a>Le Tag type d’entité
+#### <a name="the-no-loctag-entity-type"></a>Le Tag type d’entité
 
 Le `Tag` type d’entité :
 
@@ -76,7 +80,7 @@ Et sa configuration dans `DbContext.OnModelCreating` :
 
 De même Item que, Tag masque sa clé primaire et définit la `Label` propriété en lecture seule.
 
-### <a name="the-itemscontroller"></a>ItemsController
+### <a name="the-no-locitemscontroller"></a>Le Items contrôleur
 
 Le contrôleur d’API Web est plutôt basique.
 Elle obtient un `DbContext` à partir du conteneur d’injection de dépendances via l’injection de constructeur :
@@ -104,29 +108,30 @@ La plupart des validations et des erreurs ont été supprimées pour réduire l�
 ## <a name="the-tests"></a>Les tests
 
 Les tests sont organisés pour s’exécuter avec plusieurs configurations de fournisseur de base de données :
-* Fournisseur SQL Server, qui est le fournisseur utilisé par l’application
-* Fournisseur SQLite
-* Fournisseur SQLite utilisant des bases de données SQLite en mémoire
-* Fournisseur de base de données EF en mémoire
+
+- Fournisseur SQL Server, qui est le fournisseur utilisé par l’application
+- Fournisseur SQLite
+- Fournisseur SQLite utilisant des bases de données SQLite en mémoire
+- Fournisseur de base de données EF en mémoire
 
 Pour ce faire, vous devez placer tous les tests dans une classe de base, puis hériter de ce pour effectuer un test avec chaque fournisseur.
 
 > [!TIP]
 > Si vous n’utilisez pas la base de données locale, vous devez modifier la chaîne de connexion SQL Server.
-
-> [!TIP]
-> Pour obtenir des conseils sur l’utilisation de SQLite pour le test en mémoire, consultez [test avec SQLite](xref:core/miscellaneous/testing/sqlite) . 
+> Pour obtenir des conseils sur l’utilisation de SQLite pour le test en mémoire, consultez [test avec SQLite](xref:core/miscellaneous/testing/sqlite) .
 
 Les deux tests suivants sont censés échouer :
-* `Can_remove_item_and_all_associated_tags`en cas d’exécution avec le fournisseur de base de données EF en mémoire
-* `Can_add_item_differing_only_by_case`en cas d’exécution avec le fournisseur SQL Server
+
+- `Can_remove_item_and_all_associated_tags` en cas d’exécution avec le fournisseur de base de données EF en mémoire
+- `Can_add_item_differing_only_by_case` en cas d’exécution avec le fournisseur SQL Server
 
 Ce sujet est abordé plus en détail ci-dessous.
 
 ### <a name="setting-up-and-seeding-the-database"></a>Configuration et amorçage de la base de données
 
 XUnit, comme la plupart des frameworks de test, créera une nouvelle instance de classe de test pour chaque série de tests.
-En outre, XUnit n’exécutera pas de tests dans une classe de test donnée en parallèle. Cela signifie que nous pouvons configurer et configurer la base de données dans le constructeur de test et qu’elle sera dans un état connu pour chaque test.
+En outre, XUnit n’exécutera pas de tests dans une classe de test donnée en parallèle.
+Cela signifie que nous pouvons configurer et configurer la base de données dans le constructeur de test et qu’elle sera dans un état connu pour chaque test.
 
 > [!TIP]
 > Cet exemple recrée la base de données pour chaque test.
@@ -134,11 +139,12 @@ En outre, XUnit n’exécutera pas de tests dans une classe de test donnée en p
 > Les approches pour réduire cette surcharge sont traitées dans [partage des bases de données entre les tests](xref:core/miscellaneous/testing/sharing-databases).
 
 Quand chaque test est exécuté :
-* Les DbContextOptions sont configurés pour le fournisseur en cours d’utilisation et passés au constructeur de classe de base
-  * Ces options sont stockées dans une propriété et utilisées tout au long des tests pour créer des instances de DbContext
-* Une méthode Seed est appelée pour créer et amorcer la base de données
-  * La méthode Seed garantit le nettoyage de la base de données en la supprimant puis en la recréant.
-  * Certaines entités de test connues sont créées et enregistrées dans la base de données.
+
+- Les DbContextOptions sont configurés pour le fournisseur en cours d’utilisation et passés au constructeur de classe de base
+  - Ces options sont stockées dans une propriété et utilisées tout au long des tests pour créer des instances de DbContext
+- Une méthode Seed est appelée pour créer et amorcer la base de données
+  - La méthode Seed garantit le nettoyage de la base de données en la supprimant puis en la recréant.
+  - Certaines entités de test connues sont créées et enregistrées dans la base de données.
 
 [!code-csharp[Seeding](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=Seeding)]
 
@@ -158,15 +164,17 @@ Par exemple :
 
 [!code-csharp[CanGetItems](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
-Notez que différentes instances de DbContext sont utilisées pour amorcer la base de données et exécuter les tests. Cela permet de s’assurer que le test n’utilise pas (ou ne passe pas) les entités suivies par le contexte lors de l’amorçage.
+Notez que différentes instances de DbContext sont utilisées pour amorcer la base de données et exécuter les tests.
+Cela permet de s’assurer que le test n’utilise pas (ou ne passe pas) les entités suivies par le contexte lors de l’amorçage.
 Il correspond également mieux à ce qui se passe dans les services et applications Web.
 
 Les tests qui transforment la base de données créent une deuxième instance DbContext dans le test pour des raisons similaires.
-Autrement dit, créer un nouveau contexte propre, puis le lire dans la base de données pour vous assurer que les modifications ont été enregistrées dans la base de données. Par exemple :
+Autrement dit, créer un nouveau contexte propre, puis le lire dans la base de données pour vous assurer que les modifications ont été enregistrées dans la base de données.
+Par exemple :
 
 [!code-csharp[CanAddItem](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 
-Deux tests légèrement plus impliqués couvrent la logique métier autour de l’ajout de balises.
+Deux tests, un peu plus complexe, couvrent la logique métier autour de l’ajout de tags .
 
 [!code-csharp[CanAddTag](../../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddTag)]
 
@@ -189,7 +197,7 @@ L’exécution de ce test sur la base de données EF en mémoire indique que tou
 Tout est toujours parfait quand vous utilisez SQLite.
 Mais le test échoue lorsqu’il est exécuté sur SQL Server !
 
-```
+```console
 System.InvalidOperationException : Sequence contains more than one element
    at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
    at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
@@ -200,14 +208,14 @@ System.InvalidOperationException : Sequence contains more than one element
 ```
 
 Cela est dû au fait que la base de données EF en mémoire et la base de données SQLite sont sensibles à la casse par défaut.
-SQL Server, en revanche, ne respecte pas la casse ! 
+SQL Server, en revanche, ne respecte pas la casse !
 
 EF Core, par conception, ne modifie pas ces comportements, car le fait de forcer une modification du respect de la casse peut avoir un impact considérable sur les performances.
 
 Une fois que nous savons qu’il s’agit d’un problème, nous pouvons corriger l’application et compenser les tests.
 Toutefois, le point ici est que ce bogue peut être manqué en cas de test uniquement avec la base de données en mémoire EF ou les fournisseurs SQLite.
 
-### <a name="test-fails-when-the-application-is-correct"></a>Le test échoue lorsque l’application est correcte 
+### <a name="test-fails-when-the-application-is-correct"></a>Le test échoue lorsque l’application est correcte
 
 Une autre des exigences de notre application est que « la suppression d’un Item doit supprimer tous les éléments associés Tags ».
 Là encore, facile à tester :
@@ -216,13 +224,14 @@ Là encore, facile à tester :
 
 Ce test réussit sur SQL Server et SQLite, mais il échoue avec la base de données EF en mémoire !
 
-```
+```console
 Assert.False() Failure
 Expected: False
 Actual:   True
    at Tests.ItemsControllerTest.Can_remove_item_and_all_associated_tags()
 ```
 
-Dans ce cas, l’application fonctionne correctement, car SQL Server prend en charge les [suppressions en cascade](xref:core/saving/cascade-delete). SQLite prend également en charge les suppressions en cascade, comme pour la plupart des bases de données relationnelles, ce qui permet de tester ce fonctionnement sur SQLite.
+Dans ce cas, l’application fonctionne correctement, car SQL Server prend en charge les [suppressions en cascade](xref:core/saving/cascade-delete).
+SQLite prend également en charge les suppressions en cascade, comme pour la plupart des bases de données relationnelles, ce qui permet de tester ce fonctionnement sur SQLite.
 En revanche, la base de données EF en mémoire [ne prend pas en charge les suppressions en cascade](https://github.com/dotnet/efcore/issues/3924).
 Cela signifie que cette partie de l’application ne peut pas être testée avec le fournisseur de base de données EF en mémoire.

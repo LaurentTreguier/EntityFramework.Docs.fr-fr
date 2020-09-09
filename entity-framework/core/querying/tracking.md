@@ -1,35 +1,36 @@
 ---
-title: Tracking vs No-Tracking Questions - EF Core
+title: Suivi et requêtes sans suivi-EF Core
+description: Informations sur le suivi et les requêtes sans suivi dans Entity Framework Core
 author: smitpatel
 ms.date: 10/10/2019
 ms.assetid: e17e060c-929f-4180-8883-40c438fbcc01
 uid: core/querying/tracking
-ms.openlocfilehash: a6c71c12f429f1324abe91d1b2cef96312bec051
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: f49c6a3e1dc84dff72d80e3ef0f9bbe149d58a72
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417648"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617414"
 ---
-# <a name="tracking-vs-no-tracking-queries"></a>Suivi vs questions de non-suivi
+# <a name="tracking-vs-no-tracking-queries"></a>Suivi et requêtes sans suivi
 
-Suivi des contrôles de comportement si Entity Framework Core conservera des informations sur une instance d’entité dans son tracker de changement. Si une entité est suivie, toutes les modifications détectées dans l’entité sont rendues persistantes dans la base de données pendant `SaveChanges()`. EF Core fixera également les propriétés de navigation entre les entités dans un résultat de requête de suivi et les entités qui sont dans le tracker de changement.
+Suivi des contrôles de comportement si Entity Framework Core conservera des informations sur une instance d’entité dans son dispositif de suivi des modifications. Si une entité est suivie, toutes les modifications détectées dans l’entité sont rendues persistantes dans la base de données pendant `SaveChanges()`. EF Core corrigera également les propriétés de navigation entre les entités dans un résultat de requête de suivi et les entités qui se trouvent dans le dispositif de suivi des modifications.
 
 > [!NOTE]
-> [Les types d’entités sans clé](xref:core/modeling/keyless-entity-types) ne sont jamais suivis. Partout où cet article mentionne les types d’entités, il se réfère aux types d’entités qui ont une clé définie.
+> Les [types d’entité sans clé](xref:core/modeling/keyless-entity-types) ne sont jamais suivis. Chaque fois que cet article mentionne des types d’entités, il fait référence aux types d’entité qui ont une clé définie.
 
 > [!TIP]  
 > Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
 
 ## <a name="tracking-queries"></a>Requêtes avec suivi
 
-Par défaut, les requêtes qui retournent des types d’entités ont le suivi activé. Ce qui signifie que vous pouvez apporter des modifications à ces instances d’entité et avoir ces changements persistés par `SaveChanges()`. Dans l’exemple suivant, la modification de l’évaluation des blogs sera détectée et rendue persistante dans la base de données pendant `SaveChanges()`.
+Par défaut, les requêtes qui retournent des types d’entités ont le suivi activé. Cela signifie que vous pouvez apporter des modifications à ces instances d’entité et faire en sorte que ces modifications soient rendues persistantes par `SaveChanges()` . Dans l’exemple suivant, la modification de l’évaluation des blogs sera détectée et rendue persistante dans la base de données pendant `SaveChanges()`.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#Tracking)]
 
 ## <a name="no-tracking-queries"></a>Pas de suivi des requêtes
 
-Les requêtes sans suivi sont utiles lorsque les résultats sont utilisés dans un scénario en lecture seule. Ils sont plus rapides à exécuter parce qu’il n’est pas nécessaire de configurer les informations de suivi des modifications. Si vous n’avez pas besoin de mettre à jour les entités récupérées à partir de la base de données, une requête sans suivi doit être utilisée. Vous pouvez échanger une requête individuelle pour ne pas suivre.
+Les requêtes sans suivi sont utiles lorsque les résultats sont utilisés dans un scénario en lecture seule. Elles sont plus rapides à exécuter, car il n’est pas nécessaire de configurer les informations de suivi des modifications. Si vous n’avez pas besoin de mettre à jour les entités récupérées de la base de données, une requête de non-suivi doit être utilisée. Vous pouvez permuter une requête individuelle pour qu’elle soit sans suivi.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#NoTracking)]
 
@@ -39,42 +40,42 @@ Vous pouvez également modifier le comportement de suivi par défaut au niveau d
 
 ## <a name="identity-resolution"></a>Résolution de l'identité
 
-Étant donné qu’une requête de suivi utilise le tracker de changement, EF Core effectuera une résolution d’identité dans une requête de suivi. Lors de la matérialisation d’une entité, EF Core retournera la même instance entité à partir du tracker de changement si elle est déjà suivie. Si le résultat contient la même entité plusieurs fois, vous revenez le même exemple pour chaque événement. Les requêtes sans suivi n’utilisent pas le tracker de changement et ne font pas de résolution d’identité. Ainsi, vous revenez nouvelle instance de l’entité, même lorsque la même entité est contenue dans le résultat plusieurs fois. Ce comportement était différent dans les versions avant EF Core 3.0, voir [les versions précédentes](#previous-versions).
+Dans la mesure où une requête de suivi utilise le suivi des modifications, EF Core effectue la résolution d’identité dans une requête de suivi. Lors de la matérialisation d’une entité, EF Core retourne la même instance d’entité à partir du dispositif de suivi des modifications si elle fait déjà l’objet d’un suivi. Si le résultat contient plusieurs fois la même entité, vous obtenez la même instance pour chaque occurrence. Les requêtes de non-suivi n’utilisent pas le dispositif de suivi des modifications et n’effectuent pas de résolution d’identité. Ainsi, vous obtenez une nouvelle instance de l’entité même lorsque la même entité est contenue plusieurs fois dans le résultat. Ce comportement est différent dans les versions antérieures à EF Core 3,0, consultez [versions précédentes](#previous-versions).
 
 ## <a name="tracking-and-custom-projections"></a>Suivi et projections personnalisées
 
-Même si le type de résultat de la requête n’est pas un type d’entité, EF Core permettra toujours de suivre les types d’entités contenus dans le résultat par défaut. Dans la requête suivante, qui retourne un type anonyme, les instances de `Blog` dans le jeu de résultats sont suivies.
+Même si le type de résultat de la requête n’est pas un type d’entité, EF Core effectue toujours le suivi des types d’entité contenus dans le résultat par défaut. Dans la requête suivante, qui retourne un type anonyme, les instances de `Blog` dans le jeu de résultats sont suivies.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection1)]
 
-Si l’ensemble de résultats contient des types d’entités provenant de la composition de LINQ, EF Core les suivrea.
+Si le jeu de résultats contient des types d’entités provenant de la composition LINQ, EF Core les suit.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection2)]
 
-Si l’ensemble de résultat ne contient aucun type d’entité, aucun suivi n’est effectué. Dans la requête suivante, nous retournons un type anonyme avec certaines des valeurs de l’entité (mais aucun cas du type d’entité réelle). Il n’y a pas d’entités suivies qui sortent de la requête.
+Si le jeu de résultats ne contient aucun type d’entité, aucun suivi n’est effectué. Dans la requête suivante, nous retournons un type anonyme avec certaines des valeurs de l’entité (mais aucune instance du type d’entité réel). Aucune entité suivie n’est en provenance de la requête.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection3)]
 
- EF Core prend en charge l’évaluation des clients dans la projection de haut niveau. Si EF Core matérialise une entité par exemple pour l’évaluation du client, elle sera suivie. Ici, puisque nous `blog` passons des `StandardizeURL`entités à la méthode client , EF Core va suivre les instances blog trop.
+ EF Core prend en charge l’évaluation du client dans la projection de niveau supérieur. Si EF Core matérialise une instance d’entité pour l’évaluation du client, elle est suivie. Ici, puisque nous passons des `blog` entités à la méthode cliente `StandardizeURL` , EF Core effectuera le suivi des instances de blog.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientMethod)]
 
-EF Core ne suit pas les instances d’entités sans clé contenues dans le résultat. Mais EF Core suit tous les autres cas de types d’entités avec des clés selon les règles ci-dessus.
+EF Core n’effectue pas le suivi des instances d’entité keymoins contenues dans le résultat. Mais EF Core effectue le suivi de toutes les autres instances de types d’entité avec la clé conformément aux règles ci-dessus.
 
-Certaines des règles ci-dessus ont fonctionné différemment avant EF Core 3.0. Pour plus d’informations, voir [les versions précédentes](#previous-versions).
+Certaines des règles ci-dessus ont fonctionné différemment avant EF Core 3,0. Pour plus d’informations, consultez [versions précédentes](#previous-versions).
 
-## <a name="previous-versions"></a>Versions antérieures
+## <a name="previous-versions"></a>Versions précédentes
 
-Avant la version 3.0, EF Core avait quelques différences dans la façon dont le suivi a été fait. Les différences notables sont les suivantes :
+Avant la version 3,0, les EF Core présentaient certaines différences quant à la façon dont le suivi a été effectué. Les différences notables sont les suivantes :
 
-- Comme expliqué dans la page [d’évaluation client vs serveur,](xref:core/querying/client-eval) EF Core a pris en charge l’évaluation des clients dans n’importe quelle partie de la requête avant la version 3.0. L’évaluation des clients a entraîné la matérialisation des entités, ce qui ne faisait pas partie du résultat. Ef Core a donc analysé le résultat pour détecter ce qu’il faut suivre. Cette conception avait certaines différences comme suit :
-  - L’évaluation des clients dans la projection, qui a causé la matérialisation mais n’a pas retourné l’instance de l’entité matérialisée n’a pas été suivie. L’exemple suivant n’a pas suivi les `blog` entités.
+- Comme expliqué dans la page [évaluation des clients vs Server](xref:core/querying/client-eval) , EF Core évaluation du client prise en charge dans n’importe quelle partie de la requête avant la version 3,0. L’évaluation du client a provoqué la matérialisation des entités, ce qui n’a pas fait partie du résultat. Par conséquent, EF Core analysé le résultat pour détecter les éléments à suivre. Cette conception présentait certaines différences, comme suit :
+  - L’évaluation du client dans la projection, qui provoquait la matérialisation mais n’a pas retourné l’instance d’entité matérialisée n’a pas été suivie. L’exemple suivant n’a pas effectué le suivi des `blog` entités.
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#ClientProjection)]
 
-  - EF Core n’a pas suivi les objets sortant de la composition de LINQ dans certains cas. L’exemple suivant n’a pas suivi `Post`.
+  - Dans certains cas, EF Core n’avez pas suivi les objets en provenance de la composition LINQ. L’exemple suivant n’a pas été suivi `Post` .
     [!code-csharp[Main](../../../samples/core/Querying/Tracking/Sample.cs#CustomProjection2)]
 
-- Chaque fois que les résultats des requêtes contenaient des types d’entités sans clé, toute la requête était faite sans suivi. Cela signifie que les types d’entités avec des touches, qui sont en résultat n’ont pas été suivis non plus.
-- EF Core a fait la résolution d’identité dans la requête sans suivi. Il a utilisé des références faibles pour garder une trace des entités qui avaient déjà été retournées. Donc, si un ensemble de résultats contenait les mêmes heures multiples entité, vous obtiendrez le même exemple pour chaque événement. Bien que si un résultat précédent avec la même identité est sorti de portée et a obtenu des ordures recueillies, EF Core retourné une nouvelle instance.
+- Chaque fois que les résultats de la requête contiennent des types d’entité sans clé, l’ensemble de la requête a été rendu non suivi. Cela signifie que les types d’entité avec des clés, qui sont dans le résultat n’ont pas été suivis.
+- EF Core a fait la résolution d’identité dans une requête de non-suivi. Elle utilisait des références faibles pour effectuer le suivi des entités qui avaient déjà été retournées. Par conséquent, si un jeu de résultats contenait la même entité plusieurs fois, vous obtiendriez la même instance pour chaque occurrence. Toutefois, si un résultat précédent avec la même identité est hors de portée et qu’il a été récupéré par le garbage collector, EF Core retourné une nouvelle instance.

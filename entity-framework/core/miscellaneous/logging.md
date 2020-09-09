@@ -1,15 +1,16 @@
 ---
 title: Journalisation-EF Core
+description: Configuration de la journalisation avec Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 4f39e0ad1f061970aae7f7eb7abdc72e4bb0d691
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 56d0e3f8c5ecf56ee6bd6ddf0c9668bb8e3ac12f
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526457"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617740"
 ---
 # <a name="logging"></a>Journalisation
 
@@ -33,7 +34,7 @@ EF Core la journalisation requiert un ILoggerFactory qui est lui-même configur�
 
 Après l’installation du ou des packages appropriés, l’application doit créer une instance singleton/globale d’un LoggerFactory. Par exemple, à l’aide de l’enregistreur d’événements de console :
 
-### <a name="version-3x"></a>[Version 3. x](#tab/v3)
+### <a name="version-3x"></a>[Version 3.x](#tab/v3)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#DefineLoggerFactory)]
 
@@ -60,7 +61,7 @@ Cette instance de Singleton/global doit ensuite être inscrite auprès de EF Cor
 
 L’application peut contrôler ce qui est enregistré en configurant un filtre sur le ILoggerProvider. Par exemple :
 
-### <a name="version-3x"></a>[Version 3. x](#tab/v3)
+### <a name="version-3x"></a>[Version 3.x](#tab/v3)
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContextWithFiltering.cs#DefineLoggerFactory)]
 

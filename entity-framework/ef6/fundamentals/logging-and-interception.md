@@ -1,14 +1,16 @@
 ---
 title: Journalisation et interception des opérations de base de données-EF6
+description: Journalisation et interception des opérations de base de données dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b5ee7eb1-88cc-456e-b53c-c67e24c3f8ca
-ms.openlocfilehash: 35b0284a5ad8b2b732f074589bd458d243312575
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/logging-and-interception
+ms.openlocfilehash: bb5c3392b4f2e1f291d7ac373d07724f56d0eb30
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419477"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616199"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>Journalisation et interception des opérations de base de données
 > [!NOTE]
@@ -126,7 +128,7 @@ En examinant l’exemple de sortie ci-dessus, chacune des quatre commandes journ
 
 Comme indiqué ci-dessus, la journalisation dans la console est très facile. Il est également facile de se connecter à la mémoire, au fichier, etc. en utilisant différents genres de [TextWriter](https://msdn.microsoft.com/library/system.io.textwriter.aspx).  
 
-Si vous êtes familiarisé avec LINQ to SQL vous pouvez remarquer que dans LINQ to SQL la propriété log est définie sur l’objet TextWriter réel (par exemple, console. out) alors que dans EF, la propriété log est définie sur une méthode qui accepte une chaîne (par exemple, , Console. Write ou console. out. Write). Cela consiste à découpler EF de TextWriter en acceptant tout délégué pouvant agir en tant que récepteur pour les chaînes. Par exemple, imaginez que vous disposez déjà d’une infrastructure de journalisation et qu’elle définit une méthode de journalisation comme :  
+Si vous êtes familiarisé avec LINQ to SQL vous pouvez remarquer que dans LINQ to SQL la propriété log est définie sur l’objet TextWriter réel (par exemple, console. out) alors que dans EF, la propriété log est définie sur une méthode qui accepte une chaîne (par exemple, console. Write ou console. out. Write). Cela consiste à découpler EF de TextWriter en acceptant tout délégué pouvant agir en tant que récepteur pour les chaînes. Par exemple, imaginez que vous disposez déjà d’une infrastructure de journalisation et qu’elle définit une méthode de journalisation comme :  
 
 ``` csharp
 public class MyLogger
@@ -194,7 +196,7 @@ Par exemple, supposons que nous voulions enregistrer une seule ligne avant que c
 - Remplacer LogCommand pour mettre en forme et écrire la ligne unique de SQL  
 - Remplacez LogResult pour ne rien faire.  
 
-Le code doit ressembler à ceci :
+Le code se présenterait comme ceci :
 
 ``` csharp
 public class OneLineFormatter : DatabaseLogFormatter
@@ -261,11 +263,11 @@ Le code d’interception est construit autour du concept d’interfaces d’inte
 
 ### <a name="the-interception-context"></a>Contexte d’interception  
 
-En examinant les méthodes définies sur l’une des interfaces d’intercepteur, il est évident que chaque appel reçoit un objet de type DbInterceptionContext ou un type dérivé de celui-ci, tel que DbCommandInterceptionContext\<\>. Cet objet contient des informations contextuelles sur l’action effectuée par EF. Par exemple, si l’action est effectuée pour le compte d’un DbContext, le DbContext est inclus dans le DbInterceptionContext. De même, pour les commandes qui sont exécutées de façon asynchrone, l’indicateur IsAsync est défini sur DbCommandInterceptionContext.  
+En examinant les méthodes définies sur l’une des interfaces d’intercepteur, il est évident que chaque appel reçoit un objet de type DbInterceptionContext ou un type dérivé de celui-ci, tel que DbCommandInterceptionContext \<\> . Cet objet contient des informations contextuelles sur l’action effectuée par EF. Par exemple, si l’action est effectuée pour le compte d’un DbContext, le DbContext est inclus dans le DbInterceptionContext. De même, pour les commandes qui sont exécutées de façon asynchrone, l’indicateur IsAsync est défini sur DbCommandInterceptionContext.  
 
-### <a name="result-handling"></a>Gestion des résultats  
+### <a name="result-handling"></a>Traitement des résultats  
 
-La classe DbCommandInterceptionContext\<\> contient des propriétés appelées result, OriginalResult, exception et OriginalException. Ces propriétés ont la valeur null/zéro pour les appels aux méthodes d’interception qui sont appelées avant l’exécution de l’opération, c’est-à-dire pour le... Exécution des méthodes. Si l’opération est exécutée et réussit, result et OriginalResult sont définis sur le résultat de l’opération. Ces valeurs peuvent ensuite être observées dans les méthodes d’interception qui sont appelées après l’exécution de l’opération, c’est-à-dire sur le... Méthodes exécutées. De même, si l’opération lève, les propriétés exception et OriginalException sont définies.  
+La \<\> classe DbCommandInterceptionContext contient une propriété appelée result, OriginalResult, exception et OriginalException. Ces propriétés ont la valeur null/zéro pour les appels aux méthodes d’interception qui sont appelées avant l’exécution de l’opération, c’est-à-dire pour le... Exécution des méthodes. Si l’opération est exécutée et réussit, result et OriginalResult sont définis sur le résultat de l’opération. Ces valeurs peuvent ensuite être observées dans les méthodes d’interception qui sont appelées après l’exécution de l’opération, c’est-à-dire sur le... Méthodes exécutées. De même, si l’opération lève, les propriétés exception et OriginalException sont définies.  
 
 #### <a name="suppressing-execution"></a>Suppression de l’exécution  
 

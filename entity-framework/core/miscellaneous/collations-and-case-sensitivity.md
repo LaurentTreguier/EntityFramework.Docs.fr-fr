@@ -1,16 +1,16 @@
 ---
 title: Classements et respect de la casse-EF Core
-description: Comment configurer les classements et le respect de la casse dans la base de données et les requêtes
+description: Configuration des classements et du respect de la casse dans la base de données et sur les requêtes avec Entity Framework Core
 author: roji
 ms.date: 04/27/2020
 ms.assetid: bde4e0ee-fba3-4813-a849-27049323d301
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: 46a13d341c1b721bb243ee2b205bdc2f4d7e7aee
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: da37652484e0cd36c2aa907e41e875ba381ff41e
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526444"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617813"
 ---
 # <a name="collations-and-case-sensitivity"></a>Classements et respect de la casse
 

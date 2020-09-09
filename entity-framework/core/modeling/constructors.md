@@ -1,15 +1,16 @@
 ---
 title: Types d’entité avec constructeurs-EF Core
+description: Utilisation de constructeurs pour lier des données avec Entity Framework Core modèle
 author: ajcvickers
 ms.date: 02/23/2018
 ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: ddfaa8eebde388a9d3309f21b8891de593077956
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 58529a3a68e69a31249460d402027274404dce45
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417328"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617535"
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entité avec constructeurs
 
@@ -204,7 +205,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 Points à noter :
 
-* La clé « Property » est désormais un champ. Ce n’est pas un champ `readonly` afin que les clés générées par le magasin puissent être utilisées.
+* La clé « Property » est désormais un champ. Ce n’est pas un `readonly` champ afin que les clés générées par le magasin puissent être utilisées.
 * Les autres propriétés sont des propriétés en lecture seule définies uniquement dans le constructeur.
 * Si la valeur de clé primaire n’est jamais définie par EF ou lue à partir de la base de données, il n’est pas nécessaire de l’inclure dans le constructeur. Cela laisse la clé « Property » en tant que champ simple et précise qu’elle ne doit pas être définie explicitement lors de la création de nouveaux blogs ou publications.
 
@@ -215,10 +216,10 @@ Points à noter :
 
 EF Core pouvez également injecter des « services » dans le constructeur d’un type d’entité. Par exemple, vous pouvez injecter les éléments suivants :
 
-* `DbContext`-l’instance de contexte actuelle, qui peut également être typée comme votre type DbContext dérivé
-* `ILazyLoader`-le service de chargement différé--consultez la [documentation sur le chargement différé](../querying/related-data.md) pour plus d’informations
-* `Action<object, string>`-un délégué de chargement différé--consultez la [documentation sur le chargement différé](../querying/related-data.md) pour plus d’informations
-* `IEntityType`-les métadonnées de EF Core associées à ce type d’entité
+* `DbContext` -l’instance de contexte actuelle, qui peut également être typée comme votre type DbContext dérivé
+* `ILazyLoader` -le service de chargement différé : pour plus d’informations, consultez la documentation sur le [chargement différé](xref:core/querying/related-data) .
+* `Action<object, string>` -un délégué à chargement différé : consultez la documentation sur le [chargement différé](xref:core/querying/related-data) pour plus d’informations
+* `IEntityType` -les métadonnées de EF Core associées à ce type d’entité
 
 > [!NOTE]  
 > À partir de EF Core 2,1, seuls les services connus par EF Core peuvent être injectés. La prise en charge de l’injection des services d’application est prise en compte pour une version ultérieure.
@@ -265,7 +266,7 @@ public class Post
 Voici quelques points à noter :
 
 * Le constructeur est privé, car il n’est jamais appelé par EF Core, et il existe un autre constructeur public pour une utilisation générale.
-* Le code qui utilise le service injecté (autrement dit, le contexte) est défensif contre la `null` pour gérer les cas où EF Core ne crée pas l’instance.
+* Le code qui utilise le service injecté (autrement dit, le contexte) est défensif par rapport `null` à la gestion des cas où EF Core ne crée pas l’instance.
 * Étant donné que le service est stocké dans une propriété en lecture/écriture, il est réinitialisé lorsque l’entité est attachée à une nouvelle instance de contexte.
 
 > [!WARNING]  

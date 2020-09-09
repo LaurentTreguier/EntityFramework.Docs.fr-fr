@@ -1,19 +1,20 @@
 ---
 title: Utilisation d’un projet de migrations distinct-EF Core
+description: Utilisation d’un projet de migration distinct pour la gestion des schémas de base de données avec Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 10/30/2017
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: 89b7f50fe750c2953aa75efcdffcb1a5199ce90c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: a3f0ed96c6a8e3e8629d9a4bb1610fcbfe6ca043
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416814"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617914"
 ---
 # <a name="using-a-separate-migrations-project"></a>Utilisation d’un projet de migrations distinct
 
-Vous souhaiterez peut-être stocker vos migrations dans un autre assembly que celui contenant votre `DbContext`. Vous pouvez également utiliser cette stratégie pour gérer plusieurs ensembles de migrations, par exemple, un pour le développement et un autre pour les mises à niveau vers la version finale.
+Vous souhaiterez peut-être stocker vos migrations dans un autre assembly que celui contenant votre `DbContext` . Vous pouvez également utiliser cette stratégie pour gérer plusieurs ensembles de migrations, par exemple, un pour le développement et un autre pour les mises à niveau vers la version finale.
 
 Action à réaliser...
 

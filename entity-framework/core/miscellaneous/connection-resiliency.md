@@ -1,15 +1,16 @@
 ---
 title: Résilience de connexion-EF Core
+description: Utilisation de la résilience des connexions pour retenter automatiquement les commandes ayant échoué avec Entity Framework Core
 author: rowanmiller
 ms.date: 11/15/2016
 ms.assetid: e079d4af-c455-4a14-8e15-a8471516d748
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 07646e6ead845c38537945a03367ac7f50784236
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 6dd3d3eadb218ab32f373e44e2013d017e2966d8
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416640"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617764"
 ---
 # <a name="connection-resiliency"></a>Résilience des connexions
 
@@ -17,11 +18,11 @@ La résilience des connexions réessaie automatiquement les commandes de base de
 
 Par exemple, le fournisseur SQL Server inclut une stratégie d’exécution spécifiquement adaptée à SQL Server (y compris SQL Azure). Il reconnaît les types d’exception qui peuvent être retentés et qui ont des valeurs par défaut sensibles pour les nouvelles tentatives, le délai entre les nouvelles tentatives, etc.
 
-Une stratégie d’exécution est spécifiée lors de la configuration des options de votre contexte. En général, il s’agit de la méthode `OnConfiguring` de votre contexte dérivé :
+Une stratégie d’exécution est spécifiée lors de la configuration des options de votre contexte. En général, il s’agit de la `OnConfiguring` méthode de votre contexte dérivé :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#OnConfiguring)]
 
-ou `Startup.cs` pour une application ASP.NET Core :
+ou dans `Startup.cs` pour une application ASP.net Core :
 
 ``` csharp
 public void ConfigureServices(IServiceCollection services)
@@ -49,9 +50,9 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 ## <a name="execution-strategies-and-transactions"></a>Stratégies et transactions d’exécution
 
-Une stratégie d’exécution qui effectue automatiquement de nouvelles tentatives en cas de défaillance doit pouvoir lire chaque opération dans un bloc de nouvelle tentative qui échoue. Lorsque les nouvelles tentatives sont activées, chaque opération que vous effectuez via EF Core devient sa propre opération reproductibles. Autrement dit, chaque requête et chaque appel à `SaveChanges()` sont retentés en tant qu’unité en cas de défaillance temporaire.
+Une stratégie d’exécution qui effectue automatiquement de nouvelles tentatives en cas de défaillance doit pouvoir lire chaque opération dans un bloc de nouvelle tentative qui échoue. Lorsque les nouvelles tentatives sont activées, chaque opération que vous effectuez via EF Core devient sa propre opération reproductibles. Autrement dit, chaque requête et chaque appel à `SaveChanges()` est retentée en tant qu’unité en cas de défaillance temporaire.
 
-Toutefois, si votre code lance une transaction à l’aide de `BeginTransaction()` vous définissez votre propre groupe d’opérations qui doivent être traitées comme une unité, et tout ce qui se trouve à l’intérieur de la transaction doit être lu en cas de défaillance. Si vous tentez d’effectuer cette opération lors de l’utilisation d’une stratégie d’exécution, vous recevrez une exception semblable à la suivante :
+Toutefois, si votre code initie une transaction à l’aide de `BeginTransaction()` , vous définissez votre propre groupe d’opérations qui doivent être traitées comme une unité, et tout ce qui se trouve à l’intérieur de la transaction doit être lu en cas de défaillance. Si vous tentez d’effectuer cette opération lors de l’utilisation d’une stratégie d’exécution, vous recevrez une exception semblable à la suivante :
 
 > InvalidOperationException : la stratégie d’exécution configurée’SqlServerRetryingExecutionStrategy’ne prend pas en charge les transactions initiées par l’utilisateur. Utilisez la stratégie d’exécution retournée par « DbContext.Database.CreateExecutionStrategy() » pour exécuter toutes les opérations de la transaction en tant qu’ensemble pouvant être retenté.
 
@@ -79,20 +80,20 @@ Toutefois, vous devez éviter d’utiliser des clés générées par le magasin 
 
 ### <a name="option-2---rebuild-application-state"></a>Option 2-reconstruire l’état de l’application
 
-1. Ignore le `DbContext`actif.
-2. Créez un nouveau `DbContext` et restaurez l’état de votre application à partir de la base de données.
+1. Ignore le actuel `DbContext` .
+2. Créez un nouvel `DbContext` et restaurez l’état de votre application à partir de la base de données.
 3. Informe l’utilisateur que la dernière opération n’a peut-être pas été effectuée avec succès.
 
 ### <a name="option-3---add-state-verification"></a>Option 3-Ajouter une vérification de l’État
 
-Pour la plupart des opérations qui modifient l’état de la base de données, il est possible d’ajouter du code qui vérifie si elle a réussi. EF fournit une méthode d’extension pour faciliter ce `IExecutionStrategy.ExecuteInTransaction`.
+Pour la plupart des opérations qui modifient l’état de la base de données, il est possible d’ajouter du code qui vérifie si elle a réussi. EF fournit une méthode d’extension pour faciliter cette tâche `IExecutionStrategy.ExecuteInTransaction` .
 
-Cette méthode commence et valide une transaction et accepte également une fonction dans le paramètre `verifySucceeded` qui est appelée lorsqu’une erreur temporaire se produit pendant la validation de la transaction.
+Cette méthode commence et valide une transaction et accepte également une fonction dans le `verifySucceeded` paramètre qui est appelée lorsqu’une erreur temporaire se produit pendant la validation de la transaction.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/ConnectionResiliency/Program.cs#Verification)]
 
 > [!NOTE]
-> Ici `SaveChanges` est appelée avec `acceptAllChangesOnSuccess` défini sur `false` pour éviter de modifier l’état de l’entité `Blog` à `Unchanged` si la `SaveChanges` est réussie. Cela permet à de retenter la même opération si la validation échoue et que la transaction est restaurée.
+> Ici `SaveChanges` est appelé avec `acceptAllChangesOnSuccess` défini sur `false` pour éviter de modifier l’état de l' `Blog` entité en si la méthode est `Unchanged` `SaveChanges` réussie. Cela permet à de retenter la même opération si la validation échoue et que la transaction est restaurée.
 
 ### <a name="option-4---manually-track-the-transaction"></a>Option 4 : suivre manuellement la transaction
 

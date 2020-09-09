@@ -1,27 +1,29 @@
 ---
 title: Conventions de Code First personnalisées-EF6
+description: Conventions de Code First personnalisées dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: dd2bdbd9-ae9e-470a-aeb8-d0ba160499b7
-ms.openlocfilehash: cfd7f7cad532dca5227793c04d7d91e977ea5e4e
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/conventions/custom
+ms.openlocfilehash: 69e4b0111394e83195f5c0a81624c7b9e45bda52
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419226"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617260"
 ---
 # <a name="custom-code-first-conventions"></a>Conventions de Code First personnalisées
 > [!NOTE]
 > **EF6 et versions ultérieures uniquement** : Les fonctionnalités, les API, etc. décrites dans cette page ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.
 
-Lorsque vous utilisez Code First votre modèle est calculé à partir de vos classes à l’aide d’un ensemble de conventions. Les [conventions d’code First](~/ef6/modeling/code-first/conventions/built-in.md) par défaut déterminent des éléments tels que la propriété qui devient la clé primaire d’une entité, le nom de la table avec laquelle une entité est mappée et la précision et l’échelle d’une colonne décimale par défaut.
+Lorsque vous utilisez Code First votre modèle est calculé à partir de vos classes à l’aide d’un ensemble de conventions. Les [conventions d’code First](xref:ef6/modeling/code-first/conventions/built-in) par défaut déterminent des éléments tels que la propriété qui devient la clé primaire d’une entité, le nom de la table avec laquelle une entité est mappée et la précision et l’échelle d’une colonne décimale par défaut.
 
 Parfois, ces conventions par défaut ne sont pas idéales pour votre modèle, et vous devez les contourner en configurant de nombreuses entités individuelles à l’aide d’annotations de données ou de l’API Fluent. Les conventions de Code First personnalisées vous permettent de définir vos propres conventions qui fournissent des paramètres par défaut de configuration pour votre modèle. Dans cette procédure pas à pas, nous allons explorer les différents types de conventions personnalisées et créer chacun d’entre eux.
 
 
 ## <a name="model-based-conventions"></a>Conventions basées sur les modèles
 
-Cette page couvre l’API DbModelBuilder pour les conventions personnalisées. Cette API doit être suffisante pour créer la plupart des conventions personnalisées. Toutefois, il est également possible de créer des conventions basées sur des modèles qui manipulent le modèle final une fois qu’il a été créé, afin de gérer les scénarios avancés. Pour plus d’informations, consultez [conventions basées sur les modèles](~/ef6/modeling/code-first/conventions/model.md).
+Cette page couvre l’API DbModelBuilder pour les conventions personnalisées. Cette API doit être suffisante pour créer la plupart des conventions personnalisées. Toutefois, il est également possible de créer des conventions basées sur des modèles qui manipulent le modèle final une fois qu’il a été créé, afin de gérer les scénarios avancés. Pour plus d’informations, consultez [conventions basées sur les modèles](xref:ef6/modeling/code-first/conventions/model).
 
  
 
@@ -208,7 +210,7 @@ Une fois que nous avons cela, nous pouvons définir un bool sur notre attribut p
                 .Configure(c => c.IsUnicode(c.ClrPropertyInfo.GetCustomAttribute<IsUnicode>().Unicode));
 ```
 
-Cela est assez simple, mais il existe un moyen plus concis d’y parvenir à l’aide de la méthode having de l’API conventions. La méthode having a un paramètre de type Func&lt;PropertyInfo, T&gt; qui accepte le PropertyInfo de la même façon que la méthode Where, mais est supposé retourner un objet. Si l’objet retourné a la valeur null, la propriété n’est pas configurée, ce qui signifie que vous pouvez filtrer les propriétés à l’aide de la méthode, mais il est différent en ce sens qu’il capture également l’objet retourné et le transmet à la méthode Configure. Cela fonctionne comme suit :
+Cela est assez simple, mais il existe un moyen plus concis d’y parvenir à l’aide de la méthode having de l’API conventions. La méthode having a un paramètre de type Func &lt; PropertyInfo, T &gt; qui accepte le PropertyInfo de la même façon que la méthode Where, mais est supposé retourner un objet. Si l’objet retourné a la valeur null, la propriété n’est pas configurée, ce qui signifie que vous pouvez filtrer les propriétés à l’aide de la méthode, mais il est différent en ce sens qu’il capture également l’objet retourné et le transmet à la méthode Configure. Cela fonctionne comme suit :
 
 ``` csharp
     modelBuilder.Properties()
@@ -235,7 +237,7 @@ L’une des choses dont les conventions de niveau de type peuvent être vraiment
     }
 ```
 
-Cette méthode prend un type et retourne une chaîne qui utilise une minuscule avec des traits de soulignement au lieu de la casse mixte. Dans notre modèle, cela signifie que la classe ProductCategory sera mappée à une table appelée Product\_category au lieu de ProductCategories.
+Cette méthode prend un type et retourne une chaîne qui utilise une minuscule avec des traits de soulignement au lieu de la casse mixte. Dans notre modèle, cela signifie que la classe ProductCategory sera mappée à une table appelée \_ Category de produit au lieu de ProductCategories.
 
 Une fois que nous avons cette méthode, nous pouvons l’appeler dans une convention comme celle-ci :
 
@@ -246,9 +248,9 @@ Une fois que nous avons cette méthode, nous pouvons l’appeler dans une conven
 
 Cette Convention configure chaque type dans notre modèle pour qu’il corresponde au nom de table retourné par notre méthode GetTableName. Cette Convention revient à appeler la méthode ToTable pour chaque entité du modèle à l’aide de l’API Fluent.
 
-Il est important de noter que lorsque vous appelez ToTable EF, vous obtiendrez la chaîne que vous fournissez comme nom de table exact, sans aucune des deux plurielations qu’il ferait normalement lors de la détermination des noms de tables. C’est la raison pour laquelle le nom de la table de notre convention est produit\_category au lieu des catégories Product\_. Nous pouvons résoudre cela dans notre convention en effectuant un appel au service de pluralisation.
+Il est important de noter que lorsque vous appelez ToTable EF, vous obtiendrez la chaîne que vous fournissez comme nom de table exact, sans aucune des deux plurielations qu’il ferait normalement lors de la détermination des noms de tables. C’est la raison pour laquelle le nom de la table de notre convention est une \_ catégorie de produit plutôt que des catégories de produits \_ . Nous pouvons résoudre cela dans notre convention en effectuant un appel au service de pluralisation.
 
-Dans le code suivant, nous allons utiliser la fonctionnalité de [résolution des dépendances](~/ef6/fundamentals/configuring/dependency-resolution.md) ajoutée dans EF6 pour récupérer le service de pluralisation que EF aurait utilisé et pluriellement le nom de la table.
+Dans le code suivant, nous allons utiliser la fonctionnalité de [résolution des dépendances](xref:ef6/fundamentals/configuring/dependency-resolution) ajoutée dans EF6 pour récupérer le service de pluralisation que EF aurait utilisé et pluriellement le nom de la table.
 
 ``` csharp
     private string GetTableName(Type type)
