@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 6ff98d005c0a868d420509571378756c56edc54a
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: f65c07c79daf38e733c76f328843c90466c657f5
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238123"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619335"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -75,7 +75,7 @@ Pour configurer un autre appel de PK `HasKey` :
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mappage de types détenus avec le fractionnement de table
 
-Lorsque vous utilisez des bases de données relationnelles, par défaut, les types appartenant à la référence sont mappés à la même table que le propriétaire. Cela nécessite le fractionnement de la table en deux : certaines colonnes seront utilisées pour stocker les données du propriétaire, et certaines colonnes seront utilisées pour stocker les données de l’entité détenue. Il s’agit d’une fonctionnalité courante connue sous le nom de [fractionnement de table](table-splitting.md).
+Lorsque vous utilisez des bases de données relationnelles, par défaut, les types appartenant à la référence sont mappés à la même table que le propriétaire. Cela nécessite le fractionnement de la table en deux : certaines colonnes seront utilisées pour stocker les données du propriétaire, et certaines colonnes seront utilisées pour stocker les données de l’entité détenue. Il s’agit d’une fonctionnalité courante connue sous le nom de [fractionnement de table](xref:core/modeling/table-splitting).
 
 Par défaut, EF Core nommera les colonnes de base de données pour les propriétés du type d’entité détenu, en suivant le modèle _Navigation_OwnedEntityProperty_. Par conséquent, les `StreetAddress` Propriétés s’affichent dans la table Orders avec les noms « ShippingAddress_Street » et « ShippingAddress_City ».
 
@@ -122,7 +122,7 @@ Notez l' `WithOwner` appel utilisé pour définir la propriété de navigation q
 
 Il est également possible d’obtenir ce résultat à l’aide `OwnedAttribute` de sur `OrderDetails` et `StreetAddress` .
 
-Notez également l' `Navigation` appel. Dans EFCore 5,0, les propriétés de navigation vers les types détenus peuvent être configurées de manière plus approfondie [comme pour les propriétés de navigation non détenues](relationships.md#configuring-navigation-properties).
+Notez également l' `Navigation` appel. Dans EFCore 5,0, les propriétés de navigation vers les types détenus peuvent être configurées de manière plus approfondie [comme pour les propriétés de navigation non détenues](xref:core/modeling/relationships#configuring-navigation-properties).
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Stockage des types détenus dans des tables distinctes
 
@@ -145,7 +145,7 @@ Certaines de ces limitations sont essentielles à la façon dont les types d’e
 ### <a name="by-design-restrictions"></a>Restrictions par conception
 
 - Vous ne pouvez pas créer un `DbSet<T>` pour un type détenu
-- Vous ne pouvez pas appeler `Entity<T>()` avec un type détenu sur`ModelBuilder`
+- Vous ne pouvez pas appeler `Entity<T>()` avec un type détenu sur `ModelBuilder`
 
 ### <a name="current-shortcomings"></a>Lacunes actuelles
 

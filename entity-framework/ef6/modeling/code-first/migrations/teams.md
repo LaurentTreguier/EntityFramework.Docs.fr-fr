@@ -1,18 +1,20 @@
 ---
 title: Migrations Code First dans les environnements d’équipe-EF6
+description: Migrations Code First dans les environnements d’équipe dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 4c2d9a95-de6f-4e97-9738-c1f8043eff69
-ms.openlocfilehash: 7ab66a8ec29b60bb2e0102fbca5745d352b07325
-ms.sourcegitcommit: ebfd3382fc583bc90f0da58e63d6e3382b30aa22
+uid: ef6/modeling/code-first/migrations/teams
+ms.openlocfilehash: ec382ecb0b7c99e57447ee50119fc3699fe1f324
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85370407"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617041"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Migrations Code First dans les environnements d’équipe
 > [!NOTE]
-> Cet article suppose que vous savez utiliser Migrations Code First dans les scénarios de base. Si ce n’est pas le cas, vous devez lire [migrations code First](~/ef6/modeling/code-first/migrations/index.md) avant de continuer.
+> Cet article suppose que vous savez utiliser Migrations Code First dans les scénarios de base. Si ce n’est pas le cas, vous devez lire [migrations code First](xref:ef6/modeling/code-first/migrations/index) avant de continuer.
 
 ## <a name="grab-a-coffee-you-need-to-read-this-whole-article"></a>Prenez un café, vous devez lire cet article entier
 
@@ -107,11 +109,11 @@ Developer \# 1 et Developer \# 2 apporte désormais certaines modifications au m
 
 C’est un jour de chance pour le développeur \# 1, car il s’agit d’envoyer les modifications en premier. Étant donné que personne d’autre n’a archivé depuis qu’il a synchronisé son référentiel, il peut simplement envoyer les modifications sans effectuer de fusion.
 
-![Envoyer](~/ef6/media/submit.png)
+![Envoi de modifications](~/ef6/media/submit.png)
 
 Maintenant, il est temps pour le développeur \# 2 de l’envoyer. Ils ne sont pas si heureux. Étant donné qu’un autre utilisateur a soumis des modifications depuis qu’il a été synchronisé, il devra extraire les modifications et les fusionner. Le système de contrôle de code source sera probablement en mesure de fusionner automatiquement les modifications au niveau du code, car elles sont très simples. L’état du \# référentiel local du développeur 2 après la synchronisation est illustré dans le graphique suivant. 
 
-![Extraction](~/ef6/media/pull.png)
+![Extraire à partir du contrôle de code source](~/ef6/media/pull.png)
 
 À ce niveau, Developer \# 2 peut exécuter **Update-Database** , qui détectera la nouvelle migration **AddRating** (qui n’a pas été appliquée à la \# base de données de Developer 2) et l’appliquera. À présent, la colonne **Rating** est ajoutée à la table **blogs** et la base de données est synchronisée avec le modèle.
 

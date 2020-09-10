@@ -1,14 +1,16 @@
 ---
 title: Code First des procédures stockées INSERT, Update et Delete-EF6
+description: Code First des procédures stockées INSERT, Update et Delete dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 9a7ae7f9-4072-4843-877d-506dd7eef576
-ms.openlocfilehash: bfc56671814aec1965ac054ff901297e5cdbbecb
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/cud-stored-procedures
+ms.openlocfilehash: 4db54d7199baa408017159e25ce79a9d70707c59
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419086"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618118"
 ---
 # <a name="code-first-insert-update-and-delete-stored-procedures"></a>Code First des procédures stockées INSERT, Update et Delete
 > [!NOTE]
@@ -28,7 +30,7 @@ modelBuilder
 
 Dans ce cas, Code First utilise des conventions pour générer la forme attendue des procédures stockées dans la base de données.  
 
-- Trois procédures stockées nommées **\<type_name\>_INSERT**, **\<** type_name\>_UPDATE et **\<** type_name\>_Delete (par exemple, Blog_Insert, Blog_Update et Blog_Delete).  
+- Trois procédures stockées nommées ** \<type_name\> _INSERT**, ** \<type_name\> _UPDATE** et ** \<type_name\> _Delete** (par exemple, Blog_Insert, Blog_Update et Blog_Delete).  
 - Les noms de paramètres correspondent aux noms de propriété.  
   > [!NOTE]
   > Si vous utilisez HasColumnName () ou l’attribut de colonne pour renommer la colonne pour une propriété donnée, ce nom est utilisé pour les paramètres au lieu du nom de la propriété.  
@@ -162,7 +164,7 @@ END
 
 ## <a name="relationships-without-a-foreign-key-in-the-class-independent-associations"></a>Relations sans clé étrangère dans la classe (associations indépendantes)  
 
-Lorsqu’une propriété de clé étrangère est incluse dans la définition de classe, le paramètre correspondant peut être renommé de la même façon que n’importe quelle autre propriété. Lorsqu’il existe une relation sans propriété de clé étrangère dans la classe, le nom de paramètre par défaut est **\<navigation_property_name\>_\<primary_key_name** .\>  
+Lorsqu’une propriété de clé étrangère est incluse dans la définition de classe, le paramètre correspondant peut être renommé de la même façon que n’importe quelle autre propriété. Lorsqu’il existe une relation sans propriété de clé étrangère dans la classe, le nom de paramètre par défaut est ** \<navigation_property_name\> _ \<primary_key_name\> **.  
 
 Par exemple, les définitions de classe suivantes aboutissent à un paramètre Blog_BlogId attendu dans les procédures stockées pour insérer et mettre à jour des publications.  
 
@@ -214,7 +216,7 @@ Les procédures stockées de mise à jour et de suppression peuvent également a
 
 - Si l’entité contient des jetons d’accès concurrentiel, la procédure stockée peut éventuellement avoir un paramètre de sortie qui retourne le nombre de lignes mises à jour/supprimées (lignes affectées). Ce paramètre doit être configuré à l’aide de la méthode RowsAffectedParameter.  
 Par défaut, EF utilise la valeur de retour de ExecuteNonQuery pour déterminer le nombre de lignes affectées. La spécification d’un paramètre de sortie de lignes affectées est utile si vous exécutez une logique dans votre procédure stockée, qui aurait pour résultat que la valeur de retour de ExecuteNonQuery est incorrecte (de la perspective d’EF) à la fin de l’exécution.  
-- Pour chaque jeton d’accès concurrentiel, il y aura un paramètre nommé **\<property_name\>_original** (par exemple, Timestamp_Original). La valeur d’origine de cette propriété sera passée, à savoir la valeur lors de la requête à partir de la base de données.  
+- Pour chaque jeton d’accès concurrentiel, il y aura un paramètre nommé ** \<property_name\> _original** (par exemple, Timestamp_Original). La valeur d’origine de cette propriété sera passée, à savoir la valeur lors de la requête à partir de la base de données.  
     - Les jetons d’accès concurrentiel calculés par la base de données, tels que les horodateurs, n’ont qu’un paramètre de valeur d’origine.  
     - Les propriétés non calculées définies comme jetons d’accès concurrentiel comporteront également un paramètre pour la nouvelle valeur dans la procédure de mise à jour. Cela utilise les conventions d’affectation des noms déjà évoquées pour les nouvelles valeurs. Un exemple de ce type de jeton consisterait à utiliser l’URL d’un blog comme un jeton d’accès concurrentiel, la nouvelle valeur est nécessaire car elle peut être mise à jour vers une nouvelle valeur par votre code (contrairement à un jeton d’horodatage qui est uniquement mis à jour par la base de données).  
 
@@ -330,8 +332,8 @@ modelBuilder
 
 Si aucune autre configuration n’est fournie, la forme de procédure stockée suivante est utilisée par défaut.  
 
-- Deux procédures stockées nommées **\<type_one\>\<type_two\>** _Insert et **\<** type_one\>\<type_two\>_Delete (par exemple, PostTag_Insert et PostTag_Delete).  
-- Les paramètres sont les valeurs de clé pour chaque type. Nom de chaque paramètre **\<type_name\>_\<** property_name\>(par exemple, Post_PostId et Tag_TagId).
+- Deux procédures stockées nommées ** \<type_one\> \<type_two\> _INSERT** et ** \<type_one\> \<type_two\> _Delete** (par exemple, PostTag_Insert et PostTag_Delete).  
+- Les paramètres sont les valeurs de clé pour chaque type. Nom de chaque paramètre ** \<type_name\> \<property_name\> ** , par exemple, Post_PostId et Tag_TagId).
 
 Voici des exemples de procédures stockées INSERT et Update.  
 

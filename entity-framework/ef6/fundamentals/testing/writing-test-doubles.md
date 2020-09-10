@@ -1,14 +1,16 @@
 ---
 title: Test avec vos propres doubles de test-EF6
+description: Test avec vos propres doubles de test dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 16a8b7c0-2d23-47f4-9cc0-e2eb2e738ca3
-ms.openlocfilehash: 3d8933fb5e17f8c01f3971495a1fcdb5b8cfab57
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/testing/writing-test-doubles
+ms.openlocfilehash: 5c8e50247c0e6ed4081e2403ba60e0738051312b
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416328"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618239"
 ---
 # <a name="testing-with-your-own-test-doubles"></a>Test avec vos propres doubles de test
 > [!NOTE]
@@ -23,7 +25,7 @@ Il existe deux approches différentes qui peuvent être utilisées pour créer u
 - **Créer vos propres doubles de test** : cette approche implique l’écriture de votre propre implémentation en mémoire de votre contexte et DbSets. Cela vous donne un grand contrôle sur la façon dont les classes se comportent, mais peut impliquer l’écriture et la possession d’une quantité raisonnable de code.  
 - **Utilisez une infrastructure fictive pour créer des doubles de test** : à l’aide d’une infrastructure fictive (telle que MOQ), vous pouvez avoir les implémentations en mémoire de votre contexte et les jeux créés dynamiquement au moment de l’exécution.  
 
-Cet article traite de la création de votre propre double de test. Pour plus d’informations sur l’utilisation d’une infrastructure fictive, consultez [test avec un Framework fictif](mocking.md).  
+Cet article traite de la création de votre propre double de test. Pour plus d’informations sur l’utilisation d’une infrastructure fictive, consultez [test avec un Framework fictif](xref:ef6/fundamentals/testing/mocking).  
 
 ## <a name="testing-with-pre-ef6-versions"></a>Test avec les versions antérieures à EF6  
 
@@ -102,7 +104,7 @@ namespace TestingDemo
 
 Notez que notre contexte implémente l’interface IBloggingContext.  
 
-Si vous utilisez Code First vous pouvez modifier votre contexte directement pour implémenter l’interface. Si vous utilisez le concepteur EF, vous devez modifier le modèle T4 qui génère votre contexte. Ouvrez le\>de model_name \<. Fichier Context.tt imbriqué sous votre fichier edmx, recherchez le fragment de code suivant et ajoutez-le dans l’interface, comme indiqué.  
+Si vous utilisez Code First vous pouvez modifier votre contexte directement pour implémenter l’interface. Si vous utilisez le concepteur EF, vous devez modifier le modèle T4 qui génère votre contexte. Ouvrez le \<model_name\> . Fichier Context.tt imbriqué sous votre fichier edmx, recherchez le fragment de code suivant et ajoutez-le dans l’interface, comme indiqué.  
 
 ``` csharp  
 <#=Accessibility.ForType(container)#> partial class <#=code.Escape(container)#> : DbContext, IBloggingContext

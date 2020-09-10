@@ -1,19 +1,21 @@
 ---
 title: API Fluent-configuration et mappage des propriétés et des types-EF6
+description: API Fluent-configuration et mappage des propriétés et des types dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 648ed274-c501-4630-88e0-d728ab5c4057
-ms.openlocfilehash: 7371cc99142ccf8fc6bea237d7d58d1e67fcecec
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/types-and-properties
+ms.openlocfilehash: d49da416b2df5828fce5618cc196e22dfbc2bd34
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419065"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618058"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>API Fluent-configuration et mappage des propriétés et des types
 Lorsque vous utilisez Entity Framework Code First le comportement par défaut consiste à mapper vos classes POCO à des tables à l’aide d’un ensemble de conventions intégrés à EF. Toutefois, il arrive parfois que vous ne souhaitiez pas ou ne souhaitiez pas suivre ces conventions et que vous ayez besoin de mapper des entités à d’autres éléments que les conventions dictées.  
 
-Il existe deux façons de configurer EF pour utiliser autre chose que les conventions, à savoir les [Annotations](~/ef6/modeling/code-first/data-annotations.md) ou l’API Fluent EFS. Les annotations couvrent uniquement un sous-ensemble de la fonctionnalité de l’API Fluent. il existe donc des scénarios de mappage qui ne peuvent pas être obtenus à l’aide d’annotations. Cet article est conçu pour illustrer l’utilisation de l’API Fluent pour configurer des propriétés.  
+Il existe deux façons de configurer EF pour utiliser autre chose que les conventions, à savoir les [Annotations](xref:ef6/modeling/code-first/data-annotations) ou l’API Fluent EFS. Les annotations couvrent uniquement un sous-ensemble de la fonctionnalité de l’API Fluent. il existe donc des scénarios de mappage qui ne peuvent pas être obtenus à l’aide d’annotations. Cet article est conçu pour illustrer l’utilisation de l’API Fluent pour configurer des propriétés.  
 
 L’API Fluent code First est généralement accessible en remplaçant la méthode [OnModelCreating](https://msdn.microsoft.com/library/system.data.entity.dbcontext.onmodelcreating.aspx) sur votre [DbContext](https://msdn.microsoft.com/library/system.data.entity.dbcontext.aspx)dérivé. Les exemples suivants sont conçus pour montrer comment effectuer diverses tâches avec l’API Fluent et vous permettent de copier le code et de le personnaliser pour l’adapter à votre modèle. Si vous souhaitez voir le modèle avec lequel il peut être utilisé, il est fourni à la fin de cet article.  
 
@@ -29,7 +31,7 @@ modelBuilder.HasDefaultSchema("sales");
 
 ### <a name="custom-conventions-ef6-onwards"></a>Conventions personnalisées (EF6s)  
 
-À partir de EF6, vous pouvez créer vos propres conventions pour compléter celles incluses dans Code First. Pour plus d’informations, consultez [conventions de code First personnalisées](~/ef6/modeling/code-first/conventions/custom.md).  
+À partir de EF6, vous pouvez créer vos propres conventions pour compléter celles incluses dans Code First. Pour plus d’informations, consultez [conventions de code First personnalisées](xref:ef6/modeling/code-first/conventions/custom).  
 
 ## <a name="property-mapping"></a>Mappage de propriétés  
 
@@ -100,7 +102,7 @@ modelBuilder
     .HasColumnAnnotation("Index", new IndexAnnotation(new IndexAttribute()));
 ```  
 
-Pour obtenir la liste complète des paramètres disponibles dans **IndexAttribute**, consultez la section *index* de [Code First annotations de données](~/ef6/modeling/code-first/data-annotations.md). Cela comprend la personnalisation du nom d’index, la création d’index uniques et la création d’index à plusieurs colonnes.  
+Pour obtenir la liste complète des paramètres disponibles dans **IndexAttribute**, consultez la section *index* de [Code First annotations de données](xref:ef6/modeling/code-first/data-annotations). Cela comprend la personnalisation du nom d’index, la création d’index uniques et la création d’index à plusieurs colonnes.  
 
 Vous pouvez spécifier plusieurs annotations d’index sur une seule propriété en passant un tableau de **IndexAttribute** au constructeur de **IndexAnnotation**.  
 
@@ -321,7 +323,7 @@ modelBuilder.Entity<OfficeAssignment>().ToTable("Instructor");
 
 ### <a name="mapping-an-entity-type-to-insertupdatedelete-stored-procedures-ef6-onwards"></a>Mappage d’un type d’entité pour insérer/mettre à jour/supprimer des procédures stockées (EF6s)  
 
-À partir de EF6, vous pouvez mapper une entité pour utiliser des procédures stockées pour Insert Update et DELETE. Pour plus d’informations, consultez [Code First insertion/mise à jour/suppression de procédures stockées](~/ef6/modeling/code-first/fluent/cud-stored-procedures.md).  
+À partir de EF6, vous pouvez mapper une entité pour utiliser des procédures stockées pour Insert Update et DELETE. Pour plus d’informations, consultez [Code First insertion/mise à jour/suppression de procédures stockées](xref:ef6/modeling/code-first/fluent/cud-stored-procedures).  
 
 ## <a name="model-used-in-samples"></a>Modèle utilisé dans les exemples  
 

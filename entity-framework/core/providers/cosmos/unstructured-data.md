@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/unstructured-data
-ms.openlocfilehash: 69f979d46174ff56310b334f28438ac271f45155
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 9f96af00e8fcb012c33fc7528787560ea3a5e481
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417191"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619050"
 ---
 # <a name="working-with-unstructured-data-in-ef-core-azure-cosmos-db-provider"></a>Utilisation de données non structurées dans EF Core fournisseur Azure Cosmos DB
 
@@ -18,7 +18,7 @@ EF Core a été conçu pour faciliter l’utilisation des données qui suivent u
 
 ## <a name="accessing-the-raw-json"></a>Accès au JSON brut
 
-Il est possible d’accéder aux propriétés qui ne sont pas suivies par EF Core via une propriété spéciale dans l' [État Shadow](../../modeling/shadow-properties.md) nommé `"__jObject"` qui contient un `JObject` représentant les données reçues du magasin et les données qui seront stockées :
+Il est possible d’accéder aux propriétés qui ne sont pas suivies par EF Core via une propriété spéciale dans l' [État Shadow,](xref:core/modeling/shadow-properties) nommée `"__jObject"` , qui contient un `JObject` représentant les données reçues du magasin et les données qui seront stockées :
 
 [!code-csharp[Unmapped](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?highlight=23,24&name=Unmapped)]
 
@@ -42,24 +42,24 @@ Il est possible d’accéder aux propriétés qui ne sont pas suivies par EF Cor
 ```
 
 > [!WARNING]
-> La propriété `"__jObject"` fait partie de l’infrastructure EF Core et ne doit être utilisée qu’en dernier recours, car elle est susceptible d’avoir un comportement différent dans les futures versions.
+> La `"__jObject"` propriété fait partie de l’infrastructure EF Core et ne doit être utilisée qu’en dernier recours, car elle est susceptible d’avoir un comportement différent dans les futures versions.
 
 > [!NOTE]
-> Les modifications apportées à l’entité remplacent les valeurs stockées dans `"__jObject"` lors de la `SaveChanges`.
+> Les modifications apportées à l’entité remplacent les valeurs stockées dans `"__jObject"` pendant `SaveChanges` .
 
 ## <a name="using-cosmosclient"></a>Utilisation de CosmosClient
 
-Pour découpler complètement de EF Core récupérez l’objet [CosmosClient](/dotnet/api/Microsoft.Azure.Cosmos.CosmosClient) qui fait [partie du kit de développement logiciel (SDK) Azure Cosmos DB](/azure/cosmos-db/sql-api-get-started) à partir de `DbContext`:
+Pour découpler complètement de EF Core récupérez l’objet [CosmosClient](/dotnet/api/Microsoft.Azure.Cosmos.CosmosClient) qui fait [partie du kit de développement logiciel (SDK) Azure Cosmos DB](/azure/cosmos-db/sql-api-get-started) à partir de `DbContext` :
 
 [!code-csharp[CosmosClient](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?highlight=3&name=CosmosClient)]
 
 ## <a name="missing-property-values"></a>Valeurs de propriété manquantes
 
-Dans l’exemple précédent, nous avons supprimé la propriété `"TrackingNumber"` de la commande. En raison du fonctionnement de l’indexation dans Cosmos DB, les requêtes qui font référence à la propriété manquante ailleurs que dans la projection peuvent retourner des résultats inattendus. Par exemple :
+Dans l’exemple précédent, nous avons supprimé la `"TrackingNumber"` propriété de la commande. En raison du fonctionnement de l’indexation dans Cosmos DB, les requêtes qui font référence à la propriété manquante ailleurs que dans la projection peuvent retourner des résultats inattendus. Par exemple :
 
 [!code-csharp[MissingProperties](../../../../samples/core/Cosmos/UnstructuredData/Sample.cs?name=MissingProperties)]
 
 En fait, la requête triée ne retourne aucun résultat. Cela signifie qu’il faut veiller à toujours remplir les propriétés mappées par EF Core quand vous travaillez directement avec le magasin.
 
 > [!NOTE]
-> Ce comportement peut changer dans les versions ultérieures de Cosmos. Par exemple, si la stratégie d’indexation définit l’index composite {ID/ ? ASC, TrackingNumber/ ? ASC)}, une requête qui a’ORDER BY c.Id ASC, c. discriminant __ASC’retourne__ des éléments pour lesquels la propriété `"TrackingNumber"` est manquante.
+> Ce comportement peut changer dans les versions ultérieures de Cosmos. Par exemple, si la stratégie d’indexation définit l’index composite {ID/ ? ASC, TrackingNumber/ ? ASC)}, une requête qui a’ORDER BY c.Id ASC, c. discriminant __ASC’retourne__ des éléments pour lesquels la propriété est manquante `"TrackingNumber"` .

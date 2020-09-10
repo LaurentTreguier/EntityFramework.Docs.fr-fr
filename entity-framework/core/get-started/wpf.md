@@ -1,15 +1,16 @@
 ---
 title: Prise en main de WPF-EF Core
+description: Didacticiel de mise en route pour l’utilisation de WPF avec Entity Framework Core
 author: jeremylikness
 ms.author: jeliknes
 ms.date: 07/24/2020
 uid: core/get-started/wpf
-ms.openlocfilehash: 958fc579a72a9bf3c97c5551d55777df6c32293f
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 1198da5c9564663ca26392b33462c727275a432d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87535634"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619302"
 ---
 # <a name="getting-started-with-wpf"></a>Bien démarrer avec WPF
 
@@ -81,14 +82,14 @@ Ajoutez une nouvelle `ProductContext.cs` classe au projet avec la définition su
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/ProductContext.cs)]
 
 * `DbSet`Informe EF Core les entités C# qui doivent être mappées à la base de données.
-* Il existe plusieurs façons de configurer le EF Core `DbContext` . Vous pouvez en savoir plus à ce sujet dans : [configuration d’un DbContext](/ef/core/miscellaneous/configuring-dbcontext).
+* Il existe plusieurs façons de configurer le EF Core `DbContext` . Vous pouvez en savoir plus à ce sujet dans : [configuration d’un DbContext](xref:core/miscellaneous/configuring-dbcontext).
 * Cet exemple utilise le `OnConfiguring` remplacement pour spécifier un fichier de données SQLite.
 * L' `UseLazyLoadingProxies` appel indique à EF Core d’implémenter le chargement différé, de sorte que les entités enfants sont chargées automatiquement lorsqu’elles sont accessibles à partir du parent.
 
 Appuyez sur **Ctrl + Maj + B** ou accédez à **générer générer la &gt; solution** pour compiler le projet.
 
 > [!TIP]
-> Découvrez les différences qui consistaient à maintenir la synchronisation de votre base de données et de vos modèles de EF Core : la [gestion des schémas de base de données](/ef/core/managing-schemas).
+> Découvrez les différences qui consistaient à maintenir la synchronisation de votre base de données et de vos modèles de EF Core : la [gestion des schémas de base de données](xref:core/managing-schemas/index).
 
 ## <a name="lazy-loading"></a>Chargement différé
 
@@ -149,7 +150,7 @@ Le code déclare une instance de longue durée de `ProductContext` . L' `Product
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/MainWindow.xaml.cs)]
 
 > [!NOTE]
-> Le code utilise un appel à `EnsureCreated()` pour générer la base de données lors de la première exécution. Cela est acceptable pour les démonstrations, mais dans les applications de production, vous devez examiner les [migrations](/ef/core/managing-schemas/migrations/) pour gérer votre schéma. Le code s’exécute également de façon synchrone, car il utilise une base de données SQLite locale. Pour les scénarios de production qui impliquent généralement un serveur distant, envisagez d’utiliser les versions asynchrones des `Load` `SaveChanges` méthodes et.
+> Le code utilise un appel à `EnsureCreated()` pour générer la base de données lors de la première exécution. Cela est acceptable pour les démonstrations, mais dans les applications de production, vous devez examiner les [migrations](xref:core/managing-schemas/migrations/index) pour gérer votre schéma. Le code s’exécute également de façon synchrone, car il utilise une base de données SQLite locale. Pour les scénarios de production qui impliquent généralement un serveur distant, envisagez d’utiliser les versions asynchrones des `Load` `SaveChanges` méthodes et.
 
 ## <a name="test-the-wpf-application"></a>Tester l’application WPF
 
@@ -159,18 +160,18 @@ Compilez et exécutez l’application en appuyant sur **F5** ou en choisissant *
 
 ## <a name="property-change-notification"></a>Notification de modification de propriété
 
-Cet exemple s’appuie sur quatre étapes pour synchroniser les entités avec l’interface utilisateur. 
+Cet exemple s’appuie sur quatre étapes pour synchroniser les entités avec l’interface utilisateur.
 
 1. L’appel initial `_context.Categories.Load()` charge les données de catégories.
 1. Les proxys de chargement différé chargent les données des produits dépendants.
 1. Le suivi des modifications intégré de EF Core apporte les modifications nécessaires aux entités, y compris les insertions et les suppressions, lorsque `_context.SaveChanges()` est appelé.
 1. Appelle pour `DataGridView.Items.Refresh()` forcer un rechargement avec les ID nouvellement générés.
 
-Cela fonctionne pour notre exemple de prise en main, mais vous pouvez avoir besoin de code supplémentaire pour d’autres scénarios. Les contrôles WPF affichent l’interface utilisateur en lisant les champs et les propriétés sur vos entités. Lorsque vous modifiez une valeur dans l’interface utilisateur (IU), cette valeur est transmise à votre entité. Lorsque vous modifiez la valeur d’une propriété directement sur votre entité, telle que son chargement à partir de la base de données, WPF ne reflète pas immédiatement les modifications apportées à l’interface utilisateur. Le moteur de rendu doit être averti des modifications. Le projet a fait cela en appelant manuellement `Refresh()` . Une façon simple d’automatiser cette notification consiste à implémenter l’interface [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged) . Les composants WPF détectent automatiquement l’interface et s’inscrivent pour les événements de modification. L’entité est chargée de déclencher ces événements. 
+Cela fonctionne pour notre exemple de prise en main, mais vous pouvez avoir besoin de code supplémentaire pour d’autres scénarios. Les contrôles WPF affichent l’interface utilisateur en lisant les champs et les propriétés sur vos entités. Lorsque vous modifiez une valeur dans l’interface utilisateur (IU), cette valeur est transmise à votre entité. Lorsque vous modifiez la valeur d’une propriété directement sur votre entité, telle que son chargement à partir de la base de données, WPF ne reflète pas immédiatement les modifications apportées à l’interface utilisateur. Le moteur de rendu doit être averti des modifications. Le projet a fait cela en appelant manuellement `Refresh()` . Une façon simple d’automatiser cette notification consiste à implémenter l’interface [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged) . Les composants WPF détectent automatiquement l’interface et s’inscrivent pour les événements de modification. L’entité est chargée de déclencher ces événements.
 
 > [!TIP]
 > Pour en savoir plus sur la gestion des modifications, consultez [comment implémenter la notification de modification de propriété](/dotnet/framework/wpf/data/how-to-implement-property-change-notification).
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur [la configuration d’un DbContext](/ef/core/miscellaneous/configuring-dbcontext).
+En savoir plus sur [la configuration d’un DbContext](xref:core/miscellaneous/configuring-dbcontext).

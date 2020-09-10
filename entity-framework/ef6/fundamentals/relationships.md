@@ -1,14 +1,16 @@
 ---
 title: Relations, propriétés de navigation et clés étrangères-EF6
+description: Relations, propriétés de navigation et clés étrangères dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
-ms.openlocfilehash: 5807f7aeeb68328821cf45ac4f8c28efa17ed399
-ms.sourcegitcommit: 92d54fe3702e0c92e198334da22bacb42e9842b1
+uid: ef6/fundamentals/relationships
+ms.openlocfilehash: 63349d9a81065ea4e15a5f97ef5298cb3dc67339
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84664193"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618397"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, propriétés de navigation et clés étrangères
 
@@ -67,8 +69,8 @@ public class Department
 
 Le reste de cette page explique comment accéder aux données et les manipuler à l’aide de relations. Pour plus d’informations sur la configuration des relations dans votre modèle, consultez les pages suivantes.
 
--   Pour configurer les relations dans Code First, consultez [Annotations de données](~/ef6/modeling/code-first/data-annotations.md) et [API Fluent – relations](~/ef6/modeling/code-first/fluent/relationships.md).
--   Pour configurer les relations à l’aide de la Entity Framework Designer, consultez [relations avec le concepteur EF](~/ef6/modeling/designer/relationships.md).
+-   Pour configurer les relations dans Code First, consultez [Annotations de données](xref:ef6/modeling/code-first/data-annotations) et [API Fluent – relations](xref:ef6/modeling/code-first/fluent/relationships).
+-   Pour configurer les relations à l’aide de la Entity Framework Designer, consultez [relations avec le concepteur EF](xref:ef6/modeling/designer/relationships).
 
 ## <a name="creating-and-modifying-relationships"></a>Création et modification de relations
 
@@ -129,7 +131,7 @@ Dans l’exemple suivant, il existe une relation plusieurs-à-plusieurs entre le
 
 ## <a name="synchronizing-the-changes-between-the-foreign-keys-and-navigation-properties"></a>Synchronisation des modifications entre les clés étrangères et les propriétés de navigation
 
-Lorsque vous modifiez la relation des objets attachés au contexte à l’aide de l’une des méthodes décrites ci-dessus, Entity Framework doit conserver les clés étrangères, les références et les collections synchronisées. Entity Framework gère automatiquement cette synchronisation (également appelée « correction des relations ») pour les entités POCO avec proxys. Pour plus d’informations, consultez [utilisation des proxies](~/ef6/fundamentals/proxies.md).
+Lorsque vous modifiez la relation des objets attachés au contexte à l’aide de l’une des méthodes décrites ci-dessus, Entity Framework doit conserver les clés étrangères, les références et les collections synchronisées. Entity Framework gère automatiquement cette synchronisation (également appelée « correction des relations ») pour les entités POCO avec proxys. Pour plus d’informations, consultez [utilisation des proxies](xref:ef6/fundamentals/proxies).
 
 Si vous utilisez des entités POCO sans proxys, vous devez vous assurer que la méthode **DetectChanges** est appelée pour synchroniser les objets connexes dans le contexte. Notez que les API suivantes déclenchent automatiquement un appel **DetectChanges** .
 
@@ -144,11 +146,11 @@ Si vous utilisez des entités POCO sans proxys, vous devez vous assurer que la m
 -   `DbContext.GetValidationErrors`
 -   `DbContext.Entry`
 -   `DbChangeTracker.Entries`
--   Exécution d’une requête LINQ sur un`DbSet`
+-   Exécution d’une requête LINQ sur un `DbSet`
 
 ## <a name="loading-related-objects"></a>Chargement d’objets connexes
 
-Dans Entity Framework vous utilisez couramment des propriétés de navigation pour charger des entités associées à l’entité retournée par l’Association définie. Pour plus d’informations, consultez [chargement d’objets connexes](~/ef6/querying/related-data.md).
+Dans Entity Framework vous utilisez couramment des propriétés de navigation pour charger des entités associées à l’entité retournée par l’Association définie. Pour plus d’informations, consultez [chargement d’objets connexes](xref:ef6/querying/related-data).
 
 > [!NOTE]
 > Dans une association de clé étrangère, lorsque vous chargez une terminaison connexe d'un objet dépendant, l'objet connexe est chargé en fonction de la valeur de clé étrangère du dépendant actuellement en mémoire :
@@ -173,7 +175,7 @@ Dans les associations de clé étrangère et indépendantes, les contrôles d’
 
 Nous vous recommandons de toujours utiliser l’Association de clé étrangère lorsque vous travaillez avec des entités qui participent à la vérification et à la résolution de l’accès concurrentiel.
 
-Pour plus d’informations, consultez [gestion des conflits d’accès concurrentiel](~/ef6/saving/concurrency.md).
+Pour plus d’informations, consultez [gestion des conflits d’accès concurrentiel](xref:ef6/saving/concurrency).
 
 ## <a name="working-with-overlapping-keys"></a>Utilisation des touches qui se chevauchent
 

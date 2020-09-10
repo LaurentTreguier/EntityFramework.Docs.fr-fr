@@ -1,16 +1,17 @@
 ---
 title: Amorçage de données-EF Core
+description: Utilisation de l’amorçage des données pour remplir une base de données avec un jeu de données initial à l’aide de Entity Framework Core
 author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/02/2018
 ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 5c056c600f696ad1443ddb7b8c95c4b0ead06d21
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: cdf189a4d2ec00f2bb094045541a98d1a66ffefc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417225"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619379"
 ---
 # <a name="data-seeding"></a>Amorçage des données
 
@@ -32,7 +33,7 @@ Contrairement à EF6, dans EF Core, les données d’amorçage peuvent être ass
 > [!NOTE]
 > Les migrations considèrent uniquement les modifications de modèle lors de la détermination de l’opération à effectuer pour que les données de départ soient à l’état souhaité. Par conséquent, toute modification apportée aux données effectuée en dehors des migrations peut être perdue ou provoquer une erreur.
 
-Par exemple, cela permet de configurer les données de départ pour une `Blog` dans `OnModelCreating`:
+Par exemple, cela permet de configurer les données de départ pour un `Blog` dans `OnModelCreating` :
 
 [!code-csharp[BlogSeed](../../../samples/core/Modeling/DataSeeding/DataSeedingContext.cs?name=BlogSeed)]
 
@@ -76,7 +77,7 @@ Si votre scénario comprend l’un des éléments suivants, il est recommandé d
 
 ## <a name="manual-migration-customization"></a>Personnalisation manuelle de la migration
 
-Lors de l’ajout d’une migration, les modifications apportées aux données spécifiées avec `HasData` sont transformées en appels à `InsertData()`, `UpdateData()`et `DeleteData()`. L’une des façons de contourner certaines des limitations de `HasData` consiste à ajouter manuellement ces appels ou [opérations personnalisées](xref:core/managing-schemas/migrations/operations) à la migration.
+Quand une migration est ajoutée, les modifications apportées aux données spécifiées avec `HasData` sont transformées en appels à `InsertData()` , `UpdateData()` et `DeleteData()` . L’une des façons de contourner certaines des limitations de `HasData` consiste à ajouter manuellement ces appels ou des [opérations personnalisées](xref:core/managing-schemas/migrations/operations) à la migration.
 
 [!code-csharp[CustomInsert](../../../samples/core/Modeling/DataSeeding/Migrations/20181102235626_Initial.cs?name=CustomInsert)]
 

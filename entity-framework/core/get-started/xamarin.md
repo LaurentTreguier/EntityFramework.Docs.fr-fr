@@ -1,15 +1,16 @@
 ---
 title: Prise en main avec EF Core et Xamarin-EF Core
+description: Didacticiel de mise en route pour l’utilisation de Xamarin pour créer des applications mobiles avec Entity Framework Core
 author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: 14fe61e0ddd648f824bfe3c1c91a58af91b1c2d4
-ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
+ms.openlocfilehash: b4a7e2260337d74329d309e9db32fe97a2131d73
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86453038"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619293"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Prise en main avec EF Core et Xamarin
 
@@ -197,6 +198,6 @@ Dans ce guide de prise en main, vous avez appris à utiliser une application Xam
 
 Autres Entity Framework Core sujets intéressants pour les développeurs Xamarin :
 
-* [Configuration d’un`DbContext`](xref:core/miscellaneous/configuring-dbcontext)
+* [Configuration d’un `DbContext`](xref:core/miscellaneous/configuring-dbcontext)
 * Découvrir les [expressions de requête LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)
 * [Configurer votre modèle](xref:core/modeling/index) pour spécifier des éléments tels que la longueur [requise](xref:core/modeling/entity-properties#required-and-optional-properties) et la longueur [maximale](xref:core/modeling/entity-properties#maximum-length)

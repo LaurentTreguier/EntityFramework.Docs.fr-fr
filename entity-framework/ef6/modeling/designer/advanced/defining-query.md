@@ -1,21 +1,23 @@
 ---
 title: Définition de Query-EF designer-EF6
+description: Définition de la requête-concepteur EF dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e52a297e-85aa-42f6-a922-ba960f8a4b22
-ms.openlocfilehash: b1589dc12ccb50754c2e950932a2d82bc4869f6b
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/defining-query
+ms.openlocfilehash: e1962a80c3a94fb17bacf28969629ce949b117a0
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418797"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616834"
 ---
 # <a name="defining-query---ef-designer"></a>Définition de la requête-concepteur EF
-Cette procédure pas à pas montre comment ajouter une requête de définition et un type d’entité correspondant à un modèle à l’aide du concepteur EF. Une requête de définition est couramment utilisée pour fournir des fonctionnalités semblables à celles fournies par une vue de base de données, mais la vue est définie dans le modèle, et non dans la base de données. Une requête de définition vous permet d’exécuter une instruction SQL qui est spécifiée dans l’élément **DefiningQuery** d’un fichier. edmx. Pour plus d’informations, consultez **DefiningQuery** dans la [spécification SSDL](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md).
+Cette procédure pas à pas montre comment ajouter une requête de définition et un type d’entité correspondant à un modèle à l’aide du concepteur EF. Une requête de définition est couramment utilisée pour fournir des fonctionnalités semblables à celles fournies par une vue de base de données, mais la vue est définie dans le modèle, et non dans la base de données. Une requête de définition vous permet d’exécuter une instruction SQL qui est spécifiée dans l’élément **DefiningQuery**   d’un fichier. edmx. Pour plus d’informations, consultez **DefiningQuery** dans la [spécification SSDL](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec).
 
 Lorsque vous utilisez la définition de requêtes, vous devez également définir un type d’entité dans votre modèle. Le type d’entité est utilisé pour exposer les données exposées par la requête de définition. Notez que les données exposées par le biais de ce type d’entité sont en lecture seule.
 
-Les requêtes paramétrées ne peuvent pas être exécutées en tant que requêtes de définition. Toutefois, les données peuvent être mises à jour en mappant les fonctions d'insertion, de mise à jour et de suppression du type d'entité qui surface les données aux procédures stockées. Pour plus d’informations, consultez [Insert, Update et Delete with Stored Procedures](~/ef6/modeling/designer/stored-procedures/cud.md).
+Les requêtes paramétrées ne peuvent pas être exécutées en tant que requêtes de définition. Toutefois, les données peuvent être mises à jour en mappant les fonctions d'insertion, de mise à jour et de suppression du type d'entité qui surface les données aux procédures stockées. Pour plus d’informations, consultez [Insert, Update et Delete with Stored Procedures](xref:ef6/modeling/designer/stored-procedures/cud).
 
 Cette rubrique montre comment effectuer les tâches suivantes.
 
@@ -23,12 +25,12 @@ Cette rubrique montre comment effectuer les tâches suivantes.
 -   Ajouter un type d’entité au modèle
 -   Mapper la requête de définition au type d’entité
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
 - Une version récente de Visual Studio.
-- [Exemple de base de données School](~/ef6/resources/school-database.md).
+- [Exemple de base de données School](xref:ef6/resources/school-database).
 
 ## <a name="set-up-the-project"></a>Configurer le projet
 
@@ -36,7 +38,7 @@ Cette procédure pas à pas utilise Visual Studio 2012 ou une version plus réce
 
 -   Ouvrez Visual Studio.
 -   Dans le menu **Fichier** , pointez sur **Nouveau**, puis cliquez sur **Projet**.
--   Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **application console** .
+-   Dans le volet gauche, cliquez sur **Visual \# C**, puis sélectionnez le modèle **application console** .
 -   Entrez **DefiningQuerySample** comme nom du projet, puis cliquez sur **OK**.
 
  
@@ -47,12 +49,12 @@ Cette procédure pas à pas utilise Visual Studio 2012 ou une version plus réce
 -   Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet modèles.
 -   Entrez **DefiningQueryModel. edmx** comme nom de fichier, puis cliquez sur **Ajouter**.
 -   Dans la boîte de dialogue choisir le contenu du Model, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant**.
--   Cliquez sur nouvelle connexion. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, (base de données locale **)\\mssqllocaldb**), sélectionnez la méthode d’authentification, tapez **School** pour le nom de la base de données, puis cliquez sur **OK**.
+-   Cliquez sur nouvelle connexion. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, **( \\ mssqllocaldb)**, sélectionnez la méthode d’authentification, tapez **School**   comme nom de la base de données, puis cliquez sur **OK**.
     La boîte de dialogue choisir votre connexion de données est mise à jour avec votre paramètre de connexion à la base de données.
--   Dans la boîte de dialogue choisir vos objets de base de données, vérifiez le nœud **Tables** . Cette opération ajoute toutes les tables au modèle **School** .
+-   Dans la boîte de dialogue choisir vos objets de base de données, vérifiez le nœud **tables**   . Cette opération ajoute toutes les tables au modèle **School** .
 -   Cliquez sur **Terminer**.
--   Dans Explorateur de solutions, cliquez avec le bouton droit sur le fichier **DefiningQueryModel. edmx** , puis sélectionnez **Ouvrir avec...** .
--   Sélectionnez **éditeur XML (texte)** .
+-   Dans Explorateur de solutions, cliquez avec le bouton droit sur le fichier **DefiningQueryModel. edmx** , puis sélectionnez **Ouvrir avec...**.
+-   Sélectionnez **éditeur XML (texte)**.
 
     ![Éditeur XML](~/ef6/media/xmleditor.png)
 
@@ -66,10 +68,10 @@ Cette procédure pas à pas utilise Visual Studio 2012 ou une version plus réce
 
 Dans cette étape, nous allons utiliser l’éditeur XML pour ajouter une requête de définition et un type d’entité à la section SSDL du fichier. edmx. 
 
--   Ajoutez un élément **EntitySet** à la section SSDL du fichier. edmx (ligne 5 à 13). Spécifiez les éléments suivants :
-    -   Seuls les attributs **Name** et **EntityType** de l’élément **EntitySet** sont spécifiés.
-    -   Le nom qualifié complet du type d’entité est utilisé dans l’attribut **EntityType** .
-    -   L’instruction SQL à exécuter est spécifiée dans l’élément **DefiningQuery** .
+-   Ajoutez un élément **EntitySet**   à la section SSDL du fichier. edmx (ligne 5 à 13). Spécifiez les éléments suivants :
+    -   Seuls les attributs **Name**   et **EntityType**   de l’élément **EntitySet**   sont spécifiés.
+    -   Le nom qualifié complet du type d’entité est utilisé dans l’attribut **EntityType**   .
+    -   L’instruction SQL à exécuter est spécifiée dans l’élément **DefiningQuery**   .
 
 ``` xml
     <!-- SSDL content -->
@@ -125,7 +127,7 @@ Dans cette étape, nous allons utiliser l’éditeur XML pour ajouter une requê
 
 ## <a name="add-an-entity-type-to-the-model"></a>Ajouter un type d’entité au modèle
 
-Dans cette étape, nous allons ajouter le type d’entité au modèle conceptuel à l’aide du concepteur EF.  Notez les points suivants :
+Dans cette étape, nous allons ajouter le type d’entité au modèle conceptuel à l’aide du concepteur EF. Notez les points suivants :
 
 -   Le **nom** de l’entité correspond à la valeur de l’attribut **EntityType** dans l’élément **EntitySet** ci-dessus.
 -   Les noms de propriété correspondent aux noms de colonnes retournés par l’instruction SQL dans l’élément **DefiningQuery** ci-dessus.
@@ -142,9 +144,9 @@ Ouvrez le modèle dans le concepteur EF.
 
 Le Entity Designer, qui fournit une aire de conception pour la modification de votre modèle, est affiché.
 
--   Cliquez avec le bouton droit sur l’aire du concepteur, puis sélectionnez **Ajouter une nouvelle**-&gt;**entité...** .
+-   Cliquez avec le bouton droit sur l’aire du concepteur et sélectionnez **Ajouter une nouvelle** - &gt; **entité.**...
 -   Spécifiez **GradeReport** pour le nom d’entité et le **CourseID** pour la **propriété de clé**.
--   Cliquez avec le bouton droit sur l’entité **GradeReport** et sélectionnez **ajouter une nouvelle**-&gt; **propriété scalaire**.
+-   Cliquez avec le bouton droit sur l’entité **GradeReport** et sélectionnez **Ajouter une nouvelle** - &gt; **propriété scalaire**.
 -   Remplacez le nom par défaut de la propriété par **FirstName**.
 -   Ajoutez une autre propriété scalaire et spécifiez **LastName** comme nom.
 -   Ajoutez une autre propriété scalaire et spécifiez le nom de la **classe** .
@@ -170,11 +172,11 @@ Dans cette étape, nous allons utiliser la fenêtre Détails de mappage pour map
 
 -   Cliquez avec le bouton droit sur l’entité **GradeReport** sur l’aire de conception, puis sélectionnez **mappage de table**.  
     La fenêtre **Détails de mappage** s’affiche.
--   Sélectionnez **GradeReport** dans la liste déroulante **&lt;ajouter une table ou une vue&gt;** (située sous la **table**s).  
+-   Sélectionnez **GradeReport** dans la liste déroulante ** &lt; ajouter &gt; une table ou une vue** (située sous la **table**s).  
     Les mappages par défaut entre le type d’entité conceptuel et stockage **GradeReport** s’affichent.  
-    ![](~/ef6/media/mappingdetails.png) Details3 de mappage
+    ![Mappage de Details3](~/ef6/media/mappingdetails.png)
 
-Par conséquent, l’élément **EntitySetMapping** est ajouté à la section Mapping du fichier. edmx. 
+Par conséquent, l’élément **EntitySetMapping**   est ajouté à la section Mapping du fichier. edmx. 
 
 ``` xml
     <EntitySetMapping Name="GradeReports">

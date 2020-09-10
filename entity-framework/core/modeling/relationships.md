@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 11/21/2019
 uid: core/modeling/relationships
-ms.openlocfilehash: 927457c2a5b5ef4a5061fe2e5d28f864eb95c55f
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 9946b2190cb3c3973f245d44da7e359b60845541
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526730"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619106"
 ---
 # <a name="relationships"></a>Relations
 
@@ -40,23 +40,23 @@ Il existe un certain nombre de termes utilisés pour décrire les relations
   
 * **Relation à référence automatique :** Relation dans laquelle les types d’entités dependent et principal sont identiques.
 
-Le code suivant illustre une relation un-à-plusieurs entre `Blog` et`Post`
+Le code suivant illustre une relation un-à-plusieurs entre `Blog` et `Post`
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/Full.cs#Full)]
 
-* `Post`est l’entité dépendante
+* `Post` est l’entité dépendante
 
-* `Blog`est l’entité principale
+* `Blog` est l’entité principale
 
-* `Blog.BlogId`est la clé principale (dans le cas présent, il s’agit d’une clé primaire plutôt que d’une clé secondaire)
+* `Blog.BlogId` est la clé principale (dans le cas présent, il s’agit d’une clé primaire plutôt que d’une clé secondaire)
 
-* `Post.BlogId`est la clé étrangère
+* `Post.BlogId` est la clé étrangère
 
-* `Post.Blog`est une propriété de navigation de référence
+* `Post.Blog` est une propriété de navigation de référence
 
-* `Blog.Posts`est une propriété de navigation de collection
+* `Blog.Posts` est une propriété de navigation de collection
 
-* `Post.Blog`est la propriété de navigation inverse de `Blog.Posts` (et vice versa)
+* `Post.Blog` est la propriété de navigation inverse de `Blog.Posts` (et vice versa)
 
 ## <a name="conventions"></a>Conventions
 
@@ -89,7 +89,7 @@ Dans cet exemple, les propriétés mises en surbrillance sont utilisées pour co
 
 ### <a name="no-foreign-key-property"></a>Aucune propriété de clé étrangère
 
-Bien qu’il soit recommandé d’avoir une propriété de clé étrangère définie dans la classe d’entité dépendante, elle n’est pas obligatoire. Si aucune propriété de clé étrangère n’est trouvée, une [propriété de clé étrangère Shadow](shadow-properties.md) est introduite avec le nom `<navigation property name><principal key property name>` ou `<principal entity name><principal key property name>` si aucune navigation n’est présente sur le type dépendant.
+Bien qu’il soit recommandé d’avoir une propriété de clé étrangère définie dans la classe d’entité dépendante, elle n’est pas obligatoire. Si aucune propriété de clé étrangère n’est trouvée, une [propriété de clé étrangère Shadow](xref:core/modeling/shadow-properties) est introduite avec le nom `<navigation property name><principal key property name>` ou `<principal entity name><principal key property name>` si aucune navigation n’est présente sur le type dépendant.
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/NoForeignKey.cs?name=NoForeignKey&highlight=6,15)]
 
@@ -114,13 +114,13 @@ Par Convention, la suppression en cascade sera définie sur *cascade* pour les r
 
 Consultez la section [relations obligatoires et facultatives](#required-and-optional-relationships) pour connaître la différence entre les relations obligatoires et facultatives.
 
-Pour plus d’informations sur les différents comportements de suppression et les valeurs par défaut utilisées par Convention, consultez [suppression en cascade](../saving/cascade-delete.md) .
+Pour plus d’informations sur les différents comportements de suppression et les valeurs par défaut utilisées par Convention, consultez [suppression en cascade](xref:core/saving/cascade-delete) .
 
 ## <a name="manual-configuration"></a>Configuration manuelle
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
-Pour configurer une relation dans l’API Fluent, commencez par identifier les propriétés de navigation qui composent la relation. `HasOne`ou `HasMany` identifie la propriété de navigation sur le type d’entité sur lequel vous commencez la configuration. Vous enchaînez ensuite un appel à `WithOne` ou `WithMany` pour identifier la navigation inverse. `HasOne`/`WithOne`sont utilisés pour les propriétés de navigation de référence et `HasMany` / `WithMany` sont utilisés pour les propriétés de navigation de collection.
+Pour configurer une relation dans l’API Fluent, commencez par identifier les propriétés de navigation qui composent la relation. `HasOne` ou `HasMany` identifie la propriété de navigation sur le type d’entité sur lequel vous commencez la configuration. Vous enchaînez ensuite un appel à `WithOne` ou `WithMany` pour identifier la navigation inverse. `HasOne`/`WithOne`sont utilisés pour les propriétés de navigation de référence et `HasMany` / `WithMany` sont utilisés pour les propriétés de navigation de collection.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NoForeignKey.cs?name=NoForeignKey&highlight=8-10)]
 
@@ -134,7 +134,7 @@ Vous pouvez utiliser les annotations de données pour configurer la combinaison 
 > Vous pouvez uniquement utiliser [required] sur les propriétés de l’entité dépendante pour avoir un impact sur la nécessité de la relation. [Obligatoire] dans la navigation de l’entité principale, est généralement ignoré, mais l’entité peut devenir la dépendante.
 
 > [!NOTE]
-> Les annotations `[ForeignKey]` de données et `[InverseProperty]` sont disponibles dans l' `System.ComponentModel.DataAnnotations.Schema` espace de noms. `[Required]`est disponible dans l' `System.ComponentModel.DataAnnotations` espace de noms.
+> Les annotations `[ForeignKey]` de données et `[InverseProperty]` sont disponibles dans l' `System.ComponentModel.DataAnnotations.Schema` espace de noms. `[Required]` est disponible dans l' `System.ComponentModel.DataAnnotations` espace de noms.
 
 ---
 
@@ -185,7 +185,7 @@ Vous pouvez utiliser les annotations de données pour configurer la propriété 
 
 #### <a name="shadow-foreign-key"></a>Masquer la clé étrangère
 
-Vous pouvez utiliser la surcharge de chaîne de `HasForeignKey(...)` pour configurer une propriété Shadow comme clé étrangère (pour plus d’informations, consultez [Propriétés Shadow](shadow-properties.md) ). Nous vous recommandons d’ajouter explicitement la propriété Shadow au modèle avant de l’utiliser comme clé étrangère (comme indiqué ci-dessous).
+Vous pouvez utiliser la surcharge de chaîne de `HasForeignKey(...)` pour configurer une propriété Shadow comme clé étrangère (pour plus d’informations, consultez [Propriétés Shadow](xref:core/modeling/shadow-properties) ). Nous vous recommandons d’ajouter explicitement la propriété Shadow au modèle avant de l’utiliser comme clé étrangère (comme indiqué ci-dessous).
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ShadowForeignKey.cs?name=ShadowForeignKey&highlight=10,16)]
 
@@ -205,7 +205,7 @@ Vous n’avez pas nécessairement besoin de fournir une propriété de navigatio
 
 ### <a name="principal-key"></a>Clé principale
 
-Si vous souhaitez que la clé étrangère fasse référence à une propriété autre que la clé primaire, vous pouvez utiliser l’API Fluent pour configurer la propriété de clé principale de la relation. La propriété que vous configurez en tant que clé principale est automatiquement configurée en tant que [clé secondaire](alternate-keys.md).
+Si vous souhaitez que la clé étrangère fasse référence à une propriété autre que la clé primaire, vous pouvez utiliser l’API Fluent pour configurer la propriété de clé principale de la relation. La propriété que vous configurez en tant que clé principale est automatiquement configurée en tant que [clé secondaire](xref:core/modeling/keys#alternate-keys).
 
 #### <a name="simple-key"></a>[Clé simple](#tab/simple-key)
 
@@ -222,7 +222,7 @@ Si vous souhaitez que la clé étrangère fasse référence à une propriété a
 
 ### <a name="required-and-optional-relationships"></a>Relations obligatoires et facultatives
 
-Vous pouvez utiliser l’API Fluent pour déterminer si la relation est obligatoire ou facultative. Au final, cela contrôle si la propriété de clé étrangère est obligatoire ou facultative. Cela est particulièrement utile lorsque vous utilisez une clé étrangère d’État Shadow. Si vous avez une propriété de clé étrangère dans votre classe d’entité, le caractère requis de la relation est déterminé selon que la propriété de clé étrangère est obligatoire ou facultative (pour plus d’informations, consultez [propriétés requises et facultatives](required-optional.md) ).
+Vous pouvez utiliser l’API Fluent pour déterminer si la relation est obligatoire ou facultative. Au final, cela contrôle si la propriété de clé étrangère est obligatoire ou facultative. Cela est particulièrement utile lorsque vous utilisez une clé étrangère d’État Shadow. Si vous avez une propriété de clé étrangère dans votre classe d’entité, le caractère requis de la relation est déterminé selon que la propriété de clé étrangère est obligatoire ou facultative (pour plus d’informations, consultez [propriétés requises et facultatives](xref:core/modeling/entity-properties#required-and-optional-properties) ).
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=6)]
 
@@ -233,13 +233,13 @@ Vous pouvez utiliser l’API Fluent pour déterminer si la relation est obligato
 
 Vous pouvez utiliser l’API Fluent pour configurer explicitement le comportement de suppression en cascade pour une relation donnée.
 
-Pour une présentation détaillée de chaque option, consultez [suppression en cascade](../saving/cascade-delete.md) .
+Pour une présentation détaillée de chaque option, consultez [suppression en cascade](xref:core/saving/cascade-delete) .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/CascadeDelete.cs?name=CascadeDelete&highlight=6)]
 
 ## <a name="other-relationship-patterns"></a>Autres modèles de relation
 
-### <a name="one-to-one"></a>Un à un
+### <a name="one-to-one"></a>Un-à-un
 
 Les relations un-à-un ont une propriété de navigation de référence des deux côtés. Ils suivent les mêmes conventions que les relations un-à-plusieurs, mais un index unique est introduit sur la propriété de clé étrangère pour s’assurer qu’un seul dépendant est lié à chaque principal.
 
@@ -254,7 +254,7 @@ Quand vous configurez la clé étrangère, vous devez spécifier le type d’ent
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneToOne.cs?name=OneToOne&highlight=11)]
 
-### <a name="many-to-many"></a>Plusieurs à plusieurs
+### <a name="many-to-many"></a>Plusieurs-à-plusieurs
 
 Les relations plusieurs-à-plusieurs sans classe d’entité pour représenter la table de jointure ne sont pas encore prises en charge. Toutefois, vous pouvez représenter une relation plusieurs-à-plusieurs en incluant une classe d’entité pour la table de jointure et en mappant deux relations un-à-plusieurs distinctes.
 

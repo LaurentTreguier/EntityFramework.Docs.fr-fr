@@ -1,15 +1,16 @@
 ---
 title: 'Enregistrement des données associées : EF Core'
+description: Informations sur l’enregistrement de graphiques d’entités associées et la gestion des relations dans Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 07b6680f-ffcf-412c-9857-f997486b386c
 uid: core/saving/related-data
-ms.openlocfilehash: 86d32b6172ee21c12a15e9ed4bb0142afc99c8bd
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 118d5933dd543a03bbe16fd8be1f00b7304e39c4
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417544"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618894"
 ---
 # <a name="saving-related-data"></a>Enregistrement des données associées
 
@@ -53,9 +54,9 @@ Supprimer une relation peut avoir des effets secondaires sur l’entité dépend
 
 Par défaut, pour les relations requises, un comportement de suppression en cascade est configuré et l’entité dépendante/enfant est supprimée de la base de données. La suppression en cascade n’est pas configurée pour les relations facultatives par défaut, mais la propriété de clé étrangère est définie avec la valeur null.
 
-Consultez [Relations obligatoires et facultatives](../modeling/relationships.md#required-and-optional-relationships) pour en savoir plus sur la configuration de la nécessité des relations.
+Consultez [Relations obligatoires et facultatives](xref:core/modeling/relationships#required-and-optional-relationships) pour en savoir plus sur la configuration de la nécessité des relations.
 
-Consultez [Suppression en cascade](cascade-delete.md) pour plus d’informations sur la façon dont les comportements de suppression en cascade fonctionnent, dont ils peuvent être configurés explicitement ou encore être sélectionnés par convention.
+Consultez [Suppression en cascade](xref:core/saving/cascade-delete) pour plus d’informations sur la façon dont les comportements de suppression en cascade fonctionnent, dont ils peuvent être configurés explicitement ou encore être sélectionnés par convention.
 
 Dans l’exemple suivant, une suppression en cascade est configurée sur la relation entre `Blog` et `Post`, donc l’entité `post` est supprimée de la base de données.
 

@@ -4,12 +4,12 @@ description: Utilisation de comparateurs de valeur pour contrôler la façon don
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: fa5352129977d858d54d4aede746b320c91b0ad3
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526782"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616675"
 ---
 # <a name="value-comparers"></a>Comparateurs de valeurs
 
@@ -19,12 +19,12 @@ ms.locfileid: "87526782"
 > [!TIP]  
 > Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
 
-## <a name="background"></a>Arrière-plan
+## <a name="background"></a>Contexte
 
 EF Core doit comparer les valeurs de propriété dans les cas suivants :
 
 * Déterminer si une propriété a été modifiée dans le cadre de la [détection des modifications des mises à jour](xref:core/saving/basic)
-* Déterminer si deux valeurs clés sont identiques lors de la résolution des relations 
+* Déterminer si deux valeurs clés sont identiques lors de la résolution des relations
 
 Ceci est géré automatiquement pour les types primitifs courants tels que int, bool, DateTime, etc.
 
@@ -66,6 +66,7 @@ Prenons l’exemple d’une propriété qui utilise un convertisseur de valeur p
 [!code-csharp[ConfigureImmutableClassProperty](../../../samples/core/Modeling/ValueConversions/MappingImmutableClassProperty.cs?name=ConfigureImmutableClassProperty)]
 
 Les propriétés de ce type n’ont pas besoin de comparaisons ou d’instantanés spéciaux, car :
+
 * L’égalité est substituée afin que les différentes instances soient correctement comparées
 * Le type est immuable, donc il n’y a aucun risque de mutation d’une valeur d’instantané
 
@@ -90,11 +91,12 @@ Il est recommandé d’utiliser des types immuables (classes ou structs) avec de
 Cela est généralement plus efficace et a une sémantique plus propre que l’utilisation d’un type mutable.
 
 Toutefois, cela étant dit, il est courant d’utiliser des propriétés de types que l’application ne peut pas modifier.
-Par exemple, le mappage d’une propriété contenant une liste de nombres : 
+Par exemple, le mappage d’une propriété contenant une liste de nombres :
 
 [!code-csharp[ListProperty](../../../samples/core/Modeling/ValueConversions/MappingListProperty.cs?name=ListProperty)]
 
-La [ `List<T>` classe](/dotnet/api/system.collections.generic.list-1?view=netstandard-2.1):
+La [ `List<T>` classe](/dotnet/api/system.collections.generic.list-1):
+
 * A une égalité de référence ; deux listes contenant les mêmes valeurs sont traitées comme différentes.
 * Est mutable ; les valeurs de la liste peuvent être ajoutées et supprimées.
 
@@ -111,6 +113,7 @@ Cela nécessite alors de définir un `ValueComparer<T>` sur la propriété pour 
 > Au lieu de cela, le code ci-dessus appelle SetValueComparer sur le IMutableProperty de niveau inférieur exposé par le générateur en tant que « Metadata ».
 
 Le `ValueComparer<T>` constructeur accepte trois expressions :
+
 * Expression pour vérifier l’égalité
 * Expression pour la génération d’un code de hachage
 * Expression pour effectuer un instantané d’une valeur  
@@ -123,20 +126,20 @@ Plutôt immuable si vous le pouvez.)
 
 L’instantané est créé en clonant la liste avec ToList.
 Là encore, cela est nécessaire uniquement si les listes vont être mutées.
-Plutôt immuable si vous le pouvez. 
+Plutôt immuable si vous le pouvez.
 
 > [!NOTE]  
 > Les convertisseurs de valeurs et les comparateurs sont construits à l’aide d’expressions plutôt que de délégués simples.
 > Cela est dû au fait que EF insère ces expressions dans une arborescence d’expressions bien plus complexe qui est ensuite compilée dans un délégué de forme d’entité.
 > Conceptuellement, cela est similaire à l’incorporation du compilateur.
-> Par exemple, une conversion simple peut simplement être une compilation dans un cast, plutôt qu’un appel à une autre méthode pour effectuer la conversion.    
+> Par exemple, une conversion simple peut simplement être une compilation dans un cast, plutôt qu’un appel à une autre méthode pour effectuer la conversion.
 
 ### <a name="key-comparers"></a>Comparateurs de clés
 
 La section background explique pourquoi les comparaisons clés peuvent nécessiter une sémantique spéciale.
 Veillez à créer un comparateur approprié pour les clés lors de leur définition sur une propriété de clé primaire, principale ou étrangère.
 
-Utilisez [SetKeyValueComparer](/dotnet/api/microsoft.entityframeworkcore.mutablepropertyextensions.setkeyvaluecomparer?view=efcore-3.1) dans les rares cas où une sémantique différente est requise sur la même propriété.
+Utilisez [SetKeyValueComparer](/dotnet/api/microsoft.entityframeworkcore.mutablepropertyextensions.setkeyvaluecomparer) dans les rares cas où une sémantique différente est requise sur la même propriété.
 
 > [!NOTE]  
 > SetStructuralComparer a été obsolète dans EF Core 5,0.
@@ -146,7 +149,7 @@ Utilisez [SetKeyValueComparer](/dotnet/api/microsoft.entityframeworkcore.mutable
 
 Parfois, la comparaison par défaut utilisée par EF Core peut ne pas convenir.
 Par exemple, la mutation des tableaux d’octets n’est pas, par défaut, détectée dans EF Core.
-Vous pouvez la remplacer en définissant un autre comparateur sur la propriété : 
+Vous pouvez la remplacer en définissant un autre comparateur sur la propriété :
 
 [!code-csharp[OverrideComparer](../../../samples/core/Modeling/ValueConversions/OverridingByteArrayComparisons.cs?name=OverrideComparer)]
 

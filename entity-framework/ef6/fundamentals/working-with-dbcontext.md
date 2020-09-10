@@ -1,18 +1,20 @@
 ---
 title: Utilisation de DbContext-EF6
+description: Utilisation de DbContext dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: b0e6bddc-8a87-4d51-b1cb-7756df938c23
-ms.openlocfilehash: d961ffd8bed7f5b2f82dcfa30fc0241b7437be50
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/working-with-dbcontext
+ms.openlocfilehash: 7845d401cb0b8910cbfbba80eca2fd098c051b7d
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416321"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618214"
 ---
 # <a name="working-with-dbcontext"></a>Utilisation de DbContext
 
-Pour pouvoir utiliser Entity Framework pour interroger, insérer, mettre à jour et supprimer des données à l’aide d’objets .NET, vous devez d’abord [créer un modèle](~/ef6/modeling/index.md) qui mappe les entités et les relations définies dans votre modèle aux tables d’une base de données.
+Pour pouvoir utiliser Entity Framework pour interroger, insérer, mettre à jour et supprimer des données à l’aide d’objets .NET, vous devez d’abord [créer un modèle](xref:ef6/modeling/index) qui mappe les entités et les relations définies dans votre modèle aux tables d’une base de données.
 
 Une fois que vous disposez d’un modèle, la classe principale avec laquelle votre application interagit est `System.Data.Entity.DbContext` (souvent appelée classe de contexte). Vous pouvez utiliser un DbContext associé à un modèle pour effectuer les opérations suivantes :
 - Écrire et exécuter des requêtes   
@@ -35,12 +37,12 @@ public class ProductContext : DbContext
 }
 ```  
 
-Une fois que vous avez un contexte, vous pouvez rechercher, ajouter (à l’aide des méthodes `Add` ou `Attach`) ou supprimer (à l’aide d' `Remove`) des entités dans le contexte via ces propriétés. L’accès à une propriété de `DbSet` sur un objet de contexte représente une requête de démarrage qui retourne toutes les entités du type spécifié. Notez que l’accès à une propriété n’exécute pas la requête. Une requête est exécutée dans les cas suivants :  
+Une fois que vous avez un contexte, vous pouvez rechercher, ajouter (à l’aide des `Add` `Attach` méthodes ou) ou supprimer (à l’aide `Remove` de) des entités dans le contexte par le biais de ces propriétés. L’accès à une `DbSet` propriété sur un objet de contexte représente une requête de démarrage qui retourne toutes les entités du type spécifié. Notez que l’accès à une propriété n’exécute pas la requête. Une requête est exécutée dans les cas suivants :  
 
 - elle est énumérée par une instruction `foreach` (C#) ou `For Each` (Visual Basic) ;  
-- Elle est énumérée par une opération de collection comme `ToArray`, `ToDictionary`ou `ToList`.  
-- Les opérateurs LINQ tels que `First` ou `Any` sont spécifiés dans la partie la plus à l’extérieur de la requête.  
-- L’une des méthodes suivantes est appelée : la méthode d’extension `Load`, `DbEntityEntry.Reload`, `Database.ExecuteSqlCommand`et `DbSet<T>.Find`, si une entité avec la clé spécifiée est introuvable déjà chargée dans le contexte.  
+- Elle est énumérée par une opération de collection telle que `ToArray` , `ToDictionary` ou `ToList` .  
+- Les opérateurs LINQ, tels que `First` ou, `Any` sont spécifiés dans la partie la plus à l’extérieur de la requête.  
+- L’une des méthodes suivantes est appelée : la `Load` méthode d’extension, `DbEntityEntry.Reload` ,  `Database.ExecuteSqlCommand` et `DbSet<T>.Find` , si une entité avec la clé spécifiée est introuvable déjà chargée dans le contexte.  
 
 ## <a name="lifetime"></a>Durée de vie  
 

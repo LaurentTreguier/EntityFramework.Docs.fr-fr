@@ -1,26 +1,28 @@
 ---
 title: Configuration basée sur le code-EF6
+description: Configuration basée sur le code dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 13886d24-2c74-4a00-89eb-aa0dee328d83
-ms.openlocfilehash: 079a4ab30af74eac8b1f51ece5801ff40a867a29
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/fundamentals/configuring/code-based
+ms.openlocfilehash: 643aefff1d8a143e7df8251eff4e5051e2c6bd08
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417868"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618504"
 ---
 # <a name="code-based-configuration"></a>Configuration basée sur le code
 > [!NOTE]
 > **EF6 et versions ultérieures uniquement** : Les fonctionnalités, les API, etc. décrites dans cette page ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.  
 
-La configuration d’une application Entity Framework peut être spécifiée dans un fichier de configuration (App. config/Web. config) ou via du code. Cette dernière est connue sous le nom de configuration basée sur le code.  
+La configuration d’une application Entity Framework peut être spécifiée dans un fichier de configuration (app.config/web.config) ou par le biais du code. Cette dernière est connue sous le nom de configuration basée sur le code.  
 
-La configuration dans un fichier de configuration est décrite dans un [article distinct](config-file.md). Le fichier de configuration est prioritaire par rapport à la configuration basée sur le code. En d’autres termes, si une option de configuration est définie à la fois dans le code et dans le fichier de configuration, alors le paramètre dans le fichier de configuration est utilisé.  
+La configuration dans un fichier de configuration est décrite dans un [article distinct](xref:ef6/fundamentals/configuring/config-file). Le fichier de configuration est prioritaire par rapport à la configuration basée sur le code. En d’autres termes, si une option de configuration est définie à la fois dans le code et dans le fichier de configuration, alors le paramètre dans le fichier de configuration est utilisé.  
 
 ## <a name="using-dbconfiguration"></a>Utilisation de DbConfiguration  
 
-La configuration basée sur le code dans EF6 et versions ultérieures est obtenue en créant une sous-classe de System. Data. Entity. config. DbConfiguration. Les instructions suivantes doivent être suivies lors de la sous-classe DbConfiguration :  
+La configuration basée sur le code dans EF6 et versions ultérieures est obtenue en créant une sous-classe de System.Data.Entity.Config. DbConfiguration. Les instructions suivantes doivent être suivies lors de la sous-classe DbConfiguration :  
 
 - Créez une seule classe DbConfiguration pour votre application. Cette classe spécifie les paramètres de l’ensemble du domaine d’application.  
 - Placez votre classe DbConfiguration dans le même assembly que votre classe DbContext. (Consultez la section *déplacement de DbConfiguration* si vous souhaitez modifier cela.)  

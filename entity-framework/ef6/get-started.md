@@ -1,15 +1,16 @@
 ---
 title: Bien démarrer avec Entity Framework 6 - EF6
+description: Bien démarrer avec Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
 uid: ef6/get-started
-ms.openlocfilehash: 729dea2c474c35f638ccaf6673550f76e88e2667
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: a03fa403bedc260def3f8110a028e972824cb756
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "80136268"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618195"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Bien démarrer avec Entity Framework 6
 
@@ -17,57 +18,57 @@ Ce guide contient un ensemble de liens vers des articles de documentation sélec
 
 ## <a name="fundamentals"></a>Notions de base
 
-* [Obtenir Entity Framework](~/ef6/fundamentals/install.md)
+* [Obtenir Entity Framework](xref:ef6/fundamentals/install)
 
   Vous apprendrez ici à ajouter Entity Framework à vos applications. Par ailleurs, si vous voulez utiliser EF Designer, vérifiez qu’il est installé dans Visual Studio.
 
-* [Création d’un modèle : Code First, EF Designer et les flux de travail EF](~/ef6/modeling/index.md)
+* [Création d’un modèle : Code First, EF Designer et les flux de travail EF](xref:ef6/modeling/index)
 
   Préférez-vous spécifier votre modèle EF en écrivant du code ou en traçant des zones et des lignes ?
 Allez-vous utiliser EF pour mapper vos objets à une base de données existante ou voulez-vous qu’EF crée une base de données adaptée à vos objets ?
-Ici, vous en apprendrez plus sur deux approches différentes à utiliser EF6: EF Designer et Code First.
+Vous découvrirez ici deux approches différentes pour utiliser EF6 : EF designer et Code First.
 Veillez à suivre la discussion et à regarder la vidéo présentant la différence.
 
-* [Utilisation de DbContext](~/ef6/fundamentals/working-with-dbcontext.md)
+* [Utilisation de DbContext](xref:ef6/fundamentals/working-with-dbcontext)
 
   DbContext est le premier et le plus important type EF dont vous avez besoin pour apprendre à utiliser Entity Framework. Il sert de tremplin pour les requêtes de base de données et effectue le suivi des changements que vous apportez aux objets afin qu’ils puissent être conservés dans la base de données.
 
-* [Posez une question](~/ef6/resources/get-help.md)
+* [Poser une question](xref:ef6/resources/get-help)
 
   Découvrez comment obtenir de l’aide des experts et fournir vos propres réponses à la Communauté.
 
-* [Participez](https://github.com/aspnet/EntityFramework6/)
+* [Collaborer](https://github.com/aspnet/EntityFramework6/)
 
   Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comment vous pouvez aider à améliorer EF en consultant notre dépôt GitHub.
 
 ## <a name="code-first-resources"></a>Ressources Code First
 
-  - [Code First ciblant un flux de travail de base de données existant](~/ef6/modeling/code-first/workflows/existing-database.md)
-  - [Code First ciblant un nouveau flux de travail de base de données](~/ef6/modeling/code-first/workflows/new-database.md)
-  - [Mappage d’enums avec Code First](~/ef6/modeling/code-first/data-types/enums.md)
-  - [Mappage de types spatiaux avec Code First](~/ef6/modeling/code-first/data-types/spatial.md)
-  - [Écriture de conventions Code First personnalisées](~/ef6/modeling/code-first/conventions/custom.md)
-  - [Utilisation de la configuration Fluent Code First avec Visual Basic](~/ef6/modeling/code-first/fluent/vb.md)
-  - [Migrations Code First](~/ef6/modeling/code-first/migrations/index.md)
-  - [Migrations Code First dans les environnements d’équipe](~/ef6/modeling/code-first/migrations/teams.md)
-  - [Migrations Code First automatiques](~/ef6/modeling/code-first/migrations/automatic.md) (désormais déconseillées)
+  - [Code First ciblant un flux de travail de base de données existant](xref:ef6/modeling/code-first/workflows/existing-database)
+  - [Code First ciblant un nouveau flux de travail de base de données](xref:ef6/modeling/code-first/workflows/new-database)
+  - [Mappage d’enums avec Code First](xref:ef6/modeling/code-first/data-types/enums)
+  - [Mappage de types spatiaux avec Code First](xref:ef6/modeling/code-first/data-types/spatial)
+  - [Écriture de conventions Code First personnalisées](xref:ef6/modeling/code-first/conventions/custom)
+  - [Utilisation de la configuration Fluent Code First avec Visual Basic](xref:ef6/modeling/code-first/fluent/vb)
+  - [Migrations Code First](xref:ef6/modeling/code-first/migrations/index)
+  - [Migrations Code First dans les environnements d’équipe](xref:ef6/modeling/code-first/migrations/teams)
+  - [Migrations Code First automatiques](xref:ef6/modeling/code-first/migrations/automatic) (désormais déconseillées)
 
 ## <a name="ef-designer-resources"></a>Ressources EF Designer
-  - [Flux de travail Database First](~/ef6/modeling/designer/workflows/database-first.md)
-  - [Flux de travail Model First](~/ef6/modeling/designer/workflows/model-first.md)
-  - [Mappage d’enums](~/ef6/modeling/designer/data-types/enums.md)
-  - [Mappage de types spatiaux](~/ef6/modeling/designer/data-types/spatial.md)
-  - [Mappage d’héritage de table par hiérarchie](~/ef6/modeling/designer/inheritance/tph.md)
-  - [Mappage d’héritage de table par type](~/ef6/modeling/designer/inheritance/tpt.md)
-  - [Mappage de procédures stockées pour les mises à jour](~/ef6/modeling/designer/stored-procedures/cud.md)
-  - [Mappage de procédures stockées pour la requête](~/ef6/modeling/designer/stored-procedures/query.md)
-  - [Fractionnement d’entité](~/ef6/modeling/designer/entity-splitting.md)
-  - [Fractionnement de table](~/ef6/modeling/designer/table-splitting.md)
-  - [Requête de définition](~/ef6/modeling/designer/advanced/defining-query.md) (Avancé)
-  - [Fonctions table](~/ef6/modeling/designer/advanced/tvfs.md) (Avancé)
+  - [Flux de travail Database First](xref:ef6/modeling/designer/workflows/database-first)
+  - [Flux de travail Model First](xref:ef6/modeling/designer/workflows/model-first)
+  - [Mappage d’enums](xref:ef6/modeling/designer/data-types/enums)
+  - [Mappage de types spatiaux](xref:ef6/modeling/designer/data-types/spatial)
+  - [Mappage d’héritage de table par hiérarchie](xref:ef6/modeling/designer/inheritance/tph)
+  - [Mappage d’héritage de table par type](xref:ef6/modeling/designer/inheritance/tpt)
+  - [Mappage de procédures stockées pour les mises à jour](xref:ef6/modeling/designer/stored-procedures/cud)
+  - [Mappage de procédures stockées pour la requête](xref:ef6/modeling/designer/stored-procedures/query)
+  - [Fractionnement d’entité](xref:ef6/modeling/designer/entity-splitting)
+  - [Fractionnement de table](xref:ef6/modeling/designer/table-splitting)
+  - [Requête de définition](xref:ef6/modeling/designer/advanced/defining-query) (Avancé)
+  - [Fonctions table](xref:ef6/modeling/designer/advanced/tvfs) (Avancé)
 
 ## <a name="other-resources"></a>Autres ressources
-  - [Requête et enregistrement asynchrones](~/ef6/fundamentals/async.md)
-  - [Liaison de données avec WinForms](~/ef6/fundamentals/databinding/winforms.md)
-  - [Liaison de données avec WPF](~/ef6/fundamentals/databinding/wpf.md)
-  - [Scénarios déconnectés avec des entités de suivi automatique](~/ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough.md) (désormais déconseillés)
+  - [Requête et enregistrement asynchrones](xref:ef6/fundamentals/async)
+  - [Liaison de données avec WinForms](xref:ef6/fundamentals/databinding/winforms)
+  - [Liaison de données avec WPF](xref:ef6/fundamentals/databinding/wpf)
+  - [Scénarios déconnectés avec des entités de suivi automatique](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough) (désormais déconseillés)

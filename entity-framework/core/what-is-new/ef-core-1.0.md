@@ -1,15 +1,16 @@
 ---
 title: Nouveautés d’EF Core 1.0 - EF Core
+description: Modifications et améliorations dans Entity Framework Core 1,0
 author: divega
 ms.date: 10/27/2016
 ms.assetid: 20A25111-AEBE-4BC2-83A5-3F651952DF72
 uid: core/what-is-new/ef-core-1.0
-ms.openlocfilehash: 2cd2a54d75ed3f0caa8b674dfb56babcfcc13592
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: adde26095a11016796f6bd616978c3ccc0fe4c18
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417523"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618852"
 ---
 # <a name="features-included-in-ef-core-10"></a>Fonctionnalités incluses dans EF Core 1.0
 
@@ -77,7 +78,7 @@ Permet de définir dans le modèle des propriétés qui ne sont pas déclarées 
 
 Permet d’enregistrer les entités d’une hiérarchie d’héritage dans une table unique à l’aide d’une colonne de discriminateur pour identifier le type d’entité pour un enregistrement donné dans la base de données.
 
-### <a name="model-validation"></a>Validation de modèle
+### <a name="model-validation"></a>Validation du modèle
 
 Détecte les modèles non valides dans le modèle et fournit des messages d’erreur utiles.
 
@@ -177,4 +178,4 @@ Fonctionnalité conçue pour tester facilement sans vous connecter à une base d
 
 ### <a name="3rd-party-providers"></a>Fournisseurs tiers
 
-Plusieurs fournisseurs sont disponibles pour d’autres moteurs de base de données. Consultez [Fournisseurs de bases de données](../providers/index.md) pour en obtenir la liste complète.
+Plusieurs fournisseurs sont disponibles pour d’autres moteurs de base de données. Consultez [Fournisseurs de bases de données](xref:core/providers/index) pour en obtenir la liste complète.

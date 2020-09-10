@@ -1,15 +1,16 @@
 ---
 title: Gestion des migrations-EF Core
+description: Ajout, suppression et gestion des migrations de schémas de base de données avec Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 2097d3cc9232d448191dbebbe3d14d86e80b91fe
-ms.sourcegitcommit: 949faaba02e07e44359e77d7935f540af5c32093
+ms.openlocfilehash: 366824cecab57a0f1744fa58cc12e5d3f6675723
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526431"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617960"
 ---
 # <a name="managing-migrations"></a>Gestion des migrations
 
@@ -159,7 +160,7 @@ Cela peut être utilisé pour gérer tous les aspects de votre base de données,
 * Recherche en texte intégral
 * Fonctions
 * Déclencheurs
-* Affichages
+* Vues
 
 Dans la plupart des cas, EF Core encapsule automatiquement chaque migration dans sa propre transaction lors de l’application des migrations. Malheureusement, certaines opérations de migration ne peuvent pas être effectuées au sein d’une transaction dans certaines bases de données ; dans ce cas, vous pouvez refuser la transaction en passant `suppressTransaction: true` à `migrationBuilder.Sql` .
 

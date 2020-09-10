@@ -1,25 +1,27 @@
 ---
 title: Personnalisation de la table de l’historique des migrations-EF6
+description: Personnalisation de la table d’historique des migrations dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: ed5518f0-a9a6-454e-9e98-a4fa7748c8d0
-ms.openlocfilehash: eb19f367611a86f685557a6741a5f2f0bad6b718
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/migrations/history-customization
+ms.openlocfilehash: a6cd27f39c648d35d2e0238a10f8a6b351cc1220
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418978"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618064"
 ---
 # <a name="customizing-the-migrations-history-table"></a>Personnalisation de la table d’historique des migrations
 > [!NOTE]
 > **EF6 et versions ultérieures uniquement** : Les fonctionnalités, les API, etc. décrites dans cette page ont été introduites dans Entity Framework 6. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.
 
 > [!NOTE]
-> Cet article suppose que vous savez utiliser Migrations Code First dans les scénarios de base. Si ce n’est pas le cas, vous devez lire [migrations code First](~/ef6/modeling/code-first/migrations/index.md) avant de continuer.
+> Cet article suppose que vous savez utiliser Migrations Code First dans les scénarios de base. Si ce n’est pas le cas, vous devez lire [migrations code First](xref:ef6/modeling/code-first/migrations/index) avant de continuer.
 
 ## <a name="what-is-migrations-history-table"></a>Qu’est-ce que la table historique des migrations ?
 
-La table d’historique des migrations est une table utilisée par Migrations Code First pour stocker des détails sur les migrations appliquées à la base de données. Par défaut, le nom de la table dans la base de données est \_\_MigrationHistory et il est créé lors de l’application de la première migration à la base de données. Dans Entity Framework 5, cette table était une table système si l’application utilisait la base de données Microsoft SQL Server. Cela a changé dans le Entity Framework 6, mais la table d’historique des migrations n’est plus marquée comme une table système.
+La table d’historique des migrations est une table utilisée par Migrations Code First pour stocker des détails sur les migrations appliquées à la base de données. Par défaut, le nom de la table dans la base de données est \_ \_ MigrationHistory et il est créé lors de l’application de la première migration à la base de données. Dans Entity Framework 5, cette table était une table système si l’application utilisait la base de données Microsoft SQL Server. Cela a changé dans le Entity Framework 6, mais la table d’historique des migrations n’est plus marquée comme une table système.
 
 ## <a name="why-customize-migrations-history-table"></a>Pourquoi personnaliser la table d’historique des migrations ?
 
@@ -27,7 +29,7 @@ La table d’historique des migrations est supposée être utilisée uniquement 
 
 -   Vous devez modifier les noms et/ou les facettes des colonnes pour activer un fournisseur de migrations<sup>tiers.</sup>
 -   Vous souhaitez modifier le nom de la table
--   Vous devez utiliser un schéma non défini par défaut pour le \_\_table MigrationHistory
+-   Vous devez utiliser un schéma non défini par défaut pour la \_ \_ table MigrationHistory
 -   Vous devez stocker des données supplémentaires pour une version donnée du contexte et, par conséquent, vous devez ajouter une colonne supplémentaire à la table.
 
 ## <a name="words-of-precaution"></a>Mots de précaution
@@ -43,7 +45,7 @@ Tout d’abord, vous devrez créer une classe dérivée de la classe System. Dat
 >[!NOTE]
 > En général, lorsque vous configurez des modèles EF, vous n’avez pas besoin d’appeler de base. OnModelCreating () de la méthode OnModelCreating remplacée puisque DbContext. OnModelCreating () a un corps vide. Ce n’est pas le cas lors de la configuration de la table d’historique des migrations. Dans ce cas, la première chose à faire dans votre remplacement OnModelCreating () consiste à appeler la base. OnModelCreating (). Cela permet de configurer la table d’historique des migrations de la manière par défaut, que vous Affinez ensuite dans la méthode de substitution.
 
-Supposons que vous souhaitez renommer la table d’historique des migrations et la placer dans un schéma personnalisé appelé « admin ». En outre, votre administrateur de bases de donnes souhaite que vous renommez la colonne MigrationId en ID\_de migration.  Pour ce faire, vous pouvez créer la classe suivante dérivée de HistoryContext :
+Supposons que vous souhaitez renommer la table d’historique des migrations et la placer dans un schéma personnalisé appelé « admin ». En outre, votre administrateur de bases de donnes souhaite que vous renommez la colonne MigrationId en ID de migration \_ . Pour ce faire, vous pouvez créer la classe suivante dérivée de HistoryContext :
 
 ``` csharp
     using System.Data.Common;
@@ -89,4 +91,4 @@ Une fois votre HistoryContext personnalisé prêt, vous devez faire en sorte qu�
 
 C’est très bien. Vous pouvez maintenant accéder à la console du gestionnaire de package, activer-migrations, ajouter la migration et enfin mettre à jour-base de données. Cela doit entraîner l’ajout à la base de données d’une table d’historique des migrations configurée en fonction des détails que vous avez spécifiés dans votre classe dérivée HistoryContext.
 
-![Base de données](~/ef6/media/database.png)
+![Table d’historique des migrations](~/ef6/media/database.png)

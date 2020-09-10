@@ -1,15 +1,16 @@
 ---
 title: Nouveautés d’EF Core 1.1 - EF Core
+description: Modifications et améliorations dans Entity Framework Core 1,1
 author: divega
 ms.date: 10/27/2016
 ms.assetid: C7FE8C85-445A-4F0C-97EC-CC3F7F1D6F5E
 uid: core/what-is-new/ef-core-1.1
-ms.openlocfilehash: d582712ed62443318f4b9e209511fb2a557d667e
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
+ms.openlocfilehash: 89dfe4b4772e9e6dc232860f38f07c94654af437
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78417516"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618806"
 ---
 # <a name="new-features-in-ef-core-11"></a>Nouvelles fonctionnalités d’EF Core 1.1
 

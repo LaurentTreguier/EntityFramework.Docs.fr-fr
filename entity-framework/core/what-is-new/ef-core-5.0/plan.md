@@ -1,18 +1,19 @@
 ---
 title: Planifier Entity Framework Core 5,0
+description: Les fonctionnalités prévues pour Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: a0d41d6df844c9ca2c8a2dc8ba50ca669e23dced
-ms.sourcegitcommit: 6f7af3f138bf7c724cbdda261f97e5cf7035e8d7
+ms.openlocfilehash: 5ac7a48a70959b625b7c602ee48dc08a360bee73
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/25/2020
-ms.locfileid: "88847577"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618666"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Planifier Entity Framework Core 5,0
 
-Comme décrit dans le [processus de planification](xref:core/what-is-new/release_planning), nous avons rassemblé les entrées des parties prenantes dans un plan provisoire pour la version EF Core 5,0.
+Comme décrit dans le [processus de planification](xref:core/what-is-new/release-planning), nous avons rassemblé les entrées des parties prenantes dans un plan provisoire pour la version EF Core 5,0.
 
 > [!IMPORTANT]
 > Ce plan est toujours un travail en cours. Rien ici n’est un engagement. Ce plan est un point de départ qui évoluera à mesure que nous en apprendrons davantage. Certains éléments qui ne sont pas actuellement planifiés pour 5,0 peuvent être extraits. Certains éléments actuellement planifiés pour 5,0 peuvent devenir punted.
@@ -309,4 +310,4 @@ En outre, nous considérons toujours les [problèmes les plus votés](https://gi
 
 ## <a name="suggestions"></a>Suggestions
 
-Vos commentaires sur la planification sont importants. La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut) pour ce problème sur GitHub. Ces données sont ensuite chargées dans le [processus de planification](xref:core/what-is-new/release_planning) de la prochaine version.
+Vos commentaires sur la planification sont importants. La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut) pour ce problème sur GitHub. Ces données sont ensuite chargées dans le [processus de planification](xref:core/what-is-new/release-planning) de la prochaine version.

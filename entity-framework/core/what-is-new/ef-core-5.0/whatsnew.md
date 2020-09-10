@@ -4,12 +4,12 @@ description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: f822e3ae776778749a654377cbd9d9814ca40972
-ms.sourcegitcommit: 12d257db4786487a0c28e9ddd79f176f7cf6edb1
+ms.openlocfilehash: b4551a3c593694b104a750d500d81eb170a83dc0
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/28/2020
-ms.locfileid: "89043595"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618602"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
@@ -41,7 +41,7 @@ public class Pet : Animal
 
 public class Cat : Pet
 {
-    public string EdcuationLevel { get; set; }
+    public string EducationLevel { get; set; }
 }
 
 public class Dog : Pet
@@ -492,7 +492,7 @@ Dans les versions précédentes, ce comportement était configurable par l’ins
 
 ### <a name="savepoints"></a>Points
 
-EF Core prend désormais en charge les [points](/SQL/t-sql/language-elements/save-transaction-transact-sql?view=sql-server-ver15#remarks) de contrôle pour un plus grand contrôle sur les transactions qui exécutent plusieurs opérations.
+EF Core prend désormais en charge les [points](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) de contrôle pour un plus grand contrôle sur les transactions qui exécutent plusieurs opérations.
 
 Les points de sauvegarde peuvent être créés, libérés et restaurés manuellement. Par exemple :
 
@@ -738,7 +738,7 @@ Ou dans la console du gestionnaire de package :
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer -NoOnConfiguring
 ```
 
-Notez que nous vous recommandons [d’utiliser une chaîne de connexion nommée et un stockage sécurisé comme des secrets d’utilisateur](/core/managing-schemas/scaffolding?tabs=vs#configuration-and-user-secrets).
+Notez que nous vous recommandons [d’utiliser une chaîne de connexion nommée et un stockage sécurisé comme des secrets d’utilisateur](xref:core/managing-schemas/scaffolding#configuration-and-user-secrets).
 
 ### <a name="translations-for-firstordefault-on-strings"></a>Traductions pour FirstOrDefault sur les chaînes
 
@@ -846,7 +846,7 @@ La documentation est suivie d’un problème [#2273](https://github.com/dotnet/E
 
 ### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a>Transmettre les arguments dans IDesignTimeDbContextFactory
 
-Les arguments sont à présent transmis à partir de la ligne de commande dans la `CreateDbContext` méthode de [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1). Par exemple, pour indiquer qu’il s’agit d’une build dev, un argument personnalisé (par exemple, `dev` ) peut être passé sur la ligne de commande :
+Les arguments sont à présent transmis à partir de la ligne de commande dans la `CreateDbContext` méthode de [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1). Par exemple, pour indiquer qu’il s’agit d’une build dev, un argument personnalisé (par exemple, `dev` ) peut être passé sur la ligne de commande :
 
 ```
 dotnet ef migrations add two --verbose --dev
@@ -968,7 +968,7 @@ Consultez la [documentation](xref:core/modeling/relationships#configuring-naviga
 
 Les migrations et la génération de modèles automatique permettent désormais de spécifier des espaces de noms sur la ligne de commande. Par exemple, pour rétroconcevoir une base de données en plaçant le contexte et les classes de modèle dans différents espaces de noms :
 
-```
+```dotnetcli
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
 ```
 
@@ -977,7 +977,7 @@ Pour plus d’informations, consultez la documentation sur les [migrations](xref
 ---
 En outre, une chaîne de connexion peut désormais être passée à la `database-update` commande :
 
-```
+```dotnetcli
 dotnet ef database update --connection "connection string"
 ```
 
@@ -992,6 +992,7 @@ Pour des raisons de performances, EF n’effectue pas de vérifications null sup
 L’utilisation de `EnableDetailedErrors` permet d’ajouter une vérification de valeur null supplémentaire aux requêtes de sorte que, pour une faible surcharge de performances, ces erreurs sont plus faciles à suivre à une cause racine.
 
 Par exemple :
+
 ```CSharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
@@ -1017,6 +1018,7 @@ La documentation est suivie d’un problème [#2199](https://github.com/dotnet/E
 ### <a name="support-for-the-sql-server-datalength-function"></a>Prise en charge de la fonction DATALENGTH SQL Server
 
 Vous pouvez y accéder à l’aide de la nouvelle `EF.Functions.DataLength` méthode. Par exemple :
+
 ```CSharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
 ```
@@ -1047,7 +1049,7 @@ La documentation est suivie d’un problème [#2230](https://github.com/dotnet/E
 
 ### <a name="complete-discriminator-mapping"></a>Terminer le mappage de discriminateur
 
-EF Core utilise une colonne de discriminateur pour le [mappage TPH d’une hiérarchie d’héritage](/ef/core/modeling/inheritance). Certaines améliorations des performances sont possibles tant que EF Core connaît toutes les valeurs possibles pour le discriminateur. EF Core 5,0 implémente désormais ces améliorations.
+EF Core utilise une colonne de discriminateur pour le [mappage TPH d’une hiérarchie d’héritage](xref:core/modeling/inheritance). Certaines améliorations des performances sont possibles tant que EF Core connaît toutes les valeurs possibles pour le discriminateur. EF Core 5,0 implémente désormais ces améliorations.
 
 Par exemple, les versions précédentes de EF Core génèrent toujours ce SQL pour une requête qui retourne tous les types dans une hiérarchie :
 
@@ -1117,7 +1119,7 @@ La documentation est suivie d’un problème [#2075](https://github.com/dotnet/E
 
 ### <a name="change-tracking-proxies"></a>Proxys de suivi des modifications
 
-EF Core pouvez désormais générer des proxies d’exécution qui implémentent automatiquement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1) et [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1). Celles-ci rerapportent ensuite les modifications de valeur sur les propriétés d’entité directement à EF Core, évitant ainsi la nécessité d’analyser les modifications. Toutefois, les proxies sont fournis avec leur propre ensemble de limitations, donc ils ne le sont pas pour tout le monde.
+EF Core pouvez désormais générer des proxies d’exécution qui implémentent automatiquement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) et [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged). Celles-ci rerapportent ensuite les modifications de valeur sur les propriétés d’entité directement à EF Core, évitant ainsi la nécessité d’analyser les modifications. Toutefois, les proxies sont fournis avec leur propre ensemble de limitations, donc ils ne le sont pas pour tout le monde.
 
 La documentation est suivie d’un problème [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).
 
@@ -1175,7 +1177,7 @@ Le fournisseur de base de données Azure Cosmos DB prend désormais en charge l�
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-SaveChanges lèvera ensuite un en cas de `DbUpdateConcurrencyException` conflit d’accès concurrentiel, qui [peut être géré](/ef/core/saving/concurrency) pour implémenter les nouvelles tentatives, etc.
+SaveChanges lèvera ensuite un en cas de `DbUpdateConcurrencyException` conflit d’accès concurrentiel, qui [peut être géré](xref:core/saving/concurrency) pour implémenter les nouvelles tentatives, etc.
 
 La documentation est suivie d’un problème [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).
 

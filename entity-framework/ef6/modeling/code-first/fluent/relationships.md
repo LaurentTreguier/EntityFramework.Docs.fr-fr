@@ -1,18 +1,20 @@
 ---
 title: API Fluent-relations-EF6
+description: API Fluent-relations dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: fd73b4f8-16d5-40f1-9640-885ceafe67a1
-ms.openlocfilehash: 05f282c02699f8bf3c71197ac5e01000f1855917
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/code-first/fluent/relationships
+ms.openlocfilehash: 8cc56f7341df6da7f60f649308ea7042ef23b537
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419072"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617004"
 ---
 # <a name="fluent-api---relationships"></a>API Fluent-relations
 > [!NOTE]
-> Cette page fournit des informations sur la configuration des relations dans votre modèle de Code First à l’aide de l’API Fluent. Pour obtenir des informations générales sur les relations dans EF et sur la manière d’accéder aux données et de les manipuler à l’aide de relations, consultez [relations & les propriétés de navigation](~/ef6/fundamentals/relationships.md).  
+> Cette page fournit des informations sur la configuration des relations dans votre modèle de Code First à l’aide de l’API Fluent. Pour obtenir des informations générales sur les relations dans EF et sur la manière d’accéder aux données et de les manipuler à l’aide de relations, consultez [relations & les propriétés de navigation](xref:ef6/fundamentals/relationships).  
 
 Lorsque vous utilisez Code First, vous définissez votre modèle en définissant vos classes CLR de domaine. Par défaut, Entity Framework utilise les conventions Code First pour mapper vos classes au schéma de la base de données. Si vous utilisez la Code First conventions de nommage, vous pouvez, dans la plupart des cas, vous reposer sur Code First pour configurer des relations entre vos tables en fonction des clés étrangères et des propriétés de navigation que vous définissez sur les classes. Si vous ne respectez pas les conventions lors de la définition de vos classes ou si vous souhaitez modifier la façon dont les conventions fonctionnent, vous pouvez utiliser l’API Fluent ou des annotations de données pour configurer vos classes afin Code First pouvez mapper les relations entre vos tables.  
 
@@ -95,8 +97,8 @@ Vous pouvez configurer la suppression en cascade sur une relation à l’aide de
 
 Vous pouvez supprimer ces conventions de suppression en cascade à l’aide de :  
 
-modelBuilder. conventions. Remove\<OneToManyCascadeDeleteConvention\>()  
-modelBuilder. conventions. Remove\<ManyToManyCascadeDeleteConvention\>()  
+modelBuilder. conventions. Remove \<OneToManyCascadeDeleteConvention\> ()  
+modelBuilder. conventions. Remove \<ManyToManyCascadeDeleteConvention\> ()  
 
 Le code suivant configure la relation pour qu’elle soit obligatoire, puis désactive la suppression en cascade.  
 

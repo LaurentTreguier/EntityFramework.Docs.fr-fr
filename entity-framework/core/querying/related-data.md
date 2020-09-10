@@ -1,15 +1,16 @@
 ---
 title: 'Chargement des données associées : EF Core'
+description: Différentes stratégies de chargement des données associées avec Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: f9fb64e2-6699-4d70-a773-592918c04c19
 uid: core/querying/related-data
-ms.openlocfilehash: d3a1810599771befb451715d93454fff63949771
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: 43b8cbac1e36a37bc85c953319407b3814d7d327
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238305"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618919"
 ---
 # <a name="loading-related-data"></a>Chargement des données associées
 
@@ -19,7 +20,7 @@ Entity Framework Core vous permet d’utiliser les propriétés de navigation da
 * Le **Chargement explicite** signifie que les données associées sont explicitement chargées à partir de la base de données à un moment ultérieur.
 * Le **Chargement différé** signifie que les données associées sont chargées de façon transparente à partir de la base de données lors de l’accès à la propriété de navigation.
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
 
 ## <a name="eager-loading"></a>Chargement hâtif
@@ -28,7 +29,7 @@ Vous pouvez utiliser la méthode `Include` pour spécifier les données associé
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#SingleInclude)]
 
-> [!TIP]  
+> [!TIP]
 > Entity Framework Core corrige automatiquement les propriétés de navigation vers d’autres entités qui étaient précédemment chargées dans l’instance de contexte. Ainsi, même vous n’incluez pas explicitement si les données pour une propriété de navigation, la propriété peut toujours être renseignée si toutes ou une partie des entités associées ont été précédemment chargées.
 
 Vous pouvez inclure des données associées provenant de plusieurs relations dans une seule requête.
@@ -45,18 +46,17 @@ Vous pouvez enchaîner plusieurs appels à `ThenInclude` pour continuer à inclu
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleThenIncludes)]
 
-Vous pouvez combiner tout cela pour inclure les données associées de plusieurs niveaux et plusieurs racines dans la même requête.
+Vous pouvez combiner tous les appels pour inclure les données associées de plusieurs niveaux et plusieurs racines dans la même requête.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#IncludeTree)]
 
-Vous pourriez souhaiter inclure plusieurs entités associées pour une entité qui est incluse. Par exemple, quand vous interrogez des `Blogs`, vous incluez `Posts`, puis souhaitez inclure à la fois les `Author` et les `Tags` des `Posts`. Pour ce faire, vous devez spécifier chaque chemin d’accès à inclure à partir de la racine. Par exemple, `Blog -> Posts -> Author` et `Blog -> Posts -> Tags`. Cela ne signifie pas que vous obtiendrez des jointures redondantes. Dans la plupart des cas, EF consolide les jointures lors de la génération du SQL.
+Vous pourriez souhaiter inclure plusieurs entités associées pour une entité qui est incluse. Par exemple, quand vous interrogez des `Blogs`, vous incluez `Posts`, puis souhaitez inclure à la fois les `Author` et les `Tags` des `Posts`. Pour inclure les deux, vous devez spécifier chaque chemin d’accès include commençant à la racine. Par exemple, `Blog -> Posts -> Author` et `Blog -> Posts -> Tags`. Cela ne signifie pas que vous obtiendrez des jointures redondantes. dans la plupart des cas, EF combinera les jointures lors de la génération de SQL.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludes)]
 
 ### <a name="single-and-split-queries"></a>Requêtes simples et fractionnées
 
-> [!NOTE]
-> Cette fonctionnalité est introduite dans EF Core 5,0.
+#### <a name="single-queries"></a>Requêtes uniques
 
 Dans les bases de données relationnelles, toutes les entités associées sont chargées par défaut en introduisant des JOINTUREs :
 
@@ -67,13 +67,18 @@ LEFT JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
 ORDER BY [b].[BlogId], [p].[PostId]
 ```
 
-Si un blog classique contient plusieurs publications connexes, les lignes de ces publications dupliqueront les informations du blog, ce qui entraînerait un problème de « explosion cartésien ». À mesure que des relations un-à-plusieurs sont chargées, la quantité de données dupliquées peut croître et nuire aux performances de votre application.
+Si un blog classique contient plusieurs publications connexes, les lignes de ces publications dupliqueront les informations du blog, ce qui entraînerait un problème de « explosion cartésien ». À mesure que des relations un-à-plusieurs sont chargées, la quantité de données dupliquées peut croître et nuire aux performances de votre application. Par défaut, EF Core émet un avertissement s’il détecte des requêtes qui chargent la collection, notamment celles qui peuvent entraîner des problèmes de performances.
+
+#### <a name="split-queries"></a>Fractionner les requêtes
+
+> [!NOTE]
+> Cette fonctionnalité est introduite dans EF Core 5,0.
 
 EF vous permet de spécifier qu’une requête LINQ donnée doit être *fractionnée* en plusieurs requêtes SQL. Au lieu de JOINTUREs, les requêtes Split effectuent une requête SQL supplémentaire pour chaque navigation un-à-plusieurs incluse :
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
 
-Cela produira le code SQL suivant :
+Il produira le code SQL suivant :
 
 ```sql
 SELECT [b].[BlogId], [b].[OwnerId], [b].[Rating], [b].[Url]
@@ -86,20 +91,30 @@ INNER JOIN [Post] AS [p] ON [b].[BlogId] = [p].[BlogId]
 ORDER BY [b].[BlogId]
 ```
 
-Bien que cela évite les problèmes de performances associés aux JOINTUREs et à l’explosion cartésienne, elle présente également certains inconvénients :
+> [!NOTE]
+> Les entités associées à un-à-un sont toujours chargées via des JOINTUREs dans la même requête, car cela n’a aucun impact sur les performances.
 
-* Alors que la plupart des bases de données garantissent la cohérence des données pour les requêtes uniques, il n’existe pas de garantie de ce type pour plusieurs requêtes. Cela signifie que si la base de données est mise à jour en même temps que vos requêtes en cours d’exécution, les données résultantes peuvent ne pas être cohérentes. Cela peut être atténué en encapsulant les requêtes dans une transaction sérialisable ou d’instantané, bien que cela puisse créer ses propres problèmes de performances. Pour plus d’informations, consultez la documentation de votre base de données.
-* Chaque requête implique actuellement un aller-retour réseau supplémentaire vers votre base de données. Cela peut dégrader les performances, en particulier lorsque la latence est élevée pour la base de données (par exemple, les services Cloud). EF Core l’améliorera à l’avenir en regroupant les requêtes en un seul aller-retour.
-* Bien que certaines bases de données autorisent l’utilisation des résultats de plusieurs requêtes en même temps (SQL Server avec MARS, SQLite), la plupart n’autorisent l’activation que d’une seule requête à un moment donné. Cela signifie que tous les résultats des requêtes antérieures doivent être mis en mémoire tampon dans la mémoire de votre application avant d’exécuter des requêtes ultérieures, ce qui vous permet d’améliorer vos besoins en mémoire de façon potentiellement significative.
+#### <a name="enabling-split-queries-globally"></a>Activation globale des requêtes fractionnées
+
+Vous pouvez également configurer des requêtes fractionnées comme valeur par défaut pour le contexte de votre application :
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/SplitQueriesBloggingContext.cs?name=QuerySplittingBehaviorSplitQuery&highlight=6)]
+
+Lorsque les requêtes de fractionnement sont configurées en tant que valeurs par défaut, il est toujours possible de configurer des requêtes spécifiques pour qu’elles s’exécutent en tant que requêtes uniques :
+
+[!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+
+Si le mode de fractionnement de requête n’est pas explicitement spécifié, ni globalement, ni sur la requête, et EF Core détecte qu’une seule requête charge plusieurs collections includes, un avertissement est émis pour attirer l’attention sur les problèmes de performances potentiels résultants. Le fait de définir le mode de requête sur SingleQuery entraîne la non-génération de l’avertissement.
+
+#### <a name="characteristics-of-split-queries"></a>Caractéristiques des requêtes fractionnées
+
+Si la requête Split évite les problèmes de performances associés aux JOINTUREs et à l’explosion cartésienne, elle présente également certains inconvénients :
+
+* Alors que la plupart des bases de données garantissent la cohérence des données pour les requêtes uniques, il n’existe pas de garantie de ce type pour plusieurs requêtes. Si la base de données est mise à jour en même temps lors de l’exécution de vos requêtes, les données résultantes peuvent ne pas être cohérentes. Vous pouvez l’atténuer en encapsulant les requêtes dans une transaction sérialisable ou d’instantané, même si cela peut entraîner des problèmes de performances. Pour plus d’informations, consultez la documentation de votre base de données.
+* Chaque requête implique actuellement un aller-retour réseau supplémentaire vers votre base de données. Plusieurs allers-retours sur le réseau peuvent dégrader les performances, notamment lorsque la latence est élevée pour la base de données (par exemple, les services Cloud).
+* Bien que certaines bases de données autorisent l’utilisation des résultats de plusieurs requêtes en même temps (SQL Server avec MARS, SQLite), la plupart n’autorisent l’activation que d’une seule requête à un moment donné. Ainsi, tous les résultats des requêtes antérieures doivent être mis en mémoire tampon dans la mémoire de votre application avant d’exécuter des requêtes ultérieures, ce qui entraîne une augmentation des besoins en mémoire.
 
 Malheureusement, il n’existe aucune stratégie pour charger des entités associées qui s’adaptent à tous les scénarios. Examinez attentivement les avantages et les inconvénients des requêtes simples et fractionnées, puis sélectionnez celle qui répond à vos besoins.
-
-> [!NOTE]
-> Les entités associées à un-à-un sont toujours chargées via des JOINTUREs, car cela n’a aucun impact sur les performances.
->
-> Pour le moment, l’utilisation du fractionnement des requêtes sur SQL Server requiert des paramètres `MultipleActiveResultSets=true` dans votre chaîne de connexion. Cette exigence sera supprimée dans une prochaine version préliminaire.
->
-> Les versions préliminaires ultérieures de EF Core 5,0 permettront de spécifier le fractionnement des requêtes comme valeur par défaut pour votre contexte.
 
 ### <a name="filtered-include"></a>Include filtré
 
@@ -114,29 +129,29 @@ Ces opérations doivent être appliquées sur la navigation dans la collection d
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#FilteredInclude)]
 
-Chaque navigation incluse n’autorise qu’un seul ensemble d’opérations de filtre. Dans les cas où plusieurs opérations include sont appliquées pour une navigation de collection donnée ( `blog.Posts` dans les exemples ci-dessous), les opérations de filtre peuvent uniquement être spécifiées sur l’une d’entre elles : 
+Chaque navigation incluse n’autorise qu’un seul ensemble d’opérations de filtre. Dans les cas où plusieurs opérations include sont appliquées pour une navigation de collection donnée ( `blog.Posts` dans les exemples ci-dessous), les opérations de filtre peuvent uniquement être spécifiées sur l’une d’entre elles :
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered1)]
 
-Les opérations identiques peuvent également être appliquées pour chaque navigation qui est incluse plusieurs fois :
+Au lieu de cela, des opérations identiques peuvent être appliquées pour chaque navigation qui est incluse plusieurs fois :
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#MultipleLeafIncludesFiltered2)]
 
 > [!CAUTION]
-> En cas de requêtes de suivi, les résultats de l’inclusion filtrée peuvent être inattendus en raison de la correction de la [navigation](tracking.md). Toutes les entités pertinentes qui ont été querriedes précédemment et qui ont été stockées dans le dispositif de suivi des modifications sont présentes dans les résultats de la requête include filtrée, même si elles ne répondent pas aux exigences du filtre. Envisagez d’utiliser des `NoTracking` requêtes ou de recréer DbContext lors de l’utilisation de l’inclusion filtrée dans ces situations.
+> En cas de requêtes de suivi, les résultats de l’inclusion filtrée peuvent être inattendus en raison de la correction de la [navigation](xref:core/querying/tracking). Toutes les entités pertinentes qui ont été interrogées précédemment et qui ont été stockées dans le dispositif de suivi des modifications sont présentes dans les résultats de la requête include filtrée, même si elles ne répondent pas aux exigences du filtre. Envisagez d’utiliser des `NoTracking` requêtes ou de recréer DbContext lors de l’utilisation de l’inclusion filtrée dans ces situations.
 
 Exemple :
 
 ```csharp
 var orders = context.Orders.Where(o => o.Id > 1000).ToList();
 
-// customer entities will have references to all orders where Id > 1000, rathat than > 5000
+// customer entities will have references to all orders where Id > 1000, rather than > 5000
 var filtered = context.Customers.Include(c => c.Orders.Where(o => o.Id > 5000)).ToList();
 ```
 
 ### <a name="include-on-derived-types"></a>Inclure des types dérivés
 
-Vous pouvez inclure des données associées provenant de navigations définies uniquement sur un type dérivé à l’aide de `Include` et `ThenInclude`.
+Vous pouvez inclure des données associées de la navigation définies uniquement sur un type dérivé à l’aide `Include` de et de `ThenInclude` .
 
 En partant du modèle suivant :
 
@@ -198,13 +213,13 @@ Vous pouvez charger explicitement une propriété de navigation via l’API `DbC
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#Eager)]
 
-Vous pouvez également explicitement charger une propriété de navigation en exécutant une requête distincte qui retourne les entités associées. Si le suivi des modifications est activé, lors du chargement d’une entité, EF Core définit automatiquement les propriétés de navigation de l’entité qui vient d’être chargée pour faire référence à toutes les entités déjà chargées et définir les propriétés de navigation des entités déjà chargées pour faire référence à l’entité qui vient d’être chargée.
+Vous pouvez également explicitement charger une propriété de navigation en exécutant une requête distincte qui retourne les entités associées. Si le suivi des modifications est activé, lorsque la requête matérialise une entité, EF Core définira automatiquement les propriétés de navigation de l’entité nouvellement chargée pour faire référence à toutes les entités déjà chargées, et définir les propriétés de navigation des entités déjà chargées pour faire référence à l’entité qui vient d’être chargée.
 
 ### <a name="querying-related-entities"></a>Interrogation des entités associées
 
 Vous pouvez également obtenir une requête LINQ qui représente le contenu d’une propriété de navigation.
 
-Cela vous permet d’effectuer des opérations telles que l’exécution d’un opérateur d’agrégation sur les entités associées sans les charger dans la mémoire.
+Elle vous permet d’appliquer des opérateurs supplémentaires sur la requête. Exemple nombre application d’un opérateur d’agrégation sur les entités associées sans les charger en mémoire.
 
 [!code-csharp[Main](../../../samples/core/Querying/RelatedData/Sample.cs#NavQueryAggregate)]
 
@@ -254,7 +269,7 @@ public class Post
 
 ### <a name="lazy-loading-without-proxies"></a>Chargement différé sans proxy
 
-Les proxys à chargement différé fonctionnent en injectant le service `ILazyLoader` dans une entité, comme décrit dans [Constructeurs de type d’entité](../modeling/constructors.md). Par exemple :
+Les proxys à chargement différé fonctionnent en injectant le service `ILazyLoader` dans une entité, comme décrit dans [Constructeurs de type d’entité](xref:core/modeling/constructors). Par exemple :
 
 ```csharp
 public class Blog
@@ -309,7 +324,7 @@ public class Post
 }
 ```
 
-Il n’est pas nécessaire que l’héritage des types d’entité à partir des propriétés de navigation soit virtuel, et cela permet aux instances d’entité créées avec `new` d’être chargées en différé une fois jointes à un contexte. Toutefois, il requiert une référence au service `ILazyLoader`, qui est défini dans le package [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/). Ce package contient un ensemble minimal de types, de sorte que dépendre de celui-ci n’a qu’un impact très limité. Toutefois, pour éviter complètement de dépendre des packages EF Core dans les types d’entité, il est possible d’injecter la méthode `ILazyLoader.Load` en tant que délégué. Par exemple :
+Cette méthode ne requiert pas l’héritage des types d’entités ou des propriétés de navigation virtuelles, et permet aux instances d’entité créées avec la `new` valeur de chargement différé une fois attachées à un contexte. Toutefois, il requiert une référence au service `ILazyLoader`, qui est défini dans le package [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/). Ce package contient un ensemble minimal de types afin qu’il n’y ait qu’un faible impact en fonction de celui-ci. Toutefois, pour éviter complètement en fonction des packages d’EF Core dans les types d’entité, il est possible d’injecter la `ILazyLoader.Load` méthode en tant que délégué. Par exemple :
 
 ```csharp
 public class Blog
@@ -383,18 +398,18 @@ public static class PocoLoadingExtensions
 }
 ```
 
-> [!NOTE]  
+> [!NOTE]
 > Le paramètre de constructeur pour le délégué à chargement différé doit être appelé « lazyLoader ». La configuration permettant d’utiliser un nom différent est prévue pour une version ultérieure.
 
 ## <a name="related-data-and-serialization"></a>Données associées et sérialisation
 
-Étant donné qu’EF Core corrigera automatiquement les propriétés de navigation, vous pouvez vous retrouver avec des cycles dans votre graphique d’objets. Par exemple, le chargement d’un blog et de ses billets associés aboutit à un objet de blog qui fait référence à une collection de billets. Chacun de ces billets aura une référence vers le blog.
+Étant donné que EF Core effectue automatiquement une correction des propriétés de navigation, vous pouvez vous retrouver avec des cycles dans votre graphique d’objets. Par exemple, le chargement d’un blog et de ses billets associés aboutit à un objet de blog qui fait référence à une collection de billets. Chacun de ces billets aura une référence vers le blog.
 
-Certaines infrastructures de sérialisation n’autorisent pas de tels cycles. Par exemple, Json.NET lève l’exception suivante si un cycle est rencontré.
+Certaines infrastructures de sérialisation n’autorisent pas de tels cycles. Par exemple, Json.NET lèvera l’exception suivante si un cycle est trouvé.
 
 > Newtonsoft.Json.JsonSerializationException: Self referencing loop detected for property 'Blog' with type 'MyApplication.Models.Blog'.
 
-Si vous utilisez ASP.NET Core, vous pouvez configurer Json.NET pour ignorer les cycles qu’il trouve dans le graphique d’objets. Cette opération est effectuée dans la méthode `ConfigureServices(...)` de `Startup.cs`.
+Si vous utilisez ASP.NET Core, vous pouvez configurer Json.NET pour ignorer les cycles qu’il trouve dans le graphique d’objets. Cette configuration s’effectue dans la `ConfigureServices(...)` méthode de `Startup.cs` .
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
