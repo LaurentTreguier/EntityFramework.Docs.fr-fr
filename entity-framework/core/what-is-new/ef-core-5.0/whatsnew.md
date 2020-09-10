@@ -4,28 +4,28 @@ description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
 ms.date: 07/20/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: f822e3ae776778749a654377cbd9d9814ca40972
-ms.sourcegitcommit: 12d257db4786487a0c28e9ddd79f176f7cf6edb1
+ms.openlocfilehash: b4551a3c593694b104a750d500d81eb170a83dc0
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 08/28/2020
-ms.locfileid: "89043595"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89618602"
 ---
-# <a name="whats-new-in-ef-core-50"></a><span data-ttu-id="2a9cf-103">Nouveautés de EF Core 5,0</span><span class="sxs-lookup"><span data-stu-id="2a9cf-103">What's New in EF Core 5.0</span></span>
+# <a name="whats-new-in-ef-core-50"></a><span data-ttu-id="1f975-103">Nouveautés de EF Core 5,0</span><span class="sxs-lookup"><span data-stu-id="1f975-103">What's New in EF Core 5.0</span></span>
 
-<span data-ttu-id="2a9cf-104">EF Core 5,0 est actuellement en cours de développement.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-104">EF Core 5.0 is currently in development.</span></span> <span data-ttu-id="2a9cf-105">Cette page contient une vue d’ensemble des changements intéressants introduits dans chaque version préliminaire.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-105">This page will contain an overview of interesting changes introduced in each preview.</span></span>
+<span data-ttu-id="1f975-104">EF Core 5,0 est actuellement en cours de développement.</span><span class="sxs-lookup"><span data-stu-id="1f975-104">EF Core 5.0 is currently in development.</span></span> <span data-ttu-id="1f975-105">Cette page contient une vue d’ensemble des changements intéressants introduits dans chaque version préliminaire.</span><span class="sxs-lookup"><span data-stu-id="1f975-105">This page will contain an overview of interesting changes introduced in each preview.</span></span>
 
-<span data-ttu-id="2a9cf-106">Cette page ne duplique pas le [plan pour EF Core 5,0](xref:core/what-is-new/ef-core-5.0/plan).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-106">This page does not duplicate the [plan for EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan).</span></span> <span data-ttu-id="2a9cf-107">Le plan décrit les thèmes globaux pour EF Core 5,0, y compris tout ce que nous envisageons d’inclure avant d’expédier la version finale.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-107">The plan describes the overall themes for EF Core 5.0, including everything we are planning to include before shipping the final release.</span></span>
+<span data-ttu-id="1f975-106">Cette page ne duplique pas le [plan pour EF Core 5,0](xref:core/what-is-new/ef-core-5.0/plan).</span><span class="sxs-lookup"><span data-stu-id="1f975-106">This page does not duplicate the [plan for EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan).</span></span> <span data-ttu-id="1f975-107">Le plan décrit les thèmes globaux pour EF Core 5,0, y compris tout ce que nous envisageons d’inclure avant d’expédier la version finale.</span><span class="sxs-lookup"><span data-stu-id="1f975-107">The plan describes the overall themes for EF Core 5.0, including everything we are planning to include before shipping the final release.</span></span>
 
-<span data-ttu-id="2a9cf-108">Nous ajouterons des liens à partir d’ici à la documentation officielle au fur et à mesure de sa publication.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-108">We will add links from here to the official documentation as it is published.</span></span>
+<span data-ttu-id="1f975-108">Nous ajouterons des liens à partir d’ici à la documentation officielle au fur et à mesure de sa publication.</span><span class="sxs-lookup"><span data-stu-id="1f975-108">We will add links from here to the official documentation as it is published.</span></span>
 
-## <a name="preview-8"></a><span data-ttu-id="2a9cf-109">Version préliminaire 8</span><span class="sxs-lookup"><span data-stu-id="2a9cf-109">Preview 8</span></span>
+## <a name="preview-8"></a><span data-ttu-id="1f975-109">Version préliminaire 8</span><span class="sxs-lookup"><span data-stu-id="1f975-109">Preview 8</span></span>
 
-### <a name="table-per-type-tpt-mapping"></a><span data-ttu-id="2a9cf-110">Mappage table par type (TPT)</span><span class="sxs-lookup"><span data-stu-id="2a9cf-110">Table-per-type (TPT) mapping</span></span>
+### <a name="table-per-type-tpt-mapping"></a><span data-ttu-id="1f975-110">Mappage table par type (TPT)</span><span class="sxs-lookup"><span data-stu-id="1f975-110">Table-per-type (TPT) mapping</span></span>
 
-<span data-ttu-id="2a9cf-111">Par défaut, EF Core mappe une hiérarchie d’héritage de types .NET à une seule table de base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-111">By default, EF Core maps an inheritance hierarchy of .NET types to a single database table.</span></span> <span data-ttu-id="2a9cf-112">C’est ce que l’on appelle le mappage TPH (table par hiérarchie).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-112">This is known as table-per-hierarchy (TPH) mapping.</span></span> <span data-ttu-id="2a9cf-113">EF Core 5,0 permet également de mapper chaque type .NET dans une hiérarchie d’héritage à une autre table de base de données. connu sous le nom de mappage table par type (TPT).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-113">EF Core 5.0 also allows mapping each .NET type in an inheritance hierarchy to a different database table; known as table-per-type (TPT) mapping.</span></span>
+<span data-ttu-id="1f975-111">Par défaut, EF Core mappe une hiérarchie d’héritage de types .NET à une seule table de base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-111">By default, EF Core maps an inheritance hierarchy of .NET types to a single database table.</span></span> <span data-ttu-id="1f975-112">C’est ce que l’on appelle le mappage TPH (table par hiérarchie).</span><span class="sxs-lookup"><span data-stu-id="1f975-112">This is known as table-per-hierarchy (TPH) mapping.</span></span> <span data-ttu-id="1f975-113">EF Core 5,0 permet également de mapper chaque type .NET dans une hiérarchie d’héritage à une autre table de base de données. connu sous le nom de mappage table par type (TPT).</span><span class="sxs-lookup"><span data-stu-id="1f975-113">EF Core 5.0 also allows mapping each .NET type in an inheritance hierarchy to a different database table; known as table-per-type (TPT) mapping.</span></span>
 
-<span data-ttu-id="2a9cf-114">Par exemple, considérez ce modèle avec une hiérarchie mappée :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-114">For example, consider this model with a mapped hierarchy:</span></span>
+<span data-ttu-id="1f975-114">Par exemple, considérez ce modèle avec une hiérarchie mappée :</span><span class="sxs-lookup"><span data-stu-id="1f975-114">For example, consider this model with a mapped hierarchy:</span></span>
 
 ```c#
 public class Animal
@@ -41,7 +41,7 @@ public class Pet : Animal
 
 public class Cat : Pet
 {
-    public string EdcuationLevel { get; set; }
+    public string EducationLevel { get; set; }
 }
 
 public class Dog : Pet
@@ -50,7 +50,7 @@ public class Dog : Pet
 }
 ```
 
-<span data-ttu-id="2a9cf-115">Par défaut, EF Core mappe ce à une table unique :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-115">By default, EF Core will map this to a single table:</span></span>
+<span data-ttu-id="1f975-115">Par défaut, EF Core mappe ce à une table unique :</span><span class="sxs-lookup"><span data-stu-id="1f975-115">By default, EF Core will map this to a single table:</span></span>
 
 ```sql
 CREATE TABLE [Animals] (
@@ -64,7 +64,7 @@ CREATE TABLE [Animals] (
 );
 ```
 
-<span data-ttu-id="2a9cf-116">Toutefois, le mappage de chaque type d’entité à une autre table génère à la place une table par type :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-116">However, mapping each entity type to a different table will instead result in one table per type:</span></span>
+<span data-ttu-id="1f975-116">Toutefois, le mappage de chaque type d’entité à une autre table génère à la place une table par type :</span><span class="sxs-lookup"><span data-stu-id="1f975-116">However, mapping each entity type to a different table will instead result in one table per type:</span></span>
 
 ```sql
 CREATE TABLE [Animals] (
@@ -97,9 +97,9 @@ CREATE TABLE [Dogs] (
 );
 ```
 
-<span data-ttu-id="2a9cf-117">Notez que la création de contraintes de clé étrangère indiquées ci-dessus a été ajoutée après la création de branche du code pour Preview 8.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-117">Note that creation of the foreign key constraints shown above were added after branching the code for preview 8.</span></span>
+<span data-ttu-id="1f975-117">Notez que la création de contraintes de clé étrangère indiquées ci-dessus a été ajoutée après la création de branche du code pour Preview 8.</span><span class="sxs-lookup"><span data-stu-id="1f975-117">Note that creation of the foreign key constraints shown above were added after branching the code for preview 8.</span></span>
 
-<span data-ttu-id="2a9cf-118">Les types d’entités peuvent être mappés à des tables différentes à l’aide des attributs de mappage :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-118">Entity types can be mapped to different tables using mapping attributes:</span></span>
+<span data-ttu-id="1f975-118">Les types d’entités peuvent être mappés à des tables différentes à l’aide des attributs de mappage :</span><span class="sxs-lookup"><span data-stu-id="1f975-118">Entity types can be mapped to different tables using mapping attributes:</span></span>
 
 ```c#
 [Table("Animals")]
@@ -128,7 +128,7 @@ public class Dog : Pet
 }
 ```
 
-<span data-ttu-id="2a9cf-119">Ou à l’aide de la `ModelBuilder` Configuration :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-119">Or using `ModelBuilder` configuration:</span></span>
+<span data-ttu-id="1f975-119">Ou à l’aide de la `ModelBuilder` Configuration :</span><span class="sxs-lookup"><span data-stu-id="1f975-119">Or using `ModelBuilder` configuration:</span></span>
 
 ```c#
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -140,13 +140,13 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="2a9cf-120">La documentation est suivie d’un problème [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-120">Documentation is tracked by issue [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979).</span></span>
+<span data-ttu-id="1f975-120">La documentation est suivie d’un problème [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979).</span><span class="sxs-lookup"><span data-stu-id="1f975-120">Documentation is tracked by issue [#1979](https://github.com/dotnet/EntityFramework.Docs/issues/1979).</span></span>
 
-### <a name="migrations-rebuild-sqlite-tables"></a><span data-ttu-id="2a9cf-121">Migrations : reconstruire les tables SQLite</span><span class="sxs-lookup"><span data-stu-id="2a9cf-121">Migrations: Rebuild SQLite tables</span></span>
+### <a name="migrations-rebuild-sqlite-tables"></a><span data-ttu-id="1f975-121">Migrations : reconstruire les tables SQLite</span><span class="sxs-lookup"><span data-stu-id="1f975-121">Migrations: Rebuild SQLite tables</span></span>
 
-<span data-ttu-id="2a9cf-122">Par rapport à d’autres bases de données, SQLite est relativement limité dans ses fonctionnalités de manipulation de schéma.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-122">Compared to other database, SQLite is relatively limited in its schema manipulation capabilities.</span></span> <span data-ttu-id="2a9cf-123">Par exemple, la suppression d’une colonne d’une table existante nécessite la suppression et la recréation de la table entière.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-123">For example, dropping a column from an existing table requires that the entire table be dropped and re-created.</span></span> <span data-ttu-id="2a9cf-124">EF Core migrations 5,0 prend désormais en charge la reconstruction automatique de la table pour les modifications de schéma qui l’exigent.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-124">EF Core 5.0 Migrations now supports automatic rebuilding the table for schema changes that require it.</span></span>
+<span data-ttu-id="1f975-122">Par rapport à d’autres bases de données, SQLite est relativement limité dans ses fonctionnalités de manipulation de schéma.</span><span class="sxs-lookup"><span data-stu-id="1f975-122">Compared to other database, SQLite is relatively limited in its schema manipulation capabilities.</span></span> <span data-ttu-id="1f975-123">Par exemple, la suppression d’une colonne d’une table existante nécessite la suppression et la recréation de la table entière.</span><span class="sxs-lookup"><span data-stu-id="1f975-123">For example, dropping a column from an existing table requires that the entire table be dropped and re-created.</span></span> <span data-ttu-id="1f975-124">EF Core migrations 5,0 prend désormais en charge la reconstruction automatique de la table pour les modifications de schéma qui l’exigent.</span><span class="sxs-lookup"><span data-stu-id="1f975-124">EF Core 5.0 Migrations now supports automatic rebuilding the table for schema changes that require it.</span></span>
 
-<span data-ttu-id="2a9cf-125">Par exemple, imaginez que nous disposons d’une `Unicorns` table créée pour un `Unicorn` type d’entité :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-125">For example, imagine we have a `Unicorns` table created for a `Unicorn` entity type:</span></span>
+<span data-ttu-id="1f975-125">Par exemple, imaginez que nous disposons d’une `Unicorns` table créée pour un `Unicorn` type d’entité :</span><span class="sxs-lookup"><span data-stu-id="1f975-125">For example, imagine we have a `Unicorns` table created for a `Unicorn` entity type:</span></span>
 
 ```c#
 public class Unicorn
@@ -165,7 +165,7 @@ CREATE TABLE "Unicorns" (
 );
 ```
 
-<span data-ttu-id="2a9cf-126">Nous avons ensuite appris que le stockage de l’âge d’une licorne est considéré comme très impropre. nous allons donc supprimer cette propriété, ajouter une nouvelle migration et mettre à jour la base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-126">We then learn that storing the age of a unicorn is considered very rude, so let's remove that property, add a new migration, and update the database.</span></span> <span data-ttu-id="2a9cf-127">Cette mise à jour échoue lors de l’utilisation de EF Core 3,1, car la colonne ne peut pas être supprimée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-127">This update will fail when using EF Core 3.1 because the column cannot be dropped.</span></span> <span data-ttu-id="2a9cf-128">Dans EF Core 5,0, les migrations recréent à la place la table :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-128">In EF Core 5.0, Migrations will instead rebuild the table:</span></span>
+<span data-ttu-id="1f975-126">Nous avons ensuite appris que le stockage de l’âge d’une licorne est considéré comme très impropre. nous allons donc supprimer cette propriété, ajouter une nouvelle migration et mettre à jour la base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-126">We then learn that storing the age of a unicorn is considered very rude, so let's remove that property, add a new migration, and update the database.</span></span> <span data-ttu-id="1f975-127">Cette mise à jour échoue lors de l’utilisation de EF Core 3,1, car la colonne ne peut pas être supprimée.</span><span class="sxs-lookup"><span data-stu-id="1f975-127">This update will fail when using EF Core 3.1 because the column cannot be dropped.</span></span> <span data-ttu-id="1f975-128">Dans EF Core 5,0, les migrations recréent à la place la table :</span><span class="sxs-lookup"><span data-stu-id="1f975-128">In EF Core 5.0, Migrations will instead rebuild the table:</span></span>
 
 ```sql
 CREATE TABLE "ef_temp_Unicorns" (
@@ -186,22 +186,22 @@ ALTER TABLE "ef_temp_Unicorns" RENAME TO "Unicorns";
 PRAGMA foreign_keys = 1;
 ```
 
-<span data-ttu-id="2a9cf-129">Notez que :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-129">Notice that:</span></span>
-* <span data-ttu-id="2a9cf-130">Une table temporaire est créée avec le schéma souhaité pour la nouvelle table</span><span class="sxs-lookup"><span data-stu-id="2a9cf-130">A temporary table is created with the desired schema for the new table</span></span>
-* <span data-ttu-id="2a9cf-131">Les données sont copiées à partir de la table actuelle dans la table temporaire</span><span class="sxs-lookup"><span data-stu-id="2a9cf-131">Data is copied from the current table into the temporary table</span></span>
-* <span data-ttu-id="2a9cf-132">Mise hors tension de la clé étrangère</span><span class="sxs-lookup"><span data-stu-id="2a9cf-132">Foreign key enforcement is switched off</span></span>
-* <span data-ttu-id="2a9cf-133">La table actuelle est supprimée</span><span class="sxs-lookup"><span data-stu-id="2a9cf-133">The current table is dropped</span></span>
-* <span data-ttu-id="2a9cf-134">La table temporaire est renommée en une nouvelle table</span><span class="sxs-lookup"><span data-stu-id="2a9cf-134">The temporary table is renamed to be the new table</span></span>
+<span data-ttu-id="1f975-129">Notez que :</span><span class="sxs-lookup"><span data-stu-id="1f975-129">Notice that:</span></span>
+* <span data-ttu-id="1f975-130">Une table temporaire est créée avec le schéma souhaité pour la nouvelle table</span><span class="sxs-lookup"><span data-stu-id="1f975-130">A temporary table is created with the desired schema for the new table</span></span>
+* <span data-ttu-id="1f975-131">Les données sont copiées à partir de la table actuelle dans la table temporaire</span><span class="sxs-lookup"><span data-stu-id="1f975-131">Data is copied from the current table into the temporary table</span></span>
+* <span data-ttu-id="1f975-132">Mise hors tension de la clé étrangère</span><span class="sxs-lookup"><span data-stu-id="1f975-132">Foreign key enforcement is switched off</span></span>
+* <span data-ttu-id="1f975-133">La table actuelle est supprimée</span><span class="sxs-lookup"><span data-stu-id="1f975-133">The current table is dropped</span></span>
+* <span data-ttu-id="1f975-134">La table temporaire est renommée en une nouvelle table</span><span class="sxs-lookup"><span data-stu-id="1f975-134">The temporary table is renamed to be the new table</span></span>
 
-<span data-ttu-id="2a9cf-135">La documentation est suivie d’un problème [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-135">Documentation is tracked by issue [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583).</span></span>
+<span data-ttu-id="1f975-135">La documentation est suivie d’un problème [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583).</span><span class="sxs-lookup"><span data-stu-id="1f975-135">Documentation is tracked by issue [#2583](https://github.com/dotnet/EntityFramework.Docs/issues/2583).</span></span>
 
-### <a name="table-valued-functions"></a><span data-ttu-id="2a9cf-136">Fonctions table</span><span class="sxs-lookup"><span data-stu-id="2a9cf-136">Table-valued functions</span></span>
+### <a name="table-valued-functions"></a><span data-ttu-id="1f975-136">Fonctions table</span><span class="sxs-lookup"><span data-stu-id="1f975-136">Table-valued functions</span></span>
 
-<span data-ttu-id="2a9cf-137">Cette fonctionnalité a été ajoutée par la communauté [@pmiddleton](https://github.com/pmiddleton) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-137">This feature was contributed from the community by [@pmiddleton](https://github.com/pmiddleton).</span></span> <span data-ttu-id="2a9cf-138">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="2a9cf-138">Many thanks for the contribution!</span></span>
+<span data-ttu-id="1f975-137">Cette fonctionnalité a été ajoutée par la communauté [@pmiddleton](https://github.com/pmiddleton) .</span><span class="sxs-lookup"><span data-stu-id="1f975-137">This feature was contributed from the community by [@pmiddleton](https://github.com/pmiddleton).</span></span> <span data-ttu-id="1f975-138">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="1f975-138">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="2a9cf-139">EF Core 5,0 offre une prise en charge de première classe pour le mappage des méthodes .NET aux fonctions table (TVF).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-139">EF Core 5.0 includes first-class support for mapping .NET methods to table-valued functions (TVFs).</span></span> <span data-ttu-id="2a9cf-140">Ces fonctions peuvent ensuite être utilisées dans les requêtes LINQ où la composition supplémentaire sur les résultats de la fonction sera également traduite en SQL.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-140">These functions can then be used in LINQ queries where additional composition on the results of the function will also be translated to SQL.</span></span>
+<span data-ttu-id="1f975-139">EF Core 5,0 offre une prise en charge de première classe pour le mappage des méthodes .NET aux fonctions table (TVF).</span><span class="sxs-lookup"><span data-stu-id="1f975-139">EF Core 5.0 includes first-class support for mapping .NET methods to table-valued functions (TVFs).</span></span> <span data-ttu-id="1f975-140">Ces fonctions peuvent ensuite être utilisées dans les requêtes LINQ où la composition supplémentaire sur les résultats de la fonction sera également traduite en SQL.</span><span class="sxs-lookup"><span data-stu-id="1f975-140">These functions can then be used in LINQ queries where additional composition on the results of the function will also be translated to SQL.</span></span>
 
-<span data-ttu-id="2a9cf-141">Par exemple, considérez cette TVF définie dans une base de données SQL Server :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-141">For example, consider this TVF defined in a SQL Server database:</span></span>
+<span data-ttu-id="1f975-141">Par exemple, considérez cette TVF définie dans une base de données SQL Server :</span><span class="sxs-lookup"><span data-stu-id="1f975-141">For example, consider this TVF defined in a SQL Server database:</span></span>
 
 ```sql
 CREATE FUNCTION GetReports(@employeeId int)
@@ -231,9 +231,9 @@ BEGIN
 END
 ```
 
-<span data-ttu-id="2a9cf-142">Le modèle de EF Core nécessite deux types d’entités pour utiliser cette TVF :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-142">The EF Core model requires two entity types to use this TVF:</span></span>
-* <span data-ttu-id="2a9cf-143">`Employee`Type qui est mappé à la table Employees de manière normale</span><span class="sxs-lookup"><span data-stu-id="2a9cf-143">An `Employee` type that maps to the Employees table in the normal way</span></span>
-* <span data-ttu-id="2a9cf-144">`Report`Type qui correspond à la forme retournée par la fonction TVF</span><span class="sxs-lookup"><span data-stu-id="2a9cf-144">A `Report` type that matches the shape returned by the TVF</span></span>
+<span data-ttu-id="1f975-142">Le modèle de EF Core nécessite deux types d’entités pour utiliser cette TVF :</span><span class="sxs-lookup"><span data-stu-id="1f975-142">The EF Core model requires two entity types to use this TVF:</span></span>
+* <span data-ttu-id="1f975-143">`Employee`Type qui est mappé à la table Employees de manière normale</span><span class="sxs-lookup"><span data-stu-id="1f975-143">An `Employee` type that maps to the Employees table in the normal way</span></span>
+* <span data-ttu-id="1f975-144">`Report`Type qui correspond à la forme retournée par la fonction TVF</span><span class="sxs-lookup"><span data-stu-id="1f975-144">A `Report` type that matches the shape returned by the TVF</span></span>
 
 ```c#
 public class Employee
@@ -255,31 +255,31 @@ public class Report
 }
 ```
 
-<span data-ttu-id="2a9cf-145">Ces types doivent être inclus dans le modèle de EF Core :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-145">These types must be included in the EF Core model:</span></span>
+<span data-ttu-id="1f975-145">Ces types doivent être inclus dans le modèle de EF Core :</span><span class="sxs-lookup"><span data-stu-id="1f975-145">These types must be included in the EF Core model:</span></span>
 
 ```c#
 modelBuilder.Entity<Employee>();
 modelBuilder.Entity(typeof(Report)).HasNoKey();
 ```
 
-<span data-ttu-id="2a9cf-146">Notez que n' `Report` a pas de clé primaire et doit donc être configuré en tant que tel.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-146">Notice that `Report` has no primary key and so must be configured as such.</span></span>
+<span data-ttu-id="1f975-146">Notez que n' `Report` a pas de clé primaire et doit donc être configuré en tant que tel.</span><span class="sxs-lookup"><span data-stu-id="1f975-146">Notice that `Report` has no primary key and so must be configured as such.</span></span>
 
-<span data-ttu-id="2a9cf-147">Enfin, une méthode .NET doit être mappée à la TVF dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-147">Finally, a .NET method must be mapped to the TVF in the database.</span></span> <span data-ttu-id="2a9cf-148">Cette méthode peut être définie sur DbContext à l’aide de la nouvelle `FromExpression` méthode :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-148">This method can be defined on the DbContext using the new `FromExpression` method:</span></span>
+<span data-ttu-id="1f975-147">Enfin, une méthode .NET doit être mappée à la TVF dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-147">Finally, a .NET method must be mapped to the TVF in the database.</span></span> <span data-ttu-id="1f975-148">Cette méthode peut être définie sur DbContext à l’aide de la nouvelle `FromExpression` méthode :</span><span class="sxs-lookup"><span data-stu-id="1f975-148">This method can be defined on the DbContext using the new `FromExpression` method:</span></span>
 
 ```c#
 public IQueryable<Report> GetReports(int managerId)
     => FromExpression(() => GetReports(managerId));
 ```
 
-<span data-ttu-id="2a9cf-149">Cette méthode utilise un paramètre et un type de retour qui correspondent à la fonction TVF définie ci-dessus.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-149">This method uses a parameter and return type that match the TVF defined above.</span></span> <span data-ttu-id="2a9cf-150">La méthode est ensuite ajoutée au modèle EF Core dans OnModelCreating :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-150">The method is then added to the EF Core model in OnModelCreating:</span></span>
+<span data-ttu-id="1f975-149">Cette méthode utilise un paramètre et un type de retour qui correspondent à la fonction TVF définie ci-dessus.</span><span class="sxs-lookup"><span data-stu-id="1f975-149">This method uses a parameter and return type that match the TVF defined above.</span></span> <span data-ttu-id="1f975-150">La méthode est ensuite ajoutée au modèle EF Core dans OnModelCreating :</span><span class="sxs-lookup"><span data-stu-id="1f975-150">The method is then added to the EF Core model in OnModelCreating:</span></span>
 
 ```c#
 modelBuilder.HasDbFunction(() => GetReports(default));
 ```
 
-<span data-ttu-id="2a9cf-151">(L’utilisation d’une expression lambda est un moyen simple de passer le `MethodInfo` à EF Core.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-151">(Using a lambda here is an easy way to pass the `MethodInfo` to EF Core.</span></span> <span data-ttu-id="2a9cf-152">Les arguments passés à la méthode sont ignorés.)</span><span class="sxs-lookup"><span data-stu-id="2a9cf-152">The arguments passed to the method are ignored.)</span></span>
+<span data-ttu-id="1f975-151">(L’utilisation d’une expression lambda est un moyen simple de passer le `MethodInfo` à EF Core.</span><span class="sxs-lookup"><span data-stu-id="1f975-151">(Using a lambda here is an easy way to pass the `MethodInfo` to EF Core.</span></span> <span data-ttu-id="1f975-152">Les arguments passés à la méthode sont ignorés.)</span><span class="sxs-lookup"><span data-stu-id="1f975-152">The arguments passed to the method are ignored.)</span></span>
 
-<span data-ttu-id="2a9cf-153">Nous pouvons maintenant écrire des requêtes qui appellent `GetReports` et composent les résultats.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-153">We can now write queries that call `GetReports` and compose over the results.</span></span> <span data-ttu-id="2a9cf-154">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-154">For example:</span></span>
+<span data-ttu-id="1f975-153">Nous pouvons maintenant écrire des requêtes qui appellent `GetReports` et composent les résultats.</span><span class="sxs-lookup"><span data-stu-id="1f975-153">We can now write queries that call `GetReports` and compose over the results.</span></span> <span data-ttu-id="1f975-154">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-154">For example:</span></span>
 
 ```c#
 from e in context.Employees
@@ -292,7 +292,7 @@ select new
 })
 ```
 
-<span data-ttu-id="2a9cf-155">Sur SQL Server, cela se traduit par :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-155">On SQL Server, this translates to:</span></span>
+<span data-ttu-id="1f975-155">Sur SQL Server, cela se traduit par :</span><span class="sxs-lookup"><span data-stu-id="1f975-155">On SQL Server, this translates to:</span></span>
 
 ```sql
 SELECT [e].[Name] AS [ManagerName], [g].[Name] AS [EmployeeName]
@@ -301,13 +301,13 @@ CROSS APPLY [dbo].[GetReports]([e].[Id]) AS [g]
 WHERE [g].[IsDeveloper] = CAST(1 AS bit)
 ```
 
-<span data-ttu-id="2a9cf-156">Notez que le SQL est enraciné dans la `Employees` table, appelle `GetReports` , puis ajoute une clause WHERE supplémentaire sur les résultats de la fonction.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-156">Notice that the SQL is rooted in the `Employees` table, calls `GetReports`, and then adds an additional WHERE clause on the results of the function.</span></span>
+<span data-ttu-id="1f975-156">Notez que le SQL est enraciné dans la `Employees` table, appelle `GetReports` , puis ajoute une clause WHERE supplémentaire sur les résultats de la fonction.</span><span class="sxs-lookup"><span data-stu-id="1f975-156">Notice that the SQL is rooted in the `Employees` table, calls `GetReports`, and then adds an additional WHERE clause on the results of the function.</span></span>
 
-### <a name="flexible-queryupdate-mapping"></a><span data-ttu-id="2a9cf-157">Mappage de requête/mise à jour flexible</span><span class="sxs-lookup"><span data-stu-id="2a9cf-157">Flexible query/update mapping</span></span>
+### <a name="flexible-queryupdate-mapping"></a><span data-ttu-id="1f975-157">Mappage de requête/mise à jour flexible</span><span class="sxs-lookup"><span data-stu-id="1f975-157">Flexible query/update mapping</span></span>
 
-<span data-ttu-id="2a9cf-158">EF Core 5,0 permet de mapper le même type d’entité à des objets de base de données différents.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-158">EF Core 5.0 allows mapping the same entity type to different database objects.</span></span> <span data-ttu-id="2a9cf-159">Ces objets peuvent être des tables, des vues ou des fonctions.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-159">These objects may be tables, views, or functions.</span></span>
+<span data-ttu-id="1f975-158">EF Core 5,0 permet de mapper le même type d’entité à des objets de base de données différents.</span><span class="sxs-lookup"><span data-stu-id="1f975-158">EF Core 5.0 allows mapping the same entity type to different database objects.</span></span> <span data-ttu-id="1f975-159">Ces objets peuvent être des tables, des vues ou des fonctions.</span><span class="sxs-lookup"><span data-stu-id="1f975-159">These objects may be tables, views, or functions.</span></span>
 
-<span data-ttu-id="2a9cf-160">Par exemple, un type d’entité peut être mappé à une vue de base de données et à une table de base de données :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-160">For example, an entity type can be mapped to both a database view and a database table:</span></span>
+<span data-ttu-id="1f975-160">Par exemple, un type d’entité peut être mappé à une vue de base de données et à une table de base de données :</span><span class="sxs-lookup"><span data-stu-id="1f975-160">For example, an entity type can be mapped to both a database view and a database table:</span></span>
 
 ```c#
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -319,7 +319,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="2a9cf-161">Par défaut, EF Core effectue une requête à partir de la vue et envoie des mises à jour à la table.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-161">By default, EF Core will then query from the view and send updates to the table.</span></span> <span data-ttu-id="2a9cf-162">Par exemple, l’exécution du code suivant :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-162">For example, executing the following code:</span></span>
+<span data-ttu-id="1f975-161">Par défaut, EF Core effectue une requête à partir de la vue et envoie des mises à jour à la table.</span><span class="sxs-lookup"><span data-stu-id="1f975-161">By default, EF Core will then query from the view and send updates to the table.</span></span> <span data-ttu-id="1f975-162">Par exemple, l’exécution du code suivant :</span><span class="sxs-lookup"><span data-stu-id="1f975-162">For example, executing the following code:</span></span>
 
 ```c#
 var blog = context.Set<Blog>().Single(e => e.Name == "One Unicorn");
@@ -329,7 +329,7 @@ blog.Name = "1unicorn2";
 context.SaveChanges();
 ```
 
-<span data-ttu-id="2a9cf-163">Génère une requête sur la vue, puis une mise à jour de la table :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-163">Results in a query against the view, and then an update to the table:</span></span>
+<span data-ttu-id="1f975-163">Génère une requête sur la vue, puis une mise à jour de la table :</span><span class="sxs-lookup"><span data-stu-id="1f975-163">Results in a query against the view, and then an update to the table:</span></span>
 
 ```sql
 SELECT TOP(2) [b].[Id], [b].[Name], [b].[Url]
@@ -342,9 +342,9 @@ WHERE [Id] = @p1;
 SELECT @@ROWCOUNT;
 ```
 
-### <a name="context-wide-split-query-configuration"></a><span data-ttu-id="2a9cf-164">Configuration de la requête Split au niveau du contexte</span><span class="sxs-lookup"><span data-stu-id="2a9cf-164">Context-wide split-query configuration</span></span>
+### <a name="context-wide-split-query-configuration"></a><span data-ttu-id="1f975-164">Configuration de la requête Split au niveau du contexte</span><span class="sxs-lookup"><span data-stu-id="1f975-164">Context-wide split-query configuration</span></span>
 
-<span data-ttu-id="2a9cf-165">Les requêtes de fractionnement (voir ci-dessous) peuvent désormais être configurées par défaut pour toute requête exécutée par DbContext.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-165">Split queries (see below) can now be configured as the default for any query executed by the DbContext.</span></span> <span data-ttu-id="2a9cf-166">Cette configuration n’est disponible que pour les fournisseurs relationnels et doit donc être spécifiée dans le cadre de la `UseProvider` Configuration.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-166">This configuration is only available for relational providers, and so must be specified as part of the `UseProvider` configuration.</span></span> <span data-ttu-id="2a9cf-167">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-167">For example:</span></span>
+<span data-ttu-id="1f975-165">Les requêtes de fractionnement (voir ci-dessous) peuvent désormais être configurées par défaut pour toute requête exécutée par DbContext.</span><span class="sxs-lookup"><span data-stu-id="1f975-165">Split queries (see below) can now be configured as the default for any query executed by the DbContext.</span></span> <span data-ttu-id="1f975-166">Cette configuration n’est disponible que pour les fournisseurs relationnels et doit donc être spécifiée dans le cadre de la `UseProvider` Configuration.</span><span class="sxs-lookup"><span data-stu-id="1f975-166">This configuration is only available for relational providers, and so must be specified as part of the `UseProvider` configuration.</span></span> <span data-ttu-id="1f975-167">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-167">For example:</span></span>
 
 ```c#
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -354,26 +354,26 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             b => b.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery));
 ```
 
-<span data-ttu-id="2a9cf-168">La documentation est suivie d’un problème [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-168">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
+<span data-ttu-id="1f975-168">La documentation est suivie d’un problème [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span><span class="sxs-lookup"><span data-stu-id="1f975-168">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
 
-### <a name="physicaladdress-mapping"></a><span data-ttu-id="2a9cf-169">Mappage PhysicalAddress</span><span class="sxs-lookup"><span data-stu-id="2a9cf-169">PhysicalAddress mapping</span></span>
+### <a name="physicaladdress-mapping"></a><span data-ttu-id="1f975-169">Mappage PhysicalAddress</span><span class="sxs-lookup"><span data-stu-id="1f975-169">PhysicalAddress mapping</span></span>
 
-<span data-ttu-id="2a9cf-170">Cette fonctionnalité a été ajoutée par la communauté [@ralmsdeveloper](https://github.com/ralmsdeveloper) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-170">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="2a9cf-171">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="2a9cf-171">Many thanks for the contribution!</span></span>
+<span data-ttu-id="1f975-170">Cette fonctionnalité a été ajoutée par la communauté [@ralmsdeveloper](https://github.com/ralmsdeveloper) .</span><span class="sxs-lookup"><span data-stu-id="1f975-170">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="1f975-171">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="1f975-171">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="2a9cf-172">La classe .NET [PhysicalAddress](/dotnet/api/system.net.networkinformation.physicaladdress) standard est désormais automatiquement mappée à une colonne de type chaîne pour les bases de données qui n’ont pas encore de prise en charge native.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-172">The standard .NET [PhysicalAddress class](/dotnet/api/system.net.networkinformation.physicaladdress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="2a9cf-173">Pour plus d’informations, consultez les exemples `IPAddress` ci-dessous.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-173">For more information, see the examples for `IPAddress` below.</span></span>
+<span data-ttu-id="1f975-172">La classe .NET [PhysicalAddress](/dotnet/api/system.net.networkinformation.physicaladdress) standard est désormais automatiquement mappée à une colonne de type chaîne pour les bases de données qui n’ont pas encore de prise en charge native.</span><span class="sxs-lookup"><span data-stu-id="1f975-172">The standard .NET [PhysicalAddress class](/dotnet/api/system.net.networkinformation.physicaladdress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="1f975-173">Pour plus d’informations, consultez les exemples `IPAddress` ci-dessous.</span><span class="sxs-lookup"><span data-stu-id="1f975-173">For more information, see the examples for `IPAddress` below.</span></span>
 
-## <a name="preview-7"></a><span data-ttu-id="2a9cf-174">Version préliminaire 7</span><span class="sxs-lookup"><span data-stu-id="2a9cf-174">Preview 7</span></span>
+## <a name="preview-7"></a><span data-ttu-id="1f975-174">Version préliminaire 7</span><span class="sxs-lookup"><span data-stu-id="1f975-174">Preview 7</span></span>
 
-### <a name="dbcontextfactory"></a><span data-ttu-id="2a9cf-175">DbContextFactory</span><span class="sxs-lookup"><span data-stu-id="2a9cf-175">DbContextFactory</span></span>
+### <a name="dbcontextfactory"></a><span data-ttu-id="1f975-175">DbContextFactory</span><span class="sxs-lookup"><span data-stu-id="1f975-175">DbContextFactory</span></span>
 
-<span data-ttu-id="2a9cf-176">EF Core 5,0 introduit `AddDbContextFactory` et `AddPooledDbContextFactory` pour inscrire une fabrique pour la création d’instances de DbContext dans le conteneur d’injection de dépendances (D.I.) de l’application.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-176">EF Core 5.0 introduces `AddDbContextFactory` and `AddPooledDbContextFactory` to register a factory for creating DbContext instances in the application's dependency injection (D.I.) container.</span></span> <span data-ttu-id="2a9cf-177">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-177">For example:</span></span>
+<span data-ttu-id="1f975-176">EF Core 5,0 introduit `AddDbContextFactory` et `AddPooledDbContextFactory` pour inscrire une fabrique pour la création d’instances de DbContext dans le conteneur d’injection de dépendances (D.I.) de l’application.</span><span class="sxs-lookup"><span data-stu-id="1f975-176">EF Core 5.0 introduces `AddDbContextFactory` and `AddPooledDbContextFactory` to register a factory for creating DbContext instances in the application's dependency injection (D.I.) container.</span></span> <span data-ttu-id="1f975-177">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-177">For example:</span></span>
 
 ```csharp
 services.AddDbContextFactory<SomeDbContext>(b =>
     b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test"));
 ```
 
-<span data-ttu-id="2a9cf-178">Les services d’application tels que les contrôleurs de ASP.NET Core peuvent ensuite dépendre `IDbContextFactory<TContext>` du constructeur de service.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-178">Application services such as ASP.NET Core controllers can then depend on `IDbContextFactory<TContext>` in the service constructor.</span></span> <span data-ttu-id="2a9cf-179">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-179">For example:</span></span>
+<span data-ttu-id="1f975-178">Les services d’application tels que les contrôleurs de ASP.NET Core peuvent ensuite dépendre `IDbContextFactory<TContext>` du constructeur de service.</span><span class="sxs-lookup"><span data-stu-id="1f975-178">Application services such as ASP.NET Core controllers can then depend on `IDbContextFactory<TContext>` in the service constructor.</span></span> <span data-ttu-id="1f975-179">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-179">For example:</span></span>
 
 ```csharp
 public class MyController
@@ -387,7 +387,7 @@ public class MyController
 }
 ```
 
-<span data-ttu-id="2a9cf-180">Les instances de DbContext peuvent ensuite être créées et utilisées en fonction des besoins.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-180">DbContext instances can then be created and used as needed.</span></span> <span data-ttu-id="2a9cf-181">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-181">For example:</span></span>
+<span data-ttu-id="1f975-180">Les instances de DbContext peuvent ensuite être créées et utilisées en fonction des besoins.</span><span class="sxs-lookup"><span data-stu-id="1f975-180">DbContext instances can then be created and used as needed.</span></span> <span data-ttu-id="1f975-181">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-181">For example:</span></span>
 
 ```csharp
 public void DoSomeThing()
@@ -399,23 +399,23 @@ public void DoSomeThing()
 }
 ```
 
-<span data-ttu-id="2a9cf-182">Notez que les instances de DbContext créées de cette façon _ne sont pas_ gérées par le fournisseur de services de l’application et doivent donc être supprimées par l’application.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-182">Note that the DbContext instances created in this way are _not_ managed by the application's service provider and therefore must be disposed by the application.</span></span> <span data-ttu-id="2a9cf-183">Ce découplage est très utile pour les applications éblouissantes, où l’utilisation de `IDbContextFactory` est recommandée, mais peut également être utile dans d’autres scénarios.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-183">This decoupling is very useful for Blazor applications, where using `IDbContextFactory` is recommended, but may also be useful in other scenarios.</span></span>
+<span data-ttu-id="1f975-182">Notez que les instances de DbContext créées de cette façon _ne sont pas_ gérées par le fournisseur de services de l’application et doivent donc être supprimées par l’application.</span><span class="sxs-lookup"><span data-stu-id="1f975-182">Note that the DbContext instances created in this way are _not_ managed by the application's service provider and therefore must be disposed by the application.</span></span> <span data-ttu-id="1f975-183">Ce découplage est très utile pour les applications éblouissantes, où l’utilisation de `IDbContextFactory` est recommandée, mais peut également être utile dans d’autres scénarios.</span><span class="sxs-lookup"><span data-stu-id="1f975-183">This decoupling is very useful for Blazor applications, where using `IDbContextFactory` is recommended, but may also be useful in other scenarios.</span></span>
 
-<span data-ttu-id="2a9cf-184">Les instances de DbContext peuvent être regroupées en appelant `AddPooledDbContextFactory` .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-184">DbContext instances can be pooled by calling `AddPooledDbContextFactory`.</span></span> <span data-ttu-id="2a9cf-185">Ce regroupement fonctionne de la même façon que pour `AddDbContextPool` et présente également les mêmes limitations.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-185">This pooling works the same way as for `AddDbContextPool`, and also has the same limitations.</span></span>
+<span data-ttu-id="1f975-184">Les instances de DbContext peuvent être regroupées en appelant `AddPooledDbContextFactory` .</span><span class="sxs-lookup"><span data-stu-id="1f975-184">DbContext instances can be pooled by calling `AddPooledDbContextFactory`.</span></span> <span data-ttu-id="1f975-185">Ce regroupement fonctionne de la même façon que pour `AddDbContextPool` et présente également les mêmes limitations.</span><span class="sxs-lookup"><span data-stu-id="1f975-185">This pooling works the same way as for `AddDbContextPool`, and also has the same limitations.</span></span>
 
-<span data-ttu-id="2a9cf-186">La documentation est suivie d’un problème [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-186">Documentation is tracked by issue [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523).</span></span>
+<span data-ttu-id="1f975-186">La documentation est suivie d’un problème [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523).</span><span class="sxs-lookup"><span data-stu-id="1f975-186">Documentation is tracked by issue [#2523](https://github.com/dotnet/EntityFramework.Docs/issues/2523).</span></span>
 
-### <a name="reset-dbcontext-state"></a><span data-ttu-id="2a9cf-187">Réinitialiser l’état de DbContext</span><span class="sxs-lookup"><span data-stu-id="2a9cf-187">Reset DbContext state</span></span>
+### <a name="reset-dbcontext-state"></a><span data-ttu-id="1f975-187">Réinitialiser l’état de DbContext</span><span class="sxs-lookup"><span data-stu-id="1f975-187">Reset DbContext state</span></span>
 
-<span data-ttu-id="2a9cf-188">EF Core 5,0 introduit `ChangeTracker.Clear()` , qui efface le DbContext de toutes les entités suivies.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-188">EF Core 5.0 introduces `ChangeTracker.Clear()` which clears the DbContext of all tracked entities.</span></span> <span data-ttu-id="2a9cf-189">Cela ne doit généralement pas être nécessaire lors de l’utilisation de la méthode recommandée pour créer une instance de contexte de courte durée pour chaque unité de travail.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-189">This should usually not be needed when using the best practice of creating a new, short-lived context instance for each unit-of-work.</span></span> <span data-ttu-id="2a9cf-190">Toutefois, s’il est nécessaire de réinitialiser l’état d’une instance de DbContext, l’utilisation de la nouvelle `Clear()` méthode est plus performante et fiable que le détachement en masse de toutes les entités.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-190">However, if there is a need to reset the state of a DbContext instance, then using the new `Clear()` method is more performant and robust than mass-detaching all entities.</span></span>
+<span data-ttu-id="1f975-188">EF Core 5,0 introduit `ChangeTracker.Clear()` , qui efface le DbContext de toutes les entités suivies.</span><span class="sxs-lookup"><span data-stu-id="1f975-188">EF Core 5.0 introduces `ChangeTracker.Clear()` which clears the DbContext of all tracked entities.</span></span> <span data-ttu-id="1f975-189">Cela ne doit généralement pas être nécessaire lors de l’utilisation de la méthode recommandée pour créer une instance de contexte de courte durée pour chaque unité de travail.</span><span class="sxs-lookup"><span data-stu-id="1f975-189">This should usually not be needed when using the best practice of creating a new, short-lived context instance for each unit-of-work.</span></span> <span data-ttu-id="1f975-190">Toutefois, s’il est nécessaire de réinitialiser l’état d’une instance de DbContext, l’utilisation de la nouvelle `Clear()` méthode est plus performante et fiable que le détachement en masse de toutes les entités.</span><span class="sxs-lookup"><span data-stu-id="1f975-190">However, if there is a need to reset the state of a DbContext instance, then using the new `Clear()` method is more performant and robust than mass-detaching all entities.</span></span>
 
-<span data-ttu-id="2a9cf-191">La documentation est suivie d’un problème [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-191">Documentation is tracked by issue [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).</span></span>
+<span data-ttu-id="1f975-191">La documentation est suivie d’un problème [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).</span><span class="sxs-lookup"><span data-stu-id="1f975-191">Documentation is tracked by issue [#2524](https://github.com/dotnet/EntityFramework.Docs/issues/2524).</span></span>
 
-### <a name="new-pattern-for-store-generated-defaults"></a><span data-ttu-id="2a9cf-192">Nouveau modèle pour les valeurs par défaut générées par le magasin</span><span class="sxs-lookup"><span data-stu-id="2a9cf-192">New pattern for store-generated defaults</span></span>
+### <a name="new-pattern-for-store-generated-defaults"></a><span data-ttu-id="1f975-192">Nouveau modèle pour les valeurs par défaut générées par le magasin</span><span class="sxs-lookup"><span data-stu-id="1f975-192">New pattern for store-generated defaults</span></span>
 
-<span data-ttu-id="2a9cf-193">EF Core permet de définir une valeur explicite pour une colonne qui peut également avoir une contrainte de valeur par défaut.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-193">EF Core allows an explicit value to be set for a column that may also have default value constraint.</span></span> <span data-ttu-id="2a9cf-194">EF Core utilise la valeur CLR par défaut de type de propriété comme sentinelle pour ce. Si la valeur n’est pas la valeur CLR par défaut, elle est insérée, sinon la valeur par défaut de la base de données est utilisée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-194">EF Core uses the CLR default of type property type as a sentinel for this; if the value is not the CLR default, then it is inserted, otherwise the database default is used.</span></span>
+<span data-ttu-id="1f975-193">EF Core permet de définir une valeur explicite pour une colonne qui peut également avoir une contrainte de valeur par défaut.</span><span class="sxs-lookup"><span data-stu-id="1f975-193">EF Core allows an explicit value to be set for a column that may also have default value constraint.</span></span> <span data-ttu-id="1f975-194">EF Core utilise la valeur CLR par défaut de type de propriété comme sentinelle pour ce. Si la valeur n’est pas la valeur CLR par défaut, elle est insérée, sinon la valeur par défaut de la base de données est utilisée.</span><span class="sxs-lookup"><span data-stu-id="1f975-194">EF Core uses the CLR default of type property type as a sentinel for this; if the value is not the CLR default, then it is inserted, otherwise the database default is used.</span></span>
 
-<span data-ttu-id="2a9cf-195">Cela crée des problèmes pour les types où la valeur CLR par défaut n’est pas une bonne sentinelle, notamment les `bool` Propriétés.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-195">This creates problems for types where the CLR default is not a good sentinel--most notably, `bool` properties.</span></span> <span data-ttu-id="2a9cf-196">EF Core 5,0 autorise désormais la valeur null dans le champ de stockage pour les cas comme celui-ci.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-196">EF Core 5.0 now allows the backing field to be nullable for cases like this.</span></span> <span data-ttu-id="2a9cf-197">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-197">For example:</span></span>
+<span data-ttu-id="1f975-195">Cela crée des problèmes pour les types où la valeur CLR par défaut n’est pas une bonne sentinelle, notamment les `bool` Propriétés.</span><span class="sxs-lookup"><span data-stu-id="1f975-195">This creates problems for types where the CLR default is not a good sentinel--most notably, `bool` properties.</span></span> <span data-ttu-id="1f975-196">EF Core 5,0 autorise désormais la valeur null dans le champ de stockage pour les cas comme celui-ci.</span><span class="sxs-lookup"><span data-stu-id="1f975-196">EF Core 5.0 now allows the backing field to be nullable for cases like this.</span></span> <span data-ttu-id="1f975-197">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-197">For example:</span></span>
 
 ```csharp
 public class Blog
@@ -430,27 +430,27 @@ public class Blog
 }
 ```
 
-<span data-ttu-id="2a9cf-198">Notez que le champ de stockage accepte la valeur null, mais pas la propriété exposée publiquement.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-198">Note that the backing field is nullable, but the publicly exposed property is not.</span></span> <span data-ttu-id="2a9cf-199">Cela permet à la valeur de sentinelle de ne pas avoir `null` d’impact sur la surface publique du type d’entité.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-199">This allows the sentinel value to be `null` without impacting the public surface of the entity type.</span></span> <span data-ttu-id="2a9cf-200">Dans ce cas, si le `IsValid` n’est jamais défini, la valeur par défaut de la base de données est utilisée, car le champ de stockage conserve la valeur null.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-200">In this case, if the `IsValid` is never set, then the database default will be used since the backing field remains null.</span></span> <span data-ttu-id="2a9cf-201">Si `true` ou `false` sont définis, cette valeur est enregistrée explicitement dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-201">If either `true` or `false` are set, then this value is saved explicitly to the database.</span></span>
+<span data-ttu-id="1f975-198">Notez que le champ de stockage accepte la valeur null, mais pas la propriété exposée publiquement.</span><span class="sxs-lookup"><span data-stu-id="1f975-198">Note that the backing field is nullable, but the publicly exposed property is not.</span></span> <span data-ttu-id="1f975-199">Cela permet à la valeur de sentinelle de ne pas avoir `null` d’impact sur la surface publique du type d’entité.</span><span class="sxs-lookup"><span data-stu-id="1f975-199">This allows the sentinel value to be `null` without impacting the public surface of the entity type.</span></span> <span data-ttu-id="1f975-200">Dans ce cas, si le `IsValid` n’est jamais défini, la valeur par défaut de la base de données est utilisée, car le champ de stockage conserve la valeur null.</span><span class="sxs-lookup"><span data-stu-id="1f975-200">In this case, if the `IsValid` is never set, then the database default will be used since the backing field remains null.</span></span> <span data-ttu-id="1f975-201">Si `true` ou `false` sont définis, cette valeur est enregistrée explicitement dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-201">If either `true` or `false` are set, then this value is saved explicitly to the database.</span></span>
 
-<span data-ttu-id="2a9cf-202">La documentation est suivie d’un problème [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-202">Documentation is tracked by issue [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525).</span></span>
+<span data-ttu-id="1f975-202">La documentation est suivie d’un problème [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525).</span><span class="sxs-lookup"><span data-stu-id="1f975-202">Documentation is tracked by issue [#2525](https://github.com/dotnet/EntityFramework.Docs/issues/2525).</span></span>
 
-### <a name="cosmos-partition-keys"></a><span data-ttu-id="2a9cf-203">Clés de partition Cosmos</span><span class="sxs-lookup"><span data-stu-id="2a9cf-203">Cosmos partition keys</span></span>
+### <a name="cosmos-partition-keys"></a><span data-ttu-id="1f975-203">Clés de partition Cosmos</span><span class="sxs-lookup"><span data-stu-id="1f975-203">Cosmos partition keys</span></span>
 
-<span data-ttu-id="2a9cf-204">EF Core permet d’inclure la clé de partition Cosmos dans le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-204">EF Core allows the Cosmos partition key is included in the EF model.</span></span> <span data-ttu-id="2a9cf-205">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-205">For example:</span></span>
+<span data-ttu-id="1f975-204">EF Core permet d’inclure la clé de partition Cosmos dans le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="1f975-204">EF Core allows the Cosmos partition key is included in the EF model.</span></span> <span data-ttu-id="1f975-205">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-205">For example:</span></span>
 
 ```csharp
 modelBuilder.Entity<Customer>().HasPartitionKey(b => b.AlternateKey)
 ```
 
-<span data-ttu-id="2a9cf-206">À partir de Preview 7, la clé de partition est incluse dans le PK du type d’entité et est utilisée pour améliorer les performances dans certaines requêtes.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-206">Starting with preview 7, the partition key is included in the entity type's PK and is used to improved performance in some queries.</span></span>
+<span data-ttu-id="1f975-206">À partir de Preview 7, la clé de partition est incluse dans le PK du type d’entité et est utilisée pour améliorer les performances dans certaines requêtes.</span><span class="sxs-lookup"><span data-stu-id="1f975-206">Starting with preview 7, the partition key is included in the entity type's PK and is used to improved performance in some queries.</span></span>
 
-<span data-ttu-id="2a9cf-207">La documentation est suivie d’un problème [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-207">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
+<span data-ttu-id="1f975-207">La documentation est suivie d’un problème [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span><span class="sxs-lookup"><span data-stu-id="1f975-207">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
 
-### <a name="cosmos-configuration"></a><span data-ttu-id="2a9cf-208">Configuration de Cosmos</span><span class="sxs-lookup"><span data-stu-id="2a9cf-208">Cosmos configuration</span></span>
+### <a name="cosmos-configuration"></a><span data-ttu-id="1f975-208">Configuration de Cosmos</span><span class="sxs-lookup"><span data-stu-id="1f975-208">Cosmos configuration</span></span>
 
-<span data-ttu-id="2a9cf-209">EF Core 5,0 améliore la configuration des connexions Cosmos et Cosmos.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-209">EF Core 5.0 improves configuration of Cosmos and Cosmos connections.</span></span>
+<span data-ttu-id="1f975-209">EF Core 5,0 améliore la configuration des connexions Cosmos et Cosmos.</span><span class="sxs-lookup"><span data-stu-id="1f975-209">EF Core 5.0 improves configuration of Cosmos and Cosmos connections.</span></span>
 
-<span data-ttu-id="2a9cf-210">Auparavant, EF Core nécessitait la spécification du point de terminaison et de la clé explicitement lors de la connexion à une base de données Cosmos.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-210">Previously, EF Core required the end-point and key to be specified explicitly when connecting to a Cosmos database.</span></span> <span data-ttu-id="2a9cf-211">EF Core 5,0 autorise l’utilisation d’une chaîne de connexion à la place.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-211">EF Core 5.0 allows use of a connection string instead.</span></span> <span data-ttu-id="2a9cf-212">En outre, EF Core 5,0 permet de définir explicitement l’instance WebProxy.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-212">In addition, EF Core 5.0 allows the WebProxy instance to be explicitly set.</span></span> <span data-ttu-id="2a9cf-213">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-213">For example:</span></span>
+<span data-ttu-id="1f975-210">Auparavant, EF Core nécessitait la spécification du point de terminaison et de la clé explicitement lors de la connexion à une base de données Cosmos.</span><span class="sxs-lookup"><span data-stu-id="1f975-210">Previously, EF Core required the end-point and key to be specified explicitly when connecting to a Cosmos database.</span></span> <span data-ttu-id="1f975-211">EF Core 5,0 autorise l’utilisation d’une chaîne de connexion à la place.</span><span class="sxs-lookup"><span data-stu-id="1f975-211">EF Core 5.0 allows use of a connection string instead.</span></span> <span data-ttu-id="1f975-212">En outre, EF Core 5,0 permet de définir explicitement l’instance WebProxy.</span><span class="sxs-lookup"><span data-stu-id="1f975-212">In addition, EF Core 5.0 allows the WebProxy instance to be explicitly set.</span></span> <span data-ttu-id="1f975-213">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-213">For example:</span></span>
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -462,7 +462,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             });
 ```
 
-<span data-ttu-id="2a9cf-214">De nombreuses autres valeurs de délai d’attente, limites, etc. peuvent également être configurées.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-214">Many other timeout values, limits, etc. can now also be configured.</span></span> <span data-ttu-id="2a9cf-215">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-215">For example:</span></span>
+<span data-ttu-id="1f975-214">De nombreuses autres valeurs de délai d’attente, limites, etc. peuvent également être configurées.</span><span class="sxs-lookup"><span data-stu-id="1f975-214">Many other timeout values, limits, etc. can now also be configured.</span></span> <span data-ttu-id="1f975-215">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-215">For example:</span></span>
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -480,41 +480,41 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             });
 ```
 
-<span data-ttu-id="2a9cf-216">Enfin, le mode de connexion par défaut est désormais `ConnectionMode.Gateway` , ce qui est généralement plus compatible.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-216">Finally, the default connection mode is now `ConnectionMode.Gateway`, which is generally more compatible.</span></span>
+<span data-ttu-id="1f975-216">Enfin, le mode de connexion par défaut est désormais `ConnectionMode.Gateway` , ce qui est généralement plus compatible.</span><span class="sxs-lookup"><span data-stu-id="1f975-216">Finally, the default connection mode is now `ConnectionMode.Gateway`, which is generally more compatible.</span></span>
 
-<span data-ttu-id="2a9cf-217">La documentation est suivie d’un problème [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-217">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
+<span data-ttu-id="1f975-217">La documentation est suivie d’un problème [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span><span class="sxs-lookup"><span data-stu-id="1f975-217">Documentation is tracked by issue [#2471](https://github.com/dotnet/EntityFramework.Docs/issues/2471).</span></span>
 
-### <a name="scaffold-dbcontext-now-singularizes"></a><span data-ttu-id="2a9cf-218">Génération de modèles automatique-DbContext Now singularise</span><span class="sxs-lookup"><span data-stu-id="2a9cf-218">Scaffold-DbContext now singularizes</span></span>
+### <a name="scaffold-dbcontext-now-singularizes"></a><span data-ttu-id="1f975-218">Génération de modèles automatique-DbContext Now singularise</span><span class="sxs-lookup"><span data-stu-id="1f975-218">Scaffold-DbContext now singularizes</span></span>
 
-<span data-ttu-id="2a9cf-219">Auparavant, lors de la génération de modèles automatique d’une base de données existante, EF Core créera des noms de types d’entité qui correspondent aux noms de table dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-219">Previously when scaffolding a DbContext from an existing database, EF Core will create entity type names that match the table names in the database.</span></span> <span data-ttu-id="2a9cf-220">Par exemple, les tables `People` et ont `Addresses` abouti à des types d’entités nommés `People` et `Addresses` .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-220">For example, tables `People` and `Addresses` resulted in entity types named `People` and `Addresses`.</span></span>
+<span data-ttu-id="1f975-219">Auparavant, lors de la génération de modèles automatique d’une base de données existante, EF Core créera des noms de types d’entité qui correspondent aux noms de table dans la base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-219">Previously when scaffolding a DbContext from an existing database, EF Core will create entity type names that match the table names in the database.</span></span> <span data-ttu-id="1f975-220">Par exemple, les tables `People` et ont `Addresses` abouti à des types d’entités nommés `People` et `Addresses` .</span><span class="sxs-lookup"><span data-stu-id="1f975-220">For example, tables `People` and `Addresses` resulted in entity types named `People` and `Addresses`.</span></span>
 
-<span data-ttu-id="2a9cf-221">Dans les versions précédentes, ce comportement était configurable par l’inscription d’un service de pluralisation.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-221">In previous releases, this behavior was configurable through registration of a pluralization service.</span></span> <span data-ttu-id="2a9cf-222">Désormais, dans EF Core 5,0, le package [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) est utilisé comme un service de pluralisation par défaut.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-222">Now in EF Core 5.0, the [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) package is used as a default pluralization service.</span></span> <span data-ttu-id="2a9cf-223">Cela signifie que `People` les tables et `Addresses` sont maintenant rétroconçues dans les types d’entités nommés `Person` et `Address` .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-223">This means tables `People` and `Addresses` will now be reverse engineered to entity types named `Person` and `Address`.</span></span>
+<span data-ttu-id="1f975-221">Dans les versions précédentes, ce comportement était configurable par l’inscription d’un service de pluralisation.</span><span class="sxs-lookup"><span data-stu-id="1f975-221">In previous releases, this behavior was configurable through registration of a pluralization service.</span></span> <span data-ttu-id="1f975-222">Désormais, dans EF Core 5,0, le package [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) est utilisé comme un service de pluralisation par défaut.</span><span class="sxs-lookup"><span data-stu-id="1f975-222">Now in EF Core 5.0, the [Humanizer](https://www.nuget.org/packages/Humanizer.Core/) package is used as a default pluralization service.</span></span> <span data-ttu-id="1f975-223">Cela signifie que `People` les tables et `Addresses` sont maintenant rétroconçues dans les types d’entités nommés `Person` et `Address` .</span><span class="sxs-lookup"><span data-stu-id="1f975-223">This means tables `People` and `Addresses` will now be reverse engineered to entity types named `Person` and `Address`.</span></span>
 
-### <a name="savepoints"></a><span data-ttu-id="2a9cf-224">Points</span><span class="sxs-lookup"><span data-stu-id="2a9cf-224">Savepoints</span></span>
+### <a name="savepoints"></a><span data-ttu-id="1f975-224">Points</span><span class="sxs-lookup"><span data-stu-id="1f975-224">Savepoints</span></span>
 
-<span data-ttu-id="2a9cf-225">EF Core prend désormais en charge les [points](/SQL/t-sql/language-elements/save-transaction-transact-sql?view=sql-server-ver15#remarks) de contrôle pour un plus grand contrôle sur les transactions qui exécutent plusieurs opérations.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-225">EF Core now supports [savepoints](/SQL/t-sql/language-elements/save-transaction-transact-sql?view=sql-server-ver15#remarks) for greater control over transactions that execute multiple operations.</span></span>
+<span data-ttu-id="1f975-225">EF Core prend désormais en charge les [points](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) de contrôle pour un plus grand contrôle sur les transactions qui exécutent plusieurs opérations.</span><span class="sxs-lookup"><span data-stu-id="1f975-225">EF Core now supports [savepoints](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) for greater control over transactions that execute multiple operations.</span></span>
 
-<span data-ttu-id="2a9cf-226">Les points de sauvegarde peuvent être créés, libérés et restaurés manuellement.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-226">Savepoints can be manually created, released, and rolled back.</span></span> <span data-ttu-id="2a9cf-227">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-227">For example:</span></span>
+<span data-ttu-id="1f975-226">Les points de sauvegarde peuvent être créés, libérés et restaurés manuellement.</span><span class="sxs-lookup"><span data-stu-id="1f975-226">Savepoints can be manually created, released, and rolled back.</span></span> <span data-ttu-id="1f975-227">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-227">For example:</span></span>
 
 ```csharp
 context.Database.CreateSavepoint("MySavePoint");
 ```
 
-<span data-ttu-id="2a9cf-228">En outre, les EF Core sont désormais restaurés jusqu’au dernier point de sauvegarde en cas d’échec de l’exécution `SaveChanges` .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-228">In addition, EF Core will now roll back to the last savepoint when executing `SaveChanges` fails.</span></span> <span data-ttu-id="2a9cf-229">Cela permet de faire une nouvelle tentative d’SaveChanges sans retenter l’intégralité de la transaction.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-229">This allows SaveChanges to be re-tried without re-trying the entire transaction.</span></span>
+<span data-ttu-id="1f975-228">En outre, les EF Core sont désormais restaurés jusqu’au dernier point de sauvegarde en cas d’échec de l’exécution `SaveChanges` .</span><span class="sxs-lookup"><span data-stu-id="1f975-228">In addition, EF Core will now roll back to the last savepoint when executing `SaveChanges` fails.</span></span> <span data-ttu-id="1f975-229">Cela permet de faire une nouvelle tentative d’SaveChanges sans retenter l’intégralité de la transaction.</span><span class="sxs-lookup"><span data-stu-id="1f975-229">This allows SaveChanges to be re-tried without re-trying the entire transaction.</span></span>
 
-<span data-ttu-id="2a9cf-230">La documentation est suivie d’un problème [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-230">Documentation is tracked by issue [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429).</span></span>
+<span data-ttu-id="1f975-230">La documentation est suivie d’un problème [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429).</span><span class="sxs-lookup"><span data-stu-id="1f975-230">Documentation is tracked by issue [#2429](https://github.com/dotnet/EntityFramework.Docs/issues/2429).</span></span>
 
-## <a name="preview-6"></a><span data-ttu-id="2a9cf-231">Préversion 6</span><span class="sxs-lookup"><span data-stu-id="2a9cf-231">Preview 6</span></span>
+## <a name="preview-6"></a><span data-ttu-id="1f975-231">Préversion 6</span><span class="sxs-lookup"><span data-stu-id="1f975-231">Preview 6</span></span>
 
-### <a name="split-queries-for-related-collections"></a><span data-ttu-id="2a9cf-232">Fractionner les requêtes pour les regroupements associés</span><span class="sxs-lookup"><span data-stu-id="2a9cf-232">Split queries for related collections</span></span>
+### <a name="split-queries-for-related-collections"></a><span data-ttu-id="1f975-232">Fractionner les requêtes pour les regroupements associés</span><span class="sxs-lookup"><span data-stu-id="1f975-232">Split queries for related collections</span></span>
 
-<span data-ttu-id="2a9cf-233">À compter de EF Core 3,0, EF Core génère toujours une requête SQL unique pour chaque requête LINQ.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-233">Starting with EF Core 3.0, EF Core always generates a single SQL query for each LINQ query.</span></span> <span data-ttu-id="2a9cf-234">Cela garantit la cohérence des données retournées dans les contraintes du mode de transaction en cours d’utilisation.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-234">This ensures consistency of the data returned within the constraints of the transaction mode in use.</span></span> <span data-ttu-id="2a9cf-235">Toutefois, cela peut devenir très lent lorsque la requête utilise `Include` ou une projection pour rétablir plusieurs collections associées.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-235">However, this can become very slow when the query uses `Include` or a projection to bring back multiple related collections.</span></span>
+<span data-ttu-id="1f975-233">À compter de EF Core 3,0, EF Core génère toujours une requête SQL unique pour chaque requête LINQ.</span><span class="sxs-lookup"><span data-stu-id="1f975-233">Starting with EF Core 3.0, EF Core always generates a single SQL query for each LINQ query.</span></span> <span data-ttu-id="1f975-234">Cela garantit la cohérence des données retournées dans les contraintes du mode de transaction en cours d’utilisation.</span><span class="sxs-lookup"><span data-stu-id="1f975-234">This ensures consistency of the data returned within the constraints of the transaction mode in use.</span></span> <span data-ttu-id="1f975-235">Toutefois, cela peut devenir très lent lorsque la requête utilise `Include` ou une projection pour rétablir plusieurs collections associées.</span><span class="sxs-lookup"><span data-stu-id="1f975-235">However, this can become very slow when the query uses `Include` or a projection to bring back multiple related collections.</span></span>
 
-<span data-ttu-id="2a9cf-236">EF Core 5,0 autorise désormais une seule requête LINQ, y compris les collections associées, à fractionner en plusieurs requêtes SQL.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-236">EF Core 5.0 now allows a single LINQ query including related collections to be split into multiple SQL queries.</span></span> <span data-ttu-id="2a9cf-237">Cela peut améliorer considérablement les performances, mais peut entraîner une incohérence dans les résultats retournés si les données changent entre les deux requêtes.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-237">This can significantly improve performance, but can result in inconsistency in the results returned if the data changes between the two queries.</span></span> <span data-ttu-id="2a9cf-238">Les transactions sérialisables ou d’instantané peuvent être utilisées pour atténuer ce problème et obtenir une cohérence avec les requêtes fractionnées, mais cela peut réduire les coûts de performances et la différence comportementale.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-238">Serializable or snapshot transactions can be used to mitigate this and achieve consistency with split queries, but that may bring other performance costs and behavioral difference.</span></span>
+<span data-ttu-id="1f975-236">EF Core 5,0 autorise désormais une seule requête LINQ, y compris les collections associées, à fractionner en plusieurs requêtes SQL.</span><span class="sxs-lookup"><span data-stu-id="1f975-236">EF Core 5.0 now allows a single LINQ query including related collections to be split into multiple SQL queries.</span></span> <span data-ttu-id="1f975-237">Cela peut améliorer considérablement les performances, mais peut entraîner une incohérence dans les résultats retournés si les données changent entre les deux requêtes.</span><span class="sxs-lookup"><span data-stu-id="1f975-237">This can significantly improve performance, but can result in inconsistency in the results returned if the data changes between the two queries.</span></span> <span data-ttu-id="1f975-238">Les transactions sérialisables ou d’instantané peuvent être utilisées pour atténuer ce problème et obtenir une cohérence avec les requêtes fractionnées, mais cela peut réduire les coûts de performances et la différence comportementale.</span><span class="sxs-lookup"><span data-stu-id="1f975-238">Serializable or snapshot transactions can be used to mitigate this and achieve consistency with split queries, but that may bring other performance costs and behavioral difference.</span></span>
 
-#### <a name="split-queries-with-include"></a><span data-ttu-id="2a9cf-239">Fractionner des requêtes avec include</span><span class="sxs-lookup"><span data-stu-id="2a9cf-239">Split queries with Include</span></span>
+#### <a name="split-queries-with-include"></a><span data-ttu-id="1f975-239">Fractionner des requêtes avec include</span><span class="sxs-lookup"><span data-stu-id="1f975-239">Split queries with Include</span></span>
 
-<span data-ttu-id="2a9cf-240">Par exemple, considérez une requête qui extrait deux niveaux de collections associées à l’aide de `Include` :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-240">For example, consider a query that pulls in two levels of related collections using `Include`:</span></span>
+<span data-ttu-id="1f975-240">Par exemple, considérez une requête qui extrait deux niveaux de collections associées à l’aide de `Include` :</span><span class="sxs-lookup"><span data-stu-id="1f975-240">For example, consider a query that pulls in two levels of related collections using `Include`:</span></span>
 
 ```CSharp
 var artists = context.Artists
@@ -522,7 +522,7 @@ var artists = context.Artists
     .ToList();
 ```
 
-<span data-ttu-id="2a9cf-241">Par défaut, EF Core génère le code SQL suivant lorsque vous utilisez le fournisseur SQLite :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-241">By default, EF Core will generate the following SQL when using the SQLite provider:</span></span>
+<span data-ttu-id="1f975-241">Par défaut, EF Core génère le code SQL suivant lorsque vous utilisez le fournisseur SQLite :</span><span class="sxs-lookup"><span data-stu-id="1f975-241">By default, EF Core will generate the following SQL when using the SQLite provider:</span></span>
 
 ```sql
 SELECT "a"."Id", "a"."Name", "t0"."Id", "t0"."ArtistId", "t0"."Title", "t0"."Id0", "t0"."AlbumId", "t0"."Name"
@@ -535,7 +535,7 @@ LEFT JOIN (
 ORDER BY "a"."Id", "t0"."Id", "t0"."Id0"
 ```
 
-<span data-ttu-id="2a9cf-242">La nouvelle `AsSplitQuery` API peut être utilisée pour modifier ce comportement.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-242">The new `AsSplitQuery` API can be used to change this behavior.</span></span> <span data-ttu-id="2a9cf-243">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-243">For example:</span></span>
+<span data-ttu-id="1f975-242">La nouvelle `AsSplitQuery` API peut être utilisée pour modifier ce comportement.</span><span class="sxs-lookup"><span data-stu-id="1f975-242">The new `AsSplitQuery` API can be used to change this behavior.</span></span> <span data-ttu-id="1f975-243">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-243">For example:</span></span>
 
 ```CSharp
 var artists = context.Artists
@@ -544,7 +544,7 @@ var artists = context.Artists
     .ToList();
 ```
 
-<span data-ttu-id="2a9cf-244">AsSplitQuery est disponible pour tous les fournisseurs de bases de données relationnelles et peut être utilisée n’importe où dans la requête, tout comme AsNoTracking.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-244">AsSplitQuery is available for all relational database providers and can be used anywhere in the query, just like AsNoTracking.</span></span> <span data-ttu-id="2a9cf-245">EF Core générera maintenant les trois requêtes SQL suivantes :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-245">EF Core will now generate the following three SQL queries:</span></span>
+<span data-ttu-id="1f975-244">AsSplitQuery est disponible pour tous les fournisseurs de bases de données relationnelles et peut être utilisée n’importe où dans la requête, tout comme AsNoTracking.</span><span class="sxs-lookup"><span data-stu-id="1f975-244">AsSplitQuery is available for all relational database providers and can be used anywhere in the query, just like AsNoTracking.</span></span> <span data-ttu-id="1f975-245">EF Core générera maintenant les trois requêtes SQL suivantes :</span><span class="sxs-lookup"><span data-stu-id="1f975-245">EF Core will now generate the following three SQL queries:</span></span>
 
 ```sql
 SELECT "a"."Id", "a"."Name"
@@ -563,13 +563,13 @@ INNER JOIN "Tag" AS "t" ON "a0"."Id" = "t"."AlbumId"
 ORDER BY "a"."Id", "a0"."Id"
 ```
 
-<span data-ttu-id="2a9cf-246">Toutes les opérations sur la racine de la requête sont prises en charge.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-246">All operations on the query root are supported.</span></span> <span data-ttu-id="2a9cf-247">Cela comprend les opérations OrderBy/Skip/Take, Join, FirstOrDefault et des résultats uniques de sélection.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-247">This includes OrderBy/Skip/Take, Join operations, FirstOrDefault and similar single result selecting operations.</span></span>
+<span data-ttu-id="1f975-246">Toutes les opérations sur la racine de la requête sont prises en charge.</span><span class="sxs-lookup"><span data-stu-id="1f975-246">All operations on the query root are supported.</span></span> <span data-ttu-id="1f975-247">Cela comprend les opérations OrderBy/Skip/Take, Join, FirstOrDefault et des résultats uniques de sélection.</span><span class="sxs-lookup"><span data-stu-id="1f975-247">This includes OrderBy/Skip/Take, Join operations, FirstOrDefault and similar single result selecting operations.</span></span>
 
-<span data-ttu-id="2a9cf-248">Notez que les inclusions filtrées avec OrderBy/Skip/Take ne sont pas prises en charge dans Preview 6, mais sont disponibles dans les builds quotidiennes et seront incluses dans Preview 7.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-248">Note that filtered Includes with OrderBy/Skip/Take are not supported in preview 6, but are available in the daily builds and will be included in preview 7.</span></span>
+<span data-ttu-id="1f975-248">Notez que les inclusions filtrées avec OrderBy/Skip/Take ne sont pas prises en charge dans Preview 6, mais sont disponibles dans les builds quotidiennes et seront incluses dans Preview 7.</span><span class="sxs-lookup"><span data-stu-id="1f975-248">Note that filtered Includes with OrderBy/Skip/Take are not supported in preview 6, but are available in the daily builds and will be included in preview 7.</span></span>
 
-#### <a name="split-queries-with-collection-projections"></a><span data-ttu-id="2a9cf-249">Fractionner des requêtes avec des projections de collection</span><span class="sxs-lookup"><span data-stu-id="2a9cf-249">Split queries with collection projections</span></span>
+#### <a name="split-queries-with-collection-projections"></a><span data-ttu-id="1f975-249">Fractionner des requêtes avec des projections de collection</span><span class="sxs-lookup"><span data-stu-id="1f975-249">Split queries with collection projections</span></span>
 
-<span data-ttu-id="2a9cf-250">`AsSplitQuery` peut également être utilisé lorsque les collections sont chargées dans des projections.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-250">`AsSplitQuery` can also be used when collections are loaded in projections.</span></span> <span data-ttu-id="2a9cf-251">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-251">For example:</span></span>
+<span data-ttu-id="1f975-250">`AsSplitQuery` peut également être utilisé lorsque les collections sont chargées dans des projections.</span><span class="sxs-lookup"><span data-stu-id="1f975-250">`AsSplitQuery` can also be used when collections are loaded in projections.</span></span> <span data-ttu-id="1f975-251">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-251">For example:</span></span>
 
 ```CSharp
 context.Artists
@@ -581,7 +581,7 @@ context.Artists
     }).ToList();
 ```
 
-<span data-ttu-id="2a9cf-252">Cette requête LINQ génère les deux requêtes SQL suivantes lors de l’utilisation du fournisseur SQLite :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-252">This LINQ query generates the following two SQL queries when using the SQLite provider:</span></span>
+<span data-ttu-id="1f975-252">Cette requête LINQ génère les deux requêtes SQL suivantes lors de l’utilisation du fournisseur SQLite :</span><span class="sxs-lookup"><span data-stu-id="1f975-252">This LINQ query generates the following two SQL queries when using the SQLite provider:</span></span>
 
 ```sql
 SELECT "a"."Id", "a"."Name"
@@ -594,11 +594,11 @@ INNER JOIN "Album" AS "a0" ON "a"."Id" = "a0"."ArtistId"
 ORDER BY "a"."Id"
 ```
 
-<span data-ttu-id="2a9cf-253">Notez que seule la matérialisation de la collection est prise en charge.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-253">Note that only materialization of the collection is supported.</span></span> <span data-ttu-id="2a9cf-254">Les compositions ultérieures `e.Albums` dans le cas ci-dessus n’aboutissent pas à une requête Split.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-254">Any composition after `e.Albums` in above case won't result in a split query.</span></span> <span data-ttu-id="2a9cf-255">Les améliorations apportées à cette zone sont suivies par [#21234](https://github.com/dotnet/efcore/issues/21234).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-255">Improvements in this area are tracked by [#21234](https://github.com/dotnet/efcore/issues/21234).</span></span>
+<span data-ttu-id="1f975-253">Notez que seule la matérialisation de la collection est prise en charge.</span><span class="sxs-lookup"><span data-stu-id="1f975-253">Note that only materialization of the collection is supported.</span></span> <span data-ttu-id="1f975-254">Les compositions ultérieures `e.Albums` dans le cas ci-dessus n’aboutissent pas à une requête Split.</span><span class="sxs-lookup"><span data-stu-id="1f975-254">Any composition after `e.Albums` in above case won't result in a split query.</span></span> <span data-ttu-id="1f975-255">Les améliorations apportées à cette zone sont suivies par [#21234](https://github.com/dotnet/efcore/issues/21234).</span><span class="sxs-lookup"><span data-stu-id="1f975-255">Improvements in this area are tracked by [#21234](https://github.com/dotnet/efcore/issues/21234).</span></span>
 
-### <a name="indexattribute"></a><span data-ttu-id="2a9cf-256">IndexAttribute</span><span class="sxs-lookup"><span data-stu-id="2a9cf-256">IndexAttribute</span></span>
+### <a name="indexattribute"></a><span data-ttu-id="1f975-256">IndexAttribute</span><span class="sxs-lookup"><span data-stu-id="1f975-256">IndexAttribute</span></span>
 
-<span data-ttu-id="2a9cf-257">Le nouveau IndexAttribute peut être placé sur un type d’entité pour spécifier un index pour une colonne unique.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-257">The new IndexAttribute can be placed on an entity type to specify an index for a single column.</span></span> <span data-ttu-id="2a9cf-258">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-258">For example:</span></span>
+<span data-ttu-id="1f975-257">Le nouveau IndexAttribute peut être placé sur un type d’entité pour spécifier un index pour une colonne unique.</span><span class="sxs-lookup"><span data-stu-id="1f975-257">The new IndexAttribute can be placed on an entity type to specify an index for a single column.</span></span> <span data-ttu-id="1f975-258">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-258">For example:</span></span>
 
 ```CSharp
 [Index(nameof(FullName), IsUnique = true)]
@@ -611,7 +611,7 @@ public class User
 }
 ```
 
-<span data-ttu-id="2a9cf-259">Par SQL Server, les migrations génèrent alors le code SQL suivant :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-259">For SQL Server, Migrations will then generate the following SQL:</span></span>
+<span data-ttu-id="1f975-259">Par SQL Server, les migrations génèrent alors le code SQL suivant :</span><span class="sxs-lookup"><span data-stu-id="1f975-259">For SQL Server, Migrations will then generate the following SQL:</span></span>
 
 ```sql
 CREATE UNIQUE INDEX [IX_Users_FullName]
@@ -619,7 +619,7 @@ CREATE UNIQUE INDEX [IX_Users_FullName]
     WHERE [FullName] IS NOT NULL;
 ```
 
-<span data-ttu-id="2a9cf-260">IndexAttribute peut également être utilisé pour spécifier un index couvrant plusieurs colonnes.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-260">IndexAttribute can also be used to specify an index spanning multiple columns.</span></span> <span data-ttu-id="2a9cf-261">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-261">For example:</span></span>
+<span data-ttu-id="1f975-260">IndexAttribute peut également être utilisé pour spécifier un index couvrant plusieurs colonnes.</span><span class="sxs-lookup"><span data-stu-id="1f975-260">IndexAttribute can also be used to specify an index spanning multiple columns.</span></span> <span data-ttu-id="1f975-261">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-261">For example:</span></span>
 
 ```CSharp
 [Index(nameof(FirstName), nameof(LastName), IsUnique = true)]
@@ -635,7 +635,7 @@ public class User
 }
 ```
 
-<span data-ttu-id="2a9cf-262">Pour SQL Server, les résultats sont les suivants :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-262">For SQL Server, this results in:</span></span>
+<span data-ttu-id="1f975-262">Pour SQL Server, les résultats sont les suivants :</span><span class="sxs-lookup"><span data-stu-id="1f975-262">For SQL Server, this results in:</span></span>
 
 ```sql
 CREATE UNIQUE INDEX [IX_Users_FirstName_LastName]
@@ -643,21 +643,21 @@ CREATE UNIQUE INDEX [IX_Users_FirstName_LastName]
     WHERE [FirstName] IS NOT NULL AND [LastName] IS NOT NULL;
 ```
 
-<span data-ttu-id="2a9cf-263">La documentation est suivie d’un problème [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-263">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
+<span data-ttu-id="1f975-263">La documentation est suivie d’un problème [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span><span class="sxs-lookup"><span data-stu-id="1f975-263">Documentation is tracked by issue [#2407](https://github.com/dotnet/EntityFramework.Docs/issues/2407).</span></span>
 
-### <a name="improved-query-translation-exceptions"></a><span data-ttu-id="2a9cf-264">Amélioration des exceptions de traduction des requêtes</span><span class="sxs-lookup"><span data-stu-id="2a9cf-264">Improved query translation exceptions</span></span>
+### <a name="improved-query-translation-exceptions"></a><span data-ttu-id="1f975-264">Amélioration des exceptions de traduction des requêtes</span><span class="sxs-lookup"><span data-stu-id="1f975-264">Improved query translation exceptions</span></span>
 
-<span data-ttu-id="2a9cf-265">Nous continuons d’améliorer les messages d’exception générés en cas d’échec de la traduction de la requête.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-265">We are continuing to improve the exception messages generated when query translation fails.</span></span> <span data-ttu-id="2a9cf-266">Par exemple, cette requête utilise la propriété non mappée `IsSigned` :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-266">For example, this query uses the unmapped property `IsSigned`:</span></span>
+<span data-ttu-id="1f975-265">Nous continuons d’améliorer les messages d’exception générés en cas d’échec de la traduction de la requête.</span><span class="sxs-lookup"><span data-stu-id="1f975-265">We are continuing to improve the exception messages generated when query translation fails.</span></span> <span data-ttu-id="1f975-266">Par exemple, cette requête utilise la propriété non mappée `IsSigned` :</span><span class="sxs-lookup"><span data-stu-id="1f975-266">For example, this query uses the unmapped property `IsSigned`:</span></span>
 
 ```CSharp
 var artists = context.Artists.Where(e => e.IsSigned).ToList();
 ```
 
-<span data-ttu-id="2a9cf-267">EF Core lèvera l’exception suivante indiquant que la conversion a échoué, car `IsSigned` n’est pas mappé :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-267">EF Core will throw the following exception indicating that translation failed because `IsSigned` is not mapped:</span></span>
+<span data-ttu-id="1f975-267">EF Core lèvera l’exception suivante indiquant que la conversion a échoué, car `IsSigned` n’est pas mappé :</span><span class="sxs-lookup"><span data-stu-id="1f975-267">EF Core will throw the following exception indicating that translation failed because `IsSigned` is not mapped:</span></span>
 
-> <span data-ttu-id="2a9cf-268">Exception non gérée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-268">Unhandled exception.</span></span> <span data-ttu-id="2a9cf-269">System. InvalidOperationException : expression LINQ’DbSet <Artist> (). Où (a => a. IsSigned) 'n’a pas pu être traduit.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-269">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.IsSigned)' could not be translated.</span></span> <span data-ttu-id="2a9cf-270">Informations supplémentaires : la traduction du membre « IsSigned » sur le type d’entité « Artist » a échoué.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-270">Additional information: Translation of member 'IsSigned' on entity type 'Artist' failed.</span></span> <span data-ttu-id="2a9cf-271">Éventuellement, le membre spécifié n’est pas mappé.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-271">Possibly the specified member is not mapped.</span></span> <span data-ttu-id="2a9cf-272">Réécrivez la requête dans un formulaire qui peut être traduit ou basculez explicitement vers l’évaluation du client en insérant un appel à AsEnumerable (), AsAsyncEnumerable (), ToList () ou ToListAsync ().</span><span class="sxs-lookup"><span data-stu-id="2a9cf-272">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="2a9cf-273">Consultez la rubrique https://go.microsoft.com/fwlink/?linkid=2101038 (éventuellement en anglais) pour plus d'informations.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-273">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
+> <span data-ttu-id="1f975-268">Exception non gérée.</span><span class="sxs-lookup"><span data-stu-id="1f975-268">Unhandled exception.</span></span> <span data-ttu-id="1f975-269">System. InvalidOperationException : expression LINQ’DbSet <Artist> (). Où (a => a. IsSigned) 'n’a pas pu être traduit.</span><span class="sxs-lookup"><span data-stu-id="1f975-269">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.IsSigned)' could not be translated.</span></span> <span data-ttu-id="1f975-270">Informations supplémentaires : la traduction du membre « IsSigned » sur le type d’entité « Artist » a échoué.</span><span class="sxs-lookup"><span data-stu-id="1f975-270">Additional information: Translation of member 'IsSigned' on entity type 'Artist' failed.</span></span> <span data-ttu-id="1f975-271">Éventuellement, le membre spécifié n’est pas mappé.</span><span class="sxs-lookup"><span data-stu-id="1f975-271">Possibly the specified member is not mapped.</span></span> <span data-ttu-id="1f975-272">Réécrivez la requête dans un formulaire qui peut être traduit ou basculez explicitement vers l’évaluation du client en insérant un appel à AsEnumerable (), AsAsyncEnumerable (), ToList () ou ToListAsync ().</span><span class="sxs-lookup"><span data-stu-id="1f975-272">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="1f975-273">Consultez la rubrique https://go.microsoft.com/fwlink/?linkid=2101038 (éventuellement en anglais) pour plus d'informations.</span><span class="sxs-lookup"><span data-stu-id="1f975-273">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
 
-<span data-ttu-id="2a9cf-274">De même, de meilleurs messages d’exception sont désormais générés lorsque vous tentez de traduire des comparaisons de chaînes avec la sémantique dépendante de la culture.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-274">Similarly, better exception messages are now generated when attempting to translate string comparisons with culture-dependent semantics.</span></span> <span data-ttu-id="2a9cf-275">Par exemple, cette requête tente d’utiliser `StringComparison.CurrentCulture` :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-275">For example, this query attempts to use `StringComparison.CurrentCulture`:</span></span>
+<span data-ttu-id="1f975-274">De même, de meilleurs messages d’exception sont désormais générés lorsque vous tentez de traduire des comparaisons de chaînes avec la sémantique dépendante de la culture.</span><span class="sxs-lookup"><span data-stu-id="1f975-274">Similarly, better exception messages are now generated when attempting to translate string comparisons with culture-dependent semantics.</span></span> <span data-ttu-id="1f975-275">Par exemple, cette requête tente d’utiliser `StringComparison.CurrentCulture` :</span><span class="sxs-lookup"><span data-stu-id="1f975-275">For example, this query attempts to use `StringComparison.CurrentCulture`:</span></span>
 
 ```CSharp
 var artists = context.Artists
@@ -665,15 +665,15 @@ var artists = context.Artists
     .ToList();
 ```
 
-<span data-ttu-id="2a9cf-276">EF Core lèvera à présent l’exception suivante :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-276">EF Core will now throw the following exception:</span></span>
+<span data-ttu-id="1f975-276">EF Core lèvera à présent l’exception suivante :</span><span class="sxs-lookup"><span data-stu-id="1f975-276">EF Core will now throw the following exception:</span></span>
 
-> <span data-ttu-id="2a9cf-277">Exception non gérée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-277">Unhandled exception.</span></span> <span data-ttu-id="2a9cf-278">System. InvalidOperationException : expression LINQ’DbSet <Artist> (). Où (a => a. Name. Equals (valeur : « les licornes », comparisonType : CurrentCulture))» n’a pas pu être traduit.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-278">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.Name.Equals( value: "The Unicorns", comparisonType: CurrentCulture))' could not be translated.</span></span> <span data-ttu-id="2a9cf-279">Informations supplémentaires : traduction de « String ». La méthode Equals qui accepte l’argument’StringComparison’n’est pas prise en charge.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-279">Additional information: Translation of 'string.Equals' method which takes 'StringComparison' argument is not supported.</span></span> <span data-ttu-id="2a9cf-280">Consultez la rubrique https://go.microsoft.com/fwlink/?linkid=2129535 (éventuellement en anglais) pour plus d'informations.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-280">See https://go.microsoft.com/fwlink/?linkid=2129535 for more information.</span></span> <span data-ttu-id="2a9cf-281">Réécrivez la requête dans un formulaire qui peut être traduit ou basculez explicitement vers l’évaluation du client en insérant un appel à AsEnumerable (), AsAsyncEnumerable (), ToList () ou ToListAsync ().</span><span class="sxs-lookup"><span data-stu-id="2a9cf-281">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="2a9cf-282">Consultez la rubrique https://go.microsoft.com/fwlink/?linkid=2101038 (éventuellement en anglais) pour plus d'informations.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-282">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
+> <span data-ttu-id="1f975-277">Exception non gérée.</span><span class="sxs-lookup"><span data-stu-id="1f975-277">Unhandled exception.</span></span> <span data-ttu-id="1f975-278">System. InvalidOperationException : expression LINQ’DbSet <Artist> (). Où (a => a. Name. Equals (valeur : « les licornes », comparisonType : CurrentCulture))» n’a pas pu être traduit.</span><span class="sxs-lookup"><span data-stu-id="1f975-278">System.InvalidOperationException: The LINQ expression 'DbSet<Artist>() .Where(a => a.Name.Equals( value: "The Unicorns", comparisonType: CurrentCulture))' could not be translated.</span></span> <span data-ttu-id="1f975-279">Informations supplémentaires : traduction de « String ». La méthode Equals qui accepte l’argument’StringComparison’n’est pas prise en charge.</span><span class="sxs-lookup"><span data-stu-id="1f975-279">Additional information: Translation of 'string.Equals' method which takes 'StringComparison' argument is not supported.</span></span> <span data-ttu-id="1f975-280">Consultez la rubrique https://go.microsoft.com/fwlink/?linkid=2129535 (éventuellement en anglais) pour plus d'informations.</span><span class="sxs-lookup"><span data-stu-id="1f975-280">See https://go.microsoft.com/fwlink/?linkid=2129535 for more information.</span></span> <span data-ttu-id="1f975-281">Réécrivez la requête dans un formulaire qui peut être traduit ou basculez explicitement vers l’évaluation du client en insérant un appel à AsEnumerable (), AsAsyncEnumerable (), ToList () ou ToListAsync ().</span><span class="sxs-lookup"><span data-stu-id="1f975-281">Either rewrite the query in a form that can be translated, or switch to client evaluation explicitly by inserting a call to either AsEnumerable(), AsAsyncEnumerable(), ToList(), or ToListAsync().</span></span> <span data-ttu-id="1f975-282">Consultez la rubrique https://go.microsoft.com/fwlink/?linkid=2101038 (éventuellement en anglais) pour plus d'informations.</span><span class="sxs-lookup"><span data-stu-id="1f975-282">See https://go.microsoft.com/fwlink/?linkid=2101038 for more information.</span></span>
 
-### <a name="specify-transaction-id"></a><span data-ttu-id="2a9cf-283">Spécifier l’ID de la transaction</span><span class="sxs-lookup"><span data-stu-id="2a9cf-283">Specify transaction ID</span></span>
+### <a name="specify-transaction-id"></a><span data-ttu-id="1f975-283">Spécifier l’ID de la transaction</span><span class="sxs-lookup"><span data-stu-id="1f975-283">Specify transaction ID</span></span>
 
-<span data-ttu-id="2a9cf-284">Cette fonctionnalité a été ajoutée par la communauté [@Marusyk](https://github.com/Marusyk) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-284">This feature was contributed from the community by [@Marusyk](https://github.com/Marusyk).</span></span> <span data-ttu-id="2a9cf-285">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="2a9cf-285">Many thanks for the contribution!</span></span>
+<span data-ttu-id="1f975-284">Cette fonctionnalité a été ajoutée par la communauté [@Marusyk](https://github.com/Marusyk) .</span><span class="sxs-lookup"><span data-stu-id="1f975-284">This feature was contributed from the community by [@Marusyk](https://github.com/Marusyk).</span></span> <span data-ttu-id="1f975-285">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="1f975-285">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="2a9cf-286">EF Core expose un ID de transaction pour la corrélation des transactions entre les appels.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-286">EF Core exposes a transaction ID for correlation of transactions across calls.</span></span> <span data-ttu-id="2a9cf-287">Cet ID est généralement défini par EF Core lorsqu’une transaction est démarrée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-287">This ID typically set by EF Core when a transaction is started.</span></span> <span data-ttu-id="2a9cf-288">Si l’application démarre plutôt la transaction, cette fonctionnalité permet à l’application de définir explicitement l’ID de transaction afin qu’elle soit correctement corrélée partout où elle est utilisée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-288">If the application starts the transaction instead, then this feature allows the application to explicitly set the transaction ID so it is correlated correctly everywhere it is used.</span></span> <span data-ttu-id="2a9cf-289">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-289">For example:</span></span>
+<span data-ttu-id="1f975-286">EF Core expose un ID de transaction pour la corrélation des transactions entre les appels.</span><span class="sxs-lookup"><span data-stu-id="1f975-286">EF Core exposes a transaction ID for correlation of transactions across calls.</span></span> <span data-ttu-id="1f975-287">Cet ID est généralement défini par EF Core lorsqu’une transaction est démarrée.</span><span class="sxs-lookup"><span data-stu-id="1f975-287">This ID typically set by EF Core when a transaction is started.</span></span> <span data-ttu-id="1f975-288">Si l’application démarre plutôt la transaction, cette fonctionnalité permet à l’application de définir explicitement l’ID de transaction afin qu’elle soit correctement corrélée partout où elle est utilisée.</span><span class="sxs-lookup"><span data-stu-id="1f975-288">If the application starts the transaction instead, then this feature allows the application to explicitly set the transaction ID so it is correlated correctly everywhere it is used.</span></span> <span data-ttu-id="1f975-289">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-289">For example:</span></span>
 
 ```CSharp
 using (context.Database.UseTransaction(myTransaction, myId))
@@ -682,11 +682,11 @@ using (context.Database.UseTransaction(myTransaction, myId))
 }
 ```
 
-### <a name="ipaddress-mapping"></a><span data-ttu-id="2a9cf-290">Mappage IPAddress</span><span class="sxs-lookup"><span data-stu-id="2a9cf-290">IPAddress mapping</span></span>
+### <a name="ipaddress-mapping"></a><span data-ttu-id="1f975-290">Mappage IPAddress</span><span class="sxs-lookup"><span data-stu-id="1f975-290">IPAddress mapping</span></span>
 
-<span data-ttu-id="2a9cf-291">Cette fonctionnalité a été ajoutée par la communauté [@ralmsdeveloper](https://github.com/ralmsdeveloper) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-291">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="2a9cf-292">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="2a9cf-292">Many thanks for the contribution!</span></span>
+<span data-ttu-id="1f975-291">Cette fonctionnalité a été ajoutée par la communauté [@ralmsdeveloper](https://github.com/ralmsdeveloper) .</span><span class="sxs-lookup"><span data-stu-id="1f975-291">This feature was contributed from the community by [@ralmsdeveloper](https://github.com/ralmsdeveloper).</span></span> <span data-ttu-id="1f975-292">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="1f975-292">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="2a9cf-293">La classe .NET [IPAddress](/dotnet/api/system.net.ipaddress) standard est désormais automatiquement mappée à une colonne de type chaîne pour les bases de données qui n’ont pas encore de prise en charge native.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-293">The standard .NET [IPAddress class](/dotnet/api/system.net.ipaddress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="2a9cf-294">Par exemple, envisagez de mapper ce type d’entité :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-294">For example, consider mapping this entity type:</span></span>
+<span data-ttu-id="1f975-293">La classe .NET [IPAddress](/dotnet/api/system.net.ipaddress) standard est désormais automatiquement mappée à une colonne de type chaîne pour les bases de données qui n’ont pas encore de prise en charge native.</span><span class="sxs-lookup"><span data-stu-id="1f975-293">The standard .NET [IPAddress class](/dotnet/api/system.net.ipaddress) is now automatically mapped to a string column for databases that do not already have native support.</span></span> <span data-ttu-id="1f975-294">Par exemple, envisagez de mapper ce type d’entité :</span><span class="sxs-lookup"><span data-stu-id="1f975-294">For example, consider mapping this entity type:</span></span>
 
 ```CSharp
 public class Host
@@ -696,7 +696,7 @@ public class Host
 }
 ```
 
-<span data-ttu-id="2a9cf-295">Sur SQL Server, les migrations créent le tableau suivant :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-295">On SQL Server, this will result in Migrations creating the following table:</span></span>
+<span data-ttu-id="1f975-295">Sur SQL Server, les migrations créent le tableau suivant :</span><span class="sxs-lookup"><span data-stu-id="1f975-295">On SQL Server, this will result in Migrations creating the following table:</span></span>
 
 ```sql
 CREATE TABLE [Host] (
@@ -705,7 +705,7 @@ CREATE TABLE [Host] (
     CONSTRAINT [PK_Host] PRIMARY KEY ([Id]));
 ```
 
-<span data-ttu-id="2a9cf-296">Les entités peuvent ensuite être ajoutées de manière normale :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-296">Entities can then be added in the normal way:</span></span>
+<span data-ttu-id="1f975-296">Les entités peuvent ensuite être ajoutées de manière normale :</span><span class="sxs-lookup"><span data-stu-id="1f975-296">Entities can then be added in the normal way:</span></span>
 
 ```CSharp
 context.AddRange(
@@ -713,7 +713,7 @@ context.AddRange(
     new Host { Address = IPAddress.Parse("0000:0000:0000:0000:0000:0000:0000:0001")});
 ```
 
-<span data-ttu-id="2a9cf-297">Et le SQL qui en résulte insère l’adresse IPv4 ou IPv6 normalisée :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-297">And the resulting SQL will insert the normalized IPv4 or IPv6 address:</span></span>
+<span data-ttu-id="1f975-297">Et le SQL qui en résulte insère l’adresse IPv4 ou IPv6 normalisée :</span><span class="sxs-lookup"><span data-stu-id="1f975-297">And the resulting SQL will insert the normalized IPv4 or IPv6 address:</span></span>
 
 ```sql
 Executed DbCommand (14ms) [Parameters=[@p0='1', @p1='127.0.0.1' (Size = 45), @p2='2', @p3='::1' (Size = 45)], CommandType='Text', CommandTimeout='30']
@@ -722,35 +722,35 @@ Executed DbCommand (14ms) [Parameters=[@p0='1', @p1='127.0.0.1' (Size = 45), @p2
       VALUES (@p0, @p1), (@p2, @p3);
 ```
 
-### <a name="exclude-onconfiguring-when-scaffolding"></a><span data-ttu-id="2a9cf-298">Exclure OnConfiguring lors de la génération de modèles automatique</span><span class="sxs-lookup"><span data-stu-id="2a9cf-298">Exclude OnConfiguring when scaffolding</span></span>
+### <a name="exclude-onconfiguring-when-scaffolding"></a><span data-ttu-id="1f975-298">Exclure OnConfiguring lors de la génération de modèles automatique</span><span class="sxs-lookup"><span data-stu-id="1f975-298">Exclude OnConfiguring when scaffolding</span></span>
 
-<span data-ttu-id="2a9cf-299">Lorsqu’un DbContext est généré à partir d’une base de données existante, EF Core par défaut crée une surcharge OnConfiguring avec une chaîne de connexion afin que le contexte soit immédiatement utilisable.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-299">When a DbContext is scaffolded from an existing database, EF Core by default creates an OnConfiguring overload with a connection string so that the context is immediately usable.</span></span> <span data-ttu-id="2a9cf-300">Toutefois, cela n’est pas utile si vous avez déjà une classe partielle avec OnConfiguring, ou si vous configurez le contexte d’une autre façon.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-300">However, this is not useful if you already have a partial class with OnConfiguring, or if you are configuring the context some other way.</span></span>
+<span data-ttu-id="1f975-299">Lorsqu’un DbContext est généré à partir d’une base de données existante, EF Core par défaut crée une surcharge OnConfiguring avec une chaîne de connexion afin que le contexte soit immédiatement utilisable.</span><span class="sxs-lookup"><span data-stu-id="1f975-299">When a DbContext is scaffolded from an existing database, EF Core by default creates an OnConfiguring overload with a connection string so that the context is immediately usable.</span></span> <span data-ttu-id="1f975-300">Toutefois, cela n’est pas utile si vous avez déjà une classe partielle avec OnConfiguring, ou si vous configurez le contexte d’une autre façon.</span><span class="sxs-lookup"><span data-stu-id="1f975-300">However, this is not useful if you already have a partial class with OnConfiguring, or if you are configuring the context some other way.</span></span>
 
-<span data-ttu-id="2a9cf-301">Pour résoudre ce risque, les commandes de génération de modèles automatique peuvent maintenant être demandées d’omettre la génération de OnConfiguring.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-301">To address this, the scaffolding commands can now be instructed to omit generation of OnConfiguring.</span></span> <span data-ttu-id="2a9cf-302">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-302">For example:</span></span>
+<span data-ttu-id="1f975-301">Pour résoudre ce risque, les commandes de génération de modèles automatique peuvent maintenant être demandées d’omettre la génération de OnConfiguring.</span><span class="sxs-lookup"><span data-stu-id="1f975-301">To address this, the scaffolding commands can now be instructed to omit generation of OnConfiguring.</span></span> <span data-ttu-id="1f975-302">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-302">For example:</span></span>
 
 ```
 dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring
 ```
 
-<span data-ttu-id="2a9cf-303">Ou dans la console du gestionnaire de package :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-303">Or in the Package Manager Console:</span></span>
+<span data-ttu-id="1f975-303">Ou dans la console du gestionnaire de package :</span><span class="sxs-lookup"><span data-stu-id="1f975-303">Or in the Package Manager Console:</span></span>
 
 ```
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer -NoOnConfiguring
 ```
 
-<span data-ttu-id="2a9cf-304">Notez que nous vous recommandons [d’utiliser une chaîne de connexion nommée et un stockage sécurisé comme des secrets d’utilisateur](/core/managing-schemas/scaffolding?tabs=vs#configuration-and-user-secrets).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-304">Note that we recommend using [a named connection string and secure storage like User Secrets](/core/managing-schemas/scaffolding?tabs=vs#configuration-and-user-secrets).</span></span>
+<span data-ttu-id="1f975-304">Notez que nous vous recommandons [d’utiliser une chaîne de connexion nommée et un stockage sécurisé comme des secrets d’utilisateur](xref:core/managing-schemas/scaffolding#configuration-and-user-secrets).</span><span class="sxs-lookup"><span data-stu-id="1f975-304">Note that we recommend using [a named connection string and secure storage like User Secrets](xref:core/managing-schemas/scaffolding#configuration-and-user-secrets).</span></span>
 
-### <a name="translations-for-firstordefault-on-strings"></a><span data-ttu-id="2a9cf-305">Traductions pour FirstOrDefault sur les chaînes</span><span class="sxs-lookup"><span data-stu-id="2a9cf-305">Translations for FirstOrDefault on strings</span></span>
+### <a name="translations-for-firstordefault-on-strings"></a><span data-ttu-id="1f975-305">Traductions pour FirstOrDefault sur les chaînes</span><span class="sxs-lookup"><span data-stu-id="1f975-305">Translations for FirstOrDefault on strings</span></span>
 
-<span data-ttu-id="2a9cf-306">Cette fonctionnalité a été ajoutée par la communauté [@dvoreckyaa](https://github.com/dvoreckyaa) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-306">This feature was contributed from the community by [@dvoreckyaa](https://github.com/dvoreckyaa).</span></span> <span data-ttu-id="2a9cf-307">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="2a9cf-307">Many thanks for the contribution!</span></span>
+<span data-ttu-id="1f975-306">Cette fonctionnalité a été ajoutée par la communauté [@dvoreckyaa](https://github.com/dvoreckyaa) .</span><span class="sxs-lookup"><span data-stu-id="1f975-306">This feature was contributed from the community by [@dvoreckyaa](https://github.com/dvoreckyaa).</span></span> <span data-ttu-id="1f975-307">De nombreuses remerciements pour la contribution !</span><span class="sxs-lookup"><span data-stu-id="1f975-307">Many thanks for the contribution!</span></span>
 
-<span data-ttu-id="2a9cf-308">Les opérateurs FirstOrDefault et similaires pour les caractères dans les chaînes sont maintenant traduits.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-308">FirstOrDefault and similar operators for characters in strings are now translated.</span></span> <span data-ttu-id="2a9cf-309">Par exemple, cette requête LINQ :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-309">For example, this LINQ query:</span></span>
+<span data-ttu-id="1f975-308">Les opérateurs FirstOrDefault et similaires pour les caractères dans les chaînes sont maintenant traduits.</span><span class="sxs-lookup"><span data-stu-id="1f975-308">FirstOrDefault and similar operators for characters in strings are now translated.</span></span> <span data-ttu-id="1f975-309">Par exemple, cette requête LINQ :</span><span class="sxs-lookup"><span data-stu-id="1f975-309">For example, this LINQ query:</span></span>
 
 ```CSharp
 context.Customers.Where(c => c.ContactName.FirstOrDefault() == 'A').ToList();
 ```
 
-<span data-ttu-id="2a9cf-310">Sera traduit dans le code SQL suivant lors de l’utilisation de SQL Server :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-310">Will be translated to the following SQL when using SQL Server:</span></span>
+<span data-ttu-id="1f975-310">Sera traduit dans le code SQL suivant lors de l’utilisation de SQL Server :</span><span class="sxs-lookup"><span data-stu-id="1f975-310">Will be translated to the following SQL when using SQL Server:</span></span>
 
 ```sql
 SELECT [c].[Id], [c].[ContactName]
@@ -758,9 +758,9 @@ FROM [Customer] AS [c]
 WHERE SUBSTRING([c].[ContactName], 1, 1) = N'A'
 ```
 
-### <a name="simplify-case-blocks"></a><span data-ttu-id="2a9cf-311">Simplifier les blocs de casse</span><span class="sxs-lookup"><span data-stu-id="2a9cf-311">Simplify case blocks</span></span>
+### <a name="simplify-case-blocks"></a><span data-ttu-id="1f975-311">Simplifier les blocs de casse</span><span class="sxs-lookup"><span data-stu-id="1f975-311">Simplify case blocks</span></span>
 
-<span data-ttu-id="2a9cf-312">EF Core génère désormais de meilleures requêtes avec des blocs de cas.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-312">EF Core now generates better queries with CASE blocks.</span></span> <span data-ttu-id="2a9cf-313">Par exemple, cette requête LINQ :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-313">For example, this LINQ query:</span></span>
+<span data-ttu-id="1f975-312">EF Core génère désormais de meilleures requêtes avec des blocs de cas.</span><span class="sxs-lookup"><span data-stu-id="1f975-312">EF Core now generates better queries with CASE blocks.</span></span> <span data-ttu-id="1f975-313">Par exemple, cette requête LINQ :</span><span class="sxs-lookup"><span data-stu-id="1f975-313">For example, this LINQ query:</span></span>
 
 ```CSharp
 context.Weapons
@@ -768,7 +768,7 @@ context.Weapons
     .ThenBy(w => w.Id)
 ```
 
-<span data-ttu-id="2a9cf-314">Était sur SQL Server traduite formellement en :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-314">Was on SQL Server formally translated to:</span></span>
+<span data-ttu-id="1f975-314">Était sur SQL Server traduite formellement en :</span><span class="sxs-lookup"><span data-stu-id="1f975-314">Was on SQL Server formally translated to:</span></span>
 
 ```sql
 SELECT [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -787,7 +787,7 @@ ORDER BY CASE
 END, [w].[Id]");
 ```
 
-<span data-ttu-id="2a9cf-315">Mais est maintenant traduit par :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-315">But is now translated to:</span></span>
+<span data-ttu-id="1f975-315">Mais est maintenant traduit par :</span><span class="sxs-lookup"><span data-stu-id="1f975-315">But is now translated to:</span></span>
 
 ```sql
 SELECT [w].[Id], [w].[AmmunitionType], [w].[IsAutomatic], [w].[Name], [w].[OwnerFullName], [w].[SynergyWithId]
@@ -798,24 +798,24 @@ ORDER BY CASE
 END, [w].[Id]");
 ```
 
-## <a name="preview-5"></a><span data-ttu-id="2a9cf-316">Préversion 5</span><span class="sxs-lookup"><span data-stu-id="2a9cf-316">Preview 5</span></span>
+## <a name="preview-5"></a><span data-ttu-id="1f975-316">Préversion 5</span><span class="sxs-lookup"><span data-stu-id="1f975-316">Preview 5</span></span>
 
-### <a name="database-collations"></a><span data-ttu-id="2a9cf-317">Classements de base de données</span><span class="sxs-lookup"><span data-stu-id="2a9cf-317">Database collations</span></span>
+### <a name="database-collations"></a><span data-ttu-id="1f975-317">Classements de base de données</span><span class="sxs-lookup"><span data-stu-id="1f975-317">Database collations</span></span>
 
-<span data-ttu-id="2a9cf-318">Le classement par défaut d’une base de données peut désormais être spécifié dans le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-318">The default collation for a database can now be specified in the EF model.</span></span> <span data-ttu-id="2a9cf-319">Cela passera à des migrations générées pour définir le classement lors de la création de la base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-319">This will flow through to generated migrations to set the collation when the database is created.</span></span> <span data-ttu-id="2a9cf-320">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-320">For example:</span></span>
+<span data-ttu-id="1f975-318">Le classement par défaut d’une base de données peut désormais être spécifié dans le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="1f975-318">The default collation for a database can now be specified in the EF model.</span></span> <span data-ttu-id="1f975-319">Cela passera à des migrations générées pour définir le classement lors de la création de la base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-319">This will flow through to generated migrations to set the collation when the database is created.</span></span> <span data-ttu-id="1f975-320">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-320">For example:</span></span>
 
 ```CSharp
 modelBuilder.UseCollation("German_PhoneBook_CI_AS");
 ```
 
-<span data-ttu-id="2a9cf-321">Les migrations génèrent ensuite les éléments suivants pour créer la base de données sur SQL Server :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-321">Migrations then generates the following to create the database on SQL Server:</span></span>
+<span data-ttu-id="1f975-321">Les migrations génèrent ensuite les éléments suivants pour créer la base de données sur SQL Server :</span><span class="sxs-lookup"><span data-stu-id="1f975-321">Migrations then generates the following to create the database on SQL Server:</span></span>
 
 ```sql
 CREATE DATABASE [Test]
 COLLATE German_PhoneBook_CI_AS;
 ```
 
-<span data-ttu-id="2a9cf-322">Le classement à utiliser pour des colonnes de base de données spécifiques peut également être spécifié.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-322">The collation to use for specific database columns can also be specified.</span></span> <span data-ttu-id="2a9cf-323">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-323">For example:</span></span>
+<span data-ttu-id="1f975-322">Le classement à utiliser pour des colonnes de base de données spécifiques peut également être spécifié.</span><span class="sxs-lookup"><span data-stu-id="1f975-322">The collation to use for specific database columns can also be specified.</span></span> <span data-ttu-id="1f975-323">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-323">For example:</span></span>
 
 ```CSharp
  modelBuilder
@@ -824,15 +824,15 @@ COLLATE German_PhoneBook_CI_AS;
      .UseCollation("German_PhoneBook_CI_AS");
 ```
 
-<span data-ttu-id="2a9cf-324">Pour ceux qui n’utilisent pas de migrations, les classements sont à présent rétroconçus de la base de données lors de la génération de modèles automatique.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-324">For those not using migrations, collations are now reverse-engineered from the database when scaffolding a DbContext.</span></span>
+<span data-ttu-id="1f975-324">Pour ceux qui n’utilisent pas de migrations, les classements sont à présent rétroconçus de la base de données lors de la génération de modèles automatique.</span><span class="sxs-lookup"><span data-stu-id="1f975-324">For those not using migrations, collations are now reverse-engineered from the database when scaffolding a DbContext.</span></span>
 
-<span data-ttu-id="2a9cf-325">Enfin, le `EF.Functions.Collate()` autorise les requêtes ad hoc utilisant des classements différents.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-325">Finally, the `EF.Functions.Collate()` allows for ad-hoc queries using different collations.</span></span> <span data-ttu-id="2a9cf-326">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-326">For example:</span></span>
+<span data-ttu-id="1f975-325">Enfin, le `EF.Functions.Collate()` autorise les requêtes ad hoc utilisant des classements différents.</span><span class="sxs-lookup"><span data-stu-id="1f975-325">Finally, the `EF.Functions.Collate()` allows for ad-hoc queries using different collations.</span></span> <span data-ttu-id="1f975-326">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-326">For example:</span></span>
 
 ```CSharp
 context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
 ```
 
-<span data-ttu-id="2a9cf-327">La requête suivante est générée pour SQL Server :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-327">This will generate the following query for SQL Server:</span></span>
+<span data-ttu-id="1f975-327">La requête suivante est générée pour SQL Server :</span><span class="sxs-lookup"><span data-stu-id="1f975-327">This will generate the following query for SQL Server:</span></span>
 
 ```sql
 SELECT TOP(2) [u].[Id], [u].[Name]
@@ -840,19 +840,19 @@ FROM [Users] AS [u]
 WHERE [u].[Name] COLLATE French_CI_AS = N'Jean-Michel Jarre'
 ```
 
-<span data-ttu-id="2a9cf-328">Notez que les classements ad hoc doivent être utilisés avec précaution, car ils peuvent avoir un impact négatif sur les performances de la base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-328">Note that ad-hoc collations should be used with care as they can negatively impact database performance.</span></span>
+<span data-ttu-id="1f975-328">Notez que les classements ad hoc doivent être utilisés avec précaution, car ils peuvent avoir un impact négatif sur les performances de la base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-328">Note that ad-hoc collations should be used with care as they can negatively impact database performance.</span></span>
 
-<span data-ttu-id="2a9cf-329">La documentation est suivie d’un problème [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-329">Documentation is tracked by issue [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).</span></span>
+<span data-ttu-id="1f975-329">La documentation est suivie d’un problème [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).</span><span class="sxs-lookup"><span data-stu-id="1f975-329">Documentation is tracked by issue [#2273](https://github.com/dotnet/EntityFramework.Docs/issues/2273).</span></span>
 
-### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a><span data-ttu-id="2a9cf-330">Transmettre les arguments dans IDesignTimeDbContextFactory</span><span class="sxs-lookup"><span data-stu-id="2a9cf-330">Flow arguments into IDesignTimeDbContextFactory</span></span>
+### <a name="flow-arguments-into-idesigntimedbcontextfactory"></a><span data-ttu-id="1f975-330">Transmettre les arguments dans IDesignTimeDbContextFactory</span><span class="sxs-lookup"><span data-stu-id="1f975-330">Flow arguments into IDesignTimeDbContextFactory</span></span>
 
-<span data-ttu-id="2a9cf-331">Les arguments sont à présent transmis à partir de la ligne de commande dans la `CreateDbContext` méthode de [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-331">Arguments are now flowed from the command line into the `CreateDbContext` method of [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1?view=efcore-3.1).</span></span> <span data-ttu-id="2a9cf-332">Par exemple, pour indiquer qu’il s’agit d’une build dev, un argument personnalisé (par exemple, `dev` ) peut être passé sur la ligne de commande :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-332">For example, to indicate this is a dev build, a custom argument (e.g. `dev`) can be passed on the command line:</span></span>
+<span data-ttu-id="1f975-331">Les arguments sont à présent transmis à partir de la ligne de commande dans la `CreateDbContext` méthode de [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1).</span><span class="sxs-lookup"><span data-stu-id="1f975-331">Arguments are now flowed from the command line into the `CreateDbContext` method of [IDesignTimeDbContextFactory](/dotnet/api/microsoft.entityframeworkcore.design.idesigntimedbcontextfactory-1).</span></span> <span data-ttu-id="1f975-332">Par exemple, pour indiquer qu’il s’agit d’une build dev, un argument personnalisé (par exemple, `dev` ) peut être passé sur la ligne de commande :</span><span class="sxs-lookup"><span data-stu-id="1f975-332">For example, to indicate this is a dev build, a custom argument (e.g. `dev`) can be passed on the command line:</span></span>
 
 ```
 dotnet ef migrations add two --verbose --dev
 ```
 
-<span data-ttu-id="2a9cf-333">Cet argument est ensuite transmis à la fabrique, où il peut être utilisé pour contrôler la façon dont le contexte est créé et initialisé.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-333">This argument will then flow into the factory, where it can be used to control how the context is created and initialized.</span></span> <span data-ttu-id="2a9cf-334">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-334">For example:</span></span>
+<span data-ttu-id="1f975-333">Cet argument est ensuite transmis à la fabrique, où il peut être utilisé pour contrôler la façon dont le contexte est créé et initialisé.</span><span class="sxs-lookup"><span data-stu-id="1f975-333">This argument will then flow into the factory, where it can be used to control how the context is created and initialized.</span></span> <span data-ttu-id="1f975-334">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-334">For example:</span></span>
 
 ```CSharp
 public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
@@ -862,31 +862,31 @@ public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
 }
 ```
 
-<span data-ttu-id="2a9cf-335">La documentation est suivie d’un problème [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-335">Documentation is tracked by issue [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).</span></span>
+<span data-ttu-id="1f975-335">La documentation est suivie d’un problème [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).</span><span class="sxs-lookup"><span data-stu-id="1f975-335">Documentation is tracked by issue [#2419](https://github.com/dotnet/EntityFramework.Docs/issues/2419).</span></span>
 
-### <a name="no-tracking-queries-with-identity-resolution"></a><span data-ttu-id="2a9cf-336">Requêtes de suivi sans suivi de la résolution d’identité</span><span class="sxs-lookup"><span data-stu-id="2a9cf-336">No-tracking queries with identity resolution</span></span>
+### <a name="no-tracking-queries-with-identity-resolution"></a><span data-ttu-id="1f975-336">Requêtes de suivi sans suivi de la résolution d’identité</span><span class="sxs-lookup"><span data-stu-id="1f975-336">No-tracking queries with identity resolution</span></span>
 
-<span data-ttu-id="2a9cf-337">Les requêtes de non-suivi peuvent maintenant être configurées pour effectuer la résolution d’identité.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-337">No-tracking queries can now be configured to perform identity resolution.</span></span> <span data-ttu-id="2a9cf-338">Par exemple, la requête suivante crée une nouvelle instance de blog pour chaque publication, même si chaque blog a la même clé primaire.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-338">For example, the following query will create a new Blog instance for each Post, even if each Blog has the same primary key.</span></span>
+<span data-ttu-id="1f975-337">Les requêtes de non-suivi peuvent maintenant être configurées pour effectuer la résolution d’identité.</span><span class="sxs-lookup"><span data-stu-id="1f975-337">No-tracking queries can now be configured to perform identity resolution.</span></span> <span data-ttu-id="1f975-338">Par exemple, la requête suivante crée une nouvelle instance de blog pour chaque publication, même si chaque blog a la même clé primaire.</span><span class="sxs-lookup"><span data-stu-id="1f975-338">For example, the following query will create a new Blog instance for each Post, even if each Blog has the same primary key.</span></span>
 
 ```CSharp
 context.Posts.AsNoTracking().Include(e => e.Blog).ToList();
 ```
 
-<span data-ttu-id="2a9cf-339">Toutefois, au détriment d’un peu plus lentement et en utilisant toujours plus de mémoire, cette requête peut être modifiée pour garantir qu’une seule instance de blog est créée :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-339">However, at the expense of usually being slightly slower and always using more memory, this query can be changed to ensure only a single Blog instance is created:</span></span>
+<span data-ttu-id="1f975-339">Toutefois, au détriment d’un peu plus lentement et en utilisant toujours plus de mémoire, cette requête peut être modifiée pour garantir qu’une seule instance de blog est créée :</span><span class="sxs-lookup"><span data-stu-id="1f975-339">However, at the expense of usually being slightly slower and always using more memory, this query can be changed to ensure only a single Blog instance is created:</span></span>
 
 ```CSharp
 context.Posts.AsNoTracking().PerformIdentityResolution().Include(e => e.Blog).ToList();
 ```
 
-<span data-ttu-id="2a9cf-340">Notez que cela n’est utile que pour les requêtes sans suivi, car toutes les requêtes de suivi présentent déjà ce comportement.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-340">Note that this is only useful for no-tracking queries since all tracking queries already exhibit this behavior.</span></span> <span data-ttu-id="2a9cf-341">En outre, la syntaxe de l’API suivante `PerformIdentityResolution` sera modifiée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-341">Also, following API review, the `PerformIdentityResolution` syntax will be changed.</span></span> <span data-ttu-id="2a9cf-342">Consultez [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-342">See [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).</span></span>
+<span data-ttu-id="1f975-340">Notez que cela n’est utile que pour les requêtes sans suivi, car toutes les requêtes de suivi présentent déjà ce comportement.</span><span class="sxs-lookup"><span data-stu-id="1f975-340">Note that this is only useful for no-tracking queries since all tracking queries already exhibit this behavior.</span></span> <span data-ttu-id="1f975-341">En outre, la syntaxe de l’API suivante `PerformIdentityResolution` sera modifiée.</span><span class="sxs-lookup"><span data-stu-id="1f975-341">Also, following API review, the `PerformIdentityResolution` syntax will be changed.</span></span> <span data-ttu-id="1f975-342">Consultez [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).</span><span class="sxs-lookup"><span data-stu-id="1f975-342">See [#19877](https://github.com/dotnet/efcore/issues/19877#issuecomment-637371073).</span></span>
 
-<span data-ttu-id="2a9cf-343">La documentation est suivie d’un problème [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-343">Documentation is tracked by issue [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).</span></span>
+<span data-ttu-id="1f975-343">La documentation est suivie d’un problème [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).</span><span class="sxs-lookup"><span data-stu-id="1f975-343">Documentation is tracked by issue [#1895](https://github.com/dotnet/EntityFramework.Docs/issues/1895).</span></span>
 
-### <a name="stored-persisted-computed-columns"></a><span data-ttu-id="2a9cf-344">Colonnes calculées (persistantes) stockées</span><span class="sxs-lookup"><span data-stu-id="2a9cf-344">Stored (persisted) computed columns</span></span>
+### <a name="stored-persisted-computed-columns"></a><span data-ttu-id="1f975-344">Colonnes calculées (persistantes) stockées</span><span class="sxs-lookup"><span data-stu-id="1f975-344">Stored (persisted) computed columns</span></span>
 
-<span data-ttu-id="2a9cf-345">La plupart des bases de données autorisent le stockage des valeurs de colonne calculées après le calcul.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-345">Most databases allow computed column values to be stored after computation.</span></span> <span data-ttu-id="2a9cf-346">Bien que cela prenne de l’espace disque, la colonne calculée n’est calculée qu’une seule fois lors de la mise à jour, et non chaque fois que sa valeur est récupérée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-346">While this takes up disk space, the computed column is calculated only once on update, instead of each time its value is retrieved.</span></span> <span data-ttu-id="2a9cf-347">Cela permet également d’indexer la colonne pour certaines bases de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-347">This also allows the column to be indexed for some databases.</span></span>
+<span data-ttu-id="1f975-345">La plupart des bases de données autorisent le stockage des valeurs de colonne calculées après le calcul.</span><span class="sxs-lookup"><span data-stu-id="1f975-345">Most databases allow computed column values to be stored after computation.</span></span> <span data-ttu-id="1f975-346">Bien que cela prenne de l’espace disque, la colonne calculée n’est calculée qu’une seule fois lors de la mise à jour, et non chaque fois que sa valeur est récupérée.</span><span class="sxs-lookup"><span data-stu-id="1f975-346">While this takes up disk space, the computed column is calculated only once on update, instead of each time its value is retrieved.</span></span> <span data-ttu-id="1f975-347">Cela permet également d’indexer la colonne pour certaines bases de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-347">This also allows the column to be indexed for some databases.</span></span>
 
-<span data-ttu-id="2a9cf-348">EF Core 5,0 permet de configurer les colonnes calculées comme stockées.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-348">EF Core 5.0 allows computed columns to be configured as stored.</span></span> <span data-ttu-id="2a9cf-349">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-349">For example:</span></span>
+<span data-ttu-id="1f975-348">EF Core 5,0 permet de configurer les colonnes calculées comme stockées.</span><span class="sxs-lookup"><span data-stu-id="1f975-348">EF Core 5.0 allows computed columns to be configured as stored.</span></span> <span data-ttu-id="1f975-349">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-349">For example:</span></span>
 
 ```CSharp
 modelBuilder
@@ -895,15 +895,15 @@ modelBuilder
     .HasComputedColumnSql("my sql", stored: true);
 ```
 
-### <a name="sqlite-computed-columns"></a><span data-ttu-id="2a9cf-350">SQLite colonnes calculées</span><span class="sxs-lookup"><span data-stu-id="2a9cf-350">SQLite computed columns</span></span>
+### <a name="sqlite-computed-columns"></a><span data-ttu-id="1f975-350">SQLite colonnes calculées</span><span class="sxs-lookup"><span data-stu-id="1f975-350">SQLite computed columns</span></span>
 
-<span data-ttu-id="2a9cf-351">EF Core prend désormais en charge les colonnes calculées dans les bases de données SQLite.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-351">EF Core now supports computed columns in SQLite databases.</span></span>
+<span data-ttu-id="1f975-351">EF Core prend désormais en charge les colonnes calculées dans les bases de données SQLite.</span><span class="sxs-lookup"><span data-stu-id="1f975-351">EF Core now supports computed columns in SQLite databases.</span></span>
 
-## <a name="preview-4"></a><span data-ttu-id="2a9cf-352">Preview 4</span><span class="sxs-lookup"><span data-stu-id="2a9cf-352">Preview 4</span></span>
+## <a name="preview-4"></a><span data-ttu-id="1f975-352">Preview 4</span><span class="sxs-lookup"><span data-stu-id="1f975-352">Preview 4</span></span>
 
-### <a name="configure-database-precisionscale-in-model"></a><span data-ttu-id="2a9cf-353">Configurer la précision/l’échelle de la base de données dans le modèle</span><span class="sxs-lookup"><span data-stu-id="2a9cf-353">Configure database precision/scale in model</span></span>
+### <a name="configure-database-precisionscale-in-model"></a><span data-ttu-id="1f975-353">Configurer la précision/l’échelle de la base de données dans le modèle</span><span class="sxs-lookup"><span data-stu-id="1f975-353">Configure database precision/scale in model</span></span>
 
-<span data-ttu-id="2a9cf-354">La précision et l’échelle d’une propriété peuvent désormais être spécifiées à l’aide du générateur de modèles.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-354">Precision and scale for a property can now be specified using the model builder.</span></span> <span data-ttu-id="2a9cf-355">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-355">For example:</span></span>
+<span data-ttu-id="1f975-354">La précision et l’échelle d’une propriété peuvent désormais être spécifiées à l’aide du générateur de modèles.</span><span class="sxs-lookup"><span data-stu-id="1f975-354">Precision and scale for a property can now be specified using the model builder.</span></span> <span data-ttu-id="1f975-355">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-355">For example:</span></span>
 
 ```CSharp
 modelBuilder
@@ -912,13 +912,13 @@ modelBuilder
     .HasPrecision(16, 4);
 ```
 
-<span data-ttu-id="2a9cf-356">La précision et l’échelle peuvent toujours être définies par le biais du type de base de données complet, par exemple « Decimal (16, 4) ».</span><span class="sxs-lookup"><span data-stu-id="2a9cf-356">Precision and scale can still be set via the full database type, such as "decimal(16,4)".</span></span>
+<span data-ttu-id="1f975-356">La précision et l’échelle peuvent toujours être définies par le biais du type de base de données complet, par exemple « Decimal (16, 4) ».</span><span class="sxs-lookup"><span data-stu-id="1f975-356">Precision and scale can still be set via the full database type, such as "decimal(16,4)".</span></span>
 
-<span data-ttu-id="2a9cf-357">La documentation est suivie d’un problème [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-357">Documentation is tracked by issue [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).</span></span>
+<span data-ttu-id="1f975-357">La documentation est suivie d’un problème [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).</span><span class="sxs-lookup"><span data-stu-id="1f975-357">Documentation is tracked by issue [#527](https://github.com/dotnet/EntityFramework.Docs/issues/527).</span></span>
 
-### <a name="specify-sql-server-index-fill-factor"></a><span data-ttu-id="2a9cf-358">Spécifier SQL Server facteur de remplissage d’index</span><span class="sxs-lookup"><span data-stu-id="2a9cf-358">Specify SQL Server index fill factor</span></span>
+### <a name="specify-sql-server-index-fill-factor"></a><span data-ttu-id="1f975-358">Spécifier SQL Server facteur de remplissage d’index</span><span class="sxs-lookup"><span data-stu-id="1f975-358">Specify SQL Server index fill factor</span></span>
 
-<span data-ttu-id="2a9cf-359">Le facteur de remplissage peut désormais être spécifié lors de la création d’un index sur SQL Server.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-359">The fill factor can now be specified when creating an index on SQL Server.</span></span> <span data-ttu-id="2a9cf-360">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-360">For example:</span></span>
+<span data-ttu-id="1f975-359">Le facteur de remplissage peut désormais être spécifié lors de la création d’un index sur SQL Server.</span><span class="sxs-lookup"><span data-stu-id="1f975-359">The fill factor can now be specified when creating an index on SQL Server.</span></span> <span data-ttu-id="1f975-360">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-360">For example:</span></span>
 
 ```CSharp
 modelBuilder
@@ -927,11 +927,11 @@ modelBuilder
     .HasFillFactor(90);
 ```
 
-## <a name="preview-3"></a><span data-ttu-id="2a9cf-361">Preview 3</span><span class="sxs-lookup"><span data-stu-id="2a9cf-361">Preview 3</span></span>
+## <a name="preview-3"></a><span data-ttu-id="1f975-361">Preview 3</span><span class="sxs-lookup"><span data-stu-id="1f975-361">Preview 3</span></span>
 
-### <a name="filtered-include"></a><span data-ttu-id="2a9cf-362">Include filtré</span><span class="sxs-lookup"><span data-stu-id="2a9cf-362">Filtered Include</span></span>
+### <a name="filtered-include"></a><span data-ttu-id="1f975-362">Include filtré</span><span class="sxs-lookup"><span data-stu-id="1f975-362">Filtered Include</span></span>
 
-<span data-ttu-id="2a9cf-363">La méthode Include prend désormais en charge le filtrage des entités incluses.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-363">The Include method now supports filtering of the entities included.</span></span> <span data-ttu-id="2a9cf-364">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-364">For example:</span></span>
+<span data-ttu-id="1f975-363">La méthode Include prend désormais en charge le filtrage des entités incluses.</span><span class="sxs-lookup"><span data-stu-id="1f975-363">The Include method now supports filtering of the entities included.</span></span> <span data-ttu-id="1f975-364">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-364">For example:</span></span>
 
 ```CSharp
 var blogs = context.Blogs
@@ -939,59 +939,60 @@ var blogs = context.Blogs
     .ToList();
 ```
 
-<span data-ttu-id="2a9cf-365">Cette requête renverra les blogs avec chaque publication associée, mais uniquement lorsque le titre de publication contient « fromage ».</span><span class="sxs-lookup"><span data-stu-id="2a9cf-365">This query will return blogs together with each associated post, but only when the post title contains "Cheese".</span></span>
+<span data-ttu-id="1f975-365">Cette requête renverra les blogs avec chaque publication associée, mais uniquement lorsque le titre de publication contient « fromage ».</span><span class="sxs-lookup"><span data-stu-id="1f975-365">This query will return blogs together with each associated post, but only when the post title contains "Cheese".</span></span>
 
-<span data-ttu-id="2a9cf-366">Skip et Take peuvent également être utilisés pour réduire le nombre d’entités incluses.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-366">Skip and Take can also be used to reduce the number of included entities.</span></span> <span data-ttu-id="2a9cf-367">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-367">For example:</span></span>
+<span data-ttu-id="1f975-366">Skip et Take peuvent également être utilisés pour réduire le nombre d’entités incluses.</span><span class="sxs-lookup"><span data-stu-id="1f975-366">Skip and Take can also be used to reduce the number of included entities.</span></span> <span data-ttu-id="1f975-367">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-367">For example:</span></span>
 
 ```CSharp
 var blogs = context.Blogs
     .Include(e => e.Posts.OrderByDescending(post => post.Title).Take(5)))
     .ToList();
 ```
-<span data-ttu-id="2a9cf-368">Cette requête renverra les blogs contenant au maximum cinq publications, incluses sur chaque blog.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-368">This query will return blogs with at most five posts included on each blog.</span></span>
+<span data-ttu-id="1f975-368">Cette requête renverra les blogs contenant au maximum cinq publications, incluses sur chaque blog.</span><span class="sxs-lookup"><span data-stu-id="1f975-368">This query will return blogs with at most five posts included on each blog.</span></span>
 
-<span data-ttu-id="2a9cf-369">Pour plus d’informations, consultez la [documentation include](xref:core/querying/related-data#filtered-include) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-369">See the [Include documentation](xref:core/querying/related-data#filtered-include) for full details.</span></span>
+<span data-ttu-id="1f975-369">Pour plus d’informations, consultez la [documentation include](xref:core/querying/related-data#filtered-include) .</span><span class="sxs-lookup"><span data-stu-id="1f975-369">See the [Include documentation](xref:core/querying/related-data#filtered-include) for full details.</span></span>
 
-### <a name="new-modelbuilder-api-for-navigation-properties"></a><span data-ttu-id="2a9cf-370">Nouvelle API ModelBuilder pour les propriétés de navigation</span><span class="sxs-lookup"><span data-stu-id="2a9cf-370">New ModelBuilder API for navigation properties</span></span>
+### <a name="new-modelbuilder-api-for-navigation-properties"></a><span data-ttu-id="1f975-370">Nouvelle API ModelBuilder pour les propriétés de navigation</span><span class="sxs-lookup"><span data-stu-id="1f975-370">New ModelBuilder API for navigation properties</span></span>
 
-<span data-ttu-id="2a9cf-371">Les propriétés de navigation sont principalement configurées lors de la [définition de relations](xref:core/modeling/relationships).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-371">Navigation properties are primarily configured when [defining relationships](xref:core/modeling/relationships).</span></span> <span data-ttu-id="2a9cf-372">Toutefois, la nouvelle `Navigation` méthode peut être utilisée dans les cas où les propriétés de navigation nécessitent une configuration supplémentaire.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-372">However, the new `Navigation` method can be used in the cases where navigation properties need additional configuration.</span></span> <span data-ttu-id="2a9cf-373">Par exemple, pour définir un champ de stockage pour la navigation lorsque le champ est introuvable par Convention :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-373">For example, to set a backing field for the navigation when the field would not be found by convention:</span></span>
+<span data-ttu-id="1f975-371">Les propriétés de navigation sont principalement configurées lors de la [définition de relations](xref:core/modeling/relationships).</span><span class="sxs-lookup"><span data-stu-id="1f975-371">Navigation properties are primarily configured when [defining relationships](xref:core/modeling/relationships).</span></span> <span data-ttu-id="1f975-372">Toutefois, la nouvelle `Navigation` méthode peut être utilisée dans les cas où les propriétés de navigation nécessitent une configuration supplémentaire.</span><span class="sxs-lookup"><span data-stu-id="1f975-372">However, the new `Navigation` method can be used in the cases where navigation properties need additional configuration.</span></span> <span data-ttu-id="1f975-373">Par exemple, pour définir un champ de stockage pour la navigation lorsque le champ est introuvable par Convention :</span><span class="sxs-lookup"><span data-stu-id="1f975-373">For example, to set a backing field for the navigation when the field would not be found by convention:</span></span>
 
 ```CSharp
 modelBuilder.Entity<Blog>().Navigation(e => e.Posts).HasField("_myposts");
 ```
 
-<span data-ttu-id="2a9cf-374">Notez que l' `Navigation` API ne remplace pas la configuration de la relation.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-374">Note that the `Navigation` API does not replace relationship configuration.</span></span> <span data-ttu-id="2a9cf-375">Au lieu de cela, il permet une configuration supplémentaire des propriétés de navigation dans les relations déjà découvertes ou définies.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-375">Instead it allows additional configuration of navigation properties in already discovered or defined relationships.</span></span>
+<span data-ttu-id="1f975-374">Notez que l' `Navigation` API ne remplace pas la configuration de la relation.</span><span class="sxs-lookup"><span data-stu-id="1f975-374">Note that the `Navigation` API does not replace relationship configuration.</span></span> <span data-ttu-id="1f975-375">Au lieu de cela, il permet une configuration supplémentaire des propriétés de navigation dans les relations déjà découvertes ou définies.</span><span class="sxs-lookup"><span data-stu-id="1f975-375">Instead it allows additional configuration of navigation properties in already discovered or defined relationships.</span></span>
 
-<span data-ttu-id="2a9cf-376">Consultez la [documentation](xref:core/modeling/relationships#configuring-navigation-properties)sur la configuration des propriétés de navigation.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-376">See the [Configuring Navigation Properties documentation](xref:core/modeling/relationships#configuring-navigation-properties).</span></span>
+<span data-ttu-id="1f975-376">Consultez la [documentation](xref:core/modeling/relationships#configuring-navigation-properties)sur la configuration des propriétés de navigation.</span><span class="sxs-lookup"><span data-stu-id="1f975-376">See the [Configuring Navigation Properties documentation](xref:core/modeling/relationships#configuring-navigation-properties).</span></span>
 
-### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a><span data-ttu-id="2a9cf-377">Nouveaux paramètres de ligne de commande pour les espaces de noms et les chaînes de connexion</span><span class="sxs-lookup"><span data-stu-id="2a9cf-377">New command-line parameters for namespaces and connection strings</span></span>
+### <a name="new-command-line-parameters-for-namespaces-and-connection-strings"></a><span data-ttu-id="1f975-377">Nouveaux paramètres de ligne de commande pour les espaces de noms et les chaînes de connexion</span><span class="sxs-lookup"><span data-stu-id="1f975-377">New command-line parameters for namespaces and connection strings</span></span>
 
-<span data-ttu-id="2a9cf-378">Les migrations et la génération de modèles automatique permettent désormais de spécifier des espaces de noms sur la ligne de commande.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-378">Migrations and scaffolding now allow namespaces to be specified on the command line.</span></span> <span data-ttu-id="2a9cf-379">Par exemple, pour rétroconcevoir une base de données en plaçant le contexte et les classes de modèle dans différents espaces de noms :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-379">For example, to reverse engineer a database putting the context and model classes in different namespaces:</span></span>
+<span data-ttu-id="1f975-378">Les migrations et la génération de modèles automatique permettent désormais de spécifier des espaces de noms sur la ligne de commande.</span><span class="sxs-lookup"><span data-stu-id="1f975-378">Migrations and scaffolding now allow namespaces to be specified on the command line.</span></span> <span data-ttu-id="1f975-379">Par exemple, pour rétroconcevoir une base de données en plaçant le contexte et les classes de modèle dans différents espaces de noms :</span><span class="sxs-lookup"><span data-stu-id="1f975-379">For example, to reverse engineer a database putting the context and model classes in different namespaces:</span></span>
 
-```
+```dotnetcli
 dotnet ef dbcontext scaffold "connection string" Microsoft.EntityFrameworkCore.SqlServer --context-namespace "My.Context" --namespace "My.Model"
 ```
 
-<span data-ttu-id="2a9cf-380">Pour plus d’informations, consultez la documentation sur les [migrations](xref:core/managing-schemas/migrations/index#namespaces) et l' [ingénierie à rebours](xref:core/managing-schemas/scaffolding#directories-and-namespaces) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-380">See the [Migrations](xref:core/managing-schemas/migrations/index#namespaces) and [Reverse Engineering](xref:core/managing-schemas/scaffolding#directories-and-namespaces) documentation for full details.</span></span>
+<span data-ttu-id="1f975-380">Pour plus d’informations, consultez la documentation sur les [migrations](xref:core/managing-schemas/migrations/index#namespaces) et l' [ingénierie à rebours](xref:core/managing-schemas/scaffolding#directories-and-namespaces) .</span><span class="sxs-lookup"><span data-stu-id="1f975-380">See the [Migrations](xref:core/managing-schemas/migrations/index#namespaces) and [Reverse Engineering](xref:core/managing-schemas/scaffolding#directories-and-namespaces) documentation for full details.</span></span>
 
 ---
-<span data-ttu-id="2a9cf-381">En outre, une chaîne de connexion peut désormais être passée à la `database-update` commande :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-381">Also, a connection string can now be passed to the `database-update` command:</span></span>
+<span data-ttu-id="1f975-381">En outre, une chaîne de connexion peut désormais être passée à la `database-update` commande :</span><span class="sxs-lookup"><span data-stu-id="1f975-381">Also, a connection string can now be passed to the `database-update` command:</span></span>
 
-```
+```dotnetcli
 dotnet ef database update --connection "connection string"
 ```
 
-<span data-ttu-id="2a9cf-382">Pour plus d’informations, consultez la documentation sur les [Outils](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-382">See the [Tools documentation](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) for full details.</span></span>
+<span data-ttu-id="1f975-382">Pour plus d’informations, consultez la documentation sur les [Outils](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) .</span><span class="sxs-lookup"><span data-stu-id="1f975-382">See the [Tools documentation](xref:core/miscellaneous/cli/dotnet#dotnet-ef-database-update) for full details.</span></span>
 
-<span data-ttu-id="2a9cf-383">Des paramètres équivalents ont également été ajoutés aux commandes PowerShell utilisées dans la console du gestionnaire de package VS.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-383">Equivalent parameters have also been added to the PowerShell commands used in the VS Package Manager Console.</span></span>
+<span data-ttu-id="1f975-383">Des paramètres équivalents ont également été ajoutés aux commandes PowerShell utilisées dans la console du gestionnaire de package VS.</span><span class="sxs-lookup"><span data-stu-id="1f975-383">Equivalent parameters have also been added to the PowerShell commands used in the VS Package Manager Console.</span></span>
 
-### <a name="enabledetailederrors-has-returned"></a><span data-ttu-id="2a9cf-384">EnableDetailedErrors a retourné</span><span class="sxs-lookup"><span data-stu-id="2a9cf-384">EnableDetailedErrors has returned</span></span>
+### <a name="enabledetailederrors-has-returned"></a><span data-ttu-id="1f975-384">EnableDetailedErrors a retourné</span><span class="sxs-lookup"><span data-stu-id="1f975-384">EnableDetailedErrors has returned</span></span>
 
-<span data-ttu-id="2a9cf-385">Pour des raisons de performances, EF n’effectue pas de vérifications null supplémentaires lors de la lecture des valeurs de la base de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-385">For performance reasons, EF doesn't do additional null-checks when reading values from the database.</span></span> <span data-ttu-id="2a9cf-386">Cela peut entraîner des exceptions qui sont difficiles à la cause première lorsqu’une valeur Null inattendue est rencontrée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-386">This can result in exceptions that are hard to root-cause when an unexpected null is encountered.</span></span>
+<span data-ttu-id="1f975-385">Pour des raisons de performances, EF n’effectue pas de vérifications null supplémentaires lors de la lecture des valeurs de la base de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-385">For performance reasons, EF doesn't do additional null-checks when reading values from the database.</span></span> <span data-ttu-id="1f975-386">Cela peut entraîner des exceptions qui sont difficiles à la cause première lorsqu’une valeur Null inattendue est rencontrée.</span><span class="sxs-lookup"><span data-stu-id="1f975-386">This can result in exceptions that are hard to root-cause when an unexpected null is encountered.</span></span>
 
-<span data-ttu-id="2a9cf-387">L’utilisation de `EnableDetailedErrors` permet d’ajouter une vérification de valeur null supplémentaire aux requêtes de sorte que, pour une faible surcharge de performances, ces erreurs sont plus faciles à suivre à une cause racine.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-387">Using `EnableDetailedErrors` will add extra null checking to queries such that, for a small performance overhead, these errors are easier to trace back to a root cause.</span></span>
+<span data-ttu-id="1f975-387">L’utilisation de `EnableDetailedErrors` permet d’ajouter une vérification de valeur null supplémentaire aux requêtes de sorte que, pour une faible surcharge de performances, ces erreurs sont plus faciles à suivre à une cause racine.</span><span class="sxs-lookup"><span data-stu-id="1f975-387">Using `EnableDetailedErrors` will add extra null checking to queries such that, for a small performance overhead, these errors are easier to trace back to a root cause.</span></span>
 
-<span data-ttu-id="2a9cf-388">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-388">For example:</span></span>
+<span data-ttu-id="1f975-388">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-388">For example:</span></span>
+
 ```CSharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     => optionsBuilder
@@ -1000,11 +1001,11 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         .UseSqlServer(Your.SqlServerConnectionString);
 ```
 
-<span data-ttu-id="2a9cf-389">La documentation est suivie d’un problème [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-389">Documentation is tracked by issue [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955).</span></span>
+<span data-ttu-id="1f975-389">La documentation est suivie d’un problème [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955).</span><span class="sxs-lookup"><span data-stu-id="1f975-389">Documentation is tracked by issue [#955](https://github.com/dotnet/EntityFramework.Docs/issues/955).</span></span>
 
-### <a name="cosmos-partition-keys"></a><span data-ttu-id="2a9cf-390">Clés de partition Cosmos</span><span class="sxs-lookup"><span data-stu-id="2a9cf-390">Cosmos partition keys</span></span>
+### <a name="cosmos-partition-keys"></a><span data-ttu-id="1f975-390">Clés de partition Cosmos</span><span class="sxs-lookup"><span data-stu-id="1f975-390">Cosmos partition keys</span></span>
 
-<span data-ttu-id="2a9cf-391">La clé de partition à utiliser pour une requête donnée peut désormais être spécifiée dans la requête.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-391">The partition key to use for a given query can now be specified in the query.</span></span> <span data-ttu-id="2a9cf-392">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-392">For example:</span></span>
+<span data-ttu-id="1f975-391">La clé de partition à utiliser pour une requête donnée peut désormais être spécifiée dans la requête.</span><span class="sxs-lookup"><span data-stu-id="1f975-391">The partition key to use for a given query can now be specified in the query.</span></span> <span data-ttu-id="1f975-392">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-392">For example:</span></span>
 
 ```CSharp
 await context.Set<Customer>()
@@ -1012,20 +1013,21 @@ await context.Set<Customer>()
              .FirstAsync();
 ```
 
-<span data-ttu-id="2a9cf-393">La documentation est suivie d’un problème [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-393">Documentation is tracked by issue [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199).</span></span>
+<span data-ttu-id="1f975-393">La documentation est suivie d’un problème [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199).</span><span class="sxs-lookup"><span data-stu-id="1f975-393">Documentation is tracked by issue [#2199](https://github.com/dotnet/EntityFramework.Docs/issues/2199).</span></span>
 
-### <a name="support-for-the-sql-server-datalength-function"></a><span data-ttu-id="2a9cf-394">Prise en charge de la fonction DATALENGTH SQL Server</span><span class="sxs-lookup"><span data-stu-id="2a9cf-394">Support for the SQL Server DATALENGTH function</span></span>
+### <a name="support-for-the-sql-server-datalength-function"></a><span data-ttu-id="1f975-394">Prise en charge de la fonction DATALENGTH SQL Server</span><span class="sxs-lookup"><span data-stu-id="1f975-394">Support for the SQL Server DATALENGTH function</span></span>
 
-<span data-ttu-id="2a9cf-395">Vous pouvez y accéder à l’aide de la nouvelle `EF.Functions.DataLength` méthode.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-395">This can be accessed using the new `EF.Functions.DataLength` method.</span></span> <span data-ttu-id="2a9cf-396">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-396">For example:</span></span>
+<span data-ttu-id="1f975-395">Vous pouvez y accéder à l’aide de la nouvelle `EF.Functions.DataLength` méthode.</span><span class="sxs-lookup"><span data-stu-id="1f975-395">This can be accessed using the new `EF.Functions.DataLength` method.</span></span> <span data-ttu-id="1f975-396">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-396">For example:</span></span>
+
 ```CSharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
 ```
 
-## <a name="preview-2"></a><span data-ttu-id="2a9cf-397">Préversion 2</span><span class="sxs-lookup"><span data-stu-id="2a9cf-397">Preview 2</span></span>
+## <a name="preview-2"></a><span data-ttu-id="1f975-397">Préversion 2</span><span class="sxs-lookup"><span data-stu-id="1f975-397">Preview 2</span></span>
 
-### <a name="use-a-c-attribute-to-specify-a-property-backing-field"></a><span data-ttu-id="2a9cf-398">Utiliser un attribut C# pour spécifier un champ de stockage de propriété</span><span class="sxs-lookup"><span data-stu-id="2a9cf-398">Use a C# attribute to specify a property backing field</span></span>
+### <a name="use-a-c-attribute-to-specify-a-property-backing-field"></a><span data-ttu-id="1f975-398">Utiliser un attribut C# pour spécifier un champ de stockage de propriété</span><span class="sxs-lookup"><span data-stu-id="1f975-398">Use a C# attribute to specify a property backing field</span></span>
 
-<span data-ttu-id="2a9cf-399">Un attribut C# peut maintenant être utilisé pour spécifier le champ de stockage d’une propriété.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-399">A C# attribute can now be used to specify the backing field for a property.</span></span> <span data-ttu-id="2a9cf-400">Cet attribut permet à EF Core d’écrire et de lire toujours dans le champ de stockage, ce qui se produit normalement, même si le champ de stockage ne peut pas être trouvé automatiquement.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-400">This attribute allows EF Core to still write to and read from the backing field as would normally happen, even when the backing field cannot be found automatically.</span></span> <span data-ttu-id="2a9cf-401">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-401">For example:</span></span>
+<span data-ttu-id="1f975-399">Un attribut C# peut maintenant être utilisé pour spécifier le champ de stockage d’une propriété.</span><span class="sxs-lookup"><span data-stu-id="1f975-399">A C# attribute can now be used to specify the backing field for a property.</span></span> <span data-ttu-id="1f975-400">Cet attribut permet à EF Core d’écrire et de lire toujours dans le champ de stockage, ce qui se produit normalement, même si le champ de stockage ne peut pas être trouvé automatiquement.</span><span class="sxs-lookup"><span data-stu-id="1f975-400">This attribute allows EF Core to still write to and read from the backing field as would normally happen, even when the backing field cannot be found automatically.</span></span> <span data-ttu-id="1f975-401">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-401">For example:</span></span>
 
 ```CSharp
 public class Blog
@@ -1043,13 +1045,13 @@ public class Blog
 }
 ```
 
-<span data-ttu-id="2a9cf-402">La documentation est suivie d’un problème [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-402">Documentation is tracked by issue [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230).</span></span>
+<span data-ttu-id="1f975-402">La documentation est suivie d’un problème [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230).</span><span class="sxs-lookup"><span data-stu-id="1f975-402">Documentation is tracked by issue [#2230](https://github.com/dotnet/EntityFramework.Docs/issues/2230).</span></span>
 
-### <a name="complete-discriminator-mapping"></a><span data-ttu-id="2a9cf-403">Terminer le mappage de discriminateur</span><span class="sxs-lookup"><span data-stu-id="2a9cf-403">Complete discriminator mapping</span></span>
+### <a name="complete-discriminator-mapping"></a><span data-ttu-id="1f975-403">Terminer le mappage de discriminateur</span><span class="sxs-lookup"><span data-stu-id="1f975-403">Complete discriminator mapping</span></span>
 
-<span data-ttu-id="2a9cf-404">EF Core utilise une colonne de discriminateur pour le [mappage TPH d’une hiérarchie d’héritage](/ef/core/modeling/inheritance).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-404">EF Core uses a discriminator column for [TPH mapping of an inheritance hierarchy](/ef/core/modeling/inheritance).</span></span> <span data-ttu-id="2a9cf-405">Certaines améliorations des performances sont possibles tant que EF Core connaît toutes les valeurs possibles pour le discriminateur.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-405">Some performance enhancements are possible so long as EF Core knows all possible values for the discriminator.</span></span> <span data-ttu-id="2a9cf-406">EF Core 5,0 implémente désormais ces améliorations.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-406">EF Core 5.0 now implements these enhancements.</span></span>
+<span data-ttu-id="1f975-404">EF Core utilise une colonne de discriminateur pour le [mappage TPH d’une hiérarchie d’héritage](xref:core/modeling/inheritance).</span><span class="sxs-lookup"><span data-stu-id="1f975-404">EF Core uses a discriminator column for [TPH mapping of an inheritance hierarchy](xref:core/modeling/inheritance).</span></span> <span data-ttu-id="1f975-405">Certaines améliorations des performances sont possibles tant que EF Core connaît toutes les valeurs possibles pour le discriminateur.</span><span class="sxs-lookup"><span data-stu-id="1f975-405">Some performance enhancements are possible so long as EF Core knows all possible values for the discriminator.</span></span> <span data-ttu-id="1f975-406">EF Core 5,0 implémente désormais ces améliorations.</span><span class="sxs-lookup"><span data-stu-id="1f975-406">EF Core 5.0 now implements these enhancements.</span></span>
 
-<span data-ttu-id="2a9cf-407">Par exemple, les versions précédentes de EF Core génèrent toujours ce SQL pour une requête qui retourne tous les types dans une hiérarchie :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-407">For example, previous versions of EF Core would always generate this SQL for a query returning all types in a hierarchy:</span></span>
+<span data-ttu-id="1f975-407">Par exemple, les versions précédentes de EF Core génèrent toujours ce SQL pour une requête qui retourne tous les types dans une hiérarchie :</span><span class="sxs-lookup"><span data-stu-id="1f975-407">For example, previous versions of EF Core would always generate this SQL for a query returning all types in a hierarchy:</span></span>
 
 ```sql
 SELECT [a].[Id], [a].[Discriminator], [a].[Name]
@@ -1057,45 +1059,45 @@ FROM [Animal] AS [a]
 WHERE [a].[Discriminator] IN (N'Animal', N'Cat', N'Dog', N'Human')
 ```
 
-<span data-ttu-id="2a9cf-408">EF Core 5,0 génère désormais les éléments suivants lorsqu’un mappage de discriminateur complet est configuré :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-408">EF Core 5.0 will now generate the following when a complete discriminator mapping is configured:</span></span>
+<span data-ttu-id="1f975-408">EF Core 5,0 génère désormais les éléments suivants lorsqu’un mappage de discriminateur complet est configuré :</span><span class="sxs-lookup"><span data-stu-id="1f975-408">EF Core 5.0 will now generate the following when a complete discriminator mapping is configured:</span></span>
 
 ```sql
 SELECT [a].[Id], [a].[Discriminator], [a].[Name]
 FROM [Animal] AS [a]
 ```
 
-<span data-ttu-id="2a9cf-409">Il s’agit du comportement par défaut à partir de Preview 3.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-409">It will be the default behavior starting with preview 3.</span></span>
+<span data-ttu-id="1f975-409">Il s’agit du comportement par défaut à partir de Preview 3.</span><span class="sxs-lookup"><span data-stu-id="1f975-409">It will be the default behavior starting with preview 3.</span></span>
 
-### <a name="performance-improvements-in-microsoftdatasqlite"></a><span data-ttu-id="2a9cf-410">Améliorations des performances dans Microsoft. Data. sqlite</span><span class="sxs-lookup"><span data-stu-id="2a9cf-410">Performance improvements in Microsoft.Data.Sqlite</span></span>
+### <a name="performance-improvements-in-microsoftdatasqlite"></a><span data-ttu-id="1f975-410">Améliorations des performances dans Microsoft. Data. sqlite</span><span class="sxs-lookup"><span data-stu-id="1f975-410">Performance improvements in Microsoft.Data.Sqlite</span></span>
 
-<span data-ttu-id="2a9cf-411">Nous avons apporté deux améliorations des performances pour SQLIte :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-411">We have made two performance improvements for SQLIte:</span></span>
+<span data-ttu-id="1f975-411">Nous avons apporté deux améliorations des performances pour SQLIte :</span><span class="sxs-lookup"><span data-stu-id="1f975-411">We have made two performance improvements for SQLIte:</span></span>
 
-* <span data-ttu-id="2a9cf-412">La récupération de données binaires et de chaîne avec GetBytes, GetChars et GetTextReader est désormais plus efficace grâce à l’utilisation de SqliteBlob et de flux.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-412">Retrieving binary and string data with GetBytes, GetChars, and GetTextReader is now more efficient by making use of SqliteBlob and streams.</span></span>
-* <span data-ttu-id="2a9cf-413">L’initialisation de SqliteConnection est désormais différée.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-413">Initialization of SqliteConnection is now lazy.</span></span>
+* <span data-ttu-id="1f975-412">La récupération de données binaires et de chaîne avec GetBytes, GetChars et GetTextReader est désormais plus efficace grâce à l’utilisation de SqliteBlob et de flux.</span><span class="sxs-lookup"><span data-stu-id="1f975-412">Retrieving binary and string data with GetBytes, GetChars, and GetTextReader is now more efficient by making use of SqliteBlob and streams.</span></span>
+* <span data-ttu-id="1f975-413">L’initialisation de SqliteConnection est désormais différée.</span><span class="sxs-lookup"><span data-stu-id="1f975-413">Initialization of SqliteConnection is now lazy.</span></span>
 
-<span data-ttu-id="2a9cf-414">Ces améliorations se trouvent dans le fournisseur Microsoft. Data. sqlite de ADO.NET et améliorent donc également les performances en dehors de EF Core.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-414">These improvements are in the ADO.NET Microsoft.Data.Sqlite provider and hence also improve performance outside of EF Core.</span></span>
+<span data-ttu-id="1f975-414">Ces améliorations se trouvent dans le fournisseur Microsoft. Data. sqlite de ADO.NET et améliorent donc également les performances en dehors de EF Core.</span><span class="sxs-lookup"><span data-stu-id="1f975-414">These improvements are in the ADO.NET Microsoft.Data.Sqlite provider and hence also improve performance outside of EF Core.</span></span>
 
-## <a name="preview-1"></a><span data-ttu-id="2a9cf-415">Preview 1</span><span class="sxs-lookup"><span data-stu-id="2a9cf-415">Preview 1</span></span>
+## <a name="preview-1"></a><span data-ttu-id="1f975-415">Preview 1</span><span class="sxs-lookup"><span data-stu-id="1f975-415">Preview 1</span></span>
 
-### <a name="simple-logging"></a><span data-ttu-id="2a9cf-416">Journalisation simple</span><span class="sxs-lookup"><span data-stu-id="2a9cf-416">Simple logging</span></span>
+### <a name="simple-logging"></a><span data-ttu-id="1f975-416">Journalisation simple</span><span class="sxs-lookup"><span data-stu-id="1f975-416">Simple logging</span></span>
 
-<span data-ttu-id="2a9cf-417">Cette fonctionnalité ajoute des fonctionnalités similaires à `Database.Log` dans EF6.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-417">This feature adds functionality similar to `Database.Log` in EF6.</span></span> <span data-ttu-id="2a9cf-418">Autrement dit, il offre un moyen simple d’obtenir des journaux à partir de EF Core sans avoir besoin de configurer tout type d’infrastructure de journalisation externe.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-418">That is, it provides a simple way to get logs from EF Core without the need to configure any kind of external logging framework.</span></span>
+<span data-ttu-id="1f975-417">Cette fonctionnalité ajoute des fonctionnalités similaires à `Database.Log` dans EF6.</span><span class="sxs-lookup"><span data-stu-id="1f975-417">This feature adds functionality similar to `Database.Log` in EF6.</span></span> <span data-ttu-id="1f975-418">Autrement dit, il offre un moyen simple d’obtenir des journaux à partir de EF Core sans avoir besoin de configurer tout type d’infrastructure de journalisation externe.</span><span class="sxs-lookup"><span data-stu-id="1f975-418">That is, it provides a simple way to get logs from EF Core without the need to configure any kind of external logging framework.</span></span>
 
-<span data-ttu-id="2a9cf-419">La documentation préliminaire est incluse dans l' [État EF hebdomadaire du 5 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-419">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
+<span data-ttu-id="1f975-419">La documentation préliminaire est incluse dans l' [État EF hebdomadaire du 5 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span><span class="sxs-lookup"><span data-stu-id="1f975-419">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
 
-<span data-ttu-id="2a9cf-420">Une documentation supplémentaire est suivie par le [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085)du problème.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-420">Additional documentation is tracked by issue [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085).</span></span>
+<span data-ttu-id="1f975-420">Une documentation supplémentaire est suivie par le [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085)du problème.</span><span class="sxs-lookup"><span data-stu-id="1f975-420">Additional documentation is tracked by issue [#2085](https://github.com/dotnet/EntityFramework.Docs/issues/2085).</span></span>
 
-### <a name="simple-way-to-get-generated-sql"></a><span data-ttu-id="2a9cf-421">Moyen simple d’utiliser le SQL généré</span><span class="sxs-lookup"><span data-stu-id="2a9cf-421">Simple way to get generated SQL</span></span>
+### <a name="simple-way-to-get-generated-sql"></a><span data-ttu-id="1f975-421">Moyen simple d’utiliser le SQL généré</span><span class="sxs-lookup"><span data-stu-id="1f975-421">Simple way to get generated SQL</span></span>
 
-<span data-ttu-id="2a9cf-422">EF Core 5,0 introduit la `ToQueryString` méthode d’extension, qui retourne le SQL que EF Core générera lors de l’exécution d’une requête LINQ.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-422">EF Core 5.0 introduces the `ToQueryString` extension method, which will return the SQL that EF Core will generate when executing a LINQ query.</span></span>
+<span data-ttu-id="1f975-422">EF Core 5,0 introduit la `ToQueryString` méthode d’extension, qui retourne le SQL que EF Core générera lors de l’exécution d’une requête LINQ.</span><span class="sxs-lookup"><span data-stu-id="1f975-422">EF Core 5.0 introduces the `ToQueryString` extension method, which will return the SQL that EF Core will generate when executing a LINQ query.</span></span>
 
-<span data-ttu-id="2a9cf-423">La documentation préliminaire est incluse dans l' [État EF Weekly pour le 9 janvier 2020](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-423">Preliminary documentation is included in the [EF weekly status for January 9, 2020](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246).</span></span>
+<span data-ttu-id="1f975-423">La documentation préliminaire est incluse dans l' [État EF Weekly pour le 9 janvier 2020](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246).</span><span class="sxs-lookup"><span data-stu-id="1f975-423">Preliminary documentation is included in the [EF weekly status for January 9, 2020](https://github.com/dotnet/efcore/issues/19549#issuecomment-572823246).</span></span>
 
-<span data-ttu-id="2a9cf-424">Une documentation supplémentaire est suivie par le [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331)du problème.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-424">Additional documentation is tracked by issue [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331).</span></span>
+<span data-ttu-id="1f975-424">Une documentation supplémentaire est suivie par le [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331)du problème.</span><span class="sxs-lookup"><span data-stu-id="1f975-424">Additional documentation is tracked by issue [#1331](https://github.com/dotnet/EntityFramework.Docs/issues/1331).</span></span>
 
-### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a><span data-ttu-id="2a9cf-425">Utiliser un attribut C# pour indiquer qu’une entité n’a pas de clé</span><span class="sxs-lookup"><span data-stu-id="2a9cf-425">Use a C# attribute to indicate that an entity has no key</span></span>
+### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a><span data-ttu-id="1f975-425">Utiliser un attribut C# pour indiquer qu’une entité n’a pas de clé</span><span class="sxs-lookup"><span data-stu-id="1f975-425">Use a C# attribute to indicate that an entity has no key</span></span>
 
-<span data-ttu-id="2a9cf-426">Un type d’entité peut désormais être configuré comme n’ayant aucune clé à l’aide de la nouvelle `KeylessAttribute` .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-426">An entity type can now be configured as having no key using the new `KeylessAttribute`.</span></span> <span data-ttu-id="2a9cf-427">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-427">For example:</span></span>
+<span data-ttu-id="1f975-426">Un type d’entité peut désormais être configuré comme n’ayant aucune clé à l’aide de la nouvelle `KeylessAttribute` .</span><span class="sxs-lookup"><span data-stu-id="1f975-426">An entity type can now be configured as having no key using the new `KeylessAttribute`.</span></span> <span data-ttu-id="1f975-427">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-427">For example:</span></span>
 
 ```CSharp
 [Keyless]
@@ -1107,53 +1109,53 @@ public class Address
 }
 ```
 
-<span data-ttu-id="2a9cf-428">La documentation est suivie d’un problème [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-428">Documentation is tracked by issue [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186).</span></span>
+<span data-ttu-id="1f975-428">La documentation est suivie d’un problème [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186).</span><span class="sxs-lookup"><span data-stu-id="1f975-428">Documentation is tracked by issue [#2186](https://github.com/dotnet/EntityFramework.Docs/issues/2186).</span></span>
 
-### <a name="connection-or-connection-string-can-be-changed-on-initialized-dbcontext"></a><span data-ttu-id="2a9cf-429">La connexion ou la chaîne de connexion peut être modifiée lors de l’DbContext initialisé</span><span class="sxs-lookup"><span data-stu-id="2a9cf-429">Connection or connection string can be changed on initialized DbContext</span></span>
+### <a name="connection-or-connection-string-can-be-changed-on-initialized-dbcontext"></a><span data-ttu-id="1f975-429">La connexion ou la chaîne de connexion peut être modifiée lors de l’DbContext initialisé</span><span class="sxs-lookup"><span data-stu-id="1f975-429">Connection or connection string can be changed on initialized DbContext</span></span>
 
-<span data-ttu-id="2a9cf-430">Il est désormais plus facile de créer une instance DbContext sans connexion ou chaîne de connexion.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-430">It is now easier to create a DbContext instance without any connection or connection string.</span></span> <span data-ttu-id="2a9cf-431">En outre, la connexion ou la chaîne de connexion peut désormais être mutée sur l’instance de contexte.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-431">Also, the connection or connection string can now be mutated on the context instance.</span></span> <span data-ttu-id="2a9cf-432">Cette fonctionnalité permet à la même instance de contexte de se connecter de manière dynamique à différentes bases de données.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-432">This feature allows the same context instance to dynamically connect to different databases.</span></span>
+<span data-ttu-id="1f975-430">Il est désormais plus facile de créer une instance DbContext sans connexion ou chaîne de connexion.</span><span class="sxs-lookup"><span data-stu-id="1f975-430">It is now easier to create a DbContext instance without any connection or connection string.</span></span> <span data-ttu-id="1f975-431">En outre, la connexion ou la chaîne de connexion peut désormais être mutée sur l’instance de contexte.</span><span class="sxs-lookup"><span data-stu-id="1f975-431">Also, the connection or connection string can now be mutated on the context instance.</span></span> <span data-ttu-id="1f975-432">Cette fonctionnalité permet à la même instance de contexte de se connecter de manière dynamique à différentes bases de données.</span><span class="sxs-lookup"><span data-stu-id="1f975-432">This feature allows the same context instance to dynamically connect to different databases.</span></span>
 
-<span data-ttu-id="2a9cf-433">La documentation est suivie d’un problème [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-433">Documentation is tracked by issue [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075).</span></span>
+<span data-ttu-id="1f975-433">La documentation est suivie d’un problème [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075).</span><span class="sxs-lookup"><span data-stu-id="1f975-433">Documentation is tracked by issue [#2075](https://github.com/dotnet/EntityFramework.Docs/issues/2075).</span></span>
 
-### <a name="change-tracking-proxies"></a><span data-ttu-id="2a9cf-434">Proxys de suivi des modifications</span><span class="sxs-lookup"><span data-stu-id="2a9cf-434">Change-tracking proxies</span></span>
+### <a name="change-tracking-proxies"></a><span data-ttu-id="1f975-434">Proxys de suivi des modifications</span><span class="sxs-lookup"><span data-stu-id="1f975-434">Change-tracking proxies</span></span>
 
-<span data-ttu-id="2a9cf-435">EF Core pouvez désormais générer des proxies d’exécution qui implémentent automatiquement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1) et [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-435">EF Core can now generate runtime proxies that automatically implement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging?view=netcore-3.1) and [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged?view=netcore-3.1).</span></span> <span data-ttu-id="2a9cf-436">Celles-ci rerapportent ensuite les modifications de valeur sur les propriétés d’entité directement à EF Core, évitant ainsi la nécessité d’analyser les modifications.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-436">These then report value changes on entity properties directly to EF Core, avoiding the need to scan for changes.</span></span> <span data-ttu-id="2a9cf-437">Toutefois, les proxies sont fournis avec leur propre ensemble de limitations, donc ils ne le sont pas pour tout le monde.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-437">However, proxies come with their own set of limitations, so they are not for everyone.</span></span>
+<span data-ttu-id="1f975-435">EF Core pouvez désormais générer des proxies d’exécution qui implémentent automatiquement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) et [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged).</span><span class="sxs-lookup"><span data-stu-id="1f975-435">EF Core can now generate runtime proxies that automatically implement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) and [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged).</span></span> <span data-ttu-id="1f975-436">Celles-ci rerapportent ensuite les modifications de valeur sur les propriétés d’entité directement à EF Core, évitant ainsi la nécessité d’analyser les modifications.</span><span class="sxs-lookup"><span data-stu-id="1f975-436">These then report value changes on entity properties directly to EF Core, avoiding the need to scan for changes.</span></span> <span data-ttu-id="1f975-437">Toutefois, les proxies sont fournis avec leur propre ensemble de limitations, donc ils ne le sont pas pour tout le monde.</span><span class="sxs-lookup"><span data-stu-id="1f975-437">However, proxies come with their own set of limitations, so they are not for everyone.</span></span>
 
-<span data-ttu-id="2a9cf-438">La documentation est suivie d’un problème [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-438">Documentation is tracked by issue [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).</span></span>
+<span data-ttu-id="1f975-438">La documentation est suivie d’un problème [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).</span><span class="sxs-lookup"><span data-stu-id="1f975-438">Documentation is tracked by issue [#2076](https://github.com/dotnet/EntityFramework.Docs/issues/2076).</span></span>
 
-### <a name="enhanced-debug-views"></a><span data-ttu-id="2a9cf-439">Vues de débogage améliorées</span><span class="sxs-lookup"><span data-stu-id="2a9cf-439">Enhanced debug views</span></span>
+### <a name="enhanced-debug-views"></a><span data-ttu-id="1f975-439">Vues de débogage améliorées</span><span class="sxs-lookup"><span data-stu-id="1f975-439">Enhanced debug views</span></span>
 
-<span data-ttu-id="2a9cf-440">Les vues de débogage sont un moyen simple de consulter les éléments internes d’EF Core lors du débogage des problèmes.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-440">Debug views are an easy way to look at the internals of EF Core when debugging issues.</span></span> <span data-ttu-id="2a9cf-441">Une vue de débogage a été implémentée pour le modèle il y a quelque temps.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-441">A debug view for the Model was implemented some time ago.</span></span> <span data-ttu-id="2a9cf-442">Pour EF Core 5,0, nous avons facilité la lecture et l’ajout d’une nouvelle vue de débogage pour les entités suivies dans le gestionnaire d’État.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-442">For EF Core 5.0, we have made the model view easier to read and added a new debug view for tracked entities in the state manager.</span></span>
+<span data-ttu-id="1f975-440">Les vues de débogage sont un moyen simple de consulter les éléments internes d’EF Core lors du débogage des problèmes.</span><span class="sxs-lookup"><span data-stu-id="1f975-440">Debug views are an easy way to look at the internals of EF Core when debugging issues.</span></span> <span data-ttu-id="1f975-441">Une vue de débogage a été implémentée pour le modèle il y a quelque temps.</span><span class="sxs-lookup"><span data-stu-id="1f975-441">A debug view for the Model was implemented some time ago.</span></span> <span data-ttu-id="1f975-442">Pour EF Core 5,0, nous avons facilité la lecture et l’ajout d’une nouvelle vue de débogage pour les entités suivies dans le gestionnaire d’État.</span><span class="sxs-lookup"><span data-stu-id="1f975-442">For EF Core 5.0, we have made the model view easier to read and added a new debug view for tracked entities in the state manager.</span></span>
 
-<span data-ttu-id="2a9cf-443">La documentation préliminaire est incluse dans l' [État EF Weekly pour le 12 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-443">Preliminary documentation is included in the [EF weekly status for December 12, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).</span></span>
+<span data-ttu-id="1f975-443">La documentation préliminaire est incluse dans l' [État EF Weekly pour le 12 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).</span><span class="sxs-lookup"><span data-stu-id="1f975-443">Preliminary documentation is included in the [EF weekly status for December 12, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-565196206).</span></span>
 
-<span data-ttu-id="2a9cf-444">Une documentation supplémentaire est suivie par le [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086)du problème.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-444">Additional documentation is tracked by issue [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086).</span></span>
+<span data-ttu-id="1f975-444">Une documentation supplémentaire est suivie par le [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086)du problème.</span><span class="sxs-lookup"><span data-stu-id="1f975-444">Additional documentation is tracked by issue [#2086](https://github.com/dotnet/EntityFramework.Docs/issues/2086).</span></span>
 
-### <a name="improved-handling-of-database-null-semantics"></a><span data-ttu-id="2a9cf-445">Amélioration de la gestion de la sémantique null de la base de données</span><span class="sxs-lookup"><span data-stu-id="2a9cf-445">Improved handling of database null semantics</span></span>
+### <a name="improved-handling-of-database-null-semantics"></a><span data-ttu-id="1f975-445">Amélioration de la gestion de la sémantique null de la base de données</span><span class="sxs-lookup"><span data-stu-id="1f975-445">Improved handling of database null semantics</span></span>
 
-<span data-ttu-id="2a9cf-446">En général, les bases de données relationnelles traitent la valeur NULL comme une valeur inconnue et, par conséquent, n’est pas égale à une autre valeur NULL.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-446">Relational databases typically treat NULL as an unknown value and therefore not equal to any other NULL.</span></span> <span data-ttu-id="2a9cf-447">Alors que C# traite NULL comme une valeur définie, qui compare la valeur à toute autre valeur null.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-447">While C# treats null as a defined value, which compares equal to any other null.</span></span> <span data-ttu-id="2a9cf-448">EF Core par défaut traduit les requêtes afin qu’elles utilisent la sémantique null C#.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-448">EF Core by default translates queries so that they use C# null semantics.</span></span> <span data-ttu-id="2a9cf-449">EF Core 5,0 améliore considérablement l’efficacité de ces traductions.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-449">EF Core 5.0 greatly improves the efficiency of these translations.</span></span>
+<span data-ttu-id="1f975-446">En général, les bases de données relationnelles traitent la valeur NULL comme une valeur inconnue et, par conséquent, n’est pas égale à une autre valeur NULL.</span><span class="sxs-lookup"><span data-stu-id="1f975-446">Relational databases typically treat NULL as an unknown value and therefore not equal to any other NULL.</span></span> <span data-ttu-id="1f975-447">Alors que C# traite NULL comme une valeur définie, qui compare la valeur à toute autre valeur null.</span><span class="sxs-lookup"><span data-stu-id="1f975-447">While C# treats null as a defined value, which compares equal to any other null.</span></span> <span data-ttu-id="1f975-448">EF Core par défaut traduit les requêtes afin qu’elles utilisent la sémantique null C#.</span><span class="sxs-lookup"><span data-stu-id="1f975-448">EF Core by default translates queries so that they use C# null semantics.</span></span> <span data-ttu-id="1f975-449">EF Core 5,0 améliore considérablement l’efficacité de ces traductions.</span><span class="sxs-lookup"><span data-stu-id="1f975-449">EF Core 5.0 greatly improves the efficiency of these translations.</span></span>
 
-<span data-ttu-id="2a9cf-450">La documentation est suivie d’un problème [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-450">Documentation is tracked by issue [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612).</span></span>
+<span data-ttu-id="1f975-450">La documentation est suivie d’un problème [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612).</span><span class="sxs-lookup"><span data-stu-id="1f975-450">Documentation is tracked by issue [#1612](https://github.com/dotnet/EntityFramework.Docs/issues/1612).</span></span>
 
-### <a name="indexer-properties"></a><span data-ttu-id="2a9cf-451">Propriétés de l’indexeur</span><span class="sxs-lookup"><span data-stu-id="2a9cf-451">Indexer properties</span></span>
+### <a name="indexer-properties"></a><span data-ttu-id="1f975-451">Propriétés de l’indexeur</span><span class="sxs-lookup"><span data-stu-id="1f975-451">Indexer properties</span></span>
 
-<span data-ttu-id="2a9cf-452">EF Core 5,0 prend en charge le mappage des propriétés de l’indexeur C#.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-452">EF Core 5.0 supports mapping of C# indexer properties.</span></span> <span data-ttu-id="2a9cf-453">Ces propriétés permettent aux entités d’agir en tant que conteneurs de propriétés où les colonnes sont mappées à des propriétés nommées dans le conteneur.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-453">These properties allow entities to act as property bags where columns are mapped to named properties in the bag.</span></span>
+<span data-ttu-id="1f975-452">EF Core 5,0 prend en charge le mappage des propriétés de l’indexeur C#.</span><span class="sxs-lookup"><span data-stu-id="1f975-452">EF Core 5.0 supports mapping of C# indexer properties.</span></span> <span data-ttu-id="1f975-453">Ces propriétés permettent aux entités d’agir en tant que conteneurs de propriétés où les colonnes sont mappées à des propriétés nommées dans le conteneur.</span><span class="sxs-lookup"><span data-stu-id="1f975-453">These properties allow entities to act as property bags where columns are mapped to named properties in the bag.</span></span>
 
-<span data-ttu-id="2a9cf-454">La documentation est suivie d’un problème [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-454">Documentation is tracked by issue [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018).</span></span>
+<span data-ttu-id="1f975-454">La documentation est suivie d’un problème [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018).</span><span class="sxs-lookup"><span data-stu-id="1f975-454">Documentation is tracked by issue [#2018](https://github.com/dotnet/EntityFramework.Docs/issues/2018).</span></span>
 
-### <a name="generation-of-check-constraints-for-enum-mappings"></a><span data-ttu-id="2a9cf-455">Génération de contraintes de validation pour les mappages d’énumération</span><span class="sxs-lookup"><span data-stu-id="2a9cf-455">Generation of check constraints for enum mappings</span></span>
+### <a name="generation-of-check-constraints-for-enum-mappings"></a><span data-ttu-id="1f975-455">Génération de contraintes de validation pour les mappages d’énumération</span><span class="sxs-lookup"><span data-stu-id="1f975-455">Generation of check constraints for enum mappings</span></span>
 
-<span data-ttu-id="2a9cf-456">EF Core migrations 5,0 peut désormais générer des contraintes de validation pour les mappages de propriété d’énumération.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-456">EF Core 5.0 Migrations can now generate CHECK constraints for enum property mappings.</span></span> <span data-ttu-id="2a9cf-457">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-457">For example:</span></span>
+<span data-ttu-id="1f975-456">EF Core migrations 5,0 peut désormais générer des contraintes de validation pour les mappages de propriété d’énumération.</span><span class="sxs-lookup"><span data-stu-id="1f975-456">EF Core 5.0 Migrations can now generate CHECK constraints for enum property mappings.</span></span> <span data-ttu-id="1f975-457">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-457">For example:</span></span>
 
 ```SQL
 MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN ('Useful', 'Useless', 'Unknown'))
 ```
 
-<span data-ttu-id="2a9cf-458">La documentation est suivie d’un problème [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-458">Documentation is tracked by issue [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).</span></span>
+<span data-ttu-id="1f975-458">La documentation est suivie d’un problème [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).</span><span class="sxs-lookup"><span data-stu-id="1f975-458">Documentation is tracked by issue [#2082](https://github.com/dotnet/EntityFramework.Docs/issues/2082).</span></span>
 
-### <a name="isrelational"></a><span data-ttu-id="2a9cf-459">IsRelational</span><span class="sxs-lookup"><span data-stu-id="2a9cf-459">IsRelational</span></span>
+### <a name="isrelational"></a><span data-ttu-id="1f975-459">IsRelational</span><span class="sxs-lookup"><span data-stu-id="1f975-459">IsRelational</span></span>
 
-<span data-ttu-id="2a9cf-460">Une nouvelle `IsRelational` méthode a été ajoutée en plus des `IsSqlServer` , `IsSqlite` , et existants `IsInMemory` .</span><span class="sxs-lookup"><span data-stu-id="2a9cf-460">A new `IsRelational` method has been added in addition to the existing `IsSqlServer`, `IsSqlite`, and `IsInMemory`.</span></span> <span data-ttu-id="2a9cf-461">Cette méthode peut être utilisée pour tester si DbContext utilise un fournisseur de base de données relationnelle.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-461">This method can be used to test if the DbContext is using any relational database provider.</span></span> <span data-ttu-id="2a9cf-462">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-462">For example:</span></span>
+<span data-ttu-id="1f975-460">Une nouvelle `IsRelational` méthode a été ajoutée en plus des `IsSqlServer` , `IsSqlite` , et existants `IsInMemory` .</span><span class="sxs-lookup"><span data-stu-id="1f975-460">A new `IsRelational` method has been added in addition to the existing `IsSqlServer`, `IsSqlite`, and `IsInMemory`.</span></span> <span data-ttu-id="1f975-461">Cette méthode peut être utilisée pour tester si DbContext utilise un fournisseur de base de données relationnelle.</span><span class="sxs-lookup"><span data-stu-id="1f975-461">This method can be used to test if the DbContext is using any relational database provider.</span></span> <span data-ttu-id="1f975-462">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-462">For example:</span></span>
 
 ```CSharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1165,68 +1167,68 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="2a9cf-463">La documentation est suivie d’un problème [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-463">Documentation is tracked by issue [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185).</span></span>
+<span data-ttu-id="1f975-463">La documentation est suivie d’un problème [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185).</span><span class="sxs-lookup"><span data-stu-id="1f975-463">Documentation is tracked by issue [#2185](https://github.com/dotnet/EntityFramework.Docs/issues/2185).</span></span>
 
-### <a name="cosmos-optimistic-concurrency-with-etags"></a><span data-ttu-id="2a9cf-464">Accès concurrentiel optimiste Cosmos avec ETags</span><span class="sxs-lookup"><span data-stu-id="2a9cf-464">Cosmos optimistic concurrency with ETags</span></span>
+### <a name="cosmos-optimistic-concurrency-with-etags"></a><span data-ttu-id="1f975-464">Accès concurrentiel optimiste Cosmos avec ETags</span><span class="sxs-lookup"><span data-stu-id="1f975-464">Cosmos optimistic concurrency with ETags</span></span>
 
-<span data-ttu-id="2a9cf-465">Le fournisseur de base de données Azure Cosmos DB prend désormais en charge l’accès concurrentiel optimiste à l’aide d’ETags.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-465">The Azure Cosmos DB database provider now supports optimistic concurrency using ETags.</span></span> <span data-ttu-id="2a9cf-466">Utilisez le générateur de modèles de OnModelCreating pour configurer un ETag :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-466">Use the model builder in OnModelCreating to configure an ETag:</span></span>
+<span data-ttu-id="1f975-465">Le fournisseur de base de données Azure Cosmos DB prend désormais en charge l’accès concurrentiel optimiste à l’aide d’ETags.</span><span class="sxs-lookup"><span data-stu-id="1f975-465">The Azure Cosmos DB database provider now supports optimistic concurrency using ETags.</span></span> <span data-ttu-id="1f975-466">Utilisez le générateur de modèles de OnModelCreating pour configurer un ETag :</span><span class="sxs-lookup"><span data-stu-id="1f975-466">Use the model builder in OnModelCreating to configure an ETag:</span></span>
 
 ```CSharp
 builder.Entity<Customer>().Property(c => c.ETag).IsEtagConcurrency();
 ```
 
-<span data-ttu-id="2a9cf-467">SaveChanges lèvera ensuite un en cas de `DbUpdateConcurrencyException` conflit d’accès concurrentiel, qui [peut être géré](/ef/core/saving/concurrency) pour implémenter les nouvelles tentatives, etc.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-467">SaveChanges will then throw an `DbUpdateConcurrencyException` on a concurrency conflict, which [can be handled](/ef/core/saving/concurrency) to implement retries, etc.</span></span>
+<span data-ttu-id="1f975-467">SaveChanges lèvera ensuite un en cas de `DbUpdateConcurrencyException` conflit d’accès concurrentiel, qui [peut être géré](xref:core/saving/concurrency) pour implémenter les nouvelles tentatives, etc.</span><span class="sxs-lookup"><span data-stu-id="1f975-467">SaveChanges will then throw an `DbUpdateConcurrencyException` on a concurrency conflict, which [can be handled](xref:core/saving/concurrency) to implement retries, etc.</span></span>
 
-<span data-ttu-id="2a9cf-468">La documentation est suivie d’un problème [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-468">Documentation is tracked by issue [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).</span></span>
+<span data-ttu-id="1f975-468">La documentation est suivie d’un problème [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).</span><span class="sxs-lookup"><span data-stu-id="1f975-468">Documentation is tracked by issue [#2099](https://github.com/dotnet/EntityFramework.Docs/issues/2099).</span></span>
 
-### <a name="query-translations-for-more-datetime-constructs"></a><span data-ttu-id="2a9cf-469">Traductions de requêtes pour d’autres constructions DateTime</span><span class="sxs-lookup"><span data-stu-id="2a9cf-469">Query translations for more DateTime constructs</span></span>
+### <a name="query-translations-for-more-datetime-constructs"></a><span data-ttu-id="1f975-469">Traductions de requêtes pour d’autres constructions DateTime</span><span class="sxs-lookup"><span data-stu-id="1f975-469">Query translations for more DateTime constructs</span></span>
 
-<span data-ttu-id="2a9cf-470">Les requêtes contenant la nouvelle construction DateTime sont maintenant traduites.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-470">Queries containing new DateTime construction are now translated.</span></span>
+<span data-ttu-id="1f975-470">Les requêtes contenant la nouvelle construction DateTime sont maintenant traduites.</span><span class="sxs-lookup"><span data-stu-id="1f975-470">Queries containing new DateTime construction are now translated.</span></span>
 
-<span data-ttu-id="2a9cf-471">En outre, les fonctions de SQL Server suivantes sont maintenant mappées :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-471">In addition, the following SQL Server functions are now mapped:</span></span>
+<span data-ttu-id="1f975-471">En outre, les fonctions de SQL Server suivantes sont maintenant mappées :</span><span class="sxs-lookup"><span data-stu-id="1f975-471">In addition, the following SQL Server functions are now mapped:</span></span>
 
-* <span data-ttu-id="2a9cf-472">DateDiffWeek</span><span class="sxs-lookup"><span data-stu-id="2a9cf-472">DateDiffWeek</span></span>
-* <span data-ttu-id="2a9cf-473">DateFromParts</span><span class="sxs-lookup"><span data-stu-id="2a9cf-473">DateFromParts</span></span>
+* <span data-ttu-id="1f975-472">DateDiffWeek</span><span class="sxs-lookup"><span data-stu-id="1f975-472">DateDiffWeek</span></span>
+* <span data-ttu-id="1f975-473">DateFromParts</span><span class="sxs-lookup"><span data-stu-id="1f975-473">DateFromParts</span></span>
 
-<span data-ttu-id="2a9cf-474">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-474">For example:</span></span>
+<span data-ttu-id="1f975-474">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-474">For example:</span></span>
 
 ```CSharp
 var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime.Now.Year, 12, 25));
 
 ```
 
-<span data-ttu-id="2a9cf-475">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-475">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="1f975-475">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="1f975-475">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translations-for-more-byte-array-constructs"></a><span data-ttu-id="2a9cf-476">Traductions de requêtes pour d’autres constructions de tableau d’octets</span><span class="sxs-lookup"><span data-stu-id="2a9cf-476">Query translations for more byte array constructs</span></span>
+### <a name="query-translations-for-more-byte-array-constructs"></a><span data-ttu-id="1f975-476">Traductions de requêtes pour d’autres constructions de tableau d’octets</span><span class="sxs-lookup"><span data-stu-id="1f975-476">Query translations for more byte array constructs</span></span>
 
-<span data-ttu-id="2a9cf-477">Les requêtes utilisant les propriétés Contains, Length, SequenceEqual, etc. sur Byte [] sont désormais traduites en SQL.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-477">Queries using Contains, Length, SequenceEqual, etc. on byte[] properties are now translated to SQL.</span></span>
+<span data-ttu-id="1f975-477">Les requêtes utilisant les propriétés Contains, Length, SequenceEqual, etc. sur Byte [] sont désormais traduites en SQL.</span><span class="sxs-lookup"><span data-stu-id="1f975-477">Queries using Contains, Length, SequenceEqual, etc. on byte[] properties are now translated to SQL.</span></span>
 
-<span data-ttu-id="2a9cf-478">La documentation préliminaire est incluse dans l' [État EF hebdomadaire du 5 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-478">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
+<span data-ttu-id="1f975-478">La documentation préliminaire est incluse dans l' [État EF hebdomadaire du 5 décembre 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span><span class="sxs-lookup"><span data-stu-id="1f975-478">Preliminary documentation is included in the [EF weekly status for December 5, 2019](https://github.com/dotnet/efcore/issues/15403#issuecomment-562332863).</span></span>
 
-<span data-ttu-id="2a9cf-479">Une documentation supplémentaire est suivie par le [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)du problème.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-479">Additional documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="1f975-479">Une documentation supplémentaire est suivie par le [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079)du problème.</span><span class="sxs-lookup"><span data-stu-id="1f975-479">Additional documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translation-for-reverse"></a><span data-ttu-id="2a9cf-480">Traduction de requête pour l’inverse</span><span class="sxs-lookup"><span data-stu-id="2a9cf-480">Query translation for Reverse</span></span>
+### <a name="query-translation-for-reverse"></a><span data-ttu-id="1f975-480">Traduction de requête pour l’inverse</span><span class="sxs-lookup"><span data-stu-id="1f975-480">Query translation for Reverse</span></span>
 
-<span data-ttu-id="2a9cf-481">Les requêtes utilisant `Reverse` sont désormais traduites.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-481">Queries using `Reverse` are now translated.</span></span> <span data-ttu-id="2a9cf-482">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-482">For example:</span></span>
+<span data-ttu-id="1f975-481">Les requêtes utilisant `Reverse` sont désormais traduites.</span><span class="sxs-lookup"><span data-stu-id="1f975-481">Queries using `Reverse` are now translated.</span></span> <span data-ttu-id="1f975-482">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-482">For example:</span></span>
 
 ```CSharp
 context.Employees.OrderBy(e => e.EmployeeID).Reverse()
 ```
 
-<span data-ttu-id="2a9cf-483">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-483">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="1f975-483">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="1f975-483">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translation-for-bitwise-operators"></a><span data-ttu-id="2a9cf-484">Traduction des requêtes pour les opérateurs au niveau du bit</span><span class="sxs-lookup"><span data-stu-id="2a9cf-484">Query translation for bitwise operators</span></span>
+### <a name="query-translation-for-bitwise-operators"></a><span data-ttu-id="1f975-484">Traduction des requêtes pour les opérateurs au niveau du bit</span><span class="sxs-lookup"><span data-stu-id="1f975-484">Query translation for bitwise operators</span></span>
 
-<span data-ttu-id="2a9cf-485">Les requêtes utilisant des opérateurs de bits sont maintenant traduites dans d’autres cas, par exemple :</span><span class="sxs-lookup"><span data-stu-id="2a9cf-485">Queries using bitwise operators are now translated in more cases For example:</span></span>
+<span data-ttu-id="1f975-485">Les requêtes utilisant des opérateurs de bits sont maintenant traduites dans d’autres cas, par exemple :</span><span class="sxs-lookup"><span data-stu-id="1f975-485">Queries using bitwise operators are now translated in more cases For example:</span></span>
 
 ```CSharp
 context.Orders.Where(o => ~o.OrderID == negatedId)
 ```
 
-<span data-ttu-id="2a9cf-486">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-486">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="1f975-486">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="1f975-486">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
 
-### <a name="query-translation-for-strings-on-cosmos"></a><span data-ttu-id="2a9cf-487">Traduction des requêtes pour les chaînes sur Cosmos</span><span class="sxs-lookup"><span data-stu-id="2a9cf-487">Query translation for strings on Cosmos</span></span>
+### <a name="query-translation-for-strings-on-cosmos"></a><span data-ttu-id="1f975-487">Traduction des requêtes pour les chaînes sur Cosmos</span><span class="sxs-lookup"><span data-stu-id="1f975-487">Query translation for strings on Cosmos</span></span>
 
-<span data-ttu-id="2a9cf-488">Les requêtes qui utilisent les méthodes de chaîne Contains, StartsWith et EndsWith sont désormais traduites lors de l’utilisation du fournisseur Azure Cosmos DB.</span><span class="sxs-lookup"><span data-stu-id="2a9cf-488">Queries that use the string methods Contains, StartsWith, and EndsWith are now translated when using the Azure Cosmos DB provider.</span></span>
+<span data-ttu-id="1f975-488">Les requêtes qui utilisent les méthodes de chaîne Contains, StartsWith et EndsWith sont désormais traduites lors de l’utilisation du fournisseur Azure Cosmos DB.</span><span class="sxs-lookup"><span data-stu-id="1f975-488">Queries that use the string methods Contains, StartsWith, and EndsWith are now translated when using the Azure Cosmos DB provider.</span></span>
 
-<span data-ttu-id="2a9cf-489">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="2a9cf-489">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>
+<span data-ttu-id="1f975-489">La documentation est suivie d’un problème [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span><span class="sxs-lookup"><span data-stu-id="1f975-489">Documentation is tracked by issue [#2079](https://github.com/dotnet/EntityFramework.Docs/issues/2079).</span></span>

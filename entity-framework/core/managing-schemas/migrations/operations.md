@@ -1,29 +1,30 @@
 ---
 title: Opérations sur les migrations personnalisées-EF Core
+description: Gestion des migrations SQL personnalisées et brutes pour la gestion des schémas de base de données avec Entity Framework Core
 author: bricelam
 ms.author: bricelam
 ms.date: 11/07/2017
 uid: core/managing-schemas/migrations/operations
-ms.openlocfilehash: bd2bfdc24977a47eaf7a6756a88b758b563d818a
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 708894d8d567a4644be3a4ace98cc837465710e0
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78416876"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89617948"
 ---
-# <a name="custom-migrations-operations"></a><span data-ttu-id="0d9b8-102">Opérations de migration personnalisées</span><span class="sxs-lookup"><span data-stu-id="0d9b8-102">Custom Migrations Operations</span></span>
+# <a name="custom-migrations-operations"></a><span data-ttu-id="46bbe-103">Opérations de migration personnalisées</span><span class="sxs-lookup"><span data-stu-id="46bbe-103">Custom Migrations Operations</span></span>
 
-<span data-ttu-id="0d9b8-103">L’API MigrationBuilder vous permet d’effectuer de nombreux types d’opérations différents au cours d’une migration, mais elle est loin d’être exhaustive.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-103">The MigrationBuilder API allows you to perform many different kinds of operations during a migration, but it's far from exhaustive.</span></span> <span data-ttu-id="0d9b8-104">Toutefois, l’API est également extensible, ce qui vous permet de définir vos propres opérations.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-104">However, the API is also extensible allowing you to define your own operations.</span></span> <span data-ttu-id="0d9b8-105">Il existe deux façons d’étendre l’API : à l’aide de la méthode `Sql()`, ou en définissant des objets `MigrationOperation` personnalisés.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-105">There are two ways to extend the API: Using the `Sql()` method, or by defining custom `MigrationOperation` objects.</span></span>
+<span data-ttu-id="46bbe-104">L’API MigrationBuilder vous permet d’effectuer de nombreux types d’opérations différents au cours d’une migration, mais elle est loin d’être exhaustive.</span><span class="sxs-lookup"><span data-stu-id="46bbe-104">The MigrationBuilder API allows you to perform many different kinds of operations during a migration, but it's far from exhaustive.</span></span> <span data-ttu-id="46bbe-105">Toutefois, l’API est également extensible, ce qui vous permet de définir vos propres opérations.</span><span class="sxs-lookup"><span data-stu-id="46bbe-105">However, the API is also extensible allowing you to define your own operations.</span></span> <span data-ttu-id="46bbe-106">Il existe deux façons d’étendre l’API : à l’aide de la `Sql()` méthode, ou en définissant des `MigrationOperation` objets personnalisés.</span><span class="sxs-lookup"><span data-stu-id="46bbe-106">There are two ways to extend the API: Using the `Sql()` method, or by defining custom `MigrationOperation` objects.</span></span>
 
-<span data-ttu-id="0d9b8-106">Pour illustrer cela, examinons l’implémentation d’une opération qui crée un utilisateur de base de données à l’aide de chaque approche.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-106">To illustrate, let's look at implementing an operation that creates a database user using each approach.</span></span> <span data-ttu-id="0d9b8-107">Dans nos migrations, nous souhaitons activer l’écriture du code suivant :</span><span class="sxs-lookup"><span data-stu-id="0d9b8-107">In our migrations, we want to enable writing the following code:</span></span>
+<span data-ttu-id="46bbe-107">Pour illustrer cela, examinons l’implémentation d’une opération qui crée un utilisateur de base de données à l’aide de chaque approche.</span><span class="sxs-lookup"><span data-stu-id="46bbe-107">To illustrate, let's look at implementing an operation that creates a database user using each approach.</span></span> <span data-ttu-id="46bbe-108">Dans nos migrations, nous souhaitons activer l’écriture du code suivant :</span><span class="sxs-lookup"><span data-stu-id="46bbe-108">In our migrations, we want to enable writing the following code:</span></span>
 
 ``` csharp
 migrationBuilder.CreateUser("SQLUser1", "Password");
 ```
 
-## <a name="using-migrationbuildersql"></a><span data-ttu-id="0d9b8-108">Utilisation de MigrationBuilder. SQL ()</span><span class="sxs-lookup"><span data-stu-id="0d9b8-108">Using MigrationBuilder.Sql()</span></span>
+## <a name="using-migrationbuildersql"></a><span data-ttu-id="46bbe-109">Utilisation de MigrationBuilder. SQL ()</span><span class="sxs-lookup"><span data-stu-id="46bbe-109">Using MigrationBuilder.Sql()</span></span>
 
-<span data-ttu-id="0d9b8-109">Le moyen le plus simple d’implémenter une opération personnalisée consiste à définir une méthode d’extension qui appelle `MigrationBuilder.Sql()`.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-109">The easiest way to implement a custom operation is to define an extension method that calls `MigrationBuilder.Sql()`.</span></span> <span data-ttu-id="0d9b8-110">Voici un exemple qui génère le Transact-SQL approprié.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-110">Here is an example that generates the appropriate Transact-SQL.</span></span>
+<span data-ttu-id="46bbe-110">Le moyen le plus simple d’implémenter une opération personnalisée consiste à définir une méthode d’extension qui appelle `MigrationBuilder.Sql()` .</span><span class="sxs-lookup"><span data-stu-id="46bbe-110">The easiest way to implement a custom operation is to define an extension method that calls `MigrationBuilder.Sql()`.</span></span> <span data-ttu-id="46bbe-111">Voici un exemple qui génère le Transact-SQL approprié.</span><span class="sxs-lookup"><span data-stu-id="46bbe-111">Here is an example that generates the appropriate Transact-SQL.</span></span>
 
 ``` csharp
 static MigrationBuilder CreateUser(
@@ -33,7 +34,7 @@ static MigrationBuilder CreateUser(
     => migrationBuilder.Sql($"CREATE USER {name} WITH PASSWORD '{password}';");
 ```
 
-<span data-ttu-id="0d9b8-111">Si vos migrations doivent prendre en charge plusieurs fournisseurs de bases de données, vous pouvez utiliser la propriété `MigrationBuilder.ActiveProvider`.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-111">If your migrations need to support multiple database providers, you can use the `MigrationBuilder.ActiveProvider` property.</span></span> <span data-ttu-id="0d9b8-112">Voici un exemple qui prend en charge à la fois Microsoft SQL Server et PostgreSQL.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-112">Here's an example supporting both Microsoft SQL Server and PostgreSQL.</span></span>
+<span data-ttu-id="46bbe-112">Si vos migrations doivent prendre en charge plusieurs fournisseurs de bases de données, vous pouvez utiliser la `MigrationBuilder.ActiveProvider` propriété.</span><span class="sxs-lookup"><span data-stu-id="46bbe-112">If your migrations need to support multiple database providers, you can use the `MigrationBuilder.ActiveProvider` property.</span></span> <span data-ttu-id="46bbe-113">Voici un exemple qui prend en charge à la fois Microsoft SQL Server et PostgreSQL.</span><span class="sxs-lookup"><span data-stu-id="46bbe-113">Here's an example supporting both Microsoft SQL Server and PostgreSQL.</span></span>
 
 ``` csharp
 static MigrationBuilder CreateUser(
@@ -56,11 +57,11 @@ static MigrationBuilder CreateUser(
 }
 ```
 
-<span data-ttu-id="0d9b8-113">Cette approche fonctionne uniquement si vous connaissez tous les fournisseurs où votre opération personnalisée sera appliquée.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-113">This approach only works if you know every provider where your custom operation will be applied.</span></span>
+<span data-ttu-id="46bbe-114">Cette approche fonctionne uniquement si vous connaissez tous les fournisseurs où votre opération personnalisée sera appliquée.</span><span class="sxs-lookup"><span data-stu-id="46bbe-114">This approach only works if you know every provider where your custom operation will be applied.</span></span>
 
-## <a name="using-a-migrationoperation"></a><span data-ttu-id="0d9b8-114">Utilisation d’un MigrationOperation</span><span class="sxs-lookup"><span data-stu-id="0d9b8-114">Using a MigrationOperation</span></span>
+## <a name="using-a-migrationoperation"></a><span data-ttu-id="46bbe-115">Utilisation d’un MigrationOperation</span><span class="sxs-lookup"><span data-stu-id="46bbe-115">Using a MigrationOperation</span></span>
 
-<span data-ttu-id="0d9b8-115">Pour découpler l’opération personnalisée de SQL, vous pouvez définir votre propre `MigrationOperation` pour la représenter.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-115">To decouple the custom operation from the SQL, you can define your own `MigrationOperation` to represent it.</span></span> <span data-ttu-id="0d9b8-116">L’opération est ensuite transmise au fournisseur afin de pouvoir déterminer le SQL approprié à générer.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-116">The operation is then passed to the provider so it can determine the appropriate SQL to generate.</span></span>
+<span data-ttu-id="46bbe-116">Pour découpler l’opération personnalisée de SQL, vous pouvez définir votre propre opération `MigrationOperation` pour la représenter.</span><span class="sxs-lookup"><span data-stu-id="46bbe-116">To decouple the custom operation from the SQL, you can define your own `MigrationOperation` to represent it.</span></span> <span data-ttu-id="46bbe-117">L’opération est ensuite transmise au fournisseur afin de pouvoir déterminer le SQL approprié à générer.</span><span class="sxs-lookup"><span data-stu-id="46bbe-117">The operation is then passed to the provider so it can determine the appropriate SQL to generate.</span></span>
 
 ``` csharp
 class CreateUserOperation : MigrationOperation
@@ -70,7 +71,7 @@ class CreateUserOperation : MigrationOperation
 }
 ```
 
-<span data-ttu-id="0d9b8-117">Avec cette approche, la méthode d’extension doit simplement ajouter l’une de ces opérations à `MigrationBuilder.Operations`.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-117">With this approach, the extension method just needs to add one of these operations to `MigrationBuilder.Operations`.</span></span>
+<span data-ttu-id="46bbe-118">Avec cette approche, la méthode d’extension doit simplement ajouter l’une de ces opérations à `MigrationBuilder.Operations` .</span><span class="sxs-lookup"><span data-stu-id="46bbe-118">With this approach, the extension method just needs to add one of these operations to `MigrationBuilder.Operations`.</span></span>
 
 ``` csharp
 static MigrationBuilder CreateUser(
@@ -89,7 +90,7 @@ static MigrationBuilder CreateUser(
 }
 ```
 
-<span data-ttu-id="0d9b8-118">Cette approche nécessite que chaque fournisseur sache comment générer SQL pour cette opération dans son service `IMigrationsSqlGenerator`.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-118">This approach requires each provider to know how to generate SQL for this operation in their `IMigrationsSqlGenerator` service.</span></span> <span data-ttu-id="0d9b8-119">Voici un exemple qui remplace le générateur de SQL Server pour gérer la nouvelle opération.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-119">Here is an example overriding the SQL Server's generator to handle the new operation.</span></span>
+<span data-ttu-id="46bbe-119">Cette approche nécessite que chaque fournisseur sache comment générer SQL pour cette opération dans son `IMigrationsSqlGenerator` service.</span><span class="sxs-lookup"><span data-stu-id="46bbe-119">This approach requires each provider to know how to generate SQL for this operation in their `IMigrationsSqlGenerator` service.</span></span> <span data-ttu-id="46bbe-120">Voici un exemple qui remplace le générateur de SQL Server pour gérer la nouvelle opération.</span><span class="sxs-lookup"><span data-stu-id="46bbe-120">Here is an example overriding the SQL Server's generator to handle the new operation.</span></span>
 
 ``` csharp
 class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
@@ -134,7 +135,7 @@ class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
 }
 ```
 
-<span data-ttu-id="0d9b8-120">Remplacez le service SQL Generator des migrations par défaut par le service mis à jour.</span><span class="sxs-lookup"><span data-stu-id="0d9b8-120">Replace the default migrations sql generator service with the updated one.</span></span>
+<span data-ttu-id="46bbe-121">Remplacez le service SQL Generator des migrations par défaut par le service mis à jour.</span><span class="sxs-lookup"><span data-stu-id="46bbe-121">Replace the default migrations sql generator service with the updated one.</span></span>
 
 ``` csharp
 protected override void OnConfiguring(DbContextOptionsBuilder options)
