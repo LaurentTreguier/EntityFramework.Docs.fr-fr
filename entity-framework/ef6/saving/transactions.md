@@ -1,14 +1,16 @@
 ---
 title: Utilisation des transactions-EF6
+description: Utilisation des transactions dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 0d0f1824-d781-4cb3-8fda-b7eaefced1cd
-ms.openlocfilehash: 7030dc675993339f72c935f6b430cead85fecb7f
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/transactions
+ms.openlocfilehash: 65eebd82d4f9c583885af72d5b3cffd79fedf623
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419684"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619846"
 ---
 # <a name="working-with-transactions"></a>Utilisation des transactions
 > [!NOTE]
@@ -20,7 +22,7 @@ Ce document décrit l’utilisation des transactions dans EF6, y compris les am�
 
 Dans toutes les versions de Entity Framework, chaque fois que vous exécutez **SaveChanges ()** pour insérer, mettre à jour ou supprimer sur la base de données, l’infrastructure encapsule cette opération dans une transaction. Cette transaction ne dure que suffisamment longtemps pour exécuter l’opération, puis se termine. Lorsque vous exécutez une autre opération, une nouvelle transaction est démarrée.  
 
-À compter **de EF6 Database. ExecuteSqlCommand ()** par défaut, la commande est encapsulée dans une transaction, si celle-ci n’est pas déjà présente. Il existe des surcharges de cette méthode qui vous permettent de substituer ce comportement si vous le souhaitez. En outre, dans EF6, l’exécution de procédures stockées incluses dans le modèle via des API telles que **ObjectContext. ExecuteFunction ()** fait de même (sauf que le comportement par défaut ne peut pas être remplacé).  
+À compter de EF6 **Database.ExecuteSqlCommand ()** par défaut encapsule la commande dans une transaction, si celle-ci n’était pas déjà présente. Il existe des surcharges de cette méthode qui vous permettent de substituer ce comportement si vous le souhaitez. En outre, dans EF6, l’exécution de procédures stockées incluses dans le modèle via des API telles que **ObjectContext.ExecuteFunction ()** fait de même (sauf que le comportement par défaut ne peut pas être remplacé).  
 
 Dans les deux cas, le niveau d’isolation de la transaction est le niveau d’isolation que le fournisseur de base de données considère comme son paramètre par défaut. Par défaut, par exemple, sur SQL Server il s’agit de READ COMMITTED.  
 
@@ -35,7 +37,7 @@ Toutefois, certains utilisateurs ont besoin d’un meilleur contrôle sur leurs 
 Avant EF6 Entity Framework insistait sur l’ouverture de la connexion de base de données elle-même (une exception a été levée si une connexion déjà ouverte était passée). Étant donné qu’une transaction ne peut être démarrée que sur une connexion ouverte, cela signifiait que le seul moyen pour un utilisateur d’encapsuler plusieurs opérations dans une seule transaction était d’utiliser [TransactionScope](https://msdn.microsoft.com/library/system.transactions.transactionscope.aspx) ou d’utiliser la propriété **ObjectContext. Connection** et de commencer à appeler **Open ()** et **BeginTransaction ()** directement sur l’objet **EntityConnection** renvoyé. En outre, les appels d’API qui ont contacté la base de données échouent si vous avez démarré une transaction sur la connexion de base de données sous-jacente.  
 
 > [!NOTE]
-> La limitation de l’acceptation des connexions fermées a été supprimée dans Entity Framework 6. Pour plus d’informations, consultez [gestion des connexions](~/ef6/fundamentals/connection-management.md).  
+> La limitation de l’acceptation des connexions fermées a été supprimée dans Entity Framework 6. Pour plus d’informations, consultez [gestion des connexions](xref:ef6/fundamentals/connection-management).  
 
 À compter de EF6, le Framework fournit désormais :  
 
@@ -184,11 +186,11 @@ Cette section explique en détail comment les transactions ci-dessus interagisse
 
 ### <a name="connection-resiliency"></a>Résilience des connexions  
 
-La nouvelle fonctionnalité de résilience de connexion ne fonctionne pas avec les transactions initiées par l’utilisateur. Pour plus d’informations, consultez [nouvelle tentative de stratégies d’exécution](~/ef6/fundamentals/connection-resiliency/retry-logic.md#user-initiated-transactions-are-not-supported).  
+La nouvelle fonctionnalité de résilience de connexion ne fonctionne pas avec les transactions initiées par l’utilisateur. Pour plus d’informations, consultez [nouvelle tentative de stratégies d’exécution](xref:ef6/fundamentals/connection-resiliency/retry-logic#user-initiated-transactions-are-not-supported).  
 
 ### <a name="asynchronous-programming"></a>Programmation asynchrone  
 
-L’approche décrite dans les sections précédentes ne nécessite pas d’options ou de paramètres supplémentaires pour fonctionner avec la [requête asynchrone et les méthodes d’enregistrement](~/ef6/fundamentals/async.md
+L’approche décrite dans les sections précédentes ne nécessite pas d’options ou de paramètres supplémentaires pour fonctionner avec la [requête asynchrone et les méthodes d’enregistrement](xref:ef6/fundamentals/async
 ). Toutefois, sachez que, en fonction de ce que vous faites dans les méthodes asynchrones, cela peut entraîner des transactions de longue durée, qui peuvent à leur tour entraîner des blocages ou des blocages, ce qui est incorrect pour les performances de l’application globale.  
 
 ### <a name="transactionscope-transactions"></a>Transactions TransactionScope  
@@ -296,7 +298,7 @@ Il existe toujours des limitations à l’approche TransactionScope :
 
 Avantages de l’approche TransactionScope :  
 
-- Elle met automatiquement à niveau une transaction locale vers une transaction distribuée si vous créez plusieurs connexions à une base de données spécifique ou associez une connexion à une base de données avec une connexion à une base de données différente au sein de la même transaction (Remarque : vous devez avoir le service MSDTC configuré pour autoriser les transactions distribuées pour que cela fonctionne).  
+- Elle met automatiquement à niveau une transaction locale vers une transaction distribuée si vous créez plusieurs connexions à une base de données spécifique ou associez une connexion à une base de données avec une connexion à une autre base de données au sein de la même transaction (Remarque : le service MSDTC doit être configuré pour autoriser les transactions distribuées pour que cela fonctionne).  
 - Facilité de codage. Si vous préférez que la transaction soit ambiante et traitée implicitement en arrière-plan plutôt que explicitement sous contrôle, l’approche TransactionScope peut vous convenir mieux.  
 
 En résumé, avec les API New Database. BeginTransaction () et Database. UseTransaction () ci-dessus, l’approche TransactionScope n’est plus nécessaire pour la plupart des utilisateurs. Si vous continuez à utiliser TransactionScope, tenez compte des limitations ci-dessus. Nous vous recommandons d’utiliser à la place l’approche décrite dans les sections précédentes dans la mesure du possible.  

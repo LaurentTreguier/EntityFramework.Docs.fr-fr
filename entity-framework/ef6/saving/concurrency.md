@@ -1,14 +1,16 @@
 ---
 title: Gestion des conflits d’accès concurrentiel-EF6
+description: Gestion des conflits d’accès concurrentiel dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
-ms.openlocfilehash: 4d29fd7a4d9b6003f71bc8411cea2d863a4c5429
-ms.sourcegitcommit: d85263b5d5d665dbaf94de8832e2917bce048b34
+uid: ef6/saving/concurrency
+ms.openlocfilehash: 1cec47ce346e8a6c86338747c01fba4d030e7388
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86451240"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619875"
 ---
 # <a name="handling-concurrency-conflicts-ef6"></a>Gestion des conflits d’accès concurrentiel (EF6)
 
@@ -16,7 +18,7 @@ L’accès concurrentiel optimiste implique une tentative optimiste d’enregist
 
 Ce billet n’est pas l’endroit approprié pour une présentation complète de l’accès concurrentiel optimiste. Les sections ci-dessous supposent une connaissance de la résolution de concurrence et présentent des modèles pour les tâches courantes.  
 
-La plupart de ces modèles utilisent les rubriques abordées dans [utilisation des valeurs de propriété](~/ef6/saving/change-tracking/property-values.md).  
+La plupart de ces modèles utilisent les rubriques abordées dans [utilisation des valeurs de propriété](xref:ef6/saving/change-tracking/property-values).  
 
 La résolution des problèmes d’accès concurrentiel quand vous utilisez des associations indépendantes (où la clé étrangère n’est pas mappée à une propriété dans votre entité) est bien plus difficile que lorsque vous utilisez des associations de clé étrangère. Par conséquent, si vous envisagez de résoudre la concurrence dans votre application, il est recommandé de toujours mapper les clés étrangères dans vos entités. Tous les exemples ci-dessous supposent que vous utilisez des associations de clé étrangère.  
 
@@ -64,7 +66,7 @@ La méthode Entries sur DbUpdateConcurrencyException retourne les instances DbEn
 
 ## <a name="resolving-optimistic-concurrency-exceptions-as-client-wins"></a>Résolution des exceptions d’accès concurrentiel optimiste en tant que client WINS  
 
-L’exemple ci-dessus qui utilise le rechargement est parfois appelé base de données WINS ou Store WINS, car les valeurs de l’entité sont remplacées par les valeurs de la base de données. Parfois, vous souhaiterez peut-être faire l’inverse et remplacer les valeurs de la base de données par les valeurs actuellement présentes dans l’entité. Cette opération est parfois appelée WINS du client et peut être effectuée en obtenant les valeurs de la base de données actuelle et en les définissant comme valeurs d’origine pour l’entité. (Consultez [utilisation des valeurs de propriété](~/ef6/saving/change-tracking/property-values.md) pour plus d’informations sur les valeurs actuelles et d’origine.) Par exemple :  
+L’exemple ci-dessus qui utilise le rechargement est parfois appelé base de données WINS ou Store WINS, car les valeurs de l’entité sont remplacées par les valeurs de la base de données. Parfois, vous souhaiterez peut-être faire l’inverse et remplacer les valeurs de la base de données par les valeurs actuellement présentes dans l’entité. Cette opération est parfois appelée WINS du client et peut être effectuée en obtenant les valeurs de la base de données actuelle et en les définissant comme valeurs d’origine pour l’entité. (Consultez [utilisation des valeurs de propriété](xref:ef6/saving/change-tracking/property-values) pour plus d’informations sur les valeurs actuelles et d’origine.) Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())

@@ -1,14 +1,16 @@
 ---
 title: Spécification MSL-EF6
+description: Spécification MSL dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
-ms.openlocfilehash: 8990d1373ea2121ce11337a43dbcdf3b9e1532bd
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/edmx/msl-spec
+ms.openlocfilehash: 4ec43f48f82b83bd85b47fe234be143d0e4d2560
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418731"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620618"
 ---
 # <a name="msl-specification"></a>Spécification MSL
 Le langage MSL (Mapping Specification Language) est un langage basé sur XML qui décrit le mappage entre le modèle conceptuel et le modèle de stockage d’une application Entity Framework.
@@ -17,7 +19,7 @@ Dans une application Entity Framework, les métadonnées de mappage sont chargé
 
 Le Entity Framework Designer (concepteur EF) stocke les informations de mappage dans un fichier. edmx au moment de la conception. Au moment de la génération, le Entity Designer utilise les informations d’un fichier. edmx pour créer le fichier. MSL requis par Entity Framework au moment de l’exécution.
 
-Les noms de tous les types de modèle conceptuel et de stockage référencés en MSL doivent être qualifiés par le nom de leur espace de noms respectif. Pour plus d’informations sur le nom de l’espace de noms du modèle conceptuel, consultez [spécification CSDL](~/ef6/modeling/designer/advanced/edmx/csdl-spec.md). Pour plus d’informations sur le nom de l’espace de noms du modèle de stockage, consultez la [spécification SSDL](~/ef6/modeling/designer/advanced/edmx/ssdl-spec.md).
+Les noms de tous les types de modèle conceptuel et de stockage référencés en MSL doivent être qualifiés par le nom de leur espace de noms respectif. Pour plus d’informations sur le nom de l’espace de noms du modèle conceptuel, consultez [spécification CSDL](xref:ef6/modeling/designer/advanced/edmx/csdl-spec). Pour plus d’informations sur le nom de l’espace de noms du modèle de stockage, consultez la [spécification SSDL](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec).
 
 Les versions de MSL sont différenciées par les espaces de noms XML.
 
@@ -44,7 +46,7 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément d' **alias** qui définit un alias, `c`, pour les types définis dans le modèle conceptuel.
+L’exemple suivant montre un élément d' **alias** qui définit un alias, `c` , pour les types définis dans le modèle conceptuel.
 
 ``` xml
  <Mapping Space="C-S"
@@ -93,7 +95,7 @@ Le tableau suivant décrit les attributs qui s’appliquent à l’élément **A
 
 | Nom de l'attribut     | Est obligatoire | Valeur                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **AssociationSet** | Oui         | Nom de l'association mappée.                                                                                                                                 |
+| **AssociationSet ;** | Oui         | Nom de l'association mappée.                                                                                                                                 |
 | **From**           | Oui         | Valeur de l’attribut **FromRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL). |
 | **To**             | Oui         | Valeur de l’attribut **ToRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL).   |
 
@@ -131,7 +133,7 @@ Considérons également la procédure stockée suivante :
                                 WHERE CourseID=@CourseID;
 ```
 
-Pour mapper la fonction de mise à jour de l’entité `Course` à cette procédure stockée, vous devez fournir une valeur au paramètre **DepartmentID** . La valeur pour `DepartmentID` ne correspond pas à une propriété sur le type d'entité ; elle est contenue dans une association indépendante dont le mappage est indiqué ici :
+Pour mapper la fonction de mise à jour de l' `Course` entité à cette procédure stockée, vous devez fournir une valeur au paramètre **DepartmentID** . La valeur pour `DepartmentID` ne correspond pas à une propriété sur le type d'entité ; elle est contenue dans une association indépendante dont le mappage est indiqué ici :
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -146,7 +148,7 @@ Pour mapper la fonction de mise à jour de l’entité `Course` à cette procéd
  </AssociationSetMapping>
 ```
 
-Le code suivant montre l’élément **AssociationEnd** utilisé pour mapper la propriété **DepartmentID** de l’association **FK\_course\_Department** à la procédure stockée **UpdateCourse** (à laquelle la fonction de mise à jour du type d’entité **course** est mappée) :
+Le code suivant montre l’élément **AssociationEnd** utilisé pour mapper la propriété **DepartmentID** de l’Association de ** \_ \_ service de cours FK** à la procédure stockée **UpdateCourse** (à laquelle la fonction de mise à jour du type d’entité **course** est mappée) :
 
 ``` xml
  <EntitySetMapping Name="Courses">
@@ -189,10 +191,10 @@ Les associations dans le modèle conceptuel sont des types dont les propriétés
 
 L’élément **AssociationSetMapping** peut avoir les éléments enfants suivants
 
--   QueryView (zéro ou un)
+-   QueryView (zéro ou un élément)
 -   EndProperty (zéro ou deux éléments)
--   Condition (zéro, un ou plusieurs)
--   ModificationFunctionMapping (zéro ou un)
+-   Condition (zéro, un ou plusieurs éléments).
+-   ModificationFunctionMapping (zéro ou un élément)
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -206,7 +208,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association de **service FK\_\_de cours** définie dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
+L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association de ** \_ \_ service de cours FK** définie dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -227,10 +229,10 @@ Un élément **ComplexProperty** en Mapping Specification Language (MSL) défini
 
 L’élément de propriété **complexType** peut avoir les éléments enfants suivants :
 
--   ScalarProperty (zéro, un ou plusieurs)
+-   ScalarProperty (zéro, un ou plusieurs éléments) ;
 -   **ComplexProperty** (zéro ou plus)
--   ComplextTypeMapping (zéro ou plus)
--   Condition (zéro, un ou plusieurs)
+-   ComplextTypeMapping (zéro, un ou plusieurs éléments) ;
+-   Condition (zéro, un ou plusieurs éléments).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -300,7 +302,7 @@ Par défaut, le mappage entre les colonnes retournées par une procédure stock�
 
 L’élément **ComplexTypeMapping,** peut avoir les éléments enfants suivants :
 
--   ScalarProperty (zéro, un ou plusieurs)
+-   ScalarProperty (zéro, un ou plusieurs éléments) ;
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -430,9 +432,9 @@ Lorsqu’il est appliqué à l’élément EntityTypeMapping, l’élément **De
 
 L’élément **DeleteFunction** peut avoir les éléments enfants suivants lorsqu’il est appliqué à un élément **EntityTypeMapping** :
 
--   AssociationEnd (zéro, un ou plusieurs)
+-   AssociationEnd (zéro, un ou plusieurs éléments) ;
 -   ComplexProperty (zéro, un ou plusieurs éléments) ;
--   ScalarProperty (zéro ou plus)
+-   ScalarProperty (zéro, un ou plusieurs éléments).
 
 #### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -550,7 +552,7 @@ Lorsqu’un élément **EndProperty** est utilisé pour définir le mappage de l
 
 L’élément **EndProperty** peut avoir les éléments enfants suivants :
 
--   ScalarProperty (zéro, un ou plusieurs)
+-   ScalarProperty (zéro, un ou plusieurs éléments) ;
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -558,11 +560,11 @@ Le tableau suivant décrit les attributs qui s’appliquent à l’élément **E
 
 | Nom de l'attribut | Est obligatoire | Valeur                                                 |
 |:---------------|:------------|:------------------------------------------------------|
-| Name           | Oui         | Nom de la terminaison d'association mappée. |
+| Nom           | Oui         | Nom de la terminaison d'association mappée. |
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’association **FK\_cours\_service** dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
+L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association de ** \_ \_ service de cours FK** dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
 
 ``` xml
  <AssociationSetMapping Name="FK_Course_Department"
@@ -619,8 +621,8 @@ L’élément **EntityContainerMapping** en Mapping Specification Language (MSL)
 L’élément **EntityContainerMapping** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   EntitySetMapping (zéro, un ou plusieurs éléments) ;
--   AssociationSetMapping (zéro, un ou plusieurs)
--   FunctionImportMapping (zéro ou plus)
+-   AssociationSetMapping (zéro, un ou plusieurs éléments) ;
+-   FunctionImportMapping (zéro, un ou plusieurs éléments).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -670,8 +672,8 @@ L’élément **EntitySetMapping** en Mapping Specification Language (MSL) mappe
 L’élément **EntitySetMapping** peut avoir les éléments enfants suivants :
 
 -   EntityTypeMapping (zéro, un ou plusieurs éléments) ;
--   QueryView (zéro ou un)
--   MappingFragment (zéro, un ou plusieurs)
+-   QueryView (zéro ou un élément)
+-   MappingFragment (zéro, un ou plusieurs éléments) ;
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -727,8 +729,8 @@ L'élément enfant ModificationFunctionMapping peut être utilisé pour mapper l
 
 L’élément **EntityTypeMapping** peut avoir les éléments enfants suivants :
 
--   MappingFragment (zéro, un ou plusieurs)
--   ModificationFunctionMapping (zéro ou un)
+-   MappingFragment (zéro, un ou plusieurs éléments) ;
+-   ModificationFunctionMapping (zéro ou un élément)
 -   ScalarProperty
 -   Condition
 
@@ -783,7 +785,7 @@ L’exemple suivant montre un élément EntitySetMapping avec deux éléments **
 
 ### <a name="example"></a>Exemple
 
-L'exemple suivant illustre le mappage d'une hiérarchie de types dont le type racine est abstrait. Notez l’utilisation de la syntaxe `IsOfType` pour les attributs **TypeName** .
+L'exemple suivant illustre le mappage d'une hiérarchie de types dont le type racine est abstrait. Notez l’utilisation de la `IsOfType` syntaxe pour les attributs **TypeName** .
 
 ``` xml
  <EntitySetMapping Name="People">
@@ -878,10 +880,10 @@ Lorsqu’il est appliqué à l’élément EntityTypeMapping, l’élément **In
 
 L’élément **InsertFunction** peut avoir les éléments enfants suivants lorsqu’il est appliqué à un élément **EntityTypeMapping** :
 
--   AssociationEnd (zéro, un ou plusieurs)
+-   AssociationEnd (zéro, un ou plusieurs éléments) ;
 -   ComplexProperty (zéro, un ou plusieurs éléments) ;
--   ResultBinding (zéro ou un)
--   ScalarProperty (zéro ou plus)
+-   ResultBinding (zéro ou un élément) ;
+-   ScalarProperty (zéro, un ou plusieurs éléments).
 
 #### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -982,12 +984,12 @@ L’exemple suivant est basé sur le modèle School et montre l’élément **In
 
 L’élément **Mapping** en Mapping Specification Language (MSL) contient des informations pour le mappage d’objets définis dans un modèle conceptuel à une base de données (comme décrit dans un modèle de stockage). Pour plus d’informations, consultez Spécification CSDL et spécification SSDL.
 
-L’élément **Mapping** est l’élément racine d’une spécification de mappage. L’espace de noms XML pour les spécifications de mappage est https://schemas.microsoft.com/ado/2009/11/mapping/cs.
+L’élément **Mapping** est l’élément racine d’une spécification de mappage. L’espace de noms XML pour les spécifications de mappage est https://schemas.microsoft.com/ado/2009/11/mapping/cs .
 
 L'élément de mappage peut avoir les éléments enfants suivants (dans l'ordre répertorié) :
 
--   Alias (zéro, un ou plusieurs)
--   EntityContainerMapping (exactement un)
+-   Alias (zéro, un ou plusieurs éléments) ;
+-   EntityContainerMapping (exactement un élément).
 
 Les noms de types de modèle conceptuel et de stockage référencés en MSL doivent être qualifiés par le nom de leur espace de noms respectif. Pour plus d’informations sur le nom de l’espace de noms du modèle conceptuel, consultez Schema, élément (CSDL). Pour plus d’informations sur le nom de l’espace de noms du modèle de stockage, consultez Schema, élément (SSDL). Les alias d'espace de noms utilisés en MSL peuvent être définis avec l'élément Alias.
 
@@ -1040,9 +1042,9 @@ L’élément **MappingFragment** en Mapping Specification Language (MSL) défin
 
 L’élément **MappingFragment** peut avoir les éléments enfants suivants :
 
--   ComplexType (zéro, un ou plusieurs)
--   ScalarProperty (zéro, un ou plusieurs)
--   Condition (zéro, un ou plusieurs)
+-   ComplexType (zéro, un ou plusieurs éléments) ;
+-   ScalarProperty (zéro, un ou plusieurs éléments) ;
+-   Condition (zéro, un ou plusieurs éléments).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -1100,9 +1102,9 @@ L’élément **ModificationFunctionMapping** peut être un enfant de l’élém
 
 L’élément **ModificationFunctionMapping** peut avoir les éléments enfants suivants :
 
--   DeleteFunction (zéro ou un)
--   InsertFunction (zéro ou un)
--   UpdateFunction (zéro ou un)
+-   DeleteFunction (zéro ou un élément) ;
+-   InsertFunction (zéro ou un élément) ;
+-   UpdateFunction (zéro ou un élément).
 
 Aucun attribut n’est applicable à l’élément **ModificationFunctionMapping** .
 
@@ -1253,7 +1255,7 @@ L’exemple suivant montre l’élément **QueryView** en tant qu’enfant de l�
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre l’élément **QueryView** en tant qu’enfant d’un élément **AssociationSetMapping** et définit un mappage en lecture seule pour l’Association `FK_Course_Department` dans le modèle School.
+L’exemple suivant montre l’élément **QueryView** en tant qu’enfant d’un élément **AssociationSetMapping** et définit un mappage en lecture seule pour l' `FK_Course_Department` Association dans le modèle School.
 
 ``` xml
  <EntityContainerMapping StorageEntityContainer="SchoolModelStoreContainer"
@@ -1586,10 +1588,10 @@ L’élément **UpdateFunction** peut être un enfant de l’élément Modificat
 
 L’élément **UpdateFunction** peut avoir les éléments enfants suivants :
 
--   AssociationEnd (zéro, un ou plusieurs)
+-   AssociationEnd (zéro, un ou plusieurs éléments) ;
 -   ComplexProperty (zéro, un ou plusieurs éléments) ;
--   ResultBinding (zéro ou un)
--   ScalarProperty (zéro ou plus)
+-   ResultBinding (zéro ou un élément) ;
+-   ScalarProperty (zéro, un ou plusieurs éléments).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 

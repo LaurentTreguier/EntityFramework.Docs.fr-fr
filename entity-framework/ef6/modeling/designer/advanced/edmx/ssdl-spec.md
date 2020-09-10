@@ -1,19 +1,21 @@
 ---
 title: Spécification SSDL-EF6
+description: Spécification SSDL dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: a4af4b1a-40f4-48cc-b2e0-fa8f5d9d5419
-ms.openlocfilehash: b20d1f99f1da9c53a8a164fccc461e07d19c879d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
+ms.openlocfilehash: ab50579649c2e1b19d113cd127e52be995516e27
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418724"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620586"
 ---
 # <a name="ssdl-specification"></a>Spécification SSDL
 SSDL (Store Schema Definition Language) est un langage basé sur XML qui décrit le modèle de stockage d'une application Entity Framework.
 
-Dans une application Entity Framework, les métadonnées du modèle de stockage sont chargées à partir d’un fichier. SSDL (écrit en SSDL) dans une instance de System. Data. Metadata. Edm. StoreItemCollection et sont accessibles à l’aide des méthodes de la Classe System. Data. Metadata. Edm. MetadataWorkspace. Entity Framework utilise les métadonnées du modèle de stockage pour traduire les requêtes sur le modèle conceptuel en commandes spécifiques au stockage.
+Dans une application Entity Framework, les métadonnées du modèle de stockage sont chargées à partir d’un fichier. SSDL (écrit en SSDL) dans une instance de System. Data. Metadata. Edm. StoreItemCollection et sont accessibles à l’aide des méthodes de la classe System. Data. Metadata. Edm. MetadataWorkspace. Entity Framework utilise les métadonnées du modèle de stockage pour traduire les requêtes sur le modèle conceptuel en commandes spécifiques au stockage.
 
 Le Entity Framework Designer (concepteur EF) stocke les informations de modèle de stockage dans un fichier. edmx au moment de la conception. Au moment de la génération, le Entity Designer utilise les informations d’un fichier. edmx pour créer le fichier. ssdl requis par Entity Framework au moment de l’exécution.
 
@@ -31,9 +33,9 @@ Un élément **Association** en Store Schema Definition Language (SSDL) spécifi
 
 L’élément **Association** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un)
--   End (exactement deux)
--   ReferentialConstraint (zéro ou un)
+-   Documentation (zéro ou un élément) ;
+-   End (exactement deux éléments) ;
+-   ReferentialConstraint (zéro ou un élément) ;
 -   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
@@ -49,7 +51,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_CustomerOrders** :
+L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** de la clé étrangère :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -78,7 +80,7 @@ Les ensembles d'associations SSDL sont mappés aux ensembles d'associations CSDL
 
 L’élément **AssociationSet** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un)
+-   Documentation (zéro ou un élément) ;
 -   End (zéro ou deux éléments) ;
 -   éléments d'annotation (zéro, un ou plusieurs).
 
@@ -96,7 +98,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **AssociationSet** qui représente la contrainte de clé étrangère `FK_CustomerOrders` dans la base de données sous-jacente :
+L’exemple suivant montre un élément **AssociationSet** qui représente la `FK_CustomerOrders` contrainte de clé étrangère dans la base de données sous-jacente :
 
 ``` xml
  <AssociationSet Name="FK_CustomerOrders"
@@ -180,7 +182,7 @@ La syntaxe SSDL suivante illustre la déclaration d’un **EntitySet** suivi de 
  </Schema>
 ```
 
-Vous pouvez utiliser des procédures stockées dans le Entity Framework pour activer des scénarios de lecture-écriture sur des vues. Vous pouvez utiliser une vue de source de données ou une vue de Entity SQL comme table de base pour récupérer des données et pour le traitement des modifications par des procédures stockées.
+Vous pouvez utiliser des procédures stockées dans le Entity Framework pour activer des scénarios de lecture-écriture sur des vues.Vous pouvez utiliser une vue de source de données ou une vue de Entity SQL comme table de base pour récupérer des données et pour le traitement des modifications par des procédures stockées.
 
 Vous pouvez utiliser l’élément **DefiningQuery** pour cibler Microsoft SQL Server Compact 3,5. Bien que SQL Server Compact 3,5 ne prenne pas en charge les procédures stockées, vous pouvez implémenter des fonctionnalités similaires avec l’élément **DefiningQuery** . Cet élément peut s'avérer également utile pour créer des procédures stockées afin de surmonter une incompatibilité entre les types de données utilisés dans le langage de programmation et ceux de la source de données. Vous pouvez écrire un **DefiningQuery** qui accepte un certain ensemble de paramètres, puis appelle une procédure stockée avec un jeu de paramètres différent, par exemple, une procédure stockée qui supprime des données.
 
@@ -206,7 +208,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_** . L’élément **dépendant** spécifie la colonne **CustomerID** de la table **Order** comme terminaison dépendante de la contrainte.
+L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** . L’élément **dépendant** spécifie la colonne **CustomerID** de la table **Order** comme terminaison dépendante de la contrainte.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -268,9 +270,9 @@ Un élément **end** (en tant qu’enfant de l’élément **Association** ) sp�
 
 Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un élément)
--   OnDelete (zéro ou un élément)
--   Éléments d’annotation (zéro, un ou plusieurs éléments)
+-   Documentation (zéro ou un élément) ;
+-   OnDelete (zéro ou un élément) ;
+-   éléments d'annotation (zéro, un ou plusieurs éléments).
 
 #### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -280,14 +282,14 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Type**         | Oui         | Nom complet du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                                                                                                                                                                                                                                                                          |
 | **Rôle**         | Non          | Valeur de l’attribut **role** dans l’élément principal ou dépendant de l’élément ReferentialConstraint correspondant (s’il est utilisé).                                                                                                                                                                                                                                             |
-| **Multiplicité** | Oui         | **1**, **0.. 1**ou **\*** selon le nombre de lignes qui peuvent être à la fin de la contrainte de clé étrangère. <br/> **1** indique qu’une seule ligne existe à la fin de la contrainte de clé étrangère. <br/> **0.. 1** indique qu’il existe zéro ou une ligne à la fin de la contrainte de clé étrangère. <br/> **\*** indique qu’il existe zéro, une ou plusieurs lignes à la fin de la contrainte de clé étrangère. |
+| **Multiplicité** | Oui         | **1**, **0.. 1**, ou **\*** selon le nombre de lignes qui peuvent être à la fin de la contrainte de clé étrangère. <br/> **1** indique qu’une seule ligne existe à la fin de la contrainte de clé étrangère. <br/> **0.. 1** indique qu’il existe zéro ou une ligne à la fin de la contrainte de clé étrangère. <br/> **\*** indique que zéro, une ou plusieurs lignes existent à la fin de la contrainte de clé étrangère. |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément de **fin** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
 #### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK\_** . Les valeurs de **multiplicité** spécifiées sur chaque élément de **fin** indiquent que de nombreuses lignes de la table **Orders** peuvent être associées à une ligne de la table **Customers** , mais qu’une seule ligne de la table **Customers** peut être associée à une ligne dans la table **Orders** . En outre, l’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
+L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK \_ ** . Les valeurs de **multiplicité** spécifiées sur chaque élément de **fin** indiquent que de nombreuses lignes de la table **Orders** peuvent être associées à une ligne de la table **Customers** , mais qu’une seule ligne de la table **Customers** peut être associée à une ligne dans la table **Orders** . En outre, l’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -314,7 +316,7 @@ L’élément **end** (en tant qu’enfant de l’élément **AssociationSet** )
 
 Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un)
+-   Documentation (zéro ou un élément) ;
 -   éléments d'annotation (zéro, un ou plusieurs).
 
 #### <a name="applicable-attributes"></a>Attributs applicables
@@ -323,7 +325,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 | Nom de l'attribut | Est obligatoire | Valeur                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
-| **EntitySet**  | Oui         | Nom du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                      |
+| **EntitySet ;**  | Oui         | Nom du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                      |
 | **Rôle**       | Non          | Valeur de l’un des attributs de **rôle** spécifiés sur un élément de **fin** de l’élément Association correspondant. |
 
 > [!NOTE]
@@ -359,7 +361,7 @@ Un élément **EntityContainer** peut avoir zéro ou plusieurs des éléments en
 
 -   EntitySet ;
 -   AssociationSet ;
--   Éléments Annotation
+-   éléments d'annotation.
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -398,9 +400,9 @@ Un élément **EntitySet** en Store Schema Definition Language (SSDL) représent
 
 L’élément **EntitySet** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un élément)
--   DefiningQuery (zéro ou un élément)
--   Éléments Annotation
+-   Documentation (zéro ou un élément) ;
+-   DefiningQuery (zéro ou un élément) ;
+-   éléments d'annotation.
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -445,9 +447,9 @@ Un élément **EntityType** en Store Schema Definition Language (SSDL) représen
 
 L’élément **EntityType** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un élément)
+-   Documentation (zéro ou un élément) ;
 -   Key (zéro ou un élément) ;
--   Éléments Annotation
+-   éléments d'annotation.
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -484,7 +486,7 @@ L’élément **Function** de Store Schema Definition Language (SSDL) spécifie 
 
 L’élément **Function** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un)
+-   Documentation (zéro ou un élément) ;
 -   Paramètre (zéro, un ou plusieurs)
 -   CommandText (zéro ou un)
 -   ReturnType (zéro, un ou plusieurs)
@@ -492,7 +494,7 @@ L’élément **Function** peut avoir les éléments enfants suivants (dans l’
 
 Un type de retour pour une fonction doit être spécifié avec l’élément **ReturnType** ou l’attribut **ReturnType** (voir ci-dessous), mais pas les deux.
 
-Les procédures stockées spécifiées dans le modèle de stockage peuvent être importées dans le modèle conceptuel d'une application. Pour plus d’informations, consultez [interrogation avec des procédures stockées](~/ef6/modeling/designer/stored-procedures/query.md). L’élément **Function** peut également être utilisé pour définir des fonctions personnalisées dans le modèle de stockage.  
+Les procédures stockées spécifiées dans le modèle de stockage peuvent être importées dans le modèle conceptuel d'une application. Pour plus d’informations, consultez [interrogation avec des procédures stockées](xref:ef6/modeling/designer/stored-procedures/query). L’élément **Function** peut également être utilisé pour définir des fonctions personnalisées dans le modèle de stockage.  
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -546,7 +548,7 @@ L’élément **clé** en Store Schema Definition Language (SSDL) représente la
 L’élément **Key** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
 -   PropertyRef (un ou plusieurs) ;
--   Éléments Annotation
+-   éléments d'annotation.
 
 Aucun attribut n’est applicable à l’élément **Key** .
 
@@ -574,7 +576,7 @@ L’élément **OnDelete** en Store Schema Definition Language (SSDL) reflète l
 
 Un élément **OnDelete** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un)
+-   Documentation (zéro ou un élément) ;
 -   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
@@ -590,7 +592,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK\_** . L’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
+L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK \_ ** . L’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -617,7 +619,7 @@ L’élément **Parameter** en Store Schema Definition Language (SSDL) est un en
 
 L’élément **Parameter** peut avoir les éléments enfants suivants (dans l’ordre indiqué) :
 
--   Documentation (zéro ou un)
+-   Documentation (zéro ou un élément) ;
 -   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
@@ -626,7 +628,7 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 
 | Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                                                                                           |
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Nom**       | Oui         | Le nom du paramètre.                                                                                                                                                                                                      |
+| **Nom**       | Oui         | Nom du paramètre.                                                                                                                                                                                                      |
 | **Type**       | Oui         | Le type du paramètre.                                                                                                                                                                                                             |
 | **Mode**       | Non          | **In**, **out**ou **INOUT** selon que le paramètre est un paramètre d’entrée, de sortie ou d’entrée/sortie.                                                                                                                |
 | **MaxLength**  | Non          | Longueur maximale du paramètre.                                                                                                                                                                                            |
@@ -676,7 +678,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_** . L’élément **principal** spécifie la colonne **CustomerID** de la table **Customer** comme terminaison principale de la contrainte.
+L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** . L’élément **principal** spécifie la colonne **CustomerID** de la table **Customer** comme terminaison principale de la contrainte.
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -752,8 +754,8 @@ L’élément **PropertyRef** en Store Schema Definition Language (SSDL) fait r�
 
 L’élément **PropertyRef** ne peut avoir que les éléments enfants suivants :
 
--   Documentation (zéro ou un)
--   Éléments Annotation
+-   Documentation (zéro ou un élément) ;
+-   éléments d'annotation.
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 
@@ -792,9 +794,9 @@ L’élément **ReferentialConstraint** est un élément enfant facultatif de l�
 
 L’élément **ReferentialConstraint** peut avoir les éléments enfants suivants :
 
--   Documentation (zéro ou un)
+-   Documentation (zéro ou un élément) ;
 -   Principal (exactement un élément) ;
--   Dépendant (exactement un)
+-   Dependent (exactement un élément) ;
 -   éléments d'annotation (zéro, un ou plusieurs).
 
 ### <a name="applicable-attributes"></a>Attributs applicables
@@ -803,7 +805,7 @@ Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés)
 
 ### <a name="example"></a>Exemple
 
-L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK\_CustomerOrders** :
+L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** de la clé étrangère :
 
 ``` xml
  <Association Name="FK_CustomerOrders">
@@ -902,7 +904,7 @@ L’élément **Schema** peut contenir zéro, un ou plusieurs des éléments enf
 
 L’élément **Schema** utilise l’attribut **namespace** pour définir l’espace de noms du type d’entité et des objets Association dans un modèle de stockage. Dans un espace de noms, deux objets ne peuvent pas avoir le même nom.
 
-Un espace de noms de modèle de stockage est différent de l’espace de noms XML de l’élément de **schéma** . Un espace de noms de modèle de stockage (tel que défini par l’attribut d' **espace de noms** ) est un conteneur logique pour les types d’entités et les types d’association. L’espace de noms XML (indiqué par l’attribut **xmlns** ) d’un élément de **schéma** est l’espace de noms par défaut pour les éléments enfants et les attributs de l’élément de **schéma** . Les espaces de noms XML de la forme https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl (où aaaa et MM représentent respectivement une année et un mois) sont réservés au langage SSDL. Des éléments et attributs personnalisés ne peuvent pas être dans des espaces de noms de cette forme.
+Un espace de noms de modèle de stockage est différent de l’espace de noms XML de l’élément de **schéma** . Un espace de noms de modèle de stockage (tel que défini par l’attribut d' **espace de noms** ) est un conteneur logique pour les types d’entités et les types d’association. L’espace de noms XML (indiqué par l’attribut **xmlns** ) d’un élément de **schéma** est l’espace de noms par défaut pour les éléments enfants et les attributs de l’élément de **schéma** . Les espaces de noms XML de la forme https://schemas.microsoft.com/ado/YYYY/MM/edm/ssdl (où aaaa et mm représentent respectivement une année et un mois) sont réservés au langage SSDL. Des éléments et attributs personnalisés ne peuvent pas être dans des espaces de noms de cette forme.
 
 ### <a name="applicable-attributes"></a>Attributs applicables
 

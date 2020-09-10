@@ -1,18 +1,20 @@
 ---
 title: Procédures stockées CUD du concepteur-EF6
+description: Procédures stockées CUD du concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
-ms.openlocfilehash: bdb0df969c33d5ad3f103bfa9af6002c9c2bb9b3
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/stored-procedures/cud
+ms.openlocfilehash: f722cb3ac0b6ce21e685dbb7bffe571fa7b783d5
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418321"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620371"
 ---
 # <a name="designer-cud-stored-procedures"></a>Procédures stockées CUD du concepteur
 
-Cette procédure pas à pas explique comment mapper les opérations Create\\Insert, Update et Delete (CUD) d’un type d’entité aux procédures stockées à l’aide de l’Entity Framework Designer (concepteur EF).  Par défaut, le Entity Framework génère automatiquement les instructions SQL pour les opérations CUD, mais vous pouvez également mapper des procédures stockées à ces opérations.  
+Cette procédure pas à pas explique comment mapper les \\ opérations de création d’insertion, de mise à jour et de suppression (CUD) d’un type d’entité aux procédures stockées à l’aide de l’Entity Framework Designer (concepteur EF). Par défaut, le Entity Framework génère automatiquement les instructions SQL pour les opérations CUD, mais vous pouvez également mapper des procédures stockées à ces opérations.  
 
 Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Par exemple :
 
@@ -24,35 +26,35 @@ var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");
 
 Lors du mappage des opérations CUD à des procédures stockées, les considérations suivantes s’appliquent :
 
-- Si vous mappez l’une des opérations CUD à une procédure stockée, mappez-les toutes. Si vous ne mappez pas les trois, les opérations non mappées échouent si elles sont exécutées et une  **UpdateException** est levée.
+- Si vous mappez l’une des opérations CUD à une procédure stockée, mappez-les toutes. Si vous ne mappez pas les trois, les opérations non mappées échouent si elles sont exécutées et une **UpdateException**   est levée.
 - Vous devez mapper chaque paramètre de la procédure stockée à des propriétés d’entité.
-- Si le serveur génère la valeur de clé primaire pour la ligne insérée, vous devez mapper cette valeur à la propriété de clé de l’entité. Dans l’exemple qui suit, la procédure stockée **InsertPerson** retourne la clé primaire nouvellement créée dans le cadre du jeu de résultats de la procédure stockée. La clé primaire est mappée à la clé d’entité (**PersonID**) à l’aide de la **&lt;ajouter des liaisons de résultats&gt;**  fonctionnalité du concepteur EF.
+- Si le serveur génère la valeur de clé primaire pour la ligne insérée, vous devez mapper cette valeur à la propriété de clé de l’entité. Dans l’exemple qui suit, la **InsertPerson**   procédure stockée InsertPerson retourne la clé primaire nouvellement créée dans le cadre du jeu de résultats de la procédure stockée. La clé primaire est mappée à la clé d’entité (**PersonID**) à l’aide de la fonctionnalité ** &lt; Ajouter des liaisons de &gt; résultats**   du concepteur EF.
 - Les appels de procédure stockée sont mappés 1:1 avec les entités dans le modèle conceptuel. Par exemple, si vous implémentez une hiérarchie d’héritage dans votre modèle conceptuel, puis mappez les procédures stockées CUD pour les entités **parent** (base) et **enfant** (dérivées), l’enregistrement des modifications **enfants** appellera uniquement les procédures stockées de l' **enfant**, mais pas les appels des procédures stockées du **parent**.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
 - Une version récente de Visual Studio.
-- [Exemple de base de données School](~/ef6/resources/school-database.md).
+- [Exemple de base de données School](xref:ef6/resources/school-database).
 
 ## <a name="set-up-the-project"></a>Configurer le projet
 
 - Ouvrez Visual Studio 2012.
-- Sélectionnez **fichier-&gt; nouveau-&gt; projet**
-- Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **console** .
-- Entrez **CUDSProcsSample** comme nom.
+- Sélectionnez **fichier- &gt; nouveau- &gt; projet**
+- Dans le volet gauche, cliquez sur **Visual \# C**, puis sélectionnez le modèle **console** .
+- Entrez **CUDSProcsSample**   comme nom.
 - Sélectionnez **OK**.
 
 ## <a name="create-a-model"></a>Création d'un modèle
 
-- Dans Explorateur de solutions, cliquez avec le bouton droit sur le nom du projet, puis sélectionnez **Ajouter-&gt; nouvel élément**.
+- Dans Explorateur de solutions, cliquez avec le bouton droit sur le nom du projet, puis sélectionnez **ajouter- &gt; nouvel élément**.
 - Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet modèles.
 - Entrez **CUDSProcs. edmx** comme nom de fichier, puis cliquez sur **Ajouter**.
 - Dans la boîte de dialogue choisir le contenu du Model, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant**.
-- Cliquez sur **nouvelle connexion**. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, (base de données locale **)\\mssqllocaldb**), sélectionnez la méthode d’authentification, tapez **School** pour le nom de la base de données, puis cliquez sur **OK**.
+- Cliquez sur **nouvelle connexion**. Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, **( \\ mssqllocaldb)**, sélectionnez la méthode d’authentification, tapez **School**   comme nom de la base de données, puis cliquez sur **OK**.
     La boîte de dialogue choisir votre connexion de données est mise à jour avec votre paramètre de connexion à la base de données.
-- Dans la boîte de dialogue choisir vos objets de base de données, sous le nœud **Tables** , sélectionnez la table **Person** .
+- Dans la boîte de dialogue choisir vos objets de base de données, sous le nœud **tables**   , sélectionnez la table **Person** .
 - En outre, sélectionnez les procédures stockées suivantes sous le nœud **procédures stockées et fonctions** : **DeletePerson**, **InsertPerson**et **UpdatePerson**.
 - À compter de Visual Studio 2012, le concepteur EF prend en charge l’importation en bloc des procédures stockées. L' **importation des procédures stockées et des fonctions sélectionnées dans le modèle d’entité** est activée par défaut. Étant donné que dans cet exemple nous avons des procédures stockées qui insèrent, mettent à jour et suppriment des types d’entité, nous ne voulons pas les importer et décochent cette case.
 
@@ -63,30 +65,30 @@ Pour exécuter cette procédure pas à pas, vous avez besoin des éléments su
 
 ## <a name="map-the-person-entity-to-stored-procedures"></a>Mapper l’entité Person aux procédures stockées
 
-- Cliquez avec le bouton droit sur la **personne** type d’entité, puis sélectionnez **mappage de procédure stockée**.
-- Les mappages de procédure stockée s’affichent dans la fenêtre **Détails de mappage** .
-- Cliquez **&lt;sélectionnez Insérer une fonction&gt;** .
+- Cliquez avec le bouton droit sur le type d’entité **Person**   et sélectionnez **mappage de procédure stockée**.
+- Les mappages de procédure stockée s’affichent dans la fenêtre **Détails de mappage**   .
+- Cliquez sur ** &lt; Sélectionner une &gt; fonction d’insertion**.
     Le champ devient une liste déroulante des procédures stockées dans le modèle de stockage qui peut être mappé aux types d'entité dans le modèle conceptuel.
-    Sélectionnez **InsertPerson** dans la liste déroulante.
+    Sélectionnez **InsertPerson**   dans la liste déroulante.
 - Les mappages par défaut entre les paramètres des procédures stockées et les propriétés d'entité apparaissent. Notez que les flèches indiquent le sens du mappage : les valeurs des propriétés sont fournies aux paramètres des procédures stockées.
-- Cliquez sur **&lt;ajouter&gt;de liaison de résultats **.
-- Tapez **NewPersonID**, le nom du paramètre retourné par la procédure stockée  **InsertPerson** . Veillez à ne pas taper les espaces de début ou de fin.
+- Cliquez sur ** &lt; Ajouter une &gt; liaison de résultat**.
+- Tapez **NewPersonID**, le nom du paramètre retourné par la **InsertPerson**   procédure stockée InsertPerson. Veillez à ne pas taper les espaces de début ou de fin.
 - Appuyez sur **entrée**.
-- Par défaut, **NewPersonID** est mappé à la clé d’entité **PersonID**. Notez qu'une flèche indique le sens du mappage : la valeur de la colonne de résultats est fournie à la propriété.
+- Par défaut, **NewPersonID**   est mappé à la clé d’entité **PersonID**. Notez qu'une flèche indique le sens du mappage : la valeur de la colonne de résultats est fournie à la propriété.
 
     ![Détails de mappage](~/ef6/media/mappingdetails.png)
 
-- Cliquez sur **&lt;sélectionnez mettre à jour la fonction&gt;**  , puis sélectionnez **UpdatePerson** dans la liste déroulante résultante.
+- Cliquez sur ** &lt; Sélectionner une &gt; fonction de mise à jour**   et sélectionnez **UpdatePerson**   dans la liste déroulante résultante.
 - Les mappages par défaut entre les paramètres des procédures stockées et les propriétés d'entité apparaissent.
-- Cliquez sur **&lt;sélectionnez Supprimer la fonction&gt;**  , puis sélectionnez **DeletePerson** dans la liste déroulante résultante.
+- Cliquez sur ** &lt; Sélectionner la &gt; fonction de suppression**   , puis sélectionnez **DeletePerson**   dans la liste déroulante résultante.
 - Les mappages par défaut entre les paramètres des procédures stockées et les propriétés d'entité apparaissent.
 
-Les opérations d’insertion, de mise à jour et de suppression de la **personne** type d’entité sont maintenant mappées à des procédures stockées.
+Les opérations d’insertion, de mise à jour et de suppression du type d’entité **Person**   sont maintenant mappées à des procédures stockées.
 
 Si vous souhaitez activer le contrôle d’accès concurrentiel lors de la mise à jour ou de la suppression d’une entité avec des procédures stockées, utilisez l’une des options suivantes :
 
-- Utilisez un paramètre de **sortie** pour retourner le nombre de lignes affectées à partir de la procédure stockée et cochez la case **lignes affectées** la case à cocher en regard du nom du paramètre. Si la valeur retournée est zéro lorsque l’opération est appelée, une   [**OptimisticConcurrencyException**](https://msdn.microsoft.com/library/system.data.optimisticconcurrencyexception.aspx) est levée.
-- Cochez la case **utiliser la valeur d’origine** à côté d’une propriété que vous souhaitez utiliser pour la vérification de l’accès concurrentiel. Lors d’une tentative de mise à jour, la valeur de la propriété qui a été lue à l’origine dans la base de données sera utilisée lors de l’écriture de données dans la base de données. Si la valeur ne correspond pas à la valeur de la base de données, une **OptimisticConcurrencyException** est levée.
+- Utilisez un paramètre de **sortie** pour retourner le nombre de lignes affectées à partir de la procédure stockée et cochez la case **lignes affectées du paramètre**en   regard du nom du paramètre. Si la valeur retournée est zéro lorsque l’opération est appelée, une  [**OptimisticConcurrencyException**](https://msdn.microsoft.com/library/system.data.optimisticconcurrencyexception.aspx)est   levée.
+- Cochez la case **utiliser la valeur d’origine** à côté d’une propriété que vous souhaitez utiliser pour la vérification de l’accès concurrentiel. Lors d’une tentative de mise à jour, la valeur de la propriété qui a été lue à l’origine dans la base de données sera utilisée lors de l’écriture de données dans la base de données. Si la valeur ne correspond pas à la valeur de la base de données, une **OptimisticConcurrencyException**   est levée.
 
 ## <a name="use-the-model"></a>Utiliser le modèle
 
@@ -156,4 +158,4 @@ A person with PersonID 51 was deleted.
 
 Si vous utilisez la version finale de Visual Studio, vous pouvez utiliser IntelliTrace avec le débogueur pour voir les instructions SQL qui sont exécutées.
 
-![IntelliTrace](~/ef6/media/intellitrace.png)
+![Déboguer avec IntelliTrace](~/ef6/media/intellitrace.png)

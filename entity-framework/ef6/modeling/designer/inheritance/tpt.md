@@ -1,51 +1,53 @@
 ---
 title: Héritage TPT-EF6
+description: Héritage de TPT dans le concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: efc78c31-b4ea-4ea3-a0cd-c69eb507020e
-ms.openlocfilehash: 84330fba4807620aa242a70cd8ac76a60284416d
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/inheritance/tpt
+ms.openlocfilehash: cb686a9f51b14651c210102845de495906318747
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418209"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620480"
 ---
 # <a name="designer-tpt-inheritance"></a>Héritage de TPT du concepteur
 Cette procédure pas à pas montre comment implémenter l’héritage TPT (table par type) dans votre modèle à l’aide de l’Entity Framework Designer (concepteur EF). L'héritage TPT (table par type) utilise une table distincte de la base de données pour maintenir des données des propriétés non héritées et des propriétés de clé pour chaque type de la hiérarchie d'héritage.
 
-Dans cette procédure pas à pas, nous allons mapper le **cours** (type de base), **OnlineCourse** (dérivé de course) et **OnsiteCourse** (dérive de **course**) des entités à des tables portant le même nom. Nous allons créer un modèle à partir de la base de données, puis modifier le modèle pour implémenter l’héritage TPT.
+Dans cette procédure pas à pas, nous allons mapper le **cours** (type de base), **OnlineCourse** (dérivé de course) et **OnsiteCourse**   (dérives de **course**) aux tables portant le même nom. Nous allons créer un modèle à partir de la base de données, puis modifier le modèle pour implémenter l’héritage TPT.
 
 Vous pouvez également commencer par le Model First, puis générer la base de données à partir du modèle. Le concepteur EF utilise la stratégie TPT par défaut. par conséquent, tout héritage dans le modèle est mappé à des tables distinctes.
 
 ## <a name="other-inheritance-options"></a>Autres options d’héritage
 
-TPH (table par hiérarchie) est un autre type d’héritage dans lequel une table de base de données est utilisée pour conserver les données de tous les types d’entité dans une hiérarchie d’héritage.  Pour plus d’informations sur la façon de mapper l’héritage TPH (table par hiérarchie) avec le Entity Designer, consultez [EF designer TPH Inheritance](~/ef6/modeling/designer/inheritance/tph.md). 
+TPH (table par hiérarchie) est un autre type d’héritage dans lequel une table de base de données est utilisée pour conserver les données de tous les types d’entité dans une hiérarchie d’héritage.Pour plus d’informations sur la façon de mapper l’héritage TPH (table par hiérarchie) avec le Entity Designer, consultez [EF designer TPH Inheritance](xref:ef6/modeling/designer/inheritance/tph). 
 
 Notez que les modèles d’héritage de type table par béton (TPC) et d’héritage mixte sont pris en charge par le runtime Entity Framework, mais ne sont pas pris en charge par le concepteur EF. Si vous souhaitez utiliser l’héritage TPC ou mixte, deux options s’offrent à vous : Utilisez Code First ou modifiez manuellement le fichier EDMX. Si vous choisissez de travailler avec le fichier EDMX, la fenêtre Détails de mappage est placée en « mode sans échec » et vous ne pouvez pas utiliser le concepteur pour modifier les mappages.
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Pour exécuter cette procédure pas à pas, vous avez besoin des éléments suivants :
 
 - Une version récente de Visual Studio.
-- [Exemple de base de données School](~/ef6/resources/school-database.md).
+- [Exemple de base de données School](xref:ef6/resources/school-database).
 
 ## <a name="set-up-the-project"></a>Configurer le projet
 
 -   Ouvrez Visual Studio 2012.
--   Sélectionnez **fichier-&gt; nouveau-&gt; projet**
--   Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **console** .
--   Entrez **TPTDBFirstSample** comme nom.
+-   Sélectionnez **fichier- &gt; nouveau- &gt; projet**
+-   Dans le volet gauche, cliquez sur **Visual \# C**, puis sélectionnez le modèle **console** .
+-   Entrez **TPTDBFirstSample**   comme nom.
 -   Sélectionnez **OK**.
 
 ## <a name="create-a-model"></a>Création d'un modèle
 
--   Cliquez avec le bouton droit sur le projet dans Explorateur de solutions, puis sélectionnez **Ajouter-&gt; nouvel élément**.
+-   Cliquez avec le bouton droit sur le projet dans Explorateur de solutions, puis sélectionnez **ajouter- &gt; nouvel élément**.
 -   Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet modèles.
 -   Entrez **TPTModel. edmx** comme nom de fichier, puis cliquez sur **Ajouter**.
--   Dans la boîte de dialogue choisir le contenu du Model, sélectionnez ** générer à partir de la base de données**, puis cliquez sur **suivant**.
+-   Dans la boîte de dialogue choisir le contenu du Model, sélectionnez**   générer à partir de la base de données**, puis cliquez sur **suivant**.
 -   Cliquez sur **nouvelle connexion**.
-    Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, (base de données locale **)\\mssqllocaldb**), sélectionnez la méthode d’authentification, tapez **School** pour le nom de la base de données, puis cliquez sur **OK**.
+    Dans la boîte de dialogue Propriétés de connexion, entrez le nom du serveur (par exemple, **( \\ mssqllocaldb)**, sélectionnez la méthode d’authentification, tapez **School**   comme nom de la base de données, puis cliquez sur **OK**.
     La boîte de dialogue choisir votre connexion de données est mise à jour avec votre paramètre de connexion à la base de données.
 -   Dans la boîte de dialogue choisir vos objets de base de données, sous le nœud tables, sélectionnez les tables **Department**, **course, OnlineCourse et OnsiteCourse** .
 -   Cliquez sur **Terminer**.
@@ -69,7 +71,7 @@ Nous allons maintenant supprimer la propriété **CourseID** de **OnlineCourse**
 -   Cliquez avec le bouton droit sur la propriété **CourseID** du type d’entité **OnsiteCourse** , puis sélectionnez **supprimer du modèle** .
 -   L'héritage TPT (table par type) est maintenant implémenté.
 
-![TPT](~/ef6/media/tpt.png)
+![Table par type](~/ef6/media/tpt.png)
 
 ## <a name="use-the-model"></a>Utiliser le modèle
 

@@ -1,14 +1,16 @@
 ---
 title: Utilisation des États d’entité-EF6
+description: Utilisation des États d’entité dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: acb27f46-3f3a-4179-874a-d6bea5d7120c
-ms.openlocfilehash: ef0e8d5a5a9d66adab7046088c49d8cd472edc8a
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/saving/change-tracking/entity-state
+ms.openlocfilehash: 981bdbca982403338f3f65a41f601641d59d74d8
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78419698"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619986"
 ---
 # <a name="working-with-entity-states"></a>Utilisation des États d’entité
 Cette rubrique explique comment ajouter et attacher des entités à un contexte et comment Entity Framework les traite au cours de l’opération SaveChanges.

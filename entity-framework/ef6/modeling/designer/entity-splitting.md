@@ -1,23 +1,25 @@
 ---
 title: Fractionnement d’entité du concepteur-EF6
+description: Fractionnement d’entité du concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
-ms.openlocfilehash: ba1895ae491cec909ff88a8784eea82f1876f595
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/entity-splitting
+ms.openlocfilehash: d3be4e54d4bcd3ca253d8970c612acddf48dbaf4
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418461"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620526"
 ---
 # <a name="designer-entity-splitting"></a>Fractionnement d’entité du concepteur
-Cette procédure pas à pas montre comment mapper un type d’entité à deux tables en modifiant un modèle avec le Entity Framework Designer (concepteur EF). Vous pouvez mapper une entité à plusieurs tables quand les tables partagent une clé commune. Les concepts qui s’appliquent au mappage d’un type d’entité à deux tables sont facilement étendus pour le mappage d’un type d’entité à plus de deux tables.
+Cette procédure pas à pas montre comment mapper un type d’entité à deux tables en modifiant un modèle avec le Entity Framework Designer (concepteur EF). Vous pouvez mapper une entité à plusieurs tables quand les tables partagent une clé commune. Les concepts qui s'appliquent au mappage d'un type d'entité à deux tables sont facilement étendus au mappage d'un type d'entité à plusieurs tables.
 
 L’illustration suivante montre les fenêtres principales qui sont utilisées lors de l’utilisation du concepteur EF.
 
 ![EF Designer](~/ef6/media/efdesigner.png)
 
-## <a name="prerequisites"></a>Conditions préalables requises
+## <a name="prerequisites"></a>Prérequis
 
 Visual Studio 2012 ou Visual Studio 2010, édition intégrale, Premium, Professional ou Web Express.
 
@@ -31,19 +33,19 @@ Le serveur de base de données installé avec Visual Studio diffère selon la ve
 Tout d’abord, nous allons créer une base de données avec deux tables que nous allons combiner dans une entité unique.
 
 -   Ouvrez Visual Studio.
--   **Vue-&gt; Explorateur de serveurs**
--   Cliquez avec le bouton droit sur **connexions de données-&gt; ajouter une connexion...**
+-   **Vue- &gt; Explorateur de serveurs**
+-   Cliquez avec le bouton droit sur **connexions de données- &gt; Ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de Explorateur de serveurs avant de devoir sélectionner **Microsoft SQL Server** comme source de données
 -   Connectez-vous à la base de données locale ou SQL Express, en fonction de celle que vous avez installée
 -   Entrez **EntitySplitting** comme nom de la base de données
 -   Sélectionnez **OK** . vous serez invité à créer une nouvelle base de données, sélectionnez **Oui** .
 -   La nouvelle base de données s’affiche à présent dans Explorateur de serveurs
 -   Si vous utilisez Visual Studio 2012
-    -   Dans Explorateur de serveurs, cliquez avec le bouton droit sur la base de données, puis sélectionnez **nouvelle requête** .
+    -   Cliquez avec le bouton de droite sur la base de données dans l’Explorateur de serveurs et sélectionnez l’option **Nouvelle requête**.
     -   Copiez le code SQL suivant dans la nouvelle requête, cliquez avec le bouton droit sur la requête et sélectionnez **exécuter** .
 -   Si vous utilisez Visual Studio 2010
-    -   Sélectionner **les données-&gt; l’éditeur Transact SQL-&gt; nouvelle connexion à la requête...**
-    -   Entrez **.\\SQLExpress** comme nom de serveur, puis cliquez sur **OK** .
+    -   Sélectionner **des données- &gt; éditeur Transact SQL- &gt; nouvelle connexion à la requête...**
+    -   Entrez **. \\ SQLEXPRESS** comme nom de serveur, puis cliquez sur **OK**
     -   Sélectionnez la base de données **EntitySplitting** dans la liste déroulante en haut de l’éditeur de requête.
     -   Copiez le code SQL suivant dans la nouvelle requête, cliquez avec le bouton droit sur la requête et sélectionnez **Exécuter SQL** .
 
@@ -64,10 +66,10 @@ CONSTRAINT [FK_Person_PersonInfo] FOREIGN KEY ([PersonId]) REFERENCES [dbo].[Per
 );
 ```
 
-## <a name="create-the-project"></a>Création du projet
+## <a name="create-the-project"></a>Créer le projet
 
 -   Dans le menu **Fichier** , pointez sur **Nouveau**, puis cliquez sur **Projet**.
--   Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **application console** .
+-   Dans le volet gauche, cliquez sur **Visual \# C**, puis sélectionnez le modèle **application console** .
 -   Entrez **MapEntityToTablesSample** comme nom du projet, puis cliquez sur **OK**.
 -   Cliquez sur **non** si vous êtes invité à enregistrer la requête SQL créée dans la première section.
 
@@ -78,7 +80,7 @@ CONSTRAINT [FK_Person_PersonInfo] FOREIGN KEY ([PersonId]) REFERENCES [dbo].[Per
 -   Entrez **MapEntityToTablesModel. edmx** comme nom de fichier, puis cliquez sur **Ajouter**.
 -   Dans la boîte de dialogue choisir le contenu du Model, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant.**
 -   Sélectionnez la connexion **EntitySplitting** dans la liste déroulante, puis cliquez sur **suivant**.
--   Dans la boîte de dialogue choisir vos objets de base de données, activez la case à cocher en regard du nœud **Tables** .
+-   Dans la boîte de dialogue choisir vos objets de base de données, activez la case à cocher en regard du nœud **tables**   .
     Cette opération ajoute toutes les tables de la base de données **EntitySplitting** au modèle.
 -   Cliquez sur **Terminer**.
 
@@ -88,20 +90,20 @@ Le Entity Designer, qui fournit une aire de conception pour la modification de v
 
 Dans cette étape, nous allons mettre à jour le type d’entité **Person** pour combiner les données des tables **Person** et **PersonInfo** .
 
--   Sélectionnez les de **messagerie** et les propriétés de **téléphone** de l’entité **PersonInfo **, puis appuyez sur les touches **CTRL + X** .
+-   Sélectionnez les **Email**   Propriétés de l’adresse de messagerie et du **téléphone** de l’entité **PersonInfo **, puis appuyez sur les touches **CTRL + X** .
 -   Sélectionnez l’entité **Person **et appuyez sur les touches **Ctrl + V** .
--   Sur l’aire de conception, sélectionnez l’entité **PersonInfo** et appuyez sur la touche **Suppr** du clavier.
+-   Sur l’aire de conception, sélectionnez l’entité **PersonInfo**   et appuyez sur la touche **Suppr** du clavier.
 -   Cliquez sur **non** lorsque vous y êtes invité si vous souhaitez supprimer la table **PersonInfo** du modèle, nous sommes sur le sujet de la mapper à l’entité **Person** .
 
     ![Supprimer des tables](~/ef6/media/deletetables.png)
 
-Les étapes suivantes nécessitent la fenêtre **Détails de mappage** . Si vous ne voyez pas cette fenêtre, cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Détails de mapping**.
+Les étapes suivantes nécessitent la fenêtre **Détails de mappage**   . Si vous ne voyez pas cette fenêtre, cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Détails de mapping**.
 
--   Sélectionnez la **personne** type d’entité, puis cliquez sur **&lt;ajouter une table ou une vue&gt;**  dans la fenêtre des **Détails de mappage** .
--   Sélectionnez **PersonInfo ** dans la liste déroulante.
-    La fenêtre de des **Détails de mappage** est mise à jour avec les mappages de colonnes par défaut, ce qui est parfait pour notre scénario.
+-   Sélectionnez le **Person**   type d’entité Person, puis cliquez sur ** &lt; Ajouter une &gt; table ou une vue**   dans la fenêtre **Détails de mappage**   .
+-   Sélectionnez **PersonInfo **   dans la liste déroulante.
+    La fenêtre **Détails de mapping**   est mise à jour avec les mappages de colonnes par défaut, ce qui est parfait pour notre scénario.
 
-La **personne** type d’entité est maintenant mappé aux tables **Person** et **PersonInfo** .
+Le **Person**   type d’entité Person est maintenant mappé aux tables **Person**   et **PersonInfo**   .
 
 ![Mappage 2](~/ef6/media/mapping2.png)
 
@@ -141,4 +143,4 @@ Les instructions T-SQL suivantes ont été exécutées sur la base de données s
     ![Insérer 2](~/ef6/media/insert2.png)
 -   La commande **Select** suivante a été exécutée suite à l’énumération des personnes dans la base de données. Il combine les données de la table **Person** et **PersonInfo** .
 
-    ![Sélectionnez](~/ef6/media/select.png)
+    ![Sélectionner la combinaison des données Person et PersonInfo](~/ef6/media/select.png)

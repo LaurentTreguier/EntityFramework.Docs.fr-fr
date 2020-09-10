@@ -1,14 +1,16 @@
 ---
 title: Fonctions table (TVF)-EF6
+description: Fonctions table (TVF) dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
-ms.openlocfilehash: 35684196dcd7b708a8feeb1eca3096e8d4e555ec
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/advanced/tvfs
+ms.openlocfilehash: 1575526fb46f9ddd3ad43c7c4ac0304aefa1d5d3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418696"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620556"
 ---
 # <a name="table-valued-functions-tvfs"></a>Fonctions table (TVF)
 > [!NOTE]
@@ -26,13 +28,13 @@ Les TVF sont très similaires aux procédures stockées avec une différence cl�
 
 **Présenté par**: Julia Kornich
 
-[Wmv](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.wmv) | [MP4](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-mp4video-tvf.m4v) | [WMV (zip)](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.zip)
+[WMV](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.wmv)  |  [MP4](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-mp4video-tvf.m4v)  |  [WMV (zip)](https://download.microsoft.com/download/6/0/A/60A6E474-5EF3-4E1E-B9EA-F51D2DDB446A/HDI-ITPro-MSDN-winvideo-tvf.zip)
 
 ## <a name="pre-requisites"></a>Prérequis
 
 Pour effectuer cette procédure pas à pas, vous devez :
 
-- Installez la [base de données School](~/ef6/resources/school-database.md).
+- Installez la [base de données School](xref:ef6/resources/school-database).
 
 - Disposer d’une version récente de Visual Studio
 
@@ -40,12 +42,12 @@ Pour effectuer cette procédure pas à pas, vous devez :
 
 1.  Ouvrez Visual Studio.
 2.  Dans le menu **fichier** , pointez sur **nouveau**, puis cliquez sur **projet** .
-3.  Dans le volet gauche, cliquez sur **Visual C\#** , puis sélectionnez le modèle **console** .
+3.  Dans le volet gauche, cliquez sur **Visual \# C**, puis sélectionnez le modèle **console** .
 4.  Entrez **TVF** comme nom du projet, puis cliquez sur **OK** .
 
 ## <a name="add-a-tvf-to-the-database"></a>Ajouter une TVF à la base de données
 
--   Sélectionnez **affichage-&gt; Explorateur d’objets SQL Server**
+-   Sélectionner **un affichage- &gt; Explorateur d’objets SQL Server**
 -   Si la base de données locale ne figure pas dans la liste des serveurs : cliquez avec le bouton droit sur **SQL Server** et sélectionnez **ajouter SQL Server** utiliser l' **authentification Windows** par défaut pour la connexion au serveur de base de données locale
 -   Développez le nœud de base de données locale
 -   Sous le nœud bases de données, cliquez avec le bouton droit sur le nœud de la base de données School, puis sélectionnez **nouvelle requête...**
@@ -78,12 +80,12 @@ RETURN
 2.  Sélectionnez **données** dans le menu de gauche, puis sélectionnez **ADO.NET Entity Data Model** dans le volet **modèles** .
 3.  Entrez **TVFModel. edmx** comme nom de fichier, puis cliquez sur **Ajouter** .
 4.  Dans la boîte de dialogue choisir le contenu du Model, sélectionnez **générer à partir de la base de données**, puis cliquez sur **suivant** .
-5.  Cliquez sur **nouvelle connexion** entrée (base de données locale **)\\mssqllocaldb** dans la zone de texte Nom du serveur, entrez **School** pour le nom de la base de données, cliquez sur **OK** .
-6.  Dans la boîte de dialogue choisir vos objets de base de données, sous le nœud **Tables** , sélectionnez les tables **Person**, **StudentGrade**et **course** 
-7.  Sélectionnez la fonction **GetStudentGradesForCourse** située sous les **procédures stockées et les fonctions** nœud note, qui à partir de Visual Studio 2012, la Entity designer vous permet d’importer par lot vos procédures stockées et fonctions.
+5.  Cliquez sur **nouvelle connexion** entrée **( \\ mssqllocaldb)** dans la zone de texte Nom du serveur, entrez **School**   comme nom de la base de données, puis cliquez sur **OK** .
+6.  Dans la boîte de dialogue choisir vos objets de base de données, sous le nœud **tables**   , sélectionnez les tables **Person**, **StudentGrade**et **course**   .
+7.  Sélectionnez la fonction **GetStudentGradesForCourse** située sous la note du nœud **procédures stockées et fonctions**   , qui commence par Visual Studio 2012, le Entity designer vous permet d’importer par lot vos procédures stockées et fonctions
 8.  Cliquez sur **Terminer**
-9.  Le Entity Designer, qui fournit une aire de conception pour la modification de votre modèle, est affiché. Tous les objets que vous avez sélectionnés dans la boîte **de dialogue choisir vos objets de base de données** sont ajoutés au modèle.
-10. Par défaut, la forme de résultat de chaque fonction ou procédure stockée importée devient automatiquement un nouveau type complexe dans votre modèle d’entité. Mais nous voulons mapper les résultats de la fonction GetStudentGradesForCourse à l’entité StudentGrade : cliquez avec le bouton droit sur l’aire de conception, sélectionnez **Explorateur de modèles** dans l’Explorateur de modèles, sélectionnez **importations de fonction**, puis double-cliquez sur la fonction **GetStudentGradesForCourse** dans la boîte de dialogue Modifier l’importation de fonction, sélectionnez **entités** et choisissez **StudentGrade**
+9.  Le Entity Designer, qui fournit une aire de conception pour la modification de votre modèle, est affiché. Tous les objets que vous avez sélectionnés dans la boîte **de dialogue choisir vos objets de base de données**   sont ajoutés au modèle.
+10. Par défaut, la forme de résultat de chaque fonction ou procédure stockée importée devient automatiquement un nouveau type complexe dans votre modèle d’entité. Mais nous voulons mapper les résultats de la fonction GetStudentGradesForCourse à l’entité StudentGrade : cliquez avec le bouton droit sur l’aire de conception, sélectionnez **Explorateur de modèles** dans l’Explorateur de modèles, sélectionnez **importations de fonction**, puis double-cliquez sur la fonction **GetStudentGradesForCourse** dans la boîte de dialogue Modifier l’importation de fonction, sélectionnez **entités**,   puis choisissez **StudentGrade**
 
 ## <a name="persist-and-retrieve-data"></a>Conserver et récupérer des données
 

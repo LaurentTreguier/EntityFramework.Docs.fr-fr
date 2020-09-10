@@ -1,25 +1,26 @@
 ---
-title: Blogs-cadres de l’entité - EF6
+title: Entity Framework Blogs-EF6
+description: Blogs Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: f8fcfb34-35de-4e82-b419-8f99fd2eb92a
-ms.openlocfilehash: 84c173498dcdb73011d6a9ff317ccc1c31a46551
-ms.sourcegitcommit: 144edccf9b29a7ffad119c235ac9808ec1a46193
+ms.openlocfilehash: 7dffdd87254c1cca84e229ecf480197c2bc65f90
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81434281"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620255"
 ---
-# <a name="entity-framework-blogs"></a>Blogs cadre de l’entité
-Outre la documentation du produit, ces blogs peuvent être une source d’informations utiles sur le cadre de l’entité:
+# <a name="entity-framework-blogs"></a>Blogs Entity Framework
+Outre la documentation du produit, ces blogs peuvent être une source d’informations utiles sur Entity Framework :
 
-## <a name="ef-team-blogs"></a>Blogs EF Team
+## <a name="ef-team-blogs"></a>Blogs de l’équipe EF
 
-- [.NET Blog - Tag: Cadre d’entité](https://blogs.msdn.microsoft.com/dotnet/tag/entity-framework/)
-- [ADO.NET Blog (n’est plus utilisé)](https://blogs.msdn.microsoft.com/adonet/)
-- [EF Design Blog (n’est plus utilisé)](https://blogs.msdn.microsoft.com/efdesign/)
+- [Balise de blog .NET : Entity Framework](https://blogs.msdn.microsoft.com/dotnet/tag/entity-framework/)
+- [Blog ADO.NET (n’est plus utilisé)](https://blogs.msdn.microsoft.com/adonet/)
+- [Blog de conception EF (n’est plus utilisé)](https://blogs.msdn.microsoft.com/efdesign/)
 
-## <a name="current-and-former-ef-team-bloggers"></a>Blogueurs actuels et anciens de l’équipe EF
+## <a name="current-and-former-ef-team-bloggers"></a>Blogueurs d’équipe EF actuels et anciens
 
 - [Arthur Vickers](https://blog.oneunicorn.com/)
 - [Brice Lambson](https://www.bricelam.net/)
@@ -29,7 +30,7 @@ Outre la documentation du produit, ces blogs peuvent être une source d’inform
 - [Alex James](https://blogs.msdn.microsoft.com/alexj/)
 - [Zlatko Michailov](https://blogs.msdn.microsoft.com/esql/)
 
-## <a name="ef-community-bloggers"></a>Blogeuses communautaires EF
+## <a name="ef-community-bloggers"></a>Blogueurs de la communauté EF
 
 - [Julie Lerman](https://thedatafarm.com/blog/)  
 - [Shawn Wildermuth](https://wildermuth.com/Tag/%20Entity%20Framework)  

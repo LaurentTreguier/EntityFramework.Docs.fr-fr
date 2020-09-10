@@ -1,14 +1,16 @@
 ---
 title: Model First EF6
+description: Model First dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
-ms.openlocfilehash: 1b37805beb3d33f0b6dad2577a8abb3ea8f7b1e4
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+uid: ef6/modeling/designer/workflows/model-first
+ms.openlocfilehash: e995072f0f4ac23b755acc193719e5571e18f544
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418104"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620411"
 ---
 # <a name="model-first"></a>Model First
 Cette vidéo et la procédure pas à pas fournissent une introduction au développement Model First à l’aide de Entity Framework. Model First vous permet de créer un nouveau modèle à l’aide du Entity Framework Designer puis de générer un schéma de base de données à partir du modèle. Le modèle est stocké dans un fichier EDMX (extension. edmx) et peut être affiché et modifié dans le Entity Framework Designer. Les classes avec lesquelles vous interagissez dans votre application sont générées automatiquement à partir du fichier EDMX.
@@ -18,7 +20,7 @@ Cette vidéo et la procédure pas à pas fournissent une introduction au dévelo
 
 **Présentée par** : [Rowan Miller](https://romiller.com/)
 
-**Vidéo**: [wmv](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv) | [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v) | [WMV (zip)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
+**Vidéo**: [WMV](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.wmv)  |  [MP4](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-mp4video-modelfirst.m4v)  |  [WMV (zip)](https://download.microsoft.com/download/5/B/1/5B1C338C-AFA7-4F68-B304-48BB008146EF/HDI-ITPro-MSDN-winvideo-modelfirst.zip)
 
 ## <a name="pre-requisites"></a>Prérequis
 
@@ -31,7 +33,7 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 Pour simplifier les choses, nous allons créer une application console de base qui utilise le Model First pour effectuer l’accès aux données :
 
 -   Ouvrez Visual Studio.
--   **Fichier&gt; nouveau&gt;...**
+-   **Fichier- &gt; nouveau- &gt; projet...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **ModelFirstSample** comme nom
 -   Sélectionnez **OK**.
@@ -40,7 +42,7 @@ Pour simplifier les choses, nous allons créer une application console de base q
 
 Nous allons utiliser Entity Framework Designer, inclus dans le cadre de Visual Studio, pour créer notre modèle.
 
--   **Projet-&gt; ajouter un nouvel élément...**
+-   **Projet- &gt; Ajouter un nouvel élément...**
 -   Sélectionnez **données** dans le menu de gauche, puis **ADO.NET Entity Data Model**
 -   Entrez **BloggingModel** comme nom et cliquez sur **OK**pour lancer l’Assistant Entity Data Model
 -   Sélectionnez **modèle vide** , puis cliquez sur **Terminer**
@@ -50,25 +52,25 @@ Nous allons utiliser Entity Framework Designer, inclus dans le cadre de Visual S
 Le Entity Framework Designer est ouvert avec un modèle vide. Nous pouvons maintenant commencer à ajouter des entités, des propriétés et des associations au modèle.
 
 -   Cliquez avec le bouton droit sur l’aire de conception et sélectionnez **Propriétés** .
--   Dans la Fenêtre Propriétés modifiez le **nom du conteneur d’entités** en **BloggingContext**
-    *il s’agit du nom du contexte dérivé qui sera généré pour vous, le contexte représente une session avec la base de données, ce qui nous permet d’interroger et d’enregistrer les données* .
--   Cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Ajouter un nouveau-&gt; entité...**
+-   Dans la fenêtre Propriétés remplacez le **nom du conteneur d’entités** par **BloggingContext**. 
+     *il s’agit du nom du contexte dérivé qui sera généré pour vous, le contexte représente une session avec la base de données, ce qui nous permet d’interroger et d’enregistrer les données* .
+-   Cliquez avec le bouton droit sur l’aire de conception et sélectionnez **Ajouter une nouvelle &gt; entité...**
 -   Entrez **blog** comme nom de l’entité et **BlogId** comme nom de clé, puis cliquez sur **OK** .
 
     ![Ajouter une entité de blog](~/ef6/media/addblogentity.png)
 
--   Cliquez avec le bouton droit sur la nouvelle entité sur l’aire de conception et sélectionnez **Ajouter une nouvelle&gt; propriété scalaire**, entrez **nom** comme nom de la propriété.
+-   Cliquez avec le bouton droit sur la nouvelle entité sur l’aire de conception et sélectionnez **Ajouter une nouvelle &gt; propriété-scalaire**, puis entrez **nom** comme nom de la propriété.
 -   Répétez cette procédure pour ajouter une propriété **URL** .
--   Cliquez avec le bouton droit sur la propriété **URL** dans l’aire de conception, puis sélectionnez **Propriétés**. dans la fenêtre Propriétés modifiez le paramètre **Nullable** sur **true**
-    *cela nous permet d’enregistrer un blog dans la base de données sans l’affecter à une URL*
+-   Cliquez avec le bouton droit sur la propriété **URL** sur l’aire de conception, puis sélectionnez **Propriétés**. dans la fenêtre Propriétés modifiez le paramètre **Nullable** en **true**. 
+     *cela nous permet d’enregistrer un blog dans la base de données sans l’affecter à une URL*
 -   À l’aide des techniques que vous venez d’apprendre, ajoutez une entité de **publication** avec une propriété de clé **PostId**
 -   Ajouter des propriétés scalaires de **titre** et de **contenu** à l’entité de **publication**
 
 Maintenant que nous avons deux entités, il est temps d’ajouter une association (ou une relation) entre elles.
 
--   Cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **Ajouter un nouveau-&gt; Association...**
--   Créer une terminaison de la relation pointant vers le **blog** avec une multiplicité d' **un** et l’autre point de terminaison pour **publier** avec une multiplicité de **plusieurs**
-    *cela signifie qu’un blog contient de nombreuses publications et qu’un billet appartient à un blog*
+-   Cliquez avec le bouton droit sur l’aire de conception et sélectionnez **Ajouter une nouvelle &gt; Association...**
+-   Faire une extrémité du point de relation au **blog** avec une multiplicité d’un **et l'** autre point de terminaison à **publier** avec une multiplicité de **nombreux** 
+     *cela signifie qu’un blog contient de nombreuses publications et qu’un billet appartient à un blog*
 -   Vérifiez que la case **Ajouter les propriétés de clé étrangère à l’entité « poster »** est cochée, puis cliquez sur **OK** .
 
     ![Ajouter une association MF](~/ef6/media/addassociationmf.png)
@@ -83,17 +85,17 @@ Si vous travaillez dans Visual Studio 2010, vous devez suivre certaines étapes 
 
 Tout d’abord, nous devons récupérer la dernière version de Entity Framework à partir de NuGet.
 
--   **Projet-&gt; gérer les packages NuGet...** 
-    *si vous n’avez pas l’option **gérer les packages NuGet...** vous devez installer la [dernière version de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
+-   **Projet – &gt; Gérer les packages NuGet...** 
+     *Si vous ne disposez pas de l’option **gérer les packages NuGet,** vous devez installer la [dernière version de NuGet](https://visualstudiogallery.msdn.microsoft.com/27077b70-9dad-4c64-adcf-c7cf6bc9970c) *
 -   Sélectionner l’onglet **en ligne**
 -   Sélectionner le package **EntityFramework**
--   Cliquez sur **Installer**.
+-   Cliquez sur **Install**.
 
 Ensuite, nous devons permuter notre modèle pour générer le code qui utilise l’API DbContext, qui a été introduite dans les versions ultérieures de Entity Framework.
 
 -   Cliquez avec le bouton droit sur une zone vide de votre modèle dans le concepteur EF, puis sélectionnez **Ajouter un élément de génération de code...**
 -   Sélectionnez **modèles en ligne** dans le menu de gauche et recherchez **DbContext**
--   Sélectionnez le **Générateur de DBCONTEXT EF 5. x pour C\#** , entrez **BloggingModel** comme nom et cliquez sur **Ajouter** .
+-   Sélectionnez le **Générateur de DBCONTEXT EF 5. x pour \# C**, entrez **BloggingModel** comme nom et cliquez sur **Ajouter** .
 
     ![DbContext (modèle)](~/ef6/media/dbcontexttemplate.png)
 
@@ -182,13 +184,13 @@ Nous allons commencer par ajouter une nouvelle entité utilisateur à notre mod�
 
     ![Ajouter une entité utilisateur](~/ef6/media/adduserentity.png)
 
--   Cliquez avec le bouton droit sur la propriété **username** sur l’aire de conception, puis sélectionnez **Propriétés**. dans la fenêtre Propriétés modifiez le paramètre **MaxLength** sur **50**
-    *cela limite les données qui peuvent être stockées dans le nom d’utilisateur à 50 caractères* .
+-   Cliquez avec le bouton droit sur la propriété **username** sur l’aire de conception, puis sélectionnez **Propriétés**. dans la fenêtre Propriétés modifiez le paramètre **MaxLength** sur **50**. 
+     *cela limite les données pouvant être stockées dans le nom d’utilisateur à 50 caractères* .
 -   Ajouter une propriété scalaire **DisplayName** à l’entité **User**
 
 Nous disposons désormais d’un modèle mis à jour et nous sommes prêts à mettre à jour la base de données pour qu’elle s’adapte à notre nouveau type d’entité utilisateur.
 
--   Cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **générer la base de données à partir du modèle...** , Entity Framework calcule un script pour recréer un schéma basé sur le modèle mis à jour.
+-   Cliquez avec le bouton droit sur l’aire de conception, puis sélectionnez **générer la base de données à partir du modèle...**, Entity Framework calcule un script pour recréer un schéma basé sur le modèle mis à jour.
 -   Cliquez sur **Terminer**
 -   Vous pouvez recevoir des avertissements concernant le remplacement du script DDL existant et des parties de mappage et de stockage du modèle. cliquez sur **Oui** pour ces deux avertissements.
 -   Le script SQL mis à jour pour créer la base de données s’ouvre pour vous  

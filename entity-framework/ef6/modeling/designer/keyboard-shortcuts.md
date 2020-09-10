@@ -1,14 +1,15 @@
 ---
 title: Raccourcis clavier Entity Framework Designer-EF6
+description: Entity Framework Designer les raccourcis clavier dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: c75eafcca0863faa1ad64202e98b61832827377c
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: 8b93581e68e3a5d83685794f034c50cfe74eee9f
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78418517"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620460"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Raccourcis clavier Entity Framework Designer
 Cette page fournit la liste des shorcuts de clavier disponibles dans les différents écrans de l’Entity Framework Tools pour Visual Studio.
@@ -23,7 +24,7 @@ Cette page fournit la liste des shorcuts de clavier disponibles dans les différ
 |:----------|:-----------------------------------------------------------|:----------------------------------------------------|
 | **Alt + n** | Déplacer vers l’écran suivant                                        | Non disponible pour toutes les sélections du contenu du modèle. |
 | **Alt + f** | Terminez l'Assistant                                              | Non disponible pour toutes les sélections du contenu du modèle. |
-| **Alt + w** | Basculer le focus sur le « que doit contenir le modèle ? » propane. |                                                     |
+| **Alt + w** | Basculer le focus sur le « que doit contenir le modèle ? » . |                                                     |
 
 ### <a name="step-two-choose-your-connection"></a>Étape 2 : choisir votre connexion
 
@@ -33,11 +34,11 @@ Cette page fournit la liste des shorcuts de clavier disponibles dans les différ
 |:----------|:-----------------------------------------------------------|:--------------------------------------------------------|
 | **Alt + n** | Déplacer vers l’écran suivant                                        |                                                         |
 | **Alt + p** | Déplacer vers l’écran précédent                                    |                                                         |
-| **Alt + w** | Basculer le focus sur le « que doit contenir le modèle ? » propane. |                                                         |
+| **Alt + w** | Basculer le focus sur le « que doit contenir le modèle ? » . |                                                         |
 | **Alt + c** | Ouvrir la fenêtre « Propriétés de connexion »                    | Autorise la définition d’une nouvelle connexion de base de données. |
 | **Alt + e** | Exclure les données sensibles de la chaîne de connexion          |                                                         |
 | **Alt + i** | Inclure les données sensibles dans la chaîne de connexion            |                                                         |
-| **Alt + s** | Activer/désactiver l’option « Enregistrer les paramètres de connexion dans App. config » |                                                         |
+| **Alt + s** | Activer/désactiver l’option « Enregistrer les paramètres de connexion en App.Config » |                                                         |
 
 ### <a name="step-three-choose-your-version"></a>Étape 3 : choisir votre version
 
@@ -74,7 +75,7 @@ Cette page fournit la liste des shorcuts de clavier disponibles dans les différ
 
 | Raccourci                                                                                | Action                      | Notes                                                                                                                                                                                                                               |
 |:----------------------------------------------------------------------------------------|:----------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Espace/entrée**                                                                         | Activer/désactiver la sélection            | Active/désactive la sélection sur l’objet qui a le focus.                                                                                                                                                                                         |
+| **Espace/Entrée**                                                                         | Activer/désactiver la sélection            | Active/désactive la sélection sur l’objet qui a le focus.                                                                                                                                                                                         |
 | **Échap**                                                                                 | Annuler la sélection            | Annule la sélection actuelle.                                                                                                                                                                                                      |
 | **Ctrl + A**                                                                            | Tout sélectionner                  | Sélectionne toutes les formes sur l’aire de conception.                                                                                                                                                                                       |
 | **Flèche haut**                                                                            | Monter                     | Déplace l’entité sélectionnée d’un incrément de grille vers le haut. <br/> Si, dans une liste, se déplace vers le sous-champ frère précédent.                                                                                                                            |
@@ -84,11 +85,11 @@ Cette page fournit la liste des shorcuts de clavier disponibles dans les différ
 | **Maj + Flèche gauche**                                                                  | Forme taille gauche             | Réduit la largeur de l’entité sélectionnée d’un incrément de grille.                                                                                                                                                                     |
 | **Maj + Flèche droite**                                                                 | Ajuster la forme à droite            | Augmente la largeur de l’entité sélectionnée d’un incrément de grille.                                                                                                                                                                   |
 | **Accueil**                                                                                | Premier homologue                  | Déplace le focus et la sélection vers le premier objet sur l’aire de conception au même niveau d’homologue.                                                                                                                                         |
-| **Fin**                                                                                 | Dernier homologue                   | Déplace le focus et la sélection vers le dernier objet sur l’aire de conception au même niveau d’homologue.                                                                                                                                          |
-| **Ctrl + début**                                                                         | Premier homologue (Focus)          | Identique au premier homologue, mais déplace le focus au lieu de déplacer le focus et la sélection.                                                                                                                                                          |
-| **Ctrl + fin**                                                                          | Dernier homologue (Focus)           | Identique au dernier homologue, mais déplace le focus au lieu de déplacer le focus et la sélection.                                                                                                                                                           |
-| **Tab**                                                                                 | Homologue suivant                   | Déplace le focus et la sélection vers l’objet suivant sur l’aire de conception au même niveau d’homologue.                                                                                                                                          |
-| **Maj+Tab**                                                                           | Homologue précédent               | Déplace le focus et la sélection vers l’objet précédent sur l’aire de conception au même niveau d’homologue.                                                                                                                                      |
+| **Effet**                                                                                 | Dernier homologue                   | Déplace le focus et la sélection vers le dernier objet sur l’aire de conception au même niveau d’homologue.                                                                                                                                          |
+| **Ctrl + Début**                                                                         | Premier homologue (Focus)          | Identique au premier homologue, mais déplace le focus au lieu de déplacer le focus et la sélection.                                                                                                                                                          |
+| **Ctrl + Fin**                                                                          | Dernier homologue (Focus)           | Identique au dernier homologue, mais déplace le focus au lieu de déplacer le focus et la sélection.                                                                                                                                                           |
+| **Onglet**                                                                                 | Homologue suivant                   | Déplace le focus et la sélection vers l’objet suivant sur l’aire de conception au même niveau d’homologue.                                                                                                                                          |
+| **Maj + Tab**                                                                           | Homologue précédent               | Déplace le focus et la sélection vers l’objet précédent sur l’aire de conception au même niveau d’homologue.                                                                                                                                      |
 | **Alt + Ctrl + Tab**                                                                        | Homologue suivant (Focus)           | Identique à l’homologue suivant, mais déplace le focus au lieu de déplacer le focus et la sélection.                                                                                                                                                           |
 | **Alt + Ctrl + Maj + Tab**                                                                  | Homologue précédent (Focus)       | Identique à l’homologue précédent, mais déplace le focus au lieu de déplacer le focus et la sélection.                                                                                                                                                       |
 | **&lt;**                                                                                | Z                      | Passe à l’objet suivant sur l’aire de conception, un niveau plus élevé dans la hiérarchie. S’il n’y a aucune forme au-dessus de cette forme dans la hiérarchie (autrement dit, l’objet est placé directement sur l’aire de conception), le diagramme est sélectionné. |
@@ -97,13 +98,13 @@ Cette page fournit la liste des shorcuts de clavier disponibles dans les différ
 | **Ctrl + &gt;**                                                                         | Descendant (Focus)             | Identique à la commande descendante, mais déplace le focus sans sélection.                                                                                                                                                                         |
 | **Maj + fin**                                                                         | Suivre la connexion         | À partir d’une entité, se déplace vers une entité à laquelle cette entité est connectée.                                                                                                                                                               |
 | **Suppr**                                                                                 | DELETE                      | Supprimer un objet ou un connecteur du diagramme.                                                                                                                                                                                     |
-| **Ceux**                                                                                 | Insérer                      | Ajoute une nouvelle propriété à une entité lorsque l’en-tête de compartiment « propriétés scalaires » ou une propriété elle-même est sélectionné.                                                                                                           |
+| **Ceux**                                                                                 | Insert                      | Ajoute une nouvelle propriété à une entité lorsque l’en-tête de compartiment « propriétés scalaires » ou une propriété elle-même est sélectionné.                                                                                                           |
 | **PG. préc**                                                                               | Faire défiler le diagramme vers le haut           | Fait défiler l’aire de conception vers le haut, en incréments égal à 75% de la hauteur de l’aire de conception actuellement visible.                                                                                                                    |
 | **PG. suiv**                                                                             | Faire défiler le diagramme vers le dessous         | Fait défiler l’aire de conception vers le dessous.                                                                                                                                                                                                    |
 | **Maj + Pg. suiv**                                                                     | Faire défiler le diagramme vers la droite        | Fait défiler l’aire de conception vers la droite.                                                                                                                                                                                            |
 | **Maj + Pg. préc**                                                                       | Faire défiler le diagramme vers la gauche         | Fait défiler l’aire de conception vers la gauche.                                                                                                                                                                                             |
-| **F2**                                                                                  | Entrer en mode édition             | Raccourci clavier standard pour l’entrée en mode édition d’un contrôle de texte.                                                                                                                                                               |
-| **MAJ + F10**                                                                         | Afficher le menu contextuel       | Raccourci clavier standard permettant d’afficher le menu contextuel d’un élément sélectionné.                                                                                                                                                          |
+| **F2**                                                                                  | Passer au mode Édition             | Raccourci clavier standard pour l’entrée en mode édition d’un contrôle de texte.                                                                                                                                                               |
+| **Maj+F10**                                                                         | Afficher le menu contextuel       | Raccourci clavier standard permettant d’afficher le menu contextuel d’un élément sélectionné.                                                                                                                                                          |
 | **Ctrl + Maj + clic gauche de la souris**  <br/> **Ctrl + Maj + MouseWheel vers l’avant**  | Zoom sémantique en cours            | Effectue un zoom avant sur la zone de la vue de diagramme sous le pointeur de la souris.                                                                                                                                                                 |
 | **Ctrl + Maj + clic droit de souris** <br/> **Ctrl + Maj + MouseWheel vers l’arrière** | Zoom sémantique           | Effectue un zoom arrière à partir de la zone de la vue de diagramme sous le pointeur de la souris. Il recentre le diagramme lorsque vous faites un zoom arrière trop loin pour le centre de diagrammes actuel.                                                                          |
 | **Ctrl + Maj + ' + '** <br/> **Ctrl + MouseWheel vers l’avant**                        | Zoom avant                     | Effectue un zoom avant sur le centre de la vue de diagramme.                                                                                                                                                                                         |
@@ -117,16 +118,16 @@ Cette page fournit la liste des shorcuts de clavier disponibles dans les différ
 
 | Raccourci                  | Action         | Notes                                                                                                                                 |
 |:--------------------------|:---------------|:--------------------------------------------------------------------------------------------------------------------------------------|
-| **Tab**                   | Changer de contexte | Bascule entre la zone de la fenêtre principale et la barre d’outils à gauche                                                                     |
+| **Onglet**                   | Changer de contexte | Bascule entre la zone de la fenêtre principale et la barre d’outils à gauche                                                                     |
 | **Touches de direction**            | Navigation     | Déplacer les lignes vers le haut et vers le haut, ou vers la droite et la gauche sur les colonnes de la zone de la fenêtre principale. Vous déplacer entre les boutons de la barre d’outils à gauche. |
-| **Entrée** <br/> **Espace** | Sélectionnez         | Sélectionne un bouton dans la barre d’outils à gauche.                                                                                          |
+| **Entrez** <br/> **Espace** | Sélectionnez         | Sélectionne un bouton dans la barre d’outils à gauche.                                                                                          |
 | **Alt + flèche bas**      | Ouvrir la liste      | Dérouler une liste si une cellule est sélectionnée et contient une liste déroulante.                                                                     |
-| **Entrée**                 | Liste SELECT    | Sélectionne un élément dans une liste déroulante.                                                                                               |
+| **Entrez**                 | Liste SELECT    | Sélectionne un élément dans une liste déroulante.                                                                                               |
 | **Échap**                   | Fermer la liste     | Ferme une liste déroulante.                                                                                                              |
 
 ## <a name="visual-studio-navigation"></a>Navigation dans Visual Studio
 
-Entity Framework fournit également plusieurs actions qui peuvent avoir des raccourcis clavier personnalisés mappés (aucun raccourci n’est mappé par défaut). Pour créer ces raccourcis personnalisés, cliquez sur le menu Outils, puis sur options.  Sous environnement, choisissez clavier.  Faites défiler la liste vers le milieu jusqu’à ce que vous puissiez sélectionner la commande souhaitée, entrez le raccourci dans la zone de texte « appuyer sur les touches de raccourci », puis cliquez sur attribuer. Les raccourcis possibles sont les suivants :
+Entity Framework fournit également plusieurs actions qui peuvent avoir des raccourcis clavier personnalisés mappés (aucun raccourci n’est mappé par défaut). Pour créer ces raccourcis personnalisés, cliquez sur le menu Outils, puis sur options.Sous environnement, choisissez clavier.Faites défiler la liste vers le milieu jusqu’à ce que vous puissiez sélectionner la commande souhaitée, entrez le raccourci dans la zone de texte « appuyer sur les touches de raccourci », puis cliquez sur attribuer. Les raccourcis possibles sont les suivants :
 
 | Raccourci                                                                                       |
 |:-----------------------------------------------------------------------------------------------|
@@ -163,16 +164,16 @@ Entity Framework fournit également plusieurs actions qui peuvent avoir des racc
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.MappingDetails**                          |
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. ModelBrowser**                            |
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.MoveDiagramstoSeparateFile**              |
-| **OtherContextMenus. MicrosoftDataEntityDesignContext. MoveProperties. suiv.**                     |
+| **OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Down**                     |
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Down5**                    |
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.ToBottom**                 |
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.ToTop**                    |
-| **OtherContextMenus. MicrosoftDataEntityDesignContext. MoveProperties. up**                       |
+| **OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Up**                       |
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.MoveProperties.Up5**                      |
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.MovetonewDiagram**                        |
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. Open**                                    |
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. refactor. MovetoNewComplexType**           |
-| **OtherContextMenus. MicrosoftDataEntityDesignContext. Refactoriser. Renommez**                         |
+| **OtherContextMenus.MicrosoftDataEntityDesignContext.Refactor.Rename**                         |
 | **OtherContextMenus.MicrosoftDataEntityDesignContext.RemovefromDiagram**                       |
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. Rename**                                  |
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. ScalarPropertyFormat. DisplayName**        |
@@ -205,5 +206,5 @@ Entity Framework fournit également plusieurs actions qui peuvent avoir des racc
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. Zoom. Zoom**                             |
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. Zoom. ZoomOut**                            |
 | **OtherContextMenus. MicrosoftDataEntityDesignContext. Zoom. ZoomtoFit**                          |
-| **Vue. EntityDataModelBrowser**                                                                |
-| **Vue. EntityDataModelMappingDetails**                                                         |
+| **View.EntityDataModelBrowser**                                                                |
+| **View.EntityDataModelMappingDetails**                                                         |

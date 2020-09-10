@@ -1,14 +1,15 @@
 ---
 title: Études de cas pour Entity Framework-EF6
+description: Études de cas pour Entity Framework 6
 author: divega
 ms.date: 10/23/2016
 ms.assetid: cd5d3ae3-717d-4095-a2ef-0e8fd72b1a2f
-ms.openlocfilehash: d7982a3f89ac1e57b48039d828f287adf6dc5068
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: f6cabe34cfbdc5f15758678f458b2c0898198137
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417080"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620246"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Études de cas Microsoft pour Entity Framework
 Les études de cas sur cette page mettent en évidence quelques projets de production réels qui ont employé Entity Framework.
@@ -38,18 +39,18 @@ NEC souhaite accéder au marché pour la publicité sur place numérique, avec u
 Pour ce faire, il a lancé une paire d’applications Web qui automatisent les processus manuels requis dans une campagne ad traditionnelle.
 Les sites ont été créés à l’aide de ASP.NET, Silverlight 3, AJAX et WCF, ainsi que les Entity Framework dans la couche d’accès aux données pour communiquer avec SQL Server 2008.
 
-> « Avec SQL Server, nous avons pensé que nous pourrions obtenir le débit nécessaire pour servir les annonceurs et les réseaux avec des informations en temps réel et la fiabilité pour s’assurer que les informations de nos applications stratégiques seraient toujours disponibles »-Mike Corcoran, Directeur informatique
+> « Avec SQL Server, nous avons pensé que nous pourrions obtenir le débit nécessaire pour servir les annonceurs et les réseaux avec des informations en temps réel et la fiabilité pour s’assurer que les informations de nos applications stratégiques seraient toujours disponibles »-Mike Corcoran, directeur informatique
 
 ## <a name="darwin-dimensions"></a>Dimensions Darwin
 À l’aide d’un large éventail de technologies Microsoft, l’équipe de Darwin a défini la création d’un portail d’avatar en ligne que les consommateurs pourraient utiliser pour créer des avatars époustouflants et réalistes à utiliser dans les jeux, les animations et les pages de réseaux sociaux.
-Avec les avantages de productivité de la Entity Framework et l’extraction de composants tels que Windows Workflow Foundation (WF) et Windows Server AppFabric (cache d’application en mémoire hautement évolutif), l’équipe a pu fournir un produit étonnant en moins de 35% heure du développement.
+Avec les avantages de productivité de la Entity Framework et l’extraction de composants tels que Windows Workflow Foundation (WF) et Windows Server AppFabric (cache d’application en mémoire hautement évolutif), l’équipe a pu fournir un produit étonnant en moins de 35% du temps de développement.
 Bien que les membres de l’équipe soient répartis sur plusieurs pays, l’équipe suit un processus de développement agile avec des versions hebdomadaires.
 
  > «Nous essayons de ne pas créer de technologie pour les besoins de la technologie. Au démarrage, il est essentiel de tirer parti de la technologie qui permet de gagner du temps et de l’argent.
  .NET était le choix idéal pour un développement rapide et rentable.» – Zachary Olsen, architecte  
 
 ## <a name="silverware"></a>Silver
-Avec plus de 15 ans d’expérience dans le développement de solutions de point de vente (POS) pour les groupes de restaurants de petite et moyenne taille, l’équipe de développement de Silver est chargée d’améliorer son produit avec davantage de fonctionnalités de niveau entreprise afin d’attirer davantage chaînes de restaurant.
+Avec plus de 15 ans d’expérience dans le développement de solutions de point de vente pour les groupes de restaurants de petite et moyenne taille, l’équipe de développement de Silver est chargée d’améliorer son produit avec davantage de fonctionnalités au niveau de l’entreprise afin d’attirer des chaînes de restaurant plus volumineuses.
 À l’aide de la dernière version des outils de développement de Microsoft, ils ont pu créer la nouvelle solution quatre fois plus rapidement qu’auparavant.
 Les nouvelles fonctionnalités clés telles que LINQ et le Entity Framework simplifient le passage de Crystal Reports à SQL Server 2008 et SQL Server Reporting Services (SSRS) pour leurs besoins en matière de stockage de données et de création de rapports.
 
