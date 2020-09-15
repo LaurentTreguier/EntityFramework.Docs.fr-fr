@@ -3,14 +3,13 @@ title: Conversions de valeurs-EF Core
 description: Configuration des convertisseurs de valeurs dans un modèle de Entity Framework Core
 author: ajcvickers
 ms.date: 02/19/2018
-ms.assetid: 3154BF3C-1749-4C60-8D51-AE86773AA116
 uid: core/modeling/value-conversions
-ms.openlocfilehash: 79e54392bf5503b4b651f25ce6e5fc63d418df90
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 1d347eb6a7fcdcb55239e1fa854f6c38ab081b21
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616668"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072549"
 ---
 # <a name="value-conversions"></a>Conversions de valeurs
 
@@ -64,7 +63,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ## <a name="the-valueconverter-class"></a>La classe ValueConverter
 
-`HasConversion`Le fait d’appeler comme indiqué ci-dessus crée une `ValueConverter` instance et la définit sur la propriété. Le `ValueConverter` peut à la place être créé explicitement. Par exemple :
+`HasConversion`Le fait d’appeler comme indiqué ci-dessus crée une `ValueConverter` instance et la définit sur la propriété. Le `ValueConverter` peut à la place être créé explicitement. Exemple :
 
 ``` csharp
 var converter = new ValueConverter<EquineBeast, string>(

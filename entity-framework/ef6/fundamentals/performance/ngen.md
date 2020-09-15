@@ -3,14 +3,13 @@ title: Amélioration des performances de démarrage avec NGen-EF6
 description: Amélioration des performances de démarrage avec NGen dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: dc6110a0-80a0-4370-8190-cea942841cee
 uid: ef6/fundamentals/performance/ngen
-ms.openlocfilehash: 53b9c2147c95fe096d459ad195a0549b32b67155
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d3417067cca5837920449420ed13014f21c5b46c
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616094"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072640"
 ---
 # <a name="improving-startup-performance-with-ngen"></a>Amélioration des performances de démarrage avec NGen
 > [!NOTE]

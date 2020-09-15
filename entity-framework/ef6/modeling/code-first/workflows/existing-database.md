@@ -3,14 +3,13 @@ title: Code First à une base de données existante-EF6
 description: Code First à une base de données existante dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: a7e60b74-973d-4480-868f-500a3899932e
 uid: ef6/modeling/code-first/workflows/existing-database
-ms.openlocfilehash: 7cb58495ea287c59f46e804882cdc089d0f09e7b
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d26c5f2ced6b327615cc78bcb2bb6d188b012c14
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616922"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073988"
 ---
 # <a name="code-first-to-an-existing-database"></a>Code First à une base de données existante
 Cette vidéo et la procédure pas à pas fournissent une introduction au développement Code First ciblant une base de données existante. Code First vous permet de définir votre modèle à l’aide de \# classes C ou VB.net. Éventuellement, une configuration supplémentaire peut être effectuée à l’aide d’attributs sur vos classes et propriétés ou à l’aide d’une API Fluent.
@@ -30,7 +29,7 @@ En général, lorsque vous ciblez une base de données existante, elle est déj�
 
 Commençons par générer la base de données.
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Vue- &gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données- &gt; Ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de **Explorateur de serveurs** avant de devoir sélectionner **Microsoft SQL Server** comme source de données
@@ -76,7 +75,7 @@ VALUES ('.NET Framework Blog', 'http://blogs.msdn.com/dotnet/')
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise Code First pour effectuer l’accès aux données :
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Fichier- &gt; nouveau- &gt; projet...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **CodeFirstExistingDatabaseSample** comme nom

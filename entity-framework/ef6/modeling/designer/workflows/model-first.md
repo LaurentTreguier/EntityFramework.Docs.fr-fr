@@ -3,14 +3,13 @@ title: Model First EF6
 description: Model First dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: e1b9c319-bb8a-4417-ac94-7890f257e7f6
 uid: ef6/modeling/designer/workflows/model-first
-ms.openlocfilehash: e995072f0f4ac23b755acc193719e5571e18f544
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 13c5e173182ad0781a674ce3d10f7374c4443bf9
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620411"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073160"
 ---
 # <a name="model-first"></a>Model First
 Cette vidéo et la procédure pas à pas fournissent une introduction au développement Model First à l’aide de Entity Framework. Model First vous permet de créer un nouveau modèle à l’aide du Entity Framework Designer puis de générer un schéma de base de données à partir du modèle. Le modèle est stocké dans un fichier EDMX (extension. edmx) et peut être affiché et modifié dans le Entity Framework Designer. Les classes avec lesquelles vous interagissez dans votre application sont générées automatiquement à partir du fichier EDMX.
@@ -32,7 +31,7 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise le Model First pour effectuer l’accès aux données :
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Fichier- &gt; nouveau- &gt; projet...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **ModelFirstSample** comme nom

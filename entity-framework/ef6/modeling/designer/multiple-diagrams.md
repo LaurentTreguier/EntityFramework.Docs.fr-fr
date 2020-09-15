@@ -3,14 +3,13 @@ title: Plusieurs diagrammes par modèle-EF6
 description: Plusieurs diagrammes par modèle dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: b95db5c8-de8d-43bd-9ccc-5df6a5e25e1b
 uid: ef6/modeling/designer/multiple-diagrams
-ms.openlocfilehash: 5ecda72af6430222864c62aea24cf85893436f56
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d934a1b709c93fe8e6b57d40dd874b564885b19f
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620436"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073329"
 ---
 # <a name="multiple-diagrams-per-model"></a>Plusieurs diagrammes par modèle
 > [!NOTE]

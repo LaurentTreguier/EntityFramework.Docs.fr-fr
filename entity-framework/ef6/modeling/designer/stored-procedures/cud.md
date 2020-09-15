@@ -3,20 +3,19 @@ title: Procédures stockées CUD du concepteur-EF6
 description: Procédures stockées CUD du concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 1e773972-2da5-45e0-85a2-3cf3fbcfa5cf
 uid: ef6/modeling/designer/stored-procedures/cud
-ms.openlocfilehash: f722cb3ac0b6ce21e685dbb7bffe571fa7b783d5
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fae795922980452cf062a62e3cbb47de49b49c74
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620371"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073212"
 ---
 # <a name="designer-cud-stored-procedures"></a>Procédures stockées CUD du concepteur
 
 Cette procédure pas à pas explique comment mapper les \\ opérations de création d’insertion, de mise à jour et de suppression (CUD) d’un type d’entité aux procédures stockées à l’aide de l’Entity Framework Designer (concepteur EF). Par défaut, le Entity Framework génère automatiquement les instructions SQL pour les opérations CUD, mais vous pouvez également mapper des procédures stockées à ces opérations.  
 
-Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Par exemple :
+Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Exemple :
 
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]");

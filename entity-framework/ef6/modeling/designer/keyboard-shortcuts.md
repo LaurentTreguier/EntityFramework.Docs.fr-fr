@@ -3,13 +3,12 @@ title: Raccourcis clavier Entity Framework Designer-EF6
 description: Entity Framework Designer les raccourcis clavier dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 3c76cdd5-17c5-4c54-a6a5-cf21b974636b
-ms.openlocfilehash: 8b93581e68e3a5d83685794f034c50cfe74eee9f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3552f2b9bfc499654bc1dce4a81d37cacc8b7996
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620460"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073381"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Raccourcis clavier Entity Framework Designer
 Cette page fournit la liste des shorcuts de clavier disponibles dans les différents écrans de l’Entity Framework Tools pour Visual Studio.
@@ -97,8 +96,8 @@ Cette page fournit la liste des shorcuts de clavier disponibles dans les différ
 | **Ctrl + &lt;**                                                                         | Ascend (Focus)              | Identique à la commande Ascend, mais déplace le focus sans sélection.                                                                                                                                                                          |
 | **Ctrl + &gt;**                                                                         | Descendant (Focus)             | Identique à la commande descendante, mais déplace le focus sans sélection.                                                                                                                                                                         |
 | **Maj + fin**                                                                         | Suivre la connexion         | À partir d’une entité, se déplace vers une entité à laquelle cette entité est connectée.                                                                                                                                                               |
-| **Suppr**                                                                                 | DELETE                      | Supprimer un objet ou un connecteur du diagramme.                                                                                                                                                                                     |
-| **Ceux**                                                                                 | Insert                      | Ajoute une nouvelle propriété à une entité lorsque l’en-tête de compartiment « propriétés scalaires » ou une propriété elle-même est sélectionné.                                                                                                           |
+| **Suppr**                                                                                 | Supprimer                      | Supprimer un objet ou un connecteur du diagramme.                                                                                                                                                                                     |
+| **Ceux**                                                                                 | Insérer                      | Ajoute une nouvelle propriété à une entité lorsque l’en-tête de compartiment « propriétés scalaires » ou une propriété elle-même est sélectionné.                                                                                                           |
 | **PG. préc**                                                                               | Faire défiler le diagramme vers le haut           | Fait défiler l’aire de conception vers le haut, en incréments égal à 75% de la hauteur de l’aire de conception actuellement visible.                                                                                                                    |
 | **PG. suiv**                                                                             | Faire défiler le diagramme vers le dessous         | Fait défiler l’aire de conception vers le dessous.                                                                                                                                                                                                    |
 | **Maj + Pg. suiv**                                                                     | Faire défiler le diagramme vers la droite        | Fait défiler l’aire de conception vers la droite.                                                                                                                                                                                            |

@@ -3,14 +3,13 @@ title: Méthode Load-EF6
 description: Méthode Load dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 03c5a069-b7b4-455f-a16f-ee3b96cc4e28
 uid: ef6/querying/load-method
-ms.openlocfilehash: 5fbb55b899ae0ee026d42df90f80cc18fe95bfa2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 1e6dd172eebdc177dad8ef312c8d14083a409410
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620315"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072965"
 ---
 # <a name="the-load-method"></a>Méthode Load
 Il existe plusieurs scénarios dans lesquels vous pouvez charger des entités à partir de la base de données dans le contexte sans avoir à effectuer immédiatement aucune action avec ces entités. Un bon exemple est le chargement d’entités pour la liaison de données, comme décrit dans [données locales](xref:ef6/querying/local-data). Pour ce faire, une méthode courante consiste à écrire une requête LINQ, puis à appeler ToList sur celle-ci, uniquement pour supprimer immédiatement la liste créée. La méthode d’extension Load fonctionne comme ToList, sauf qu’elle évite la création de la liste.  

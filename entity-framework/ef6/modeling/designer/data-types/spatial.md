@@ -3,14 +3,13 @@ title: Spatial-EF designer-EF6
 description: Concepteur spatial-EF dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 06baa6e1-d680-4a95-845b-81305c87a962
 uid: ef6/modeling/designer/data-types/spatial
-ms.openlocfilehash: 10430d6a043182e5536dfad148dc4158cf4c96c9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6524e3d2be6d5028ab12d6bfd7c65ce3a232a07a
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620482"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073082"
 ---
 # <a name="spatial---ef-designer"></a>Concepteur spatial-EF
 > [!NOTE]

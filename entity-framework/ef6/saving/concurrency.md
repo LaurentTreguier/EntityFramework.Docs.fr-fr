@@ -3,14 +3,13 @@ title: Gestion des conflits d’accès concurrentiel-EF6
 description: Gestion des conflits d’accès concurrentiel dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2318e4d3-f561-4720-bbc3-921556806476
 uid: ef6/saving/concurrency
-ms.openlocfilehash: 1cec47ce346e8a6c86338747c01fba4d030e7388
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b6b1b3b9f593d437ed7da1873a878fcbdb3c3548
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619875"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073728"
 ---
 # <a name="handling-concurrency-conflicts-ef6"></a>Gestion des conflits d’accès concurrentiel (EF6)
 
@@ -26,7 +25,7 @@ Un DbUpdateConcurrencyException est levé par SaveChanges lorsqu’une exception
 
 ## <a name="resolving-optimistic-concurrency-exceptions-with-reload-database-wins"></a>Résolution des exceptions d’accès concurrentiel optimiste avec rechargement (base de données WINS)  
 
-La méthode Reload peut être utilisée pour remplacer les valeurs actuelles de l’entité par les valeurs maintenant dans la base de données. L’entité est ensuite généralement renvoyée à l’utilisateur sous une forme donnée et doit essayer de réenregistrer les modifications. Par exemple :  
+La méthode Reload peut être utilisée pour remplacer les valeurs actuelles de l’entité par les valeurs maintenant dans la base de données. L’entité est ensuite généralement renvoyée à l’utilisateur sous une forme donnée et doit essayer de réenregistrer les modifications. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -55,7 +54,7 @@ using (var context = new BloggingContext())
 }
 ```  
 
-Un bon moyen de simuler une exception d’accès concurrentiel consiste à définir un point d’arrêt sur l’appel de SaveChanges, puis à modifier une entité qui est enregistrée dans la base de données à l’aide d’un autre outil tel que SQL Server Management Studio. Vous pouvez également insérer une ligne avant SaveChanges pour mettre à jour la base de données directement à l’aide de SqlCommand. Par exemple :  
+Un bon moyen de simuler une exception d’accès concurrentiel consiste à définir un point d’arrêt sur l’appel de SaveChanges, puis à modifier une entité qui est enregistrée dans la base de données à l’aide d’un autre outil tel que SQL Server Management Studio. Vous pouvez également insérer une ligne avant SaveChanges pour mettre à jour la base de données directement à l’aide de SqlCommand. Exemple :  
 
 ``` csharp
 context.Database.SqlCommand(
@@ -97,7 +96,7 @@ using (var context = new BloggingContext())
 
 ## <a name="custom-resolution-of-optimistic-concurrency-exceptions"></a>Résolution personnalisée des exceptions d’accès concurrentiel optimiste  
 
-Il peut arriver que vous souhaitiez combiner les valeurs actuellement présentes dans la base de données avec les valeurs actuellement présentes dans l’entité. Cela nécessite généralement une logique personnalisée ou une interaction avec l’utilisateur. Par exemple, vous pouvez présenter un formulaire à l’utilisateur qui contient les valeurs actuelles, les valeurs de la base de données et un ensemble par défaut de valeurs résolues. L’utilisateur modifie ensuite les valeurs résolues en fonction des besoins, et il s’agit de valeurs résolues qui sont enregistrées dans la base de données. Pour ce faire, vous pouvez utiliser les objets DbPropertyValues retournés par CurrentValues et GetDatabaseValues sur l’entrée de l’entité. Par exemple :  
+Il peut arriver que vous souhaitiez combiner les valeurs actuellement présentes dans la base de données avec les valeurs actuellement présentes dans l’entité. Cela nécessite généralement une logique personnalisée ou une interaction avec l’utilisateur. Par exemple, vous pouvez présenter un formulaire à l’utilisateur qui contient les valeurs actuelles, les valeurs de la base de données et un ensemble par défaut de valeurs résolues. L’utilisateur modifie ensuite les valeurs résolues en fonction des besoins, et il s’agit de valeurs résolues qui sont enregistrées dans la base de données. Pour ce faire, vous pouvez utiliser les objets DbPropertyValues retournés par CurrentValues et GetDatabaseValues sur l’entrée de l’entité. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())

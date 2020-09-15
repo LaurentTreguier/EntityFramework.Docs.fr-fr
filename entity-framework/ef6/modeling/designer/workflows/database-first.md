@@ -3,14 +3,13 @@ title: Database First EF6
 description: Database First dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: cc6ffdb3-388d-4e79-a201-01ec2577c949
 uid: ef6/modeling/designer/workflows/database-first
-ms.openlocfilehash: 095fc6d6882df306816e65995ff314f1a0e7178a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 412d83b37ed5f3e2b863dca0913746e61ecdef76
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620451"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073173"
 ---
 # <a name="database-first"></a>Database First
 Cette vidéo et la procédure pas à pas fournissent une introduction au développement Database First à l’aide de Entity Framework. Database First vous permet de rétroconcevoir un modèle à partir d’une base de données existante. Le modèle est stocké dans un fichier EDMX (extension. edmx) et peut être affiché et modifié dans le Entity Framework Designer. Les classes avec lesquelles vous interagissez dans votre application sont générées automatiquement à partir du fichier EDMX.
@@ -43,7 +42,7 @@ Le serveur de base de données installé avec Visual Studio diffère selon la ve
 
 Commençons par générer la base de données.
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Vue- &gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données- &gt; Ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de Explorateur de serveurs avant de devoir sélectionner Microsoft SQL Server comme source de données
@@ -85,7 +84,7 @@ CREATE TABLE [dbo].[Posts] (
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise le Database First pour effectuer l’accès aux données :
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Fichier- &gt; nouveau- &gt; projet...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **DatabaseFirstSample** comme nom

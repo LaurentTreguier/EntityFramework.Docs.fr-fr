@@ -3,14 +3,13 @@ title: Migrations Code First - EF6
 description: Migrations Code First dans Entity Framework 6.
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 36591d8f-36e1-4835-8a51-90f34f633d1e
 uid: ef6/modeling/code-first/migrations/index
-ms.openlocfilehash: b2200a91b087cf6f2dff0803b710e2518193af40
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: aec3a53816e41bf7ead696fd9edc30618d58b07a
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616967"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072159"
 ---
 # <a name="code-first-migrations"></a>Migrations Code First
 Migrations Code First est la méthode recommandée pour faire évoluer votre schéma de base de données d’application si vous utilisez le flux de travail Code First. Les migrations fournissent un ensemble d’outils pour les opérations suivantes :

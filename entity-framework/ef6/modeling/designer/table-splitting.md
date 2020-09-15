@@ -3,14 +3,13 @@ title: Fractionnement de table du concepteur-EF6
 description: Fractionnement des tables du concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 452f17c3-9f26-4de4-9894-8bc036e23b0f
 uid: ef6/modeling/designer/table-splitting
-ms.openlocfilehash: 55642d7c3b4efc7467e8a40e68b4144728df270f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6fdb5050ab4d3860184f19ea056a0f2257e20a3c
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620386"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073108"
 ---
 # <a name="designer-table-splitting"></a>Fractionnement des tables du concepteur
 Cette procédure pas à pas montre comment mapper plusieurs types d’entité à une seule table en modifiant un modèle avec le Entity Framework Designer (concepteur EF).

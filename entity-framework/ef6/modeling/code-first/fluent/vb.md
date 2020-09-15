@@ -3,14 +3,13 @@ title: API Fluent avec VB.NET-EF6
 description: API Fluent avec VB.NET dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 763dc6a2-764a-4600-896c-f6f13abf56ec
 uid: ef6/modeling/code-first/fluent/vb
-ms.openlocfilehash: d6430ee254c6f0d5f093961d25902326022226cd
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d59e685578fb151aea2ae0b41a933f3e13de6c50
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616973"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072575"
 ---
 # <a name="fluent-api-with-vbnet"></a>API Fluent avec VB.NET
 Code First vous permet de définir votre modèle à l’aide de \# classes C ou VB.net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide d’attributs sur vos classes et propriétés ou à l’aide d’une API Fluent. Cette procédure pas à pas montre comment effectuer la configuration de l’API Fluent à l’aide de VB.NET.
@@ -30,7 +29,7 @@ Si vous utilisez Visual Studio 2010, [NuGet](https://visualstudiogallery.msdn.mi
 
 Pour simplifier les choses, nous allons créer une application console de base qui utilise Code First pour effectuer l’accès aux données.
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Fichier- &gt; nouveau- &gt; projet...**
 -   Sélectionnez **Windows** dans le menu de gauche et dans l' **application console** .
 -   Entrez **CodeFirstVBSample** comme nom

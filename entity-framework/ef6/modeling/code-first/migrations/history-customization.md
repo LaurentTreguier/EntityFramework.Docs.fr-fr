@@ -3,14 +3,13 @@ title: Personnalisation de la table de l’historique des migrations-EF6
 description: Personnalisation de la table d’historique des migrations dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: ed5518f0-a9a6-454e-9e98-a4fa7748c8d0
 uid: ef6/modeling/code-first/migrations/history-customization
-ms.openlocfilehash: a6cd27f39c648d35d2e0238a10f8a6b351cc1220
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b71ac7635d6804af2db9bf00acf7e8f4b2a11033
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618064"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073459"
 ---
 # <a name="customizing-the-migrations-history-table"></a>Personnalisation de la table d’historique des migrations
 > [!NOTE]

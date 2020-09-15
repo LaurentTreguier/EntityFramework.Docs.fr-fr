@@ -3,21 +3,20 @@ title: Données locales-EF6
 description: Données locales dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 2eda668b-1e5d-487d-9a8c-0e3beef03fcb
 uid: ef6/querying/local-data
-ms.openlocfilehash: f7c4c8904a2985901491e423f655d4aea79f666d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 5763424ab295ed6ceec655368fe3565a10c911d3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620306"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073910"
 ---
 # <a name="local-data"></a>Données locales
 L’exécution d’une requête LINQ directement sur un DbSet enverra toujours une requête à la base de données, mais vous pouvez accéder aux données qui sont actuellement en mémoire à l’aide de la propriété DbSet. local. Vous pouvez également accéder aux informations supplémentaires EF en effectuant le suivi de vos entités à l’aide des méthodes DbContext. Entry et DbContext. ChangeTracker. Entries. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
 
 ## <a name="using-local-to-look-at-local-data"></a>Utilisation de local pour examiner les données locales  
 
-La propriété locale de DbSet fournit un accès simple aux entités du jeu qui font actuellement l’objet d’un suivi par le contexte et qui n’ont pas été marquées comme supprimées. L’accès à la propriété locale n’entraîne jamais l’envoi d’une requête à la base de données. Cela signifie qu’il est généralement utilisé après qu’une requête a déjà été exécutée. La méthode d’extension Load peut être utilisée pour exécuter une requête afin que le contexte effectue le suivi des résultats. Par exemple :  
+La propriété locale de DbSet fournit un accès simple aux entités du jeu qui font actuellement l’objet d’un suivi par le contexte et qui n’ont pas été marquées comme supprimées. L’accès à la propriété locale n’entraîne jamais l’envoi d’une requête à la base de données. Cela signifie qu’il est généralement utilisé après qu’une requête a déjà été exécutée. La méthode d’extension Load peut être utilisée pour exécuter une requête afin que le contexte effectue le suivi des résultats. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -75,7 +74,7 @@ Cela illustre trois points :
 
 ## <a name="using-local-to-add-and-remove-entities-from-the-context"></a>Utilisation de l’environnement local pour ajouter et supprimer des entités dans le contexte  
 
-La propriété locale sur DbSet retourne un [ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) avec des événements raccordés de sorte qu’il reste synchronisé avec le contenu du contexte. Cela signifie que des entités peuvent être ajoutées ou supprimées de la collection locale ou du DbSet. Cela signifie également que les requêtes qui apportent de nouvelles entités dans le contexte entraînent la mise à jour de la collection locale avec ces entités. Par exemple :  
+La propriété locale sur DbSet retourne un [ObservableCollection](https://msdn.microsoft.com/library/ms668604.aspx) avec des événements raccordés de sorte qu’il reste synchronisé avec le contenu du contexte. Cela signifie que des entités peuvent être ajoutées ou supprimées de la collection locale ou du DbSet. Cela signifie également que les requêtes qui apportent de nouvelles entités dans le contexte entraînent la mise à jour de la collection locale avec ces entités. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -157,7 +156,7 @@ Il ne s’agit pas d’un emplacement approprié pour un exemple de liaison de d
 
 ## <a name="wpf-binding-to-navigation-properties"></a>Liaison WPF avec les propriétés de navigation  
 
-Si vous effectuez une liaison de données maître/détail, vous pouvez lier l’affichage détails à une propriété de navigation de l’une de vos entités. Un moyen simple d’effectuer ce travail consiste à utiliser ObservableCollection pour la propriété de navigation. Par exemple :  
+Si vous effectuez une liaison de données maître/détail, vous pouvez lier l’affichage détails à une propriété de navigation de l’une de vos entités. Un moyen simple d’effectuer ce travail consiste à utiliser ObservableCollection pour la propriété de navigation. Exemple :  
 
 ``` csharp
 public class Blog
@@ -177,7 +176,7 @@ public class Blog
 
 ## <a name="using-local-to-clean-up-entities-in-savechanges"></a>Utilisation de local pour nettoyer les entités dans SaveChanges  
 
-Dans la plupart des cas, les entités supprimées d’une propriété de navigation ne sont pas automatiquement marquées comme supprimées dans le contexte. Par exemple, si vous supprimez un objet post de la collection blog. publications, cette publication ne sera pas automatiquement supprimée lorsque SaveChanges est appelé. Si vous avez besoin de la supprimer, vous devrez peut-être trouver ces entités en suspens et les marquer comme supprimées avant d’appeler SaveChanges ou dans le cadre d’une SaveChanges substituée. Par exemple :  
+Dans la plupart des cas, les entités supprimées d’une propriété de navigation ne sont pas automatiquement marquées comme supprimées dans le contexte. Par exemple, si vous supprimez un objet post de la collection blog. publications, cette publication ne sera pas automatiquement supprimée lorsque SaveChanges est appelé. Si vous avez besoin de la supprimer, vous devrez peut-être trouver ces entités en suspens et les marquer comme supprimées avant d’appeler SaveChanges ou dans le cadre d’une SaveChanges substituée. Exemple :  
 
 ``` csharp
 public override int SaveChanges()
@@ -210,7 +209,7 @@ Il ne s’agit pas d’un emplacement approprié pour un exemple de liaison de d
 
 La plupart des exemples de cette série utilisent la méthode Entry pour retourner une instance DbEntityEntry pour une entité. Cet objet d’entrée sert ensuite de point de départ pour la collecte d’informations sur l’entité, par exemple son état actuel, ainsi que pour l’exécution d’opérations sur l’entité, telles que le chargement explicite d’une entité associée.  
 
-Les méthodes d’entrée retournent des objets DbEntityEntry pour la plupart ou toutes les entités faisant l’objet d’un suivi par le contexte. Cela vous permet de collecter des informations ou d’effectuer des opérations sur de nombreuses entités plutôt que sur une seule entrée. Par exemple :  
+Les méthodes d’entrée retournent des objets DbEntityEntry pour la plupart ou toutes les entités faisant l’objet d’un suivi par le contexte. Cela vous permet de collecter des informations ou d’effectuer des opérations sur de nombreuses entités plutôt que sur une seule entrée. Exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())

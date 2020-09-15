@@ -3,14 +3,13 @@ title: Nouveautés – EF6
 description: Nouveautés d’Entity Framework 6.
 author: divega
 ms.date: 09/12/2019
-ms.assetid: 41d1f86b-ce66-4bf2-8963-48514406fb4c
 uid: ef6/what-is-new/index
-ms.openlocfilehash: 71854e0a7009b35742a70724210708a284f50a3d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3663276174b7f17701756a82b592ebb971516719
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619757"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073654"
 ---
 # <a name="whats-new-in-ef6"></a>Nouveautés dans EF6
 

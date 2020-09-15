@@ -3,14 +3,13 @@ title: Conventions basées sur les modèles-EF6
 description: Conventions basées sur les modèles dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 0fc4eef8-29b8-4192-9c77-08fd33d3db3a
 uid: ef6/modeling/code-first/conventions/model
-ms.openlocfilehash: 30a79f505939220b3d4040778397eab972e6a712
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: bcb7a88f4d9fc994b51300ac30ec58671be370c8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617187"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90074001"
 ---
 # <a name="model-based-conventions"></a>Conventions basées sur les modèles
 > [!NOTE]

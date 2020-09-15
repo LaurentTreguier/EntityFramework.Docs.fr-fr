@@ -3,14 +3,13 @@ title: Mise à niveau vers Entity Framework 6-EF6
 description: Mise à niveau vers Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 29958ae5-85d3-4585-9ba6-550b8ec9393a
 uid: ef6/what-is-new/upgrading-to-ef6
-ms.openlocfilehash: b27504e3b18c668a1c41142b9cd5e697944cb5fa
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 118853ad9b53fe2157f50b329bddc31d3135d75a
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619712"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90074040"
 ---
 # <a name="upgrading-to-entity-framework-6"></a>Mise à niveau vers Entity Framework 6
 
@@ -66,7 +65,7 @@ Les espaces de noms pour DbContext et les types Code First n’ont pas changé. 
 
 Les types comme ObjectContext qui étaient précédemment dans System.Data.Entity.dll ont été déplacés vers de nouveaux espaces de noms. Cela signifie que vous devrez peut-être mettre à jour vos directives *using* ou *Import* pour créer des EF6.
 
-La règle générale pour les modifications d’espace de noms est que tout type dans System. Data. * est déplacé vers System. Data. Entity. Core. *. En d’autres termes, il suffit d’insérer **Entity. Core.** après System. Data. Par exemple :
+La règle générale pour les modifications d’espace de noms est que tout type dans System. Data. * est déplacé vers System. Data. Entity. Core. *. En d’autres termes, il suffit d’insérer **Entity. Core.** après System. Data. Exemple :
 
 - System. Data. EntityException => System. Data. **Entity. Core**. EntityException  
 - System. Data. Objects. ObjectContext => System. Data. **Entity. Core**. Objects. ObjectContext  

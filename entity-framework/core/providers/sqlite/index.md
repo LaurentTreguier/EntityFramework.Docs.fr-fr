@@ -3,14 +3,13 @@ title: Fournisseur de base de données SQLite - EF Core
 description: Informations sur le fournisseur de base de données Entity Framework Core SQLite.
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: 3e2f7698-fec2-4cec-9e2d-2e3e0074120c
 uid: core/providers/sqlite/index
-ms.openlocfilehash: 8620f0e37825368cb3d7965a05118ab1297fb9e8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: ba537acdf537fa475378c08b8c6290930b29239d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616566"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071236"
 ---
 # <a name="sqlite-ef-core-database-provider"></a>Fournisseur de base de données EF Core SQLite
 

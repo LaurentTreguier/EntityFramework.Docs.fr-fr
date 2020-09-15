@@ -3,14 +3,13 @@ title: Liaison de liaison avec WPF-EF6
 description: Liaison de liaison avec WPF dans Entity Framework 6
 author: divega
 ms.date: 05/19/2020
-ms.assetid: e90d48e6-bea7785-47ef-b756-7b89cce4daf0
 uid: ef6/fundamentals/databinding/wpf
-ms.openlocfilehash: d6f9695215c57a288dbd1c7b8f653416dc270760
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 85aea308d89241f1da9633ef60f4bc8c3997561d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616270"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072978"
 ---
 # <a name="databinding-with-wpf"></a>Liaison de données avec WPF
 
@@ -43,7 +42,7 @@ Si vous utilisez Visual Studio 2010, vous devez également installer NuGet. Pour
 
 ## <a name="create-the-application"></a>Création de l’application
 
-- Ouvrez Visual Studio.
+- Ouvrir Visual Studio
 - **Fichier- &gt; nouveau- &gt; projet....**
 - Sélectionnez **fenêtres**   dans le volet gauche et **WPFApplication** dans le volet droit
 - Entrez **WPFwithEFSample**   comme nom

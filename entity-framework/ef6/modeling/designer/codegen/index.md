@@ -3,14 +3,13 @@ title: Modèles de génération de code de concepteur - EF6
 description: Modèles de génération de code de concepteur dans Entity Framework 6.
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
 uid: ef6/modeling/designer/codegen/index
-ms.openlocfilehash: edc8fe3c269336d59d5bb7a10582881584215b1c
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 4a8225d0186174ea2e2effbc1241389afcbe3921
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620567"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070196"
 ---
 # <a name="designer-code-generation-templates"></a>Modèles de génération de code de concepteur
 Quand vous créez un modèle à l’aide d’Entity Framework Designer, vos classes et le contexte dérivé sont générés automatiquement pour vous. En plus de la génération de code par défaut, nous fournissons également un nombre de modèles pouvant servir à personnaliser le code généré. Ces modèles sont fournis sous forme de modèles de texte T4, ce qui vous permet de les personnaliser si nécessaire.

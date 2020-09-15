@@ -3,14 +3,13 @@ title: Migrations Code First automatique-EF6
 description: Migrations Code First automatique dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 0eb86787-2161-4cb4-9cb8-67c5d6e95650
 uid: ef6/modeling/code-first/migrations/automatic
-ms.openlocfilehash: 541adf5aed517685b54d675730996c12ff0c824a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e7bd9ff7d9dcecb7fecf213306047a53fc04135c
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618082"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072562"
 ---
 # <a name="automatic-code-first-migrations"></a>Migrations Code First automatique
 La migration automatique vous permet d’utiliser Migrations Code First sans avoir de fichier de code dans votre projet pour chaque modification que vous apportez. Toutes les modifications ne peuvent pas être appliquées automatiquement. par exemple, les renommages de colonne nécessitent l’utilisation d’une migration basée sur le code.
@@ -99,7 +98,7 @@ Modifions un peu plus notre modèle.
     public string Url { get; set; }
 ```
 
-Si vous deviez réexécuter l’application, vous obtiendrez une exception InvalidOperationException indiquant que le *modèle sauvegardant le contexte’BlogContext’a changé depuis la création de la base de données. Envisagez d’utiliser Migrations Code First pour mettre à jour la base de données (* [*http://go.microsoft.com/fwlink/?LinkId=238269*](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
+Si vous réexécutez l’application, vous obtenez une exception InvalidOperationException indiquant *Le modèle permettant la sauvegarde du contexte 'BlogContext' a changé depuis la création de la base de données. Utilisez Migrations Code First pour mettre à jour la base de données (* [ *http://go.microsoft.com/fwlink/?LinkId=238269* ](https://go.microsoft.com/fwlink/?LinkId=238269) *).*
 
 Comme le suggère l’exception, utilisons donc Migrations Code First. Étant donné que nous voulons utiliser des migrations automatiques, nous allons spécifier le commutateur **– EnableAutomaticMigrations** .
 

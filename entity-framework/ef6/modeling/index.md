@@ -3,14 +3,13 @@ title: Création d’un modèle - EF6
 description: Création d’un modèle dans Entity Framework 6.
 author: divega
 ms.date: 07/05/2018
-ms.assetid: 4890228E-CEA1-4595-B8AD-CA81253F8767
 uid: ef6/modeling/index
-ms.openlocfilehash: 417671d5313bb95bb97d5de85b25b09d687c5c3d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 74b018c75bea72b07e137483f80bf8785a91cd0d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620341"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073030"
 ---
 # <a name="creating-a-model"></a>Création d’un modèle
 

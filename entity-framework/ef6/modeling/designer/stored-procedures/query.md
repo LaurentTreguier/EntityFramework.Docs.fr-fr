@@ -3,19 +3,18 @@ title: Procédures stockées de requête du concepteur-EF6
 description: Procédures stockées de requête du concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 9554ed25-c5c1-43be-acad-5da37739697f
 uid: ef6/modeling/designer/stored-procedures/query
-ms.openlocfilehash: c647516e1c6ea010c791df6857782b2304ceed1c
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 4976c7d4f788e6e9524055a508f9c906b47c9ebb
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620353"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073199"
 ---
 # <a name="designer-query-stored-procedures"></a>Procédures stockées de requête du concepteur
 Cette procédure pas à pas explique comment utiliser le Entity Framework Designer (concepteur EF) pour importer des procédures stockées dans un modèle, puis appeler les procédures stockées importées pour récupérer les résultats. 
 
-Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Par exemple :
+Notez que Code First ne prend pas en charge le mappage à des procédures stockées ou à des fonctions. Toutefois, vous pouvez appeler des procédures stockées ou des fonctions à l’aide de la méthode System. Data. Entity. DbSet. SqlQuery. Exemple :
 ``` csharp
 var query = context.Products.SqlQuery("EXECUTE [dbo].[GetAllProducts]")`;
 ```

@@ -3,14 +3,13 @@ title: Liaison de liaison avec WinForms-EF6
 description: Liaison de liaison avec WinForms dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 80fc5062-2f1c-4dbd-ab6e-b99496784b36
 uid: ef6/fundamentals/databinding/winforms
-ms.openlocfilehash: 934ea2ae488a7df128746a0607037d85e9b23771
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b316aea0a36edc8586a81427825ed4ee11fc9ef3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616340"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073225"
 ---
 # <a name="databinding-with-winforms"></a>Liaison de données avec WinForms
 Cette procédure pas à pas montre comment lier des types POCO à des contrôles Windows Forms (WinForms) dans un formulaire maître/détail. L’application utilise Entity Framework pour remplir les objets avec les données de la base de données, effectuer le suivi des modifications et conserver les données dans la base de données.
@@ -27,7 +26,7 @@ Si vous utilisez Visual Studio 2010, vous devez également installer NuGet. Pour
 
 ## <a name="create-the-application"></a>Création de l’application
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Fichier- &gt; nouveau- &gt; projet....**
 -   Sélectionnez **fenêtres** dans le volet gauche et **Windows FormsApplication** dans le volet droit
 -   Entrez **WinFormswithEFSample** comme nom

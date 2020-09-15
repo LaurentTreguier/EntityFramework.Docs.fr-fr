@@ -3,14 +3,13 @@ title: Fractionnement d’entité du concepteur-EF6
 description: Fractionnement d’entité du concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: aa2dd48a-1f0e-49dd-863d-d6b4f5834832
 uid: ef6/modeling/designer/entity-splitting
-ms.openlocfilehash: d3be4e54d4bcd3ca253d8970c612acddf48dbaf4
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fa25629bae1a35b2d792e2b890e87db6c99c37ab
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620526"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073134"
 ---
 # <a name="designer-entity-splitting"></a>Fractionnement d’entité du concepteur
 Cette procédure pas à pas montre comment mapper un type d’entité à deux tables en modifiant un modèle avec le Entity Framework Designer (concepteur EF). Vous pouvez mapper une entité à plusieurs tables quand les tables partagent une clé commune. Les concepts qui s'appliquent au mappage d'un type d'entité à deux tables sont facilement étendus au mappage d'un type d'entité à plusieurs tables.
@@ -32,7 +31,7 @@ Le serveur de base de données installé avec Visual Studio diffère selon la ve
 
 Tout d’abord, nous allons créer une base de données avec deux tables que nous allons combiner dans une entité unique.
 
--   Ouvrez Visual Studio.
+-   Ouvrir Visual Studio
 -   **Vue- &gt; Explorateur de serveurs**
 -   Cliquez avec le bouton droit sur **connexions de données- &gt; Ajouter une connexion...**
 -   Si vous n’êtes pas connecté à une base de données à partir de Explorateur de serveurs avant de devoir sélectionner **Microsoft SQL Server** comme source de données

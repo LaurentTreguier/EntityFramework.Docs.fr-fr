@@ -3,14 +3,13 @@ title: Héritage TPT-EF6
 description: Héritage de TPT dans le concepteur dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: efc78c31-b4ea-4ea3-a0cd-c69eb507020e
 uid: ef6/modeling/designer/inheritance/tpt
-ms.openlocfilehash: cb686a9f51b14651c210102845de495906318747
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e60965550db3f140dfebf4c1952b3901b9b00aab
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620480"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90073368"
 ---
 # <a name="designer-tpt-inheritance"></a>Héritage de TPT du concepteur
 Cette procédure pas à pas montre comment implémenter l’héritage TPT (table par type) dans votre modèle à l’aide de l’Entity Framework Designer (concepteur EF). L'héritage TPT (table par type) utilise une table distincte de la base de données pour maintenir des données des propriétés non héritées et des propriétés de clé pour chaque type de la hiérarchie d'héritage.
