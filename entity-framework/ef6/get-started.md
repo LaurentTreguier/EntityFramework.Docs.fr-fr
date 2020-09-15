@@ -3,14 +3,13 @@ title: Bien démarrer avec Entity Framework 6 - EF6
 description: Bien démarrer avec Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 66ce9113-81d2-480f-8c16-d00ec405b2f7
 uid: ef6/get-started
-ms.openlocfilehash: a03fa403bedc260def3f8110a028e972824cb756
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 825fe3716ade947f1660c8131100a1c3acba5a1d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618195"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072133"
 ---
 # <a name="get-started-with-entity-framework-6"></a>Bien démarrer avec Entity Framework 6
 
@@ -37,7 +36,7 @@ Veillez à suivre la discussion et à regarder la vidéo présentant la différe
 
   Découvrez comment obtenir de l’aide des experts et fournir vos propres réponses à la Communauté.
 
-* [Collaborer](https://github.com/aspnet/EntityFramework6/)
+* [Collaboration](https://github.com/aspnet/EntityFramework6/)
 
   Entity Framework 6 utilise un modèle de développement ouvert. Découvrez comment vous pouvez aider à améliorer EF en consultant notre dépôt GitHub.
 

@@ -3,14 +3,13 @@ title: 'Fonctionnement des requêtes : EF Core'
 description: Informations générales sur la façon dont Entity Framework Core compile et exécute des requêtes en interne
 author: ajcvickers
 ms.date: 03/17/2020
-ms.assetid: de2e34cd-659b-4cab-b5ed-7a979c6bf120
 uid: core/querying/how-query-works
-ms.openlocfilehash: e0e489f5f797b6f7d8f4860539a538dba90bd1c2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f3a6794b9bfdf70ae40bc8e97ee41861931b9b46
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616367"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071184"
 ---
 # <a name="how-queries-work"></a>Fonctionnement des requêtes
 

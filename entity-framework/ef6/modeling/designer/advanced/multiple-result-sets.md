@@ -3,21 +3,20 @@ title: Procédures stockées avec plusieurs jeux de résultats-EF6
 description: Procédures stockées avec plusieurs jeux de résultats dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 1b3797f9-cd3d-4752-a55e-47b84b399dc1
 uid: ef6/modeling/designer/advanced/multiple-result-sets
-ms.openlocfilehash: 39b8ae171b7cee263554b6ff94bed6bd8f1e0c39
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 6b213b944ca06a7ca141746d86f1127be2fd7d87
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620581"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070222"
 ---
 # <a name="stored-procedures-with-multiple-result-sets"></a>Procédures stockées avec plusieurs jeux de résultats
 Parfois, lorsque vous utilisez des procédures stockées, vous devez retourner plusieurs jeux de résultats. Ce scénario est couramment utilisé pour réduire le nombre d’allers-retours de base de données requis pour composer un seul écran.Avant EF5, Entity Framework autoriserait l’appel de la procédure stockée, mais retournerait uniquement le premier jeu de résultats au code appelant.
 
 Cet article vous montre deux façons de vous permettre d’accéder à plusieurs jeux de résultats à partir d’une procédure stockée dans Entity Framework. Une qui utilise simplement le code et fonctionne avec code First et le concepteur EF et une qui fonctionne uniquement avec le concepteur EF. Les outils et la prise en charge de l’API pour cela doivent s’améliorer dans les futures versions de Entity Framework.
 
-## <a name="model"></a>Modèle
+## <a name="model"></a>Modéliser
 
 Les exemples de cet article utilisent un blog de base et publient un modèle dans lequel un blog contient de nombreuses publications et une publication appartient à un blog unique. Nous allons utiliser une procédure stockée dans la base de données qui retourne tous les blogs et toutes les publications, comme suit :
 

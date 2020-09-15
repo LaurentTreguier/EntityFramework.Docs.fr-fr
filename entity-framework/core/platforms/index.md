@@ -1,14 +1,15 @@
 ---
 title: Implémentations de .NET prises en charge - EF Core
+description: Informations sur les plateformes prises en charge selon les versions d’Entity Framework Core.
 author: bricelam
 ms.date: 06/26/2020
 uid: core/platforms/index
-ms.openlocfilehash: f7e7a4f7993061aa46c1f9c648169158f7a35193
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: f57002af869c16eeedf931085f5e5ff9e72e2984
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238045"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616649"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Implémentations de .NET prises en charge par EF Core
 
@@ -25,7 +26,7 @@ Le tableau suivant fournit des conseils pour chaque implémentation de .NET :
 | .NET Framework<sup>(1)</sup>  | 4.7.2       | (non pris en charge) |
 | Mono                          | 5,4         | 6.4             |
 | Xamarin.iOS<sup>(2)</sup>     | 10.14       | 12.16           |
-| Xamarin. Mac<sup>(2)</sup>     | 3.8         | 5.16            |
+| Xamarin.Mac<sup>(2)</sup>     | 3.8         | 5.16            |
 | Xamarin.Android<sup>(2)</sup> | 8.0         | 10.0            |
 | UWP<sup>(3)</sup>             | 10.0.16299  | TBD             |
 | Unity<sup>(4)</sup>           | 2018.1      | TBD             |

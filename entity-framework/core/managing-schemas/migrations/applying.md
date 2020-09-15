@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: c83194057d58f8278bfbb5264623858e6c022d8f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619462"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071887"
 ---
 # <a name="applying-migrations"></a>Application de migrations
 
@@ -117,7 +117,7 @@ Script-Migration -Idempotent
 
 Les outils en ligne de commande EF peuvent être utilisés pour appliquer des migrations à une base de données. Bien qu’elle soit productive pour le développement et le test de migrations locaux, cette approche n’est pas idéale pour la gestion des bases de données de production :
 
-* Les commandes SQL sont appliquées directement par l’outil, sans donner au développeur une modification pour les inspecter ou les modifier. Cela peut être dangereux dans un environnement de production.
+* Les commandes SQL sont appliquées directement par l’outil, sans donner aux développeurs la possibilité de les inspecter ou de les modifier. Cela peut être dangereux dans un environnement de production.
 * Le kit de développement logiciel (SDK) .NET et l’outil EF doivent être installés sur les serveurs de production.
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
@@ -139,7 +139,7 @@ Notez que cela peut être utilisé pour revenir à une migration antérieure ég
 > [!WARNING]
 > Prenez note des scénarios de pertes de données potentielles.
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 Le code suivant met à jour votre base de données avec la dernière migration :
 
@@ -170,7 +170,7 @@ Il est possible que l’application elle-même applique des migrations par progr
 * De même, si une application accède à la base de données alors qu’une autre application la migre, cela peut entraîner de graves problèmes.
 * L’application doit disposer d’un accès avec élévation de privilèges pour modifier le schéma de la base de données. Il est généralement conseillé de limiter les autorisations de base de données de l’application en production.
 * Il est important de pouvoir restaurer une migration appliquée en cas de problème. Les autres stratégies le fournissent facilement et en toute simplicité.
-* Les commandes SQL sont appliquées directement par le programme, sans donner au développeur une modification pour les inspecter ou les modifier. Cela peut être dangereux dans un environnement de production.
+* Les commandes SQL sont appliquées directement par le programme, sans donner aux développeurs la possibilité de les inspecter ou de les modifier. Cela peut être dangereux dans un environnement de production.
 
 Pour appliquer des migrations par programme, appelez `context.Database.Migrate()` . Par exemple, une application ASP.NET classique peut effectuer les opérations suivantes :
 

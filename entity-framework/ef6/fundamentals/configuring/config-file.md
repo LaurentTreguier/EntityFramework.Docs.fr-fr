@@ -3,14 +3,13 @@ title: Paramètres du fichier de configuration-EF6
 description: Paramètres du fichier de configuration dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 000044c6-1d32-4cf7-ae1f-ea21d86ebf8f
 uid: ef6/fundamentals/configuring/config-file
-ms.openlocfilehash: ac257c0da8da4dff852ec24f7de91c62c68f92d8
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b407ae7d64df18f6a8d80aa13703a8c243c6f3a2
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618482"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070716"
 ---
 # <a name="configuration-file-settings"></a>Paramètres du fichier de configuration
 Entity Framework permet de spécifier un certain nombre de paramètres à partir du fichier de configuration. En général, respecte un principe de « Convention sur la configuration » : tous les paramètres abordés dans ce billet ont un comportement par défaut, vous n’avez plus à vous soucier de modifier le paramètre lorsque la valeur par défaut ne répond plus à vos besoins.  
@@ -42,7 +41,7 @@ La section **EntityFramework** a été ajoutée automatiquement au fichier de co
 
 Les chaînes de connexion sont placées dans l’élément **connectionStrings** standard et ne nécessitent pas la section **entityFramework** .  
 
-Les modèles basés sur Code First utilisent des chaînes de connexion ADO.NET normales. Par exemple :  
+Les modèles basés sur Code First utilisent des chaînes de connexion ADO.NET normales. Exemple :  
 
 ``` xml
 <connectionStrings>
@@ -52,7 +51,7 @@ Les modèles basés sur Code First utilisent des chaînes de connexion ADO.NET n
 </connectionStrings>
 ```  
 
-Les modèles basés sur le concepteur EF utilisent des chaînes de connexion EF spéciales. Par exemple :  
+Les modèles basés sur le concepteur EF utilisent des chaînes de connexion EF spéciales. Exemple :  
 
 ``` xml  
 <connectionStrings>

@@ -4,14 +4,13 @@ description: Utilisation d’entités déconnectées et non suivies sur plusieur
 author: ajcvickers
 ms.author: avickers
 ms.date: 10/27/2016
-ms.assetid: 2533b195-d357-4056-b0e0-8698971bc3b0
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: 52ba838c4d54771c51737c3940e5a88659f94144
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d9b6d2d2c0761dd6f670ba51f935c866e10460b7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617270"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070885"
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -132,7 +131,7 @@ Comme précédemment, lorsque vous n’utilisez pas les clés générées automa
 
 La suppression peut être compliquée à gérer, car souvent l’absence d’une entité signifie qu’elle droit être supprimée. Une façon de gérer cela consiste est d’utiliser des « suppressions récupérables » par exemple en marquant l’entité comme supprimée plutôt que la supprimer réellement. Les suppressions s’apparentent alors à des mises à jour. Les suppressions récupérables peuvent être implémentées à l’aide de [filtres de requête](xref:core/querying/filters).
 
-Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Par exemple :
+Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Exemple :
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

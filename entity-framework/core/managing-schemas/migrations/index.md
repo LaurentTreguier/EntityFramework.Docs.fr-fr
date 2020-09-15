@@ -1,30 +1,31 @@
 ---
-title: Vue d’ensemble des migrations-EF Core
+title: Vue d’ensemble des migrations – EF Core
+description: Vue d’ensemble de la gestion des schémas de la base de données avec Entity Framework Core à l’aide des migrations.
 author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 8539a8da6f0051d3737efc583f0adfaf05fb2d3d
-ms.sourcegitcommit: 31536e52b838a84680d2e93e5bb52fb16df72a97
+ms.openlocfilehash: f1197fb869c33c34672d20e9b727cd187c9c5601
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86238227"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89619467"
 ---
 # <a name="migrations-overview"></a>Vue d’ensemble des migrations
 
-Dans les projets réels, les modèles de données changent à mesure que les fonctionnalités sont implémentées : de nouvelles entités ou propriétés sont ajoutées et supprimées, et les schémas de base de données doivent être modifiés en conséquence afin d’être synchronisés avec l’application. La fonctionnalité de migration dans EF Core permet de mettre à jour de manière incrémentielle le schéma de la base de données pour qu’il reste synchronisé avec le modèle de données de l’application tout en conservant les données existantes dans la base de données.
+Dans la pratique, les modèles de données des projets évoluent au fur et à mesure que des fonctionnalités sont implémentées : de nouvelles entités et propriétés sont ajoutées et supprimées, et les schémas de la base de données doivent être modifiés en conséquence pour rester synchronisés avec l’application. La fonctionnalité de migration dans EF Core permet de mettre à jour de manière incrémentielle le schéma de la base de données pour qu’il reste synchronisé avec le modèle de données de l’application tout en conservant les données existantes dans la base de données.
 
-À un niveau élevé, les migrations fonctionnent de la façon suivante :
+Dans les grandes lignes, les migrations fonctionnent de la façon suivante :
 
-* Lors de l’introduction d’une modification de modèle de données, le développeur utilise EF Core outils pour ajouter une migration correspondante décrivant les mises à jour nécessaires pour maintenir la synchronisation du schéma de base de données. EF Core compare le modèle actuel par rapport à un instantané de l’ancien modèle pour déterminer les différences et génère des fichiers sources de migration ; les fichiers peuvent être suivis dans le contrôle de code source de votre projet comme tout autre fichier source.
-* Une fois qu’une nouvelle migration a été générée, elle peut être appliquée à une base de données de différentes façons. EF Core enregistre toutes les migrations appliquées dans une table d’historique spéciale, ce qui lui permet de savoir quelles migrations ont été appliquées.
+* Lors de l’introduction d’une modification du modèle de données, le développeur utilise des outils EF Core afin d’ajouter une migration correspondante décrivant les mises à jour nécessaires pour préserver la synchronisation du schéma de la base de données. EF Core compare le modèle actuel à un instantané de l’ancien modèle pour déterminer les différences et génère des fichiers sources de migration. Ces fichiers peuvent, comme n’importe quel fichier source, faire l’objet d’un suivi dans le contrôle de code source du projet.
+* Une fois générée, la nouvelle migration peut être appliquée à une base de données de différentes façons. EF Core enregistre toutes les migrations appliquées dans une table d’historique spéciale, ce qui lui permet de savoir quelles migrations ont été appliquées.
 
-Le reste de cette page est un guide pas à pas pour le débutant en vue de l’utilisation des migrations. Consultez les autres pages de cette section pour obtenir des informations plus approfondies.
+La suite de cette page est un guide pas à pas d’utilisation des migrations à destination des débutants. Pour plus d’informations, consultez les autres pages de cette section .
 
 ## <a name="getting-started"></a>Prise en main
 
-Supposons que vous venez de terminer votre première EF Core application, qui contient le modèle simple suivant :
+Supposons que vous venez de terminer votre première application EF Core, qui contient le modèle simple suivant :
 
 ```c#
 public class Blog
@@ -34,18 +35,18 @@ public class Blog
 }
 ```
 
-Pendant le développement, vous avez peut-être utilisé les [API de création et de suppression](xref:core/managing-schemas/ensure-created) pour itérer rapidement, en modifiant votre modèle si nécessaire. mais maintenant que votre application va passer en production, vous devez disposer d’un moyen de faire évoluer le schéma en toute sécurité sans supprimer l’intégralité de la base de données.
+Pendant le développement, vous avez peut-être utilisé les [API de création et de suppression](xref:core/managing-schemas/ensure-created) pour effectuer des itérations rapides, en modifiant votre modèle selon les besoins. Cependant, maintenant que votre application est sur le point de passer en production, il vous faut un moyen de faire évoluer le schéma de manière sécurisée sans supprimer l’intégralité de la base de données.
 
 ### <a name="install-the-tools"></a>Installer les outils
 
-Tout d’abord, vous devez installer les [outils en ligne de commande EF Core](xref:core/miscellaneous/cli/index):
+Tout d’abord, vous devez installer les [outils en ligne de commande EF Core](xref:core/miscellaneous/cli/index) :
 
-* Nous recommandons généralement d’utiliser les [outils de CLI .net Core](xref:core/miscellaneous/cli/dotnet), qui fonctionnent sur toutes les plateformes.
-* Si vous avez l’habitude de travailler dans Visual Studio ou si vous avez des difficultés avec les migrations EF6, vous pouvez également utiliser les outils de la [console du gestionnaire de package](xref:core/miscellaneous/cli/powershell).
+* Nous recommandons généralement d’utiliser les [outils CLI .NET Core](xref:core/miscellaneous/cli/dotnet), qui fonctionnent sur toutes les plateformes.
+* Si vous avez l’habitude de travailler dans Visual Studio ou que vous connaissez les migrations EF6, vous pouvez également utiliser les [outils de la console du gestionnaire de package](xref:core/miscellaneous/cli/powershell).
 
-### <a name="create-your-first-migration"></a>Créer votre première migration
+### <a name="create-your-first-migration"></a>Première création d’une migration
 
-Vous êtes maintenant prêt à ajouter votre première migration ! Demandez à EF Core de créer une migration nommée **InitialCreate**:
+Il est temps d’ajouter votre première migration. Demandez à EF Core de créer une migration nommée **InitialCreate** :
 
 #### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
@@ -61,11 +62,11 @@ Add-Migration InitialCreate
 
 ***
 
-EF Core créera un répertoire nommé **migrations** dans votre projet et générera des fichiers. Il est judicieux d’inspecter ce qui est exactement EF Core généré, et éventuellement de le modifier, mais nous allons ignorer cela pour l’instant.
+EF Core créera un répertoire nommé **Migrations** dans votre projet et générera des fichiers. Il est judicieux d’inspecter précisément les fichiers en question, et éventuellement de les modifier, mais nous allons nous en passer pour l’instant.
 
-### <a name="create-your-database-and-schema"></a>Créer votre base de données et votre schéma
+### <a name="create-your-database-and-schema"></a>Création d’une base de données et d’un schéma
 
-À ce stade, EF peut créer votre base de données et créer votre schéma à partir de la migration. Pour ce faire, procédez comme suit :
+Vous pouvez maintenant demander à EF de créer votre base de données et votre schéma à partir de la migration, par différents moyens :
 
 #### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
@@ -80,11 +81,11 @@ Update-Database
 
 ***
 
-Voilà, votre application est prête à être exécutée sur votre nouvelle base de données, et vous n’avez pas besoin d’écrire une seule ligne de SQL. Notez que cette méthode d’application des migrations est idéale pour le développement local, mais est moins adaptée aux environnements de production. pour plus d’informations, consultez la [page application des migrations](xref:core/managing-schemas/migrations/applying) .
+Votre application est prête à s’exécuter sur votre nouvelle base de données, sans que vous ayez eu à écrire une seule ligne de code SQL. Sachez que cette méthode d’application des migrations, idéale pour le développement local, est moins adaptée aux environnements de production. Pour plus d’informations, consultez la page [Application des migrations](xref:core/managing-schemas/migrations/applying).
 
-### <a name="evolving-your-model"></a>Évolution de votre modèle
+### <a name="evolving-your-model"></a>Évolution du modèle
 
-Quelques jours se sont écoulés, et vous êtes invité à ajouter un horodateur de création à vos blogs. Vous avez effectué les modifications nécessaires à votre application et votre modèle ressemble maintenant à ce qui suit :
+Au bout de quelques jours, il vous est demandé d’ajouter un timestamp de création à vos blogs. Vous avez apporté les modifications nécessaires à votre application. Votre modèle se présente maintenant ainsi :
 
 ```c#
 public class Blog
@@ -95,7 +96,7 @@ public class Blog
 }
 ```
 
-Votre modèle et votre base de données de production ne sont plus synchronisés. nous devons ajouter une nouvelle colonne à votre schéma de base de données. Nous allons créer une nouvelle migration pour ce qui suit :
+Votre modèle et votre base de données de production ne sont plus synchronisés. Vous devez donc ajouter une nouvelle colonne au schéma de votre base de données. Créons pour cela une nouvelle migration :
 
 #### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
@@ -111,11 +112,11 @@ Add-Migration AddBlogCreatedTimestamp
 
 ***
 
-Notez que nous fournissons des migrations un nom descriptif pour faciliter la compréhension ultérieure de l’historique du projet.
+Comme vous pouvez le constater, nous donnons aux migrations un nom descriptif pour faciliter par la suite la compréhension de l’historique du projet.
 
-Comme il ne s’agit pas de la première migration du projet, EF Core compare maintenant votre modèle mis à jour par rapport à un instantané de l’ancien modèle, avant l’ajout de la colonne ; l’instantané de modèle est l’un des fichiers générés par EF Core lorsque vous ajoutez une migration, et est archivé dans le contrôle de code source. Sur la base de cette comparaison, EF Core détecte qu’une colonne a été ajoutée et ajoute la migration appropriée.
+Comme il ne s’agit pas de la première migration du projet, EF Core compare maintenant votre modèle mis à jour à un instantané de l’ancien modèle avant ajout de la colonne, à savoir l’un des fichiers générés par EF Core à l’ajout d’une migration, archivé dans le contrôle de code source. Sur la base de cette comparaison, EF Core détecte qu’une colonne a été ajoutée et ajoute la migration correspondante.
 
-Vous pouvez maintenant appliquer votre migration comme précédemment :
+Vous pouvez maintenant appliquer votre migration comme tout à l’heure :
 
 #### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
@@ -130,8 +131,8 @@ Update-Database
 
 ***
 
-Notez que cette fois, EF détecte que la base de données existe déjà. En outre, lorsque la première migration était appliquée ci-dessus, ce fait a été enregistré dans une table d’historique des migrations spéciale de votre base de données. Cela permet à EF d’appliquer automatiquement la nouvelle migration uniquement.
+Cette fois, EF détecte que la base de données existe déjà. Par ailleurs, lors de l’application de la première migration, ce fait a été enregistré dans une table d’historique des migrations spéciale de la base de données. Ainsi, EF peut appliquer automatiquement la nouvelle migration uniquement.
 
 ### <a name="next-steps"></a>Étapes suivantes
 
-Vous ne disposez que d’une brève présentation des migrations. Consultez les autres pages de documentation pour en savoir plus sur la [gestion des migrations](xref:core/managing-schemas/migrations/managing), [leur application](xref:core/managing-schemas/migrations/applying)et d’autres aspects. La [référence de l’outil CLI .net Core](xref:core/miscellaneous/cli/index) contient également des informations utiles sur les différentes commandes.
+Cette page ne constitue qu’une courte initiation aux migrations. Pour plus d’informations sur la [gestion des migrations](xref:core/managing-schemas/migrations/managing), leur [application](xref:core/managing-schemas/migrations/applying) et d’autres aspects, consultez les autres pages de la documentation. La [référence de l’outil CLI .NET Core](xref:core/miscellaneous/cli/index) contient également des informations utiles sur les différentes commandes.

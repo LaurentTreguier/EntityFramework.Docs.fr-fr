@@ -3,14 +3,13 @@ title: Requête Async et Save-EF6
 description: Requête asynchrone et enregistrement dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: d56e6f1d-4bd1-4b50-9558-9a30e04a8ec3
 uid: ef6/fundamentals/async
-ms.openlocfilehash: 0ecfa116da9591a03ca50a8a186c5381c3e92436
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 576da2d2eaa292e46a8d0a913851ba93e6f72587
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618543"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070807"
 ---
 # <a name="async-query-and-save"></a>Requête asynchrone et enregistrement
 > [!NOTE]

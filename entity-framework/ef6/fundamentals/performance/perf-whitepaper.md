@@ -3,14 +3,13 @@ title: Considérations relatives aux performances pour EF4, EF5 et EF6-EF6
 description: Considérations relatives aux performances pour les Entity Framework 4, 5 et 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: d6d5a465-6434-45fa-855d-5eb48c61a2ea
 uid: ef6/fundamentals/performance/perf-whitepaper
-ms.openlocfilehash: 9d70eab61caace02f59f3c555ef416c45d4f8f45
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 65584382df3d510f314a576f41c5dee3d2e718e7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616175"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070534"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Considérations relatives aux performances pour EF 4, 5 et 6
 Par David Obando, Eric Dettinger et autres
@@ -211,7 +210,7 @@ Le cache du plan de requête est partagé entre les instances ObjectContext au s
 
 -   Le cache du plan de requête est partagé pour tous les types de requêtes : les objets Entity SQL, LINQ to Entities et CompiledQuery.
 -   Par défaut, la mise en cache du plan de requête est activée pour les requêtes Entity SQL, qu’elles soient exécutées via un EntityCommand ou via un ObjectQuery. Elle est également activée par défaut pour les requêtes LINQ to Entities dans Entity Framework sur .NET 4,5 et dans Entity Framework 6
-    -   La mise en cache du plan de requête peut être désactivée en affectant à la propriété EnablePlanCaching (sur EntityCommand ou ObjectQuery) la valeur false. Par exemple :
+    -   La mise en cache du plan de requête peut être désactivée en affectant à la propriété EnablePlanCaching (sur EntityCommand ou ObjectQuery) la valeur false. Exemple :
 ``` csharp
                     var query = from customer in context.Customer
                                 where customer.CustomerId == id
@@ -249,8 +248,8 @@ Pour illustrer l’effet de la mise en cache du plan de requête sur les perform
 | Test                                                                   | EF5 aucun cache | EF5 mis en cache | EF6 aucun cache | EF6 mis en cache |
 |:-----------------------------------------------------------------------|:-------------|:-----------|:-------------|:-----------|
 | Énumération de toutes les requêtes 18723                                          | 124          | 125,4      | 124,3        | 125,3      |
-| Éviter le balayage (uniquement les premières requêtes 800, quelle que soit la complexité)  | 41,7         | 5.5        | 40,5         | 5.4        |
-| Uniquement les requêtes AggregatingSubtotals (178 au total-qui évite le balayage) | 39,5         | 4,5        | 38,1         | 4,6        |
+| Éviter le balayage (uniquement les premières requêtes 800, quelle que soit la complexité)  | 41,7         | 5.5        | 40,5         | 5,4        |
+| Uniquement les requêtes AggregatingSubtotals (178 au total-qui évite le balayage) | 39,5         | 4.5        | 38,1         | 4.6        |
 
 *Toutes les fois en secondes.*
 
@@ -456,7 +455,7 @@ Entity Framework 6 contient des optimisations de la façon dont IEnumerable &lt;
 
 ### <a name="42-using-functions-that-produce-queries-with-constants"></a>4,2 utilisation de fonctions qui produisent des requêtes avec des constantes
 
-Les opérateurs LINQ Skip (), Take (), Contains () et DefautIfEmpty () ne génèrent pas de requêtes SQL avec des paramètres, mais placent les valeurs qui leur sont passées en tant que constantes. Pour cette raison, les requêtes qui peuvent sinon être identiques finissent par polluer le cache du plan de requête, à la fois sur la pile EF et sur le serveur de base de données, et ne sont pas réutilisées, sauf si les mêmes constantes sont utilisées lors de l’exécution d’une requête ultérieure. Par exemple :
+Les opérateurs LINQ Skip (), Take (), Contains () et DefautIfEmpty () ne génèrent pas de requêtes SQL avec des paramètres, mais placent les valeurs qui leur sont passées en tant que constantes. Pour cette raison, les requêtes qui peuvent sinon être identiques finissent par polluer le cache du plan de requête, à la fois sur la pile EF et sur le serveur de base de données, et ne sont pas réutilisées, sauf si les mêmes constantes sont utilisées lors de l’exécution d’une requête ultérieure. Exemple :
 
 ``` csharp
 var id = 10;
@@ -510,7 +509,7 @@ for (; i < count; ++i)
 
 ### <a name="43-using-the-properties-of-a-non-mapped-object"></a>4,3 utilisation des propriétés d’un objet non mappé
 
-Quand une requête utilise les propriétés d’un type d’objet non mappé comme paramètre, la requête n’est pas mise en cache. Par exemple :
+Quand une requête utilise les propriétés d’un type d’objet non mappé comme paramètre, la requête n’est pas mise en cache. Exemple :
 
 ``` csharp
 using (var context = new MyContext())
@@ -691,7 +690,7 @@ var q = context.Products.AsNoTracking()
     -   Les modèles utilisant DefaultIfEmpty pour les requêtes de jointure externe génèrent des requêtes plus complexes que les instructions de jointure externe simples dans Entity SQL.
     -   Vous ne pouvez toujours pas utiliser LIKE avec les critères spéciaux.
 
-Notez que les requêtes qui projetent les propriétés scalaires ne sont pas suivies, même si le NoTracking n’est pas spécifié. Par exemple :
+Notez que les requêtes qui projetent les propriétés scalaires ne sont pas suivies, même si le NoTracking n’est pas spécifié. Exemple :
 
 ``` csharp
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { p.ProductName });

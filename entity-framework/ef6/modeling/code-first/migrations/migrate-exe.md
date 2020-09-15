@@ -3,14 +3,13 @@ title: Utilisation de migrate.exe-EF6
 description: Utilisation de migrate.exe dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 989ea862-e936-4c85-926a-8cfbef5df5b8
 uid: ef6/modeling/code-first/migrations/migrate-exe
-ms.openlocfilehash: e35907ed421d95111ca956aa928d65ece2c9a116
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 421b0a186afabdaa225816e0e5967633a95de959
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616989"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072172"
 ---
 # <a name="using-migrateexe"></a>Utilisation de migrate.exe
 Migrations Code First peut être utilisé pour mettre à jour une base de données à partir de Visual Studio, mais elle peut également être exécutée à l’aide de l’outil en ligne de commande migrate.exe. Cette page propose une vue d’ensemble rapide de l’utilisation de migrate.exe pour exécuter des migrations sur une base de données.

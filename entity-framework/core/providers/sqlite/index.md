@@ -1,15 +1,16 @@
 ---
 title: Fournisseur de base de données SQLite - EF Core
+description: Informations sur le fournisseur de base de données Entity Framework Core SQLite.
 author: rowanmiller
 ms.date: 10/27/2016
 ms.assetid: 3e2f7698-fec2-4cec-9e2d-2e3e0074120c
 uid: core/providers/sqlite/index
-ms.openlocfilehash: e8c3d675322b163fdf1e2e7e01f3815e28f427a2
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+ms.openlocfilehash: 8620f0e37825368cb3d7965a05118ab1297fb9e8
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413134"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616566"
 ---
 # <a name="sqlite-ef-core-database-provider"></a>Fournisseur de base de données EF Core SQLite
 
@@ -25,7 +26,7 @@ Installez le [package NuGet Microsoft.EntityFrameworkCore.Sqlite](https://www.nu
 dotnet add package Microsoft.EntityFrameworkCore.Sqlite
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ``` powershell
 Install-Package Microsoft.EntityFrameworkCore.Sqlite
@@ -39,4 +40,4 @@ Install-Package Microsoft.EntityFrameworkCore.Sqlite
 
 ## <a name="limitations"></a>Limites
 
-Consultez [Limitations de SQLite](limitations.md) pour connaître certaines limitations importantes du fournisseur SQLite.
+Consultez [Limitations de SQLite](xref:core/providers/sqlite/limitations) pour connaître certaines limitations importantes du fournisseur SQLite.

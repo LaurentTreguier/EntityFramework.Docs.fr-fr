@@ -3,14 +3,13 @@ title: Relations, propriétés de navigation et clés étrangères-EF6
 description: Relations, propriétés de navigation et clés étrangères dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 8a21ae73-6d9b-4b50-838a-ec1fddffcf37
 uid: ef6/fundamentals/relationships
-ms.openlocfilehash: 63349d9a81065ea4e15a5f97ef5298cb3dc67339
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 65caacfbd860b5b896695c208b55b9c66d11255d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618397"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072250"
 ---
 # <a name="relationships-navigation-properties-and-foreign-keys"></a>Relations, propriétés de navigation et clés étrangères
 
@@ -96,7 +95,7 @@ Les exemples suivants montrent comment utiliser les propriétés de clé étrang
   course.Department = department;
   ```
 
-- Pour supprimer la relation, affectez à la propriété de navigation la valeur `null` . Si vous utilisez Entity Framework qui est basé sur .NET 4,0, la terminaison connexe doit être chargée avant de lui affecter la valeur null. Par exemple :   
+- Pour supprimer la relation, affectez à la propriété de navigation la valeur `null` . Si vous utilisez Entity Framework qui est basé sur .NET 4,0, la terminaison connexe doit être chargée avant de lui affecter la valeur null. Exemple :   
   ``` csharp
   context.Entry(course).Reference(c => c.Department).Load();
   course.Department = null;

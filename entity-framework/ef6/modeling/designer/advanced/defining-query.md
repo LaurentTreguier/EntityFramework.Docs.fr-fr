@@ -3,14 +3,13 @@ title: Définition de Query-EF designer-EF6
 description: Définition de la requête-concepteur EF dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: e52a297e-85aa-42f6-a922-ba960f8a4b22
 uid: ef6/modeling/designer/advanced/defining-query
-ms.openlocfilehash: e1962a80c3a94fb17bacf28969629ce949b117a0
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: b5d24b9f6c047eb8681a0343c768d1ffa70ca6b8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616834"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070339"
 ---
 # <a name="defining-query---ef-designer"></a>Définition de la requête-concepteur EF
 Cette procédure pas à pas montre comment ajouter une requête de définition et un type d’entité correspondant à un modèle à l’aide du concepteur EF. Une requête de définition est couramment utilisée pour fournir des fonctionnalités semblables à celles fournies par une vue de base de données, mais la vue est définie dans le modèle, et non dans la base de données. Une requête de définition vous permet d’exécuter une instruction SQL qui est spécifiée dans l’élément **DefiningQuery**   d’un fichier. edmx. Pour plus d’informations, consultez **DefiningQuery** dans la [spécification SSDL](xref:ef6/modeling/designer/advanced/edmx/ssdl-spec).

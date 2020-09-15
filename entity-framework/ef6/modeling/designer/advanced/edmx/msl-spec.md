@@ -3,14 +3,13 @@ title: Spécification MSL-EF6
 description: Spécification MSL dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 13ae7bc1-74b4-4ee4-8d73-c337be841467
 uid: ef6/modeling/designer/advanced/edmx/msl-spec
-ms.openlocfilehash: 4ec43f48f82b83bd85b47fe234be143d0e4d2560
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 36527b9827a7576f73c9ef476462d9392b601984
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620618"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070110"
 ---
 # <a name="msl-specification"></a>Spécification MSL
 Le langage MSL (Mapping Specification Language) est un langage basé sur XML qui décrit le mappage entre le modèle conceptuel et le modèle de stockage d’une application Entity Framework.
@@ -44,7 +43,7 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 | **Clé**        | Oui         | Alias de l’espace de noms spécifié par l’attribut **value** . |
 | **Valeur**      | Oui         | Espace de noms pour lequel la valeur de l’élément **Key** est un alias.     |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément d' **alias** qui définit un alias, `c` , pour les types définis dans le modèle conceptuel.
 
@@ -93,13 +92,13 @@ L’élément **AssociationEnd** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **AssociationEnd** .
 
-| Nom de l'attribut     | Est obligatoire | Valeur                                                                                                                                                                             |
+| Nom de l'attribut     | Est obligatoire | Value                                                                                                                                                                             |
 |:-------------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **AssociationSet ;** | Oui         | Nom de l'association mappée.                                                                                                                                 |
 | **From**           | Oui         | Valeur de l’attribut **FromRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL). |
 | **To**             | Oui         | Valeur de l’attribut **ToRole** de la propriété de navigation qui correspond à l’Association qui est mappée. Pour plus d’informations, consultez NavigationProperty, élément (CSDL).   |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 Considérons le type d'entité de modèle conceptuel suivant :
 
@@ -203,10 +202,10 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 | Nom de l'attribut     | Est obligatoire | Valeur                                                                                       |
 |:-------------------|:------------|:--------------------------------------------------------------------------------------------|
 | **Nom**           | Oui         | Nom de l'ensemble d'associations du modèle conceptuel mappé.                      |
-| **TypeName**       | Non          | Nom qualifié par un espace de noms du type d'association du modèle conceptuel mappé. |
-| **StoreEntitySet** | Non          | Nom de la table mappée.                                                 |
+| **TypeName**       | Non           | Nom qualifié par un espace de noms du type d'association du modèle conceptuel mappé. |
+| **StoreEntitySet** | Non           | Nom de la table mappée.                                                 |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association de ** \_ \_ service de cours FK** définie dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
 
@@ -241,9 +240,9 @@ Le tableau suivant décrit les attributs qui s’appliquent à l’élément **C
 | Nom de l'attribut | Est obligatoire | Valeur                                                                                            |
 |:---------------|:------------|:-------------------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom de la propriété complexe d'un type d'entité dans le modèle conceptuel mappé. |
-| **TypeName**   | Non          | Nom qualifié par un espace de noms du type de propriété de modèle conceptuel.                              |
+| **TypeName**   | Non           | Nom qualifié par un espace de noms du type de propriété de modèle conceptuel.                              |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L'exemple suivant est basé sur le modèle School. Le type complexe suivant a été ajouté au modèle conceptuel :
 
@@ -308,11 +307,11 @@ L’élément **ComplexTypeMapping,** peut avoir les éléments enfants suivants
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **ComplexTypeMapping,** .
 
-| Nom de l'attribut | Est obligatoire | Valeur                                                                  |
+| Nom de l'attribut | Est obligatoire | Value                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------|
 | **TypeName**   | Oui         | Nom qualifié par un espace de noms du type complexe mappé. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 Examinez la procédure stockée suivante :
 
@@ -379,14 +378,14 @@ L’élément **condition** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **condition** :
 
-| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                                                                                                                                                         |
+| Nom de l'attribut | Est obligatoire | Value                                                                                                                                                                                                                                                                                         |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **ColumnName** | Non          | Nom de la colonne de table dont la valeur est utilisée pour évaluer la condition.                                                                                                                                                                                                                   |
-| **IsNull**     | Non          | **True** ou **False**. Si la valeur est **true** et que la valeur de la colonne est **null**, ou si la valeur est **false** et que la valeur de la colonne n’est pas **null**, la condition est true. Sinon, la condition n'est pas vérifiée (False). <br/> Les attributs **IsNull** et **value** ne peuvent pas être utilisés en même temps. |
+| **ColumnName** | Non           | Nom de la colonne de table dont la valeur est utilisée pour évaluer la condition.                                                                                                                                                                                                                   |
+| **IsNull**     | Non           | **True** ou **False**. Si la valeur est **true** et que la valeur de la colonne est **null**, ou si la valeur est **false** et que la valeur de la colonne n’est pas **null**, la condition est true. Sinon, la condition n'est pas vérifiée (False). <br/> Les attributs **IsNull** et **value** ne peuvent pas être utilisés en même temps. |
 | **Valeur**      | Non          | Valeur à laquelle la valeur de colonne est comparée. Si les valeurs sont identiques, la condition est vérifiée (True). Sinon, la condition n'est pas vérifiée (False). <br/> Les attributs **IsNull** et **value** ne peuvent pas être utilisés en même temps.                                                                       |
-| **Nom**       | Non          | Nom de la propriété d'entité de modèle conceptuel dont la valeur est utilisée pour évaluer la condition. <br/> Cet attribut n’est pas applicable si l’élément **condition** est utilisé dans un élément FunctionImportMapping.                                                                           |
+| **Nom**       | Non           | Nom de la propriété d'entité de modèle conceptuel dont la valeur est utilisée pour évaluer la condition. <br/> Cet attribut n’est pas applicable si l’élément **condition** est utilisé dans un élément FunctionImportMapping.                                                                           |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre des éléments de **condition** en tant qu’enfants d’éléments **MappingFragment** . Lorsque **HireDate** n’a pas la valeur null et que **EnrollmentDate** a la valeur null, les données sont mappées entre le type **SchoolModel. Instructor** et les colonnes **PersonID** et **HireDate** de la table **Person** . Lorsque **EnrollmentDate** n’a pas la valeur null et **HireDate** a la valeur null, les données sont mappées entre le type **SchoolModel. Student** et les colonnes **PersonID** et **inscription** de la table **Person** .
 
@@ -440,12 +439,12 @@ L’élément **DeleteFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **DeleteFunction** lorsqu’il est appliqué à un élément **EntityTypeMapping** .
 
-| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de suppression est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
-| **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
+| **RowsAffectedParameter** | Non           | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
 
-#### <a name="example"></a>Exemple
+#### <a name="example"></a> Exemple
 
 L’exemple suivant est basé sur le modèle School et montre l’élément **DeleteFunction** qui mappe la fonction Delete du type d’entité **Person** à la procédure stockée **DeletePerson** . La procédure stockée **DeletePerson** est déclarée dans le modèle de stockage.
 
@@ -504,12 +503,12 @@ L’élément **DeleteFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **DeleteFunction** lorsqu’il est appliqué à l’élément **AssociationSetMapping** .
 
-| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de suppression est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
-| **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
+| **RowsAffectedParameter** | Non           | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
 
-#### <a name="example"></a>Exemple
+#### <a name="example"></a> Exemple
 
 L’exemple suivant est basé sur le modèle School et montre l’élément **DeleteFunction** utilisé pour mapper la fonction Delete de l’Association **CourseInstructor** à la procédure stockée **DeleteCourseInstructor** . La procédure stockée **DeleteCourseInstructor** est déclarée dans le modèle de stockage.
 
@@ -558,11 +557,11 @@ L’élément **EndProperty** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **EndProperty** :
 
-| Nom de l'attribut | Est obligatoire | Valeur                                                 |
+| Nom de l'attribut | Est obligatoire | Value                                                 |
 |:---------------|:------------|:------------------------------------------------------|
 | Nom           | Oui         | Nom de la terminaison d'association mappée. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l’Association de ** \_ \_ service de cours FK** dans le modèle conceptuel est mappée à la table **course** de la base de données. Les mappages entre les propriétés de type d’association et les colonnes de table sont spécifiés dans les éléments **EndProperty** enfants.
 
@@ -579,7 +578,7 @@ L’exemple suivant montre un élément **AssociationSetMapping** dans lequel l�
  </AssociationSetMapping>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre l’élément **EndProperty** qui mappe les fonctions d’insertion et de suppression d’une association (**CourseInstructor**) à des procédures stockées dans la base de données sous-jacente. Les fonctions mappées sont déclarées dans le modèle de stockage.
 
@@ -628,13 +627,13 @@ L’élément **EntityContainerMapping** peut avoir les éléments enfants suiva
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntityContainerMapping** .
 
-| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Value                                                                                                                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StorageModelContainer** | Oui         | Nom du conteneur d'entités de modèle de stockage mappé.                                                                                                                                                                                     |
 | **CdmEntityContainer**    | Oui         | Nom du conteneur d'entités de modèle conceptuel mappé.                                                                                                                                                                                  |
-| **GenerateUpdateViews**   | Non          | **True** ou **False**. Si la **valeur est false**, aucune vue de mise à jour n’est générée. Cet attribut doit avoir la valeur **false** lorsque vous avez un mappage en lecture seule qui serait non valide, car les données ne peuvent pas aller-retour. <br/> La valeur par défaut est **True**. |
+| **GenerateUpdateViews**   | Non           | **True** ou **False**. Si la **valeur est false**, aucune vue de mise à jour n’est générée. Cet attribut doit avoir la valeur **false** lorsque vous avez un mappage en lecture seule qui serait non valide, car les données ne peuvent pas aller-retour. <br/> La valeur par défaut est **True**. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément **EntityContainerMapping** qui mappe le conteneur **SchoolModelEntities** (le conteneur d’entités de modèle conceptuel) au conteneur **SchoolModelStoreContainer** (conteneur d’entités de modèle de stockage) :
 
@@ -682,15 +681,15 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 | Nom de l'attribut           | Est obligatoire | Valeur                                                                                                                                                                                                                         |
 |:-------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                 | Oui         | Nom du jeu d'entités de modèle conceptuel mappé.                                                                                                                                                             |
-| **TypeName** **1**       | Non          | Nom du type d'entité de modèle conceptuel mappé.                                                                                                                                                            |
-| **StoreEntitySet** **1** | Non          | Nom du jeu d'entités de modèle de stockage de destination du mappage.                                                                                                                                                             |
-| **MakeColumnsDistinct**  | Non          | **True** ou **false** selon que seules des lignes distinctes sont retournées. <br/> Si cet attribut est défini sur **true**, l’attribut **GenerateUpdateViews** de l’élément EntityContainerMapping doit avoir la valeur **false**. |
+| **TypeName** **1**       | Non           | Nom du type d'entité de modèle conceptuel mappé.                                                                                                                                                            |
+| **StoreEntitySet** **1** | Non           | Nom du jeu d'entités de modèle de stockage de destination du mappage.                                                                                                                                                             |
+| **MakeColumnsDistinct**  | Non           | **True** ou **false** selon que seules des lignes distinctes sont retournées. <br/> Si cet attribut est défini sur **true**, l’attribut **GenerateUpdateViews** de l’élément EntityContainerMapping doit avoir la valeur **false**. |
 
  
 
 **1** les attributs **TypeName** et **StoreEntitySet** peuvent être utilisés à la place des éléments enfants EntityTypeMapping et MappingFragment pour mapper un type d’entité unique à une table unique.
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément **EntitySetMapping** qui mappe trois types (un type de base et deux types dérivés) dans le jeu d’entités **courses** du modèle conceptuel à trois tables différentes dans la base de données sous-jacente. Les tables sont spécifiées par l’attribut **StoreEntitySet** dans chaque élément **MappingFragment** .
 
@@ -745,11 +744,11 @@ L’élément **EntityTypeMapping** peut avoir les éléments enfants suivants 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **EntityTypeMapping** .
 
-| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                                                                |
+| Nom de l'attribut | Est obligatoire | Value                                                                                                                                                                                                |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **TypeName**   | Oui         | Nom qualifié par un espace de noms du type d'entité de modèle conceptuel mappé. <br/> Si le type correspond à un type abstrait ou dérivé, la valeur doit être `IsOfType(Namespace-qualified_type_name)`. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément EntitySetMapping avec deux éléments **EntityTypeMapping** enfants. Dans le premier élément **EntityTypeMapping** , le type d’entité **SchoolModel. Person** est mappé à la table **Person** . Dans le deuxième élément **EntityTypeMapping** , la fonctionnalité de mise à jour du type **SchoolModel. Person** est mappée à une procédure stockée, **UpdatePerson**, dans la base de données.
 
@@ -783,7 +782,7 @@ L’exemple suivant montre un élément EntitySetMapping avec deux éléments **
  </EntitySetMapping>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L'exemple suivant illustre le mappage d'une hiérarchie de types dont le type racine est abstrait. Notez l’utilisation de la `IsOfType` syntaxe pour les attributs **TypeName** .
 
@@ -831,12 +830,12 @@ L’élément **FunctionImportMapping** peut avoir les éléments enfants suivan
 
 Le tableau suivant décrit les attributs qui s’appliquent à l’élément **FunctionImportMapping** :
 
-| Nom de l'attribut         | Est obligatoire | Valeur                                                                                   |
+| Nom de l'attribut         | Est obligatoire | Value                                                                                   |
 |:-----------------------|:------------|:----------------------------------------------------------------------------------------|
 | **FunctionImportName** | Oui         | Nom de l'importation de fonction dans le modèle conceptuel mappé.           |
 | **FunctionName**       | Oui         | Nom qualifié par un espace de noms de la fonction dans le modèle de stockage mappé. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L'exemple suivant est basé sur le modèle School. Considérez la fonction suivante dans le modèle de stockage :
 
@@ -889,12 +888,12 @@ L’élément **InsertFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **InsertFunction** lorsqu’ils sont appliqués à un élément **EntityTypeMapping** .
 
-| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction d'insertion est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
-| **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
+| **RowsAffectedParameter** | Non           | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
 
-#### <a name="example"></a>Exemple
+#### <a name="example"></a> Exemple
 
 L’exemple suivant est basé sur le modèle School et montre l’élément **InsertFunction** utilisé pour mapper la fonction d’insertion du type d’entité Person à la procédure stockée **InsertPerson** . La procédure stockée **InsertPerson** est déclarée dans le modèle de stockage.
 
@@ -940,12 +939,12 @@ L’élément **InsertFunction** peut avoir les éléments enfants suivants lors
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **InsertFunction** lorsqu’il est appliqué à l’élément **AssociationSetMapping** .
 
-| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction d'insertion est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
-| **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
+| **RowsAffectedParameter** | Non           | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
 
-#### <a name="example"></a>Exemple
+#### <a name="example"></a> Exemple
 
 L’exemple suivant est basé sur le modèle School et montre l’élément **InsertFunction** utilisé pour mapper la fonction d’insertion de l’Association **CourseInstructor** à la procédure stockée **InsertCourseInstructor** . La procédure stockée **InsertCourseInstructor** est déclarée dans le modèle de stockage.
 
@@ -997,11 +996,11 @@ Les noms de types de modèle conceptuel et de stockage référencés en MSL doiv
 
 Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’élément **Mapping** .
 
-| Nom de l'attribut | Est obligatoire | Valeur                                                 |
+| Nom de l'attribut | Est obligatoire | Value                                                 |
 |:---------------|:------------|:------------------------------------------------------|
 | **Espace**      | Oui         | **C-S**. Il s'agit d'une valeur fixe qui ne peut pas être modifiée. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant illustre un élément de **mappage** basé sur une partie du modèle School. Pour plus d’informations sur le modèle School, consultez démarrage rapide (Entity Framework) :
 
@@ -1050,12 +1049,12 @@ L’élément **MappingFragment** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **MappingFragment** .
 
-| Nom de l'attribut          | Est obligatoire | Valeur                                                                                                                                                                                                                         |
+| Nom de l'attribut          | Est obligatoire | Value                                                                                                                                                                                                                         |
 |:------------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **StoreEntitySet**      | Oui         | Nom de la table ou de la vue mappée.                                                                                                                                                                           |
-| **MakeColumnsDistinct** | Non          | **True** ou **false** selon que seules des lignes distinctes sont retournées. <br/> Si cet attribut est défini sur **true**, l’attribut **GenerateUpdateViews** de l’élément EntityContainerMapping doit avoir la valeur **false**. |
+| **MakeColumnsDistinct** | Non           | **True** ou **false** selon que seules des lignes distinctes sont retournées. <br/> Si cet attribut est défini sur **true**, l’attribut **GenerateUpdateViews** de l’élément EntityContainerMapping doit avoir la valeur **false**. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément **MappingFragment** en tant qu’enfant d’un élément **EntityTypeMapping** . Dans cet exemple, les propriétés du type de **cours** dans le modèle conceptuel sont mappées aux colonnes de la table **course** dans la base de données.
 
@@ -1072,7 +1071,7 @@ L’exemple suivant montre un élément **MappingFragment** en tant qu’enfant 
  </EntitySetMapping>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre un élément **MappingFragment** en tant qu’enfant d’un élément **EntitySetMapping** . Comme dans l’exemple ci-dessus, les propriétés du type de **cours** dans le modèle conceptuel sont mappées aux colonnes de la table **course** dans la base de données.
 
@@ -1108,7 +1107,7 @@ L’élément **ModificationFunctionMapping** peut avoir les éléments enfants 
 
 Aucun attribut n’est applicable à l’élément **ModificationFunctionMapping** .
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre le mappage de jeu d’entités pour le jeu d’entités **People** dans le modèle School. En plus du mappage de colonnes pour le type d’entité **Person** , le mappage des fonctions d’insertion, de mise à jour et de suppression du type **Person** est affiché. Les fonctions mappées sont déclarées dans le modèle de stockage.
 
@@ -1155,7 +1154,7 @@ L’exemple suivant montre le mappage de jeu d’entités pour le jeu d’entit�
  </EntitySetMapping>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre le mappage de l’ensemble d’associations pour l’ensemble d’associations **CourseInstructor** dans le modèle School. En plus du mappage de colonnes pour l’Association **CourseInstructor** , le mappage des fonctions d’insertion et de suppression de l’Association **CourseInstructor** est affiché. Les fonctions mappées sont déclarées dans le modèle de stockage.
 
@@ -1213,11 +1212,11 @@ L’élément **QueryView** ne peut pas avoir d’éléments enfants.
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **QueryView** .
 
-| Nom de l'attribut | Est obligatoire | Valeur                                                                         |
+| Nom de l'attribut | Est obligatoire | Value                                                                         |
 |:---------------|:------------|:------------------------------------------------------------------------------|
-| **TypeName**   | Non          | Nom du type de modèle conceptuel mappé par l'affichage des requêtes. |
+| **TypeName**   | Non           | Nom du type de modèle conceptuel mappé par l'affichage des requêtes. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre l’élément **QueryView** en tant qu’enfant de l’élément **EntitySetMapping** et définit un mappage d’affichage des requêtes pour le type d’entité **Department** dans le modèle School.
 
@@ -1253,7 +1252,7 @@ L’exemple suivant montre l’élément **QueryView** en tant qu’enfant de l�
  </EntityType>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre l’élément **QueryView** en tant qu’enfant d’un élément **AssociationSetMapping** et définit un mappage en lecture seule pour l' `FK_Course_Department` Association dans le modèle School.
 
@@ -1332,7 +1331,7 @@ Le tableau suivant décrit les attributs qui s’appliquent à l’élément **R
 | **Nom**       | Oui         | Nom de la propriété d'entité dans le modèle conceptuel mappé. |
 | **ColumnName** | Oui         | Nom de la colonne mappée.                                          |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant est basé sur le modèle School et montre un élément **InsertFunction** utilisé pour mapper la fonction insert du type d’entité **Person** à la procédure stockée **InsertPerson** . (La procédure stockée **InsertPerson** est indiquée ci-dessous et est déclarée dans le modèle de stockage.) Un élément **ResultBinding** est utilisé pour mapper une valeur de colonne retournée par la procédure stockée (**NewPersonID**) à une propriété de type d’entité (**PersonID**).
 
@@ -1405,7 +1404,7 @@ L’élément **ResultMapping** peut avoir les éléments enfants suivants :
 
 Aucun attribut n’est applicable à l’élément **ResultMapping** .
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 Examinez la procédure stockée suivante :
 
@@ -1490,9 +1489,9 @@ Le tableau suivant décrit les attributs qui s’appliquent à l’élément **S
 |:------------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**          | Oui         | Nom de la propriété de modèle conceptuel mappée.                                                                                 |
 | **ParameterName** | Oui         | Nom du paramètre mappé.                                                                                                 |
-| **Version**       | Non          | **Actuel** ou **original** selon que la valeur actuelle ou la valeur d’origine de la propriété doit être utilisée pour les contrôles d’accès concurrentiel. |
+| **Version**       | Non           | **Actuel** ou **original** selon que la valeur actuelle ou la valeur d’origine de la propriété doit être utilisée pour les contrôles d’accès concurrentiel. |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre l’élément **ScalarProperty** utilisé de deux manières :
 
@@ -1542,7 +1541,7 @@ L’exemple suivant montre l’élément **ScalarProperty** utilisé de deux man
  </EntitySetMapping>
 ```
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant montre l’élément **ScalarProperty** utilisé pour mapper les fonctions d’insertion et de suppression d’une association de modèle conceptuel à des procédures stockées dans la base de données. Les procédures stockées sont déclarées dans le modèle de stockage.
 
@@ -1597,12 +1596,12 @@ L’élément **UpdateFunction** peut avoir les éléments enfants suivants :
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **UpdateFunction** .
 
-| Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                    |
+| Nom de l'attribut            | Est obligatoire | Value                                                                                                                                                    |
 |:--------------------------|:------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **FunctionName**          | Oui         | Nom qualifié par un espace de noms de la procédure stockée à laquelle la fonction de mise à jour est mappée. La procédure stockée doit être déclarée dans le modèle de stockage. |
-| **RowsAffectedParameter** | Non          | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
+| **RowsAffectedParameter** | Non           | Nom du paramètre de sortie qui retourne le nombre de lignes affectées.                                                                               |
 
-### <a name="example"></a>Exemple
+### <a name="example"></a> Exemple
 
 L’exemple suivant est basé sur le modèle School et montre l’élément **UpdateFunction** utilisé pour mapper la fonction de mise à jour du type d’entité **Person** à la procédure stockée **UpdatePerson** . La procédure stockée **UpdatePerson** est déclarée dans le modèle de stockage.
 

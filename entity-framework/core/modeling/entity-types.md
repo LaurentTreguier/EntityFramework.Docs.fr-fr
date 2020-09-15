@@ -3,28 +3,27 @@ title: Types d’entité-EF Core
 description: Comment configurer et mapper des types d’entité à l’aide de Entity Framework Core
 author: roji
 ms.date: 12/03/2019
-ms.assetid: cbe6935e-2679-4b77-8914-a8d772240cf1
 uid: core/modeling/entity-types
-ms.openlocfilehash: b3d9ad753637d021d9aa52965da38091ae690f77
-ms.sourcegitcommit: cc0ff36e46e9ed3527638f7208000e8521faef2e
+ms.openlocfilehash: fead7f9e37efb7f674f429acbfd16c2ca78480d4
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78417232"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071509"
 ---
-# <a name="entity-types"></a>Types d'entité
+# <a name="entity-types"></a>Types d'entités
 
 L’inclusion d’un DbSet d’un type dans votre contexte signifie qu’il est inclus dans le modèle de EF Core ; Nous faisons généralement référence à un type de ce type en tant qu' *entité*. EF Core pouvez lire et écrire des instances d’entité à partir de/vers la base de données, et si vous utilisez une base de données relationnelle, EF Core pouvez créer des tables pour vos entités via des migrations.
 
 ## <a name="including-types-in-the-model"></a>Inclusion de types dans le modèle
 
-Par Convention, les types qui sont exposés dans les propriétés DbSet de votre contexte sont inclus dans le modèle en tant qu’entités. Les types d’entités qui sont spécifiés dans la méthode `OnModelCreating` sont également inclus, comme tous les types trouvés en explorant de manière récursive les propriétés de navigation d’autres types d’entités découverts.
+Par Convention, les types qui sont exposés dans les propriétés DbSet de votre contexte sont inclus dans le modèle en tant qu’entités. Les types d’entités qui sont spécifiés dans la `OnModelCreating` méthode sont également inclus, comme tous les types trouvés en explorant de manière récursive les propriétés de navigation d’autres types d’entités découverts.
 
 Dans l’exemple de code ci-dessous, tous les types sont inclus :
 
 * `Blog` est inclus, car il est exposé dans une propriété DbSet sur le contexte.
-* `Post` est inclus, car il est découvert via la propriété de navigation `Blog.Posts`.
-* `AuditEntry`, car il est spécifié dans `OnModelCreating`.
+* `Post` est inclus, car il est découvert via la `Blog.Posts` propriété de navigation.
+* `AuditEntry` parce qu’il est spécifié dans `OnModelCreating` .
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs?name=EntityTypes&highlight=3,7,16)]
 
@@ -60,7 +59,7 @@ Vous pouvez configurer manuellement le nom de la table :
 
 ## <a name="table-schema"></a>Schéma de table
 
-Lorsque vous utilisez une base de données relationnelle, les tables sont par convention créées dans le schéma par défaut de votre base de données. Par exemple, Microsoft SQL Server utilise le schéma de `dbo` (SQLite ne prend pas en charge les schémas).
+Lorsque vous utilisez une base de données relationnelle, les tables sont par convention créées dans le schéma par défaut de votre base de données. Par exemple, Microsoft SQL Server utilise le `dbo` schéma (SQLite ne prend pas en charge les schémas).
 
 Vous pouvez configurer des tables à créer dans un schéma spécifique comme suit :
 

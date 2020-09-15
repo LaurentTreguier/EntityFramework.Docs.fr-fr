@@ -3,13 +3,12 @@ title: Testabilité et Entity Framework 4,0-EF6
 description: Testabilité et Entity Framework 4,0
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 9430e2ab-261c-4e8e-8545-2ebc52d7a247
-ms.openlocfilehash: e1ded772bfee4f1870a891eaa525b33da8e9d3bc
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 439e2af6b0c851a2ab70d6d9ed1004deb83b1a0e
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618357"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070508"
 ---
 # <a name="testability-and-entity-framework-40"></a>Testabilité et Entity Framework 4,0
 Scott Allen
@@ -918,7 +917,7 @@ Vous pouvez utiliser différentes techniques pour tester des logiciels avec des 
 -   Vérifiez que le modèle contient une liste de tous les employés après l’exécution de l’index.
 -   Vérifiez que le dépôt ne contient pas d’employé donné après l’exécution de la suppression.
 
-Une autre approche que vous verrez avec les objets factices consiste à vérifier les *interactions*. Bien que le test basé sur l’État fasse des assertions sur l’état des objets, le test basé sur l’interaction fait des assertions sur la manière dont les objets interagissent. Par exemple :
+Une autre approche que vous verrez avec les objets factices consiste à vérifier les *interactions*. Bien que le test basé sur l’État fasse des assertions sur l’état des objets, le test basé sur l’interaction fait des assertions sur la manière dont les objets interagissent. Exemple :
 
 -   Vérifiez que le contrôleur appelle la méthode Add du référentiel lorsque Create s’exécute.
 -   Vérifiez que le contrôleur appelle la méthode FindAll du référentiel lorsque l’index s’exécute.

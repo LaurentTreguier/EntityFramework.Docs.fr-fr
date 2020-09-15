@@ -5,12 +5,12 @@ author: AndriySvyryd
 ms.author: ansvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 0d88e0a4876755656626621fd9a4ca01d18b5b64
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
-ms.translationtype: HT
+ms.openlocfilehash: 188c5b10aefa784715c0bbf2d50337d65c21fd62
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619315"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071366"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Fournisseur Azure Cosmos DB EF Core
 
@@ -47,7 +47,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 > [!TIP]  
 > Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Cosmos).
 
-Comme pour les autres fournisseurs, la première étape consiste à appeler [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos) :
+Comme pour les autres fournisseurs, la première étape consiste à appeler [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos):
 
 [!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=Configuration)]
 

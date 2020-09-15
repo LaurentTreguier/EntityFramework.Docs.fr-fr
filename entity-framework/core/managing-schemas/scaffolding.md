@@ -4,14 +4,13 @@ description: Rétroconception d’un modèle à partir d’une base de données 
 author: bricelam
 ms.author: bricelam
 ms.date: 11/13/2018
-ms.assetid: 6263EF7D-4989-42E6-BDEE-45DA770342FB
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: e88be834aa1f2f3be41657f07bc7ace3e34c58aa
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 86aa6d22ebe8e5c1d654c83d4c292a1ed5842ddd
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619215"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071912"
 ---
 # <a name="reverse-engineering"></a> Reconstitution de la logique des produits
 
@@ -72,7 +71,7 @@ Pour inclure plusieurs tables, spécifiez l’option plusieurs fois :
 dotnet ef dbcontext scaffold ... --table Artist --table Album
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 L' `-Schemas` option peut être utilisée pour inclure chaque table dans un schéma, tandis que `-Tables` peut être utilisé pour inclure des tables spécifiques.
 
@@ -130,7 +129,7 @@ Par défaut, l’espace de noms est l’espace de noms racine, ainsi que les nom
 dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace Your.DbContext.Namespace
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 Vous pouvez spécifier le répertoire dans lequel les classes sont échafaudées à l’aide de `-OutputDir` , et `-ContextDir` peut être utilisé pour générer un modèle de structure de la classe DbContext dans un répertoire distinct de celui des classes de type d’entité :
 

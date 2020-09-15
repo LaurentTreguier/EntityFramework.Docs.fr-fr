@@ -3,14 +3,13 @@ title: Index-EF Core
 description: Configuration des index dans un modèle de Entity Framework Core
 author: roji
 ms.date: 12/16/2019
-ms.assetid: 85b92003-b692-417d-ac1d-76d40dce664b
 uid: core/modeling/indexes
-ms.openlocfilehash: 1ce40a9219dde56478b1ff8891841b53d9ba1934
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3a89f1ae9727dcd8f086e915e666721572636314
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619352"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071405"
 ---
 # <a name="indexes"></a>Index
 

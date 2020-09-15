@@ -3,14 +3,13 @@ title: Fournisseur de base de données SQLite-limitations-EF Core
 description: Limitations du fournisseur de base de données Entity Framework Core SQLite par rapport aux autres fournisseurs
 author: bricelam
 ms.date: 07/16/2020
-ms.assetid: 94ab4800-c460-4caa-a5e8-acdfee6e6ce2
 uid: core/providers/sqlite/limitations
-ms.openlocfilehash: 2657bf03bc5cd0d5fb45c57e7f7605824deb44d2
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 546910afb9c97a93a7cc471bb813be0b9874a4bd
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616538"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071223"
 ---
 # <a name="sqlite-ef-core-database-provider-limitations"></a>Limites d’un fournisseur de base de données EF Core SQLite
 
@@ -68,11 +67,11 @@ Une régénération sera tentée afin d’effectuer certaines opérations. Les r
 | RenameColumn         | ✔           | 2.2.2            |
 | RenameIndex          | ✔ (régénération) | 2.1              |
 | RenameTable          | ✔           | 1.0              |
-| EnsureSchema         | ✔ (aucune opération)   | 2,0              |
-| DropSchema           | ✔ (aucune opération)   | 2,0              |
-| Insert               | ✔           | 2,0              |
-| Update               | ✔           | 2,0              |
-| DELETE               | ✔           | 2,0              |
+| EnsureSchema         | ✔ (aucune opération)   | 2.0              |
+| DropSchema           | ✔ (aucune opération)   | 2.0              |
+| Insérer               | ✔           | 2.0              |
+| Mise à jour               | ✔           | 2.0              |
+| Supprimer               | ✔           | 2.0              |
 
 ## <a name="migrations-limitations-workaround"></a>Solution de contournement des limitations des migrations
 

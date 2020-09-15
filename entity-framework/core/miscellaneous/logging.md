@@ -3,14 +3,13 @@ title: Journalisation-EF Core
 description: Configuration de la journalisation avec Entity Framework Core
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: f6e35c6d-45b7-4258-be1d-87c1bb67438d
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 56d0e3f8c5ecf56ee6bd6ddf0c9668bb8e3ac12f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0fd1c83f01989095a813727390179db2327b610d
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617740"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071665"
 ---
 # <a name="logging"></a>Journalisation
 
@@ -50,7 +49,7 @@ public static readonly LoggerFactory MyLoggerFactory
 
 ***
 
-Cette instance de Singleton/global doit ensuite être inscrite auprès de EF Core sur le `DbContextOptionsBuilder` . Par exemple :
+Cette instance de Singleton/global doit ensuite être inscrite auprès de EF Core sur le `DbContextOptionsBuilder` . Exemple :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -59,7 +58,7 @@ Cette instance de Singleton/global doit ensuite être inscrite auprès de EF Cor
 
 ## <a name="filtering-what-is-logged"></a>Filtrage des éléments consignés
 
-L’application peut contrôler ce qui est enregistré en configurant un filtre sur le ILoggerProvider. Par exemple :
+L’application peut contrôler ce qui est enregistré en configurant un filtre sur le ILoggerProvider. Exemple :
 
 ### <a name="version-3x"></a>[Version 3.x](#tab/v3)
 

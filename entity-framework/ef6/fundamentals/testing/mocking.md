@@ -3,14 +3,13 @@ title: Test avec un Framework fictif-EF6
 description: Test avec une infrastructure fictive dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: bd66a638-d245-44d4-8e71-b9c6cb335cc7
 uid: ef6/fundamentals/testing/mocking
-ms.openlocfilehash: 01890ab3bb8dbf0caa7b3eff797e53b06bc8ec9b
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: ebd57ca2127bab32c94d806f8213739a6e0b4f0a
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618299"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070482"
 ---
 # <a name="testing-with-a-mocking-framework"></a>Test avec un Framework fictif
 > [!NOTE]

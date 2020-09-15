@@ -3,14 +3,13 @@ title: Balises de requête - EF Core
 description: Utilisation de balises de requête pour aider à identifier des requêtes spécifiques dans les messages de journal émis par Entity Framework Core
 author: divega
 ms.date: 11/14/2018
-ms.assetid: 73C7A627-C8E9-452D-9CD5-AFCC8FEFE395
 uid: core/querying/tags
-ms.openlocfilehash: bf80057d29160bd5ef6ae26ee6d447fc3c3f0fec
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 27f757f4159a36bec324cce56d74b7860e1c3741
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617483"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070989"
 ---
 # <a name="query-tags"></a>Balises de requête
 
@@ -70,7 +69,7 @@ ORDER BY [f].[Location].STDistance(@__myLocation_0) DESC
 ```
 
 Il est également possible d’utiliser des chaînes multilignes comme balises de requête.
-Par exemple :
+Exemple :
 
 ``` csharp
 var results = Limit(GetNearestFriends(myLocation), 25).TagWith(

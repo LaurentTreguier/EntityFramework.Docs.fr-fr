@@ -2,22 +2,664 @@
 title: Nouveautés de EF Core 5,0
 description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
-ms.date: 07/20/2020
+ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: b4551a3c593694b104a750d500d81eb170a83dc0
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0605d021b46066c6af7b631c99e86c0e53caa8db
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618602"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070755"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
-EF Core 5,0 est actuellement en cours de développement. Cette page contient une vue d’ensemble des changements intéressants introduits dans chaque version préliminaire.
+Toutes les fonctionnalités prévues pour EF Core 5,0 sont maintenant terminées. Cette page contient une vue d’ensemble des changements intéressants introduits dans chaque version préliminaire.
 
 Cette page ne duplique pas le [plan pour EF Core 5,0](xref:core/what-is-new/ef-core-5.0/plan). Le plan décrit les thèmes globaux pour EF Core 5,0, y compris tout ce que nous envisageons d’inclure avant d’expédier la version finale.
 
-Nous ajouterons des liens à partir d’ici à la documentation officielle au fur et à mesure de sa publication.
+## <a name="rc1"></a>RC1
+
+### <a name="many-to-many"></a>Plusieurs-à-plusieurs
+
+EF Core 5,0 prend en charge les relations plusieurs-à-plusieurs sans mapper explicitement la table de jointure.
+
+Par exemple, considérez les types d’entités suivants :
+
+```C#
+public class Post
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public ICollection<Tag> Tags { get; set; }
+}
+
+public class Tag
+{
+    public int Id { get; set; }
+    public string Text { get; set; }
+    public ICollection<Post> Posts { get; set; }
+}
+```
+
+Notez que `Post` contient une collection de `Tags` et `Tag` contient une collection de `Posts` . EF Core 5,0 reconnaît qu’il s’agit d’une relation plusieurs-à-plusieurs par Convention. Cela signifie qu’aucun code n’est requis dans `OnModelCreating` :
+
+```C#
+public class BlogContext : DbContext
+{
+    public DbSet<Post> Posts { get; set; }
+    public DbSet<Blog> Blogs { get; set; }
+}
+```
+
+Lorsque des migrations (ou `EnsureCreated` ) sont utilisées pour créer la base de données, EF Core crée automatiquement la table de jointure. Par exemple, sur SQL Server pour ce modèle, EF Core génère :
+
+```sql
+CREATE TABLE [Posts] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Posts] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [Tag] (
+    [Id] int NOT NULL IDENTITY,
+    [Text] nvarchar(max) NULL,
+    CONSTRAINT [PK_Tag] PRIMARY KEY ([Id])
+);
+
+CREATE TABLE [PostTag] (
+    [PostsId] int NOT NULL,
+    [TagsId] int NOT NULL,
+    CONSTRAINT [PK_PostTag] PRIMARY KEY ([PostsId], [TagsId]),
+    CONSTRAINT [FK_PostTag_Posts_PostsId] FOREIGN KEY ([PostsId]) REFERENCES [Posts] ([Id]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_Tag_TagsId] FOREIGN KEY ([TagsId]) REFERENCES [Tag] ([Id]) ON DELETE CASCADE
+);
+
+CREATE INDEX [IX_PostTag_TagsId] ON [PostTag] ([TagsId]);
+```
+
+La création et `Blog` l’Association `Post` d’entités et les résultats des mises à jour de la table de jointure se produisent automatiquement. Exemple :
+
+```C#
+var beginnerTag = new Tag {Text = "Beginner"};
+var advancedTag = new Tag {Text = "Advanced"};
+var efCoreTag = new Tag {Text = "EF Core"};
+
+context.AddRange(
+    new Post {Name = "EF Core 101", Tags = new List<Tag> {beginnerTag, efCoreTag}},
+    new Post {Name = "Writing an EF database provider", Tags = new List<Tag> {advancedTag, efCoreTag}},
+    new Post {Name = "Savepoints in EF Core", Tags = new List<Tag> {beginnerTag, efCoreTag}});
+
+context.SaveChanges();
+```
+
+Une fois les billets et les balises insérés, EF crée automatiquement des lignes dans la table de jointure. Par exemple, sur SQL Server :
+
+```sql
+SET NOCOUNT ON;
+INSERT INTO [PostTag] ([PostsId], [TagsId])
+VALUES (@p6, @p7),
+(@p8, @p9),
+(@p10, @p11),
+(@p12, @p13),
+(@p14, @p15),
+(@p16, @p17);
+```
+
+Pour les requêtes, l’inclusion et d’autres opérations de requête fonctionnent comme pour toute autre relation. Exemple :
+
+```C#
+foreach (var post in context.Posts.Include(e => e.Tags))
+{
+    Console.Write($"Post \"{post.Name}\" has tags");
+
+    foreach (var tag in post.Tags)
+    {
+        Console.Write($" '{tag.Text}'");
+    }
+}
+```
+
+Le SQL généré utilise automatiquement la table de jointure pour rétablir toutes les balises associées :
+
+```sql
+SELECT [p].[Id], [p].[Name], [t0].[PostsId], [t0].[TagsId], [t0].[Id], [t0].[Text]
+FROM [Posts] AS [p]
+LEFT JOIN (
+    SELECT [p0].[PostsId], [p0].[TagsId], [t].[Id], [t].[Text]
+    FROM [PostTag] AS [p0]
+    INNER JOIN [Tag] AS [t] ON [p0].[TagsId] = [t].[Id]
+) AS [t0] ON [p].[Id] = [t0].[PostsId]
+ORDER BY [p].[Id], [t0].[PostsId], [t0].[TagsId], [t0].[Id]
+```
+
+Contrairement à EF6, EF Core permet une personnalisation complète de la table de jointure. Par exemple, le code ci-dessous configure une relation plusieurs-à-plusieurs qui a également des navigations vers l’entité de jointure, et dans laquelle l’entité de jointure contient une propriété de charge utile :
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder
+        .Entity<Community>()
+        .HasMany(e => e.Members)
+        .WithMany(e => e.Memberships)
+        .UsingEntity<PersonCommunity>(
+            b => b.HasOne(e => e.Member).WithMany().HasForeignKey(e => e.MembersId),
+            b => b.HasOne(e => e.Membership).WithMany().HasForeignKey(e => e.MembershipsId))
+        .Property(e => e.MemberSince).HasDefaultValueSql("CURRENT_TIMESTAMP");
+}
+```
+
+### <a name="map-entity-types-to-queries"></a>Mapper les types d’entités aux requêtes
+
+Les types d’entités sont couramment mappés à des tables ou à des vues de telle sorte que EF Core récupère le contenu de la table ou de la vue lors de l’interrogation de ce type. EF Core 5,0 permet à un type d’entité d’être mappé à une « définition de requête ». (Ceci était partiellement pris en charge dans les versions précédentes, mais a été considérablement amélioré et sa syntaxe est différente dans EF Core 5,0.)
+
+Prenons l’exemple de deux tables : l’un avec les publications modernes ; l’autre avec les publications héritées. Le tableau des publications modernes contient des colonnes supplémentaires, mais dans le cadre de notre application, nous souhaitons que les publications moderne et héritée TP soient combinées et mappées à un type d’entité avec toutes les propriétés nécessaires :
+
+```c#
+public class Post
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public string Category { get; set; }
+    public int BlogId { get; set; }
+    public Blog Blog { get; set; }
+}
+```
+
+Dans EF Core 5,0, `ToSqlQuery` peut être utilisé pour mapper ce type d’entité à une requête qui extrait et combine des lignes des deux tables :
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Post>().ToSqlQuery(
+        @"SELECT Id, Name, Category, BlogId FROM posts
+          UNION ALL
+          SELECT Id, Name, ""Legacy"", BlogId from legacy_posts");
+}
+```
+
+Notez que la `legacy_posts` table n’a pas de `Category` colonne, donc nous synthétisons plutôt une valeur par défaut pour toutes les publications héritées.
+
+Ce type d’entité peut ensuite être utilisé de manière normale pour les requêtes LINQ. Par exemple, requête LINQ :
+
+```c#
+var posts = context.Posts.Where(e => e.Blog.Name.Contains("Unicorn")).ToList();
+```
+
+Génère le code SQL suivant sur SQLite :
+
+```sql
+SELECT "p"."Id", "p"."BlogId", "p"."Category", "p"."Name"
+FROM (
+    SELECT Id, Name, Category, BlogId FROM posts
+    UNION ALL
+    SELECT Id, Name, "Legacy", BlogId from legacy_posts
+) AS "p"
+INNER JOIN "Blogs" AS "b" ON "p"."BlogId" = "b"."Id"
+WHERE ('Unicorn' = '') OR (instr("b"."Name", 'Unicorn') > 0)
+```
+
+Notez que la requête configurée pour le type d’entité est utilisée comme base pour composer la requête LINQ complète.
+
+### <a name="event-counters"></a>Compteurs d’événements
+
+Les [compteurs d’événements .net](https://devblogs.microsoft.com/dotnet/introducing-diagnostics-improvements-in-net-core-3-0/) permettent d’exposer efficacement les métriques de performances à partir d’une application. EF Core 5,0 comprend des compteurs d’événements sous la `Microsoft.EntityFrameworkCore` catégorie. Exemple :
+
+```
+dotnet counters monitor Microsoft.EntityFrameworkCore -p 49496
+```
+
+Cela indique aux compteurs dotnet de commencer à collecter des événements de EF Core pour le processus 49496. Cela génère une sortie similaire à celle-ci dans la console :
+
+```
+[Microsoft.EntityFrameworkCore]
+    Active DbContexts                                               1
+    Execution Strategy Operation Failures (Count / 1 sec)           0
+    Execution Strategy Operation Failures (Total)                   0
+    Optimistic Concurrency Failures (Count / 1 sec)                 0
+    Optimistic Concurrency Failures (Total)                         0
+    Queries (Count / 1 sec)                                     1,755
+    Queries (Total)                                            98,402
+    Query Cache Hit Rate (%)                                      100
+    SaveChanges (Count / 1 sec)                                     0
+    SaveChanges (Total)                                             1
+```
+
+### <a name="property-bags"></a>Conteneurs de propriétés
+
+EF Core 5,0 permet au même type CLR d’être mappé à plusieurs types d’entité différents. Ces types sont appelés types d’entité de type Shared. Cette fonctionnalité combinée aux propriétés d’indexeur (incluses dans Preview 1) permet d’utiliser des conteneurs de propriétés comme type d’entité.
+
+Par exemple, le DbContext ci-dessous configure le type BCL `Dictionary<string, object>` en tant que type d’entité de type partagé pour les produits et les catégories.
+
+```c#
+public class ProductsContext : DbContext
+{
+    public DbSet<Dictionary<string, object>> Products => Set<Dictionary<string, object>>("Product");
+    public DbSet<Dictionary<string, object>> Categories => Set<Dictionary<string, object>>("Category");
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Category", b =>
+        {
+            b.IndexerProperty<string>("Description");
+            b.IndexerProperty<int>("Id");
+            b.IndexerProperty<string>("Name").IsRequired();
+        });
+
+        modelBuilder.SharedTypeEntity<Dictionary<string, object>>("Product", b =>
+        {
+            b.IndexerProperty<int>("Id");
+            b.IndexerProperty<string>("Name").IsRequired();
+            b.IndexerProperty<string>("Description");
+            b.IndexerProperty<decimal>("Price");
+            b.IndexerProperty<int?>("CategoryId");
+
+            b.HasOne("Category", null).WithMany();
+        });
+    }
+}
+```
+
+Les objets dictionary (« conteneurs de propriétés ») peuvent maintenant être ajoutés au contexte en tant qu’instances d’entité et enregistrés. Exemple :
+
+```c#
+var beverages = new Dictionary<string, object>
+{
+    ["Name"] = "Beverages",
+    ["Description"] = "Stuff to sip on"
+};
+
+context.Categories.Add(beverages);
+
+context.SaveChanges();
+```
+
+Ces entités peuvent ensuite être interrogées et mises à jour de manière normale :
+
+```c#
+var foods = context.Categories.Single(e => e["Name"] == "Foods");
+var marmite = context.Products.Single(e => e["Name"] == "Marmite");
+
+marmite["CategoryId"] = foods["Id"];
+marmite["Description"] = "Yummy when spread _thinly_ on buttered Toast!";
+
+context.SaveChanges();
+```
+
+### <a name="savechanges-interception-and-events"></a>Interception d’SaveChanges et événements
+
+EF Core 5,0 introduit les événements .NET et un intercepteur de EF Core déclenché lorsque SaveChanges est appelé.
+
+Les événements sont simples à utiliser. par exemple :
+
+```c#
+context.SavingChanges += (sender, args) =>
+{
+    Console.WriteLine($"Saving changes for {((DbContext)sender).Database.GetConnectionString()}");
+};
+
+context.SavedChanges += (sender, args) =>
+{
+    Console.WriteLine($"Saved {args.EntitiesSavedCount} changes for {((DbContext)sender).Database.GetConnectionString()}");
+};
+```
+
+Notez que :
+* L’expéditeur de l’événement est l' `DbContext` instance
+* Les arguments de l' `SavedChanges` événement contiennent le nombre d’entités enregistrées dans la base de données
+
+L’intercepteur est défini par `ISaveChangesInterceptor` , mais il est souvent convienient d’hériter de `SaveChangesInterceptor` pour éviter d’implémenter chaque méthode. Exemple :
+
+```c#
+public class MySaveChangesInterceptor : SaveChangesInterceptor
+{
+    public override InterceptionResult<int> SavingChanges(
+        DbContextEventData eventData,
+        InterceptionResult<int> result)
+    {
+        Console.WriteLine($"Saving changes for {eventData.Context.Database.GetConnectionString()}");
+
+        return result;
+    }
+
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = new CancellationToken())
+    {
+        Console.WriteLine($"Saving changes asynchronously for {eventData.Context.Database.GetConnectionString()}");
+
+        return new ValueTask<InterceptionResult<int>>(result);
+    }
+}
+```
+
+Notez que :
+* L’intercepteur a à la fois des méthodes synchrones et asynchrones. Cela peut être utile si vous devez effectuer des e/s asynchrones, telles que l’écriture sur un serveur d’audit.
+* L’intercepteur permet d’ignorer SaveChanges à l’aide du `InterceptionResult` mécanisme commun à tous les intercepteurs.
+
+L’inconvénient des intercepteurs est qu’ils doivent être inscrits sur le DbContext lorsqu’il est en cours de construction. Exemple :
+
+```c#
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder
+            .AddInterceptors(new MySaveChangesInterceptor())
+            .UseSqlite("Data Source = test.db");
+```
+
+En revanche, les événements peuvent être enregistrés sur l’instance DbContext à tout moment.
+
+### <a name="exclude-tables-from-migrations"></a>Exclure des tables des migrations
+
+Il est parfois utile d’avoir un seul type d’entité mappé dans plusieurs DbContexts. Cela est particulièrement vrai lorsque vous utilisez des [contextes délimités](https://www.martinfowler.com/bliki/BoundedContext.html), pour lesquels il est courant d’avoir un type DbContext différent pour chaque contexte délimité.
+
+Par exemple, un `User` type peut être nécessaire à la fois par un contexte d’autorisation et un contexte de création de rapports. Si une modification est apportée au `User` type, les migrations pour les deux DbContexts tentent de mettre à jour la base de données. Pour éviter cela, le modèle de l’un des contextes peut être configuré pour exclure la table de ses migrations.
+
+Dans le code ci-dessous, le `AuthorizationContext` génère des migrations pour les modifications apportées à la `Users` table, mais ce n' `ReportingContext` est pas le cas, ce qui empêche les migrations d’entrer en conflit.
+
+```C#
+public class AuthorizationContext : DbContext
+{
+    public DbSet<User> Users { get; set; }
+}
+
+public class ReportingContext : DbContext
+{
+    public DbSet<User> Users { get; set; }
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<User>().ToTable("Users", t => t.ExcludeFromMigrations());
+    }
+}
+```
+
+### <a name="required-11-dependents"></a>Dépendants 1:1 requis
+
+Dans EF Core 3,1, la terminaison dépendante d’une relation un-à-un était toujours considérée comme facultative. Cela était le plus évident lors de l’utilisation d’entités détenues. Par exemple, considérez le modèle et la configuration suivants :
+
+```c#
+public class Person
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+
+    public Address HomeAddress { get; set; }
+    public Address WorkAddress { get; set; }
+}
+
+public class Address
+{
+    public string Line1 { get; set; }
+    public string Line2 { get; set; }
+    public string City { get; set; }
+    public string Region { get; set; }
+    public string Country { get; set; }
+    public string Postcode { get; set; }
+}
+```
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Person>(b =>
+    {
+        b.OwnsOne(e => e.HomeAddress,
+            b =>
+            {
+                b.Property(e => e.Line1).IsRequired();
+                b.Property(e => e.City).IsRequired();
+                b.Property(e => e.Region).IsRequired();
+                b.Property(e => e.Postcode).IsRequired();
+            });
+
+        b.OwnsOne(e => e.WorkAddress);
+    });
+}
+```
+
+Cela entraîne des migrations créant la table suivante pour SQLite :
+
+```sql
+CREATE TABLE "People" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_People" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL,
+    "HomeAddress_Line1" TEXT NULL,
+    "HomeAddress_Line2" TEXT NULL,
+    "HomeAddress_City" TEXT NULL,
+    "HomeAddress_Region" TEXT NULL,
+    "HomeAddress_Country" TEXT NULL,
+    "HomeAddress_Postcode" TEXT NULL,
+    "WorkAddress_Line1" TEXT NULL,
+    "WorkAddress_Line2" TEXT NULL,
+    "WorkAddress_City" TEXT NULL,
+    "WorkAddress_Region" TEXT NULL,
+    "WorkAddress_Country" TEXT NULL,
+    "WorkAddress_Postcode" TEXT NULL
+);
+```
+
+Notez que toutes les colonnes acceptent la valeur null, même si certaines des `HomeAddress` propriétés ont été configurées selon les besoins. En outre, lors de l’interrogation d’un `Person` , si toutes les colonnes pour l’adresse personnelle ou professionnelle ont la valeur null, EF Core laisse les `HomeAddress` Propriétés and/or `WorkAddress` comme null, au lieu de définir une instance vide de `Address` .
+
+Dans EF Core 5,0, la `HomeAddress` navigation peut désormais être configurée comme un dépendant obligatoire. Exemple :
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Person>(b =>
+    {
+        b.OwnsOne(e => e.HomeAddress,
+            b =>
+            {
+                b.Property(e => e.Line1).IsRequired();
+                b.Property(e => e.City).IsRequired();
+                b.Property(e => e.Region).IsRequired();
+                b.Property(e => e.Postcode).IsRequired();
+            });
+        b.Navigation(e => e.HomeAddress).IsRequired();
+
+        b.OwnsOne(e => e.WorkAddress);
+    });
+}
+```
+
+La table créée par les migrations inclue désormais des colonnes non Nullable pour les propriétés requises du dépendant requis :
+
+```sql
+CREATE TABLE "People" (
+    "Id" INTEGER NOT NULL CONSTRAINT "PK_People" PRIMARY KEY AUTOINCREMENT,
+    "Name" TEXT NULL,
+    "HomeAddress_Line1" TEXT NOT NULL,
+    "HomeAddress_Line2" TEXT NULL,
+    "HomeAddress_City" TEXT NOT NULL,
+    "HomeAddress_Region" TEXT NOT NULL,
+    "HomeAddress_Country" TEXT NULL,
+    "HomeAddress_Postcode" TEXT NOT NULL,
+    "WorkAddress_Line1" TEXT NULL,
+    "WorkAddress_Line2" TEXT NULL,
+    "WorkAddress_City" TEXT NULL,
+    "WorkAddress_Region" TEXT NULL,
+    "WorkAddress_Country" TEXT NULL,
+    "WorkAddress_Postcode" TEXT NULL
+);
+```
+
+En outre, EF Core lève désormais une exception en cas de tentative d’enregistrement d’un propriétaire qui a un dépendant obligatoire null. Dans cet exemple, EF Core lève une exception quand vous tentez d’enregistrer un `Person` avec une valeur null `HomeAddress` .
+
+Enfin, EF Core créera toujours une instance d’un dépendant obligatoire, même si toutes les colonnes de la dépendance requise ont des valeurs NULL.
+
+### <a name="options-for-migration-generation"></a>Options de génération de la migration
+
+EF Core 5,0 offre un contrôle accru de la génération des migrations à des fins différentes. Cela comprend la possibilité de :
+
+* Savoir si la migration est en cours de génération pour un script ou pour une exécution immédiate
+* Savoir si un script idempotent est en cours de génération
+* Sachez si le script doit exclure les instructions de transaction (voir les _scripts de migration avec les transactions_ ci-dessous).
+
+Ce comportement est spécifié par un `MigrationsSqlGenerationOptions` enum, qui peut désormais être passé à `IMigrator.GenerateScript` .
+
+Ce travail inclut également une meilleure génération de scripts idempotent avec des appels à `EXEC` sur SQL Server lorsque cela est nécessaire. Ce travail permet également d’apporter des améliorations similaires aux scripts générés par d’autres fournisseurs de bases de données, notamment PostgreSQL.
+
+### <a name="migrations-scripts-with-transactions"></a>Migration de scripts avec transactions
+
+Les scripts SQL générés à partir des migrations contiennent désormais des instructions pour commencer et valider des transactions en fonction de la migration. Par exemple, le script de migration ci-dessous a été généré à partir de deux migrations. Notez que chaque migration est maintenant appliquée à l’intérieur d’une transaction.
+
+```sql
+BEGIN TRANSACTION;
+GO
+
+CREATE TABLE [Groups] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    CONSTRAINT [PK_Groups] PRIMARY KEY ([Id])
+);
+GO
+
+CREATE TABLE [Members] (
+    [Id] int NOT NULL IDENTITY,
+    [Name] nvarchar(max) NULL,
+    [GroupId] int NULL,
+    CONSTRAINT [PK_Members] PRIMARY KEY ([Id]),
+    CONSTRAINT [FK_Members_Groups_GroupId] FOREIGN KEY ([GroupId]) REFERENCES [Groups] ([Id]) ON DELETE NO ACTION
+);
+GO
+
+CREATE INDEX [IX_Members_GroupId] ON [Members] ([GroupId]);
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910194835_One', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+EXEC sp_rename N'[Groups].[Name]', N'GroupName', N'COLUMN';
+GO
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20200910195234_Two', N'6.0.0-alpha.1.20460.2');
+GO
+
+COMMIT;
+```
+
+Comme mentionné dans la section précédente, cette utilisation des transactions peut être désactivée si les transactions doivent être gérées différemment.
+
+### <a name="see-pending-migrations"></a>Voir migrations en attente
+
+Cette fonctionnalité a été ajoutée par la communauté [@Psypher9](https://github.com/Psypher9) . De nombreuses remerciements pour la contribution !
+
+La `dotnet ef migrations list` commande affiche maintenant les migrations qui n’ont pas encore été appliquées à la base de données. Exemple :
+
+```
+ajcvickers@avickers420u:~/AllTogetherNow/Daily$ dotnet ef migrations list
+Build started...
+Build succeeded.
+20200910201647_One
+20200910201708_Two
+20200910202050_Three (Pending)
+ajcvickers@avickers420u:~/AllTogetherNow/Daily$
+```
+
+En outre, il existe désormais une `Get-Migration` commande pour la console du gestionnaire de package avec la même fonctionnalité.
+
+### <a name="modelbuilder-api-for-value-comparers"></a>API ModelBuilder pour les comparateurs de valeurs
+
+Les propriétés de EF Core pour les types mutables personnalisés [requièrent un comparateur de valeur](xref:core/modeling/value-comparers) pour que les modifications de propriété soient détectées correctement. Cela peut maintenant être spécifié dans le cadre de la configuration de la conversion de valeur pour le type. Exemple :
+
+```c#
+modelBuilder
+    .Entity<EntityType>()
+    .Property(e => e.MyProperty)
+    .HasConversion(
+        v => JsonSerializer.Serialize(v, null),
+        v => JsonSerializer.Deserialize<List<int>>(v, null),
+        new ValueComparer<List<int>>(
+            (c1, c2) => c1.SequenceEqual(c2),
+            c => c.Aggregate(0, (a, v) => HashCode.Combine(a, v.GetHashCode())),
+            c => c.ToList()));
+```
+
+### <a name="entityentry-trygetvalue-methods"></a>EntityEntry, méthodes TryGetValue
+
+Cette fonctionnalité a été ajoutée par la communauté [@m4ss1m0g](https://github.com/m4ss1m0g) . De nombreuses remerciements pour la contribution !
+
+Une `TryGetValue` méthode a été ajoutée à `EntityEntry.CurrentValues` et `EntityEntry.OriginalValues` . Cela permet de demander la valeur d’une propriété sans vérifier d’abord si la propriété est mappée dans le modèle EF. Exemple :
+
+```c#
+if (entry.CurrentValues.TryGetValue(propertyName, out var value))
+{
+    Console.WriteLine(value);
+}
+```
+
+### <a name="default-max-batch-size-for-sql-server"></a>Taille de lot maximale par défaut pour SQL Server
+
+À compter de EF Core 5,0, la taille de lot maximale par défaut pour SaveChanges sur SQL Server est désormais 42. Comme c’est bien connu, il s’agit également de la réponse à la question ultime de vie, de l’univers et de tout. Toutefois, il s’agit probablement d’une coïncidence, puisque la valeur a été obtenue par l' [analyse des performances de traitement par lot](https://github.com/dotnet/efcore/issues/9270). Nous ne pensons pas que nous avons découvert une forme de la question finale, bien qu’il semble quelque peu plausible que la terre a été créée pour comprendre pourquoi SQL Server fonctionne comme elle.
+
+### <a name="default-environment-to-development"></a>Développement de l’environnement par défaut
+
+Les outils en ligne de commande EF Core configurent désormais automatiquement les `ASPNETCORE_ENVIRONMENT` _and_ `DOTNET_ENVIRONMENT` variables d’environnement et en « développement ». Cela permet d’utiliser l’hôte générique en fonction de l’expérience de ASP.NET Core pendant le développement. Consultez [#19903](https://github.com/dotnet/efcore/issues/19903).
+
+### <a name="better-migrations-column-ordering"></a>Meilleur classement des colonnes de migrations
+
+Les colonnes pour les classes de base non mappées sont désormais ordonnées après d’autres colonnes pour les types d’entités mappés. Notez que cela affecte uniquement les tables nouvellement créées. L’ordre des colonnes pour les tables existantes reste inchangé. Consultez [#11314](https://github.com/dotnet/efcore/issues/11314).
+
+### <a name="query-improvements"></a>Améliorations des requêtes
+
+EF Core 5,0 RC1 contient des améliorations supplémentaires de la traduction des requêtes :
+
+* Traduction de `is` sur Cosmos--voir [#16391](https://github.com/dotnet/efcore/issues/16391)
+* Les fonctions mappées par l’utilisateur peuvent désormais être annotées pour contrôler la propagation de la valeur null, voir [#19609](https://github.com/dotnet/efcore/issues/19609)
+* Prise en charge de la traduction de GroupBy avec des agrégats conditionnels--voir [#11711](https://github.com/dotnet/efcore/issues/11711)
+* Traduction d’un opérateur distinct sur un élément Group avant Aggregate--voir [#17376](https://github.com/dotnet/efcore/issues/17376)
+
+### <a name="model-building-for-fields"></a>Génération de modèles pour les champs
+
+Enfin, pour RC1, EF Core autorise désormais l’utilisation des méthodes lambda dans ModelBuilder pour les champs, ainsi que pour les propriétés. Par exemple, si vous êtes réticent aux propriétés pour une raison quelconque et décidez d’utiliser des champs publics, ces champs peuvent maintenant être mappés à l’aide des générateurs lambda :
+
+```c#
+public class Post
+{
+    public int Id;
+    public string Name;
+    public string Category;
+    public int BlogId;
+    public Blog Blog;
+}
+
+public class Blog
+{
+    public int Id;
+    public string Name;
+    public ICollection<Post> Posts;
+}
+```
+
+```c#
+protected override void OnModelCreating(ModelBuilder modelBuilder)
+{
+    modelBuilder.Entity<Blog>(b =>
+    {
+        b.Property(e => e.Id);
+        b.Property(e => e.Name);
+    });
+
+    modelBuilder.Entity<Post>(b =>
+    {
+        b.Property(e => e.Id);
+        b.Property(e => e.Name);
+        b.Property(e => e.Category);
+        b.Property(e => e.BlogId);
+        b.HasOne(e => e.Blog).WithMany(e => e.Posts);
+    });
+}
+```
+
+Bien que cela soit maintenant possible, nous ne vous recommandons pas de le faire. Notez également que cela n’ajoute pas de fonctionnalités de mappage de champs supplémentaires à EF Core, mais autorise uniquement l’utilisation des méthodes lambda au lieu d’exiger toujours les méthodes de chaîne. Cela est rarement utile dans la mesure où les champs sont rarement publics.
 
 ## <a name="preview-8"></a>Version préliminaire 8
 
@@ -279,7 +921,7 @@ modelBuilder.HasDbFunction(() => GetReports(default));
 
 (L’utilisation d’une expression lambda est un moyen simple de passer le `MethodInfo` à EF Core. Les arguments passés à la méthode sont ignorés.)
 
-Nous pouvons maintenant écrire des requêtes qui appellent `GetReports` et composent les résultats. Par exemple :
+Nous pouvons maintenant écrire des requêtes qui appellent `GetReports` et composent les résultats. Exemple :
 
 ```c#
 from e in context.Employees
@@ -344,7 +986,7 @@ SELECT @@ROWCOUNT;
 
 ### <a name="context-wide-split-query-configuration"></a>Configuration de la requête Split au niveau du contexte
 
-Les requêtes de fractionnement (voir ci-dessous) peuvent désormais être configurées par défaut pour toute requête exécutée par DbContext. Cette configuration n’est disponible que pour les fournisseurs relationnels et doit donc être spécifiée dans le cadre de la `UseProvider` Configuration. Par exemple :
+Les requêtes de fractionnement (voir ci-dessous) peuvent désormais être configurées par défaut pour toute requête exécutée par DbContext. Cette configuration n’est disponible que pour les fournisseurs relationnels et doit donc être spécifiée dans le cadre de la `UseProvider` Configuration. Exemple :
 
 ```c#
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -366,14 +1008,14 @@ La classe .NET [PhysicalAddress](/dotnet/api/system.net.networkinformation.physi
 
 ### <a name="dbcontextfactory"></a>DbContextFactory
 
-EF Core 5,0 introduit `AddDbContextFactory` et `AddPooledDbContextFactory` pour inscrire une fabrique pour la création d’instances de DbContext dans le conteneur d’injection de dépendances (D.I.) de l’application. Par exemple :
+EF Core 5,0 introduit `AddDbContextFactory` et `AddPooledDbContextFactory` pour inscrire une fabrique pour la création d’instances de DbContext dans le conteneur d’injection de dépendances (D.I.) de l’application. Exemple :
 
 ```csharp
 services.AddDbContextFactory<SomeDbContext>(b =>
     b.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=Test"));
 ```
 
-Les services d’application tels que les contrôleurs de ASP.NET Core peuvent ensuite dépendre `IDbContextFactory<TContext>` du constructeur de service. Par exemple :
+Les services d’application tels que les contrôleurs de ASP.NET Core peuvent ensuite dépendre `IDbContextFactory<TContext>` du constructeur de service. Exemple :
 
 ```csharp
 public class MyController
@@ -387,7 +1029,7 @@ public class MyController
 }
 ```
 
-Les instances de DbContext peuvent ensuite être créées et utilisées en fonction des besoins. Par exemple :
+Les instances de DbContext peuvent ensuite être créées et utilisées en fonction des besoins. Exemple :
 
 ```csharp
 public void DoSomeThing()
@@ -415,7 +1057,7 @@ La documentation est suivie d’un problème [#2524](https://github.com/dotnet/E
 
 EF Core permet de définir une valeur explicite pour une colonne qui peut également avoir une contrainte de valeur par défaut. EF Core utilise la valeur CLR par défaut de type de propriété comme sentinelle pour ce. Si la valeur n’est pas la valeur CLR par défaut, elle est insérée, sinon la valeur par défaut de la base de données est utilisée.
 
-Cela crée des problèmes pour les types où la valeur CLR par défaut n’est pas une bonne sentinelle, notamment les `bool` Propriétés. EF Core 5,0 autorise désormais la valeur null dans le champ de stockage pour les cas comme celui-ci. Par exemple :
+Cela crée des problèmes pour les types où la valeur CLR par défaut n’est pas une bonne sentinelle, notamment les `bool` Propriétés. EF Core 5,0 autorise désormais la valeur null dans le champ de stockage pour les cas comme celui-ci. Exemple :
 
 ```csharp
 public class Blog
@@ -436,7 +1078,7 @@ La documentation est suivie d’un problème [#2525](https://github.com/dotnet/E
 
 ### <a name="cosmos-partition-keys"></a>Clés de partition Cosmos
 
-EF Core permet d’inclure la clé de partition Cosmos dans le modèle EF. Par exemple :
+EF Core permet d’inclure la clé de partition Cosmos dans le modèle EF. Exemple :
 
 ```csharp
 modelBuilder.Entity<Customer>().HasPartitionKey(b => b.AlternateKey)
@@ -450,7 +1092,7 @@ La documentation est suivie d’un problème [#2471](https://github.com/dotnet/E
 
 EF Core 5,0 améliore la configuration des connexions Cosmos et Cosmos.
 
-Auparavant, EF Core nécessitait la spécification du point de terminaison et de la clé explicitement lors de la connexion à une base de données Cosmos. EF Core 5,0 autorise l’utilisation d’une chaîne de connexion à la place. En outre, EF Core 5,0 permet de définir explicitement l’instance WebProxy. Par exemple :
+Auparavant, EF Core nécessitait la spécification du point de terminaison et de la clé explicitement lors de la connexion à une base de données Cosmos. EF Core 5,0 autorise l’utilisation d’une chaîne de connexion à la place. En outre, EF Core 5,0 permet de définir explicitement l’instance WebProxy. Exemple :
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -462,7 +1104,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
             });
 ```
 
-De nombreuses autres valeurs de délai d’attente, limites, etc. peuvent également être configurées. Par exemple :
+De nombreuses autres valeurs de délai d’attente, limites, etc. peuvent également être configurées. Exemple :
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -494,7 +1136,7 @@ Dans les versions précédentes, ce comportement était configurable par l’ins
 
 EF Core prend désormais en charge les [points](/sql/t-sql/language-elements/save-transaction-transact-sql#remarks) de contrôle pour un plus grand contrôle sur les transactions qui exécutent plusieurs opérations.
 
-Les points de sauvegarde peuvent être créés, libérés et restaurés manuellement. Par exemple :
+Les points de sauvegarde peuvent être créés, libérés et restaurés manuellement. Exemple :
 
 ```csharp
 context.Database.CreateSavepoint("MySavePoint");
@@ -535,7 +1177,7 @@ LEFT JOIN (
 ORDER BY "a"."Id", "t0"."Id", "t0"."Id0"
 ```
 
-La nouvelle `AsSplitQuery` API peut être utilisée pour modifier ce comportement. Par exemple :
+La nouvelle `AsSplitQuery` API peut être utilisée pour modifier ce comportement. Exemple :
 
 ```CSharp
 var artists = context.Artists
@@ -569,7 +1211,7 @@ Notez que les inclusions filtrées avec OrderBy/Skip/Take ne sont pas prises en 
 
 #### <a name="split-queries-with-collection-projections"></a>Fractionner des requêtes avec des projections de collection
 
-`AsSplitQuery` peut également être utilisé lorsque les collections sont chargées dans des projections. Par exemple :
+`AsSplitQuery` peut également être utilisé lorsque les collections sont chargées dans des projections. Exemple :
 
 ```CSharp
 context.Artists
@@ -598,7 +1240,7 @@ Notez que seule la matérialisation de la collection est prise en charge. Les co
 
 ### <a name="indexattribute"></a>IndexAttribute
 
-Le nouveau IndexAttribute peut être placé sur un type d’entité pour spécifier un index pour une colonne unique. Par exemple :
+Le nouveau IndexAttribute peut être placé sur un type d’entité pour spécifier un index pour une colonne unique. Exemple :
 
 ```CSharp
 [Index(nameof(FullName), IsUnique = true)]
@@ -619,7 +1261,7 @@ CREATE UNIQUE INDEX [IX_Users_FullName]
     WHERE [FullName] IS NOT NULL;
 ```
 
-IndexAttribute peut également être utilisé pour spécifier un index couvrant plusieurs colonnes. Par exemple :
+IndexAttribute peut également être utilisé pour spécifier un index couvrant plusieurs colonnes. Exemple :
 
 ```CSharp
 [Index(nameof(FirstName), nameof(LastName), IsUnique = true)]
@@ -673,7 +1315,7 @@ EF Core lèvera à présent l’exception suivante :
 
 Cette fonctionnalité a été ajoutée par la communauté [@Marusyk](https://github.com/Marusyk) . De nombreuses remerciements pour la contribution !
 
-EF Core expose un ID de transaction pour la corrélation des transactions entre les appels. Cet ID est généralement défini par EF Core lorsqu’une transaction est démarrée. Si l’application démarre plutôt la transaction, cette fonctionnalité permet à l’application de définir explicitement l’ID de transaction afin qu’elle soit correctement corrélée partout où elle est utilisée. Par exemple :
+EF Core expose un ID de transaction pour la corrélation des transactions entre les appels. Cet ID est généralement défini par EF Core lorsqu’une transaction est démarrée. Si l’application démarre plutôt la transaction, cette fonctionnalité permet à l’application de définir explicitement l’ID de transaction afin qu’elle soit correctement corrélée partout où elle est utilisée. Exemple :
 
 ```CSharp
 using (context.Database.UseTransaction(myTransaction, myId))
@@ -726,7 +1368,7 @@ Executed DbCommand (14ms) [Parameters=[@p0='1', @p1='127.0.0.1' (Size = 45), @p2
 
 Lorsqu’un DbContext est généré à partir d’une base de données existante, EF Core par défaut crée une surcharge OnConfiguring avec une chaîne de connexion afin que le contexte soit immédiatement utilisable. Toutefois, cela n’est pas utile si vous avez déjà une classe partielle avec OnConfiguring, ou si vous configurez le contexte d’une autre façon.
 
-Pour résoudre ce risque, les commandes de génération de modèles automatique peuvent maintenant être demandées d’omettre la génération de OnConfiguring. Par exemple :
+Pour résoudre ce risque, les commandes de génération de modèles automatique peuvent maintenant être demandées d’omettre la génération de OnConfiguring. Exemple :
 
 ```
 dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring
@@ -802,7 +1444,7 @@ END, [w].[Id]");
 
 ### <a name="database-collations"></a>Classements de base de données
 
-Le classement par défaut d’une base de données peut désormais être spécifié dans le modèle EF. Cela passera à des migrations générées pour définir le classement lors de la création de la base de données. Par exemple :
+Le classement par défaut d’une base de données peut désormais être spécifié dans le modèle EF. Cela passera à des migrations générées pour définir le classement lors de la création de la base de données. Exemple :
 
 ```CSharp
 modelBuilder.UseCollation("German_PhoneBook_CI_AS");
@@ -815,7 +1457,7 @@ CREATE DATABASE [Test]
 COLLATE German_PhoneBook_CI_AS;
 ```
 
-Le classement à utiliser pour des colonnes de base de données spécifiques peut également être spécifié. Par exemple :
+Le classement à utiliser pour des colonnes de base de données spécifiques peut également être spécifié. Exemple :
 
 ```CSharp
  modelBuilder
@@ -826,7 +1468,7 @@ Le classement à utiliser pour des colonnes de base de données spécifiques peu
 
 Pour ceux qui n’utilisent pas de migrations, les classements sont à présent rétroconçus de la base de données lors de la génération de modèles automatique.
 
-Enfin, le `EF.Functions.Collate()` autorise les requêtes ad hoc utilisant des classements différents. Par exemple :
+Enfin, le `EF.Functions.Collate()` autorise les requêtes ad hoc utilisant des classements différents. Exemple :
 
 ```CSharp
 context.Users.Single(e => EF.Functions.Collate(e.Name, "French_CI_AS") == "Jean-Michel Jarre");
@@ -852,7 +1494,7 @@ Les arguments sont à présent transmis à partir de la ligne de commande dans l
 dotnet ef migrations add two --verbose --dev
 ```
 
-Cet argument est ensuite transmis à la fabrique, où il peut être utilisé pour contrôler la façon dont le contexte est créé et initialisé. Par exemple :
+Cet argument est ensuite transmis à la fabrique, où il peut être utilisé pour contrôler la façon dont le contexte est créé et initialisé. Exemple :
 
 ```CSharp
 public class MyDbContextFactory : IDesignTimeDbContextFactory<SomeDbContext>
@@ -886,7 +1528,7 @@ La documentation est suivie d’un problème [#1895](https://github.com/dotnet/E
 
 La plupart des bases de données autorisent le stockage des valeurs de colonne calculées après le calcul. Bien que cela prenne de l’espace disque, la colonne calculée n’est calculée qu’une seule fois lors de la mise à jour, et non chaque fois que sa valeur est récupérée. Cela permet également d’indexer la colonne pour certaines bases de données.
 
-EF Core 5,0 permet de configurer les colonnes calculées comme stockées. Par exemple :
+EF Core 5,0 permet de configurer les colonnes calculées comme stockées. Exemple :
 
 ```CSharp
 modelBuilder
@@ -903,7 +1545,7 @@ EF Core prend désormais en charge les colonnes calculées dans les bases de don
 
 ### <a name="configure-database-precisionscale-in-model"></a>Configurer la précision/l’échelle de la base de données dans le modèle
 
-La précision et l’échelle d’une propriété peuvent désormais être spécifiées à l’aide du générateur de modèles. Par exemple :
+La précision et l’échelle d’une propriété peuvent désormais être spécifiées à l’aide du générateur de modèles. Exemple :
 
 ```CSharp
 modelBuilder
@@ -918,7 +1560,7 @@ La documentation est suivie d’un problème [#527](https://github.com/dotnet/En
 
 ### <a name="specify-sql-server-index-fill-factor"></a>Spécifier SQL Server facteur de remplissage d’index
 
-Le facteur de remplissage peut désormais être spécifié lors de la création d’un index sur SQL Server. Par exemple :
+Le facteur de remplissage peut désormais être spécifié lors de la création d’un index sur SQL Server. Exemple :
 
 ```CSharp
 modelBuilder
@@ -931,7 +1573,7 @@ modelBuilder
 
 ### <a name="filtered-include"></a>Include filtré
 
-La méthode Include prend désormais en charge le filtrage des entités incluses. Par exemple :
+La méthode Include prend désormais en charge le filtrage des entités incluses. Exemple :
 
 ```CSharp
 var blogs = context.Blogs
@@ -941,7 +1583,7 @@ var blogs = context.Blogs
 
 Cette requête renverra les blogs avec chaque publication associée, mais uniquement lorsque le titre de publication contient « fromage ».
 
-Skip et Take peuvent également être utilisés pour réduire le nombre d’entités incluses. Par exemple :
+Skip et Take peuvent également être utilisés pour réduire le nombre d’entités incluses. Exemple :
 
 ```CSharp
 var blogs = context.Blogs
@@ -991,7 +1633,7 @@ Pour des raisons de performances, EF n’effectue pas de vérifications null sup
 
 L’utilisation de `EnableDetailedErrors` permet d’ajouter une vérification de valeur null supplémentaire aux requêtes de sorte que, pour une faible surcharge de performances, ces erreurs sont plus faciles à suivre à une cause racine.
 
-Par exemple :
+Exemple :
 
 ```CSharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1005,7 +1647,7 @@ La documentation est suivie d’un problème [#955](https://github.com/dotnet/En
 
 ### <a name="cosmos-partition-keys"></a>Clés de partition Cosmos
 
-La clé de partition à utiliser pour une requête donnée peut désormais être spécifiée dans la requête. Par exemple :
+La clé de partition à utiliser pour une requête donnée peut désormais être spécifiée dans la requête. Exemple :
 
 ```CSharp
 await context.Set<Customer>()
@@ -1017,7 +1659,7 @@ La documentation est suivie d’un problème [#2199](https://github.com/dotnet/E
 
 ### <a name="support-for-the-sql-server-datalength-function"></a>Prise en charge de la fonction DATALENGTH SQL Server
 
-Vous pouvez y accéder à l’aide de la nouvelle `EF.Functions.DataLength` méthode. Par exemple :
+Vous pouvez y accéder à l’aide de la nouvelle `EF.Functions.DataLength` méthode. Exemple :
 
 ```CSharp
 var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate));
@@ -1027,7 +1669,7 @@ var count = context.Orders.Count(c => 100 < EF.Functions.DataLength(c.OrderDate)
 
 ### <a name="use-a-c-attribute-to-specify-a-property-backing-field"></a>Utiliser un attribut C# pour spécifier un champ de stockage de propriété
 
-Un attribut C# peut maintenant être utilisé pour spécifier le champ de stockage d’une propriété. Cet attribut permet à EF Core d’écrire et de lire toujours dans le champ de stockage, ce qui se produit normalement, même si le champ de stockage ne peut pas être trouvé automatiquement. Par exemple :
+Un attribut C# peut maintenant être utilisé pour spécifier le champ de stockage d’une propriété. Cet attribut permet à EF Core d’écrire et de lire toujours dans le champ de stockage, ce qui se produit normalement, même si le champ de stockage ne peut pas être trouvé automatiquement. Exemple :
 
 ```CSharp
 public class Blog
@@ -1097,7 +1739,7 @@ Une documentation supplémentaire est suivie par le [#1331](https://github.com/d
 
 ### <a name="use-a-c-attribute-to-indicate-that-an-entity-has-no-key"></a>Utiliser un attribut C# pour indiquer qu’une entité n’a pas de clé
 
-Un type d’entité peut désormais être configuré comme n’ayant aucune clé à l’aide de la nouvelle `KeylessAttribute` . Par exemple :
+Un type d’entité peut désormais être configuré comme n’ayant aucune clé à l’aide de la nouvelle `KeylessAttribute` . Exemple :
 
 ```CSharp
 [Keyless]
@@ -1145,7 +1787,7 @@ La documentation est suivie d’un problème [#2018](https://github.com/dotnet/E
 
 ### <a name="generation-of-check-constraints-for-enum-mappings"></a>Génération de contraintes de validation pour les mappages d’énumération
 
-EF Core migrations 5,0 peut désormais générer des contraintes de validation pour les mappages de propriété d’énumération. Par exemple :
+EF Core migrations 5,0 peut désormais générer des contraintes de validation pour les mappages de propriété d’énumération. Exemple :
 
 ```SQL
 MyEnumColumn VARCHAR(10) NOT NULL CHECK (MyEnumColumn IN ('Useful', 'Useless', 'Unknown'))
@@ -1155,7 +1797,7 @@ La documentation est suivie d’un problème [#2082](https://github.com/dotnet/E
 
 ### <a name="isrelational"></a>IsRelational
 
-Une nouvelle `IsRelational` méthode a été ajoutée en plus des `IsSqlServer` , `IsSqlite` , et existants `IsInMemory` . Cette méthode peut être utilisée pour tester si DbContext utilise un fournisseur de base de données relationnelle. Par exemple :
+Une nouvelle `IsRelational` méthode a été ajoutée en plus des `IsSqlServer` , `IsSqlite` , et existants `IsInMemory` . Cette méthode peut être utilisée pour tester si DbContext utilise un fournisseur de base de données relationnelle. Exemple :
 
 ```CSharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -1190,7 +1832,7 @@ En outre, les fonctions de SQL Server suivantes sont maintenant mappées :
 * DateDiffWeek
 * DateFromParts
 
-Par exemple :
+Exemple :
 
 ```CSharp
 var count = context.Orders.Count(c => date > EF.Functions.DateFromParts(DateTime.Now.Year, 12, 25));
@@ -1209,7 +1851,7 @@ Une documentation supplémentaire est suivie par le [#2079](https://github.com/d
 
 ### <a name="query-translation-for-reverse"></a>Traduction de requête pour l’inverse
 
-Les requêtes utilisant `Reverse` sont désormais traduites. Par exemple :
+Les requêtes utilisant `Reverse` sont désormais traduites. Exemple :
 
 ```CSharp
 context.Employees.OrderBy(e => e.EmployeeID).Reverse()

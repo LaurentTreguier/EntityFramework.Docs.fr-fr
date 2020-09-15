@@ -3,14 +3,13 @@ title: Chaînes et modèles de connexion-EF6
 description: Chaînes de connexion et modèles dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 294bb138-978f-4fe2-8491-fdf3cd3c60c4
 uid: ef6/fundamentals/configuring/connection-strings
-ms.openlocfilehash: 2203d7f2168dc9d4ae5a6b1914742c7c2b6fbf77
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 45db461b18cde3bc1f1fccadec3c8ece6dd16832
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618435"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070781"
 ---
 # <a name="connection-strings-and-models"></a>Modèles et chaînes de connexion
 Cette rubrique explique comment Entity Framework Découvre la connexion de base de données à utiliser et comment vous pouvez la modifier. Les modèles créés avec Code First et le concepteur EF sont abordés dans cette rubrique.  
@@ -25,7 +24,7 @@ Les fragments suivants montrent quelques-unes des façons dont les constructeurs
 
 ## <a name="use-code-first-with-connection-by-convention"></a>Utiliser Code First avec la connexion par Convention  
 
-Si vous n’avez pas effectué d’autres configurations dans votre application, l’appel du constructeur sans paramètre sur DbContext entraîne l’exécution de DbContext en mode Code First avec une connexion de base de données créée par Convention. Par exemple :  
+Si vous n’avez pas effectué d’autres configurations dans votre application, l’appel du constructeur sans paramètre sur DbContext entraîne l’exécution de DbContext en mode Code First avec une connexion de base de données créée par Convention. Exemple :  
 
 ``` csharp  
 namespace Demo.EF
@@ -46,7 +45,7 @@ Visual Studio 2010 comprend SQL Express par défaut et Visual Studio 2012 et ver
 
 ## <a name="use-code-first-with-connection-by-convention-and-specified-database-name"></a>Utiliser Code First avec la connexion par Convention et le nom de base de données spécifié  
 
-Si vous n’avez pas effectué d’autres configurations dans votre application, l’appel du constructeur de chaîne sur DbContext avec le nom de la base de données que vous souhaitez utiliser entraîne l’exécution de DbContext en mode Code First avec une connexion de base de données créée par Convention à la base de données de ce nom. Par exemple :  
+Si vous n’avez pas effectué d’autres configurations dans votre application, l’appel du constructeur de chaîne sur DbContext avec le nom de la base de données que vous souhaitez utiliser entraîne l’exécution de DbContext en mode Code First avec une connexion de base de données créée par Convention à la base de données de ce nom. Exemple :  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -62,7 +61,7 @@ Dans cet exemple, DbContext utilise « BloggingDatabase » comme nom de base d
 
 ## <a name="use-code-first-with-connection-string-in-appconfigwebconfig-file"></a>Utiliser Code First avec la chaîne de connexion dans le fichier app.config/web.config  
 
-Vous pouvez choisir de placer une chaîne de connexion dans votre fichier app.config ou web.config. Par exemple :  
+Vous pouvez choisir de placer une chaîne de connexion dans votre fichier app.config ou web.config. Exemple :  
 
 ``` xml  
 <configuration>
@@ -76,7 +75,7 @@ Vous pouvez choisir de placer une chaîne de connexion dans votre fichier app.co
 
 Il s’agit d’un moyen simple pour indiquer à DbContext d’utiliser un serveur de base de données autre que SQL Express ou de la base de données locale. l’exemple ci-dessus spécifie une base de données SQL Server Compact Edition.  
 
-Si le nom de la chaîne de connexion correspond au nom de votre contexte (avec ou sans qualification d’espace de noms), il est trouvé par DbContext lorsque le constructeur sans paramètre est utilisé. Si le nom de la chaîne de connexion est différent du nom de votre contexte, vous pouvez indiquer à DbContext d’utiliser cette connexion en mode Code First en passant le nom de la chaîne de connexion au constructeur DbContext. Par exemple :  
+Si le nom de la chaîne de connexion correspond au nom de votre contexte (avec ou sans qualification d’espace de noms), il est trouvé par DbContext lorsque le constructeur sans paramètre est utilisé. Si le nom de la chaîne de connexion est différent du nom de votre contexte, vous pouvez indiquer à DbContext d’utiliser cette connexion en mode Code First en passant le nom de la chaîne de connexion au constructeur DbContext. Exemple :  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -88,7 +87,7 @@ public class BloggingContext : DbContext
 }
 ```  
 
-Vous pouvez également utiliser le formulaire « name = \<connection string name\> » pour la chaîne passée au constructeur DbContext. Par exemple :  
+Vous pouvez également utiliser le formulaire « name = \<connection string name\> » pour la chaîne passée au constructeur DbContext. Exemple :  
 
 ``` csharp  
 public class BloggingContext : DbContext
@@ -106,7 +105,7 @@ Ce formulaire rend explicite que la chaîne de connexion se trouve dans votre fi
 
 Les modèles créés avec le concepteur EF sont différents de Code First dans le fait que votre modèle existe déjà et qu’il n’est pas généré à partir du code lors de l’exécution de l’application. Le modèle existe généralement sous la forme d’un fichier EDMX dans votre projet.  
 
-Le concepteur ajoute une chaîne de connexion EF à votre app.config ou web.config fichier. Cette chaîne de connexion est spéciale dans la mesure où elle contient des informations sur la façon de rechercher les informations dans votre fichier EDMX. Par exemple :  
+Le concepteur ajoute une chaîne de connexion EF à votre app.config ou web.config fichier. Cette chaîne de connexion est spéciale dans la mesure où elle contient des informations sur la façon de rechercher les informations dans votre fichier EDMX. Exemple :  
 
 ``` xml  
 <configuration>  
@@ -126,7 +125,7 @@ Le concepteur ajoute une chaîne de connexion EF à votre app.config ou web.conf
 </configuration>
 ```  
 
-Le concepteur EF génère également du code qui indique à DbContext d’utiliser cette connexion en passant le nom de la chaîne de connexion au constructeur DbContext. Par exemple :  
+Le concepteur EF génère également du code qui indique à DbContext d’utiliser cette connexion en passant le nom de la chaîne de connexion au constructeur DbContext. Exemple :  
 
 ``` csharp  
 public class NorthwindContext : DbContext

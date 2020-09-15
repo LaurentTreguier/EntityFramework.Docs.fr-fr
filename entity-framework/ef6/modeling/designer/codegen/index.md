@@ -1,14 +1,16 @@
 ---
 title: Modèles de génération de code de concepteur - EF6
+description: Modèles de génération de code de concepteur dans Entity Framework 6.
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 56e00fa2-f9f0-48b3-8006-f8266ca7e74b
-ms.openlocfilehash: e4e99a86e7c273682c85eba06042af9a2a837d12
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/modeling/designer/codegen/index
+ms.openlocfilehash: edc8fe3c269336d59d5bb7a10582881584215b1c
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413284"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620567"
 ---
 # <a name="designer-code-generation-templates"></a>Modèles de génération de code de concepteur
 Quand vous créez un modèle à l’aide d’Entity Framework Designer, vos classes et le contexte dérivé sont générés automatiquement pour vous. En plus de la génération de code par défaut, nous fournissons également un nombre de modèles pouvant servir à personnaliser le code généré. Ces modèles sont fournis sous forme de modèles de texte T4, ce qui vous permet de les personnaliser si nécessaire.
@@ -30,11 +32,11 @@ Les modèles suivants sont fournis par l’équipe Entity Framework :
 
 Ce modèle génère des classes d’entité OCT simples et un contexte qui dérive de DbContext à l’aide d’EF6.
 Il s’agit du modèle recommandé, sauf si vous avez besoin d’utiliser un des autres modèles répertoriés ci-dessous.
-C’est également le modèle de génération de code que vous recevez par défaut si vous utilisez des versions récentes de Visual Studio (Visual Studio 2013 et ultérieur) : Lorsque vous créez un nouveau modèle, ce modèle est utilisé par défaut et les fichiers T4 (.tt) sont imbriqués sous votre fichier .edmx.
+C’est également le modèle de génération de code que vous obtenez par défaut si vous utilisez les versions récentes de Visual Studio (Visual Studio 2013 et versions ultérieures) : quand vous créez un modèle, ce modèle est utilisé par défaut et les fichiers T4 (.tt) sont imbriqués sous votre fichier .edmx.
 
 #### <a name="older-versions-of-visual-studio"></a>Versions précédentes de Visual Studio
-- **Visual Studio 2012 :** Pour obtenir les modèles **EF 6.x DbContextGenerator**, vous devez installer la dernière version **d’Entity Framework Tools pour Visual Studio**. Consultez la page [Obtenir Entity Framework](~/ef6/fundamentals/install.md) pour plus d’informations.
-- **Visual Studio 2010 :** Les modèles **EF 6.x DbContextGenerator** ne sont pas disponibles pour Visual Studio 2010.
+- **Visual Studio 2012 :** Pour obtenir les modèles **EF 6.x DbContextGenerator**, vous devez installer la dernière version **d’Entity Framework Tools pour Visual Studio** (consultez la page [Obtenir Entity Framework](xref:ef6/fundamentals/install) pour plus d’informations).
+- **Visual Studio 2010 :** Les modèles **EF 6.x DbContextGenerator** ne sont pas disponibles pour Visual Studio 2010.
 
 #### <a name="dbcontext-generator-for-ef-5x"></a>DbContext Generator pour EF 5.x
 
@@ -86,18 +88,18 @@ Si vous utilisez Visual Studio 2012 ou 2013, vous devez sélectionner l’onglet
 - [EF 5.x EntityObject Generator for VB.NET](https://visualstudiogallery.msdn.microsoft.com/92c0129e-40dc-488c-a836-7e30846dfb30)
 - [EF 5.x EntityObject Generator for VB.NET Web Sites](https://visualstudiogallery.msdn.microsoft.com/5dd7f75c-8c98-4eb7-b4bc-06f0d0b03b41)
 
-Si vous voulez utiliser la génération de code ObjectContext sans avoir à modifier le modèle, vous pouvez [revenir à la génération de code EntityObject](~/ef6/modeling/designer/codegen/legacy-objectcontext.md).
+Si vous voulez utiliser la génération de code ObjectContext sans avoir à modifier le modèle, vous pouvez [revenir à la génération de code EntityObject](xref:ef6/modeling/designer/codegen/legacy-objectcontext).
 
 Si vous utilisez Visual Studio 2010, ce modèle est déjà installé. Si vous créez un modèle dans Visual Studio 2010, il est utilisé par défaut, mais les fichiers .tt ne sont pas inclus dans votre projet. Pour personnaliser le modèle, vous devez l’ajouter à votre projet.
 
 ### <a name="self-tracking-entities-ste-generator"></a>Self-Tracking Entities (STE) Generator
 
-Ce modèle génère des classes d’entité de suivi automatique et un contexte qui dérive d’ObjectContext. Dans une application EF, c’est le contexte qui est chargé de suivre les changements des entités. Toutefois, dans les scénarios multicouches, le contexte risque de ne pas être disponible sur la couche qui modifie les entités. Les entités de suivi automatique vous aident à suivre les changements de n’importe quelle couche. Pour plus d’informations, consultez [Entités de suivi automatique](~/ef6/fundamentals/disconnected-entities/self-tracking-entities/index.md).
+Ce modèle génère des classes d’entité de suivi automatique et un contexte qui dérive d’ObjectContext. Dans une application EF, c’est le contexte qui est chargé de suivre les changements des entités. Toutefois, dans les scénarios multicouches, le contexte risque de ne pas être disponible sur la couche qui modifie les entités. Les entités de suivi automatique vous aident à suivre les changements de n’importe quelle couche. Pour plus d’informations, consultez [Entités de suivi automatique](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/index).
 
 > [!NOTE]
 > Modèle des entités de suivi automatique non recommandé
 
-Nous ne recommandons plus d’utiliser le modèle des entités de suivi automatique dans les nouvelles applications, mais il reste disponible pour prendre en charge les applications existantes. Consultez [l’article sur les entités déconnectées](~/ef6/fundamentals/disconnected-entities/index.md) afin de connaître les autres options que nous recommandons pour les scénarios multicouches.
+Nous ne recommandons plus d’utiliser le modèle des entités de suivi automatique dans les nouvelles applications, mais il reste disponible pour prendre en charge les applications existantes. Consultez [l’article sur les entités déconnectées](xref:ef6/fundamentals/disconnected-entities/index) afin de connaître les autres options que nous recommandons pour les scénarios multicouches.
 
 > [!NOTE]
 > Le modèle des entités de suivi automatique n’a pas de version EF 6.x.
@@ -149,17 +151,17 @@ Les modèles « Web Sites » (par ex., **EF 5.x DbContext Generator for C\# Web 
 
 ## <a name="using-a-template"></a>Utilisation d’un modèle
 
-Pour commencer à utiliser un modèle de génération de code, cliquez avec le bouton droit sur un emplacement vide dans l’aire de conception dans EF Designer et sélectionnez **Ajouter un élément de génération de code...** .
+Pour commencer à utiliser un modèle de génération de code, cliquez avec le bouton droit sur un emplacement vide dans l’aire de conception dans EF Designer et sélectionnez **Ajouter un élément de génération de code...**.
 
 ![Ajouter un élément de génération de code](~/ef6/media/add-code-gen-item.png)
 
 Si vous avez déjà installé le modèle à utiliser (ou qu’il a été inclus dans Visual Studio), il est disponible sous la section **Code** ou **Données** dans le menu à gauche.
 
-![Installé](~/ef6/media/installed.png)
+![Modèle installé](~/ef6/media/installed.png)
 
 Si vous n’avez pas installé le modèle, sélectionnez **En ligne** dans le menu à gauche et recherchez le modèle souhaité.
 
-![Rechercher](~/ef6/media/search.png) 
+![Recherche du modèle](~/ef6/media/search.png) 
 
 Si vous utilisez Visual Studio 2012, les nouveaux fichiers .tt sont imbriqués sous le fichier .edmx.*
 

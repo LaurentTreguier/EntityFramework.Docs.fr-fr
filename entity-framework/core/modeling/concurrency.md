@@ -3,14 +3,13 @@ title: Jetons d’accès concurrentiel-EF Core
 description: Configuration des jetons d’accès concurrentiel pour le contrôle d’accès concurrentiel optimiste dans un modèle de Entity Framework Core
 author: AndriySvyryd
 ms.date: 01/03/2020
-ms.assetid: bc8b1cb0-befe-4b67-8004-26e6c5f69385
 uid: core/modeling/concurrency
-ms.openlocfilehash: 57718a1b0146f437bb4126524889c81ae0dfd895
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fab9ad99609cd8e724b550000f6f06ef8c172c81
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617549"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071613"
 ---
 # <a name="concurrency-tokens"></a>Jetons d'accès concurrentiel
 

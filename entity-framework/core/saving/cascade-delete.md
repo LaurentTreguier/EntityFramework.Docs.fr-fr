@@ -3,14 +3,13 @@ title: 'Suppression en cascade : EF Core'
 description: Configuration des comportements de suppression pour les entités associées lorsqu’une entité principale est supprimée
 author: rowanmiller
 ms.date: 10/27/2016
-ms.assetid: ee8e14ec-2158-4c9c-96b5-118715e2ed9e
 uid: core/saving/cascade-delete
-ms.openlocfilehash: cf17e6586b89376b2d7fcc0f9cbfc8e1c4f6ba58
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 197d52758f969bcdb69c0a7a230001737596b821
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617411"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070911"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -42,7 +41,7 @@ Pour les relations facultatives (clé étrangère acceptant la valeur null) il _
 | Nom du comportement               | Effet sur les entités dépendantes/enfant en mémoire    | Effet sur les entités dépendantes/enfant dans la base de données  |
 |:----------------------------|:---------------------------------------|:---------------------------------------|
 | **Répercuté**                 | Les entités sont supprimées                   | Les entités sont supprimées                   |
-| **ClientSetNull** (par défaut) | Les propriétés de clé étrangère sont définies avec la valeur null | None                                   |
+| **ClientSetNull** (par défaut) | Les propriétés de clé étrangère sont définies avec la valeur null | Aucun                                   |
 | **SetNull**                 | Les propriétés de clé étrangère sont définies avec la valeur null | Les propriétés de clé étrangère sont définies avec la valeur null |
 | **Identifier**                | None                                   | None                                   |
 
@@ -53,7 +52,7 @@ Pour les relations requises (clé étrangère n’acceptant pas la valeur null) 
 | Nom du comportement         | Effet sur les entités dépendantes/enfant en mémoire | Effet sur les entités dépendantes/enfant dans la base de données |
 |:----------------------|:------------------------------------|:--------------------------------------|
 | **Cascade** (par défaut) | Les entités sont supprimées                | Les entités sont supprimées                  |
-| **ClientSetNull**     | Lève une exception SaveChanges                  | None                                  |
+| **ClientSetNull**     | Lève une exception SaveChanges                  | Aucun                                  |
 | **SetNull**           | Lève une exception SaveChanges                  | Lève une exception SaveChanges                    |
 | **Identifier**          | None                                | None                                  |
 

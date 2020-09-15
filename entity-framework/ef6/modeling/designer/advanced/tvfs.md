@@ -3,14 +3,13 @@ title: Fonctions table (TVF)-EF6
 description: Fonctions table (TVF) dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: f019c97b-87b0-4e93-98f4-2c539f77b2dc
 uid: ef6/modeling/designer/advanced/tvfs
-ms.openlocfilehash: 1575526fb46f9ddd3ad43c7c4ac0304aefa1d5d3
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 727c6c7ff5947e78bf8eb489194e355e2fd157c9
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620556"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070159"
 ---
 # <a name="table-valued-functions-tvfs"></a>Fonctions table (TVF)
 > [!NOTE]
@@ -40,7 +39,7 @@ Pour effectuer cette procédure pas à pas, vous devez :
 
 ## <a name="set-up-the-project"></a>Configurer le projet
 
-1.  Ouvrez Visual Studio.
+1.  Ouvrir Visual Studio
 2.  Dans le menu **fichier** , pointez sur **nouveau**, puis cliquez sur **projet** .
 3.  Dans le volet gauche, cliquez sur **Visual \# C**, puis sélectionnez le modèle **console** .
 4.  Entrez **TVF** comme nom du projet, puis cliquez sur **OK** .

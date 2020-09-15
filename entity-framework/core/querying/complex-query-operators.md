@@ -3,14 +3,13 @@ title: Opérateurs de requête complexes-EF Core
 description: Informations détaillées sur les opérateurs de requête LINQ plus complexes lors de l’utilisation de Entity Framework Core
 author: smitpatel
 ms.date: 10/03/2019
-ms.assetid: 2e187a2a-4072-4198-9040-aaad68e424fd
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 61a46361cc4bc1635174aaf2ca3260fa67fc6aaf
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 57157fa1593c9e5fe54e5fbe6b2c58eca3d4b0e7
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616445"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071157"
 ---
 # <a name="complex-query-operators"></a>Opérateurs de requête complexes
 
@@ -113,8 +112,8 @@ ORDER BY [p].[AuthorId]
 
 Les opérateurs d’agrégation EF Core prend en charge sont les suivants :
 
-- Moyenne
-- Count
+- Average
+- Nombre
 - LongCount
 - Max
 - Min

@@ -3,14 +3,13 @@ title: Types d’entité avec constructeurs-EF Core
 description: Utilisation de constructeurs pour lier des données avec Entity Framework Core modèle
 author: ajcvickers
 ms.date: 02/23/2018
-ms.assetid: 420AFFE7-B709-4A68-9149-F06F8746FB33
 uid: core/modeling/constructors
-ms.openlocfilehash: 58529a3a68e69a31249460d402027274404dce45
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 06d18f173275599ad1e547193363e13c48fc8dcf
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617535"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90071587"
 ---
 # <a name="entity-types-with-constructors"></a>Types d’entité avec constructeurs
 
@@ -49,7 +48,7 @@ public class Post
 }
 ```
 
-Lorsque EF Core crée des instances de ces types, par exemple pour les résultats d’une requête, il commence par appeler le constructeur sans paramètre par défaut, puis affecte à chaque propriété la valeur de la base de données. Toutefois, si EF Core trouve un constructeur paramétrable avec des noms et des types de paramètres qui correspondent à ceux des propriétés mappées, il appellera plutôt le constructeur paramétrable avec des valeurs pour ces propriétés et ne définira pas explicitement chaque propriété. Par exemple :
+Lorsque EF Core crée des instances de ces types, par exemple pour les résultats d’une requête, il commence par appeler le constructeur sans paramètre par défaut, puis affecte à chaque propriété la valeur de la base de données. Toutefois, si EF Core trouve un constructeur paramétrable avec des noms et des types de paramètres qui correspondent à ceux des propriétés mappées, il appellera plutôt le constructeur paramétrable avec des valeurs pour ces propriétés et ne définira pas explicitement chaque propriété. Exemple :
 
 ``` csharp
 public class Blog
@@ -102,7 +101,7 @@ Une fois les propriétés définies par le biais du constructeur, il peut être 
 * Les propriétés sans Setter ne sont pas mappées par Convention. (Cela a tendance à mapper les propriétés qui ne doivent pas être mappées, telles que les propriétés calculées.)
 * L’utilisation de valeurs de clés générées automatiquement nécessite une propriété de clé en lecture-écriture, puisque la valeur de clé doit être définie par le générateur de clé lors de l’insertion de nouvelles entités.
 
-Un moyen simple d’éviter ces choses consiste à utiliser des accesseurs set privés. Par exemple :
+Un moyen simple d’éviter ces choses consiste à utiliser des accesseurs set privés. Exemple :
 
 ``` csharp
 public class Blog

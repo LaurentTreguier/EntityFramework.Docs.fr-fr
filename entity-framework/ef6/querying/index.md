@@ -1,14 +1,16 @@
 ---
 title: Interrogation et recherche d’entités - EF6
+description: Interrogation et recherche d’entités dans Entity Framework 6.
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 65bb3db2-2226-44af-8864-caa575cf1b46
-ms.openlocfilehash: 29a86817e250a2f53ecaa73e8fa4bf93452f0497
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/querying/index
+ms.openlocfilehash: 4bfdc59527ab75e7a2e08dc743a1974246643aa3
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78412974"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89620326"
 ---
 # <a name="querying-and-finding-entities"></a>Interrogation et recherche d’entités
 Cette rubrique décrit les différentes méthodes de recherche de données à l’aide d’Entity Framework, y compris LINQ et la méthode Find. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
@@ -41,7 +43,7 @@ Notez que DbSet et IDbSet créent toujours des requêtes sur la base de données
 
 Quand les résultats sont retournés à partir de la base de données, les objets qui n’existent pas dans le contexte sont attachés au contexte. Si un objet est déjà dans le contexte, l’objet existant est retourné (les valeurs actuelles et d’origine des propriétés de l’objet dans l’entrée ne sont **pas** remplacées par les valeurs de la base de données).  
 
-Quand vous exécutez une requête, les entités qui ont été ajoutées au contexte, mais n’ont pas encore été enregistrées dans la base de données, ne sont pas retournées dans le jeu de résultats. Pour obtenir les données du contexte, consultez [Données locales](~/ef6/querying/local-data.md).  
+Quand vous exécutez une requête, les entités qui ont été ajoutées au contexte, mais n’ont pas encore été enregistrées dans la base de données, ne sont pas retournées dans le jeu de résultats. Pour obtenir les données du contexte, consultez [Données locales](xref:ef6/querying/local-data).  
 
 Si une requête ne retourne aucune ligne de la base de données, le résultat est une collection vide au lieu de **null**.  
 

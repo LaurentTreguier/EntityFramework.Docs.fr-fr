@@ -4,12 +4,12 @@ description: Liste complète des modifications avec rupture introduites dans Ent
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/breaking-changes
-ms.openlocfilehash: 644e61994dab4e9993c6a78792ff584c57fbe48a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: e348cb630d91ebe4536b73b9a7bd9a7b6a46db79
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89620764"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90072237"
 ---
 # <a name="breaking-changes-included-in-ef-core-3x"></a>Modifications avec rupture incluses dans EF Core 3. x
 
@@ -20,12 +20,12 @@ Les changements qui, selon nous, auront une incidence uniquement sur les fournis
 
 | **Modification critique**                                                                                               | **Impact** |
 |:------------------------------------------------------------------------------------------------------------------|------------|
-| [Les requêtes LINQ ne sont plus évaluées sur le client](#linq-queries-are-no-longer-evaluated-on-the-client)         | Importante       |
-| [EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0](#netstandard21) | Importante      |
-| [L’outil en ligne de commande EF Core, dotnet ef, ne fait plus partie du SDK .NET Core](#dotnet-ef) | Importante      |
-| [DetectChanges honore les valeurs de clés générées par le magasin](#dc) | Importante      |
-| [FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés](#fromsql) | Importante      |
-| [Les types de requêtes sont regroupés avec les types d’entités](#qt) | Importante      |
+| [Les requêtes LINQ ne sont plus évaluées sur le client](#linq-queries-are-no-longer-evaluated-on-the-client)         | Élevé       |
+| [EF Core 3.0 cible .NET Standard 2.1 plutôt que .NET Standard 2.0](#netstandard21) | Élevé      |
+| [L’outil en ligne de commande EF Core, dotnet ef, ne fait plus partie du SDK .NET Core](#dotnet-ef) | Élevé      |
+| [DetectChanges honore les valeurs de clés générées par le magasin](#dc) | Élevé      |
+| [FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés](#fromsql) | Élevé      |
+| [Les types de requêtes sont regroupés avec les types d’entités](#qt) | Élevé      |
 | [Entity Framework Core ne fait plus partie du framework partagé ASP.NET Core](#no-longer) | Moyenne      |
 | [Les suppressions en cascade se produisent désormais immédiatement par défaut](#cascade) | Moyenne      |
 | [Le chargement hâtif des entités associées se produit désormais dans une seule requête](#eager-loading-single-query) | Moyenne      |
@@ -178,7 +178,7 @@ Pour pouvoir gérer des migrations ou générer un `DbContext`, installez `dotne
     $ dotnet tool install --global dotnet-ef
   ```
 
-Vous pouvez également obtenir un outil local quand vous restaurez les dépendances d’un projet qui le déclare en tant que dépendance d’outil à l’aide d’un [fichier manifeste d’outil](https://github.com/dotnet/cli/issues/10288).
+Vous pouvez également obtenir un outil local quand vous restaurez les dépendances d’un projet qui le déclare en tant que dépendance d’outil à l’aide d’un [fichier manifeste d’outil](/dotnet/core/tools/global-tools#install-a-local-tool).
 
 <a name="fromsql"></a>
 ### <a name="fromsql-executesql-and-executesqlasync-have-been-renamed"></a>FromSql, ExecuteSql et ExecuteSqlAsync ont été renommés
@@ -192,7 +192,7 @@ Avant EF Core 3.0, ces noms de méthode étaient surchargés pour être utilis�
 **Nouveau comportement**
 
 À compter d’EF Core 3.0, utilisez `FromSqlRaw`, `ExecuteSqlRaw` et `ExecuteSqlRawAsync` pour créer une requête paramétrable, où les paramètres sont passés séparément à partir de la chaîne de requête.
-Par exemple :
+Exemple :
 
 ```csharp
 context.Products.FromSqlRaw(
@@ -201,7 +201,7 @@ context.Products.FromSqlRaw(
 ```
 
 Utilisez `FromSqlInterpolated`, `ExecuteSqlInterpolated` et `ExecuteSqlInterpolatedAsync` pour créer une requête paramétrable, où les paramètres sont passés dans le cadre d’une chaîne de requête interpolée.
-Par exemple :
+Exemple :
 
 ```csharp
 context.Products.FromSqlInterpolated(
@@ -398,7 +398,7 @@ Ce changement a été apporté afin d’améliorer l’expérience de liaison de
 **Corrections**
 
 Vous pouvez restaurer le comportement précédent par le biais des paramètres sur `context.ChangeTracker`.
-Par exemple :
+Exemple :
 
 ```csharp
 context.ChangeTracker.CascadeDeleteTiming = CascadeTiming.OnSaveChanges;
@@ -479,6 +479,9 @@ Cela ne serait toujours pas configuré par convention, afin d’éviter une conf
 * **`DbContext.Query<>()`** - `DbContext.Set<>()` Doit être utilisé à la place.
 * **`IQueryTypeConfiguration<TQuery>`** -À la place, `IEntityTypeConfiguration<TEntity>` * * doit être utilisé.
 
+> [!NOTE]
+> En raison d' [un problème dans 3. x](https://github.com/dotnet/efcore/issues/19537) lors de l’interrogation de keymoins les entités dont toutes les propriétés ont la valeur est `null` `null` retournée à la place d’une entité, si ce problème est applicable à votre scénario, ajoutez également une logique pour gérer les `null` résultats.
+
 <a name="config"></a>
 ### <a name="configuration-api-for-owned-type-relationships-has-changed"></a>L’API de configuration pour les relations de type détenu a changé
 
@@ -493,7 +496,7 @@ Avant EF Core 3.0, la configuration de la relation détenue était effectuée d
 **Nouveau comportement**
 
 À compter d’EF Core 3.0, il existe une API Fluent afin de configurer une propriété de navigation pour le propriétaire à l’aide de `WithOwner()`.
-Par exemple :
+Exemple :
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
@@ -501,7 +504,7 @@ modelBuilder.Entity<Order>.OwnsOne(e => e.Details).WithOwner(e => e.Order);
 
 La configuration liée à la relation entre le propriétaire et le détenu doit maintenant être chaînée après `WithOwner()` tout comme les autres relations.
 En revanche, la configuration du type détenu lui-même serait toujours chaînée après `OwnsOne()/OwnsMany()`.
-Par exemple :
+Exemple :
 
 ```csharp
 modelBuilder.Entity<Order>.OwnsOne(e => e.Details, eb =>
@@ -747,7 +750,7 @@ Toutefois, si `Order` est un type détenu, cela fait également de `CustomerId` 
 
 À compter de la version 3.0, EF Core ne tente pas d’utiliser des propriétés pour les clés étrangères par convention si elles ont le même nom que la propriété principale.
 Les modèles de nom du type de principal concaténé au nom de la propriété de principal, et de nom de navigation concaténé au nom de propriété de principal sont toujours mis en correspondance.
-Par exemple :
+Exemple :
 
 ```csharp
 public class Customer
@@ -883,7 +886,7 @@ Ce changement a été apporté afin d’empêcher EF Core de déclencher par err
 **Corrections**
 
 Vous pouvez restaurer le comportement antérieur à la version 3.0 en configurant le mode d’accès à la propriété sur `ModelBuilder`.
-Par exemple :
+Exemple :
 
 ```csharp
 modelBuilder.UsePropertyAccessMode(PropertyAccessMode.PreferFieldDuringConstruction);
@@ -1143,7 +1146,7 @@ Ce changement a été apporté afin d’améliorer le code d’application avec 
 
 En présence de cette erreur, le mieux consiste à tenter de comprendre la cause racine, et de cesser de créer autant de fournisseurs de services internes.
 Toutefois, vous pouvez reconvertir cette erreur en avertissement (ou l’ignorer) par le biais de la configuration sur le `DbContextOptionsBuilder`.
-Par exemple :
+Exemple :
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -1162,7 +1165,7 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 **Ancien comportement**
 
 Avant EF Core 3.0, la façon dont était interprété le code qui appelait `HasOne` ou `HasMany` avec une seule chaîne prêtait à confusion.
-Par exemple :
+Exemple :
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Entrance").WithOne();
 ```
@@ -1184,7 +1187,7 @@ L’ancien comportement était très déroutant, en particulier pour qui lisait 
 Seules les applications qui configurent explicitement des relations en utilisant des chaînes comme noms de type sans spécifier explicitement la propriété de navigation sont concernées,
 ce qui n’est pas courant.
 Pour revenir au comportement précédent, transmettez explicitement `null` comme nom de propriété de navigation.
-Par exemple :
+Exemple :
 
 ```csharp
 modelBuilder.Entity<Samurai>().HasOne("Some.Entity.Type.Name", null).WithOne();
@@ -1275,7 +1278,7 @@ Avant EF Core 3.0, `ForSqlServerHasIndex().ForSqlServerInclude()` offrait un mo
 **Nouveau comportement**
 
 À compter d’EF Core 3.0, l’utilisation de `Include` sur un index est prise en charge au niveau relationnel.
-Utiliser `HasIndex().ForSqlServerInclude()`.
+Utilisez `HasIndex().ForSqlServerInclude()`.
 
 **Pourquoi**
 
@@ -1574,7 +1577,7 @@ Utilisez le nouveau nom. (Notez que le numéro d’ID événement n’a pas chan
 
 **Ancien comportement**
 
-Avant EF Core 3.0, les noms de contrainte de clé étrangère étaient désignés simplement par le terme « nom ». Par exemple :
+Avant EF Core 3.0, les noms de contrainte de clé étrangère étaient désignés simplement par le terme « nom ». Exemple :
 
 ```csharp
 var constraintName = myForeignKey.Name;
@@ -1582,7 +1585,7 @@ var constraintName = myForeignKey.Name;
 
 **Nouveau comportement**
 
-À compter d’EF Core 3.0, les noms de contrainte de clé étrangère sont désignés par « noms de contrainte ». Par exemple :
+À compter d’EF Core 3.0, les noms de contrainte de clé étrangère sont désignés par « noms de contrainte ». Exemple :
 
 ```csharp
 var constraintName = myForeignKey.ConstraintName;
@@ -1725,7 +1728,7 @@ Suivi de problème no 13573
 
 **Ancien comportement**
 
-Un type d’entité avec plusieurs propriétés de navigation unidirectionnelle autoréférencées et les clés étrangères correspondantes a été incorrectement configuré en tant que relation unique. Par exemple :
+Un type d’entité avec plusieurs propriétés de navigation unidirectionnelle autoréférencées et les clés étrangères correspondantes a été incorrectement configuré en tant que relation unique. Exemple :
 
 ```csharp
 public class User 
@@ -1748,7 +1751,7 @@ Le modèle résultant est ambigu et probablement erroné dans ce cas.
 
 **Corrections**
 
-Utilisez la configuration complète de la relation. Par exemple :
+Utilisez la configuration complète de la relation. Exemple :
 
 ```csharp
 modelBuilder

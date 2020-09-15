@@ -3,14 +3,13 @@ title: Configuration basée sur le code-EF6
 description: Configuration basée sur le code dans Entity Framework 6
 author: divega
 ms.date: 10/23/2016
-ms.assetid: 13886d24-2c74-4a00-89eb-aa0dee328d83
 uid: ef6/fundamentals/configuring/code-based
-ms.openlocfilehash: 643aefff1d8a143e7df8251eff4e5051e2c6bd08
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 67bb7ebd620c90ebe80983cc5baa6cab032907f8
+ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618504"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90070729"
 ---
 # <a name="code-based-configuration"></a>Configuration basée sur le code
 > [!NOTE]
@@ -31,7 +30,7 @@ La configuration basée sur le code dans EF6 et versions ultérieures est obtenu
 
 Conformément à ces instructions, EF peut détecter et utiliser votre configuration automatiquement par les outils qui ont besoin d’accéder à votre modèle et lorsque votre application est exécutée.  
 
-## <a name="example"></a>Exemple  
+## <a name="example"></a> Exemple  
 
 Une classe dérivée de DbConfiguration peut se présenter comme suit :  
 
@@ -59,7 +58,7 @@ Cette classe configure EF pour utiliser la stratégie d’exécution de SQL Azur
 
 Dans certains cas, il n’est pas possible de placer votre classe DbConfiguration dans le même assembly que votre classe DbContext. Par exemple, vous pouvez avoir deux classes DbContext chacune dans des assemblys différents. Il existe deux options pour gérer cela.  
 
-La première option consiste à utiliser le fichier de configuration pour spécifier l’instance DbConfiguration à utiliser. Pour ce faire, définissez l’attribut codeConfigurationType de la section entityFramework. Par exemple :  
+La première option consiste à utiliser le fichier de configuration pour spécifier l’instance DbConfiguration à utiliser. Pour ce faire, définissez l’attribut codeConfigurationType de la section entityFramework. Exemple :  
 
 ``` xml
 <entityFramework codeConfigurationType="MyNamespace.MyDbConfiguration, MyAssembly">
@@ -69,7 +68,7 @@ La première option consiste à utiliser le fichier de configuration pour spéci
 
 La valeur de codeConfigurationType doit être le nom complet de l’assembly et de l’espace de noms de votre classe DbConfiguration.  
 
-La deuxième option consiste à placer DbConfigurationTypeAttribute sur votre classe de contexte. Par exemple :  
+La deuxième option consiste à placer DbConfigurationTypeAttribute sur votre classe de contexte. Exemple :  
 
 ``` csharp  
 [DbConfigurationType(typeof(MyDbConfiguration))]
@@ -78,7 +77,7 @@ public class MyContextContext : DbContext
 }
 ```  
 
-La valeur passée à l’attribut peut être votre type DbConfiguration, comme indiqué ci-dessus, ou la chaîne de nom de type qualifié d’assembly et d’espace de noms. Par exemple :  
+La valeur passée à l’attribut peut être votre type DbConfiguration, comme indiqué ci-dessus, ou la chaîne de nom de type qualifié d’assembly et d’espace de noms. Exemple :  
 
 ``` csharp
 [DbConfigurationType("MyNamespace.MyDbConfiguration, MyAssembly")]

@@ -1,14 +1,16 @@
 ---
 title: Entités de suivi automatique - EF6
+description: Entité d’auto-suivi dans Entity Framework 6.
 author: divega
 ms.date: 10/23/2016
 ms.assetid: 5e60f5be-7bbb-4bf8-835e-0ac808d6c84a
-ms.openlocfilehash: 3bb9759d89fbd0c10b911625aa7d0afd7747de14
-ms.sourcegitcommit: 9b562663679854c37c05fca13d93e180213fb4aa
-ms.translationtype: HT
+uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/index
+ms.openlocfilehash: 0e771c0f147589112779359ab8c06344eb05b8fc
+ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/07/2020
-ms.locfileid: "78413354"
+ms.lasthandoff: 09/09/2020
+ms.locfileid: "89616185"
 ---
 # <a name="self-tracking-entities"></a>Entités de suivi automatique
 
@@ -21,12 +23,12 @@ Utilisez les entités de suivi automatique uniquement si le contexte n’est pas
 
 Cet élément de modèle génère deux fichiers .tt (modèle de texte) :  
 
-- Le fichier **\<nom du modèle\>.tt** génère les types d’entité et une classe d’assistance qui contient la logique de suivi des changements utilisée par les entités de suivi automatique et les méthodes d’extension qui permettent de définir l’état sur les entités de suivi automatique.  
-- Le fichier **\<nom du modèle\>.Context.tt** génère un contexte dérivé et une classe d’extension qui contient des méthodes **ApplyChanges** pour les classes **ObjectContext** et **ObjectSet**. Ces méthodes examinent les informations de suivi des modifications contenues dans le graphique des entités de suivi automatique pour déduire l'ensemble des opérations à effectuer pour enregistrer les modifications dans la base de données.  
+- Le fichier **\<model name\>.tt** génère les types d’entités et une classe d’assistance contenant la logique de suivi des modifications appliquée par les entités d’auto-suivi et les méthodes d’extension qui permettent de définir l’état de ces entités.  
+- Le fichier **\<model name\>.Context.tt** génère un contexte dérivé et une classe d’extension contenant les méthodes **ApplyChanges** des classes **ObjectContext** et **ObjectSet**. Ces méthodes examinent les informations de suivi des modifications contenues dans le graphique des entités de suivi automatique pour déduire l'ensemble des opérations à effectuer pour enregistrer les modifications dans la base de données.  
 
 ## <a name="get-started"></a>Découvrir  
 
-Pour commencer, visitez la page [Procédure pas à pas des entités de suivi automatique](walkthrough.md).  
+Pour commencer, visitez la page [Procédure pas à pas des entités de suivi automatique](xref:ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough).  
 
 ## <a name="functional-considerations-when-working-with-self-tracking-entities"></a>Points fonctionnels à prendre en considération lors de l’utilisation d’entités de suivi automatique  
 > [!IMPORTANT]
