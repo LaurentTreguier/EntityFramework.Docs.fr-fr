@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: ff8102a3fd1ad7263ac60befd59a48380aab34ed
-  ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
-  ms.translationtype: HT
+  ms.openlocfilehash: a97ca698d4fcd2cf26066e6088a0f88ebc5cf187
+  ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+  ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 09/09/2020
-  ms.locfileid: "89619517"
+  ms.lasthandoff: 09/14/2020
+  ms.locfileid: "90070352"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -130,7 +130,7 @@ additionalContent:
         text: Suivi et non-suivi
       - url: core/querying/complex-query-operators.md
         text: Opérateurs de requête complexes
-      - url: core/querying/related-data.md
+      - url: core/querying/related-data/index.md
         text: Charger les données associées
       - url: core/querying/async.md
         text: Requêtes asynchrones
