@@ -4,12 +4,12 @@ description: Liste complète des modifications avec rupture introduites dans Ent
 author: bricelam
 ms.date: 09/09/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 63fd1d1a01b7a72fd34bb9a0130191131306426c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070794"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210365"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifications avec rupture dans EF Core 5,0
 
@@ -29,6 +29,7 @@ Les modifications d’API et de comportement suivantes peuvent bloquer les mises
 | [Les générateurs de valeur sont appelés lorsque l’état de l’entité passe de détaché à inchangé, mis à jour ou supprimé](#non-added-generation) | Faible        |
 | [IMigrationsModelDiffer utilise désormais IRelationalModel](#relational-model)                                                                 | Faible        |
 | [Les discriminateurs sont en lecture seule](#read-only-discriminators)                                                                             | Faible        |
+| [EF spécifique au fournisseur. Les méthodes Functions lèvent pour le fournisseur InMemory](#no-client-methods)                                              | Faible        |
 
 <a name="geometric-sqlite"></a>
 
@@ -193,7 +194,7 @@ Auparavant, les méthodes d’extension étaient appelées `GetPropertyName` et 
 
 **Nouveau comportement**
 
-L’ancienne API a été obsolète et de nouvelles méthodes ont été ajoutées : `GetJsonPropertyName` , `SetJsonPropertyName`
+L’ancienne API a été supprimée et de nouvelles méthodes ont été ajoutées : `GetJsonPropertyName` , `SetJsonPropertyName`
 
 **Pourquoi**
 
@@ -201,7 +202,7 @@ Cette modification supprime l’ambiguïté autour de la configuration de ces m�
 
 **Corrections**
 
-Utilisez la nouvelle API ou suspendez temporairement les avertissements obsolètes.
+Utilisez la nouvelle API.
 
 <a name="non-added-generation"></a>
 
@@ -320,3 +321,25 @@ La définition initiale des requêtes a été introduite en tant que vues côté
 
 Pour les fournisseurs relationnels, utilisez `ToSqlQuery` la méthode dans `OnModelCreating` et transmettez une chaîne SQL à utiliser pour le type d’entité.
 Pour le fournisseur en mémoire, utilisez la `ToInMemoryQuery` méthode dans `OnModelCreating` et transmettez une requête LINQ à utiliser pour le type d’entité.
+
+<a name="no-client-methods"></a>
+
+### <a name="provider-specific-effunctions-methods-throw-for-inmemory-provider"></a>EF spécifique au fournisseur. Les méthodes Functions lèvent pour le fournisseur InMemory
+
+[#20294 du problème de suivi](https://github.com/dotnet/efcore/issues/20294)
+
+**Ancien comportement**
+
+EF spécifique au fournisseur. Les méthodes Functions contenaient une implémentation pour l’exécution du client, ce qui leur permettait d’être exécutées sur le fournisseur d’InMemory. Par exemple, `EF.Functions.DateDiffDay` est une méthode propre à SQL Server, qui fonctionnait sur le fournisseur d’InMemory.
+
+**Nouveau comportement**
+
+Les méthodes spécifiques au fournisseur ont été mises à jour pour lever une exception dans leur corps de méthode afin de bloquer leur évaluation côté client.
+
+**Pourquoi**
+
+Les méthodes spécifiques au fournisseur sont mappées à une fonction de base de données. Le calcul effectué par la fonction de base de données mappée ne peut pas toujours être répliqué côté client dans LINQ. Cela peut provoquer la différence entre le résultat du serveur et l’exécution de la même méthode sur le client. Étant donné que ces méthodes sont utilisées dans LINQ pour traduire des fonctions de base de données spécifiques, elles n’ont pas besoin d’être évaluées côté client. Comme le fournisseur d’InMemory est une *base de données*différente, ces méthodes ne sont pas disponibles pour ce fournisseur. Si vous tentez de les exécuter pour le fournisseur d’InMemory ou tout autre fournisseur qui ne traduit pas ces méthodes, lève une exception.
+
+**Corrections**
+
+Étant donné qu’il n’existe aucun moyen de reproduire le comportement des fonctions de base de données avec précision, vous devez tester les requêtes qui les contiennent sur le même type de base de données qu’en production.

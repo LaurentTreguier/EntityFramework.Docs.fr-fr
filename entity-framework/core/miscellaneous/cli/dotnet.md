@@ -3,45 +3,44 @@ title: Informations de référence sur les outils de EF Core (CLI .NET)-EF Core
 description: Guide de référence pour les outils de CLI .NET Core Entity Framework Core
 author: bricelam
 ms.author: bricelam
-ms.date: 09/09/2020
+ms.date: 09/17/2020
 uid: core/miscellaneous/cli/dotnet
-ms.openlocfilehash: a3fa73bf7f9173cbd49dffdabeacc98d5c35ac14
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ee1caebcda93f627d285878f8594688a0f08c194
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071834"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210391"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Informations de référence sur les outils de Entity Framework Core-CLI .NET Core
 
 Les outils de l’interface de ligne de commande (CLI) pour Entity Framework Core effectuer des tâches de développement au moment du Design. Par exemple, ils créent des [migrations](/aspnet/core/data/ef-mvc/migrations), appliquent des migrations et génèrent du code pour un modèle basé sur une base de données existante. Les commandes sont une extension de la commande [dotnet](/dotnet/core/tools) multiplateforme, qui fait partie du [Kit SDK .net Core](https://www.microsoft.com/net/core). Ces outils fonctionnent avec les projets .NET Core.
 
-Si vous utilisez Visual Studio, nous vous recommandons d’utiliser les outils de la [console du gestionnaire de package](xref:core/miscellaneous/cli/powershell) à la place :
+Lorsque vous utilisez Visual Studio, envisagez d’utiliser les outils de la [console du gestionnaire de package](xref:core/miscellaneous/cli/powershell) à la place des outils CLI. Outils de la console du gestionnaire de package :
 
-* Ils fonctionnent automatiquement avec le projet actif sélectionné dans la **console du gestionnaire de package** sans que vous ayez besoin de basculer manuellement les répertoires.
-* Ils ouvrent automatiquement les fichiers générés par une commande une fois la commande terminée.
+* Fonctionne avec le projet actif sélectionné dans la **console du gestionnaire de package** sans que vous ayez besoin de basculer manuellement les répertoires.
+* Ouvre les fichiers générés par une commande une fois la commande terminée.
+* Fournit la saisie semi-automatique par tabulation des commandes, des paramètres, des noms de projets, des types de contexte et des noms de migration.
 
 ## <a name="installing-the-tools"></a>Installation des outils
 
 La procédure d’installation dépend du type et de la version du projet :
 
-* EF Core 3.x
+* EF Core 3. x et 5. x
 * ASP.NET Core version 2,1 et versions ultérieures
 * EF Core 2. x
-* EF Core 1. x
 
-### <a name="ef-core-3x"></a>EF Core 3.x
+### <a name="ef-core-3x-and-5x"></a>EF Core 3. x et 5. x
 
-* `dotnet ef` doit être installé en tant qu’outil Global ou local. La plupart des développeurs s’installent `dotnet ef` comme un outil global avec la commande suivante :
+* `dotnet ef` doit être installé en tant qu’outil Global ou local. La plupart des développeurs préfèrent installer `dotnet ef` en tant qu’outil Global à l’aide de la commande suivante :
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
-  Vous pouvez également utiliser `dotnet ef` en tant qu’outil local. Pour l’utiliser en tant qu’outil local, restaurez les dépendances d’un projet qui le déclare en tant que dépendance de l’outil à l’aide d’un [fichier manifeste d’outil](/dotnet/core/tools/global-tools#install-a-local-tool).
+  `dotnet ef` peut également être utilisé en tant qu’outil local. Pour l’utiliser en tant qu’outil local, restaurez les dépendances d’un projet qui le déclare en tant que dépendance de l’outil à l’aide d’un [fichier manifeste d’outil](/dotnet/core/tools/global-tools#install-a-local-tool).
 
 * Installez le [kit de développement logiciel (SDK) .NET Core](https://www.microsoft.com/net/download/core).
-
 * Installez le package le plus récent `Microsoft.EntityFrameworkCore.Design` .
 
   ```dotnetcli
@@ -50,7 +49,7 @@ La procédure d’installation dépend du type et de la version du projet :
 
 ### <a name="aspnet-core-21"></a>ASP.NET Core 2.1 +
 
-* Installez le [Kit SDK .net Core](https://www.microsoft.com/net/download/core)actuel. Le kit SDK doit être installé même si vous disposez de la dernière version de Visual Studio 2017.
+* Installez le [Kit SDK .net Core](https://www.microsoft.com/net/download/core)actuel. Le kit de développement logiciel (SDK) doit être installé même si vous disposez de la dernière version de Visual Studio.
 
   C’est tout ce qui est nécessaire pour ASP.NET Core 2.1 + car le `Microsoft.EntityFrameworkCore.Design` package est inclus dans le [AspNetCore.](/aspnet/core/fundamentals/metapackage-app)
 
@@ -66,43 +65,7 @@ Les `dotnet ef` commandes sont incluses dans le kit SDK .net Core, mais pour act
   dotnet add package Microsoft.EntityFrameworkCore.Design
   ```
 
-### <a name="ef-core-1x"></a>EF Core 1. x
-
-* Installez la version de kit SDK .NET Core 2.1.200. Les versions ultérieures ne sont pas compatibles avec les outils CLI pour EF Core 1,0 et 1,1.
-
-* Configurez l’application pour utiliser la version du kit de développement logiciel (SDK) 2.1.200 en modifiant son [global.jssur](/dotnet/core/tools/global-json) le fichier. Ce fichier est normalement inclus dans le répertoire de la solution (l’un au-dessus du projet).
-
-* Modifiez le fichier projet et ajoutez `Microsoft.EntityFrameworkCore.Tools.DotNet` en tant qu' `DotNetCliToolReference` élément. Spécifiez la version 1. x la plus récente, par exemple : 1.1.6. Consultez l’exemple de fichier projet à la fin de cette section.
-
-* Installez la dernière version 1. x du `Microsoft.EntityFrameworkCore.Design` package, par exemple :
-
-  ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.Design -v 1.1.6
-  ```
-
-  Une fois les deux références de package ajoutées, le fichier projet ressemble à ceci :
-
-  ``` xml
-  <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-      <OutputType>Exe</OutputType>
-      <TargetFramework>netcoreapp1.1</TargetFramework>
-    </PropertyGroup>
-    <ItemGroup>
-      <PackageReference Include="Microsoft.EntityFrameworkCore.Design"
-                        Version="1.1.6"
-                         PrivateAssets="All" />
-    </ItemGroup>
-    <ItemGroup>
-       <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet"
-                              Version="1.1.6" />
-    </ItemGroup>
-  </Project>
-  ```
-
-  Une référence de package avec `PrivateAssets="All"` n’est pas exposée aux projets qui font référence à ce projet. Cette restriction est particulièrement utile pour les packages qui sont généralement utilisés uniquement pendant le développement.
-
-### <a name="verify-installation"></a>Vérifier l’installation
+### <a name="verify-installation"></a>Vérifier l'installation
 
 Exécutez les commandes suivantes pour vérifier que EF Core outils CLI sont correctement installés :
 
@@ -127,9 +90,9 @@ Entity Framework Core .NET Command-line Tools 2.1.3-rtm-32065
 <Usage documentation follows, not shown.>
 ```
 
-## <a name="updating-the-tools"></a>Mise à jour des outils
+## <a name="update-the-tools"></a>Mettre à jour Data Lake Tools
 
-Utilisez `dotnet tool update --global dotnet-ef` pour mettre à jour les outils globaux vers la dernière version disponible, si les outils sont installés localement dans votre projet `dotnet tool update dotnet-ef` . Installez une version spécifique en ajoutant `--version <VERSION>` à votre commande. Pour plus d’informations, consultez la section [mise à jour](/dotnet/core/tools/dotnet-tool-update) de la documentation de l’outil dotnet.
+Utilisez `dotnet tool update --global dotnet-ef` pour mettre à jour les outils globaux vers la dernière version disponible. Si les outils sont installés localement dans votre projet, utilisez `dotnet tool update dotnet-ef` . Installez une version spécifique en ajoutant `--version <VERSION>` à votre commande. Pour plus d’informations, consultez la section [mise à jour](/dotnet/core/tools/dotnet-tool-update) de la documentation de l’outil dotnet.
 
 ## <a name="using-the-tools"></a>Utilisation des outils
 

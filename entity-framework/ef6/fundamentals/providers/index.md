@@ -4,12 +4,12 @@ description: Fournisseurs Entity Framework dans Entity Framework 6.
 author: divega
 ms.date: 06/27/2018
 uid: ef6/fundamentals/providers/index
-ms.openlocfilehash: bb573cb0666556de8fb37802f465af97fc40673a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7d448f749448e35702c2440717593221324508fa
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073147"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210326"
 ---
 # <a name="entity-framework-6-providers"></a>Fournisseurs Entity Framework 6
 > [!NOTE]
@@ -41,6 +41,8 @@ Les fournisseurs regénérés pour EF6 dont nous avons connaissance sont notamme
     *   Npgsql est disponible sous forme de [package NuGet](https://www.nuget.org/packages/EntityFramework6.Npgsql/)
 *   **Oracle**
     *   ODP.NET est disponible sous forme de [package NuGet](https://www.nuget.org/packages/Oracle.ManagedDataAccess.EntityFramework/)
+*   **SQLite**
+    *   System. Data. SQLite est disponible en tant que [package NuGet](https://www.nuget.org/packages/System.Data.SQLite/)
 
 Notez que le niveau de fonctionnalité ou de prise en charge n’est pas indiqué pour un fournisseur donné, la liste indique uniquement qu’une build pour EF6 a été rendue disponible.
 

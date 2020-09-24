@@ -5,12 +5,12 @@ author: bricelam
 ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 50937f96e63f9bda2ffcf5e94dabf688ee2ba1f3
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cde83a944e1e698a7f8a00c4692c0ce08a87b5ab
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071887"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210404"
 ---
 # <a name="applying-migrations"></a>Application de migrations
 
@@ -139,7 +139,7 @@ Notez que cela peut être utilisé pour revenir à une migration antérieure ég
 > [!WARNING]
 > Prenez note des scénarios de pertes de données potentielles.
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 Le code suivant met à jour votre base de données avec la dernière migration :
 
@@ -193,5 +193,5 @@ Notez que s' `Migrate()` appuie sur le `IMigrator` service, qui peut être utili
 
 > [!WARNING]
 >
-> * Réfléchissez soigneusement avant d’utiliser cette approche en production. L’expérience a montré que la simplicité de cette stratégie de déploiement est dépensée par les problèmes qu’elle crée. Envisagez plutôt d’utiliser des scripts SQL.
+> * Réfléchissez soigneusement avant d’utiliser cette approche en production. L’expérience a montré que la simplicité de cette stratégie de déploiement est dépensée par les problèmes qu’elle crée. Envisagez de générer des scripts SQL à partir de migrations à la place.
 > * N’appelez pas `EnsureCreated()` avant `Migrate()`. `EnsureCreated()` ignore Migrations pour créer le schéma, ce qui entraîne l’échec de `Migrate()`.

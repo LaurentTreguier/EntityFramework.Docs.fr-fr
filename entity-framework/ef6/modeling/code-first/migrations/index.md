@@ -4,12 +4,12 @@ description: Migrations Code First dans Entity Framework 6.
 author: divega
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/index
-ms.openlocfilehash: aec3a53816e41bf7ead696fd9edc30618d58b07a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7233789c277d87d0fda420cdbdf669c8fd56cd22
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072159"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210478"
 ---
 # <a name="code-first-migrations"></a>Migrations Code First
 Migrations Code First est la méthode recommandée pour faire évoluer votre schéma de base de données d’application si vous utilisez le flux de travail Code First. Les migrations fournissent un ensemble d’outils pour les opérations suivantes :
@@ -18,7 +18,7 @@ Migrations Code First est la méthode recommandée pour faire évoluer votre sch
 2. Générer des migrations pour suivre les changements que vous appliquez à votre modèle EF
 2. Mettre à jour votre base de données avec ces changements
 
-La procédure suivante fournit une vue d’ensemble de Migrations Code First dans Entity Framework. Vous pouvez suivre l’intégralité de la procédure pas à pas ou passer à la rubrique qui vous intéresse. Les rubriques suivantes sont traitées :
+La procédure pas à pas suivante fournit une vue d’ensemble des Migrations Code First dans Entity Framework. Vous pouvez suivre l’intégralité de la procédure pas à pas ou passer à la rubrique qui vous intéresse. Les rubriques suivantes sont traitées :
 
 ## <a name="building-an-initial-model--database"></a>Génération d’un modèle et d’une base de données initiaux
 

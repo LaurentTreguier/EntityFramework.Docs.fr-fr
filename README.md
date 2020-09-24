@@ -10,19 +10,19 @@ Les problèmes de documentation pour EF Core et EF6 doivent être enregistrés d
 
 Envisagez d’envoyer une requête de tirage plutôt que de déposer un problème. Cela peut être fait entièrement à partir du Web :
 
-* Recherchez le fichier à mettre à jour dans ce référentiel, puis cliquez dessus pour l’ouvrir.
+* Dans l’angle supérieur droit du document, sélectionnez l’icône représentant un stylet : ![ image](https://user-images.githubusercontent.com/3605364/93646907-e75ef680-f9a2-11ea-847a-c5c3839f3aa8.png)
 
-![image](https://user-images.githubusercontent.com/1430078/64454137-10199400-d09f-11e9-9d1a-b7fdca2c518e.png)
+  Remarque : vous devrez peut-être agrandir la fenêtre du navigateur pour voir l’icône du stylet.
 
 * Cliquez sur le bouton modifier (✏️) pour modifier dans votre navigateur Web.
 
 ![image](https://user-images.githubusercontent.com/1430078/64454321-85856480-d09f-11e9-85a6-1c93bc6611e2.png)
 
-* Lorsque vous avez terminé, ajoutez un titre et une description, puis utilisez la section « créer une nouvelle branche et démarrer une requête de tirage ». option.
+* Lorsque vous avez terminé, ajoutez un titre et une description, puis utilisez la **branche créer une nouvelle branche et démarrer une requête de tirage.** option.
 
 ![image](https://user-images.githubusercontent.com/1430078/64454455-dac17600-d09f-11e9-922b-0346117011f5.png)
 
-(Notez que vous pouvez également cloner ce référentiel et effectuer une demande de tirage GitHub de manière normale.)
+Notez que vous pouvez également cloner ce référentiel et effectuer une demande de tirage (GitHub) de la manière normale.
 
 ## <a name="making-more-substantial-changes"></a>Apport de modifications plus substantielles
 

@@ -4,12 +4,12 @@ description: Chargement hâtif des données associées avec Entity Framework Cor
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: f7e33895293e1d7b8b32a135d60b58dd1f050621
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5ac15a85b28f21588639f34cbaa9ef76f366f7b5
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078946"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210465"
 ---
 # <a name="eager-loading-of-related-data"></a>Chargement hâtif des données associées
 
@@ -92,7 +92,7 @@ Vous pouvez également configurer des requêtes fractionnées comme valeur par d
 
 Lorsque les requêtes de fractionnement sont configurées en tant que valeurs par défaut, il est toujours possible de configurer des requêtes spécifiques pour qu’elles s’exécutent en tant que requêtes uniques :
 
-[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSplitQuery&highlight=5)]
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs?name=AsSingleQuery&highlight=5)]
 
 Si le mode de fractionnement de requête n’est pas explicitement spécifié, ni globalement, ni sur la requête, et EF Core détecte qu’une seule requête charge plusieurs collections includes, un avertissement est émis pour attirer l’attention sur les problèmes de performances potentiels résultants. Le fait de définir le mode de requête sur SingleQuery entraîne la non-génération de l’avertissement.
 

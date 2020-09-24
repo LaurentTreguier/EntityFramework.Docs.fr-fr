@@ -4,12 +4,12 @@ description: Chargement explicite de données associées avec Entity Framework C
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/explicit
-ms.openlocfilehash: 4cfc11237b498f5357476ee4ad96fdc279cd3fee
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: def1c8c2736c64bc6f39af0d344fd1330f8a06f5
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078952"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210452"
 ---
 # <a name="explicit-loading-of-related-data"></a>Chargement explicite de données associées
 
@@ -25,7 +25,7 @@ Vous pouvez également explicitement charger une propriété de navigation en ex
 
 Vous pouvez également obtenir une requête LINQ qui représente le contenu d’une propriété de navigation.
 
-Elle vous permet d’appliquer des opérateurs supplémentaires sur la requête. Exemple nombre application d’un opérateur d’agrégation sur les entités associées sans les charger en mémoire.
+Elle vous permet d’appliquer des opérateurs supplémentaires sur la requête. Par exemple, l’application d’un opérateur d’agrégation sur les entités associées sans les charger en mémoire.
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Sample.cs#NavQueryAggregate)]
 

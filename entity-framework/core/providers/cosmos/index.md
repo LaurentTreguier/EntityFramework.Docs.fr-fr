@@ -2,15 +2,14 @@
 title: Fournisseur Azure Cosmos DB - EF Core
 description: La documentation du fournisseur de base de données qui permet d’utiliser Entity Framework Core avec l’API SQL d’Azure Cosmos DB
 author: AndriySvyryd
-ms.author: ansvyryd
-ms.date: 11/05/2019
+ms.date: 09/14/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 188c5b10aefa784715c0bbf2d50337d65c21fd62
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 94ba29f3f2643e8f563a460e17dce9d15cb7c2df
+ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071366"
+ms.lasthandoff: 09/24/2020
+ms.locfileid: "91210339"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Fournisseur Azure Cosmos DB EF Core
 
@@ -66,6 +65,18 @@ L’enregistrement et l’interrogation des données suivent le modèle EF norma
 
 > [!IMPORTANT]
 > L’appel de [EnsureCreatedAsync](/dotnet/api/Microsoft.EntityFrameworkCore.Storage.IDatabaseCreator.EnsureCreatedAsync) est nécessaire pour créer les conteneurs requis et insérer les [données initiales](xref:core/modeling/data-seeding) si elles sont présentes dans le modèle. Toutefois, `EnsureCreatedAsync` ne doit être appelé qu’au cours du déploiement, pas pendant le fonctionnement normal, car cela peut entraîner des problèmes de performances.
+
+## <a name="cosmos-options"></a>Options de Cosmos
+
+Il est également possible de configurer le fournisseur de Cosmos DB avec une chaîne de connexion unique et de spécifier d’autres options pour personnaliser la connexion :
+
+[!code-csharp[Configuration](../../../../samples/core/Cosmos/ModelBuilding/OptionsContext.cs?name=Configuration)]
+
+> [!NOTE]
+> La plupart de ces options sont nouvelles dans EF Core Cosmos 5,0.
+
+> [!TIP]
+> Pour obtenir une description détaillée de l’effet de chaque option mentionnée ci-dessus, consultez la documentation sur les [options de Azure Cosmos DB](/dotnet/api/microsoft.azure.cosmos.cosmosclientoptions) .
 
 ## <a name="cosmos-specific-model-customization"></a>Personnalisation du modèle propre à Cosmos
 
