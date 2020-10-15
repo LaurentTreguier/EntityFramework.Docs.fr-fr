@@ -1,15 +1,15 @@
 ---
 title: Résilience de connexion-EF Core
 description: Utilisation de la résilience des connexions pour retenter automatiquement les commandes ayant échoué avec Entity Framework Core
-author: rowanmiller
+author: AndriySvyryd
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: 25b754334edd15532780cb4e40682bc211620c76
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: db0666a49cbd41ef3eacf447eaeed1fb54ffcbf4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210291"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061916"
 ---
 # <a name="connection-resiliency"></a>Résilience des connexions
 
@@ -23,7 +23,7 @@ Une stratégie d’exécution est spécifiée lors de la configuration des optio
 
 ou dans `Startup.cs` pour une application ASP.net Core :
 
-``` csharp
+```csharp
 public void ConfigureServices(IServiceCollection services)
 {
     services.AddDbContext<PicnicContext>(
@@ -37,7 +37,7 @@ public void ConfigureServices(IServiceCollection services)
 
 Il existe un mécanisme permettant d’inscrire votre propre stratégie d’exécution personnalisée si vous souhaitez modifier les valeurs par défaut.
 
-``` csharp
+```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 {
     optionsBuilder
@@ -65,7 +65,7 @@ Cette approche peut également être utilisée avec les transactions ambiantes.
 
 ## <a name="transaction-commit-failure-and-the-idempotency-issue"></a>Échec de validation de transaction et problème idempotence
 
-En général, en cas d’échec de la connexion, la transaction actuelle est annulée. Toutefois, si la connexion est abandonnée pendant la validation de la transaction, l’état résultant de la transaction est inconnu. 
+En général, en cas d’échec de la connexion, la transaction actuelle est annulée. Toutefois, si la connexion est abandonnée pendant la validation de la transaction, l’état résultant de la transaction est inconnu.
 
 Par défaut, la stratégie d’exécution retentera l’opération comme si la transaction était restaurée, mais si ce n’est pas le cas, cela entraînera une exception si le nouvel état de la base de données est incompatible ou risque d' **endommager les données** si l’opération ne repose pas sur un état particulier, par exemple lors de l’insertion d’une nouvelle ligne avec des valeurs de clé générées
 

@@ -2,15 +2,14 @@
 title: Création de DbContext au moment du design-EF Core
 description: Stratégies de création d’un DbContext au moment du design avec Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 09/16/2019
 uid: core/miscellaneous/cli/dbcontext-creation
-ms.openlocfilehash: ef2eba93827e04a9731ba960c40e9a50168ca8ff
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a9d7da2bb76d60ca63eb0dc189f924df125f0a7d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619447"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062007"
 ---
 # <a name="design-time-dbcontext-creation"></a>Création de DbContext au moment de la conception
 

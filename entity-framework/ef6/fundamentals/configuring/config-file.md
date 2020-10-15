@@ -1,20 +1,20 @@
 ---
 title: Paramètres du fichier de configuration-EF6
 description: Paramètres du fichier de configuration dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/configuring/config-file
-ms.openlocfilehash: b407ae7d64df18f6a8d80aa13703a8c243c6f3a2
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: fc991810e93840c27e6631dfb5bc1796c1328d37
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070716"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063320"
 ---
 # <a name="configuration-file-settings"></a>Paramètres du fichier de configuration
 Entity Framework permet de spécifier un certain nombre de paramètres à partir du fichier de configuration. En général, respecte un principe de « Convention sur la configuration » : tous les paramètres abordés dans ce billet ont un comportement par défaut, vous n’avez plus à vous soucier de modifier le paramètre lorsque la valeur par défaut ne répond plus à vos besoins.  
 
-## <a name="a-code-based-alternative"></a>Une alternative basée sur le code  
+## <a name="a-code-based-alternative"></a>Une alternative Code-Based  
 
 Tous ces paramètres peuvent également être appliqués à l’aide de code. À partir de EF6, nous avons introduit une [configuration basée sur le code](xref:ef6/fundamentals/configuring/code-based), qui offre un moyen central d’appliquer la configuration à partir du code. Avant EF6, la configuration peut toujours être appliquée à partir du code, mais vous devez utiliser différentes API pour configurer différentes zones. L’option fichier de configuration permet de modifier facilement ces paramètres lors du déploiement sans mettre à jour votre code.
 
@@ -41,7 +41,7 @@ La section **EntityFramework** a été ajoutée automatiquement au fichier de co
 
 Les chaînes de connexion sont placées dans l’élément **connectionStrings** standard et ne nécessitent pas la section **entityFramework** .  
 
-Les modèles basés sur Code First utilisent des chaînes de connexion ADO.NET normales. Exemple :  
+Les modèles basés sur Code First utilisent des chaînes de connexion ADO.NET normales. Par exemple :  
 
 ``` xml
 <connectionStrings>
@@ -51,7 +51,7 @@ Les modèles basés sur Code First utilisent des chaînes de connexion ADO.NET n
 </connectionStrings>
 ```  
 
-Les modèles basés sur le concepteur EF utilisent des chaînes de connexion EF spéciales. Exemple :  
+Les modèles basés sur le concepteur EF utilisent des chaînes de connexion EF spéciales. Par exemple :  
 
 ``` xml  
 <connectionStrings>
@@ -71,7 +71,7 @@ Les modèles basés sur le concepteur EF utilisent des chaînes de connexion EF 
 </connectionStrings>
 ```
 
-## <a name="code-based-configuration-type-ef6-onwards"></a>Type de configuration basée sur le code (EF6)  
+## <a name="code-based-configuration-type-ef6-onwards"></a>Type de configuration Code-Based (EF6)  
 
 À partir de EF6, vous pouvez spécifier le DbConfiguration pour EF à utiliser pour la [configuration basée sur le code](xref:ef6/fundamentals/configuring/code-based) dans votre application. Dans la plupart des cas, vous n’avez pas besoin de spécifier ce paramètre, car EF détecte automatiquement votre DbConfiguration. Pour plus d’informations sur le moment où vous devrez peut-être spécifier DbConfiguration dans votre fichier de configuration, consultez la section **déplacement de DbConfiguration** de la [configuration basée sur le code](xref:ef6/fundamentals/configuring/code-based).  
 

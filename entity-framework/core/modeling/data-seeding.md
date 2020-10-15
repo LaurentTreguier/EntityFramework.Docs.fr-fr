@@ -2,15 +2,14 @@
 title: Amorçage de données-EF Core
 description: Utilisation de l’amorçage des données pour remplir une base de données avec un jeu de données initial à l’aide de Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: 1d7adbe45c4cbc64a39485c76d8f516e32ffeba5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f8284d7473c6fbcafde25d01ec0709c2d50b666f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071600"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063697"
 ---
 # <a name="data-seeding"></a>Amorçage des données
 
@@ -23,9 +22,6 @@ Pour ce faire, vous pouvez procéder de plusieurs façons dans EF Core :
 * Logique d’initialisation personnalisée
 
 ## <a name="model-seed-data"></a>Données de valeur de départ du modèle
-
-> [!NOTE]
-> Cette fonctionnalité est une nouveauté d’EF Core 2.1.
 
 Contrairement à EF6, dans EF Core, les données d’amorçage peuvent être associées à un type d’entité dans le cadre de la configuration du modèle. Ensuite EF Core [migrations](xref:core/managing-schemas/migrations/index) peut calculer automatiquement les opérations d’insertion, de mise à jour ou de suppression qui doivent être appliquées lors de la mise à niveau de la base de données vers une nouvelle version du modèle.
 

@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: b4a7e2260337d74329d309e9db32fe97a2131d73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 0552038d471e294834bed9e3bf1f05fd74c39192
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619293"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062540"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Prise en main avec EF Core et Xamarin
 
@@ -19,7 +19,7 @@ Dans ce didacticiel, vous allez créer une application [Xamarin. Forms](/xamarin
 Vous pouvez suivre le didacticiel à l’aide de Visual Studio sur Windows ou Visual Studio pour Mac.
 
 > [!TIP]
-> Vous pouvez consulter l’exemple de cet article [sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin).
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -72,6 +72,14 @@ Revenez à la page de la liste des blogs. Et cliquez sur **Supprimer tout** dans
 Les sections suivantes vous guident tout au long du code de l’exemple de projet qui lit, crée, met à jour et supprime des données d’une base de données SQLite à l’aide de EF Core avec Xamarin. Forms.
 
 Il est supposé que vous êtes familiarisé avec les rubriques Xamarin. Forms relatives à l' [affichage des données](/xamarin/xamarin-forms/app-fundamentals/data-binding/) et à la [navigation entre les pages](/xamarin/xamarin-forms/app-fundamentals/navigation/).
+
+> [!IMPORTANT]
+> Entity Framework Core utilise la réflexion pour appeler des fonctions que l’éditeur de liens Xamarin. iOS peut supprimer en même temps que les configurations en mode **Release** . Vous pouvez éviter cela de deux manières.
+> 
+> * La première consiste à ajouter des `--linkskip System.Core` **arguments mTouch supplémentaires** dans les options de **génération iOS** .
+> * Vous pouvez également définir le comportement de l' **éditeur de liens** Xamarin. iOS sur `Don't Link` dans les options de **génération iOS** .
+> [Cet article explique plus en détail l’éditeur de liens Xamarin. iOS](/xamarin/ios/deploy-test/linker) , y compris comment définir le comportement sur Xamarin. iOS.
+> 
 
 ## <a name="entity-framework-core-nuget-packages"></a>Packages NuGet Entity Framework Core
 
@@ -178,7 +186,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a>DELETE
+### <a name="delete"></a>Supprimer
 
 * Supprimer tous les enregistrements avec des enregistrements en cascade vers enfants.
   * La `DeleteAll_Clicked` fonction de `BlogsPage.xaml.cs` supprime tous les `Blog` enregistrements de la base de données SQLite et répercute les suppressions sur tous les `Blog` enregistrements enfants `Post` .

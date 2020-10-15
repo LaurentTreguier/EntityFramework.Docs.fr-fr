@@ -1,15 +1,15 @@
 ---
 title: Prise en charge des fournisseurs pour les types spatiaux-EF6
 description: Prise en charge des fournisseurs pour les types spatiaux dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/providers/spatial-support
-ms.openlocfilehash: d6214ec503af8ea02b586cfddfd958ec7b47e42f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e2a543bc309001b14fb770d747a0dea22bcc91ca
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070443"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062904"
 ---
 # <a name="provider-support-for-spatial-types"></a>Prise en charge des fournisseurs pour les types spatiaux
 Entity Framework prend en charge l’utilisation des données spatiales via les classes DbGeography ou DbGeometry. Ces classes reposent sur les fonctionnalités spécifiques à la base de données offertes par le fournisseur Entity Framework. Tous les fournisseurs ne prennent pas en charge les données spatiales et ceux qui peuvent avoir des conditions préalables supplémentaires telles que l’installation d’assemblys de type spatial. Vous trouverez ci-dessous des informations supplémentaires sur la prise en charge des fournisseurs pour les types spatiaux.  

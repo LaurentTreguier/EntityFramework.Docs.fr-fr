@@ -4,29 +4,29 @@ description: Utilisation du SQL brut pour les requêtes dans Entity Framework Co
 author: smitpatel
 ms.date: 10/08/2019
 uid: core/querying/raw-sql
-ms.openlocfilehash: 13f5cbfbd7a110394402bff74d51b5fcda04c642
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9c480d13c46c7c84554996bcb581627a1df318dd
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071132"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062592"
 ---
 # <a name="raw-sql-queries"></a>Requêtes SQL brutes
 
 Entity Framework Core vous permet d’examiner les requêtes SQL brutes lorsque vous travaillez avec une base de données relationnelle. Les requêtes SQL brutes sont utiles si la requête que vous souhaitez ne peut pas être exprimée à l’aide de LINQ. Les requêtes SQL brutes sont également utilisées si une requête LINQ aboutit à une requête SQL inefficace. Les requêtes SQL brutes peuvent retourner des types d’entité standard ou des [types d’entité sans clé](xref:core/modeling/keyless-entity-types) qui font partie de votre modèle.
 
 > [!TIP]  
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/RawSQL) sur GitHub.
 
 ## <a name="basic-raw-sql-queries"></a>Requêtes SQL brutes de base
 
 Vous pouvez utiliser la `FromSqlRaw` méthode d’extension pour commencer une requête LINQ basée sur une requête SQL brute. `FromSqlRaw` peut uniquement être utilisé sur les racines de requête, qui est directement sur le `DbSet<>` .
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRaw)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlRaw)]
 
 Les requêtes SQL brutes peuvent servir à exécuter une procédure stockée.
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedure)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlRawStoredProcedure)]
 
 ## <a name="passing-parameters"></a>Passage de paramètres
 
@@ -39,31 +39,31 @@ Les requêtes SQL brutes peuvent servir à exécuter une procédure stockée.
 
 L’exemple suivant passe un paramètre unique à une procédure stockée en incluant un espace réservé de paramètre dans la chaîne de requête SQL et en fournissant un argument supplémentaire. Alors que cette syntaxe peut ressembler `String.Format` à la syntaxe, la valeur fournie est encapsulée dans un `DbParameter` et le nom de paramètre généré est inséré à l’emplacement où l' `{0}` espace réservé a été spécifié.
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureParameter)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlRawStoredProcedureParameter)]
 
 `FromSqlInterpolated` est semblable à `FromSqlRaw` , mais vous permet d’utiliser la syntaxe d’interpolation de chaîne. Tout comme `FromSqlRaw` , `FromSqlInterpolated` ne peut être utilisé que sur des racines de requête. Comme dans l’exemple précédent, la valeur est convertie en `DbParameter` et n’est pas vulnérable à l’injection SQL.
 
 > [!NOTE]
 > Avant la version 3,0, `FromSqlRaw` `FromSqlInterpolated` deux surcharges étaient nommées `FromSql` . Pour plus d’informations, consultez la [section versions précédentes](#previous-versions).
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedStoredProcedureParameter)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlInterpolatedStoredProcedureParameter)]
 
 Vous pouvez également construire un objet DbParameter et le fournir en tant que valeur de paramètre. Étant donné qu’un espace réservé de paramètre SQL standard est utilisé, plutôt qu’un espace réservé de chaîne, `FromSqlRaw` peut être utilisé en toute sécurité :
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureSqlParameter)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlRawStoredProcedureSqlParameter)]
 
 `FromSqlRaw` vous permet d’utiliser des paramètres nommés dans la chaîne de requête SQL, ce qui est utile lorsqu’une procédure stockée a des paramètres facultatifs :
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlRawStoredProcedureNamedSqlParameter)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlRawStoredProcedureNamedSqlParameter)]
 
 > [!NOTE]
 > **Classement des paramètres** Entity Framework Core passe des paramètres en fonction de l’ordre du `SqlParameter[]` tableau. Lors du passage `SqlParameter` de plusieurs s, le classement dans la chaîne SQL doit correspondre à l’ordre des paramètres dans la définition de la procédure stockée. Si vous ne le faites pas, vous risquez d’obtenir des exceptions de conversion de type et/ou un comportement inattendu lors de l’exécution de la procédure.
 
 ## <a name="composing-with-linq"></a>Composition avec LINQ
 
-Vous pouvez composer en haut de la requête SQL brute initiale à l’aide des opérateurs LINQ. EF Core le traitera comme sous-requête et composera dessus dans la base de données. L’exemple suivant utilise une requête SQL brute qui effectue une sélection à partir d’une fonction table (TVF). Puis le compose à l’aide de LINQ pour effectuer un filtrage et un tri.
+Vous pouvez composer en haut de la requête SQL brute initiale à l’aide des opérateurs LINQ. EF Core le traitera comme sous-requête et composera dessus dans la base de données. L’exemple suivant utilise une requête SQL brute qui effectue une sélection à partir d’une fonction de Table-Valued (TVF). Puis le compose à l’aide de LINQ pour effectuer un filtrage et un tri.
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedComposed)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlInterpolatedComposed)]
 
 La requête ci-dessus génère le code SQL suivant :
 
@@ -80,7 +80,7 @@ ORDER BY [b].[Rating] DESC
 
 La méthode `Include` peut être utilisée pour inclure des données associées, comme avec toute autre requête LINQ :
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedInclude)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlInterpolatedInclude)]
 
 La composition avec LINQ nécessite que votre requête SQL brute soit composable, car EF Core traite le SQL fourni comme sous-requête. Les requêtes SQL qui peuvent être composées commencent par le mot clé `SELECT`. En outre, SQL passé ne doit pas contenir de caractères ou d’options qui ne sont pas valides dans une sous-requête, par exemple :
 
@@ -94,9 +94,9 @@ SQL Server n’autorise pas la composition sur les appels de procédure stockée
 
 Les requêtes qui utilisent `FromSqlRaw` les `FromSqlInterpolated` méthodes ou suivent exactement les mêmes règles de suivi des modifications que toute autre requête LINQ dans EF Core. Par exemple, si la requête projette des types d’entités, les résultats sont suivis par défaut.
 
-L’exemple suivant utilise une requête SQL brute qui effectue une sélection à partir d’une fonction table (TVF), puis désactive le suivi des modifications avec l’appel à `AsNoTracking` :
+L’exemple suivant utilise une requête SQL brute qui effectue une sélection à partir d’une fonction de Table-Valued (TVF), puis désactive le suivi des modifications avec l’appel à `AsNoTracking` :
 
-[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Sample.cs#FromSqlInterpolatedAsNoTracking)]
+[!code-csharp[Main](../../../samples/core/Querying/RawSQL/Program.cs#FromSqlInterpolatedAsNoTracking)]
 
 ## <a name="limitations"></a>Limites
 

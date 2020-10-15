@@ -1,15 +1,15 @@
 ---
 title: Considérations relatives aux performances pour EF4, EF5 et EF6-EF6
 description: Considérations relatives aux performances pour les Entity Framework 4, 5 et 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/performance/perf-whitepaper
-ms.openlocfilehash: 65584382df3d510f314a576f41c5dee3d2e718e7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ae9374401b66f0493f7318ffcbfd9c4d6a24ada5
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070534"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063424"
 ---
 # <a name="performance-considerations-for-ef-4-5-and-6"></a>Considérations relatives aux performances pour EF 4, 5 et 6
 Par David Obando, Eric Dettinger et autres
@@ -22,7 +22,7 @@ Dernière mise à jour : mai 2014
 
 ## <a name="1-introduction"></a>1. Introduction
 
-Les infrastructures de mappage objet-relationnel sont un moyen pratique de fournir une abstraction pour l’accès aux données dans une application orientée objet. Pour les applications .NET, l’O/RM recommandé de Microsoft est Entity Framework. Malgré toute abstraction, les performances peuvent devenir un problème.
+Les infrastructures de mappage Object-Relational sont un moyen pratique de fournir une abstraction pour l’accès aux données dans une application orientée objet. Pour les applications .NET, l’O/RM recommandé de Microsoft est Entity Framework. Malgré toute abstraction, les performances peuvent devenir un problème.
 
 Ce livre blanc a été rédigé pour illustrer les considérations relatives aux performances lors du développement d’applications à l’aide de Entity Framework, afin de donner aux développeurs une idée des algorithmes internes Entity Framework qui peuvent affecter les performances et de fournir des conseils pour l’investigation et l’amélioration des performances dans leurs applications qui utilisent Entity Framework. Il existe un certain nombre de bonnes rubriques sur les performances déjà disponibles sur le Web et nous avons également essayé de pointer vers ces ressources dans la mesure du possible.
 
@@ -210,7 +210,7 @@ Le cache du plan de requête est partagé entre les instances ObjectContext au s
 
 -   Le cache du plan de requête est partagé pour tous les types de requêtes : les objets Entity SQL, LINQ to Entities et CompiledQuery.
 -   Par défaut, la mise en cache du plan de requête est activée pour les requêtes Entity SQL, qu’elles soient exécutées via un EntityCommand ou via un ObjectQuery. Elle est également activée par défaut pour les requêtes LINQ to Entities dans Entity Framework sur .NET 4,5 et dans Entity Framework 6
-    -   La mise en cache du plan de requête peut être désactivée en affectant à la propriété EnablePlanCaching (sur EntityCommand ou ObjectQuery) la valeur false. Exemple :
+    -   La mise en cache du plan de requête peut être désactivée en affectant à la propriété EnablePlanCaching (sur EntityCommand ou ObjectQuery) la valeur false. Par exemple :
 ``` csharp
                     var query = from customer in context.Customer
                                 where customer.CustomerId == id
@@ -248,7 +248,7 @@ Pour illustrer l’effet de la mise en cache du plan de requête sur les perform
 | Test                                                                   | EF5 aucun cache | EF5 mis en cache | EF6 aucun cache | EF6 mis en cache |
 |:-----------------------------------------------------------------------|:-------------|:-----------|:-------------|:-----------|
 | Énumération de toutes les requêtes 18723                                          | 124          | 125,4      | 124,3        | 125,3      |
-| Éviter le balayage (uniquement les premières requêtes 800, quelle que soit la complexité)  | 41,7         | 5.5        | 40,5         | 5,4        |
+| Éviter le balayage (uniquement les premières requêtes 800, quelle que soit la complexité)  | 41,7         | 5.5        | 40,5         | 5.4        |
 | Uniquement les requêtes AggregatingSubtotals (178 au total-qui évite le balayage) | 39,5         | 4.5        | 38,1         | 4.6        |
 
 *Toutes les fois en secondes.*
@@ -455,7 +455,7 @@ Entity Framework 6 contient des optimisations de la façon dont IEnumerable &lt;
 
 ### <a name="42-using-functions-that-produce-queries-with-constants"></a>4,2 utilisation de fonctions qui produisent des requêtes avec des constantes
 
-Les opérateurs LINQ Skip (), Take (), Contains () et DefautIfEmpty () ne génèrent pas de requêtes SQL avec des paramètres, mais placent les valeurs qui leur sont passées en tant que constantes. Pour cette raison, les requêtes qui peuvent sinon être identiques finissent par polluer le cache du plan de requête, à la fois sur la pile EF et sur le serveur de base de données, et ne sont pas réutilisées, sauf si les mêmes constantes sont utilisées lors de l’exécution d’une requête ultérieure. Exemple :
+Les opérateurs LINQ Skip (), Take (), Contains () et DefautIfEmpty () ne génèrent pas de requêtes SQL avec des paramètres, mais placent les valeurs qui leur sont passées en tant que constantes. Pour cette raison, les requêtes qui peuvent sinon être identiques finissent par polluer le cache du plan de requête, à la fois sur la pile EF et sur le serveur de base de données, et ne sont pas réutilisées, sauf si les mêmes constantes sont utilisées lors de l’exécution d’une requête ultérieure. Par exemple :
 
 ``` csharp
 var id = 10;
@@ -509,7 +509,7 @@ for (; i < count; ++i)
 
 ### <a name="43-using-the-properties-of-a-non-mapped-object"></a>4,3 utilisation des propriétés d’un objet non mappé
 
-Quand une requête utilise les propriétés d’un type d’objet non mappé comme paramètre, la requête n’est pas mise en cache. Exemple :
+Quand une requête utilise les propriétés d’un type d’objet non mappé comme paramètre, la requête n’est pas mise en cache. Par exemple :
 
 ``` csharp
 using (var context = new MyContext())
@@ -690,7 +690,7 @@ var q = context.Products.AsNoTracking()
     -   Les modèles utilisant DefaultIfEmpty pour les requêtes de jointure externe génèrent des requêtes plus complexes que les instructions de jointure externe simples dans Entity SQL.
     -   Vous ne pouvez toujours pas utiliser LIKE avec les critères spéciaux.
 
-Notez que les requêtes qui projetent les propriétés scalaires ne sont pas suivies, même si le NoTracking n’est pas spécifié. Exemple :
+Notez que les requêtes qui projetent les propriétés scalaires ne sont pas suivies, même si le NoTracking n’est pas spécifié. Par exemple :
 
 ``` csharp
 var q = context.Products.Where(p => p.Category.CategoryName == "Beverages").Select(p => new { p.ProductName });

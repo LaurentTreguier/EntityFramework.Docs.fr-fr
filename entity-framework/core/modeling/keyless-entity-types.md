@@ -2,20 +2,19 @@
 title: Types d’entité sans clé-EF Core
 description: Comment configurer les types d’entité sans clé à l’aide de Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: 00e8f17c88fd51e39df3c1e45c648c203bbbe324
-ms.sourcegitcommit: 387cbd8109c0fc5ce6bdc85d0dec1aed72ad4c33
+ms.openlocfilehash: cb4ce44526ada77e37eb4dceb9986a670ea3656b
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 04/23/2020
-ms.locfileid: "82103124"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063801"
 ---
 # <a name="keyless-entity-types"></a>Types d’entité sans clé
 
 > [!NOTE]
-> Cette fonctionnalité a été ajoutée à EF Core 2,1 sous le nom des types de requêtes. Dans EF Core 3,0, le concept a été renommé en types d’entité sans clé. L' `[Keyless]` annotation de données est devenue disponible dans EFCore 5,0.
+> Cette fonctionnalité a été ajoutée sous le nom des types de requêtes. Dans EF Core 3,0, le concept a été renommé en types d’entité sans clé. L' `[Keyless]` annotation de données est devenue disponible dans EFCore 5,0.
 
 En plus des types d’entités standard, un modèle de EF Core peut contenir des _types d’entité sans_clé, qui peuvent être utilisés pour exécuter des requêtes de base de données sur des données qui ne contiennent pas de valeurs de clés.
 
@@ -61,10 +60,10 @@ Voici quelques-uns des principaux scénarios d’utilisation pour les types d’
 
 ## <a name="mapping-to-database-objects"></a>Mapper à des objets de base de données
 
-Le mappage d’un type d’entité clé-inférieur à un objet de `ToTable` base `ToView` de données s’effectue à l’aide de l’API Fluent ou. Du point de vue de EF Core, l’objet de base de données spécifié dans cette méthode est une _vue_, ce qui signifie qu’elle est traitée comme une source de requête en lecture seule et ne peut pas être la cible d’opérations de mise à jour, d’insertion ou de suppression. Toutefois, cela ne signifie pas que l’objet de base de données est réellement requis pour être une vue de base de données. Il peut également s’agir d’une table de base de données qui sera traitée en lecture seule. À l’inverse, pour les types d’entités standard, EF Core suppose qu’un objet de base de `ToTable` données spécifié dans la méthode peut être traité comme une _table_, ce qui signifie qu’il peut être utilisé comme source de requête, mais également ciblé par les opérations Update, DELETE et insert. En fait, vous pouvez spécifier le nom d’une vue de base `ToTable` de données dans et tout fonctionne correctement tant que la vue est configurée pour être mise à jour sur la base de données.
+Le mappage d’un type d’entité clé-inférieur à un objet de base de données s’effectue à l’aide de l' `ToTable` `ToView` API Fluent ou. Du point de vue de EF Core, l’objet de base de données spécifié dans cette méthode est une _vue_, ce qui signifie qu’elle est traitée comme une source de requête en lecture seule et ne peut pas être la cible d’opérations de mise à jour, d’insertion ou de suppression. Toutefois, cela ne signifie pas que l’objet de base de données est réellement requis pour être une vue de base de données. Il peut également s’agir d’une table de base de données qui sera traitée en lecture seule. À l’inverse, pour les types d’entités standard, EF Core suppose qu’un objet de base de données spécifié dans la `ToTable` méthode peut être traité comme une _table_, ce qui signifie qu’il peut être utilisé comme source de requête, mais également ciblé par les opérations Update, DELETE et insert. En fait, vous pouvez spécifier le nom d’une vue de base de données dans `ToTable` et tout fonctionne correctement tant que la vue est configurée pour être mise à jour sur la base de données.
 
 > [!NOTE]
-> `ToView`suppose que l’objet existe déjà dans la base de données et qu’il n’est pas créé par des migrations.
+> `ToView` suppose que l’objet existe déjà dans la base de données et qu’il n’est pas créé par des migrations.
 
 ## <a name="example"></a>Exemple
 
@@ -85,12 +84,12 @@ Ensuite, nous définissons une classe qui contiendra le résultat de la vue de b
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#KeylessEntityType)]
 
-Ensuite, vous configurez le type d’entité _OnModelCreating_ « sans clé `HasNoKey` » dans OnModelCreating à l’aide de l’API.
+Ensuite, vous configurez le type d’entité « sans clé » dans _OnModelCreating_ à l’aide de l' `HasNoKey` API.
 Nous utilisons l’API de configuration Fluent pour configurer le mappage pour le type d’entité « sans clé » :
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#Configuration)]
 
-Ensuite, nous configurons `DbContext` le pour inclure `DbSet<T>`les éléments suivants :
+Ensuite, nous configurons le `DbContext` pour inclure les `DbSet<T>` éléments suivants :
 
 [!code-csharp[Main](../../../samples/core/KeylessEntityTypes/Program.cs#DbSet)]
 

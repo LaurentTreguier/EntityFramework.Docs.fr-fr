@@ -1,15 +1,15 @@
 ---
 title: 'Enregistrement des données associées : EF Core'
 description: Informations sur l’enregistrement de graphiques d’entités associées et la gestion des relations dans Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/related-data
-ms.openlocfilehash: 0ae6477032109787e63cae498bda7148dcaa5abe
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 25b4e265f19e658097be7332f9cba6fec3b560db
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070976"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062943"
 ---
 # <a name="saving-related-data"></a>Enregistrement des données associées
 
@@ -27,7 +27,7 @@ Dans l’exemple suivant, le blog et trois billets associés sont tous insérés
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
 > [!TIP]  
-> Utilisez la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple : `context.Entry(blog).State = EntityState.Modified`.
+> Utilisez la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="adding-a-related-entity"></a>Ajout d’une entité associée
 

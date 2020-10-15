@@ -1,19 +1,19 @@
 ---
 title: Fournisseur de base de données InMemory - EF Core
 description: Informations sur le fournisseur de base de données Entity Framework Core InMemory.
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/providers/in-memory/index
-ms.openlocfilehash: 9d0a5d14cdb047b80788fbe4d9d34deccdbd4ce1
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 1857ebbfa0eded1572220825a5b0d75961bcf3dd
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071353"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064009"
 ---
 # <a name="ef-core-in-memory-database-provider"></a>Fournisseur de base de données InMemory EF Core
 
-Ce fournisseur de base de données permet d’utiliser Entity Framework Core avec une base de données en mémoire. Ceci peut s’avérer utile pour les tests, bien que le fournisseur SQLite en mode en mémoire constitue peut-être un remplacement de test plus approprié pour les bases de données relationnelles. Il est géré dans le cadre du [projet Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
+Ce fournisseur de base de données permet d’utiliser Entity Framework Core avec une base de données en mémoire. La base de données en mémoire peut être utile pour le test, bien que le fournisseur SQLite en mode in-Memory puisse être un test de remplacement plus approprié pour les bases de données relationnelles. La base de données en mémoire est conçue à des fins de test uniquement. Il est géré dans le cadre du [projet Entity Framework Core](https://github.com/aspnet/EntityFrameworkCore).
 
 ## <a name="install"></a>Installer
 
@@ -27,7 +27,7 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.InMemory
 ```
 
@@ -42,4 +42,4 @@ Les ressources suivantes vous permettent de commencer à utiliser ce fournisseur
 
 ## <a name="supported-database-engines"></a>Moteurs de base de données pris en charge
 
-Base de données en mémoire in-process (conçue uniquement à des fins de test)
+Base de données de mémoire in-process, conçue à des fins de test uniquement.

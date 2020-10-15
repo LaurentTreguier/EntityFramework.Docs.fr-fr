@@ -11,12 +11,12 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 839f932f48e1cc6cb1b4c86d5e1405e888d5227a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 07cde296f07a883ba6abf45f94a31e072fb6d6cb
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617656"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063047"
 ---
 # <a name="ef-core-testing-sample"></a>Exemple de test EF Core
 
@@ -183,7 +183,7 @@ Deux tests, un peu plus complexe, couvrent la logique métier autour de l’ajou
 ## <a name="issues-using-different-database-providers"></a>Problèmes liés à l’utilisation de différents fournisseurs de bases de données
 
 Le test avec un système de base de données différent de celui utilisé dans l’application de production peut entraîner des problèmes.
-Celles-ci sont couvertes au niveau conceptuel du [test de code qui utilise EF Core](xref:core/miscellaneous/testing/index).  
+Celles-ci sont couvertes au niveau conceptuel du [test de code qui utilise EF Core](xref:core/miscellaneous/testing/index).
 Les sections ci-dessous couvrent deux exemples de tels problèmes démontrés par les tests de cet exemple.
 
 ### <a name="test-passes-when-the-application-is-broken"></a>Le test réussit lorsque l’application est interrompue
@@ -197,7 +197,7 @@ L’exécution de ce test sur la base de données EF en mémoire indique que tou
 Tout est toujours parfait quand vous utilisez SQLite.
 Mais le test échoue lorsqu’il est exécuté sur SQL Server !
 
-```console
+```output
 System.InvalidOperationException : Sequence contains more than one element
    at System.Linq.ThrowHelper.ThrowMoreThanOneElementException()
    at System.Linq.Enumerable.Single[TSource](IEnumerable`1 source)
@@ -224,7 +224,7 @@ Là encore, facile à tester :
 
 Ce test réussit sur SQL Server et SQLite, mais il échoue avec la base de données EF en mémoire !
 
-```console
+```output
 Assert.False() Failure
 Expected: False
 Actual:   True

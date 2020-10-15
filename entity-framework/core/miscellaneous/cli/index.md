@@ -2,15 +2,14 @@
 title: Informations de référence sur les outils Entity Framework Core - EF Core
 description: Guide de référence de l’outil CLI Entity Framework Core et de la console du gestionnaire de package Visual Studio.
 author: bricelam
-ms.author: bricelam
 ms.date: 09/19/2018
 uid: core/miscellaneous/cli/index
-ms.openlocfilehash: 7d5fb984aafed2cf45efa9e5b83bf4bc6c18a44a
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 90e8d799de8fa9426de6ac3d286bcd5458a43f0d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619422"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061994"
 ---
 # <a name="entity-framework-core-tools-reference"></a>Informations de référence sur les outils Entity Framework Core
 

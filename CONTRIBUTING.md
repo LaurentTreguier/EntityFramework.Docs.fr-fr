@@ -11,7 +11,7 @@ Les articles sont stockés dans le dépôt sous forme de fichiers Markdown. Pour
 Vous devez avoir une connaissance de base de [Git et GitHub.com](https://guides.github.com/activities/hello-world/).
 
 * Ouvrez un [dossier](https://github.com/dotnet/EntityFramework.Docs/issues/new) décrivant ce que vous voulez faire, par exemple modifier un article existant ou en créer un. Attendez l’approbation de l’équipe EF avant de vous investir davantage.
-* EMBRANCHEZ le référentiel [dotnet/EntityFramework. docs](https://github.com/dotnet/EntityFramework.Docs/) et créez une branche pour vos modifications.
+* EMBRANCHEZ les référentiels [dotnet/EntityFramework.Doc](https://github.com/dotnet/EntityFramework.Docs/) et créez une branche pour vos modifications.
 * Soumettez une demande de tirage dans la branche principale avec vos modifications.
 * Répondez aux commentaires sur la demande de tirage.
 
@@ -33,13 +33,13 @@ Voici quelques exemples de [syntaxe d’extrait de code DFM](http://dotnet.githu
 
 Pour afficher un fichier de code entier en tant qu’extrait de code :
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs)]
 ```
 
 Pour afficher une partie d’un fichier en tant qu’extrait de code en utilisant des numéros de ligne :
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?range=1-10]
 ```
 
@@ -47,13 +47,13 @@ Pour les extraits de code C#, vous pouvez référencer une [région C#](https://
 
 Pour afficher une région C# nommée « snippet_Example » :
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?name=snippet_Example)]
 ```
 
 Pour mettre en surbrillance les lignes sélectionnées dans un extrait de code affiché (généralement sous la forme d’un arrière-plan jaune) :
 
-``` none
+```none
 [!code-csharp[Main](../../../samples/core/saving/Program.cs?name=snippet_Example&highlight=1-3,10,20-25)]
 ```
 
@@ -69,7 +69,7 @@ DocFX nécessite le .NET Framework sur Windows ou Mono pour Linux ou macOS.
 * Ajoutez DocFX à votre chemin (PATH).
 * Dans une fenêtre de ligne de commande, accédez au dépôt cloné (qui contient le fichier *docfx.json*) et exécutez la commande suivante :
 
-   ``` console
+   ```console
    docfx -t default --serve
    ```
 
@@ -82,7 +82,7 @@ DocFX nécessite le .NET Framework sur Windows ou Mono pour Linux ou macOS.
 * Extrayez dans `\bin\docfx`.
 * Créez un alias pour **docfx** :
 
-  ``` console
+  ```console
   function docfx {
     mono $HOME/bin/docfx/docfx.exe
   }
@@ -94,6 +94,6 @@ DocFX nécessite le .NET Framework sur Windows ou Mono pour Linux ou macOS.
 
 * Exécutez **docfx** dans le dépôt cloné pour générer le site, puis **docfx servi** pour afficher le site sur `http://localhost:8080`.
 
-## <a name="voice-and-tone"></a>Style et ton
+## <a name="voice-and-tone"></a>Voix et ton
 
 Notre objectif est d’écrire une documentation facile à comprendre par le plus grand nombre. À cette fin, nous avons établi des recommandations pour le style rédactionnel que nous invitons nos contributeurs à suivre. Pour plus d’informations, consultez [Voice and tone guidelines](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md) dans le dépôt .NET Core.

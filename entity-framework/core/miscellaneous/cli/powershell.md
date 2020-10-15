@@ -2,15 +2,14 @@
 title: Informations de référence sur les outils de EF Core (console du gestionnaire de package)-EF Core
 description: Guide de référence pour le Entity Framework Core console du gestionnaire de package Visual Studio
 author: bricelam
-ms.author: bricelam
-ms.date: 09/09/2020
+ms.date: 10/13/2020
 uid: core/miscellaneous/cli/powershell
-ms.openlocfilehash: 5dca397978c60c12610d9080caba972a66b079b6
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 3a9599288d74013bf4da910c64bc858539c0c32c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071860"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062384"
 ---
 # <a name="entity-framework-core-tools-reference---package-manager-console-in-visual-studio"></a>Référence des outils de Entity Framework Core-console du gestionnaire de package dans Visual Studio
 
@@ -20,50 +19,15 @@ Si vous n’utilisez pas Visual Studio, nous vous recommandons d’utiliser les 
 
 ## <a name="installing-the-tools"></a>Installation des outils
 
-Les procédures d’installation et de mise à jour des outils diffèrent entre ASP.NET Core 2.1 + et les versions antérieures ou d’autres types de projets.
-
-### <a name="aspnet-core-version-21-and-later"></a>ASP.NET Core version 2,1 et versions ultérieures
-
-Les outils sont inclus automatiquement dans un projet ASP.NET Core 2.1 +, car le `Microsoft.EntityFrameworkCore.Tools` package est inclus dans le [AspNetCore](/aspnet/core/fundamentals/metapackage-app).
-
-Par conséquent, vous n’avez rien à faire pour installer les outils, mais vous devez effectuer les opérations suivantes :
-
-* Restaurez les packages avant d’utiliser les outils d’un nouveau projet.
-* Installez un package pour mettre à jour les outils vers une version plus récente.
-
-Pour vous assurer que vous obtenez la version la plus récente des outils, nous vous recommandons également d’effectuer les étapes suivantes :
-
-* Modifiez votre fichier *. csproj* et ajoutez une ligne spécifiant la dernière version du package [Microsoft. EntityFrameworkCore. Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/) . Par exemple, le fichier *. csproj* peut inclure un `ItemGroup` qui ressemble à ceci :
-
-  ```xml
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.3" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.2" />
-  </ItemGroup>
-  ```
-
-Mettez à jour les outils lorsque vous recevez un message comme dans l’exemple suivant :
-
-> La version des outils de EF Core « 2.1.1-RTM-30846 » est plus ancienne que celle du runtime « 2.1.3-RTM-32065 ». Mettez à jour les outils des dernières fonctionnalités et correctifs de bogues.
-
-Pour mettre à jour les outils :
-
-* Installez le dernier kit SDK .NET Core.
-* Effectuez la mise à jour de Visual Studio vers la dernière version.
-* Modifiez le fichier *. csproj* afin qu’il inclue une référence de package au package d’outils le plus récent, comme indiqué plus haut.
-
-### <a name="other-versions-and-project-types"></a>Autres types de versions et de projets
-
 Installez les outils de la console du gestionnaire de package en exécutant la commande suivante dans la **console du gestionnaire de package**:
 
-``` powershell
+```powershell
 Install-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
 Mettez à jour les outils en exécutant la commande suivante dans la **console du gestionnaire de package**.
 
-``` powershell
+```powershell
 Update-Package Microsoft.EntityFrameworkCore.Tools
 ```
 
@@ -71,13 +35,13 @@ Update-Package Microsoft.EntityFrameworkCore.Tools
 
 Vérifiez que les outils sont installés en exécutant la commande suivante :
 
-``` powershell
+```powershell
 Get-Help about_EntityFrameworkCore
 ```
 
 La sortie ressemble à ceci (il ne vous indique pas la version des outils que vous utilisez) :
 
-```console
+```output
 
                      _/\__
                ---==/    \\
@@ -145,7 +109,7 @@ Pour afficher des informations d’aide sur une commande, utilisez la commande d
 > [!TIP]
 > Les paramètres Context, Project et StartupProject prennent en charge l’expansion de tabulation.
 
-## <a name="add-migration"></a>Ajouter une migration
+## <a name="add-migration"></a>Add-Migration
 
 Ajoute une nouvelle migration.
 
@@ -159,7 +123,7 @@ Paramètres :
 
 Les [paramètres communs](#common-parameters) sont répertoriés ci-dessus.
 
-## <a name="drop-database"></a>Supprimer la base de données
+## <a name="drop-database"></a>Drop-Database
 
 Supprime la base de données.
 
@@ -171,13 +135,13 @@ Paramètres :
 
 Les [paramètres communs](#common-parameters) sont répertoriés ci-dessus.
 
-## <a name="get-dbcontext"></a>Acquérir-DbContext
+## <a name="get-dbcontext"></a>Get-DbContext
 
 Répertorie et obtient des informations sur les `DbContext` types disponibles.
 
 Les [paramètres communs](#common-parameters) sont répertoriés ci-dessus.
 
-## <a name="get-migration"></a>Acquérir-migration
+## <a name="get-migration"></a>Get-Migration
 
 Répertorie les migrations disponibles. Ajouté dans EF Core 5,0.
 
@@ -202,7 +166,7 @@ Paramètres :
 
 Les [paramètres communs](#common-parameters) sont répertoriés ci-dessus.
 
-## <a name="scaffold-dbcontext"></a>Génération de modèles automatique-DbContext
+## <a name="scaffold-dbcontext"></a>Scaffold-DbContext
 
 Génère du code pour les `DbContext` types d’entité et pour une base de données. Pour `Scaffold-DbContext` que puisse générer un type d’entité, la table de base de données doit avoir une clé primaire.
 
@@ -251,7 +215,7 @@ Paramètres :
 
 Les [paramètres communs](#common-parameters) sont répertoriés ci-dessus.
 
-## <a name="script-migration"></a>Script-migration
+## <a name="script-migration"></a>Script-Migration
 
 Génère un script SQL qui applique toutes les modifications d’une migration sélectionnée à une autre migration sélectionnée.
 
@@ -282,7 +246,7 @@ L’exemple suivant crée un script pour toutes les migrations après la migrati
 Script-Migration -From 20180904195021_InitialCreate
 ```
 
-## <a name="update-database"></a>Mettre à jour-base de données
+## <a name="update-database"></a>Update-Database
 
 Met à jour la base de données jusqu’à la dernière migration ou à une migration spécifiée.
 

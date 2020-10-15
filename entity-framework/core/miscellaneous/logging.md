@@ -1,22 +1,39 @@
 ---
 title: Journalisation-EF Core
 description: Configuration de la journalisation avec Entity Framework Core
-author: rowanmiller
-ms.date: 10/27/2016
+author: ajcvickers
+ms.date: 10/06/2020
 uid: core/miscellaneous/logging
-ms.openlocfilehash: 0fd1c83f01989095a813727390179db2327b610d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 389834b3822aeeaefb8c085538bc6359ccfa7094
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071665"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063008"
 ---
 # <a name="logging"></a>Journalisation
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Logging) sur GitHub.
 
-## <a name="aspnet-core-applications"></a>Applications ASP.NET Core
+## <a name="simple-logging"></a>Journalisation simple
+
+> [!NOTE]
+> Cette fonctionnalité a été ajoutée dans EF Core 5,0.
+
+Entity Framework Core (EF Core) génère des messages de journal pour des opérations telles que l’exécution d’une requête ou l’enregistrement des modifications apportées à la base de données. Vous pouvez y accéder à partir de n’importe quel type d’application via l’utilisation de [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> lors [de la configuration d’une instance DbContext](xref:core/miscellaneous/configuring-dbcontext). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
+
+<!--
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        => optionsBuilder.LogTo(Console.WriteLine);
+-->
+[!code-csharp[LogToConsole](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=LogToConsole)]
+
+Ce concept est semblable à <xref:System.Data.Entity.Database.Log?displayProperty=nameWithType> dans EF6.
+
+Pour plus d’informations, consultez [journalisation simple](xref:core/miscellaneous/events/simple-logging) .
+
+## <a name="aspnet-core-applications"></a>applications ASP.NET Core ;
 
 EF Core s’intègre automatiquement avec les mécanismes de journalisation de ASP.NET Core chaque fois que `AddDbContext` ou `AddDbContextPool` est utilisé. Par conséquent, lors de l’utilisation de ASP.NET Core, la journalisation doit être configurée comme décrit dans la [documentation de ASP.net Core](/aspnet/core/fundamentals/logging?tabs=aspnetcore2x).
 
@@ -42,14 +59,14 @@ Après l’installation du ou des packages appropriés, l’application doit cr�
 > [!NOTE]
 > L’exemple de code suivant utilise un `ConsoleLoggerProvider` constructeur qui a été obsolète dans la version 2,2 et remplacé dans 3,0. Il est possible d’ignorer et de supprimer sans risque les avertissements lors de l’utilisation de 2,2.
 
-``` csharp
+```csharp
 public static readonly LoggerFactory MyLoggerFactory
     = new LoggerFactory(new[] { new ConsoleLoggerProvider((_, __) => true, true) });
 ```
 
 ***
 
-Cette instance de Singleton/global doit ensuite être inscrite auprès de EF Core sur le `DbContextOptionsBuilder` . Exemple :
+Cette instance de Singleton/global doit ensuite être inscrite auprès de EF Core sur le `DbContextOptionsBuilder` . Par exemple :
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/Logging/Logging/BloggingContext.cs#RegisterLoggerFactory)]
 
@@ -58,7 +75,7 @@ Cette instance de Singleton/global doit ensuite être inscrite auprès de EF Cor
 
 ## <a name="filtering-what-is-logged"></a>Filtrage des éléments consignés
 
-L’application peut contrôler ce qui est enregistré en configurant un filtre sur le ILoggerProvider. Exemple :
+L’application peut contrôler ce qui est enregistré en configurant un filtre sur le ILoggerProvider. Par exemple :
 
 ### <a name="version-3x"></a>[Version 3.x](#tab/v3)
 
@@ -69,7 +86,7 @@ L’application peut contrôler ce qui est enregistré en configurant un filtre 
 > [!NOTE]
 > L’exemple de code suivant utilise un `ConsoleLoggerProvider` constructeur qui a été obsolète dans la version 2,2 et remplacé dans 3,0. Il est possible d’ignorer et de supprimer sans risque les avertissements lors de l’utilisation de 2,2.
 
-``` csharp
+```csharp
 public static readonly LoggerFactory MyLoggerFactory
     = new LoggerFactory(new[]
     {

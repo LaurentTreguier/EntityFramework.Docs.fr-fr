@@ -1,15 +1,15 @@
 ---
 title: Champs de stockage-EF Core
 description: Configuration de champs de stockage pour les propriétés d’un modèle de Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/modeling/backing-field
-ms.openlocfilehash: 48ef28e7b880fee571cb1857601fb2cead535fbf
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 4f5680b14c7f0e1fa5128d366f2960c4ae9b3735
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071626"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063684"
 ---
 # <a name="backing-fields"></a>Champs de stockage
 
@@ -17,7 +17,7 @@ Les champs de stockage permettent à EF de lire et/ou d’écrire dans un champ 
 
 ## <a name="basic-configuration"></a>Configuration de base
 
-Par Convention, les champs suivants sont découverts en tant que champs de stockage pour une propriété donnée (liste dans l’ordre de priorité). 
+Par Convention, les champs suivants sont découverts en tant que champs de stockage pour une propriété donnée (liste dans l’ordre de priorité).
 
 * `_<camel-cased property name>`
 * `_<property name>`
@@ -63,6 +63,6 @@ EF tente de trouver une propriété CLR portant le nom donné, ou un champ si au
 
 Vous devrez peut-être faire référence à une propriété de champ uniquement à partir de requêtes LINQ, mais ces champs sont généralement privés. Vous pouvez utiliser la `EF.Property(...)` méthode dans une requête LINQ pour faire référence au champ :
 
-``` csharp
+```csharp
 var blogs = db.blogs.OrderBy(b => EF.Property<string>(b, "_validatedUrl"));
 ```

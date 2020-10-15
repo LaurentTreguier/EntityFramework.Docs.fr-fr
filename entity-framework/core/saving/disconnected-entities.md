@@ -2,15 +2,14 @@
 title: 'Entités déconnectées : EF Core'
 description: Utilisation d’entités déconnectées et non suivies sur plusieurs instances de contexte dans Entity Framework Core
 author: ajcvickers
-ms.author: avickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: d9b6d2d2c0761dd6f670ba51f935c866e10460b7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070885"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063567"
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -74,9 +73,6 @@ Toutefois, si l’entité utilise les valeurs de clé générées automatiquemen
 
 Normalement, la méthode Update marque l’entité pour la mise à jour, et non l’insertion. Toutefois, si l’entité a une clé générée automatiquement, et qu’aucune valeur de clé n’a été définie, l’entité est automatiquement marquée pour insertion.
 
-> [!TIP]  
-> Ce comportement a été introduit dans EF Core 2.0. Pour les versions antérieures, il est toujours nécessaire de choisir explicitement Add ou Update.
-
 Si l’entité n’utilise pas les clés générées automatiquement, l’application doit décider si l’entité doit être insérée ou mise à jour. Par exemple :
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertOrUpdateSingleEntityWithFind)]
@@ -131,7 +127,7 @@ Comme précédemment, lorsque vous n’utilisez pas les clés générées automa
 
 La suppression peut être compliquée à gérer, car souvent l’absence d’une entité signifie qu’elle droit être supprimée. Une façon de gérer cela consiste est d’utiliser des « suppressions récupérables » par exemple en marquant l’entité comme supprimée plutôt que la supprimer réellement. Les suppressions s’apparentent alors à des mises à jour. Les suppressions récupérables peuvent être implémentées à l’aide de [filtres de requête](xref:core/querying/filters).
 
-Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Exemple :
+Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Par exemple :
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

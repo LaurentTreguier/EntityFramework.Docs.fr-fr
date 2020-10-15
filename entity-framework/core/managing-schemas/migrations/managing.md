@@ -2,15 +2,14 @@
 title: Gestion des migrations-EF Core
 description: Ajout, suppression et gestion des migrations de schémas de base de données avec Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 366824cecab57a0f1744fa58cc12e5d3f6675723
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: fdfda6f3dea306fbbc343c1be3f4d5754d1f65c4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617960"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062059"
 ---
 # <a name="managing-migrations"></a>Gestion des migrations
 
@@ -31,7 +30,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration AddBlogCreatedTimestamp
 ```
 
@@ -59,7 +58,7 @@ dotnet ef migrations add InitialCreate --namespace Your.Namespace
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration InitialCreate -Namespace Your.Namespace
 ```
 
@@ -73,7 +72,7 @@ Bien que EF Core crée généralement des migrations précises, vous devez toujo
 
 Un exemple notable dans lequel la personnalisation des migrations est nécessaire est lors de l’attribution d’un nouveau nom à une propriété. Par exemple, si vous renommez une propriété de `Name` en `FullName` , EF Core génère la migration suivante :
 
-```c#
+```csharp
 migrationBuilder.DropColumn(
     name: "Name",
     table: "Customers");
@@ -86,7 +85,7 @@ migrationBuilder.AddColumn<string>(
 
 EF Core n’est généralement pas en mesure de savoir quand l’intention est de supprimer une colonne et d’en créer une (deux modifications distinctes) et de renommer une colonne. Si la migration ci-dessus est appliquée telle quelle, tous vos noms de clients seront perdus. Pour renommer une colonne, remplacez la migration générée ci-dessus par ce qui suit :
 
-```c#
+```csharp
 migrationBuilder.RenameColumn(
     name: "Name",
     table: "Customers",
@@ -100,7 +99,7 @@ migrationBuilder.RenameColumn(
 
 L’attribution d’un nouveau nom à une colonne peut être obtenue via une API intégrée, dans de nombreux cas, ce qui n’est pas possible. Par exemple, nous pouvons souhaiter remplacer les `FirstName` Propriétés et existantes `LastName` par une seule nouvelle `FullName` propriété. La migration générée par EF Core sera la suivante :
 
-``` csharp
+```csharp
 migrationBuilder.DropColumn(
     name: "FirstName",
     table: "Customer");
@@ -117,7 +116,7 @@ migrationBuilder.AddColumn<string>(
 
 Comme précédemment, cela entraînerait une perte de données indésirable. Pour transférer les données des anciennes colonnes, nous réorganisons les migrations et introduisons une opération SQL brute comme suit :
 
-``` csharp
+```csharp
 migrationBuilder.AddColumn<string>(
     name: "FullName",
     table: "Customer",
@@ -144,7 +143,7 @@ Le SQL brut peut également être utilisé pour gérer des objets de base de don
 
 Par exemple, la migration suivante crée une procédure stockée SQL Server :
 
-```c#
+```csharp
 migrationBuilder.Sql(
 @"
     EXEC ('CREATE PROCEDURE getFullName
@@ -160,7 +159,7 @@ Cela peut être utilisé pour gérer tous les aspects de votre base de données,
 * Recherche en texte intégral
 * Fonctions
 * Déclencheurs
-* Vues
+* Affichages
 
 Dans la plupart des cas, EF Core encapsule automatiquement chaque migration dans sa propre transaction lors de l’application des migrations. Malheureusement, certaines opérations de migration ne peuvent pas être effectuées au sein d’une transaction dans certaines bases de données ; dans ce cas, vous pouvez refuser la transaction en passant `suppressTransaction: true` à `migrationBuilder.Sql` .
 
@@ -178,7 +177,7 @@ dotnet ef migrations remove
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Remove-Migration
 ```
 
@@ -206,4 +205,7 @@ Il est également possible de réinitialiser toutes les migrations et d’en cr�
 * Supprimer votre dossier **migrations**
 * Créer une nouvelle migration et générer un script SQL pour celle-ci
 * Dans votre base de données, supprimez toutes les lignes de la table de l’historique des migrations.
-* Insérez une seule ligne dans l’historique des migrations, pour enregistrer que la première migration a déjà été appliquée, puisque vos tables sont déjà en cours d’exécution. L’instruction INSERT SEQL est la dernière opération du script SQL générée ci-dessus.
+* Insérez une seule ligne dans l’historique des migrations, pour enregistrer que la première migration a déjà été appliquée, puisque vos tables sont déjà en cours d’exécution. L’instruction SQL INSERT est la dernière opération du script SQL générée ci-dessus.
+
+> [!WARNING]
+> Tout [Code de migration personnalisé](#customize-migration-code) est perdu lorsque le dossier **migrations** est supprimé.  Toutes les personnalisations doivent être appliquées manuellement à la nouvelle migration initiale afin d’être conservées.

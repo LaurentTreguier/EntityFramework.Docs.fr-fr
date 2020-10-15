@@ -2,15 +2,14 @@
 title: Ingénierie à rebours-EF Core
 description: Rétroconception d’un modèle à partir d’une base de données existante à l’aide de Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 86aa6d22ebe8e5c1d654c83d4c292a1ed5842ddd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e1b4ed8d5209688fbe5c89ae60cf0d981136305f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071912"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061968"
 ---
 # <a name="reverse-engineering"></a> Reconstitution de la logique des produits
 
@@ -36,7 +35,7 @@ dotnet ef dbcontext scaffold "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Scaffold-DbContext 'Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook' Microsoft.EntityFrameworkCore.SqlServer
 ```
 
@@ -71,13 +70,13 @@ Pour inclure plusieurs tables, spécifiez l’option plusieurs fois :
 dotnet ef dbcontext scaffold ... --table Artist --table Album
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 L' `-Schemas` option peut être utilisée pour inclure chaque table dans un schéma, tandis que `-Tables` peut être utilisé pour inclure des tables spécifiques.
 
 Pour inclure plusieurs tables, utilisez un tableau :
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
@@ -93,7 +92,7 @@ Par défaut, les types d’entités sont configurés à l’aide de l’API Flue
 
 Par exemple, l’utilisation de l’API Fluent entraîne l’échafaudage suivant :
 
-``` csharp
+```csharp
 entity.Property(e => e.Title)
     .IsRequired()
     .HasMaxLength(160);
@@ -101,7 +100,7 @@ entity.Property(e => e.Title)
 
 Lorsque vous utilisez des annotations de données, vous générez une structure :
 
-``` csharp
+```csharp
 [Required]
 [StringLength(160)]
 public string Title { get; set; }
@@ -129,17 +128,17 @@ Par défaut, l’espace de noms est l’espace de noms racine, ainsi que les nom
 dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace Your.DbContext.Namespace
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 Vous pouvez spécifier le répertoire dans lequel les classes sont échafaudées à l’aide de `-OutputDir` , et `-ContextDir` peut être utilisé pour générer un modèle de structure de la classe DbContext dans un répertoire distinct de celui des classes de type d’entité :
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -ContextDir Data -OutputDir Models
 ```
 
 Par défaut, l’espace de noms est l’espace de noms racine, ainsi que les noms de tous les sous-répertoires sous le répertoire racine du projet. Toutefois, à partir de EFCore 5,0, vous pouvez remplacer l’espace de noms pour toutes les classes de sortie à l’aide de `-Namespace` . Vous pouvez également remplacer l’espace de noms uniquement pour la classe DbContext à l’aide de `-ContextNamespace` .
 
-``` powershell
+```powershell
 Scaffold-DbContext ... -Namespace Your.Namespace -ContextNamespace Your.DbContext.Namespace
 ```
 

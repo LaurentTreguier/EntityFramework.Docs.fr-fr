@@ -2,14 +2,14 @@
 title: Types d’entité-EF Core
 description: Comment configurer et mapper des types d’entité à l’aide de Entity Framework Core
 author: roji
-ms.date: 12/03/2019
+ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: fead7f9e37efb7f674f429acbfd16c2ca78480d4
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: bfefa29c08679a1524c00769b3495d75a301e2d3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071509"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062228"
 ---
 # <a name="entity-types"></a>Types d'entités
 
@@ -40,6 +40,19 @@ Si vous ne souhaitez pas qu’un type soit inclus dans le modèle, vous pouvez l
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IgnoreType.cs?name=IgnoreType&highlight=3)]
 
 ***
+
+### <a name="excluding-from-migrations"></a>Exclusion des migrations
+
+> [!NOTE]
+> La possibilité d’exclure des tables des migrations a été ajoutée dans EF Core 5,0.
+
+Il est parfois utile d’avoir le même type d’entité mappé dans plusieurs `DbContext` types. Cela est particulièrement vrai lorsque vous utilisez des [contextes délimités](https://www.martinfowler.com/bliki/BoundedContext.html), pour lesquels il est courant d’avoir un `DbContext` type différent pour chaque contexte délimité.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs?name=TableExcludeFromMigrations&highlight=4)]
+
+Avec cette configuration, les migrations ne créent pas la `blogs` table, mais elles `Blog` sont toujours incluses dans le modèle et peuvent être utilisées normalement.
+
+Si vous devez commencer à gérer la table à l’aide des migrations, une nouvelle migration doit être créée, où `blogs` n’est pas exclu. La migration suivante contiendra désormais toutes les modifications apportées à la table.
 
 ## <a name="table-name"></a>Nom de la table
 
@@ -78,3 +91,14 @@ Au lieu de spécifier le schéma pour chaque table, vous pouvez également défi
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DefaultSchema.cs?name=DefaultSchema&highlight=3)]
 
 Notez que la définition du schéma par défaut affectera également d’autres objets de base de données, tels que les séquences.
+
+## <a name="view-mapping"></a>Afficher le mappage
+
+Les types d’entités peuvent être mappés à des vues de base de données à l’aide de l’API Fluent.
+
+> [!Note]
+> EF suppose que la vue référencée existe déjà dans la base de données, elle ne la crée pas automatiquement dans une migration.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ViewNameAndSchema.cs?name=ViewNameAndSchema&highlight=1)]
+
+ Le mappage à une vue supprime le mappage de table par défaut, mais le type d’entité peut également être mappé à une table de manière explicite. Dans ce cas, le mappage de requête est utilisé pour les requêtes et le mappage de table est utilisé pour les mises à jour.

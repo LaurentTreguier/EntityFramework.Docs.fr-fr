@@ -4,12 +4,12 @@ description: Évaluation du client et du serveur des requêtes avec Entity Frame
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/client-eval
-ms.openlocfilehash: 41be7da26423f50017f57a7686f65bd8baf69ef5
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071171"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062709"
 ---
 # <a name="client-vs-server-evaluation"></a>Comparaison entre client et serveur
 
@@ -19,21 +19,21 @@ En règle générale, Entity Framework Core tente d’évaluer autant que possib
 > Avant la version 3,0, Entity Framework Core l’évaluation du client prise en charge n’importe où dans la requête. Pour plus d’informations, consultez la [section versions précédentes](#previous-versions).
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ClientEvaluation) sur GitHub.
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>Évaluation du client dans la projection de niveau supérieur
 
 Dans l’exemple suivant, une méthode d’assistance est utilisée pour normaliser les URL des blogs, qui sont retournées à partir d’une base de données SQL Server. Étant donné que le fournisseur de SQL Server n’a aucune idée de la façon dont cette méthode est implémentée, il n’est pas possible de la traduire en SQL. Tous les autres aspects de la requête sont évalués dans la base de données, mais le passage du retourné `URL` via cette méthode s’effectue sur le client.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientProjection)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientProjection)]
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientMethod)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientMethod)]
 
 ## <a name="unsupported-client-evaluation"></a>Évaluation du client non prise en charge
 
 Si l’évaluation du client est utile, elle peut entraîner des performances médiocres. Considérez la requête suivante, dans laquelle la méthode d’assistance est désormais utilisée dans un filtre Where. Étant donné que le filtre ne peut pas être appliqué dans la base de données, toutes les données doivent être extraites en mémoire pour appliquer le filtre sur le client. En fonction du filtre et de la quantité de données sur le serveur, l’évaluation du client peut entraîner des performances médiocres. Ainsi Entity Framework Core bloque cette évaluation du client et lève une exception d’exécution.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ClientWhere)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ClientWhere)]
 
 ## <a name="explicit-client-evaluation"></a>Évaluation explicite du client
 
@@ -44,7 +44,7 @@ Vous devrez peut-être forcer l’évaluation du client explicitement dans certa
 
 Dans ce cas, vous pouvez choisir explicitement l’évaluation du client en appelant des méthodes telles que `AsEnumerable` ou `ToList` ( `AsAsyncEnumerable` ou `ToListAsync` pour Async). En utilisant `AsEnumerable` , vous transmettrez les résultats en continu, mais l’utilisation de `ToList` entraînerait une mise en mémoire tampon en créant une liste, ce qui prend également davantage de mémoire. Toutefois, si vous énumérez plusieurs fois, le stockage des résultats dans une liste est plus utile, car il n’existe qu’une seule requête dans la base de données. En fonction de l’utilisation particulière, vous devez déterminer la méthode qui est plus utile pour le cas.
 
-[!code-csharp[Main](../../../samples/core/Querying/ClientEval/Sample.cs#ExplicitClientEval)]
+[!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
 ## <a name="potential-memory-leak-in-client-evaluation"></a>Fuite de mémoire potentielle dans l’évaluation du client
 

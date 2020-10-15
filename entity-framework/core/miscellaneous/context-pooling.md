@@ -5,12 +5,12 @@ author: rick-anderson
 ms.author: riande
 ms.date: 9/19/2020
 uid: core/miscellaneous/context-pooling
-ms.openlocfilehash: fd5f53ff97a73895f0c4239439730dd8cb3ecc29
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 8638c838511be85bd994751b9911b107974dfe2f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91215599"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061955"
 ---
 # <a name="dbcontext-pooling"></a>Regroupement DbContext
 
@@ -20,7 +20,7 @@ Le modèle typique d’une application ASP.NET Core utilisant EF Core implique l
 
 <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContextPool%2A> active un pool d’instances de contexte réutilisables. Pour utiliser le regroupement de contexte, utilisez la `AddDbContextPool` méthode au lieu de lors de l' `AddDbContext` inscription du service :
 
-``` csharp
+```csharp
 services.AddDbContextPool<BloggingContext>(
     options => options.UseSqlServer(connectionString));
 ```
@@ -37,7 +37,7 @@ Les applications doivent être profilées et testées pour montrer que l’initi
 
 `AddDbContextPool` présente quelques limitations sur ce qui peut être fait dans la `OnConfiguring` méthode du contexte.
 
-> [!WARNING]  
+> [!WARNING]
 > Évitez d’utiliser le regroupement de contexte dans les applications qui maintiennent l’État. Par exemple, les champs privés dans le contexte qui ne doivent pas être partagés entre les requêtes. EF Core réinitialise uniquement l’État qu’il reconnaît avant d’ajouter une instance de contexte au pool.
 
 Le regroupement de contexte fonctionne en réutilisant la même instance de contexte entre les requêtes. Cela signifie qu’elle est enregistrée en tant que [Singleton](/aspnet/core/fundamentals/dependency-injection#service-lifetimes) en termes de l’instance elle-même afin de pouvoir être persistante.

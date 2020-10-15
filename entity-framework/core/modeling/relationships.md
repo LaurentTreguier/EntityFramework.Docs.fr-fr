@@ -2,14 +2,14 @@
 title: Relations-EF Core
 description: Comment configurer des relations entre des types d’entités lors de l’utilisation de Entity Framework Core
 author: AndriySvyryd
-ms.date: 11/21/2019
+ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 9946b2190cb3c3973f245d44da7e359b60845541
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 71d960a15dfb938af1dcc7035dc2587df7ad4677
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619106"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063840"
 ---
 # <a name="relationships"></a>Relations
 
@@ -148,7 +148,10 @@ Si vous n’avez qu’une seule propriété de navigation, il y a des surcharges
 
 ### <a name="configuring-navigation-properties"></a>Configuration des propriétés de navigation
 
-Une fois la propriété de navigation créée, vous devrez peut-être la configurer ultérieurement. Dans EFCore 5,0, une nouvelle API Fluent est ajoutée pour vous permettre d’effectuer cette configuration.
+> [!NOTE]
+> Cette fonctionnalité a été ajoutée dans EF Core 5,0.
+
+Une fois la propriété de navigation créée, vous devrez peut-être la configurer ultérieurement.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/NavigationConfiguration.cs?name=NavigationConfiguration&highlight=7-9)]
 
@@ -224,6 +227,8 @@ Si vous souhaitez que la clé étrangère fasse référence à une propriété a
 
 Vous pouvez utiliser l’API Fluent pour déterminer si la relation est obligatoire ou facultative. Au final, cela contrôle si la propriété de clé étrangère est obligatoire ou facultative. Cela est particulièrement utile lorsque vous utilisez une clé étrangère d’État Shadow. Si vous avez une propriété de clé étrangère dans votre classe d’entité, le caractère requis de la relation est déterminé selon que la propriété de clé étrangère est obligatoire ou facultative (pour plus d’informations, consultez [propriétés requises et facultatives](xref:core/modeling/entity-properties#required-and-optional-properties) ).
 
+Les propriétés de clé étrangère se trouvent sur le type d’entité dépendant. par conséquent, si elles sont configurées comme obligatoires, cela signifie que chaque entité dépendante doit avoir une entité principale correspondante.
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/Required.cs?name=Required&highlight=6)]
 
 > [!NOTE]
@@ -254,8 +259,69 @@ Quand vous configurez la clé étrangère, vous devez spécifier le type d’ent
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/OneToOne.cs?name=OneToOne&highlight=11)]
 
+Le côté dépendant est considéré comme facultatif par défaut, mais peut être configuré en fonction des besoins. Toutefois, EF ne vérifie pas si une entité dépendante a été fournie, donc cette configuration ne fait qu’une différence lorsque le mappage de base de données lui permet d’être appliqué. Un scénario courant pour ce sont les types détenues par référence qui utilisent le fractionnement de table par défaut.
+
+[!code-csharp[Main](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=Required&highlight=11-12)]
+
+Avec cette configuration, les colonnes correspondantes `ShippingAddress` sont marquées comme n’acceptant pas les valeurs NULL dans la base de données.
+
+> [!NOTE]
+> Si vous utilisez des [types de référence n’acceptant pas les valeurs NULL,](/dotnet/csharp/nullable-references) l’appel de `IsRequired` n’est pas nécessaire.
+
+> [!NOTE]
+> La possibilité de configurer si le dépendant est requis a été ajoutée dans EF Core 5,0.
+
 ### <a name="many-to-many"></a>Plusieurs-à-plusieurs
 
-Les relations plusieurs-à-plusieurs sans classe d’entité pour représenter la table de jointure ne sont pas encore prises en charge. Toutefois, vous pouvez représenter une relation plusieurs-à-plusieurs en incluant une classe d’entité pour la table de jointure et en mappant deux relations un-à-plusieurs distinctes.
+Les relations plusieurs-à-plusieurs requièrent une propriété de navigation de collection des deux côtés. Ils seront découverts par convention comme d’autres types de relations.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=ManyToManyShared)]
+
+La façon dont cette relation est implémentée dans la base de données est une table de jointure qui contient des clés étrangères pour `Post` et `Tag` . Par exemple, il s’agit de ce que EF crée dans une base de données relationnelle pour le modèle ci-dessus.
+
+```sql
+CREATE TABLE [Posts] (
+    [PostId] int NOT NULL IDENTITY,
+    [Title] nvarchar(max) NULL,
+    [Content] nvarchar(max) NULL,
+    CONSTRAINT [PK_Posts] PRIMARY KEY ([PostId])
+);
+
+CREATE TABLE [Tags] (
+    [TagId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_Tags] PRIMARY KEY ([TagId])
+);
+
+CREATE TABLE [PostTag] (
+    [PostId] int NOT NULL,
+    [TagId] nvarchar(450) NOT NULL,
+    CONSTRAINT [PK_PostTag] PRIMARY KEY ([PostId], [TagId]),
+    CONSTRAINT [FK_PostTag_Posts_PostId] FOREIGN KEY ([PostId]) REFERENCES [Posts] ([PostId]) ON DELETE CASCADE,
+    CONSTRAINT [FK_PostTag_Tags_TagId] FOREIGN KEY ([TagId]) REFERENCES [Tags] ([TagId]) ON DELETE CASCADE
+);
+```
+
+En interne, EF crée un type d’entité pour représenter la table de jointure qui sera désignée comme type d’entité de jointure. Il n’existe pas de type CLR spécifique qui peut être utilisé pour ce. par conséquent, `Dictionary<string, object>` est utilisé. Plus d’une relation plusieurs-à-plusieurs peut exister dans le modèle ; par conséquent, le type d’entité de jointure doit avoir un nom unique, dans ce cas `PostTag` . La fonctionnalité qui permet cela est appelée type d’entité de type partagé.
+
+Les navigations plusieurs-à-plusieurs sont appelées ignorer les navigations, car elles ignorent le type d’entité de jointure. Si vous utilisez la configuration en bloc, toutes les navigations ignorées peuvent être obtenues à partir de `GetSkipNavigations` .
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+Il est courant d’appliquer la configuration au type d’entité de jointure. Cette action peut être effectuée via `UsingEntity` .
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=SharedConfiguration)]
+
+Des [données de valeur de départ de modèle](xref:core/modeling/data-seeding) peuvent être fournies pour le type d’entité de jointure à l’aide de types anonymes. Vous pouvez examiner la vue de débogage du modèle pour déterminer les noms de propriété créés par Convention.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Seeding)]
+
+Des données supplémentaires peuvent être stockées dans le type d’entité de jointure, mais pour cela, il est préférable de créer un type CLR Spoke. Lors de la configuration de la relation avec un type d’entité de jointure personnalisée, les deux clés étrangères doivent être spécifiées explicitement.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
+
+> [!NOTE]
+> La possibilité de configurer des relations plusieurs-à-plusieurs a été ajoutée dans EF Core 5,0, pour la version précédente, utilisez l’approche suivante.
+
+Vous pouvez également représenter une relation plusieurs-à-plusieurs en ajoutant simplement le type d’entité de jointure et en mappant deux relations un-à-plusieurs distinctes.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]

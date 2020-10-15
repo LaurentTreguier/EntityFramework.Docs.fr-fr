@@ -2,15 +2,14 @@
 title: Table d’historique des migrations personnalisées-EF Core
 description: Personnalisation d’une table d’historique à utiliser pour les migrations avec Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 11/07/2017
 uid: core/managing-schemas/migrations/history-table
-ms.openlocfilehash: deed86b2023557036eb14ca5a66f04ab5bb4139f
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 1f6dcb2fbb20e7dafed17160832ccec453839aa3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89617984"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062306"
 ---
 # <a name="custom-migrations-history-table"></a>Table d’historique des migrations personnalisées
 

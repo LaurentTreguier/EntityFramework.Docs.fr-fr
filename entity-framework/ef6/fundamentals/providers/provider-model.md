@@ -1,15 +1,15 @@
 ---
 title: Modèle de fournisseur Entity Framework 6-EF6
 description: Modèle de fournisseur Entity Framework 6 dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 06/27/2018
 uid: ef6/fundamentals/providers/provider-model
-ms.openlocfilehash: 4fc45ba5fe916253be348182196be236729d685d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 15b5443ff05b5c8704f80d4f2f83b4ed20edd1c0
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074014"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063190"
 ---
 # <a name="the-entity-framework-6-provider-model"></a>Modèle de fournisseur Entity Framework 6
 
@@ -75,7 +75,7 @@ L’implémentation de DbProviderServices à utiliser peut être inscrite dans l
 
 ### <a name="config-file-registration"></a>Inscription dans le fichier config
 
-Le type DbProviderServices à utiliser est inscrit en tant qu’élément de fournisseur dans la liste des fournisseurs de la section entityFramework du fichier de configuration de l’application. Exemple :
+Le type DbProviderServices à utiliser est inscrit en tant qu’élément de fournisseur dans la liste des fournisseurs de la section entityFramework du fichier de configuration de l’application. Par exemple :
 
 ``` xml
 <entityFramework>
@@ -89,7 +89,7 @@ Le _type_ chaîne doit être le nom de type qualifié par un assembly de l’imp
 
 ### <a name="code-based-registration"></a>Inscription basée sur le code
 
-Le démarrage des fournisseurs EF6 peut également être inscrit à l’aide de code. Cela permet l’utilisation d’un fournisseur EF sans aucune modification du fichier de configuration de l’application. Pour utiliser la configuration basée sur le code, une application doit créer une classe DbConfiguration comme décrit dans la [documentation relative à la configuration basée sur le code](https://msdn.com/data/jj680699). Le constructeur de la classe DbConfiguration doit ensuite appeler SetProviderServices pour inscrire le fournisseur EF. Exemple :
+Le démarrage des fournisseurs EF6 peut également être inscrit à l’aide de code. Cela permet l’utilisation d’un fournisseur EF sans aucune modification du fichier de configuration de l’application. Pour utiliser la configuration basée sur le code, une application doit créer une classe DbConfiguration comme décrit dans la [documentation relative à la configuration basée sur le code](https://msdn.com/data/jj680699). Le constructeur de la classe DbConfiguration doit ensuite appeler SetProviderServices pour inscrire le fournisseur EF. Par exemple :
 
 ``` csharp
 public class MyConfiguration : DbConfiguration
@@ -162,7 +162,7 @@ Il est possible d’inscrire explicitement certains des services de fournisseur 
 
 À compter de EF5, le package NuGet EntityFramework a inscrit automatiquement la fabrique de connexion SQL Express ou la fabrique de connexion de la base de données locale dans le fichier de configuration.
 
-Exemple :
+Par exemple :
 
 ``` xml
 <entityFramework>
@@ -206,8 +206,8 @@ Par exemple, le package EntityFramework. SqlServerCompact inclus dans le code [b
 
 Quand le package NuGet EntityFramework est installé, il inscrit un module PowerShell qui contient deux commandes qui sont très utiles pour les packages de fournisseur :
 
-*   Add-EFProvider ajoute une nouvelle entité pour le fournisseur dans le fichier de configuration du projet cible et vérifie qu’il se trouve à la fin de la liste des fournisseurs inscrits.
-*   Add-EFDefaultConnectionFactory ajoute ou met à jour l’inscription de defaultConnectionFactory dans le fichier de configuration du projet cible.
+*   Add-EFProvider ajoute une nouvelle entité pour le fournisseur dans le fichier de configuration du projet cible et s’assure qu’elle se trouve à la fin de la liste des fournisseurs inscrits.
+*   Add-EFDefaultConnectionFactory ajoute ou met à jour l’inscription defaultConnectionFactory dans le fichier de configuration du projet cible.
 
 Ces deux commandes prennent en charge l’ajout d’une section entityFramework au fichier de configuration et l’ajout d’une collection de fournisseurs si nécessaire.
 

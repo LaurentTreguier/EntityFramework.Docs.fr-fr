@@ -2,15 +2,14 @@
 title: Migrations avec plusieurs fournisseurs-EF Core
 description: Utilisation de migrations pour gérer les schémas de base de données lors du ciblage de plusieurs fournisseurs de bases de données avec Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 11/08/2017
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: df38af6ac700a530894b98e1f29bbe804831bad5
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f44abb5156ea3a175c68c1a0ec23ff41a9d13452
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619193"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92061981"
 ---
 # <a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
 
@@ -24,7 +23,7 @@ Pour ce faire, vous pouvez placer chaque ensemble de migration [dans un assembly
 
 Une autre approche qui facilite l’utilisation des outils consiste à créer un nouveau type qui dérive de votre DbContext et qui remplace le fournisseur actif. Ce type est utilisé au moment de la conception lors de l’ajout ou de l’application de migrations.
 
-``` csharp
+```csharp
 class MySqliteDbContext : MyDbContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder options)
@@ -46,7 +45,7 @@ dotnet ef migrations add InitialCreate --context MySqliteDbContext --output-dir 
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Add-Migration InitialCreate -Context MyDbContext -OutputDir Migrations\SqlServerMigrations
 Add-Migration InitialCreate -Context MySqliteDbContext -OutputDir Migrations\SqliteMigrations
 ```
@@ -62,7 +61,7 @@ Si vous n’aimez pas avoir deux ensembles de migrations, vous pouvez les combin
 
 Les annotations peuvent coexister car un fournisseur ignore les annotations qu’il ne comprend pas. Par exemple, une colonne de clé primaire qui fonctionne avec Microsoft SQL Server et SQLite peut se présenter comme suit.
 
-``` csharp
+```csharp
 Id = table.Column<int>(nullable: false)
     .Annotation("SqlServer:ValueGenerationStrategy",
         SqlServerValueGenerationStrategy.IdentityColumn)
@@ -71,7 +70,7 @@ Id = table.Column<int>(nullable: false)
 
 Si les opérations peuvent être appliquées uniquement pour un fournisseur, ou si elles sont différentes entre les fournisseurs, utilisez la `ActiveProvider` propriété pour déterminer quel fournisseur est actif :
 
-``` csharp
+```csharp
 if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")
 {
     migrationBuilder.CreateSequence(

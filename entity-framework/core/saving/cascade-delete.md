@@ -1,15 +1,15 @@
 ---
 title: 'Suppression en cascade : EF Core'
 description: Configuration des comportements de suppression pour les entités associées lorsqu’une entité principale est supprimée
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 197d52758f969bcdb69c0a7a230001737596b821
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 037b018c669da76a70f134e3991ad22b36917920
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070911"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063606"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -27,7 +27,7 @@ Il existe trois mesures qu'EF peut prendre lorsqu’une entité principale/paren
 * Les valeurs de clé étrangère de l’enfant peuvent être définies avec la valeur null
 * L’enfant reste inchangé
 
-> [!NOTE]  
+> [!NOTE]
 > Le comportement de suppression configuré dans le modèle EF Core est uniquement appliqué lorsque l’entité principale est supprimée à l’aide d’EF Core et que les entités dépendantes sont chargées en mémoire (par exemple, pour les suivis dépendants). Un comportement de cascade correspondant doit être configuré dans la base de données pour s’assurer que les données qui ne sont pas suivies par le contexte disposent de la bonne action appliquée. Si vous utilisez EF Core pour créer la base de données, ce comportement en cascade sera configuré pour vous.
 
 Pour la deuxième action ci-dessus, la définition d’une clé étrangère sur la valeur null n’est pas valide si cette clé étrangère n’accepte pas la valeur null. (Une clé étrangère qui n’accepte pas les valeurs NULL est équivalente à une relation obligatoire.) Dans ce cas, EF Core suit que la propriété de clé étrangère a été marquée comme Null jusqu’à ce que SaveChanges soit appelé, auquel cas une exception est levée, car la modification ne peut pas être rendue persistante dans la base de données. Cela est similaire à une violation de contrainte de la base de données.
@@ -70,9 +70,6 @@ Dans les tableaux ci-dessus, *Aucun* peut entraîner une violation de contrainte
 > [!NOTE]
 > Dans EF Core, contrairement à EF6, les effets en cascade ne se produisent pas immédiatement, mais à la place uniquement lorsque SaveChanges est appelé.
 
-> [!NOTE]  
-> **Changements dans EF Core 2.0 :** dans les versions précédentes, *Restrict* provoquerait la définition des propriétés de clé étrangère facultatives dans des entités dépendantes suivies sur null. C’était le comportement de suppression par défaut pour les relations optionnelles. Dans EF Core 2.0, l’option *ClientSetNull* a été introduite pour représenter ce comportement et est devenue la valeur par défaut pour les relations facultatives. Le comportement de *Restrict* a été ajusté pour ne jamais avoir d’effets sur les entités dépendantes.
-
 ## <a name="entity-deletion-examples"></a>Exemples de suppression d’entité
 
 Le code suivant fait partie d’un [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/CascadeDelete/) qui peut être téléchargé et exécuté. L’exemple montre ce qui se passe pour chaque comportement de suppression pour les relations facultatives et requises lorsqu’une entité parente est supprimée.
@@ -83,26 +80,26 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade avec une relation obligatoire ou facultative
 
-```console
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+Saving changes:
+  DELETE FROM [Posts] WHERE [PostId] = 1
+  DELETE FROM [Posts] WHERE [PostId] = 2
+  DELETE FROM [Blogs] WHERE [BlogId] = 1
 
-  After SaveChanges:
-    Blog '1' is in state Detached with 2 posts referenced.
-      Post '1' is in state Detached with FK '1' and no reference to a blog.
-      Post '2' is in state Detached with FK '1' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Detached with 2 posts referenced.
+    Post '1' is in state Detached with FK '1' and no reference to a blog.
+    Post '2' is in state Detached with FK '1' and no reference to a blog.
 ```
 
 * Le blog est marqué comme supprimé
@@ -112,21 +109,21 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation requise
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
 
-  SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
+SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
 * Le blog est marqué comme supprimé
@@ -135,26 +132,26 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation facultative
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
+  DELETE FROM [Blogs] WHERE [BlogId] = 1
 
-  After SaveChanges:
-    Blog '1' is in state Detached with 2 posts referenced.
-      Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
-      Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Detached with 2 posts referenced.
+    Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
+    Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
 * Le blog est marqué comme supprimé
@@ -165,19 +162,19 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict avec une relation obligatoire ou facultative
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After deleting blog '1':
-    Blog '1' is in state Deleted with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+After deleting blog '1':
+  Blog '1' is in state Deleted with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  Saving changes:
-  SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
+Saving changes:
+SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
 * Le blog est marqué comme supprimé
@@ -194,25 +191,25 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorcascade-with-required-or-optional-relationship"></a>DeleteBehavior.Cascade avec une relation obligatoire ou facultative
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK '1' and no reference to a blog.
-      Post '2' is in state Modified with FK '1' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK '1' and no reference to a blog.
+    Post '2' is in state Modified with FK '1' and no reference to a blog.
 
-  Saving changes:
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
+Saving changes:
+  DELETE FROM [Posts] WHERE [PostId] = 1
+  DELETE FROM [Posts] WHERE [PostId] = 2
 
-  After SaveChanges:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Detached with FK '1' and no reference to a blog.
-      Post '2' is in state Detached with FK '1' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Detached with FK '1' and no reference to a blog.
+    Post '2' is in state Detached with FK '1' and no reference to a blog.
 ```
 
 * Les billets sont marqués comme modifiés, car l’interruption de la relation a provoqué la définition de la clé étrangère sur null
@@ -222,21 +219,21 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-required-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation requise
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK 'null' and no reference to a blog.
-      Post '2' is in state Modified with FK 'null' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK 'null' and no reference to a blog.
+    Post '2' is in state Modified with FK 'null' and no reference to a blog.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
 
-  SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
+SaveChanges threw DbUpdateException: Cannot insert the value NULL into column 'BlogId', table 'EFSaving.CascadeDelete.dbo.Posts'; column does not allow nulls. UPDATE fails. The statement has been terminated.
 ```
 
 * Les billets sont marqués comme modifiés, car l’interruption de la relation a provoqué la définition de la clé étrangère sur null
@@ -245,25 +242,25 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorclientsetnull-or-deletebehaviorsetnull-with-optional-relationship"></a>DeleteBehavior.ClientSetNull ou DeleteBehavior.SetNull avec une relation facultative
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK 'null' and no reference to a blog.
-      Post '2' is in state Modified with FK 'null' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK 'null' and no reference to a blog.
+    Post '2' is in state Modified with FK 'null' and no reference to a blog.
 
-  Saving changes:
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
-    UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
+Saving changes:
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 1
+  UPDATE [Posts] SET [BlogId] = NULL WHERE [PostId] = 2
 
-  After SaveChanges:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
-      Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
+After SaveChanges:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK 'null' and no reference to a blog.
+    Post '2' is in state Unchanged with FK 'null' and no reference to a blog.
 ```
 
 * Les billets sont marqués comme modifiés, car l’interruption de la relation a provoqué la définition de la clé étrangère sur null
@@ -273,19 +270,19 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 
 ### <a name="deletebehaviorrestrict-with-required-or-optional-relationship"></a>DeleteBehavior.Restrict avec une relation obligatoire ou facultative
 
-``` output
-  After loading entities:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
-      Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
+```output
+After loading entities:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Unchanged with FK '1' and reference to blog '1'.
+    Post '2' is in state Unchanged with FK '1' and reference to blog '1'.
 
-  After making posts orphans:
-    Blog '1' is in state Unchanged with 2 posts referenced.
-      Post '1' is in state Modified with FK '1' and no reference to a blog.
-      Post '2' is in state Modified with FK '1' and no reference to a blog.
+After making posts orphans:
+  Blog '1' is in state Unchanged with 2 posts referenced.
+    Post '1' is in state Modified with FK '1' and no reference to a blog.
+    Post '2' is in state Modified with FK '1' and no reference to a blog.
 
-  Saving changes:
-  SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
+Saving changes:
+SaveChanges threw InvalidOperationException: The association between entity types 'Blog' and 'Post' has been severed but the foreign key for this relationship cannot be set to null. If the dependent entity should be deleted, then setup the relationship to use cascade deletes.
 ```
 
 * Les billets sont marqués comme modifiés, car l’interruption de la relation a provoqué la définition de la clé étrangère sur null
@@ -297,15 +294,15 @@ Nous allons étudier chaque variation de comprendre ce qui se passe.
 Lorsque vous appelez *SaveChanges*, les règles de suppression en cascade s’appliqueront à toutes les entités qui sont suivies par le contexte. C’est le cas dans tous les exemples ci-dessus, c’est pourquoi le SQL généré pour supprimer l’entité principale/parent (le blog) et toutes les entités dépendantes/enfant (les billets) :
 
 ```sql
-    DELETE FROM [Posts] WHERE [PostId] = 1
-    DELETE FROM [Posts] WHERE [PostId] = 2
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+DELETE FROM [Posts] WHERE [PostId] = 1
+DELETE FROM [Posts] WHERE [PostId] = 2
+DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
 Si seule l’entité principale est chargée, par exemple lorsqu’une requête est faite sur un blog sans `Include(b => b.Posts)` pour inclure également les billets, alors SaveChanges génère uniquement le SQL pour supprimer l’entité principale/parent :
 
 ```sql
-    DELETE FROM [Blogs] WHERE [BlogId] = 1
+DELETE FROM [Blogs] WHERE [BlogId] = 1
 ```
 
 Les entités dépendantes/enfant (les billets) seront supprimées uniquement si la base de données a un comportement de cascade correspondant configuré. Si vous utilisez EF pour créer la base de données, ce comportement en cascade sera configuré pour vous.

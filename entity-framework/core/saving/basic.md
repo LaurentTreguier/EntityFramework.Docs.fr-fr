@@ -1,15 +1,15 @@
 ---
 title: 'Enregistrement de base : EF Core'
 description: Informations de base sur l’ajout, la mise à jour et la suppression de données avec Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: ea73ff86d8843acf8226f9d6696b79b99da9dab7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c6288fc8ca79b78b6c377f25e3874211b38059b2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070950"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063632"
 ---
 # <a name="basic-save"></a>Enregistrement de base
 
@@ -25,7 +25,7 @@ Utilisez la méthode *DbSet.Add* pour ajouter de nouvelles instances de vos clas
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
 > [!TIP]  
-> Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](xref:core/saving/related-data). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple : `context.Entry(blog).State = EntityState.Modified`.
+> Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](xref:core/saving/related-data). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="updating-data"></a>Mise à jour des données
 

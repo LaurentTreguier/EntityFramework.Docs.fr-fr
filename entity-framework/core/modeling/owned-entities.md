@@ -2,15 +2,14 @@
 title: Types d’entités détenues-EF Core
 description: Comment configurer des agrégats ou des types d’entités détenus lors de l’utilisation de Entity Framework Core
 author: AndriySvyryd
-ms.author: ansvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: f65c07c79daf38e733c76f328843c90466c657f5
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619335"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063775"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -20,7 +19,7 @@ Les entités détenues sont essentiellement une partie du propriétaire et ne pe
 
 ## <a name="explicit-configuration"></a>Configuration explicite
 
-Les types d’entités détenus ne sont jamais inclus par EF Core dans le modèle par Convention. Vous pouvez utiliser la `OwnsOne` méthode dans `OnModelCreating` ou annoter le type avec `OwnedAttribute` (nouveauté de EF Core 2,1) pour configurer le type en tant que type détenu.
+Les types d’entités détenus ne sont jamais inclus par EF Core dans le modèle par Convention. Vous pouvez utiliser la `OwnsOne` méthode dans `OnModelCreating` ou annoter le type avec `OwnedAttribute` pour configurer le type en tant que type détenu.
 
 Dans cet exemple, `StreetAddress` est un type sans propriété d’identité. Il est utilisé comme propriété du type Order pour spécifier l’adresse d’expédition d’une commande particulière.
 
@@ -40,6 +39,9 @@ Si la `ShippingAddress` propriété est privée dans le `Order` type, vous pouve
 
 Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) .
 
+> [!TIP]
+> Le type d’entité détenu peut être marqué comme requis, voir les [dépendants un-à-un requis](xref:core/modeling/relationships#one-to-one) pour plus d’informations.
+
 ## <a name="implicit-keys"></a>Clés implicites
 
 Les types détenus configurés `OwnsOne` ou découverts via une navigation de référence ont toujours une relation un-à-un avec le propriétaire, donc ils n’ont pas besoin de leurs propres valeurs de clés, car les valeurs de clé étrangère sont uniques. Dans l’exemple précédent, le `StreetAddress` type n’a pas besoin de définir une propriété de clé.  
@@ -47,9 +49,6 @@ Les types détenus configurés `OwnsOne` ou découverts via une navigation de r�
 Pour comprendre comment EF Core effectue le suivi de ces objets, il est utile de savoir qu’une clé primaire est créée en tant que [propriété Shadow](xref:core/modeling/shadow-properties) pour le type détenu. La valeur de la clé d’une instance du type détenu sera identique à la valeur de la clé de l’instance propriétaire.
 
 ## <a name="collections-of-owned-types"></a>Collections de types détenus
-
-> [!NOTE]
-> Cette fonctionnalité est une nouveauté d’EF Core 2.2.
 
 Pour configurer une collection de types détenus `OwnsMany` , utilisez dans `OnModelCreating` .
 
@@ -60,18 +59,15 @@ Les deux solutions les plus simples à ce niveau sont les suivantes :
 - Définition d’une clé primaire de substitution sur une nouvelle propriété indépendante de la clé étrangère qui pointe vers le propriétaire. Les valeurs contenues doivent être uniques parmi tous les propriétaires (par exemple, si le parent {1} a {1} un enfant, alors {2} le parent ne peut pas avoir {1} d’enfant), de sorte que la valeur n’a pas de signification inhérente. Étant donné que la clé étrangère ne fait pas partie de la clé primaire, ses valeurs peuvent être modifiées. vous pouvez donc déplacer un enfant d’un parent à un autre, mais cela est généralement dû à une sémantique d’agrégation.
 - En utilisant la clé étrangère et une propriété supplémentaire comme clé composite. La valeur de propriété supplémentaire ne doit désormais être unique que pour un parent donné (par conséquent, si le parent a un enfant, le {1} {1,1} parent {2} peut encore avoir un enfant {2,1} ). En faisant de la clé étrangère de la clé primaire, la relation entre le propriétaire et l’entité détenue devient immuable et reflète mieux la sémantique d’agrégation. C’est ce que EF Core par défaut.
 
-Dans cet exemple, nous allons utiliser la `Distributor` classe :
+Dans cet exemple, nous allons utiliser la `Distributor` classe.
 
 [!code-csharp[Distributor](../../../samples/core/Modeling/OwnedEntities/Distributor.cs?name=Distributor)]
 
 Par défaut, la clé primaire utilisée pour le type détenu référencé via la `ShippingCenters` propriété de navigation sera `("DistributorId", "Id")` where `"DistributorId"` et `"Id"` est une `int` valeur unique.
 
-Pour configurer un autre appel de PK `HasKey` :
+Pour configurer un autre appel de clé primaire `HasKey` .
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
-
-> [!NOTE]
-> Avant de EF Core `WithOwner()` méthode 3,0 n’existait pas, cet appel doit être supprimé. En outre, la clé primaire n’a pas été détectée automatiquement et doit donc toujours être spécifiée.
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mappage de types détenus avec le fractionnement de table
 
@@ -79,7 +75,7 @@ Lorsque vous utilisez des bases de données relationnelles, par défaut, les typ
 
 Par défaut, EF Core nommera les colonnes de base de données pour les propriétés du type d’entité détenu, en suivant le modèle _Navigation_OwnedEntityProperty_. Par conséquent, les `StreetAddress` Propriétés s’affichent dans la table Orders avec les noms « ShippingAddress_Street » et « ShippingAddress_City ».
 
-Vous pouvez utiliser la `HasColumnName` méthode pour renommer ces colonnes :
+Vous pouvez utiliser la `HasColumnName` méthode pour renommer ces colonnes.
 
 [!code-csharp[ColumnNames](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=ColumnNames)]
 
@@ -92,7 +88,7 @@ Un type d’entité détenu peut être du même type .NET qu’un autre type d�
 
 Dans ce cas, la propriété qui pointe du propriétaire vers l’entité détenue devient la définition de la _navigation_ du type d’entité détenu. Du point de vue de EF Core, la navigation de définition fait partie de l’identité du type en même temps que le type .NET.
 
-Par exemple, dans la classe suivante `ShippingAddress` et `BillingAddress` sont tous deux du même type .NET `StreetAddress` :
+Par exemple, dans la classe suivante `ShippingAddress` et `BillingAddress` sont tous deux du même type .net, `StreetAddress` .
 
 [!code-csharp[OrderDetails](../../../samples/core/Modeling/OwnedEntities/OrderDetails.cs?name=OrderDetails)]
 
@@ -144,16 +140,15 @@ Certaines de ces limitations sont essentielles à la façon dont les types d’e
 
 ### <a name="by-design-restrictions"></a>Restrictions par conception
 
-- Vous ne pouvez pas créer un `DbSet<T>` pour un type détenu
-- Vous ne pouvez pas appeler `Entity<T>()` avec un type détenu sur `ModelBuilder`
+- Vous ne pouvez pas créer un `DbSet<T>` pour un type détenu.
+- Vous ne pouvez pas appeler `Entity<T>()` avec un type détenu sur `ModelBuilder` .
+- Les instances de types d’entité possédées ne peuvent pas être partagées par plusieurs propriétaires (il s’agit d’un scénario connu pour les objets de valeur qui ne peuvent pas être implémentés à l’aide des types d’entité détenus).
 
 ### <a name="current-shortcomings"></a>Lacunes actuelles
 
 - Les types d’entités détenues ne peuvent pas avoir de hiérarchies d’héritage
-- Les navigations de référence vers les types d’entité détenus ne peuvent pas avoir la valeur null, sauf si elles sont explicitement mappées à une table distincte du propriétaire
-- Les instances de types d’entité possédées ne peuvent pas être partagées par plusieurs propriétaires (il s’agit d’un scénario connu pour les objets de valeur qui ne peuvent pas être implémentés à l’aide des types d’entités détenus)
 
 ### <a name="shortcomings-in-previous-versions"></a>Lacunes dans les versions précédentes
 
-- Dans EF Core 2,0, les navigations vers les types d’entités détenues ne peuvent pas être déclarées dans des types d’entité dérivés, à moins que les entités détenues soient explicitement mappées à une table distincte de la hiérarchie de propriétaire. Cette limitation a été supprimée dans EF Core 2,1
-- Dans EF Core 2,0 et 2,1, seules les navigations de référence vers les types détenus étaient prises en charge. Cette limitation a été supprimée dans EF Core 2,2
+- Dans EF Core 2. x, les navigations de référence vers les types d’entités détenus ne peuvent pas avoir la valeur null, sauf si elles sont explicitement mappées à une table distincte du propriétaire.
+- Dans EF Core 3. x, les colonnes des types d’entité détenus mappés à la même table que le propriétaire sont toujours marquées comme Nullable.

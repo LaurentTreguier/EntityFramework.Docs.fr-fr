@@ -2,15 +2,14 @@
 title: Application de migrations-EF Core
 description: Stratégies d’application des migrations de schéma vers des bases de données de production et de développement à l’aide de Entity Framework Core
 author: bricelam
-ms.author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: cde83a944e1e698a7f8a00c4692c0ce08a87b5ab
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: 68d482a34e5f5c7acf968acdfd8825e1d21ecb13
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210404"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92062345"
 ---
 # <a name="applying-migrations"></a>Application de migrations
 
@@ -65,7 +64,7 @@ Vous pouvez utiliser un `from` plus récent que le `to` afin de générer un scr
 
 L’exemple suivant génère un script SQL à partir d’une base de données vide vers la dernière migration :
 
-``` powershell
+```powershell
 Script-Migration
 ```
 
@@ -107,7 +106,7 @@ dotnet ef migrations script --idempotent
 
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
-``` powershell
+```powershell
 Script-Migration -Idempotent
 ```
 
@@ -143,13 +142,13 @@ Notez que cela peut être utilisé pour revenir à une migration antérieure ég
 
 Le code suivant met à jour votre base de données avec la dernière migration :
 
-``` powershell
+```powershell
 Update-Database
 ```
 
 Le code suivant met à jour votre base de données vers une migration donnée :
 
-``` powershell
+```powershell
 Update-Database AddNewTables
 ```
 
@@ -174,7 +173,7 @@ Il est possible que l’application elle-même applique des migrations par progr
 
 Pour appliquer des migrations par programme, appelez `context.Database.Migrate()` . Par exemple, une application ASP.NET classique peut effectuer les opérations suivantes :
 
-```c#
+```csharp
 public static void Main(string[] args)
 {
     var host = CreateHostBuilder(args).Build();

@@ -1,15 +1,15 @@
 ---
 title: Nouveautés d’EF Core 2.0 - EF Core
 description: Modifications et améliorations apportées dans Entity Framework Core 2.0.
-author: divega
+author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: f553e620c088a65eda64c0761aaab49313041727
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7438d8ad1a5ade971af71186a20ec57fd83713de
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072354"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063450"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
@@ -26,7 +26,7 @@ Vous pouvez désormais mapper deux ou plusieurs types d’entité à la même ta
 
 Pour utiliser le fractionnement de table, vous devez configurer une relation d’identification (où les propriétés de clé étrangère forment la clé primaire) entre tous les types d’entité partageant la table :
 
-``` csharp
+```csharp
 modelBuilder.Entity<Product>()
     .HasOne(e => e.Details).WithOne(e => e.Product)
     .HasForeignKey<ProductDetails>(e => e.Id);
@@ -42,7 +42,7 @@ Un type d’entité détenu peut partager le même type .NET qu’un autre type 
 
 Par convention, une clé primaire cachée est créée pour le type détenu et est mappée à la même table que le propriétaire à l’aide du fractionnement de table. Cela permet d’utiliser des types détenus à l’image des types complexes dans EF6 :
 
-``` csharp
+```csharp
 modelBuilder.Entity<Order>().OwnsOne(p => p.OrderDetails, cb =>
     {
         cb.OwnsOne(c => c.BillingAddress);
@@ -79,7 +79,7 @@ EF Core 2.0 inclut une nouvelle fonctionnalité que nous appelons « filtres de 
 
 Voici un exemple simple illustrant la fonctionnalité pour les deux scénarios répertoriés ci-dessus :
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }
@@ -113,7 +113,7 @@ Voici une brève description de l’utilisation de la fonctionnalité :
 
 Déclarez une méthode statique sur votre `DbContext` et annotez-la avec `DbFunctionAttribute` :
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     [DbFunction]
@@ -126,7 +126,7 @@ public class BloggingContext : DbContext
 
 Les méthodes telles que celle-ci sont inscrites automatiquement. Une fois inscrits, les appels à la méthode dans une requête LINQ peuvent être traduits en appels de fonction dans SQL :
 
-``` csharp
+```csharp
 var query =
     from p in context.Posts
     where BloggingContext.PostReadCount(p.Id) > 5
@@ -143,7 +143,7 @@ Points à noter :
 
 Dans EF6, il était possible d’encapsuler la configuration Code First d’un type d’entité spécifique en effectuant une dérivation à partir *d’EntityTypeConfiguration*. Dans EF Core 2.0, nous reprenons ce modèle :
 
-``` csharp
+```csharp
 class CustomerConfiguration : IEntityTypeConfiguration<Customer>
 {
     public void Configure(EntityTypeBuilder<Customer> builder)
@@ -166,7 +166,7 @@ En règle générale, le modèle de base pour l’utilisation d’EF Core dans u
 
 La version 2.0 offre une nouvelle façon d’inscrire des types DbContext personnalisés dans l’injection de dépendances, qui introduit en toute transparence un groupe d’instances de DbContext réutilisables. Pour utiliser le regroupement DbContext, utilisez `AddDbContextPool` au lieu d’`AddDbContext` durant l’inscription des services :
 
-``` csharp
+```csharp
 services.AddDbContextPool<BloggingContext>(
     options => options.UseSqlServer(connectionString));
 ```
@@ -179,7 +179,7 @@ Ce regroupement est conceptuellement semblable au regroupement de connexions dan
 
 La nouvelle méthode présente quelques limitations quant à ce qui peut être effectué dans la méthode `OnConfiguring()` de DbContext.
 
-> [!WARNING]  
+> [!WARNING]
 > Évitez d’utiliser le regroupement DbContext si vous gérez votre propre état (par exemple, champs privés) dans votre classe DbContext dérivée qui ne doit pas être partagée entre les requêtes. EF Core réinitialise uniquement l’état dont il a connaissance avant d’ajouter une instance de DbContext au pool.
 
 ### <a name="explicitly-compiled-queries"></a>Requêtes compilées explicitement
@@ -190,7 +190,7 @@ Les API de requête manuelles ou compilées explicitement étaient disponibles d
 
 Bien qu’en général EF Core puisse automatiquement compiler et mettre en cache les requêtes en fonction d’une représentation hachée des expressions de requête, ce mécanisme peut être utilisé pour obtenir un petit gain de performances en contournant le calcul du hachage et la recherche dans le cache, ce qui permet à l’application d’utiliser une requête déjà compilée par le biais de l’appel d’un délégué.
 
-``` csharp
+```csharp
 // Create an explicitly compiled query
 private static Func<CustomerContext, int, Customer> _customerById =
     EF.CompileQuery((CustomerContext db, int id) =>
@@ -227,7 +227,7 @@ C# 6 a introduit l’interpolation de chaîne, fonctionnalité qui permet d’in
 
 Voici un exemple :
 
-``` csharp
+```csharp
 var city = "London";
 var contactTitle = "Sales Representative";
 
@@ -259,7 +259,7 @@ WHERE ""City"" = @p0
 
 Nous avons ajouté la propriété EF.Functions qui peut être utilisée par EF Core ou des fournisseurs pour définir des méthodes mappées à des fonctions ou des opérateurs de base de données afin qu’elles puissent être appelées dans les requêtes LINQ. Le premier exemple de ce type de méthode est Like() :
 
-``` csharp
+```csharp
 var aCustomers =
     from c in context.Customers
     where EF.Functions.Like(c.Name, "a%")
@@ -276,7 +276,7 @@ EF Core 2.0 introduit un nouveau service *IPluralizer* qui est utilisé pour sin
 
 Voici à quoi cela ressemble dans le cas d’un développeur souhaitant mettre en place son propre pluraliseur :
 
-``` csharp
+```csharp
 public class MyDesignTimeServices : IDesignTimeServices
 {
     public void ConfigureDesignTimeServices(IServiceCollection services)

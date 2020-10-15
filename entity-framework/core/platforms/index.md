@@ -4,12 +4,12 @@ description: Informations sur les plateformes prises en charge selon les version
 author: bricelam
 ms.date: 06/26/2020
 uid: core/platforms/index
-ms.openlocfilehash: f57002af869c16eeedf931085f5e5ff9e72e2984
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: 3efec5fda2aecf44306a9d41386de1e9b9612850
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616649"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92063970"
 ---
 # <a name="net-implementations-supported-by-ef-core"></a>Implémentations de .NET prises en charge par EF Core
 
@@ -45,13 +45,13 @@ Vous devez peut-être modifier les applications qui ciblent le .NET Framework po
 
 Modifiez le fichier projet et vérifiez que l’entrée suivante apparaît dans le groupe de propriétés initiales :
 
-``` xml
+```xml
 <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
 ```
 
 Pour les projets de test, vérifiez également que l’entrée suivante est présente :
 
-``` xml
+```xml
 <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 ```
 
@@ -59,7 +59,7 @@ Si vous voulez utiliser une ancienne version de Visual Studio, vous devez [mettr
 
 Nous vous recommandons également d’effectuer une migration depuis NuGet packages.config vers PackageReference, si possible. Ajoutez la propriété suivante à votre fichier projet :
 
-``` xml
+```xml
 <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
 ```
 
