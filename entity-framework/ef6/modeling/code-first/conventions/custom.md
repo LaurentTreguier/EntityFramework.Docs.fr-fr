@@ -1,15 +1,15 @@
 ---
 title: Conventions de Code First personnalisées-EF6
 description: Conventions de Code First personnalisées dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/conventions/custom
-ms.openlocfilehash: 19f22d311438b8c7d3ac9d270017f3ea4907efda
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 5142f58d229dd7743fd4d5c7f0004c080e22c9e4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074027"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066458"
 ---
 # <a name="custom-code-first-conventions"></a>Conventions de Code First personnalisées
 > [!NOTE]
@@ -20,7 +20,7 @@ Lorsque vous utilisez Code First votre modèle est calculé à partir de vos cla
 Parfois, ces conventions par défaut ne sont pas idéales pour votre modèle, et vous devez les contourner en configurant de nombreuses entités individuelles à l’aide d’annotations de données ou de l’API Fluent. Les conventions de Code First personnalisées vous permettent de définir vos propres conventions qui fournissent des paramètres par défaut de configuration pour votre modèle. Dans cette procédure pas à pas, nous allons explorer les différents types de conventions personnalisées et créer chacun d’entre eux.
 
 
-## <a name="model-based-conventions"></a>Conventions basées sur les modèles
+## <a name="model-based-conventions"></a>Conventions de Model-Based
 
 Cette page couvre l’API DbModelBuilder pour les conventions personnalisées. Cette API doit être suffisante pour créer la plupart des conventions personnalisées. Toutefois, il est également possible de créer des conventions basées sur des modèles qui manipulent le modèle final une fois qu’il a été créé, afin de gérer les scénarios avancés. Pour plus d’informations, consultez [conventions basées sur les modèles](xref:ef6/modeling/code-first/conventions/model).
 
@@ -213,7 +213,7 @@ Cela est assez simple, mais il existe un moyen plus concis d’y parvenir à l�
 
 ``` csharp
     modelBuilder.Properties()
-                .Having(x =>x.GetCustomAttributes(false).OfType<IsUnicode>().FirstOrDefault())
+                .Having(x => x.GetCustomAttributes(false).OfType<IsUnicode>().FirstOrDefault())
                 .Configure((config, att) => config.IsUnicode(att.Unicode));
 ```
 

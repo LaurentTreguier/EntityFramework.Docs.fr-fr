@@ -1,15 +1,15 @@
 ---
 title: Annotations de données Code Firstes-EF6
 description: Code First des annotations de données dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/data-annotations
-ms.openlocfilehash: dd91ddf674f2235190e50beb847e569a898ad59b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: f6bf063ab99c5b7ef01993aec8fd6bdd06dd8f7d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90074062"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066471"
 ---
 # <a name="code-first-data-annotations"></a>Annotations de données Code First
 > [!NOTE]
@@ -52,7 +52,7 @@ Comme c’est le cas, le blog et les classes de publication suivent facilement l
 
  
 
-## <a name="key"></a>Clé
+## <a name="key"></a>Clé :
 
 Entity Framework s’appuie sur chaque entité ayant une valeur de clé utilisée pour le suivi des entités. Une convention de Code First est une propriété de clé implicite. Code First recherche une propriété nommée « ID », ou une combinaison de nom de classe et « ID », par exemple « BlogId ». Cette propriété est mappée à une colonne de clé primaire dans la base de données.
 
@@ -370,7 +370,7 @@ Par défaut, les index sont non uniques, mais vous pouvez utiliser le `IsUnique`
     }
 ```
 
-### <a name="multiple-column-indexes"></a>Index à plusieurs colonnes
+### <a name="multiple-column-indexes"></a>Index Multiple-Column
 
 Les index qui s’étendent sur plusieurs colonnes sont spécifiés en utilisant le même nom dans plusieurs annotations d’index pour une table donnée. Lorsque vous créez des index à plusieurs colonnes, vous devez spécifier un ordre pour les colonnes de l’index. Par exemple, le code suivant crée un index à plusieurs colonnes sur `Rating` et `BlogId` appelé **IX \_ BlogIdAndRating**. `BlogId` est la première colonne de l’index et `Rating` est la seconde.
 
