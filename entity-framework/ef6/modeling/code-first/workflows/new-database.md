@@ -1,15 +1,15 @@
 ---
 title: Code First à une nouvelle base de données-EF6
 description: Code First à une nouvelle base de données dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/workflows/new-database
-ms.openlocfilehash: 96d76162383149c045178954196e1294331918a8
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 9d0082ac5226fff066d3e18c9164e2230c84b285
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070365"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065017"
 ---
 # <a name="code-first-to-a-new-database"></a>Code First to a New Database (Création d’une nouvelle base de données avec Code First)
 Cette vidéo et la procédure pas à pas fournissent une introduction au développement Code First ciblant une nouvelle base de données. Ce scénario comprend le ciblage d’une base de données qui n’existe pas et Code First créera, ou une base de données vide à laquelle Code First ajoutera de nouvelles tables. Code First vous permet de définir votre modèle à l’aide de \# classes C ou VB.net. Une configuration supplémentaire peut éventuellement être effectuée à l’aide d’attributs sur vos classes et propriétés ou à l’aide d’une API Fluent.
@@ -238,7 +238,7 @@ public class Blog
 ```
 
 -   Exécutez la commande **Add-migration AddUrl** dans la console du gestionnaire de package.
-    La commande Add-migration vérifie les modifications apportées depuis votre dernière migration et génère une nouvelle migration avec les modifications détectées. Nous pouvons attribuer un nom à la migration. dans ce cas, nous appelons la migration « AddUrl ».
+    La commande Add-Migration vérifie les modifications apportées depuis votre dernière migration et génère une nouvelle migration avec les modifications détectées. Nous pouvons attribuer un nom à la migration. dans ce cas, nous appelons la migration « AddUrl ».
     Le code de génération de modèles automatique indique que nous devons ajouter une colonne d’URL, qui peut contenir des données de chaîne, au dbo. Table blogs. Si nécessaire, nous pourrions modifier le code de génération de modèles automatique, mais cela n’est pas nécessaire dans ce cas.
 
 ``` csharp
@@ -263,7 +263,7 @@ namespace CodeFirstNewDatabaseSample.Migrations
 ```
 
 -   Exécutez la commande **Update-Database** dans la console du gestionnaire de package. Cette commande applique toutes les migrations en attente à la base de données. Notre migration InitialCreate a déjà été appliquée afin que les migrations appliquent simplement notre nouvelle migration AddUrl.
-    Conseil : vous pouvez utiliser le commutateur **– Verbose** lors de l’appel de Update-Database pour voir le SQL en cours d’exécution sur la base de données.
+    Conseil : vous pouvez utiliser le commutateur **– Verbose** lors de l’appel de Update-Database pour afficher le SQL en cours d’exécution sur la base de données.
 
 La nouvelle colonne URL est maintenant ajoutée à la table blogs dans la base de données :
 

@@ -1,15 +1,15 @@
 ---
-title: Requêtes de non-suivi-EF6
-description: Requêtes de suivi sans suivi dans Entity Framework 6
-author: divega
+title: Requêtes de No-Tracking-EF6
+description: No-Tracking des requêtes dans Entity Framework 6
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/no-tracking
-ms.openlocfilehash: ea4f05eb7a9b95fba55f70f249876bc9c5630f18
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 74826d3052cf6a249796db2845fa6b96e5ecb8f9
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073897"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065860"
 ---
 # <a name="no-tracking-queries"></a>sans suivi
 Il peut arriver que vous souhaitiez récupérer des entités à partir d’une requête, mais que ces entités ne soient pas suivies par le contexte. Cela peut entraîner de meilleures performances lors de l’interrogation d’un grand nombre d’entités dans des scénarios en lecture seule. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  

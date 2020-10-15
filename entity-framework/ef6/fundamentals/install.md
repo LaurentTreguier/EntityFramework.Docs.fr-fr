@@ -1,22 +1,22 @@
 ---
 title: Obtient Entity Framework-EF6
 description: Télécharger Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/install
-ms.openlocfilehash: 9254f835f5007a213c49557165f6830c30711f1f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7dc4c560cc4eb24a1c5d5dac0c9e28883de471b0
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072783"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065457"
 ---
 # <a name="get-entity-framework"></a>Obtenir Entity Framework
 Entity Framework se compose des outils EF pour Visual Studio et du runtime EF.
 
 ## <a name="ef-tools-for-visual-studio"></a>Outils EF pour Visual Studio
 
-Le Entity Framework Tools pour Visual Studio inclut le concepteur EF et l’Assistant Modèle EF et sont requis pour les flux de travail First et Model First. Les outils EF sont inclus dans toutes les versions récentes de Visual Studio. Si vous effectuez une installation personnalisée de Visual Studio, vous devez vous assurer que l’élément « outils Entity Framework 6 » est sélectionné en choisissant une charge de travail qui l’y ajoute ou en la sélectionnant en tant que composant individuel.
+Le [Entity Framework Tools pour Visual Studio](/visualstudio/data-tools/entity-data-model-tools-in-visual-studio) inclut le concepteur EF et l’Assistant Modèle EF et sont requis pour les flux de travail First et Model First. Les outils EF sont inclus dans toutes les versions récentes de Visual Studio. Si vous effectuez une installation personnalisée de Visual Studio, vous devez vous assurer que l’élément « outils Entity Framework 6 » est sélectionné en choisissant une charge de travail qui l’y ajoute ou en la sélectionnant en tant que composant individuel.
 
 Pour certaines versions antérieures de Visual Studio, les outils EF mis à jour sont disponibles en téléchargement. Pour obtenir des conseils sur la façon d’obtenir la dernière version des outils EF disponibles pour votre version de Visual Studio, consultez les [versions de Visual Studio](xref:ef6/what-is-new/visual-studio) .
 

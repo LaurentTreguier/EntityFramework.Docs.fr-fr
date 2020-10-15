@@ -2,16 +2,14 @@
 title: Journal des modifications affectant le fournisseur-EF Core
 description: Journal des modifications apportées à Entity Framework Core qui ont un impact sur les fournisseurs
 author: ajcvickers
-ms.author: avickers
 ms.date: 08/08/2018
-ms.technology: entity-framework-core
 uid: core/providers/provider-log
-ms.openlocfilehash: 52e4e2c2929cb50585572e4057e88a25c137ad2a
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: e701bac32c39f13be039d093931510a99070abbf
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071288"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065379"
 ---
 # <a name="provider-impacting-changes"></a>Modifications ayant un impact sur le fournisseur
 

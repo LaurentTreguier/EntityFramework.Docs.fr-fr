@@ -1,15 +1,15 @@
 ---
 title: Migrations Code First automatique-EF6
 description: Migrations Code First automatique dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/automatic
-ms.openlocfilehash: e7bd9ff7d9dcecb7fecf213306047a53fc04135c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 8152cdf642258a30d98f3750bf1ca4ccd2859978
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072562"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066406"
 ---
 # <a name="automatic-code-first-migrations"></a>Migrations Code First automatique
 La migration automatique vous permet d’utiliser Migrations Code First sans avoir de fichier de code dans votre projet pour chaque modification que vous apportez. Toutes les modifications ne peuvent pas être appliquées automatiquement. par exemple, les renommages de colonne nécessitent l’utilisation d’une migration basée sur le code.
@@ -116,7 +116,7 @@ Migrations Code First a deux commandes principales que nous allons découvrir ma
 -   **Add-Migration** génère automatiquement la prochaine migration en fonction des changements de votre modèle depuis la création de la dernière migration
 -   **Update-Database** applique toutes les migrations en attente à la base de données
 
-Nous allons éviter d’utiliser Add-migration (sauf si cela est vraiment nécessaire) et de se concentrer sur la possibilité Migrations Code First de calculer et d’appliquer automatiquement les modifications. Nous allons utiliser **Update-Database** pour récupérer migrations code First pour transmettre les modifications apportées à notre modèle (la nouvelle propriété **blog. ur**l) à la base de données.
+Nous allons éviter d’utiliser des Add-Migration (sauf si cela est vraiment nécessaire) et se concentrer sur la possibilité Migrations Code First de calculer et d’appliquer automatiquement les modifications. Nous allons utiliser **Update-Database** pour récupérer migrations code First pour transmettre les modifications apportées à notre modèle (la nouvelle propriété **blog. ur**l) à la base de données.
 
 -   Exécutez la commande **Update-Database** dans la console du gestionnaire de package.
 
@@ -164,7 +164,7 @@ Examinons maintenant ce que nous pourrions utiliser pour la migration basée sur
 ```
 
 Nous pourrions simplement exécuter **Update-Database** pour envoyer ces modifications à la base de données. Toutefois, nous ajoutons une colonne blogs qui n’accepte pas les valeurs null **.** si des données existent dans la table, elles reçoivent la valeur CLR par défaut du type de données de la nouvelle colonne (l’évaluation est un entier, donc **0**). Toutefois, nous voulons spécifier une valeur par défaut égale à **3** pour que les lignes existantes de la table **Blogs** commencent avec un classement correct.
-Nous allons utiliser la commande Add-migration pour écrire cette modification dans une migration basée sur du code afin de pouvoir la modifier. La commande **Add-migration** nous permet d’attribuer un nom à ces migrations, nous appelons simplement le nôtre **AddBlogRating**.
+Nous allons utiliser la commande Add-Migration pour écrire cette modification dans une migration basée sur du code afin de pouvoir la modifier. La commande **Add-migration** nous permet d’attribuer un nom à ces migrations, nous appelons simplement le nôtre **AddBlogRating**.
 
 -   Exécutez la commande **Add-migration AddBlogRating** dans la console du gestionnaire de package.
 -   Dans le dossier **migrations** , nous disposons désormais d’une nouvelle migration **AddBlogRating** . Le nom du fichier de migration est précédé d’un horodateur pour faciliter le classement. Modifions le code généré pour spécifier une valeur par défaut de 3 pour blog. Rating (ligne 10 dans le code ci-dessous)

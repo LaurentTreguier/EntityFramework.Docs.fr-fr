@@ -1,15 +1,15 @@
 ---
 title: Chargement des entités associées-EF6
 description: Chargement des entités associées dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/related-data
-ms.openlocfilehash: d1bf04f9d9017291ef3f5ec0809095df856329cd
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 30d5bcff0696b4886655f5413e4878f1a611cf88
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073871"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064690"
 ---
 # <a name="loading-related-entities"></a>Chargement des entités associées
 
@@ -125,7 +125,7 @@ Le chargement de la collection de publications peut toujours être effectué à 
 
 ### <a name="turn-off-lazy-loading-for-all-entities"></a>Désactiver le chargement différé pour toutes les entités
 
-Le chargement différé peut être désactivé pour toutes les entités du contexte en définissant un indicateur sur la propriété de configuration. Exemple :
+Le chargement différé peut être désactivé pour toutes les entités du contexte en définissant un indicateur sur la propriété de configuration. Par exemple :
 
 ``` csharp
 public class BloggingContext : DbContext
@@ -141,7 +141,7 @@ Le chargement d’entités associées peut toujours être effectué à l’aide 
 
 ## <a name="explicitly-loading"></a>Chargement explicite
 
-Même si le chargement différé est désactivé, il est toujours possible de charger tardivement les entités associées, mais cela doit être effectué avec un appel explicite. Pour ce faire, vous utilisez la méthode Load sur l’entrée de l’entité associée. Exemple :
+Même si le chargement différé est désactivé, il est toujours possible de charger tardivement les entités associées, mais cela doit être effectué avec un appel explicite. Pour ce faire, vous utilisez la méthode Load sur l’entrée de l’entité associée. Par exemple :
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -170,7 +170,7 @@ using (var context = new BloggingContext())
 
 ### <a name="applying-filters-when-explicitly-loading-related-entities"></a>Application de filtres lors du chargement explicite d’entités associées
 
-La méthode de requête fournit l’accès à la requête sous-jacente que Entity Framework utilisera lors du chargement des entités associées. Vous pouvez ensuite utiliser LINQ pour appliquer des filtres à la requête avant de l’exécuter avec un appel à une méthode d’extension LINQ comme ToList, Load, etc. La méthode de requête peut être utilisée avec les propriétés de navigation de référence et de collection, mais elle est particulièrement utile pour les collections où elle peut être utilisée pour charger uniquement une partie de la collection. Exemple :
+La méthode de requête fournit l’accès à la requête sous-jacente que Entity Framework utilisera lors du chargement des entités associées. Vous pouvez ensuite utiliser LINQ pour appliquer des filtres à la requête avant de l’exécuter avec un appel à une méthode d’extension LINQ comme ToList, Load, etc. La méthode de requête peut être utilisée avec les propriétés de navigation de référence et de collection, mais elle est particulièrement utile pour les collections où elle peut être utilisée pour charger uniquement une partie de la collection. Par exemple :
 
 ``` csharp
 using (var context = new BloggingContext())

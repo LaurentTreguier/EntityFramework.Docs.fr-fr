@@ -1,14 +1,14 @@
 ---
 title: Études de cas pour Entity Framework-EF6
 description: Études de cas pour Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 342929f70aa09704c934bd1d89e177f6953bfc43
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca2315ac8aad8d28240f4bef6c962de0f63ac0df
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073819"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064664"
 ---
 # <a name="microsoft-case-studies-for-entity-framework"></a>Études de cas Microsoft pour Entity Framework
 Les études de cas sur cette page mettent en évidence quelques projets de production réels qui ont employé Entity Framework.
@@ -17,7 +17,7 @@ Les études de cas sur cette page mettent en évidence quelques projets de produ
 
 ## <a name="epicor"></a>Epicor espèrent accélérer
 Epic est une grande entreprise de logiciels internationale (avec plus de 400 développeurs) qui développe des solutions ERP (Enterprise Resource Planning) pour les entreprises dans plus de 150 pays.
-Leur produit phare, Epicy 9, est basé sur une architecture orientée service (SOA) à l’aide de l' .NET Framework.
+Leur produit phare, Epicy 9, est basé sur une architecture de Service-Oriented (SOA) à l’aide du .NET Framework.
 Face à de nombreuses demandes des clients pour assurer la prise en charge de LINQ (Language-Integrated Query) et à réduire la charge sur leurs serveurs SQL principaux, l’équipe a décidé de mettre à niveau vers Visual Studio 2010 et le .NET Framework 4,0.
 À l’aide de la Entity Framework 4,0, ils ont pu atteindre ces objectifs et simplifier de manière considérable le développement et la maintenance.
 En particulier, la prise en charge de T4 enrichie de Entity Framework leur a permis de prendre le contrôle total de leur code généré et de créer automatiquement des fonctionnalités d’économie de performances telles que les requêtes précompilées et la mise en cache.

@@ -1,15 +1,15 @@
 ---
 title: Glossaire Entity Framework-EF6
 description: Glossaire Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/resources/glossary
-ms.openlocfilehash: 819bdda133b427fa6f8fc1915cde07560e6ca568
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 6c11b45978ad8efaf70bb640567c79b60ff7a708
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072887"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064651"
 ---
 # <a name="entity-framework-glossary"></a>Glossaire Entity Framework
 ## <a name="code-first"></a>Code First
@@ -61,7 +61,7 @@ Création d’un modèle de Entity Framework à l’aide du concepteur EF, qui e
 Propriété d’une entité qui référence une autre entité. Par exemple, Product contient une propriété de navigation Category et Category contient une propriété de navigation Products.
 
 ## <a name="poco"></a>POCO
-Acronyme de Plain-Old CLR Object. Classe d’utilisateur simple qui n’a pas de dépendances avec n’importe quelle infrastructure. Dans le contexte d’EF, une classe d’entité qui ne dérive pas de EntityObject, implémente toutes les interfaces ou transporte tous les attributs définis dans EF. De telles classes d’entité qui sont découplées de l’infrastructure de persistance sont également dites « ignorant la persistance ».  
+Acronyme de Plain-Old objet CLR. Classe d’utilisateur simple qui n’a pas de dépendances avec n’importe quelle infrastructure. Dans le contexte d’EF, une classe d’entité qui ne dérive pas de EntityObject, implémente toutes les interfaces ou transporte tous les attributs définis dans EF. De telles classes d’entité qui sont découplées de l’infrastructure de persistance sont également dites « ignorant la persistance ».  
 
 ## <a name="relationship-inverse"></a>Relation inverse
 L’extrémité opposée d’une relation, par exemple Product. Catégorie et catégorie. Production.

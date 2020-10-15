@@ -1,15 +1,15 @@
 ---
 title: Spécification SSDL-EF6
 description: Spécification SSDL dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/edmx/ssdl-spec
-ms.openlocfilehash: dbcd4c771e8ca1324a0520f9c8ca13ba4661487b
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 33052967bb543048fc0885957cf1f37abfac9cd2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070209"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066302"
 ---
 # <a name="ssdl-specification"></a>Spécification SSDL
 SSDL (Store Schema Definition Language) est un langage basé sur XML qui décrit le modèle de stockage d'une application Entity Framework.
@@ -48,7 +48,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **Association** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** de la clé étrangère :
 
@@ -95,7 +95,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **AssociationSet** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **AssociationSet** qui représente la `FK_CustomerOrders` contrainte de clé étrangère dans la base de données sous-jacente :
 
@@ -114,7 +114,7 @@ L’élément **CollectionType** en Store Schema Definition Language (SSDL) spé
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **CollectionType** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre une fonction qui utilise un élément **CollectionType** pour spécifier que la fonction retourne une collection de lignes.
 
@@ -142,7 +142,7 @@ L’élément **CommandText** ne peut pas avoir d’éléments enfants. Le corps
 
 Aucun attribut n’est applicable à l’élément **CommandText** .
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **Function** avec un élément **CommandText** enfant. Exposez la fonction **UpdateProductInOrder** en tant que méthode sur ObjectContext en l’important dans le modèle conceptuel.  
 
@@ -198,14 +198,14 @@ L’élément **dépendant** peut avoir les éléments enfants suivants (dans l�
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **dépendant** .
 
-| Nom de l'attribut | Est obligatoire | Value                                                                                                                                                       |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                       |
 |:---------------|:------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rôle**       | Oui         | La même valeur que l’attribut de **rôle** (s’il est utilisé) de l’élément de fin correspondant ; dans le cas contraire, il s’agit du nom de la table qui contient la colonne de référence. |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **dépendant** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** . L’élément **dépendant** spécifie la colonne **CustomerID** de la table **Order** comme terminaison dépendante de la contrainte.
 
@@ -241,7 +241,7 @@ L’élément **documentation** peut avoir les éléments enfants suivants (dans
 
 Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **documentation** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre l’élément de **documentation** en tant qu’élément enfant d’un élément EntityType.
 
@@ -277,16 +277,16 @@ Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **final** lorsqu’il est l’enfant d’un élément **Association** .
 
-| Nom de l'attribut   | Est obligatoire | Value                                                                                                                                                                                                                                                                                                                                                                                      |
+| Nom de l'attribut   | Est obligatoire | Valeur                                                                                                                                                                                                                                                                                                                                                                                      |
 |:-----------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Type**         | Oui         | Nom complet du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                                                                                                                                                                                                                                                                          |
-| **Rôle**         | Non           | Valeur de l’attribut **role** dans l’élément principal ou dépendant de l’élément ReferentialConstraint correspondant (s’il est utilisé).                                                                                                                                                                                                                                             |
+| **Rôle**         | Non          | Valeur de l’attribut **role** dans l’élément principal ou dépendant de l’élément ReferentialConstraint correspondant (s’il est utilisé).                                                                                                                                                                                                                                             |
 | **Multiplicité** | Oui         | **1**, **0.. 1**, ou **\*** selon le nombre de lignes qui peuvent être à la fin de la contrainte de clé étrangère. <br/> **1** indique qu’une seule ligne existe à la fin de la contrainte de clé étrangère. <br/> **0.. 1** indique qu’il existe zéro ou une ligne à la fin de la contrainte de clé étrangère. <br/> **\*** indique que zéro, une ou plusieurs lignes existent à la fin de la contrainte de clé étrangère. |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément de **fin** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK \_ ** . Les valeurs de **multiplicité** spécifiées sur chaque élément de **fin** indiquent que de nombreuses lignes de la table **Orders** peuvent être associées à une ligne de la table **Customers** , mais qu’une seule ligne de la table **Customers** peut être associée à une ligne dans la table **Orders** . En outre, l’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
 
@@ -322,15 +322,15 @@ Un élément **end** peut avoir les éléments enfants suivants (dans l’ordre 
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **end** lorsqu’il est l’enfant d’un élément **AssociationSet** .
 
-| Nom de l'attribut | Est obligatoire | Value                                                                                                                  |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                  |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------|
 | **EntitySet ;**  | Oui         | Nom du jeu d'entités SSDL qui est à la terminaison de la contrainte de clé étrangère.                                      |
-| **Rôle**       | Non           | Valeur de l’un des attributs de **rôle** spécifiés sur un élément de **fin** de l’élément Association correspondant. |
+| **Rôle**       | Non          | Valeur de l’un des attributs de **rôle** spécifiés sur un élément de **fin** de l’élément Association correspondant. |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément de **fin** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-#### <a name="example"></a> Exemple
+#### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **EntityContainer** avec un élément **AssociationSet** avec deux éléments **end** :
 
@@ -373,7 +373,7 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **EntityContainer** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **EntityContainer** qui définit deux jeux d’entités et un ensemble d’associations. Notez que les noms de type d'entité et de type d'association sont qualifiés par le nom de l'espace de noms du modèle conceptuel.
 
@@ -414,13 +414,13 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 |:---------------|:------------|:-----------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Nom du jeu d'entités.                                                              |
 | **EntityType** | Oui         | Nom qualifié complet du type d'entité pour lequel le jeu d'entités contient des instances. |
-| **Schéma**     | Non           | Schéma de base de données.                                                                     |
-| **Table**      | Non           | Table de base de données.                                                                      |
+| **Schéma**     | Non          | Schéma de base de données.                                                                     |
+| **Table**      | Non          | Table de base de données.                                                                      |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **EntitySet** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **EntityContainer** qui a deux éléments **EntitySet** et un élément **AssociationSet** :
 
@@ -461,7 +461,7 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **EntityType** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **EntityType** avec deux propriétés :
 
@@ -505,14 +505,14 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 | Nom de l'attribut             | Est obligatoire | Valeur                                                                                                                                                                                                              |
 |:---------------------------|:------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                   | Oui         | Nom de la procédure stockée.                                                                                                                                                                                  |
-| **ReturnType**             | Non           | Type de retour de la procédure stockée.                                                                                                                                                                           |
-| **Agrégat**              | Non           | **True** si la procédure stockée retourne une valeur d’agrégation ; Sinon, **false**.                                                                                                                                  |
-| **Intégrée**                | Non           | **True** si la fonction est une fonction intégrée<sup>1</sup> ; Sinon, **false**.                                                                                                                                  |
-| **StoreFunctionName**      | Non           | Nom de la procédure stockée.                                                                                                                                                                                  |
-| **NiladicFunction**        | Non           | **True** si la fonction est une fonction niladic<sup>2</sup> ; **False** dans le cas contraire.                                                                                                                                   |
-| **IsComposable**           | Non           | **True** si la fonction est une fonction composable<sup>3</sup> ; **False** dans le cas contraire.                                                                                                                                |
-| **ParameterTypeSemantics** | Non           | Énumération qui définit la sémantique de type utilisée pour résoudre les surcharges de fonction. L'énumération est définie dans le manifeste du fournisseur par définition de fonction. La valeur par défaut est **AllowImplicitConversion**. |
-| **Schéma**                 | Non           | Nom du schéma dans lequel une procédure stockée est définie.                                                                                                                                                   |
+| **ReturnType**             | Non          | Type de retour de la procédure stockée.                                                                                                                                                                           |
+| **Agrégat**              | Non          | **True** si la procédure stockée retourne une valeur d’agrégation ; Sinon, **false**.                                                                                                                                  |
+| **Intégrée**                | Non          | **True** si la fonction est une fonction intégrée<sup>1</sup> ; Sinon, **false**.                                                                                                                                  |
+| **StoreFunctionName**      | Non          | Nom de la procédure stockée.                                                                                                                                                                                  |
+| **NiladicFunction**        | Non          | **True** si la fonction est une fonction niladic<sup>2</sup> ; **False** dans le cas contraire.                                                                                                                                   |
+| **IsComposable**           | Non          | **True** si la fonction est une fonction composable<sup>3</sup> ; **False** dans le cas contraire.                                                                                                                                |
+| **ParameterTypeSemantics** | Non          | Énumération qui définit la sémantique de type utilisée pour résoudre les surcharges de fonction. L'énumération est définie dans le manifeste du fournisseur par définition de fonction. La valeur par défaut est **AllowImplicitConversion**. |
+| **Schéma**                 | Non          | Nom du schéma dans lequel une procédure stockée est définie.                                                                                                                                                   |
 
 <sup>1</sup> une fonction intégrée est une fonction définie dans la base de données. Pour plus d’informations sur les fonctions définies dans le modèle de stockage, consultez CommandText, élément (SSDL).
 
@@ -523,7 +523,7 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément de **fonction** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **Function** qui correspond à la procédure stockée **UpdateOrderQuantity** . La procédure stockée accepte deux paramètres et ne retourne pas de valeur.
 
@@ -551,7 +551,7 @@ L’élément **Key** peut avoir les éléments enfants suivants (dans l’ordre
 
 Aucun attribut n’est applicable à l’élément **Key** .
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **EntityType** avec une clé qui référence une propriété :
 
@@ -582,14 +582,14 @@ Un élément **OnDelete** peut avoir les éléments enfants suivants (dans l’o
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **OnDelete** .
 
-| Nom de l'attribut | Est obligatoire | Value                                                                                               |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                               |
 |:---------------|:------------|:----------------------------------------------------------------------------------------------------|
 | **Action**     | Oui         | **Cascade** ou **None**. (La valeur **Restricted** est valide mais a le même comportement qu' **aucun**.) |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **OnDelete** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **Association** qui définit la contrainte de clé étrangère **FK \_ ** . L’élément **OnDelete** indique que toutes les lignes de la table **Orders** qui font référence à une ligne particulière de la table **Customers** seront supprimées si la ligne de la table **Customers** est supprimée.
 
@@ -629,16 +629,16 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 |:---------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**       | Oui         | Le nom du paramètre.                                                                                                                                                                                                      |
 | **Type**       | Oui         | Le type du paramètre.                                                                                                                                                                                                             |
-| **Mode**       | Non           | **In**, **out**ou **INOUT** selon que le paramètre est un paramètre d’entrée, de sortie ou d’entrée/sortie.                                                                                                                |
-| **MaxLength**  | Non           | Longueur maximale du paramètre.                                                                                                                                                                                            |
-| **Précision**  | Non           | La précision du paramètre.                                                                                                                                                                                                 |
-| **Mise à l’échelle**      | Non           | L’échelle du paramètre.                                                                                                                                                                                                     |
-| **SRID**       | Non           | Identificateur de référence système spatial. Valide uniquement pour les paramètres des types spatiaux. Pour plus d’informations, consultez [SRID](https://en.wikipedia.org/wiki/SRID) et [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
+| **Mode**       | Non          | **In**, **out**ou **INOUT** selon que le paramètre est un paramètre d’entrée, de sortie ou d’entrée/sortie.                                                                                                                |
+| **MaxLength**  | Non          | Longueur maximale du paramètre.                                                                                                                                                                                            |
+| **Précision**  | Non          | La précision du paramètre.                                                                                                                                                                                                 |
+| **Mettre à l'échelle**      | Non          | L’échelle du paramètre.                                                                                                                                                                                                     |
+| **SRID**       | Non          | Identificateur de référence système spatial. Valide uniquement pour les paramètres des types spatiaux. Pour plus d’informations, consultez [SRID](https://en.wikipedia.org/wiki/SRID) et [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **Parameter** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **Function** qui possède deux éléments **Parameter** qui spécifient des paramètres d’entrée :
 
@@ -668,14 +668,14 @@ L’élément **principal** peut avoir les éléments enfants suivants (dans l�
 
 Le tableau suivant décrit les attributs qui peuvent être appliqués à l’élément **principal** .
 
-| Nom de l'attribut | Est obligatoire | Value                                                                                                                                                      |
+| Nom de l'attribut | Est obligatoire | Valeur                                                                                                                                                      |
 |:---------------|:------------|:-----------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Rôle**       | Oui         | La même valeur que l’attribut de **rôle** (s’il est utilisé) de l’élément de fin correspondant ; Sinon, le nom de la table qui contient la colonne référencée. |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **principal** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément Association qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** . L’élément **principal** spécifie la colonne **CustomerID** de la table **Customer** comme terminaison principale de la contrainte.
 
@@ -712,21 +712,21 @@ Le tableau suivant décrit les attributs qui peuvent être appliqués à l’él
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Nom**                  | Oui         | Nom de la colonne correspondante.                                                                                                                                                                                           |
 | **Type**                  | Oui         | Type de la colonne correspondante.                                                                                                                                                                                           |
-| **Nullable**              | Non           | **True** (valeur par défaut) ou **false** selon que la colonne correspondante peut avoir une valeur null ou non.                                                                                                                  |
-| **DefaultValue**          | Non           | Valeur par défaut de la colonne correspondante.                                                                                                                                                                                  |
-| **MaxLength**             | Non           | Longueur maximale de la colonne correspondante.                                                                                                                                                                                 |
-| **Multiple**           | Non           | **True** ou **false** selon que la valeur de colonne correspondante sera stockée en tant que chaîne de longueur fixe.                                                                                                              |
-| **Précision**             | Non           | Précision de la colonne correspondante.                                                                                                                                                                                      |
-| **Mise à l’échelle**                 | Non           | Échelle de la colonne correspondante.                                                                                                                                                                                          |
-| **Unicode**               | Non           | **True** ou **false** selon que la valeur de colonne correspondante sera stockée en tant que chaîne Unicode.                                                                                                                   |
-| **Classement**             | Non           | Chaîne qui spécifie l’ordre de tri à utiliser dans la source de données.                                                                                                                                                   |
-| **SRID**                  | Non           | Identificateur de référence système spatial. Valide uniquement pour les propriétés des types spatiaux. Pour plus d’informations, consultez [SRID](https://en.wikipedia.org/wiki/SRID) et [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
-| **StoreGeneratedPattern** | Non           | **None**, **Identity** (si la valeur de colonne correspondante est une identité générée dans la base de données) ou **calculée** (si la valeur de colonne correspondante est calculée dans la base de données). Non valide pour les propriétés RowType. |
+| **Nullable**              | Non          | **True** (valeur par défaut) ou **false** selon que la colonne correspondante peut avoir une valeur null ou non.                                                                                                                  |
+| **DefaultValue**          | Non          | Valeur par défaut de la colonne correspondante.                                                                                                                                                                                  |
+| **MaxLength**             | Non          | Longueur maximale de la colonne correspondante.                                                                                                                                                                                 |
+| **Multiple**           | Non          | **True** ou **false** selon que la valeur de colonne correspondante sera stockée en tant que chaîne de longueur fixe.                                                                                                              |
+| **Précision**             | Non          | Précision de la colonne correspondante.                                                                                                                                                                                      |
+| **Mettre à l'échelle**                 | Non          | Échelle de la colonne correspondante.                                                                                                                                                                                          |
+| **Unicode**               | Non          | **True** ou **false** selon que la valeur de colonne correspondante sera stockée en tant que chaîne Unicode.                                                                                                                   |
+| **Classement**             | Non          | Chaîne qui spécifie l’ordre de tri à utiliser dans la source de données.                                                                                                                                                   |
+| **SRID**                  | Non          | Identificateur de référence système spatial. Valide uniquement pour les propriétés des types spatiaux. Pour plus d’informations, consultez [SRID](https://en.wikipedia.org/wiki/SRID) et [SRID (SQL Server)](https://msdn.microsoft.com/library/bb964707.aspx). |
+| **StoreGeneratedPattern** | Non          | **None**, **Identity** (si la valeur de colonne correspondante est une identité générée dans la base de données) ou **calculée** (si la valeur de colonne correspondante est calculée dans la base de données). Non valide pour les propriétés RowType. |
 
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **Property** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **EntityType** avec deux éléments de **propriété** enfants :
 
@@ -767,7 +767,7 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **PropertyRef** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage CSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **PropertyRef** utilisé pour définir une clé primaire en référençant une propriété définie sur un élément **EntityType** .
 
@@ -802,7 +802,7 @@ L’élément **ReferentialConstraint** peut avoir les éléments enfants suivan
 
 Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **ReferentialConstraint** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément **Association** qui utilise un élément **ReferentialConstraint** pour spécifier les colonnes qui participent à la contrainte de clé étrangère **FK \_ ** de la clé étrangère :
 
@@ -838,7 +838,7 @@ L’élément **ReturnType** peut avoir les éléments enfants suivants :
 > [!NOTE]
 > Un nombre quelconque d’attributs d’annotation (attributs XML personnalisés) peut être appliqué à l’élément **ReturnType** . Toutefois, les attributs personnalisés ne peuvent pas appartenir à un espace de noms XML réservé pour le langage SSDL. Les noms qualifiés complets de deux attributs personnalisés quelconques ne peuvent pas être identiques.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant utilise une **fonction** qui retourne une collection de lignes.
 
@@ -869,7 +869,7 @@ Un élément **RowType** peut avoir les éléments enfants suivants :
 
 - Property (un ou plusieurs) ;  
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre une fonction de magasin qui utilise un élément **CollectionType** pour spécifier que la fonction retourne une collection de lignes (comme spécifié dans l’élément **RowType** ).
 
@@ -912,11 +912,11 @@ Le tableau ci-dessous décrit les attributs qui peuvent être appliqués à l’
 | Nom de l'attribut            | Est obligatoire | Valeur                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 |:--------------------------|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Espace de noms**             | Oui         | Espace de noms du modèle de stockage. La valeur de l’attribut d' **espace de noms** est utilisée pour former le nom qualifié complet d’un type. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store, le nom qualifié complet de l' **EntityType** est ExampleModel. Store. Customer. <br/> Les chaînes suivantes ne peuvent pas être utilisées comme valeur pour l’attribut d' **espace de noms** : **System**, **transient**ou **EDM**. La valeur de l’attribut d' **espace de noms** ne peut pas être la même que la valeur de l’attribut d' **espace de noms** dans l’élément de schéma CSDL. |
-| **Alias**                 | Non           | Identificateur utilisé à la place du nom de l'espace de noms. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store et que la valeur de l’attribut **alias** est *StorageModel*, vous pouvez utiliser StorageModel. Customer comme nom qualifié complet de l' **EntityType.**                                                                                                                                                                                                                                                                                    |
+| **Alias**                 | Non          | Identificateur utilisé à la place du nom de l'espace de noms. Par exemple, si un **EntityType** nommé *Customer* se trouve dans l’espace de noms ExampleModel. Store et que la valeur de l’attribut **alias** est *StorageModel*, vous pouvez utiliser StorageModel. Customer comme nom qualifié complet de l' **EntityType.**                                                                                                                                                                                                                                                                                    |
 | **Fournisseur**              | Oui         | Fournisseur de données.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **ProviderManifestToken** | Oui         | Jeton qui indique au fournisseur quel manifeste de fournisseur retourner. Aucun format n'est défini pour le jeton. Les valeurs du jeton sont définies par le fournisseur. Pour plus d’informations sur les jetons de manifeste du fournisseur SQL Server, consultez SqlClient pour Entity Framework.                                                                                                                                                                                                                                                                                                                        |
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant illustre un élément de **schéma** qui contient un élément **EntityContainer** , deux éléments **EntityType** et un élément **Association** .
 
@@ -1013,7 +1013,7 @@ Les attributs d'annotation en SSDL (Store Schema Definition Language) sont des a
 
 Plusieurs attributs d'annotation peuvent être appliqués à un élément SSDL donné. Vous pouvez accéder aux métadonnées contenues dans les éléments d’annotation au moment de l’exécution à l’aide des classes de l’espace de noms System. Data. Metadata. Edm.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément EntityType qui a un attribut d’annotation appliqué à la propriété **OrderID** . L’exemple montre également un élément d’annotation ajouté à l’élément **EntityType** .
 
@@ -1043,7 +1043,7 @@ Les éléments d'annotation en SSDL (Store Schema Definition Language) sont des 
 
 Plusieurs éléments d'annotation peuvent être des enfants d'un élément SSDL donné. À partir de la .NET Framework version 4, les métadonnées contenues dans les éléments d’annotation sont accessibles au moment de l’exécution à l’aide des classes de l’espace de noms System. Data. Metadata. Edm.
 
-### <a name="example"></a> Exemple
+### <a name="example"></a>Exemple
 
 L’exemple suivant montre un élément EntityType qui a un élément annotation (**customelement**). L’exemple montre également un attribut d’annotation appliqué à la propriété **OrderID** .
 
@@ -1075,5 +1075,5 @@ Le tableau ci-dessous décrit les facettes prises en charge dans le langage SSDL
 | **Multiple** | Spécifie si la longueur de la valeur de colonne peut varier.                                                                                                                                                                                                  |
 | **MaxLength**   | Spécifie la longueur maximale de la valeur de colonne.                                                                                                                                                                                                           |
 | **Précision**   | Pour les propriétés de type **Decimal**, spécifie le nombre de chiffres qu’une valeur de propriété peut avoir. Pour les propriétés de type **Time**, **DateTime**et **DateTimeOffset**, spécifie le nombre de chiffres pour la partie fractionnaire des secondes de la valeur de colonne. |
-| **Mise à l’échelle**       | Spécifie le nombre de chiffres à droite de la virgule décimale pour la valeur de colonne.                                                                                                                                                                      |
+| **Mettre à l'échelle**       | Spécifie le nombre de chiffres à droite de la virgule décimale pour la valeur de colonne.                                                                                                                                                                      |
 | **Unicode**     | Indique si la valeur de colonne est stockée au format Unicode.                                                                                                                                                                                                    |

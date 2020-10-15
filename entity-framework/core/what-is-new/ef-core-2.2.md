@@ -1,15 +1,15 @@
 ---
 title: Nouveautés d’EF Core 2.2 - EF Core
 description: Modifications et améliorations dans Entity Framework Core 2,2
-author: divega
+author: ajcvickers
 ms.date: 11/14/2018
 uid: core/what-is-new/ef-core-2.2
-ms.openlocfilehash: 68e3cbd5c7345330a47f1457c9b096fee5dd49e9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ca71c7479254b25fe932e6abf43fe0fd8f1781b3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072327"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065691"
 ---
 # <a name="new-features-in-ef-core-22"></a>Nouvelles fonctionnalités d’EF Core 2.2
 
@@ -25,9 +25,9 @@ Chacun de ces packages contribue aux mappages des types NTS et des méthodes ain
 Ces extensions de fournisseur sont désormais disponibles pour [SQL Server](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite/), [SQLite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/), et [PostgreSQL](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite/) (à partir du [projet Npgsql](https://www.npgsql.org/)).
 Les types spatiaux peuvent être utilisés directement avec le [fournisseur en mémoire EF Core](xref:core/providers/in-memory/index), sans extensions supplémentaires.
 
-Une fois l’extension du fournisseur installée, vous pouvez ajouter à vos entités des propriétés de types pris en charge. Exemple :
+Une fois l’extension du fournisseur installée, vous pouvez ajouter à vos entités des propriétés de types pris en charge. Par exemple :
 
-``` csharp
+```csharp
 using NetTopologySuite.Geometries;
 
 namespace MyApp
@@ -36,7 +36,7 @@ namespace MyApp
   {
     [Key]
     public string Name { get; set; }
-  
+
     [Required]
     public Point Location { get; set; }
   }
@@ -45,7 +45,7 @@ namespace MyApp
 
 Vous pouvez alors conserver les entités avec des données spatiales :
 
-``` csharp
+```csharp
 using (var context = new MyDbContext())
 {
     context.Add(
@@ -60,11 +60,11 @@ using (var context = new MyDbContext())
 
 Et vous pouvez exécuter des requêtes de base de données basées sur des données spatiales et des opérations :
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 Pour plus d’informations sur cette fonctionnalité, consultez la [documentation sur les types spatiaux](xref:core/modeling/spatial).
@@ -85,7 +85,7 @@ Mais dans les bases de données orientées document, nous prévoyons d’imbriqu
 
 Vous pouvez utiliser cette fonctionnalité en appelant la nouvelle API OwnsMany() :
 
-``` csharp
+```csharp
 modelBuilder.Entity<Customer>().OwnsMany(c => c.Addresses);
 ```
 
@@ -98,16 +98,16 @@ Cette fonctionnalité simplifie la corrélation des requêtes LINQ dans le code 
 Pour tirer parti des balises de requête, vous annotez une requête LINQ à l’aide de la nouvelle méthode TagWith().
 En utilisant la requête spatiale d’un exemple précédent :
 
-``` csharp
-  var nearestFriends =
-      (from f in context.Friends.TagWith(@"This is my spatial query!")
-      orderby f.Location.Distance(myLocation) descending
-      select f).Take(5).ToList();
+```csharp
+var nearestFriends =
+    (from f in context.Friends.TagWith(@"This is my spatial query!")
+    orderby f.Location.Distance(myLocation) descending
+    select f).Take(5).ToList();
 ```
 
 Cette requête LINQ générera la sortie SQL suivante :
 
-``` sql
+```sql
 -- This is my spatial query!
 
 SELECT TOP(@__p_1) [f].[Name], [f].[Location]

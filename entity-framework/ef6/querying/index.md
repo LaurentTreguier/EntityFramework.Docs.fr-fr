@@ -1,15 +1,15 @@
 ---
 title: Interrogation et recherche d’entités - EF6
 description: Interrogation et recherche d’entités dans Entity Framework 6.
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/index
-ms.openlocfilehash: d55c88280bcf164457da89ec58c180e9aa1ad12d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ec0239ed54099226d009031af79388f5ae00cdc4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072991"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065891"
 ---
 # <a name="querying-and-finding-entities"></a>Interrogation et recherche d’entités
 Cette rubrique décrit les différentes méthodes de recherche de données à l’aide d’Entity Framework, y compris LINQ et la méthode Find. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  

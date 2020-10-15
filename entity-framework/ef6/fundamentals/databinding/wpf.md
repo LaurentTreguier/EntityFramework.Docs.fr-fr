@@ -1,15 +1,15 @@
 ---
 title: Liaison de liaison avec WPF-EF6
 description: Liaison de liaison avec WPF dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 05/19/2020
 uid: ef6/fundamentals/databinding/wpf
-ms.openlocfilehash: 85aea308d89241f1da9633ef60f4bc8c3997561d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: b6dc484d09340671dfcd841e34234d55e9808af2
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072978"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065652"
 ---
 # <a name="databinding-with-wpf"></a>Liaison de données avec WPF
 
@@ -257,7 +257,7 @@ Ajoutez les classes définies dans le modèle en tant que sources de données po
 - La fenêtre sources de données s’ouvre en regard de la fenêtre MainWindow. XAML *si la fenêtre sources de données ne s’affiche pas, sélectionnez **afficher- &gt; autres &gt; sources de données Windows** * .
 - Appuyez sur l’icône d’épingle pour que la fenêtre sources de données ne soit pas masquée automatiquement. Vous devrez peut-être cliquer sur le bouton Actualiser si la fenêtre était déjà visible.
 
-    ![Sources de données](~/ef6/media/datasources.png)
+    ![Data Sources](~/ef6/media/datasources.png)
 
 - Sélectionnez la source de données de **catégorie** et faites-la glisser sur le formulaire.
 

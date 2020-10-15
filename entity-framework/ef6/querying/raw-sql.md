@@ -1,15 +1,15 @@
 ---
 title: Requêtes SQL brutes-EF6
 description: Requêtes SQL brutes dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/querying/raw-sql
-ms.openlocfilehash: 30fab3029d71fb560493af279231e46828aa43d4
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: da813ede818b24a5e7930202bfa761d65e4e6b72
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073884"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064716"
 ---
 # <a name="raw-sql-queries-ef6"></a>Requêtes SQL brutes (EF6)
 
@@ -17,7 +17,7 @@ Entity Framework vous permet d’interroger à l’aide de LINQ avec vos classes
 
 ## <a name="writing-sql-queries-for-entities"></a>Écriture de requêtes SQL pour des entités  
 
-La méthode SqlQuery sur DbSet permet l’écriture d’une requête SQL brute qui renverra des instances d’entité. Les objets retournés feront l’objet d’un suivi par le contexte comme s’ils étaient retournés par une requête LINQ. Exemple :  
+La méthode SqlQuery sur DbSet permet l’écriture d’une requête SQL brute qui renverra des instances d’entité. Les objets retournés feront l’objet d’un suivi par le contexte comme s’ils étaient retournés par une requête LINQ. Par exemple :  
 
 ``` csharp  
 using (var context = new BloggingContext())
@@ -56,7 +56,7 @@ using (var context = new BloggingContext())
 
 ## <a name="writing-sql-queries-for-non-entity-types"></a>Écriture de requêtes SQL pour les types non-entité  
 
-Une requête SQL qui retourne des instances de tout type, y compris des types primitifs, peut être créée à l’aide de la méthode SqlQuery sur la classe de base de données. Exemple :  
+Une requête SQL qui retourne des instances de tout type, y compris des types primitifs, peut être créée à l’aide de la méthode SqlQuery sur la classe de base de données. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())
@@ -70,7 +70,7 @@ Les résultats retournés à partir de SqlQuery sur la base de données ne feron
 
 ## <a name="sending-raw-commands-to-the-database"></a>Envoi de commandes brutes à la base de données  
 
-Les commandes qui ne sont pas des requêtes peuvent être envoyées à la base de données à l’aide de la méthode ExecuteSqlCommand sur la base de données. Exemple :  
+Les commandes qui ne sont pas des requêtes peuvent être envoyées à la base de données à l’aide de la méthode ExecuteSqlCommand sur la base de données. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())

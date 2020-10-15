@@ -1,15 +1,15 @@
 ---
 title: Retour à ObjectContext dans Entity Framework Designer-EF6
 description: Retour à ObjectContext dans Entity Framework Designer dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/codegen/legacy-objectcontext
-ms.openlocfilehash: 9ceb8ef43e4df083fe3cc5e63862ba2eb338f659
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 563c1defd12a72836a158d9c2398202c421dd6f3
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90069962"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064937"
 ---
 # <a name="reverting-to-objectcontext-in-entity-framework-designer"></a>Retour à ObjectContext dans Entity Framework Designer
 Avec la version précédente de Entity Framework un modèle créé avec le concepteur EF générait un contexte dérivé d’ObjectContext et des classes d’entité dérivées de EntityObject.
@@ -30,7 +30,7 @@ Si vous utilisez VB.NET, vous devez sélectionner le bouton **Afficher tous les 
 
 ![Afficher tous les fichiers](~/ef6/media/showallfiles.png)
 
-### <a name="2-re-enable-objectcontext-code-generation"></a>2. réactiver la génération de code ObjectContext
+### <a name="2-re-enable-objectcontext-code-generation"></a>2. Re-Enable la génération de code ObjectContext
 
 Ouvrez votre modèle dans le concepteur EF, cliquez avec le bouton droit sur une section vide de l’aire de conception, puis sélectionnez **Propriétés**.
 

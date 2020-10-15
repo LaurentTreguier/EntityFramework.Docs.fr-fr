@@ -1,14 +1,14 @@
 ---
 title: Raccourcis clavier Entity Framework Designer-EF6
 description: Entity Framework Designer les raccourcis clavier dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 3552f2b9bfc499654bc1dce4a81d37cacc8b7996
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 90589419a52a198747eadee740775e2761bc757c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073381"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064885"
 ---
 # <a name="entity-framework-designer-keyboard-shortcuts"></a>Raccourcis clavier Entity Framework Designer
 Cette page fournit la liste des shorcuts de clavier disponibles dans les différents écrans de l’Entity Framework Tools pour Visual Studio.

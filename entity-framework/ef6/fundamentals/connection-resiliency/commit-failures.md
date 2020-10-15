@@ -1,15 +1,15 @@
 ---
 title: Gestion des échecs de validation de transaction-EF6
 description: Gestion des échecs de validation de transaction dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/connection-resiliency/commit-failures
-ms.openlocfilehash: c817e5e9342d5e0682318dc34fa3b4cdfa756228
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ecc9daf568f12e3bf93af8c93e543c12dfddbb06
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072848"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065587"
 ---
 # <a name="handling-transaction-commit-failures"></a>Gestion des échecs de validation de transaction
 

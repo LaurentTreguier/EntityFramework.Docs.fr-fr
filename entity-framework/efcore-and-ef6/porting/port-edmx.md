@@ -1,17 +1,17 @@
 ---
-title: Portage à partir de EF6 vers EF Core-Portage d’un modèle basé sur EDMX-EF
+title: Portage à partir de EF6 vers EF Core-Portage d’un EDMX-Based modèle-EF
 description: Informations spécifiques sur le portage d’une application de modèle Entity Framework 6 basée sur EDMX pour Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-edmx
-ms.openlocfilehash: 7bd832f459ae3893e6a90e8483c95a41ca13f9ab
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 27b37ad1c2e3436ae96a71bc97e953763c48ee50
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070001"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064261"
 ---
-# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portage d’un modèle basé sur EF6 EDMX vers EF Core
+# <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portage d’un modèle de EDMX-Based EF6 vers EF Core
 
 EF Core ne prend pas en charge le format de fichier EDMX pour les modèles. La meilleure option pour porter ces modèles consiste à générer un nouveau modèle basé sur du code à partir de la base de données de votre application.
 
@@ -25,13 +25,13 @@ Vous pouvez maintenant utiliser la fonctionnalité d’ingénierie à rebours po
 
 Exécutez la commande suivante dans la console du gestionnaire de package (outils – > gestionnaire de package NuGet – > console du gestionnaire de package). Consultez [console du gestionnaire de package (Visual Studio)](xref:core/miscellaneous/cli/powershell) pour obtenir des options de commande permettant d’effectuer une génération de modèles automatique d’un sous-ensemble de tables.
 
-``` powershell
+```powershell
 Scaffold-DbContext "<connection string>" <database provider name>
 ```
 
 Par exemple, voici la commande pour générer un modèle de structure à partir de la base de données de blogs sur votre instance SQL Server de base de données locale.
 
-``` powershell
+```powershell
 Scaffold-DbContext "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
 ```
 

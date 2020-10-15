@@ -1,17 +1,17 @@
 ---
-title: Fonctions table (TVF)-EF6
-description: Fonctions table (TVF) dans Entity Framework 6
-author: divega
+title: Fonctions Table-Valued (TVF)-EF6
+description: Fonctions de Table-Valued (TVF) dans Entity Framework 6
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/advanced/tvfs
-ms.openlocfilehash: 727c6c7ff5947e78bf8eb489194e355e2fd157c9
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 2c699cad3ace253842d17aca4eca4df2318c4795
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90070159"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066198"
 ---
-# <a name="table-valued-functions-tvfs"></a>Fonctions table (TVF)
+# <a name="table-valued-functions-tvfs"></a>Fonctions Table-Valued (TVF)
 > [!NOTE]
 > **EF5 uniquement** : les fonctionnalités, les API, etc. présentées dans cette page ont été introduites dans Entity Framework 5. Si vous utilisez une version antérieure, certaines ou toutes les informations ne s’appliquent pas.
 

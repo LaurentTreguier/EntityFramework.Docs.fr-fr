@@ -1,17 +1,17 @@
 ---
-title: Procédure pas à pas des entités de suivi automatique-EF6
+title: Procédures pas à pas relatives aux entités Self-Tracking-EF6
 description: Procédure pas à pas pour les entités de suivi automatique pour Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/disconnected-entities/self-tracking-entities/walkthrough
-ms.openlocfilehash: 398be11d330f5a7413f5a84424217ea3eda446ef
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 7c50bbc9fad10a474728b03e79b685c549cf675d
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072796"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065600"
 ---
-# <a name="self-tracking-entities-walkthrough"></a>Procédure pas à pas des entités de suivi automatique
+# <a name="self-tracking-entities-walkthrough"></a>Procédure pas à pas des entités Self-Tracking
 > [!IMPORTANT]
 > Nous ne recommandons plus d’utiliser le modèle des entités de suivi automatique. Il reste disponible uniquement pour prendre en charge les applications existantes. Si votre application doit utiliser des graphiques d’entités déconnectés, envisagez d’autres alternatives comme les [Entités traçables](https://trackableentities.github.io/), qui présentent une technologie similaire aux entités de suivi automatique, mais développée de manière plus active par la communauté, ou bien l’écriture de code personnalisé à l’aide des API de suivi de changements de bas niveau.
 
@@ -23,7 +23,7 @@ Cette procédure pas à pas effectue les actions suivantes :
 
 -   Crée une base de données à laquelle accéder.
 -   Crée une bibliothèque de classes qui contient le modèle.
--   Bascule vers le modèle générateur d’entité de suivi automatique.
+-   Bascule vers le modèle de générateur d’entités Self-Tracking.
 -   Déplace les classes d’entité vers un projet distinct.
 -   Crée un service WCF qui expose des opérations pour interroger et enregistrer des entités.
 -   Crée des applications clientes (console et WPF) qui consomment le service.
@@ -104,7 +104,7 @@ Nous allons maintenant créer un modèle simple dans le concepteur EF pour accé
 
 ## <a name="swap-to-ste-code-generation"></a>Basculer vers la génération de code STE
 
-Maintenant, nous devons désactiver la génération de code et l’échange par défaut pour les entités de suivi automatique.
+Nous devons maintenant désactiver la génération de code par défaut et basculer vers Self-Tracking entités.
 
 ### <a name="if-you-are-using-visual-studio-2012"></a>Si vous utilisez Visual Studio 2012
 
@@ -118,13 +118,13 @@ Maintenant, nous devons désactiver la génération de code et l’échange par 
 ### <a name="if-you-are-using-visual-studio-2010"></a>Si vous utilisez Visual Studio 2010
 
 -   Cliquez avec le bouton droit sur une zone vide de l’aire du concepteur EF, puis sélectionnez **Ajouter un élément de génération de code...**
--   Sélectionnez **code** dans le volet gauche, puis **Générateur d’entité de suivi automatique ADO.net**
+-   Dans le volet gauche, sélectionnez **code** , puis **ADO.net Self-Tracking générateur d’entités**
 -   Entrez **STETemplate** comme nom et cliquez sur **Ajouter** .
 -   Les fichiers **STETemplate.TT** et **STETemplate.Context.TT** sont ajoutés directement à votre projet
 
 ## <a name="move-entity-types-into-separate-project"></a>Déplacer les types d’entités dans un projet distinct
 
-Pour utiliser les entités de suivi automatique, notre application cliente a besoin d’accéder aux classes d’entité générées à partir de notre modèle. Étant donné que nous ne souhaitons pas exposer l’ensemble du modèle à l’application cliente, nous allons déplacer les classes d’entité dans un projet distinct.
+Pour utiliser Self-Tracking des entités, notre application cliente a besoin d’accéder aux classes d’entité générées à partir de notre modèle. Étant donné que nous ne souhaitons pas exposer l’ensemble du modèle à l’application cliente, nous allons déplacer les classes d’entité dans un projet distinct.
 
 La première étape consiste à arrêter la génération de classes d’entité dans le projet existant :
 

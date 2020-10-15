@@ -1,15 +1,15 @@
 ---
 title: Concepteur TPH héritage-EF6
 description: Héritage TPH dans le concepteur dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/inheritance/tph
-ms.openlocfilehash: 39675f9533dfef0ddad1867e3b70cd13b30708ea
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: bf689e02a76e46e5eee5a64cb9825e667c8cd65c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073394"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064846"
 ---
 # <a name="designer-tph-inheritance"></a>Héritage TPH du concepteur
 Cette procédure pas à pas montre comment implémenter l’héritage TPH (table par hiérarchie) dans votre modèle conceptuel avec l’Entity Framework Designer (concepteur EF). L’héritage TPH utilise une table de base de données pour conserver les données de tous les types d’entité dans une hiérarchie d’héritage.

@@ -1,15 +1,15 @@
 ---
 title: Prise en charge d’enum-concepteur EF-EF6
 description: Prise en charge d’enum-concepteur EF dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/data-types/enums
-ms.openlocfilehash: f3dff2c71cfdeb32183865265144a938eff087c0
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 42508b533249bf01c76939f864a23adc86a08822
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073121"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064924"
 ---
 # <a name="enum-support---ef-designer"></a>Prise en charge d’enum-concepteur EF
 > [!NOTE]

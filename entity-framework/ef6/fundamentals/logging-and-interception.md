@@ -1,15 +1,15 @@
 ---
 title: Journalisation et interception des opérations de base de données-EF6
 description: Journalisation et interception des opérations de base de données dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/fundamentals/logging-and-interception
-ms.openlocfilehash: 858e96a781933da52725efa56087bc27db06257d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 97248af9953de4372503aa7340712f3eff19b6b8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072666"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065431"
 ---
 # <a name="logging-and-intercepting-database-operations"></a>Journalisation et interception des opérations de base de données
 > [!NOTE]
@@ -101,7 +101,7 @@ WHERE @@ROWCOUNT > 0 AND [Id] = scope_identity()
 
 Lorsque la propriété log est définie, tous les éléments suivants sont enregistrés :  
 
-- SQL pour tous les différents types de commandes. Exemple :  
+- SQL pour tous les différents types de commandes. Par exemple :  
     - Requêtes, y compris les requêtes LINQ normales, les requêtes eSQL et les requêtes brutes à partir de méthodes telles que SqlQuery  
     - Insertions, mises à jour et suppressions générées dans le cadre d’SaveChanges  
     - Requêtes de chargement des relations, telles que celles générées par le chargement différé  
@@ -228,7 +228,7 @@ Pour consigner la sortie, appelez simplement la méthode Write qui enverra la so
 
 ### <a name="setting-the-databaselogformatter"></a>Définition de DatabaseLogFormatter  
 
-Une fois qu’une nouvelle classe DatabaseLogFormatter a été créée, elle doit être inscrite auprès d’EF. Cette opération s’effectue à l’aide de la configuration basée sur le code. En résumé, cela implique la création d’une nouvelle classe qui dérive de DbConfiguration dans le même assembly que votre classe DbContext, puis l’appel de SetDatabaseLogFormatter dans le constructeur de cette nouvelle classe. Exemple :  
+Une fois qu’une nouvelle classe DatabaseLogFormatter a été créée, elle doit être inscrite auprès d’EF. Cette opération s’effectue à l’aide de la configuration basée sur le code. En résumé, cela implique la création d’une nouvelle classe qui dérive de DbConfiguration dans le même assembly que votre classe DbContext, puis l’appel de SetDatabaseLogFormatter dans le constructeur de cette nouvelle classe. Par exemple :  
 
 ``` csharp
 public class MyDbConfiguration : DbConfiguration
@@ -290,7 +290,7 @@ Les propriétés OriginalResult et OriginalException sont en lecture seule et ne
 
 ### <a name="registering-interceptors"></a>Inscription des intercepteurs  
 
-Une fois qu’une classe qui implémente une ou plusieurs interfaces d’interception a été créée, elle peut être inscrite auprès d’EF à l’aide de la classe DbInterception. Exemple :  
+Une fois qu’une classe qui implémente une ou plusieurs interfaces d’interception a été créée, elle peut être inscrite auprès d’EF à l’aide de la classe DbInterception. Par exemple :  
 
 ``` csharp
 DbInterception.Add(new NLogCommandInterceptor());

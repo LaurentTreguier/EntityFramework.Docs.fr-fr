@@ -1,15 +1,15 @@
 ---
 title: Nouveautés d’EF Core 2.1 - EF Core
 description: Modifications et améliorations dans Entity Framework Core 2,1
-author: divega
+author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: b3d44fe344155df1d814e189b533010673754089
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c98a44f9bc06447bb41f0278c59b412f770c5bd4
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072315"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065704"
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
 
@@ -35,7 +35,7 @@ Jusqu’à présent, EF Core pouvait uniquement mapper les propriétés de types
 - Mappage d’entiers non signés avec SQL Server
 - Chiffrement et déchiffrement automatiques des valeurs de propriété
 
-Pour plus d’informations sur cette rubrique, lisez la [section sur les conversions de valeurs](xref:core/modeling/value-conversions).  
+Pour plus d’informations sur cette rubrique, lisez la [section sur les conversions de valeurs](xref:core/modeling/value-conversions).
 
 ## <a name="linq-groupby-translation"></a>Traduction LINQ GroupBy
 
@@ -43,7 +43,7 @@ Avant la version 2.1, l’opérateur LINQ GroupBy dans EF Core était toujours 
 
 Cet exemple illustre une requête avec GroupBy utilisée pour calculer différentes fonctions d’agrégation :
 
-``` csharp
+```csharp
 var query = context.Orders
     .GroupBy(o => new { o.CustomerId, o.EmployeeId })
     .Select(g => new
@@ -59,7 +59,7 @@ var query = context.Orders
 
 La traduction SQL correspondante ressemble à ceci :
 
-``` SQL
+```sql
 SELECT [o].[CustomerId], [o].[EmployeeId],
     SUM([o].[Amount]), MIN([o].[Amount]), MAX([o].[Amount]), AVG([o].[Amount])
 FROM [Orders] AS [o]
@@ -72,11 +72,11 @@ Avec la nouvelle version, il sera possible de fournir des données initiales pou
 
 Par exemple, utilisez ceci pour configurer les données d’amorçage d’un Post dans `OnModelCreating`:
 
-``` csharp
+```csharp
 modelBuilder.Entity<Post>().HasData(new Post{ Id = 1, Text = "Hello World!" });
 ```
 
-Pour plus d’informations sur cette rubrique, lisez la [section sur l’amorçage des données](xref:core/modeling/data-seeding).  
+Pour plus d’informations sur cette rubrique, lisez la [section sur l’amorçage des données](xref:core/modeling/data-seeding).
 
 ## <a name="query-types"></a>Types de requêtes
 
@@ -93,7 +93,7 @@ Pour plus d’informations sur cette rubrique, lisez la [section sur les types d
 
 Vous pouvez désormais spécifier des propriétés de navigation définies uniquement sur des types dérivés lors de l’écriture d’expressions pour la méthode `Include`. Pour la version fortement typée de `Include`, nous prenons en charge l’utilisation d’un cast explicite ou de l’opérateur `as`. Nous prenons également en charge le référencement des noms de propriété de navigation définis sur des types dérivés dans la version chaîne de `Include` :
 
-``` csharp
+```csharp
 var option1 = context.People.Include(p => ((Student)p).School);
 var option2 = context.People.Include(p => (p as Student).School);
 var option3 = context.People.Include("School");
@@ -117,14 +117,14 @@ Nous avons amélioré la traduction des requêtes pour éviter l’exécution de
 
 Par exemple, la requête suivante est normalement traduite en une seule requête pour Customers, plus N requêtes séparées pour Orders (où « N » est le nombre de clients retournés) :
 
-``` csharp
+```csharp
 var query = context.Customers.Select(
     c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount));
 ```
 
 En incluant `ToList()` au bon endroit, vous indiquez que la mise en mémoire tampon est appropriée pour Orders, ce qui déclenche l’optimisation :
 
-``` csharp
+```csharp
 var query = context.Customers.Select(
     c => c.Orders.Where(o => o.Amount  > 100).Select(o => o.Amount).ToList());
 ```
@@ -135,7 +135,7 @@ Notez que cette requête est traduite en deux requêtes SQL seulement : une pour
 
 Il est désormais possible de configurer des [types d’entités détenus](xref:core/modeling/owned-entities) en annotant simplement le type avec `[Owned]` et en veillant à ce que l’entité propriétaire soit ajoutée au modèle :
 
-``` csharp
+```csharp
 [Owned]
 public class StreetAddress
 {
@@ -168,7 +168,7 @@ Les nouveaux événements `Tracked` et `StateChanged` sur `ChangeTracker` peuven
 
 Un nouvel analyseur de code est inclus avec EF Core. Il détecte les utilisations potentiellement dangereuses de nos API SQL brutes, comme `FromSql` ou `ExecuteSqlCommand`. Par exemple, dans la requête suivante, un avertissement s’affiche, car _minAge_ n’est pas paramétrable :
 
-``` csharp
+```csharp
 var sql = $"SELECT * FROM People WHERE Age > {minAge}";
 var query = context.People.FromSql(sql);
 ```

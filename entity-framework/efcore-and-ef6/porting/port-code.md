@@ -1,17 +1,17 @@
 ---
-title: Portage à partir de EF6 vers EF Core-Portage d’un modèle basé sur du code-EF
+title: Portage à partir de EF6 vers EF Core-Portage d’un Code-Based modèle-EF
 description: Informations spécifiques sur le portage d’une application de modèle Entity Framework 6 basée sur du code pour Entity Framework Core
-author: rowanmiller
+author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-code
-ms.openlocfilehash: a5bbdc2ee95ea6bea96e24bee4588b524e0ffc58
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 819c3bc0eba140c023cdcd5038a4cd63c300ed4c
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073576"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064222"
 ---
-# <a name="porting-an-ef6-code-based-model-to-ef-core"></a>Portage d’un modèle basé sur du code EF6 vers EF Core
+# <a name="porting-an-ef6-code-based-model-to-ef-core"></a>Portage d’un modèle de Code-Based EF6 vers EF Core
 
 Si vous avez lu tous les avertissements et que vous êtes prêt à utiliser le port, voici quelques conseils pour vous aider à démarrer.
 
@@ -33,7 +33,7 @@ Comme décrit dans [la section s’assurer EF Core fonctionne pour votre applica
 
 La plupart des applications EF6 stockent la chaîne de connexion dans le fichier d’application `App/Web.config` . Dans EF Core, vous lisez cette chaîne de connexion à l’aide de l' `ConfigurationManager` API. Vous devrez peut-être ajouter une référence à l' `System.Configuration` assembly de Framework pour pouvoir utiliser cette API.
 
-``` csharp
+```csharp
 public class BloggingContext : DbContext
 {
     public DbSet<Blog> Blogs { get; set; }

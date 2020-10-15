@@ -1,15 +1,15 @@
 ---
 title: API Fluent-configuration et mappage des propriétés et des types-EF6
 description: API Fluent-configuration et mappage des propriétés et des types dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/fluent/types-and-properties
-ms.openlocfilehash: ddd56ff280b72adbfd2247a4f1a85e37bf2f4879
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 821672bcb797314c96189443ace7f875a79c8582
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072588"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065145"
 ---
 # <a name="fluent-api---configuring-and-mapping-properties-and-types"></a>API Fluent-configuration et mappage des propriétés et des types
 Lorsque vous utilisez Entity Framework Code First le comportement par défaut consiste à mapper vos classes POCO à des tables à l’aide d’un ensemble de conventions intégrés à EF. Toutefois, il arrive parfois que vous ne souhaitiez pas ou ne souhaitiez pas suivre ces conventions et que vous ayez besoin de mapper des entités à d’autres éléments que les conventions dictées.  
@@ -18,7 +18,7 @@ Il existe deux façons de configurer EF pour utiliser autre chose que les conven
 
 L’API Fluent code First est généralement accessible en remplaçant la méthode [OnModelCreating](https://msdn.microsoft.com/library/system.data.entity.dbcontext.onmodelcreating.aspx) sur votre [DbContext](https://msdn.microsoft.com/library/system.data.entity.dbcontext.aspx)dérivé. Les exemples suivants sont conçus pour montrer comment effectuer diverses tâches avec l’API Fluent et vous permettent de copier le code et de le personnaliser pour l’adapter à votre modèle. Si vous souhaitez voir le modèle avec lequel il peut être utilisé, il est fourni à la fin de cet article.  
 
-## <a name="model-wide-settings"></a>Paramètres à l’ensemble du modèle  
+## <a name="model-wide-settings"></a>Paramètres de Model-Wide  
 
 ### <a name="default-schema-ef6-onwards"></a>Schéma par défaut (EF6)  
 

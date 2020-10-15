@@ -1,15 +1,15 @@
 ---
 title: Détection automatique des modifications-EF6
 description: Détection automatique des modifications dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/change-tracking/auto-detect-changes
-ms.openlocfilehash: aa8b94d843d99a8f040bdb065297d2e19b4770d7
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 159143a9ade64a65e857a30117e577b21e0b9f98
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073780"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064494"
 ---
 # <a name="automatic-detect-changes"></a>Détection automatique des modifications
 Lors de l’utilisation de la plupart des entités POCO, la détermination de la manière dont une entité a changé (et par conséquent les mises à jour qui doivent être envoyées à la base de données) est gérée par l’algorithme de détection des modifications. Détecter les modifications fonctionne en détectant les différences entre les valeurs de propriété actuelles de l’entité et les valeurs de propriétés d’origine qui sont stockées dans un instantané lorsque l’entité a été interrogée ou attachée. Les techniques présentées dans cette rubrique s’appliquent également aux modèles créés avec Code First et EF Designer.  
@@ -30,7 +30,7 @@ Par défaut, Entity Framework effectue la détection automatique des modificatio
 
 ## <a name="disabling-automatic-detection-of-changes"></a>Désactivation de la détection automatique des modifications  
 
-Si vous effectuez le suivi d’un grand nombre d’entités dans votre contexte et que vous appelez l’une de ces méthodes plusieurs fois dans une boucle, vous pouvez obtenir des améliorations significatives en matière de performances en désactivant la détection des modifications pour la durée de la boucle. Exemple :  
+Si vous effectuez le suivi d’un grand nombre d’entités dans votre contexte et que vous appelez l’une de ces méthodes plusieurs fois dans une boucle, vous pouvez obtenir des améliorations significatives en matière de performances en désactivant la détection des modifications pour la durée de la boucle. Par exemple :  
 
 ``` csharp
 using (var context = new BloggingContext())

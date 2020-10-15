@@ -1,15 +1,15 @@
 ---
 title: Vue d’ensemble d’Entity Framework 6 - EF6
 description: Vue d'ensemble d'Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/index
-ms.openlocfilehash: aff7aee51c4e12b278f7cab8b5122ee0edbbac0f
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 09b7cb9e0141e9739b15d6c9789286c2e47018cc
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072120"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065392"
 ---
 # <a name="entity-framework-6"></a>Entity Framework 6
 Entity Framework 6 (EF6) est un mappeur Objet Relationnel (O/RM) éprouvé pour .NET qui bénéficie de nombreuses années de développement de fonctionnalités et de stabilisation.

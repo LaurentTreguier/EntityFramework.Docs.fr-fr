@@ -1,15 +1,15 @@
 ---
 title: Utilisation des transactions-EF6
 description: Utilisation des transactions dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/transactions
-ms.openlocfilehash: 15cc2171338defe482767114c58afe16cc1ffe21
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 525b5cf605c1b61225ee2b9f1e0559a8e13f3052
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073715"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92064430"
 ---
 # <a name="working-with-transactions"></a>Utilisation des transactions
 > [!NOTE]
@@ -112,7 +112,7 @@ using (var conn = new SqlConnection("..."))
 
 En outre, vous devez démarrer la transaction vous-même (y compris la fonction IsolationLevel si vous souhaitez éviter le paramètre par défaut) et laisser Entity Framework savoir qu’une transaction existante a déjà démarré sur la connexion (voir la ligne 33 ci-dessous).  
 
-Vous êtes alors libre d’exécuter des opérations de base de données directement sur le SqlConnection lui-même ou sur DbContext. Toutes ces opérations sont exécutées dans une transaction. Vous êtes responsable de la validation ou de la restauration de la transaction et de l’appel de dispose () sur celle-ci, ainsi que pour la fermeture et la suppression de la connexion de base de données. Exemple :  
+Vous êtes alors libre d’exécuter des opérations de base de données directement sur le SqlConnection lui-même ou sur DbContext. Toutes ces opérations sont exécutées dans une transaction. Vous êtes responsable de la validation ou de la restauration de la transaction et de l’appel de dispose () sur celle-ci, ainsi que pour la fermeture et la suppression de la connexion de base de données. Par exemple :  
 
 ``` csharp
 using System;

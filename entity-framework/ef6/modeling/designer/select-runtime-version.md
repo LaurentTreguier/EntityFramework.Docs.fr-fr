@@ -1,14 +1,14 @@
 ---
 title: Sélection de Entity Framework version du runtime pour les modèles du concepteur EF-EF6
 description: Sélection de Entity Framework version du runtime pour les modèles du concepteur EF dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
-ms.openlocfilehash: 2025ca5e46c7d9a38ba596d57c023a2c1b224129
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: dcd06ed9585028b3a318d867b03980254979a32f
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073264"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92066094"
 ---
 # <a name="selecting-entity-framework-runtime-version-for-ef-designer-models"></a>Sélection de Entity Framework version du runtime pour les modèles du concepteur EF
 > [!NOTE]
@@ -27,7 +27,7 @@ EF6 sera désactivé si vous avez déjà installé une version antérieure d’E
 1.  Dans Explorateur de solutions, cliquez avec le bouton droit sur votre projet, puis sélectionnez **gérer les packages NuGet...**
 2.  Sélectionner les **mises à jour**
 3.  Sélectionnez **EntityFramework** (Assurez-vous qu’il va le mettre à jour vers la version de votre choix)
-4.  Cliquez sur **mettre à jour**
+4.  Cliquez sur **Mettre à jour**
 
  
 

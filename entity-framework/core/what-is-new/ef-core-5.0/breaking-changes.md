@@ -2,14 +2,14 @@
 title: Modifications avec rupture dans EF Core 5,0-EF Core
 description: Liste complète des modifications avec rupture introduites dans Entity Framework Core 5,0
 author: bricelam
-ms.date: 09/09/2020
+ms.date: 09/24/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 8e9df4e2ff81e20cf5a36855247c5aff89ea2394
-ms.sourcegitcommit: c0e6a00b64c2dcd8acdc0fe6d1b47703405cdf09
+ms.openlocfilehash: e64f2b387d236e96d0451f3d55b3241daaba32d8
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/24/2020
-ms.locfileid: "91210365"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065639"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifications avec rupture dans EF Core 5,0
 
@@ -19,8 +19,8 @@ Les modifications d’API et de comportement suivantes peuvent bloquer les mises
 
 | **Modification critique**                                                                                                                   | **Impact** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
-| [Obligatoire sur la navigation du principal au dépendant a une sémantique différente](#required-dependent)                                 | Moyenne     |
-| [La définition de la requête est remplacée par des méthodes spécifiques au fournisseur](#defining-query)                                                          | Moyenne     |
+| [Obligatoire sur la navigation du principal au dépendant a une sémantique différente](#required-dependent)                                 | Medium     |
+| [La définition de la requête est remplacée par des méthodes spécifiques au fournisseur](#defining-query)                                                          | Medium     |
 | [Suppression de la méthode HasGeometricDimension de l’extension NTS SQLite](#geometric-sqlite)                                                   | Faible        |
 | [Cosmos : la clé de partition est maintenant ajoutée à la clé primaire](#cosmos-partition-key)                                                        | Faible        |
 | [Cosmos : `id` propriété renommée en `__id`](#cosmos-id)                                                                                 | Faible        |
@@ -30,6 +30,8 @@ Les modifications d’API et de comportement suivantes peuvent bloquer les mises
 | [IMigrationsModelDiffer utilise désormais IRelationalModel](#relational-model)                                                                 | Faible        |
 | [Les discriminateurs sont en lecture seule](#read-only-discriminators)                                                                             | Faible        |
 | [EF spécifique au fournisseur. Les méthodes Functions lèvent pour le fournisseur InMemory](#no-client-methods)                                              | Faible        |
+| [IndexBuilder. HasName est désormais obsolète](#index-obsolete)                                                                               | Faible        |
+| [Un pluarlizer est maintenant inclus pour la génération de modèles automatique de modèles rétroconçus](#pluralizer)                                                 | Faible        |
 
 <a name="geometric-sqlite"></a>
 
@@ -53,7 +55,7 @@ L’utilisation de HasGeometricDimension après avoir spécifié la dimension da
 
 Utilisez `HasColumnType` pour spécifier la dimension :
 
-```cs
+```csharp
 modelBuilder.Entity<GeoEntity>(
     x =>
     {
@@ -81,7 +83,7 @@ Avec la prise en charge supplémentaire des dépendants requis, il est désormai
 
 `IsRequired`L’appel de avant la spécification de la terminaison dépendante est maintenant ambigu :
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -97,7 +99,7 @@ Le nouveau comportement est nécessaire pour activer la prise en charge des dép
 
 Supprimez `RequiredAttribute` de la navigation vers le dépendant et placez-le à la place sur la navigation vers le principal ou configurez la relation dans `OnModelCreating` :
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasOne(b => b.BlogImage)
     .WithOne(i => i.Blog)
@@ -127,7 +129,7 @@ Cette modification rend le modèle mieux aligné avec Azure Cosmos DB sémantiqu
 
 Pour empêcher que la propriété de clé de partition soit ajoutée à la clé primaire, configurez-la dans `OnModelCreating` .
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .HasKey(b => b.Id);
 ```
@@ -154,7 +156,7 @@ Cette modification rend moins probable la `id` propriété en conflit avec une p
 
 Pour revenir au comportement 3. x, configurez la `id` propriété dans `OnModelCreating` .
 
-```cs
+```csharp
 modelBuilder.Entity<Blog>()
     .Property<string>("id")
     .ToJsonProperty("id");
@@ -248,7 +250,7 @@ Pour empêcher l’appel du générateur de valeurs, assignez une valeur non dé
 
 Utilisez le code suivant pour comparer le modèle à `snapshot` l’aide du modèle à partir de `context` :
 
-```cs
+```csharp
 var dependencies = context.GetService<ProviderConventionSetBuilderDependencies>();
 var relationalDependencies = context.GetService<RelationalConventionSetBuilderDependencies>();
 
@@ -288,7 +290,7 @@ EF ne s’attend pas à ce que le type d’entité change pendant qu’il est to
 
 Si la modification de la valeur de discriminateur est nécessaire et que le contexte est supprimé immédiatement après l’appel `SaveChanges` de, le discriminateur peut devenir mutable :
 
-```cs
+```csharp
 modelBuilder.Entity<BaseEntity>()
     .Property<string>("Discriminator")
     .Metadata.SetAfterSaveBehavior(PropertySaveBehavior.Save);
@@ -315,12 +317,12 @@ Alors que la définition de requêtes a été implémentée en tant que requête
 - Si la définition de la requête consiste à projeter un type d’entité à l’aide `new { ... }` de dans `Select` la méthode, vous devez ensuite identifier qu’en tant qu’entité a requis un travail supplémentaire et qu’elle est incohérente avec la façon dont EF Core traite les types nominaux dans la requête.
 - Pour les fournisseurs relationnels `FromSql` , il est toujours nécessaire de passer la chaîne SQL sous forme d’expression LINQ.
 
-La définition initiale des requêtes a été introduite en tant que vues côté client à utiliser avec le fournisseur en mémoire pour les entités keymoins (similaires aux vues de base de données dans les bases de données relationnelles). Une telle définition facilite le test de l’application sur la base de données en mémoire. Par la suite, ils sont devenus largement applicables, ce qui était utile, mais incohérents et difficiles à comprendre. Nous avons donc décidé de simplifier le concept. Nous avons fait en sorte que la requête de définition basée sur LINQ soit exclusive au fournisseur en mémoire et ne les traite pas de manière différente. Pour plus d’informations, [consultez ce problème](https://github.com/dotnet/efcore/issues/20023).
+La définition initiale des requêtes a été introduite en tant que vues côté client à utiliser avec In-Memory fournisseur pour les entités keymoins (similaires aux vues de base de données dans les bases de données relationnelles). Une telle définition facilite le test de l’application sur la base de données en mémoire. Par la suite, ils sont devenus largement applicables, ce qui était utile, mais incohérents et difficiles à comprendre. Nous avons donc décidé de simplifier le concept. Nous avons fait en sorte que la requête de définition basée sur LINQ soit exclusive pour In-Memory fournisseur et les traite différemment. Pour plus d’informations, [consultez ce problème](https://github.com/dotnet/efcore/issues/20023).
 
 **Corrections**
 
 Pour les fournisseurs relationnels, utilisez `ToSqlQuery` la méthode dans `OnModelCreating` et transmettez une chaîne SQL à utiliser pour le type d’entité.
-Pour le fournisseur en mémoire, utilisez la `ToInMemoryQuery` méthode dans `OnModelCreating` et transmettez une requête LINQ à utiliser pour le type d’entité.
+Pour le fournisseur In-Memory, utilisez la `ToInMemoryQuery` méthode dans `OnModelCreating` et transmettez une requête LINQ à utiliser pour le type d’entité.
 
 <a name="no-client-methods"></a>
 
@@ -343,3 +345,49 @@ Les méthodes spécifiques au fournisseur sont mappées à une fonction de base 
 **Corrections**
 
 Étant donné qu’il n’existe aucun moyen de reproduire le comportement des fonctions de base de données avec précision, vous devez tester les requêtes qui les contiennent sur le même type de base de données qu’en production.
+
+<a name="index-obsolete"></a>
+
+### <a name="indexbuilderhasname-is-now-obsolete"></a>IndexBuilder. HasName est désormais obsolète
+
+[#21089 du problème de suivi](https://github.com/dotnet/efcore/issues/21089)
+
+**Ancien comportement**
+
+Auparavant, un seul index pouvait être défini sur un ensemble de propriétés donné. Le nom de la base de données d’un index a été configuré à l’aide de IndexBuilder. HasName.
+
+**Nouveau comportement**
+
+Plusieurs index sont désormais autorisés sur le même jeu ou les mêmes propriétés. Ces index sont à présent distingués par un nom dans le modèle. Par Convention, le nom du modèle est utilisé comme nom de la base de données ; Toutefois, il peut également être configuré indépendamment à l’aide de HasDatabaseName.
+
+**Pourquoi**
+
+À l’avenir, nous souhaitons activer à la fois les index croissants et les index décroissant avec différents classements sur le même ensemble de propriétés. Cette modification nous déplace une autre étape dans cette direction.
+
+**Corrections**
+
+Tout code qui appelle précédemment IndexBuilder. HasName doit être mis à jour pour appeler HasDatabaseName à la place.
+
+Si votre projet comprend des migrations générées avant EF Core version 2.0.0, vous pouvez ignorer en toute sécurité l’avertissement dans ces fichiers et le supprimer en ajoutant `#pragma warning disable 612, 618` .
+
+<a name="pluralizer"></a>
+
+### <a name="a-pluarlizer-is-now-included-for-scaffolding-reverse-engineered-models"></a>Un pluarlizer est maintenant inclus pour la génération de modèles automatique de modèles rétroconçus
+
+[#11160 du problème de suivi](https://github.com/dotnet/efcore/issues/11160)
+
+**Ancien comportement**
+
+Auparavant, vous deviez installer un package pluraliseur distinct pour plurieliser les noms de navigation des DbSet et des collections et les noms de tables singulières lorsque scaffoding un DbContext et des types d’entité en reconstituant l’ingénierie inverse d’un schéma de base de données.
+
+**Nouveau comportement**
+
+EF Core comprend maintenant un pluraliseur qui utilise la bibliothèque [Humanizer](https://github.com/Humanizr/Humanizer) . Il s’agit de la même bibliothèque que celle utilisée par Visual Studio pour recommander des noms de variables.
+
+**Pourquoi**
+
+L’utilisation de plusieurs formes de mots pour les propriétés de collection et les formes singulières pour les types et les propriétés de référence est idiomatique dans .NET.
+
+**Corrections**
+
+Pour désactiver pluraliseur, utilisez l' `--no-pluralize` option sur `dotnet ef dbcontext scaffold` ou le `-NoPluralize` commutateur activé `Scaffold-DbContext` .

@@ -1,15 +1,15 @@
 ---
 title: Migrations Code First dans les environnements d’équipe-EF6
 description: Migrations Code First dans les environnements d’équipe dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/code-first/migrations/teams
-ms.openlocfilehash: c3f12788f2aba85f54dc062bdb6a7919be47b56d
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: c617dc3c34e829585b21766c7738bd622890b286
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90072224"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065080"
 ---
 # <a name="code-first-migrations-in-team-environments"></a>Migrations Code First dans les environnements d’équipe
 > [!NOTE]
@@ -141,7 +141,7 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 1.  Vérifiez que toutes les modifications de modèle en attente dans votre base de code locale ont été écrites dans une migration. Cette étape garantit que vous ne manquez pas les modifications légitimes lorsqu’il est temps de générer la migration vide.
 2.  Synchroniser avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer toutes les nouvelles migrations archivées par d’autres développeurs.
-    **_Remarque :_** *si vous ne recevez aucun avertissement de la commande Update-Database, aucune nouvelle migration n’a été effectuée par les autres développeurs et il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
+    **_Remarque :_** *si vous n’avez pas d’avertissements de la part de la commande Update-Database, cela signifie qu’il n’y a pas de nouvelles migrations d’autres développeurs et qu’il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
 4.  Exécutez **Add-migration &lt; pick \_ a \_ name &gt; – IgnoreChanges** (par exemple, **Add-migration Merge – IgnoreChanges**). Cela génère une migration avec toutes les métadonnées (y compris un instantané du modèle actuel), mais ignore toutes les modifications détectées lors de la comparaison du modèle actuel à l’instantané dans les dernières migrations (ce qui signifie que vous recevez une méthode de **mise** en forme et de **réduction** de l’espace).
 5.  Exécutez **Update-Database** pour réappliquer la dernière migration avec les métadonnées mises à jour.
 6.  Poursuivez le développement ou envoyez-le au contrôle de code source (après avoir exécuté vos tests unitaires bien sûr).
@@ -163,7 +163,7 @@ Le processus suivant peut être utilisé pour cette approche, à partir du momen
 1.  Vérifiez que toutes les modifications de modèle en attente dans votre base de code locale ont été écrites dans une migration. Cette étape garantit que vous ne manquez pas les modifications légitimes lorsqu’il est temps de générer la migration vide.
 2.  Synchronisez avec le contrôle de code source.
 3.  Exécutez **Update-Database** pour appliquer toutes les nouvelles migrations archivées par d’autres développeurs.
-    **_Remarque :_** *si vous ne recevez aucun avertissement de la commande Update-Database, aucune nouvelle migration n’a été effectuée par les autres développeurs et il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
+    **_Remarque :_** *si vous n’avez pas d’avertissements de la part de la commande Update-Database, cela signifie qu’il n’y a pas de nouvelles migrations d’autres développeurs et qu’il n’est pas nécessaire d’effectuer une fusion supplémentaire.*
 4.  Exécutez **Update-Database – TargetMigration &lt; second \_ Last \_ dernière &gt; migration** (dans l’exemple, nous avons effectué la **mise à jour-Database – TargetMigration AddRating**). Cela restaure la base de données à l’état de la deuxième dernière migration, en « désappliquant » la dernière migration de la base de données.
     **_Remarque :_** *cette étape est requise pour permettre la modification des métadonnées de la migration, car les métadonnées sont également stockées dans le \_ \_ MigrationsHistoryTable de la base de données. C’est pourquoi vous ne devez utiliser cette option que si la dernière migration est uniquement dans votre base de code locale. Si la dernière migration a été appliquée à d’autres bases de données, vous devez également les restaurer et réappliquer la dernière migration pour mettre à jour les métadonnées.* 
 5.  Exécutez **Add-migration &lt; Full \_ name \_ , y compris l' \_ horodateur \_ de la \_ dernière \_ migration** &gt; (dans notre exemple, nous avons effectué cette opération, comme **Add-migration 201311062215252 \_ AddReaders**).

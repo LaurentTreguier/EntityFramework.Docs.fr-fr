@@ -1,15 +1,15 @@
 ---
 title: Types complexes-concepteur EF-EF6
 description: Types complexes-concepteur EF dans Entity Framework 6
-author: divega
+author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/modeling/designer/data-types/complex-types
-ms.openlocfilehash: 6ebba9ea36ddad1a25b21bf98a6ac3090c327144
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: abacbdd375c2871e6c4205e0084764029b149a40
+ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90073511"
+ms.lasthandoff: 10/14/2020
+ms.locfileid: "92065041"
 ---
 # <a name="complex-types---ef-designer"></a>Types complexes-concepteur EF
 Cette rubrique montre comment mapper des types complexes avec le Entity Framework Designer (concepteur EF) et comment interroger des entités qui contiennent des propriétés de type complexe.
