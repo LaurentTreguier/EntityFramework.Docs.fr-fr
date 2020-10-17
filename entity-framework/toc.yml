@@ -77,6 +77,8 @@
               href: core/miscellaneous/async.md
             - name: Journalisation
               href: core/miscellaneous/logging.md
+            - name: Regroupement contextuel
+              href: core/miscellaneous/context-pooling.md
             - name: Résilience de la connexion
               href: core/miscellaneous/connection-resiliency.md
             - name: Test
@@ -111,7 +113,7 @@
               href: core/modeling/generated-properties.md
             - name: Jetons d’accès concurrentiel
               href: core/modeling/concurrency.md
-            - name: Propriétés cachées
+            - name: Propriétés cachées et propriétés de l'indexeur
               href: core/modeling/shadow-properties.md
             - name: Relations
               href: core/modeling/relationships.md
@@ -172,14 +174,24 @@
           items:
             - name: Vue d'ensemble
               href: core/querying/index.md
+            - name: Charger les données associées
+              items:
+                - name: Vue d’ensemble
+                  href: core/querying/related-data/index.md
+                - name: Chargement hâtif
+                  href: core/querying/related-data/eager.md
+                - name: Chargement explicite
+                  href: core/querying/related-data/explicit.md
+                - name: Chargement différé
+                  href: core/querying/related-data/lazy.md
+                - name: Données associées et sérialisation
+                  href: core/querying/related-data/serialization.md
             - name: Évaluation du client/serveur
               href: core/querying/client-eval.md
             - name: Suivi et non-suivi
               href: core/querying/tracking.md
             - name: Opérateurs de requête complexes
               href: core/querying/complex-query-operators.md
-            - name: Charger les données associées
-              href: core/querying/related-data.md
             - name: Requêtes SQL brutes
               href: core/querying/raw-sql.md
             - name: Filtres de requête globale
@@ -216,10 +228,15 @@
               items:
                 - name: Vue d'ensemble
                   href: core/providers/sql-server/index.md
+                - name: Mappages de fonctions
+                  href: core/providers/sql-server/functions.md
                 - name: Index
                   href: core/providers/sql-server/indexes.md
                 - name: Tables optimisées en mémoire
                   href: core/providers/sql-server/memory-optimized-tables.md
+                - name: Données spatiales
+                  displayName: GIS
+                  href: core/providers/sql-server/spatial.md
                 - name: Spécifier des options Azure SQL Database
                   href: core/providers/sql-server/azure-sql-database.md
             - name: SQLite
@@ -228,6 +245,13 @@
                   href: core/providers/sqlite/index.md
                 - name: Limitations de SQLite
                   href: core/providers/sqlite/limitations.md
+                - name: Mappages de fonctions
+                  href: core/providers/sqlite/functions.md
+                - name: Données spatiales
+                  displayName: GIS
+                  href: core/providers/sqlite/spatial.md
+                - name: Microsoft.Data.Sqlite >>
+                  href: /dotnet/standard/data/sqlite/
             - name: Cosmos
               items:
                 - name: Vue d'ensemble
@@ -236,6 +260,8 @@
                   href: core/providers/cosmos/unstructured-data.md
                 - name: Limitations de Cosmos
                   href: core/providers/cosmos/limitations.md
+                - name: Mappages de fonctions
+                  href: core/providers/cosmos/functions.md
             - name: InMemory (pour les tests)
               href: core/providers/in-memory/index.md
             - name: Écrire un fournisseur de base de données
