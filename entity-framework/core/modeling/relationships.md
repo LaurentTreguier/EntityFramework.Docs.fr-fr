@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 71d960a15dfb938af1dcc7035dc2587df7ad4677
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 567d212ddf41f33ee32443d85d2a17234fbc026b
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063840"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430181"
 ---
 # <a name="relationships"></a>Relations
 
@@ -85,7 +85,7 @@ Dans cet exemple, les propriétés mises en surbrillance sont utilisées pour co
 > Si la propriété est la clé primaire ou si elle est d’un type qui n’est pas compatible avec la clé principale, elle ne sera pas configurée en tant que clé étrangère.
 
 > [!NOTE]
-> Avant le EF Core 3,0, la propriété nommée exactement comme la propriété de clé principale [était également mise en correspondance comme clé étrangère](https://github.com/aspnet/EntityFrameworkCore/issues/13274)
+> Avant le EF Core 3,0, la propriété nommée exactement comme la propriété de clé principale [était également mise en correspondance comme clé étrangère](https://github.com/dotnet/efcore/issues/13274)
 
 ### <a name="no-foreign-key-property"></a>Aucune propriété de clé étrangère
 
@@ -194,7 +194,7 @@ Vous pouvez utiliser la surcharge de chaîne de `HasForeignKey(...)` pour config
 
 #### <a name="foreign-key-constraint-name"></a>Nom de la contrainte de clé étrangère
 
-Par Convention, lorsque vous ciblez une base de données relationnelle, les contraintes de clé étrangère sont nommées FK_ <dependent type name> _<principal type name>_ <foreign key property name> . Pour les clés étrangères composites <foreign key property name> devient une liste de noms de propriétés de clé étrangère séparés par un trait de soulignement.
+Par Convention, lorsque vous ciblez une base de données relationnelle, les contraintes de clé étrangère sont nommées FK \_ \<dependent type name> \_ \<principal type name> \_ \<foreign key property name> . Pour les clés étrangères composites, \<foreign key property name> devient une liste de noms de propriétés de clé étrangère séparés par un trait de soulignement.
 
 Vous pouvez également configurer le nom de la contrainte comme suit :
 
@@ -325,3 +325,10 @@ Des données supplémentaires peuvent être stockées dans le type d’entité d
 Vous pouvez également représenter une relation plusieurs-à-plusieurs en ajoutant simplement le type d’entité de jointure et en mappant deux relations un-à-plusieurs distinctes.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+
+> [!NOTE]
+> La prise en charge de la génération de modèles automatique de relations plusieurs-à-plusieurs à partir de la base de données n’est pas encore ajoutée. Voir le [problème de suivi](https://github.com/dotnet/efcore/issues/22475).
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+* [EF Core session réunions](https://www.youtube.com/watch?v=W1sxepfIMRM&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=32)de la Communauté, avec une présentation approfondie des plusieurs-à-plusieurs et de l’infrastructure qui les étaye.

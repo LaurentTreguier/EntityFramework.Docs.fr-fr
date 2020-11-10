@@ -4,12 +4,12 @@ description: Comment configurer l’héritage de type d’entité à l’aide de
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 47aae0d57d7203f0e6da5868bdc082ad85d59620
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063866"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429518"
 ---
 # <a name="inheritance"></a>Héritage
 
@@ -37,7 +37,7 @@ Par défaut, EF mappe l’héritage à l’aide du modèle TPH ( *table par hié
 
 Le modèle ci-dessus est mappé au schéma de base de données suivant (Notez la colonne créée implicitement `Discriminator` , qui identifie le type de qui `Blog` est stocké dans chaque ligne).
 
-![image](_static/inheritance-tph-data.png)
+![Capture d’écran des résultats de l’interrogation de la hiérarchie d’entité de blog à l’aide d’un modèle TPH (table par hiérarchie)](_static/inheritance-tph-data.png)
 
 Vous pouvez configurer le nom et le type de la colonne de discriminateur et les valeurs utilisées pour identifier chaque type dans la hiérarchie :
 
@@ -50,6 +50,10 @@ Dans les exemples ci-dessus, EF a ajouté le discriminateur implicitement en tan
 Enfin, le discriminateur peut également être mappé à une propriété .NET normale dans votre entité :
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/NonShadowDiscriminator.cs?name=NonShadowDiscriminator&highlight=4)]
+
+Lors de l’interrogation d’entités dérivées, qui utilisent le modèle TPH, EF Core ajoute un prédicat sur la colonne de discriminateur dans la requête. Ce filtre permet de s’assurer que nous n’obtenons pas de lignes supplémentaires pour les types de base ou les types frères non dans le résultat. Ce prédicat de filtre est ignoré pour le type d’entité de base, car l’interrogation de l’entité de base obtient les résultats de toutes les entités de la hiérarchie. Lors de la matérialisation des résultats à partir d’une requête, si nous fournissons une valeur de discriminateur qui n’est pas mappée à un type d’entité dans le modèle, nous levez une exception, car nous ne savons pas comment matérialiser les résultats. Cette erreur se produit uniquement si votre base de données contient des lignes avec des valeurs de discriminateur qui ne sont pas mappées dans le modèle EF. Si vous disposez de ces données, vous pouvez marquer le mappage du discriminateur dans EF Core modèle comme incomplet pour indiquer que nous devrions toujours ajouter un prédicat de filtre pour interroger un type dans la hiérarchie. `IsComplete(false)` l’appel sur la configuration de discriminateur marque le mappage comme étant incomplet.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/DiscriminatorMappingIncomplete.cs?name=DiscriminatorMappingIncomplete&highlight=5)]
 
 ### <a name="shared-columns"></a>Colonnes partagées
 

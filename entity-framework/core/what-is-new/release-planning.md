@@ -4,12 +4,12 @@ description: Informations sur la façon dont Entity Framework Core la planificat
 author: ajcvickers
 ms.date: 01/28/2020
 uid: core/what-is-new/release-planning
-ms.openlocfilehash: 91a130b4ddae66f626bcff8e70283a7e03192542
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f84b8cef40a74245575df6013d94fcda5738e229
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618569"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429141"
 ---
 # <a name="release-planning-process"></a>Processus de planning des versions
 
@@ -36,14 +36,16 @@ Cela est dû au fait qu’il est essentiel que les mises à jour correctives n�
 Par conséquent, le processus de décision met l’accent sur une valeur élevée et un risque faible.
 
 Nous sommes plus susceptibles de corriger un problème dans les cas suivants :
-  * Il a un impact sur plusieurs clients
-  * Il s’agit d’une régression à partir d’une version précédente
-  * L’échec provoque la corruption des données
+
+* Il a un impact sur plusieurs clients
+* Il s’agit d’une régression à partir d’une version précédente
+* L’échec provoque la corruption des données
 
 Nous sommes moins susceptibles de corriger un problème dans les cas suivants :
-  * Il existe des solutions de contournement raisonnables
-  * Le correctif présente un risque élevé de rupture d’autre chose
-  * Le bogue se trouve dans un cas d’angle
+
+* Il existe des solutions de contournement raisonnables
+* Le correctif présente un risque élevé de rupture d’autre chose
+* Le bogue se trouve dans un cas d’angle
 
 Cette barre dépasse progressivement la durée de vie d’une version de [support à long terme (LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) . Cela est dû au fait que les versions LTS insistent sur la stabilité.
 
@@ -55,6 +57,7 @@ Les versions mineures modifient uniquement la partie « mineure » de la versi
 Par exemple, EF Core 3. **1**. 0 est une version qui s’améliore sur EF Core 3. **0**. 0.
 
 Versions mineures :
+
 * Visent à améliorer la qualité et les fonctionnalités de la version précédente
 * Contiennent généralement des correctifs de bogues et de nouvelles fonctionnalités
 * Ne pas inclure les modifications avec rupture intentionnelle
@@ -66,6 +69,7 @@ Les versions majeures modifient le numéro de version d’EF « majeur ».
 Par exemple, EF Core **3**. 0,0 est une version majeure qui fait un grand pas en avant sur EF Core 2.2. x.
 
 Versions majeures :
+
 * Visent à améliorer la qualité et les fonctionnalités de la version précédente
 * Contiennent généralement des correctifs de bogues et de nouvelles fonctionnalités
   * Certaines des nouvelles fonctionnalités peuvent être des modifications fondamentales de la façon dont EF Core fonctionne

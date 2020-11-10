@@ -4,12 +4,12 @@ description: Comment configurer la génération de valeurs pour les propriétés
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/generated-properties
-ms.openlocfilehash: d89739cf8bd2612b97bbf338e9685e9888b6216b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 347cedbf5fdebc985d75c6cad3c28f17d1344993
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062215"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429622"
 ---
 # <a name="generated-values"></a>Valeurs générées
 
@@ -34,7 +34,7 @@ Selon le fournisseur de base de données utilisé, les valeurs peuvent être gé
 Si vous ajoutez une entité au contexte qui a une valeur affectée à la propriété, EF tente d’insérer cette valeur au lieu d’en générer une nouvelle. Une propriété est considérée comme ayant une valeur affectée si la valeur CLR par défaut n’est pas affectée ( `null` pour, pour, pour, `string` `0` `int` `Guid.Empty` `Guid` etc.). Pour plus d’informations, consultez [valeurs explicites pour les propriétés générées](xref:core/saving/explicit-values-generated-properties).
 
 > [!WARNING]
-> La façon dont la valeur est générée pour les entités ajoutées dépend du fournisseur de base de données utilisé. Les fournisseurs de base de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, mais d’autres peuvent vous obliger à configurer manuellement la manière dont la valeur est générée.
+> La façon dont la valeur est générée pour les entités ajoutées dépend du fournisseur de base de données utilisé. Les fournisseurs de bases de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, mais d’autres peuvent vous obliger à configurer manuellement la manière dont la valeur est générée.
 >
 > Par exemple, lors de l’utilisation de SQL Server, les valeurs sont générées automatiquement pour `GUID` les propriétés (à l’aide de l’algorithme de GUID SQL Server séquentiel). Toutefois, si vous spécifiez qu’une `DateTime` propriété est générée lors de l’ajout, vous devez configurer un moyen de générer les valeurs. Pour ce faire, vous pouvez configurer une valeur par défaut de `GETDATE()` , voir [valeurs par défaut](#default-values).
 
@@ -45,9 +45,9 @@ La valeur générée à l’ajout ou à la mise à jour signifie qu’une nouvel
 Comme `value generated on add` , si vous spécifiez une valeur pour la propriété sur une instance nouvellement ajoutée d’une entité, cette valeur est insérée au lieu d’une valeur générée. Il est également possible de définir une valeur explicite lors de la mise à jour. Pour plus d’informations, consultez [valeurs explicites pour les propriétés générées](xref:core/saving/explicit-values-generated-properties).
 
 > [!WARNING]
-> La façon dont la valeur est générée pour les entités ajoutées et mises à jour dépend du fournisseur de base de données utilisé. Les fournisseurs de base de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, tandis que d’autres vous obligent à configurer manuellement la façon dont la valeur est générée.
+> La façon dont la valeur est générée pour les entités ajoutées et mises à jour dépend du fournisseur de base de données utilisé. Les fournisseurs de bases de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, tandis que d’autres vous obligent à configurer manuellement la manière dont la valeur est générée.
 >
-> Par exemple, lors de l’utilisation de SQL Server, `byte[]` les propriétés définies comme générées lors de l’ajout ou de la mise à jour et marquées comme jetons d’accès concurrentiel sont configurées avec le type de données, de `rowversion` sorte que les valeurs sont générées dans la base de données. Toutefois, si vous spécifiez qu’une `DateTime` propriété est générée lors de l’ajout ou de la mise à jour, vous devez configurer un moyen de générer les valeurs. Pour ce faire, vous pouvez configurer une valeur par défaut `GETDATE()` (voir les [valeurs par défaut](#default-values)) pour générer des valeurs pour les nouvelles lignes. Vous pouvez ensuite utiliser un déclencheur de base de données pour générer des valeurs lors des mises à jour (par exemple, le déclencheur suivant).
+> Par exemple, lors de l’utilisation de SQL Server, les `byte[]` propriétés définies comme générées lors de l’ajout ou de la mise à jour et marquées comme jetons d’accès concurrentiel sont configurées avec le type de données, de `rowversion` sorte que les valeurs sont générées dans la base de données. Toutefois, si vous spécifiez qu’une `DateTime` propriété est générée lors de l’ajout ou de la mise à jour, vous devez configurer un moyen de générer les valeurs. Pour ce faire, vous pouvez configurer une valeur par défaut `GETDATE()` (voir les [valeurs par défaut](#default-values)) pour générer des valeurs pour les nouvelles lignes. Vous pouvez ensuite utiliser un déclencheur de base de données pour générer des valeurs lors des mises à jour (par exemple, le déclencheur suivant).
 >
 > [!code-sql[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.sql)]
 
@@ -94,19 +94,23 @@ La spécification d’une valeur par défaut configure implicitement la proprié
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
-***
+**_
 
 > [!WARNING]
-> Cela permet simplement à EF de savoir que les valeurs sont générées pour les entités ajoutées ou mises à jour, mais elle ne garantit pas que EF configure le mécanisme réel pour générer des valeurs. Pour plus d’informations, consultez la section [valeur générée dans la section Ajouter ou mettre à jour](#value-generated-on-add-or-update) .
+> Cela permet simplement à EF de savoir que les valeurs sont générées pour les entités ajoutées ou mises à jour, mais elle ne garantit pas qu’EF configure le mécanisme réel pour générer des valeurs. Pour plus d’informations, consultez la section [valeur générée dans la section Ajouter ou mettre à jour](#value-generated-on-add-or-update) .
 
 ### <a name="computed-columns"></a>Colonnes calculées
 
-Sur certaines bases de données relationnelles, une colonne peut être configurée de manière à ce que sa valeur soit calculée dans la base de données, généralement avec une expression faisant référence à d’autres colonnes :
+Sur la plupart des bases de données relationnelles, une colonne peut être configurée de manière à ce que sa valeur soit calculée dans la base de données, généralement avec une expression faisant référence à d’autres colonnes :
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=ComputedColumn&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=DefaultComputedColumn)]
+
+L’instruction ci-dessus crée une colonne calculée _virtual *, dont la valeur est calculée chaque fois qu’elle est extraite de la base de données. Vous pouvez également spécifier qu’une colonne calculée soit *stockée* (parfois appelée *PERSISTED* ), ce qui signifie qu’elle est calculée à chaque mise à jour de la ligne et qu’elle est stockée sur le disque avec les colonnes normales :
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ComputedColumn.cs?name=StoredComputedColumn)]
 
 > [!NOTE]
-> Dans certains cas, la valeur de la colonne est calculée chaque fois qu’elle est extraite (parfois appelée colonnes *virtuelles* ), et dans d’autres, elle est calculée à chaque mise à jour de la ligne et stockée (parfois appelée colonnes *stockées* ou *conservées* ). Cela varie d’un fournisseur de base de données à l’autre.
+> La prise en charge de la création de colonnes calculées stockées a été ajoutée dans EF Core 5,0.
 
 ## <a name="no-value-generation"></a>Aucune génération de valeur
 

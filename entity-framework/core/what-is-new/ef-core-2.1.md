@@ -4,12 +4,12 @@ description: Modifications et améliorations dans Entity Framework Core 2,1
 author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.1
-ms.openlocfilehash: c98a44f9bc06447bb41f0278c59b412f770c5bd4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: f235c310cbd336da65cd05d25e1338d87534eb2a
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065704"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429336"
 ---
 # <a name="new-features-in-ef-core-21"></a>Nouvelles fonctionnalités d’EF Core 2.1
 
@@ -154,7 +154,7 @@ public class Order
 
 Les commandes _ef-dotnet_ font désormais partie du SDK .NET Core. Ainsi, il n’est plus nécessaire d’utiliser DotNetCliToolReference dans le projet pour pouvoir utiliser des migrations ou structurer un DbContext à partir d’une base de données existante.
 
-Pour plus d’informations sur la façon d’activer les outils en ligne de commande pour différentes versions du SDK .NET Core et EF Core, consultez la section sur [l’installation des outils](xref:core/miscellaneous/cli/dotnet#installing-the-tools).
+Pour plus d’informations sur la façon d’activer les outils en ligne de commande pour différentes versions du SDK .NET Core et EF Core, consultez la section sur [l’installation des outils](xref:core/cli/dotnet#installing-the-tools).
 
 ## <a name="microsoftentityframeworkcoreabstractions-package"></a>Package Microsoft.EntityFrameworkCore.Abstractions
 
@@ -178,4 +178,4 @@ var query = context.People.FromSql(sql);
 Nous vous recommandons d’utiliser EF Core 2.1 avec des fournisseurs qui ont été mis à jour ou au moins testés pour fonctionner avec EF Core 2.1.
 
 > [!TIP]
-> Si vous vous heurtez à des incompatibilités inattendues ou à d’autres problèmes liés aux nouvelles fonctionnalités, ou si vous avez des commentaires à propos de ces nouveautés, utilisez [notre système de suivi des problèmes](https://github.com/aspnet/EntityFrameworkCore/issues/new) pour nous en faire part.
+> Si vous vous heurtez à des incompatibilités inattendues ou à d’autres problèmes liés aux nouvelles fonctionnalités, ou si vous avez des commentaires à propos de ces nouveautés, utilisez [notre système de suivi des problèmes](https://github.com/dotnet/efcore/issues/new) pour nous en faire part.

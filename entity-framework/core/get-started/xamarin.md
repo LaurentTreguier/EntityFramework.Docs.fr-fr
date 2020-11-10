@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: 0552038d471e294834bed9e3bf1f05fd74c39192
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a08c5582b063f4a7748a43811c2bf28e8f3e5c14
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062540"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429908"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Prise en main avec EF Core et Xamarin
 
@@ -75,11 +75,11 @@ Il est supposé que vous êtes familiarisé avec les rubriques Xamarin. Forms re
 
 > [!IMPORTANT]
 > Entity Framework Core utilise la réflexion pour appeler des fonctions que l’éditeur de liens Xamarin. iOS peut supprimer en même temps que les configurations en mode **Release** . Vous pouvez éviter cela de deux manières.
-> 
+>
 > * La première consiste à ajouter des `--linkskip System.Core` **arguments mTouch supplémentaires** dans les options de **génération iOS** .
 > * Vous pouvez également définir le comportement de l' **éditeur de liens** Xamarin. iOS sur `Don't Link` dans les options de **génération iOS** .
 > [Cet article explique plus en détail l’éditeur de liens Xamarin. iOS](/xamarin/ios/deploy-test/linker) , y compris comment définir le comportement sur Xamarin. iOS.
-> 
+>
 
 ## <a name="entity-framework-core-nuget-packages"></a>Packages NuGet Entity Framework Core
 
@@ -186,7 +186,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a>Supprimer
+### <a name="delete"></a>DELETE
 
 * Supprimer tous les enregistrements avec des enregistrements en cascade vers enfants.
   * La `DeleteAll_Clicked` fonction de `BlogsPage.xaml.cs` supprime tous les `Blog` enregistrements de la base de données SQLite et répercute les suppressions sur tous les `Blog` enregistrements enfants `Post` .
@@ -206,6 +206,6 @@ Dans ce guide de prise en main, vous avez appris à utiliser une application Xam
 
 Autres Entity Framework Core sujets intéressants pour les développeurs Xamarin :
 
-* [Configuration d’un `DbContext`](xref:core/miscellaneous/configuring-dbcontext)
+* [Configuration d’un `DbContext`](xref:core/dbcontext-configuration/index)
 * Découvrir les [expressions de requête LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)
 * [Configurer votre modèle](xref:core/modeling/index) pour spécifier des éléments tels que la longueur [requise](xref:core/modeling/entity-properties#required-and-optional-properties) et la longueur [maximale](xref:core/modeling/entity-properties#maximum-length)

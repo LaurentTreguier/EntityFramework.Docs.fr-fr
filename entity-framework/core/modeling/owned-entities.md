@@ -4,12 +4,12 @@ description: Comment configurer des agrégats ou des types d’entités détenus
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: a49d9aab735232dfd5a3db456410d527f94f3c18
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063775"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429435"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -36,6 +36,10 @@ Il est également possible d’utiliser la `OwnsOne` méthode dans `OnModelCreat
 Si la `ShippingAddress` propriété est privée dans le `Order` type, vous pouvez utiliser la version de chaîne de la `OwnsOne` méthode :
 
 [!code-csharp[OwnsOneString](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsOneString)]
+
+Le modèle ci-dessus est mappé au schéma de base de données suivant :
+
+![Sceenshot du modèle de base de données pour l’entité contenant la référence d’appartenance](_static/owned-entities-ownsone.png)
 
 Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/OwnedEntities) .
 
@@ -68,6 +72,10 @@ Par défaut, la clé primaire utilisée pour le type détenu référencé via la
 Pour configurer un autre appel de clé primaire `HasKey` .
 
 [!code-csharp[OwnsMany](../../../samples/core/Modeling/OwnedEntities/OwnedEntityContext.cs?name=OwnsMany)]
+
+Le modèle ci-dessus est mappé au schéma de base de données suivant :
+
+![Sceenshot du modèle de base de données pour l’entité contenant la collection détenue](_static/owned-entities-ownsmany.png)
 
 ## <a name="mapping-owned-types-with-table-splitting"></a>Mappage de types détenus avec le fractionnement de table
 
@@ -119,6 +127,10 @@ Notez l' `WithOwner` appel utilisé pour définir la propriété de navigation q
 Il est également possible d’obtenir ce résultat à l’aide `OwnedAttribute` de sur `OrderDetails` et `StreetAddress` .
 
 Notez également l' `Navigation` appel. Dans EFCore 5,0, les propriétés de navigation vers les types détenus peuvent être configurées de manière plus approfondie [comme pour les propriétés de navigation non détenues](xref:core/modeling/relationships#configuring-navigation-properties).
+
+Le modèle ci-dessus est mappé au schéma de base de données suivant :
+
+![Sceenshot du modèle de base de données pour l’entité contenant des références d’appartenance imbriquées](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Stockage des types détenus dans des tables distinctes
 

@@ -2,14 +2,14 @@
 title: Vue d’ensemble des migrations – EF Core
 description: Vue d’ensemble de la gestion des schémas de la base de données avec Entity Framework Core à l’aide des migrations.
 author: bricelam
-ms.date: 05/06/2020
+ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: eea2c32cccbb678cacaa63760c4f7d36d2d19bb1
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 9f1c9e266d60b7ed4aed783bb8e01864c93867ea
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062280"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429817"
 ---
 # <a name="migrations-overview"></a>Vue d’ensemble des migrations
 
@@ -38,10 +38,10 @@ Pendant le développement, vous avez peut-être utilisé les [API de création e
 
 ### <a name="install-the-tools"></a>Installer les outils
 
-Tout d’abord, vous devez installer les [outils en ligne de commande EF Core](xref:core/miscellaneous/cli/index) :
+Tout d’abord, vous devez installer les [outils en ligne de commande EF Core](xref:core/cli/index) :
 
-* Nous recommandons généralement d’utiliser les [outils CLI .NET Core](xref:core/miscellaneous/cli/dotnet), qui fonctionnent sur toutes les plateformes.
-* Si vous avez l’habitude de travailler dans Visual Studio ou que vous connaissez les migrations EF6, vous pouvez également utiliser les [outils de la console du gestionnaire de package](xref:core/miscellaneous/cli/powershell).
+* Nous recommandons généralement d’utiliser les [outils CLI .NET Core](xref:core/cli/dotnet), qui fonctionnent sur toutes les plateformes.
+* Si vous avez l’habitude de travailler dans Visual Studio ou que vous connaissez les migrations EF6, vous pouvez également utiliser les [outils de la console du gestionnaire de package](xref:core/cli/powershell).
 
 ### <a name="create-your-first-migration"></a>Première création d’une migration
 
@@ -59,9 +59,9 @@ dotnet ef migrations add InitialCreate
 Add-Migration InitialCreate
 ```
 
-***
+**_
 
-EF Core créera un répertoire nommé **Migrations** dans votre projet et générera des fichiers. Il est judicieux d’inspecter précisément les fichiers en question, et éventuellement de les modifier, mais nous allons nous en passer pour l’instant.
+EF Core créera un répertoire appelé _ *migrations* * dans votre projet et générera des fichiers. Il est judicieux d’inspecter précisément les fichiers en question, et éventuellement de les modifier, mais nous allons nous en passer pour l’instant.
 
 ### <a name="create-your-database-and-schema"></a>Création d’une base de données et d’un schéma
 
@@ -72,13 +72,14 @@ Vous pouvez maintenant demander à EF de créer votre base de données et votre 
 ```dotnetcli
 dotnet ef database update
 ```
+
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Update-Database
 ```
 
-***
+**_
 
 Votre application est prête à s’exécuter sur votre nouvelle base de données, sans que vous ayez eu à écrire une seule ligne de code SQL. Sachez que cette méthode d’application des migrations, idéale pour le développement local, est moins adaptée aux environnements de production. Pour plus d’informations, consultez la page [Application des migrations](xref:core/managing-schemas/migrations/applying).
 
@@ -109,7 +110,7 @@ dotnet ef migrations add AddBlogCreatedTimestamp
 Add-Migration AddBlogCreatedTimestamp
 ```
 
-***
+_*_
 
 Comme vous pouvez le constater, nous donnons aux migrations un nom descriptif pour faciliter par la suite la compréhension de l’historique du projet.
 
@@ -117,21 +118,39 @@ Comme il ne s’agit pas de la première migration du projet, EF Core compare ma
 
 Vous pouvez maintenant appliquer votre migration comme tout à l’heure :
 
+<!--markdownlint-disable MD024-->
+
 #### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef database update
 ```
+
 #### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Update-Database
 ```
 
-***
+<!--markdownlint-enable MD024-->
+
+_*_
 
 Cette fois, EF détecte que la base de données existe déjà. Par ailleurs, lors de l’application de la première migration, ce fait a été enregistré dans une table d’historique des migrations spéciale de la base de données. Ainsi, EF peut appliquer automatiquement la nouvelle migration uniquement.
 
+### <a name="excluding-parts-of-your-model"></a>Exclusion de parties de votre modèle
+
+> [!NOTE]
+> Cette fonctionnalité a été ajoutée dans EF Core 5,0.
+
+Parfois, vous pouvez faire référence à des types à partir d’un autre DbContext. Cela peut entraîner des conflits de migration. Pour éviter cela, excluez le type des migrations de l’un des DbContexts.
+
+[!code-csharp[](../../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs#TableExcludeFromMigrations)]
+
 ### <a name="next-steps"></a>Étapes suivantes
 
-Cette page ne constitue qu’une courte initiation aux migrations. Pour plus d’informations sur la [gestion des migrations](xref:core/managing-schemas/migrations/managing), leur [application](xref:core/managing-schemas/migrations/applying) et d’autres aspects, consultez les autres pages de la documentation. La [référence de l’outil CLI .NET Core](xref:core/miscellaneous/cli/index) contient également des informations utiles sur les différentes commandes.
+Cette page ne constitue qu’une courte initiation aux migrations. Pour plus d’informations sur la [gestion des migrations](xref:core/managing-schemas/migrations/managing), leur [application](xref:core/managing-schemas/migrations/applying) et d’autres aspects, consultez les autres pages de la documentation. La [référence de l’outil CLI .NET Core](xref:core/cli/index) contient également des informations utiles sur les différentes commandes.
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+_ [EF Core session réunions](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) de la communauté en passant par les nouvelles fonctionnalités de migration de EF Core 5,0.

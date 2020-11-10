@@ -4,12 +4,12 @@ description: Stratégies d’application des migrations de schéma vers des base
 author: bricelam
 ms.date: 05/06/2020
 uid: core/managing-schemas/migrations/applying
-ms.openlocfilehash: 68d482a34e5f5c7acf968acdfd8825e1d21ecb13
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 7ff84636fb0999941b832c6a2d65d77b0ad368c5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062345"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429847"
 ---
 # <a name="applying-migrations"></a>Application de migrations
 
@@ -83,6 +83,7 @@ L’exemple suivant génère un script SQL à partir de la `from` migration spé
 ```powershell
 Script-Migration AddNewTables AddAuditTable
 ```
+
 Vous pouvez utiliser un `from` plus récent que le `to` afin de générer un script de restauration. *Prenez note des scénarios de pertes de données potentielles.*
 
 ***
@@ -98,25 +99,25 @@ Les scripts SQL générés ci-dessus ne peuvent être appliqués que pour modifi
 
 La commande suivante génère des migrations idempotent :
 
-#### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
+### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
 ```dotnetcli
 dotnet ef migrations script --idempotent
 ```
 
-#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Script-Migration -Idempotent
 ```
 
-***
+**_
 
 ## <a name="command-line-tools"></a>Outils de ligne de commande
 
 Les outils en ligne de commande EF peuvent être utilisés pour appliquer des migrations à une base de données. Bien qu’elle soit productive pour le développement et le test de migrations locaux, cette approche n’est pas idéale pour la gestion des bases de données de production :
 
-* Les commandes SQL sont appliquées directement par l’outil, sans donner aux développeurs la possibilité de les inspecter ou de les modifier. Cela peut être dangereux dans un environnement de production.
+_ Les commandes SQL sont appliquées directement par l’outil, sans donner au développeur la possibilité de les inspecter ou de les modifier. Cela peut être dangereux dans un environnement de production.
 * Le kit de développement logiciel (SDK) .NET et l’outil EF doivent être installés sur les serveurs de production.
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
@@ -159,7 +160,7 @@ Notez que cela peut être utilisé pour revenir à une migration antérieure ég
 
 ***
 
-Pour plus d’informations sur l’application des migrations à l’aide des outils en ligne de commande, consultez la référence sur les [outils de EF Core](xref:core/miscellaneous/cli/index).
+Pour plus d’informations sur l’application des migrations à l’aide des outils en ligne de commande, consultez la référence sur les [outils de EF Core](xref:core/cli/index).
 
 ## <a name="apply-migrations-at-runtime"></a>Appliquer des migrations au moment de l’exécution
 

@@ -4,12 +4,12 @@ description: Instructions et notes relatives à la mise à niveau vers Entity Fr
 author: ajcvickers
 ms.date: 08/13/2017
 uid: core/what-is-new/ef-core-2.0/upgrade
-ms.openlocfilehash: c7c736629209da99f191ceb0d4000d19f40414b9
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 5054661d308e7ea6acd433981dfb2af6026b7765
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063437"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430090"
 ---
 # <a name="upgrading-applications-from-previous-versions-to-ef-core-20"></a>Mise à niveau des applications des versions précédentes vers EF Core 2,0
 
@@ -17,11 +17,11 @@ Nous avons pris la possibilité d’affiner de manière significative nos API et
 
 La mise à jour d’une application existante vers EF Core 2,0 peut nécessiter les éléments suivants :
 
-1. Mise à niveau de l’implémentation .NET cible de l’application vers une implémentation qui prend en charge .NET Standard 2,0. Pour plus d’informations, consultez [implémentations .net prises en charge](xref:core/platforms/index) .
+1. Mise à niveau de l’implémentation .NET cible de l’application vers une implémentation qui prend en charge .NET Standard 2,0. Pour plus d’informations, consultez [implémentations .net prises en charge](xref:core/miscellaneous/platforms) .
 
 2. Identifiez un fournisseur pour la base de données cible qui est compatible avec EF Core 2,0. Consultez [EF Core 2,0 requiert un fournisseur de base de données 2,0](#ef-core-20-requires-a-20-database-provider) ci-dessous.
 
-3. Mise à niveau de tous les packages de EF Core (Runtime et outils) vers 2,0. Pour plus d’informations, consultez [installation de EF Core](xref:core/get-started/install/index) .
+3. Mise à niveau de tous les packages de EF Core (Runtime et outils) vers 2,0. Pour plus d’informations, consultez [installation de EF Core](xref:core/get-started/overview/install) .
 
 4. Apportez les modifications nécessaires au code pour compenser les modifications avec rupture décrites dans le reste de ce document.
 
@@ -58,7 +58,7 @@ namespace AspNetCoreDotNetCore2._0App
 }
 ```
 
-L’adoption de ce nouveau modèle lors de la mise à jour des applications vers 2,0 est vivement recommandée et est nécessaire pour que des fonctionnalités de produit telles que Entity Framework Core migrations fonctionnent. L’autre alternative courante consiste à [implémenter *IDesignTimeDbContextFactory \<TContext> *](xref:core/miscellaneous/cli/dbcontext-creation#from-a-design-time-factory).
+L’adoption de ce nouveau modèle lors de la mise à jour des applications vers 2,0 est vivement recommandée et est nécessaire pour que des fonctionnalités de produit telles que Entity Framework Core migrations fonctionnent. L’autre alternative courante consiste à [implémenter *IDesignTimeDbContextFactory \<TContext>*](xref:core/cli/dbcontext-creation#from-a-design-time-factory).
 
 ## <a name="idbcontextfactory-renamed"></a>IDbContextFactory renommée
 
@@ -96,7 +96,7 @@ Remarque : ces modifications ne doivent pas avoir d’impact sur la plupart du 
 
 Les ID d’événement pour les messages envoyés à un [ILogger](/dotnet/api/microsoft.extensions.logging.ilogger) ont été modifiés dans 2,0. Les ID d’événement sont maintenant uniques dans le code EF Core. En outre, ces messages suivent désormais le modèle standard de la journalisation structurée utilisé, par exemple, par le modèle MVC.
 
-Les catégories d’enregistreurs d’événements ont également changé. Il existe désormais un jeu connu de catégories accessibles par le biais de [DbLoggerCategory](https://github.com/aspnet/EntityFrameworkCore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs).
+Les catégories d’enregistreurs d’événements ont également changé. Il existe désormais un jeu connu de catégories accessibles par le biais de [DbLoggerCategory](https://github.com/dotnet/efcore/blob/rel/2.0.0/src/EFCore/DbLoggerCategory.cs).
 
 Les événements [DiagnosticSource](https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) utilisent désormais les mêmes noms d’ID d’événements que les `ILogger` messages correspondants. Les charges utiles d’événement sont tous des types nominaux dérivés de [EventData](/dotnet/api/microsoft.entityframeworkcore.diagnostics.eventdata).
 

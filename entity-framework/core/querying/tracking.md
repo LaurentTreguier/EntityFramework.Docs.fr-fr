@@ -2,14 +2,14 @@
 title: Suivi et requêtes de No-Tracking-EF Core
 description: Informations sur le suivi et les requêtes sans suivi dans Entity Framework Core
 author: smitpatel
-ms.date: 10/10/2019
+ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: dff6c14edcd69e7d16be8bab5fa3088c2c1288e1
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b4c059f9a9b726697009589271e007bd1d2afd56
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063658"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430441"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Suivi et requêtes de No-Tracking
 
@@ -27,9 +27,11 @@ Par défaut, les requêtes qui retournent des types d’entités ont le suivi ac
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#Tracking)]
 
+Lorsque les résultats sont retournés dans une requête de suivi, EF Core vérifie si l’entité est déjà dans le contexte. Si EF Core trouve une entité existante, la même instance est retournée. EF Core ne remplacera pas les valeurs actuelles et d’origine des propriétés de l’entité dans l’entrée avec les valeurs de la base de données. Si l’entité est introuvable dans le contexte, EF Core crée une nouvelle instance d’entité et l’attache au contexte. Les résultats de la requête ne contiennent pas d’entité, qui est ajoutée au contexte mais pas encore enregistrée dans la base de données.
+
 ## <a name="no-tracking-queries"></a>Pas de suivi des requêtes
 
-Les requêtes sans suivi sont utiles lorsque les résultats sont utilisés dans un scénario en lecture seule. Elles sont plus rapides à exécuter, car il n’est pas nécessaire de configurer les informations de suivi des modifications. Si vous n’avez pas besoin de mettre à jour les entités récupérées de la base de données, une requête de non-suivi doit être utilisée. Vous pouvez permuter une requête individuelle pour qu’elle soit sans suivi.
+Les requêtes sans suivi sont utiles lorsque les résultats sont utilisés dans un scénario en lecture seule. Elles sont plus rapides à exécuter, car il n’est pas nécessaire de configurer les informations de suivi des modifications. Si vous n’avez pas besoin de mettre à jour les entités récupérées de la base de données, une requête de non-suivi doit être utilisée. Vous pouvez permuter une requête individuelle pour qu’elle soit sans suivi. Aucune requête de suivi ne vous donnera également des résultats en fonction de ce qui se trouve dans la base de données, en ce qui concerne les modifications locales ou les entités ajoutées.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTracking)]
 
@@ -40,6 +42,10 @@ Vous pouvez également modifier le comportement de suivi par défaut au niveau d
 ## <a name="identity-resolution"></a>Résolution de l'identité
 
 Dans la mesure où une requête de suivi utilise le suivi des modifications, EF Core effectue la résolution d’identité dans une requête de suivi. Lors de la matérialisation d’une entité, EF Core retourne la même instance d’entité à partir du dispositif de suivi des modifications si elle fait déjà l’objet d’un suivi. Si le résultat contient plusieurs fois la même entité, vous obtenez la même instance pour chaque occurrence. Les requêtes de non-suivi n’utilisent pas le dispositif de suivi des modifications et n’effectuent pas de résolution d’identité. Ainsi, vous obtenez une nouvelle instance de l’entité même lorsque la même entité est contenue plusieurs fois dans le résultat. Ce comportement est différent dans les versions antérieures à EF Core 3,0, consultez [versions précédentes](#previous-versions).
+
+À compter de EF Core 5,0, vous pouvez combiner les deux comportements ci-dessus dans la même requête. Autrement dit, vous pouvez avoir une requête aucune suivi, ce qui entraîne la résolution de l’identité dans les résultats. Tout comme l' `AsNoTracking()` opérateur interrogeable, nous avons ajouté un autre opérateur `AsNoTrackingWithIdentityResolution()` . Une entrée associée est également ajoutée dans <xref:Microsoft.EntityFrameworkCore.QueryTrackingBehavior> enum. Quand vous configurez la requête pour qu’elle utilise la résolution d’identité sans suivi, nous utilisons un dispositif de suivi des modifications autonome en arrière-plan lors de la génération des résultats de la requête afin que chaque instance ne soit matérialisée qu’une seule fois. Étant donné que ce dispositif de suivi des modifications est différent de celui du contexte, les résultats ne sont pas suivis par le contexte. Une fois la requête entièrement énumérée, le dispositif de suivi des modifications est hors de portée et récupéré par le garbage collector en fonction des besoins.
+
+[!code-csharp[Main](../../../samples/core/Querying/Tracking/Program.cs#NoTrackingWithIdentityResolution)]
 
 ## <a name="tracking-and-custom-projections"></a>Suivi et projections personnalisées
 

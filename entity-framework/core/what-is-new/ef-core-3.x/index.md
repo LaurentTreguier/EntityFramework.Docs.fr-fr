@@ -4,12 +4,12 @@ description: Modifications et améliorations apportées dans Entity Framework Co
 author: ajcvickers
 ms.date: 09/05/2020
 uid: core/what-is-new/ef-core-3.x/index
-ms.openlocfilehash: b987ca1fdbe46105162c1c7623822e15bd01ef25
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 0c005345505c1c2f3712e489ab69ec4a20564293
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065626"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429258"
 ---
 # <a name="new-features-in-entity-framework-core-3x"></a>Nouvelles fonctionnalités d’Entity Framework Core 3.x
 
@@ -130,7 +130,7 @@ public class HintCommandInterceptor : DbCommandInterceptor
 }
 ```
 
-Et l’enregistrer avec votre `DbContext` :
+Et inscrivez-le auprès de votre `DbContext` :
 
 ```csharp
 services.AddDbContext(b => b
@@ -143,7 +143,7 @@ services.AddDbContext(b => b
 Les types de requêtes qui représentent des données pouvant être lues à partir de la base de données, mais ne pouvant pas être mises à jour, ont été renommés [types d’entités sans clé](xref:core/modeling/keyless-entity-types).
 Comme ils sont très bien adaptés au mappage d’affichages de bases de données dans la plupart des scénarios, EF Core crée désormais automatiquement des types d’entités sans clé lors de l’ingénierie à rebours d’affichages de base de données.
 
-Par exemple, avec l’[outil dotnet ef command-line](xref:core/miscellaneous/cli/dotnet), vous pouvez saisir :
+Par exemple, avec l’[outil dotnet ef command-line](xref:core/cli/dotnet), vous pouvez saisir :
 
 ```dotnetcli
 dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Trusted_Connection=True;" Microsoft.EntityFrameworkCore.SqlServer
@@ -202,5 +202,5 @@ Pour plus d'informations, consultez les [nouveautés de la base de données dans
 
 Certaines fonctionnalités prévues à l’origine pour EF Core 3 ont été reportées pour de prochaines versions :
 
-- Capacité d’ignorer des parties d’un modèle lors de migrations, référence de suivi [#2725](https://github.com/aspnet/EntityFrameworkCore/issues/2725).
-- Entités des conteneurs de propriétés, suivies comme deux problèmes distincts : [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914) pour les entités de type partagé et [#13610](https://github.com/aspnet/EntityFrameworkCore/issues/13610) pour le support du mappage de propriété.
+- Capacité d’ignorer des parties d’un modèle lors de migrations, référence de suivi [#2725](https://github.com/dotnet/efcore/issues/2725).
+- Entités des conteneurs de propriétés, suivies comme deux problèmes distincts : [#9914](https://github.com/dotnet/efcore/issues/9914) pour les entités de type partagé et [#13610](https://github.com/dotnet/efcore/issues/13610) pour le support du mappage de propriété.

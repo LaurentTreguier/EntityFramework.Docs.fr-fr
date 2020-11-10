@@ -4,19 +4,19 @@ description: Modifications et améliorations apportées dans Entity Framework Co
 author: ajcvickers
 ms.date: 02/20/2018
 uid: core/what-is-new/ef-core-2.0
-ms.openlocfilehash: 7438d8ad1a5ade971af71186a20ec57fd83713de
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a670cba56c9ba4ebc45c81c1185faa114b78c146
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063450"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429375"
 ---
 # <a name="new-features-in-ef-core-20"></a>Nouvelles fonctionnalités d’EF Core 2.0
 
 ## <a name="net-standard-20"></a>.NET Standard 2.0
 
 EF Core cible désormais .NET Standard 2.0, ce qui signifie qu’il peut fonctionner avec .NET Core 2.0, .NET Framework 4.6.1 et d’autres bibliothèques qui implémentent .NET Standard 2.0.
-Pour plus d’informations sur ce qui est pris en charge, consultez [Implémentations .NET prises en charge](xref:core/platforms/index).
+Pour plus d’informations sur ce qui est pris en charge, consultez [Implémentations .NET prises en charge](xref:core/miscellaneous/platforms).
 
 ## <a name="modeling"></a>Modélisation
 

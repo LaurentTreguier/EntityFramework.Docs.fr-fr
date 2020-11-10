@@ -2,52 +2,45 @@
 title: Migrations avec plusieurs fournisseurs-EF Core
 description: Utilisation de migrations pour gérer les schémas de base de données lors du ciblage de plusieurs fournisseurs de bases de données avec Entity Framework Core
 author: bricelam
-ms.date: 11/08/2017
+ms.date: 10/29/2020
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: f44abb5156ea3a175c68c1a0ec23ff41a9d13452
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fb8c6121a4baccf573e57b52ebeb3fcd29fe2cba
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061981"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429778"
 ---
 # <a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
 
-Les [outils de EF corent][1] uniquement les migrations de l’échafaudage pour le fournisseur actif. Toutefois, il peut arriver que vous souhaitiez utiliser plusieurs fournisseurs (par exemple Microsoft SQL Server et SQLite) avec votre DbContext. Il existe deux façons de gérer cela avec les migrations. Vous pouvez gérer deux ensembles de migrations, un pour chaque fournisseur, ou les fusionner dans un ensemble unique qui peut fonctionner sur les deux.
+Les [outils de EF corent](xref:core/cli/index) uniquement les migrations de l’échafaudage pour le fournisseur actif. Toutefois, il peut arriver que vous souhaitiez utiliser plusieurs fournisseurs (par exemple Microsoft SQL Server et SQLite) avec votre DbContext. Gérez-la en conservant plusieurs ensembles de migrations, un pour chaque fournisseur, et en ajoutant une migration à chaque modification de modèle pour chaque modèle.
 
-## <a name="two-migration-sets"></a>Deux ensembles de migration
+## <a name="using-multiple-context-types"></a>Utilisation de plusieurs types de contexte
 
-Dans la première approche, vous générez deux migrations pour chaque modification de modèle.
-
-Pour ce faire, vous pouvez placer chaque ensemble de migration [dans un assembly distinct][2] et basculer manuellement le fournisseur actif (et l’assembly de migration) entre l’ajout des deux migrations.
-
-Une autre approche qui facilite l’utilisation des outils consiste à créer un nouveau type qui dérive de votre DbContext et qui remplace le fournisseur actif. Ce type est utilisé au moment de la conception lors de l’ajout ou de l’application de migrations.
+Une façon de créer plusieurs jeux de migration consiste à utiliser un type DbContext par fournisseur.
 
 ```csharp
-class MySqliteDbContext : MyDbContext
+class SqliteBlogContext : BlogContext
 {
     protected override void OnConfiguring(DbContextOptionsBuilder options)
         => options.UseSqlite("Data Source=my.db");
 }
 ```
 
-> [!NOTE]
-> Étant donné que chaque jeu de migration utilise ses propres types DbContext, cette approche ne nécessite pas l’utilisation d’un assembly de migrations distinct.
-
-Lorsque vous ajoutez une nouvelle migration, spécifiez les types de contexte.
+Spécifiez le type de contexte lors de l’ajout de nouvelles migrations.
 
 ### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
 
 ```dotnetcli
-dotnet ef migrations add InitialCreate --context MyDbContext --output-dir Migrations/SqlServerMigrations
-dotnet ef migrations add InitialCreate --context MySqliteDbContext --output-dir Migrations/SqliteMigrations
+dotnet ef migrations add InitialCreate --context BlogContext --output-dir Migrations/SqlServerMigrations
+dotnet ef migrations add InitialCreate --context SqliteBlogContext --output-dir Migrations/SqliteMigrations
 ```
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
-Add-Migration InitialCreate -Context MyDbContext -OutputDir Migrations\SqlServerMigrations
-Add-Migration InitialCreate -Context MySqliteDbContext -OutputDir Migrations\SqliteMigrations
+Add-Migration InitialCreate -Context BlogContext -OutputDir Migrations\SqlServerMigrations
+Add-Migration InitialCreate -Context SqliteBlogContext -OutputDir Migrations\SqliteMigrations
 ```
 
 ***
@@ -55,28 +48,39 @@ Add-Migration InitialCreate -Context MySqliteDbContext -OutputDir Migrations\Sql
 > [!TIP]
 > Vous n’avez pas besoin de spécifier le répertoire de sortie pour les migrations suivantes, car elles sont créées en tant que frères au dernier.
 
-## <a name="one-migration-set"></a>Un jeu de migration
+## <a name="using-one-context-type"></a>Utilisation d’un type de contexte
 
-Si vous n’aimez pas avoir deux ensembles de migrations, vous pouvez les combiner manuellement en un seul ensemble qui peut être appliqué aux deux fournisseurs.
+Il est également possible d’utiliser un type DbContext. Cela nécessite actuellement le déplacement des migrations dans un assembly distinct. Pour obtenir des instructions sur la configuration de vos projets, reportez-vous à [la rubrique utilisation d’un projet de migration distinct](xref:core/managing-schemas/migrations/projects) .
 
-Les annotations peuvent coexister car un fournisseur ignore les annotations qu’il ne comprend pas. Par exemple, une colonne de clé primaire qui fonctionne avec Microsoft SQL Server et SQLite peut se présenter comme suit.
+> [!TIP]
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Schemas/TwoProjectMigrations).
 
-```csharp
-Id = table.Column<int>(nullable: false)
-    .Annotation("SqlServer:ValueGenerationStrategy",
-        SqlServerValueGenerationStrategy.IdentityColumn)
-    .Annotation("Sqlite:Autoincrement", true),
+À partir de EF Core 5,0, vous pouvez passer des arguments dans l’application à partir des outils. Cela peut permettre un flux de travail plus rationalisé qui évite d’avoir à apporter des modifications manuelles au projet lors de l’exécution des outils.
+
+Voici un modèle qui fonctionne bien lorsque vous utilisez un [hôte générique](/dotnet/core/extensions/generic-host).
+
+[!code-csharp[](../../../../samples/core/Schemas/TwoProjectMigrations/WorkerService1/Program.cs#snippet_CreateHostBuilder)]
+
+Étant donné que le générateur d’hôte par défaut lit la configuration à partir d’arguments de ligne de commande, vous pouvez spécifier le fournisseur lors de l’exécution des outils.
+
+### <a name="net-core-cli"></a>[CLI .NET Core](#tab/dotnet-core-cli)
+
+```dotnetcli
+dotnet ef migrations add MyMigration --project ../SqlServerMigrations -- --provider SqlServer
+dotnet ef migrations add MyMigration --project ../SqliteMigrations -- --provider Sqlite
 ```
 
-Si les opérations peuvent être appliquées uniquement pour un fournisseur, ou si elles sont différentes entre les fournisseurs, utilisez la `ActiveProvider` propriété pour déterminer quel fournisseur est actif :
+> [!TIP]
+> Le `--` jeton indique `dotnet ef` à traiter tout ce qui suit comme argument et ne tente pas de les analyser en tant qu’options. Les arguments supplémentaires non utilisés par `dotnet ef` sont transmis à l’application.
 
-```csharp
-if (migrationBuilder.ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")
-{
-    migrationBuilder.CreateSequence(
-        name: "EntityFrameworkHiLoSequence");
-}
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+
+```powershell
+Add-Migration MyMigration -Args "--provider SqlServer"
+Add-Migration MyMigration -Args "--provider Sqlite"
 ```
 
-  [1]: xref:core/miscellaneous/cli/index
-  [2]: xref:core/managing-schemas/migrations/projects
+***
+
+> [!NOTE]
+> La possibilité de spécifier des arguments supplémentaires pour l’application a été ajoutée dans EF Core 5,0. Si vous utilisez une version antérieure, spécifiez à la place des valeurs de configuration avec des variables d’environnement.

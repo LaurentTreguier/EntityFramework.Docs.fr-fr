@@ -4,12 +4,12 @@ description: Configuration des classements et du respect de la casse dans la bas
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: e327df8adf777bfa5603a71eca8297a051f5bd56
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: cced7e11f7bf02223d3f181677ad1707c1da4051
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071717"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429739"
 ---
 # <a name="collations-and-case-sensitivity"></a>Classements et respect de la casse
 
@@ -20,7 +20,7 @@ Le traitement de texte dans les bases de données peut être complexe et nécess
 
 ## <a name="introduction-to-collations"></a>Présentation des classements
 
-Un concept fondamental du traitement du texte est le *classement*, qui est un ensemble de règles déterminant comment les valeurs de texte sont classées et comparées à des fins d’égalité. Par exemple, bien qu’un classement ne respectant pas la casse ignore les différences entre les lettres majuscules et minuscules dans le cadre de la comparaison d’égalité, le classement qui respecte la casse ne le fait pas. Toutefois, étant donné que le respect de la casse est dépendant de la culture (par exemple, `i` et `I` représente une lettre différente en turc), il existe plusieurs classements qui ne respectent pas la casse, chacun avec son propre ensemble de règles. L’étendue des classements s’étend également au-delà du respect de la casse, aux autres aspects des données de caractères. en allemand, par exemple, il est parfois (mais pas toujours) souhaitable de traiter `ä` et `ae` comme identiques. Enfin, les classements définissent également le mode de *Tri*des valeurs de texte : en Allemand `ä` `a` , le place à la fin de l’alphabet.
+Un concept fondamental du traitement du texte est le *classement* , qui est un ensemble de règles déterminant comment les valeurs de texte sont classées et comparées à des fins d’égalité. Par exemple, bien qu’un classement ne respectant pas la casse ignore les différences entre les lettres majuscules et minuscules dans le cadre de la comparaison d’égalité, le classement qui respecte la casse ne le fait pas. Toutefois, étant donné que le respect de la casse est dépendant de la culture (par exemple, `i` et `I` représente une lettre différente en turc), il existe plusieurs classements qui ne respectent pas la casse, chacun avec son propre ensemble de règles. L’étendue des classements s’étend également au-delà du respect de la casse, aux autres aspects des données de caractères. en allemand, par exemple, il est parfois (mais pas toujours) souhaitable de traiter `ä` et `ae` comme identiques. Enfin, les classements définissent également le mode de *Tri* des valeurs de texte : en Allemand `ä` `a` , le place à la fin de l’alphabet.
 
 Toutes les opérations de texte dans une base de données utilisent un classement, qu’il s’agisse de manière explicite ou implicite, pour déterminer comment l’opération compare et trie les chaînes. La liste réelle des classements disponibles et leurs schémas de nommage sont spécifiques à la base de données. consultez [la section ci-dessous](#database-specific-information) pour obtenir des liens vers des pages de documentation pertinentes de différentes bases de données. Heureusement, la base de données permet généralement de définir un classement par défaut au niveau de la base de données ou de la colonne, et de spécifier explicitement le classement à utiliser pour des opérations spécifiques dans une requête.
 
@@ -69,9 +69,15 @@ Dans .NET, l’égalité des chaînes respecte la casse par défaut : `s1 == s2
 
 En outre, .NET fournit des surcharges de [`string.Equals`](/dotnet/api/system.string.equals#System_String_Equals_System_String_System_StringComparison_) l’acceptation d’un [`StringComparison`](/dotnet/api/system.stringcomparison) enum, ce qui permet de spécifier le respect de la casse et la culture pour la comparaison. Par défaut, EF Core s’abstient de traduire ces surcharges en SQL, et la tentative de les utiliser entraînera une exception. Pour une chose, EF Core ne sait pas quel classement sensible à la casse ou non sensible à la casse doit être utilisé. Plus important encore, l’application d’un classement dans la plupart des cas empêche l’utilisation de l’index, ce qui a un impact significatif sur les performances d’une construction .NET très basique et couramment utilisée. Pour forcer une requête à utiliser une comparaison qui respecte la casse ou qui ne respecte pas la casse, spécifiez explicitement le classement via `EF.Functions.Collate` comme [détaillé ci-dessus](#explicit-collations-and-indexes).
 
-## <a name="database-specific-information"></a>Informations spécifiques à la base de données
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+### <a name="database-specific-information"></a>Informations spécifiques à la base de données
 
 * [SQL Server de la documentation sur les classements](/sql/relational-databases/collations/collation-and-unicode-support).
 * [Documentation de Microsoft. Data. sqlite sur les classements](/dotnet/standard/data/sqlite/collation).
 * [Documentation PostgreSQL sur les classements](https://www.postgresql.org/docs/current/collation.html).
 * [Documentation MySQL sur les classements](https://dev.mysql.com/doc/refman/en/charset-general.html).
+
+### <a name="other-resources"></a>Autres ressources
+
+* [EF Core session réunions](https://www.youtube.com/watch?v=OgMhLVa_VfA&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=1)de la Communauté, présentation des classements et exploration des performances et des aspects d’indexation.

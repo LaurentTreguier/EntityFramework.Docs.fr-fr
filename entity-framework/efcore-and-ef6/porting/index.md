@@ -4,12 +4,12 @@ description: Informations générales sur le portage d’une application d’Ent
 author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/index
-ms.openlocfilehash: 0dfb4cc5f7c65aa081d0175708a0db95b0688e50
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: d50def47e65455c8cf5242cad4386f157148c0bc
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064209"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429206"
 ---
 # <a name="porting-from-ef6-to-ef-core"></a>Portage depuis EF6 vers EF Core
 
@@ -33,17 +33,12 @@ Dans EF6, appeler `DbSet.Add()` sur une entité entraîne une recherche récursi
 
 **EF Core effectue une recherche récursive similaire, mais avec des règles légèrement différentes.**
 
-*  L’entité racine est toujours dans l’état demandé (ajouté pour `DbSet.Add` et inchangé pour `DbSet.Attach`).
-
-*  **Pour les entités qui sont détectées lors de la recherche récursive des propriétés de navigation :**
-
-    *  **Si la clé primaire de l’entité est générée par le magasin**
-
-        * Si la clé primaire n’est pas définie sur une valeur, l’état est défini sur ajouté. La valeur de clé primaire est considérée comme « non définie » si elle est affectée à la valeur CLR par défaut pour le type de propriété (par exemple, `0` pour `int`, `null` pour `string`, etc.).
-
-        * Si la clé primaire n’est pas définie sur une valeur, l’état est défini sur inchangé.
-
-    *  Si la clé primaire n’est pas générée par la base de données, l’entité est mise dans le même état que la racine.
+* L’entité racine est toujours dans l’état demandé (ajouté pour `DbSet.Add` et inchangé pour `DbSet.Attach`).
+* **Pour les entités qui sont détectées lors de la recherche récursive des propriétés de navigation :**
+  * **Si la clé primaire de l’entité est générée par le magasin**
+    * Si la clé primaire n’est pas définie sur une valeur, l’état est défini sur ajouté. La valeur de clé primaire est considérée comme « non définie » si elle est affectée à la valeur CLR par défaut pour le type de propriété (par exemple, `0` pour `int`, `null` pour `string`, etc.).
+    * Si la clé primaire n’est pas définie sur une valeur, l’état est défini sur inchangé.
+  * Si la clé primaire n’est pas générée par la base de données, l’entité est mise dans le même état que la racine.
 
 ### <a name="code-first-database-initialization"></a>Initialisation de la base de données Code First
 

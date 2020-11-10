@@ -4,12 +4,12 @@ description: Versions actuelles d’EF Core et détails sur le planning des vers
 author: ajcvickers
 ms.date: 06/11/2020
 uid: core/what-is-new/index
-ms.openlocfilehash: 4424f9233016edbc8d98e8df840091f2adaf1ee9
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
-ms.translationtype: HT
+ms.openlocfilehash: 24b814bd906ece9cc485bf96713b9f8feac5eb2c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618590"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430532"
 ---
 # <a name="ef-core-releases-and-planning"></a>Mise en production et planification d’EF Core
 
@@ -25,7 +25,7 @@ ms.locfileid: "89618590"
 | ~~[EF Core 1.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.1.6)~~ | .NET Standard 1.3 | Expiration le 27 juin 2019 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-1-1/)
 | ~~[EF Core 1.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/1.0.6)~~ | .NET Standard 1.3 | Expiration le 27 juin 2019 | [Annonce](https://devblogs.microsoft.com/dotnet/entity-framework-core-1-0-0-available/)
 
-Pour plus d’informations sur les plateformes prises en charge par chacune des versions d’EF Core, voir [Plateformes prises en charge](xref:core/platforms/index).
+Pour plus d’informations sur les plateformes prises en charge par chacune des versions d’EF Core, voir [Plateformes prises en charge](xref:core/miscellaneous/platforms).
 
 Pour plus d’informations sur les versions à expiration du support et les versions LTS (support à long terme), voir [Stratégie de support .NET](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
 
@@ -47,7 +47,7 @@ En règle générale, nous ne procédons pas à une planification détaillée au
 
 ## <a name="ef-core-50"></a>EF Core 5.0
 
-La prochaine version stable planifiée est **EF Core 5.0**, prévue pour novembre 2020.
+La prochaine version stable planifiée est **EF Core 5.0** , prévue pour novembre 2020.
 
 Un [plan global pour EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan) a été créé en suivant le [processus de planification des versions](xref:core/what-is-new/release-planning) documenté.
 
@@ -55,7 +55,7 @@ Vos commentaires sur la planification sont importants.
 La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut 👍) pour ce problème sur GitHub.
 Ces données sont ensuite intégrées dans le processus de planification de la prochaine version.
 
-### <a name="get-it-now"></a>N’attendez pas !
+### <a name="get-it-now"></a>Obtenir maintenant
 
 Les packages EF Core 5.0 sont **désormais disponibles**  sous forme de :
 

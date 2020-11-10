@@ -4,12 +4,12 @@ description: Utilisation de filtres de requête globaux pour filtrer les résult
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 8a9eabd7e86864c9ebb4b1dc4a06bf7fc207d496
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062605"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430129"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
 
@@ -46,6 +46,21 @@ Les expressions de prédicat transmises aux `HasQueryFilter` appels seront déso
 ## <a name="use-of-navigations"></a>Utilisation des navigations
 
 Vous pouvez également utiliser des navigations dans la définition de filtres de requête globaux. L’utilisation de navigations dans le filtre de requête entraîne l’application de filtres de requête de manière récursive. Lorsque EF Core développe les navigations utilisées dans les filtres de requête, il applique également des filtres de requête définis sur les entités référencées.
+
+Pour illustrer cela, configurez les filtres de requête dans `OnModelCreating` de la manière suivante : [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#NavigationInFilter)]
+
+Ensuite, interrogez toutes les `Blog` entités : [!code-csharp[Main](../../../samples/core/Querying/QueryFilters/FilteredBloggingContextRequired.cs#QueriesNavigation)]
+
+Cette requête produit le code SQL suivant, qui applique des filtres de requête définis pour les `Blog` `Post` entités et :
+
+```sql
+SELECT [b].[BlogId], [b].[Name], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE (
+    SELECT COUNT(*)
+    FROM [Posts] AS [p]
+    WHERE ([p].[Title] LIKE N'%fish%') AND ([b].[BlogId] = [p].[BlogId])) > 0
+```
 
 > [!NOTE]
 > Actuellement EF Core ne détecte pas les cycles dans les définitions de filtre de requête globale. vous devez donc être prudent lorsque vous les définissez. S’ils sont spécifiés de manière incorrecte, les cycles peuvent entraîner des boucles infinies lors de la traduction de la requête.

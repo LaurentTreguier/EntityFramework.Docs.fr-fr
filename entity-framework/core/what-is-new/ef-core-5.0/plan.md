@@ -4,12 +4,12 @@ description: Les fonctionnalités prévues pour Entity Framework Core 5,0
 author: ajcvickers
 ms.date: 08/22/2020
 uid: core/what-is-new/ef-core-5.0/plan
-ms.openlocfilehash: 5ac7a48a70959b625b7c602ee48dc08a360bee73
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f2639e41499f3bfca5942d613922fd97212fc2b9
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89618666"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429232"
 ---
 # <a name="plan-for-entity-framework-core-50"></a>Planifier Entity Framework Core 5,0
 
@@ -44,18 +44,18 @@ Nous avons extrait quelques principaux domaines ou thèmes qui constitueront la 
 
 Développeurs en chef : @smitpatel , @AndriySvyryd et @lajones
 
-Suivi par [#10508](https://github.com/aspnet/EntityFrameworkCore/issues/10508)
+Suivi par [#10508](https://github.com/dotnet/efcore/issues/10508)
 
 Taille de T-shirt : L
 
 État : terminé
 
-Plusieurs-à-plusieurs est la [fonctionnalité la plus demandée](https://github.com/aspnet/EntityFrameworkCore/issues/1368) (environ 506 votes) sur le backlog github.
+Plusieurs-à-plusieurs est la [fonctionnalité la plus demandée](https://github.com/dotnet/efcore/issues/1368) (environ 506 votes) sur le backlog github.
 
 La prise en charge des relations plusieurs-à-plusieurs peut être divisée en trois domaines principaux :
 
 * Ignorer les propriétés de navigation--couvertes par le thème suivant.
-* Types d’entité de conteneur de propriétés. Celles-ci permettent l’utilisation d’un type CLR standard (par exemple, `Dictionary` ) pour les instances d’entité, de sorte qu’un type CLR explicite n’est pas nécessaire pour chaque type d’entité. Suivi par [#9914](https://github.com/aspnet/EntityFrameworkCore/issues/9914).
+* Types d’entité de conteneur de propriétés. Celles-ci permettent l’utilisation d’un type CLR standard (par exemple, `Dictionary` ) pour les instances d’entité, de sorte qu’un type CLR explicite n’est pas nécessaire pour chaque type d’entité. Suivi par [#9914](https://github.com/dotnet/efcore/issues/9914).
 * Sucre pour une configuration facile des relations plusieurs-à-plusieurs.
 
 En plus de la prise en charge de la navigation par omission, nous allons maintenant extraire ces autres zones de plusieurs-à-plusieurs dans EF Core 5,0 afin de fournir une expérience complète.
@@ -64,7 +64,7 @@ En plus de la prise en charge de la navigation par omission, nous allons mainten
 
 Développeurs en chef : @smitpatel et @AndriySvyryd
 
-Suivi par [#19003](https://github.com/aspnet/EntityFrameworkCore/issues/19003)
+Suivi par [#19003](https://github.com/dotnet/efcore/issues/19003)
 
 Taille de T-shirt : L
 
@@ -79,7 +79,7 @@ Le type d’entité de la table de jointure peut encore exister, mais il ne doit
 
 Développeur principal : @AndriySvyryd et @smitpatel
 
-Suivi par [#2266](https://github.com/aspnet/EntityFrameworkCore/issues/2266)
+Suivi par [#2266](https://github.com/dotnet/efcore/issues/2266)
 
 Taille de T-shirt : XL
 
@@ -91,7 +91,7 @@ Nous faisons TPT parce qu’il s’agit d’une fonctionnalité hautement demand
 
 Développeur principal : @maumar
 
-Suivi par [#1833](https://github.com/aspnet/EntityFrameworkCore/issues/1833)
+Suivi par [#1833](https://github.com/dotnet/efcore/issues/1833)
 
 Taille de T-shirt : M
 
@@ -131,7 +131,7 @@ Dans EF Core 3,0, tous les dépendants, y compris les types détenus, sont facul
 
 Développeurs en chef : @AndriySvyryd et @smitpatel
 
-Suivi par [#17270](https://github.com/aspnet/EntityFrameworkCore/issues/17270)
+Suivi par [#17270](https://github.com/dotnet/efcore/issues/17270)
 
 Taille de T-shirt : L
 
@@ -302,7 +302,7 @@ En plus des fonctionnalités plus grandes décrites ci-dessus, nous avons égale
 
 ## <a name="below-the-line"></a>En dessous de la ligne
 
-Suivi par des [problèmes étiquetés `consider-for-next-release` avec](https://github.com/aspnet/EntityFrameworkCore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)
+Suivi par des [problèmes étiquetés `consider-for-next-release` avec](https://github.com/dotnet/efcore/issues?q=is%3Aopen+is%3Aissue+label%3Aconsider-for-next-release)
 
 Ce sont des correctifs de bogues et des améliorations qui **ne sont pas** actuellement planifiés pour la version 5,0, mais nous examinerons les objectifs d’étirement en fonction de la progression de la tâche ci-dessus.
 

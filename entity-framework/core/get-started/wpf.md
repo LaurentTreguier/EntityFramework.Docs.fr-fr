@@ -5,12 +5,12 @@ author: jeremylikness
 ms.author: jeliknes
 ms.date: 07/24/2020
 uid: core/get-started/wpf
-ms.openlocfilehash: 1198da5c9564663ca26392b33462c727275a432d
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: f183064fafbe2d0e7b8dbdafa921169afc9ffe78
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89619302"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429921"
 ---
 # <a name="getting-started-with-wpf"></a>Bien démarrer avec WPF
 
@@ -21,20 +21,18 @@ Le modèle définit deux types qui participent à une relation un-à-plusieurs 
 Les captures d’écran et les listes de code de cette procédure pas à pas sont extraites de Visual Studio 2019 16.6.5.
 
 > [!TIP]
-> Vous pouvez consulter l’exemple de cet article [sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/WPF).
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/WPF).
 
 ## <a name="pre-requisites"></a>Prérequis
 
-* Vous devez avoir installé Visual Studio 2019 16,3 ou version ultérieure avec la **charge de travail de bureau .net** sélectionnée pour effectuer cette procédure pas à pas.
-    
-    Pour plus d’informations sur l’installation de la dernière version de Visual Studio, consultez [installer Visual Studio](/visualstudio/install/install-visual-studio).
+Vous devez avoir installé Visual Studio 2019 16,3 ou version ultérieure avec la **charge de travail de bureau .net** sélectionnée pour effectuer cette procédure pas à pas. Pour plus d’informations sur l’installation de la dernière version de Visual Studio, consultez [installer Visual Studio](/visualstudio/install/install-visual-studio).
 
 ## <a name="create-the-application"></a>Création de l’application
 
 1. Ouvrez Visual Studio.
 2. Dans la fenêtre de démarrage, choisissez **Créer un projet**.
 3. Recherchez « WPF », choisissez **application WPF (.net Core)** , puis choisissez **suivant**.
-4. Dans l’écran suivant, donnez un nom au projet, par exemple, **GetStartedWPF**, puis choisissez **créer.**
+4. Dans l’écran suivant, donnez un nom au projet, par exemple, **GetStartedWPF** , puis choisissez **créer.**
 
 ## <a name="install-the-entity-framework-nuget-packages"></a>Installer les packages NuGet Entity Framework
 
@@ -51,7 +49,7 @@ Les captures d’écran et les listes de code de cette procédure pas à pas son
 1. Répétez les étapes pour rechercher `entityframeworkcore.proxies` et installer **Microsoft. EntityFrameworkCore. proxies**.
 
 > [!NOTE]
-> Lorsque vous avez installé le package SQLite, il a automatiquement retiré le package de base **Microsoft. EntityFrameworkCore** associé. Le package **Microsoft. EntityFrameworkCore. proxies** prend en charge les données de « chargement différé ». Cela signifie que lorsque vous avez des entités avec des entités enfants, seuls les parents sont extraits lors de la charge initiale. Les proxies détectent quand une tentative d’accès aux entités enfants est effectuée et les charge automatiquement à la demande. 
+> Lorsque vous avez installé le package SQLite, il a automatiquement retiré le package de base **Microsoft. EntityFrameworkCore** associé. Le package **Microsoft. EntityFrameworkCore. proxies** prend en charge les données de « chargement différé ». Cela signifie que lorsque vous avez des entités avec des entités enfants, seuls les parents sont extraits lors de la charge initiale. Les proxies détectent quand une tentative d’accès aux entités enfants est effectuée et les charge automatiquement à la demande.
 
 ## <a name="define-a-model"></a>Définir un modèle
 
@@ -82,7 +80,7 @@ Ajoutez une nouvelle `ProductContext.cs` classe au projet avec la définition su
 [!code-csharp[](../../../samples/core/WPF/GetStartedWPF/GetStartedWPF/ProductContext.cs)]
 
 * `DbSet`Informe EF Core les entités C# qui doivent être mappées à la base de données.
-* Il existe plusieurs façons de configurer le EF Core `DbContext` . Vous pouvez en savoir plus à ce sujet dans : [configuration d’un DbContext](xref:core/miscellaneous/configuring-dbcontext).
+* Il existe plusieurs façons de configurer le EF Core `DbContext` . Vous pouvez en savoir plus à ce sujet dans : [configuration d’un DbContext](xref:core/dbcontext-configuration/index).
 * Cet exemple utilise le `OnConfiguring` remplacement pour spécifier un fichier de données SQLite.
 * L' `UseLazyLoadingProxies` appel indique à EF Core d’implémenter le chargement différé, de sorte que les entités enfants sont chargées automatiquement lorsqu’elles sont accessibles à partir du parent.
 
@@ -97,7 +95,7 @@ La propriété **Products** de la classe **Category** et la propriété **Catego
 
 EF Core vous donne la possibilité de charger automatiquement des entités associées à partir de la base de données la première fois que vous accédez à la propriété de navigation. Avec ce type de chargement (appelé chargement différé), sachez que la première fois que vous accédez à chaque propriété de navigation, une requête distincte est exécutée sur la base de données si le contenu n’est pas déjà dans le contexte.
 
-Lors de l’utilisation des types d’entités POCO (Plain Old C# Object), EF Core réalise un chargement différé en créant des instances de types de proxy dérivés au cours de l’exécution, puis en substituant les propriétés virtuelles dans vos classes pour ajouter le raccordement de chargement. Pour bénéficier du chargement différé d’objets connexes, vous devez déclarer les accesseurs get de propriété de navigation comme **public** et **virtuel** (**substituable** dans Visual Basic) et votre classe ne doit pas être **sealed** (**NotOverridable** dans Visual Basic). Lorsque vous utilisez Database First, les propriétés de navigation sont automatiquement configurées pour permettre le chargement différé. 
+Lors de l’utilisation des types d’entités POCO (Plain Old C# Object), EF Core réalise un chargement différé en créant des instances de types de proxy dérivés au cours de l’exécution, puis en substituant les propriétés virtuelles dans vos classes pour ajouter le raccordement de chargement. Pour bénéficier du chargement différé d’objets connexes, vous devez déclarer les accesseurs get de propriété de navigation comme **public** et **virtuel** ( **substituable** dans Visual Basic) et votre classe ne doit pas être **sealed** ( **NotOverridable** dans Visual Basic). Lorsque vous utilisez Database First, les propriétés de navigation sont automatiquement configurées pour permettre le chargement différé.
 
 ## <a name="bind-object-to-controls"></a>Lier un objet à des contrôles
 
@@ -136,14 +134,14 @@ Votre mode Design doit ressembler à ceci :
 
 Il est temps d’ajouter des gestionnaires d’événements à la fenêtre principale.
 
-1. Dans la fenêtre XAML, cliquez sur l’élément de ** &lt; fenêtre &gt; ** pour sélectionner la fenêtre principale.
+1. Dans la fenêtre XAML, cliquez sur l’élément de **&lt; fenêtre &gt;** pour sélectionner la fenêtre principale.
 1. Dans la fenêtre **Propriétés** , choisissez **événements** en haut à droite, puis double-cliquez sur la zone de texte à droite de l’étiquette **chargée** .
 
     ![Propriétés de la fenêtre principale](_static/wpf-tutorial-loaded.jpg)
 
 Cela vous amène au code-behind pour le formulaire, nous allons maintenant modifier le code pour utiliser le `ProductContext` pour effectuer l’accès aux données. Mettez à jour le code comme indiqué ci-dessous.
 
-Le code déclare une instance de longue durée de `ProductContext` . L' `ProductContext` objet est utilisé pour interroger et enregistrer des données dans la base de données. La `Dispose()` méthode sur l' `ProductContext` instance est ensuite appelée à partir de la `OnClosing` méthode substituée.Les commentaires de code expliquent ce que fait chaque étape.
+Le code déclare une instance de longue durée de `ProductContext` . L' `ProductContext` objet est utilisé pour interroger et enregistrer des données dans la base de données. La `Dispose()` méthode sur l' `ProductContext` instance est ensuite appelée à partir de la `OnClosing` méthode substituée. Les commentaires de code expliquent ce que fait chaque étape.
 
 **`MainWindow.xaml.cs`**
 
@@ -174,4 +172,4 @@ Cela fonctionne pour notre exemple de prise en main, mais vous pouvez avoir beso
 
 ## <a name="next-steps"></a>Étapes suivantes
 
-En savoir plus sur [la configuration d’un DbContext](xref:core/miscellaneous/configuring-dbcontext).
+En savoir plus sur [la configuration d’un DbContext](xref:core/dbcontext-configuration/index).

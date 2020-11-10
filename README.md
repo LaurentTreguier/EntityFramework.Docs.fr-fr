@@ -1,6 +1,6 @@
-## <a name="entity-framework-docs"></a>Entity Framework Docs
+# <a name="entity-framework-docs"></a>Entity Framework Docs
 
-Ce projet contient la source de la documentation EF Core et EF6 située dans [docs.Microsoft.com/EF](https://docs.microsoft.com/ef/). 
+Ce projet contient la source de la documentation EF Core et EF6 située dans [docs.Microsoft.com/EF](https://docs.microsoft.com/ef/).
 
 Les problèmes de documentation pour EF Core et EF6 doivent être enregistrés dans ce référentiel. Les problèmes liés au produit (bogues) doivent être signalés dans le [EF Core référentiel](https://github.com/dotnet/efcore) ou dans le [référentiel EF6](https://github.com/dotnet/ef6) , le cas échéant.
 

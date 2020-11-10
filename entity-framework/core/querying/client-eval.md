@@ -2,14 +2,14 @@
 title: Client et évaluation du serveur-EF Core
 description: Évaluation du client et du serveur des requêtes avec Entity Framework Core
 author: smitpatel
-ms.date: 10/03/2019
+ms.date: 11/09/2020
 uid: core/querying/client-eval
-ms.openlocfilehash: f2e80541439de8cc824c182e52400f730dd2af48
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a1ddfb625be36cb05f01da08eb3be29512c54ab5
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062709"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430142"
 ---
 # <a name="client-vs-server-evaluation"></a>Comparaison entre client et serveur
 
@@ -46,19 +46,22 @@ Dans ce cas, vous pouvez choisir explicitement l’évaluation du client en appe
 
 [!code-csharp[Main](../../../samples/core/Querying/ClientEvaluation/Program.cs#ExplicitClientEvaluation)]
 
+> [!TIP]
+> Si vous utilisez `AsAsyncEnumerable` et souhaitez composer la requête plus en détail côté client, vous pouvez utiliser la bibliothèque [System. interactive. Async](https://www.nuget.org/packages/System.Interactive.Async/) qui définit des opérateurs pour les énumérables Async. Pour plus d’informations, consultez [opérateurs LINQ côté client](xref:core/miscellaneous/async#client-side-async-linq-operators).
+
 ## <a name="potential-memory-leak-in-client-evaluation"></a>Fuite de mémoire potentielle dans l’évaluation du client
 
 Étant donné que la traduction et la compilation des requêtes sont coûteuses, EF Core met en cache le plan de requête compilé. Le délégué mis en cache peut utiliser le code client lors de l’évaluation du client de la projection de niveau supérieur. EF Core génère des paramètres pour les parties évaluées par le client de l’arborescence et réutilise le plan de requête en remplaçant les valeurs des paramètres. Toutefois, certaines constantes de l’arborescence de l’expression ne peuvent pas être converties en paramètres. Si le délégué mis en cache contient des constantes, ces objets ne peuvent pas être récupérés par le garbage collector, car ils sont toujours référencés. Si un tel objet contient un DbContext ou d’autres services qu’il contient, cela peut entraîner une augmentation de l’utilisation de la mémoire de l’application au fil du temps. Ce comportement est généralement le signe d’une fuite de mémoire. EF Core lève une exception chaque fois qu’il s’agit d’une constante d’un type qui ne peut pas être mappé à l’aide du fournisseur de base de données actuel. Les causes courantes et leurs solutions sont les suivantes :
 
-- **Utilisation d’une méthode d’instance**: lors de l’utilisation de méthodes d’instance dans une projection cliente, l’arborescence de l’expression contient une constante de l’instance. Si votre méthode n’utilise pas de données de l’instance, envisagez de rendre la méthode statique. Si vous avez besoin de données d’instance dans le corps de la méthode, transmettez les données spécifiques en tant qu’argument à la méthode.
-- **Passage d’arguments de constante à la méthode**: ce cas se produit généralement à l’aide `this` de dans un argument de la méthode cliente. Envisagez de fractionner l’argument dans en plusieurs arguments scalaires, qui peuvent être mappés par le fournisseur de base de données.
-- **Autres constantes**: si une constante est parvenue dans un autre cas, vous pouvez évaluer si la constante est nécessaire dans le traitement. S’il est nécessaire d’avoir la constante, ou si vous ne pouvez pas utiliser une solution des cas ci-dessus, créez une variable locale pour stocker la valeur et utilisez la variable locale dans la requête. EF Core convertira la variable locale en paramètre.
+- **Utilisation d’une méthode d’instance** : lors de l’utilisation de méthodes d’instance dans une projection cliente, l’arborescence de l’expression contient une constante de l’instance. Si votre méthode n’utilise pas de données de l’instance, envisagez de rendre la méthode statique. Si vous avez besoin de données d’instance dans le corps de la méthode, transmettez les données spécifiques en tant qu’argument à la méthode.
+- **Passage d’arguments de constante à la méthode** : ce cas se produit généralement à l’aide `this` de dans un argument de la méthode cliente. Envisagez de fractionner l’argument dans en plusieurs arguments scalaires, qui peuvent être mappés par le fournisseur de base de données.
+- **Autres constantes** : si une constante est parvenue dans un autre cas, vous pouvez évaluer si la constante est nécessaire dans le traitement. S’il est nécessaire d’avoir la constante, ou si vous ne pouvez pas utiliser une solution des cas ci-dessus, créez une variable locale pour stocker la valeur et utilisez la variable locale dans la requête. EF Core convertira la variable locale en paramètre.
 
 ## <a name="previous-versions"></a>Versions précédentes
 
 La section suivante s’applique aux versions de EF Core antérieures à 3,0.
 
-Les anciennes versions de EF Core prises en charge pour l’évaluation du client dans n’importe quelle partie de la requête, et pas seulement la projection de niveau supérieur. C’est pourquoi les requêtes similaires à une publication sous la section d' [évaluation du client non prise en charge](#unsupported-client-evaluation) fonctionnaient correctement. Dans la mesure où ce comportement peut provoquer des problèmes de performances invisibles, EF Core journalisé un avertissement d’évaluation du client. Pour plus d’informations sur l’affichage de la sortie de journalisation, consultez [journalisation](xref:core/miscellaneous/logging).
+Les anciennes versions de EF Core prises en charge pour l’évaluation du client dans n’importe quelle partie de la requête, et pas seulement la projection de niveau supérieur. C’est pourquoi les requêtes similaires à une publication sous la section d' [évaluation du client non prise en charge](#unsupported-client-evaluation) fonctionnaient correctement. Dans la mesure où ce comportement peut provoquer des problèmes de performances invisibles, EF Core journalisé un avertissement d’évaluation du client. Pour plus d’informations sur l’affichage de la sortie de journalisation, consultez [journalisation](xref:core/logging-events-diagnostics/index).
 
 Si vous le souhaitez, vous pouvez EF Core modifier le comportement par défaut pour lever une exception ou ne rien faire lors de l’évaluation du client (à l’exception de dans la projection). Le comportement de levée d’exception le rendrait similaire au comportement dans 3,0. Pour modifier le comportement, vous devez configurer des avertissements lors de la configuration des options de votre contexte, généralement dans `DbContext.OnConfiguring` , ou dans `Startup.cs` si vous utilisez ASP.net core.
 

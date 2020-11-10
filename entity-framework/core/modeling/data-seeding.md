@@ -4,12 +4,12 @@ description: Utilisation de l’amorçage des données pour remplir une base de 
 author: AndriySvyryd
 ms.date: 11/02/2018
 uid: core/modeling/data-seeding
-ms.openlocfilehash: f8284d7473c6fbcafde25d01ec0709c2d50b666f
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fefa6232496cd250d52a436971251f59af09f5c6
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063697"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429674"
 ---
 # <a name="data-seeding"></a>Amorçage des données
 
@@ -66,6 +66,7 @@ Si votre scénario comprend l’un des éléments suivants, il est recommandé d
 
 * Données temporaires pour le test
 * Données qui dépendent de l’état de la base de données
+* Données volumineuses (l’amorçage des données est capturé dans les instantanés de migration, et les données volumineuses peuvent rapidement entraîner des fichiers énormes et des performances dégradées).
 * Données qui ont besoin de valeurs clés pour être générées par la base de données, y compris les entités qui utilisent d’autres clés comme identité
 * Données qui requièrent une transformation personnalisée (qui n’est pas gérée par les [conversions de valeurs](xref:core/modeling/value-conversions)), comme un hachage de mot de passe
 * Données nécessitant des appels à l’API externe, par exemple ASP.NET Core des rôles d’identité et la création d’utilisateurs

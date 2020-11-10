@@ -4,12 +4,12 @@ description: Utilisation de données spatiales dans un modèle de Entity Framewo
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: 2c0cd7a8acf7e4b58eadf8805afa1fe4a1d6e949
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063931"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430519"
 ---
 # <a name="spatial-data"></a>Données spatiales
 
@@ -78,7 +78,7 @@ Dans LINQ, les méthodes et propriétés NTS disponibles en tant que fonctions d
 
 ## <a name="reverse-engineering"></a>Rétroconception
 
-Les packages NuGet spatiaux activent également les modèles d' [ingénierie à rebours](xref:core/managing-schemas/scaffolding) avec des propriétés spatiales, mais vous devez installer le package ***avant*** d’exécuter `Scaffold-DbContext` ou `dotnet ef dbcontext scaffold` . Si vous ne le souhaitez pas, vous recevrez des avertissements sur les mappages de type pour les colonnes et les colonnes seront ignorées.
+Les packages NuGet spatiaux activent également les modèles d' [ingénierie à rebours](xref:core/managing-schemas/scaffolding) avec des propriétés spatiales, mais vous devez installer le package * *_avant_* _ exécuter `Scaffold-DbContext` ou `dotnet ef dbcontext scaffold` . Si vous ne le souhaitez pas, vous recevrez des avertissements sur les mappages de type pour les colonnes et les colonnes seront ignorées.
 
 ## <a name="srid-ignored-during-client-operations"></a>SRID ignoré pendant les opérations du client
 
@@ -97,9 +97,15 @@ Voici un exemple d’utilisation de ProjNet4GeoAPI pour calculer la distance ent
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
+### <a name="database-specific-information"></a>Informations spécifiques à la base de données
+
 Veillez à lire la documentation de votre fournisseur pour plus d’informations sur l’utilisation des données spatiales.
 
-* [Données spatiales dans le fournisseur SQL Server](xref:core/providers/sql-server/spatial)
+_ [Données spatiales dans le fournisseur SQL Server](xref:core/providers/sql-server/spatial)
 * [Données spatiales dans le fournisseur SQLite](xref:core/providers/sqlite/spatial)
 * [Données spatiales dans le fournisseur npgsql](https://www.npgsql.org/efcore/mapping/nts.html)
+
+### <a name="other-resources"></a>Autres ressources
+
 * [Documentation NetTopologySuite](https://nettopologysuite.github.io/NetTopologySuite/)
+* [EF Core session réunions](https://www.youtube.com/watch?v=IHslY5rrxD0&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=15)de la Communauté, en se concentrant sur les données spatiales et les NetTopologySuite.

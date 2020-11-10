@@ -4,16 +4,16 @@ description: Vue d’ensemble des informations sur les requêtes dans Entity Fra
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/index
-ms.openlocfilehash: 7cf53d59a577c5bc45f3ea4ea0cfbe257437b44e
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: da5177dda4f2df6537ee9133edf4f1240a4b5e94
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062561"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94430116"
 ---
 # <a name="querying-data"></a>Interrogation des données
 
-Entity Framework Core utilise LINQ (Language Integrated Query) pour interroger les données de la base de données. LINQ vous permet d’utiliser C# (ou le langage .NET de votre choix) pour écrire des requêtes fortement typées. Il utilise vos classes de contexte et d’entité dérivées pour référencer les objet de base de données. EF Core passe une représentation de la requête LINQ au fournisseur de bases de données. Les fournisseurs de bases de données la traduisent à leur tour en langage de requête spécifique aux bases de données (par exemple, SQL pour une base de données relationnelle).
+Entity Framework Core utilise la requête Language-Integrated (LINQ) pour interroger les données de la base de données. LINQ vous permet d’utiliser C# (ou le langage .NET de votre choix) pour écrire des requêtes fortement typées. Il utilise vos classes de contexte et d’entité dérivées pour référencer les objet de base de données. EF Core passe une représentation de la requête LINQ au fournisseur de bases de données. Les fournisseurs de bases de données la traduisent à leur tour en langage de requête spécifique aux bases de données (par exemple, SQL pour une base de données relationnelle). Les requêtes sont toujours exécutées sur la base de données même si les entités retournées dans le résultat existent déjà dans le contexte.
 
 > [!TIP]
 > Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Overview) sur GitHub.

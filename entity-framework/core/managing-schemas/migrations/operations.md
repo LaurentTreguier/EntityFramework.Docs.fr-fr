@@ -2,14 +2,14 @@
 title: Opérations sur les migrations personnalisées-EF Core
 description: Gestion des migrations SQL personnalisées et brutes pour la gestion des schémas de base de données avec Entity Framework Core
 author: bricelam
-ms.date: 11/07/2017
+ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/operations
-ms.openlocfilehash: d1d29b7789eea5e887490364a7ce3abfdc903545
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 2abde4d5eac977a746863dcfd77bc85a34e2166c
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062033"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429830"
 ---
 # <a name="custom-migrations-operations"></a>Opérations de migration personnalisées
 
@@ -25,36 +25,14 @@ migrationBuilder.CreateUser("SQLUser1", "Password");
 
 Le moyen le plus simple d’implémenter une opération personnalisée consiste à définir une méthode d’extension qui appelle `MigrationBuilder.Sql()` . Voici un exemple qui génère le Transact-SQL approprié.
 
-```csharp
-static MigrationBuilder CreateUser(
-    this MigrationBuilder migrationBuilder,
-    string name,
-    string password)
-    => migrationBuilder.Sql($"CREATE USER {name} WITH PASSWORD '{password}';");
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperationSql.cs#snippet_CustomOperationSql)]
+
+> [!TIP]
+> Utilisez la `EXEC` fonction quand une instruction doit être la première ou une seule dans un lot SQL. Il peut également être nécessaire de contourner les erreurs de l’analyseur dans des scripts de migration idempotent qui peuvent se produire lorsque des colonnes référencées n’existent pas actuellement sur une table.
 
 Si vos migrations doivent prendre en charge plusieurs fournisseurs de bases de données, vous pouvez utiliser la `MigrationBuilder.ActiveProvider` propriété. Voici un exemple qui prend en charge à la fois Microsoft SQL Server et PostgreSQL.
 
-```csharp
-static MigrationBuilder CreateUser(
-    this MigrationBuilder migrationBuilder,
-    string name,
-    string password)
-{
-    switch (migrationBuilder.ActiveProvider)
-    {
-        case "Npgsql.EntityFrameworkCore.PostgreSQL":
-            return migrationBuilder
-                .Sql($"CREATE USER {name} WITH PASSWORD '{password}';");
-
-        case "Microsoft.EntityFrameworkCore.SqlServer":
-            return migrationBuilder
-                .Sql($"CREATE USER {name} WITH PASSWORD = '{password}';");
-    }
-
-    return migrationBuilder;
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperationMultiSql.cs#snippet_CustomOperationMultiSql)]
 
 Cette approche fonctionne uniquement si vous connaissez tous les fournisseurs où votre opération personnalisée sera appliquée.
 
@@ -62,83 +40,16 @@ Cette approche fonctionne uniquement si vous connaissez tous les fournisseurs o�
 
 Pour découpler l’opération personnalisée de SQL, vous pouvez définir votre propre opération `MigrationOperation` pour la représenter. L’opération est ensuite transmise au fournisseur afin de pouvoir déterminer le SQL approprié à générer.
 
-```csharp
-class CreateUserOperation : MigrationOperation
-{
-    public string Name { get; set; }
-    public string Password { get; set; }
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_CreateUserOperation)]
 
 Avec cette approche, la méthode d’extension doit simplement ajouter l’une de ces opérations à `MigrationBuilder.Operations` .
 
-```csharp
-static MigrationBuilder CreateUser(
-    this MigrationBuilder migrationBuilder,
-    string name,
-    string password)
-{
-    migrationBuilder.Operations.Add(
-        new CreateUserOperation
-        {
-            Name = name,
-            Password = password
-        });
-
-    return migrationBuilder;
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_MigrationBuilderExtension)]
 
 Cette approche nécessite que chaque fournisseur sache comment générer SQL pour cette opération dans son `IMigrationsSqlGenerator` service. Voici un exemple qui remplace le générateur de SQL Server pour gérer la nouvelle opération.
 
-```csharp
-class MyMigrationsSqlGenerator : SqlServerMigrationsSqlGenerator
-{
-    public MyMigrationsSqlGenerator(
-        MigrationsSqlGeneratorDependencies dependencies,
-        IMigrationsAnnotationProvider migrationsAnnotations)
-        : base(dependencies, migrationsAnnotations)
-    {
-    }
-
-    protected override void Generate(
-        MigrationOperation operation,
-        IModel model,
-        MigrationCommandListBuilder builder)
-    {
-        if (operation is CreateUserOperation createUserOperation)
-        {
-            Generate(createUserOperation, builder);
-        }
-        else
-        {
-            base.Generate(operation, model, builder);
-        }
-    }
-
-    private void Generate(
-        CreateUserOperation operation,
-        MigrationCommandListBuilder builder)
-    {
-        var sqlHelper = Dependencies.SqlGenerationHelper;
-        var stringMapping = Dependencies.TypeMappingSource.FindMapping(typeof(string));
-
-        builder
-            .Append("CREATE USER ")
-            .Append(sqlHelper.DelimitIdentifier(operation.Name))
-            .Append(" WITH PASSWORD = ")
-            .Append(stringMapping.GenerateSqlLiteral(operation.Password))
-            .AppendLine(sqlHelper.StatementTerminator)
-            .EndCommand();
-    }
-}
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_MigrationsSqlGenerator)]
 
 Remplacez le service SQL Generator des migrations par défaut par le service mis à jour.
 
-```csharp
-protected override void OnConfiguring(DbContextOptionsBuilder options)
-    => options
-        .UseSqlServer(connectionString)
-        .ReplaceService<IMigrationsSqlGenerator, MyMigrationsSqlGenerator>();
-```
+[!code-csharp[](../../../../samples/core/Schemas/Migrations/CustomOperation.cs#snippet_OnConfiguring)]

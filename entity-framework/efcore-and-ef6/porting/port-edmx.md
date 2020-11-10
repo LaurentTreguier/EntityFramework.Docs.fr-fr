@@ -4,12 +4,12 @@ description: Informations spécifiques sur le portage d’une application de mod
 author: ajcvickers
 ms.date: 10/27/2016
 uid: efcore-and-ef6/porting/port-edmx
-ms.openlocfilehash: 27b37ad1c2e3436ae96a71bc97e953763c48ee50
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 9c1b308318c9bf0325ece0b60ace646becc8de39
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064261"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429219"
 ---
 # <a name="porting-an-ef6-edmx-based-model-to-ef-core"></a>Portage d’un modèle de EDMX-Based EF6 vers EF Core
 
@@ -23,7 +23,7 @@ Installez le package NuGet `Microsoft.EntityFrameworkCore.Tools`.
 
 Vous pouvez maintenant utiliser la fonctionnalité d’ingénierie à rebours pour créer un modèle basé sur votre base de données existante.
 
-Exécutez la commande suivante dans la console du gestionnaire de package (outils – > gestionnaire de package NuGet – > console du gestionnaire de package). Consultez [console du gestionnaire de package (Visual Studio)](xref:core/miscellaneous/cli/powershell) pour obtenir des options de commande permettant d’effectuer une génération de modèles automatique d’un sous-ensemble de tables.
+Exécutez la commande suivante dans la console du gestionnaire de package (outils – > gestionnaire de package NuGet – > console du gestionnaire de package). Consultez [console du gestionnaire de package (Visual Studio)](xref:core/cli/powershell) pour obtenir des options de commande permettant d’effectuer une génération de modèles automatique d’un sous-ensemble de tables.
 
 ```powershell
 Scaffold-DbContext "<connection string>" <database provider name>

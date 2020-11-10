@@ -4,12 +4,12 @@ description: Comment configurer et mapper des types d’entité à l’aide de E
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: bfefa29c08679a1524c00769b3495d75a301e2d3
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 9094193640e7cab6db3fed7ae0ab818a455156ca
+ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062228"
+ms.lasthandoff: 11/10/2020
+ms.locfileid: "94429583"
 ---
 # <a name="entity-types"></a>Types d'entités
 
@@ -50,9 +50,9 @@ Il est parfois utile d’avoir le même type d’entité mappé dans plusieurs `
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableExcludeFromMigrations.cs?name=TableExcludeFromMigrations&highlight=4)]
 
-Avec cette configuration, les migrations ne créent pas la `blogs` table, mais elles `Blog` sont toujours incluses dans le modèle et peuvent être utilisées normalement.
+Avec cette configuration, les migrations ne créent pas la `AspNetUsers` table, mais elles `IdentityUser` sont toujours incluses dans le modèle et peuvent être utilisées normalement.
 
-Si vous devez commencer à gérer la table à l’aide des migrations, une nouvelle migration doit être créée, où `blogs` n’est pas exclu. La migration suivante contiendra désormais toutes les modifications apportées à la table.
+Si vous devez commencer à gérer la table à l’aide des migrations, une nouvelle migration doit être créée, où `AspNetUsers` n’est pas exclu. La migration suivante contiendra désormais toutes les modifications apportées à la table.
 
 ## <a name="table-name"></a>Nom de la table
 
@@ -68,7 +68,7 @@ Vous pouvez configurer manuellement le nom de la table :
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
-***
+**_
 
 ## <a name="table-schema"></a>Schéma de table
 
@@ -84,7 +84,7 @@ Vous pouvez configurer des tables à créer dans un schéma spécifique comme su
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-***
+_**
 
 Au lieu de spécifier le schéma pour chaque table, vous pouvez également définir le schéma par défaut au niveau du modèle à l’aide de l’API Fluent :
 
@@ -101,4 +101,7 @@ Les types d’entités peuvent être mappés à des vues de base de données à 
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ViewNameAndSchema.cs?name=ViewNameAndSchema&highlight=1)]
 
- Le mappage à une vue supprime le mappage de table par défaut, mais le type d’entité peut également être mappé à une table de manière explicite. Dans ce cas, le mappage de requête est utilisé pour les requêtes et le mappage de table est utilisé pour les mises à jour.
+ Le mappage à une vue supprime le mappage de table par défaut, mais à partir d’EF 5,0, le type d’entité peut également être mappé à une table de manière explicite. Dans ce cas, le mappage de requête est utilisé pour les requêtes et le mappage de table est utilisé pour les mises à jour.
+
+> [!TIP]
+> Pour tester les types d’entités mappés à des vues à l’aide du fournisseur en mémoire, mappez-les à une requête via `ToInMemoryQuery` . Pour plus d’informations, consultez un [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) à l’aide de cette technique.
