@@ -4,12 +4,12 @@ description: Utilisation de DiagnosticListener pour la consommation mondiale de 
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: dba82a910e2b551e692f37d721d41968981849cf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a2a962ac714cf80c42c269cee3770699aaa4c0c9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431539"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503226"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>Utilisation d’écouteurs de diagnostic dans EF Core
 
@@ -95,7 +95,7 @@ La valeur de la paire clé/valeur est un type de charge utile spécifique à l�
 Par exemple, le code ci-dessus gère les <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId.ContextInitialized> <xref:Microsoft.EntityFrameworkCore.Diagnostics.RelationalEventId.ConnectionOpening> événements et. Pour la première, la charge utile est <xref:Microsoft.EntityFrameworkCore.Diagnostics.ContextInitializedEventData> . Pour la seconde, il s’agit de <xref:Microsoft.EntityFrameworkCore.Diagnostics.ConnectionEventData> .
 
 > [!TIP]
-> ToString est substitué dans chaque classe de données d’événement EF Core pour générer le message de journal équivalent pour l’événement. Par exemple, l’appel de `ContextInitializedEventData.ToString` génère « Entity Framework Core 5.0.0-RC. 2.20475.6 a initialisé «BlogsContext » à l’aide du fournisseur « Microsoft. EntityFrameworkCore. sqlite » avec les options : None».
+> ToString est substitué dans chaque classe de données d’événement EF Core pour générer le message de journal équivalent pour l’événement. Par exemple, l’appel de `ContextInitializedEventData.ToString` génère « Entity Framework Core 5.0.0 a initialisé «BlogsContext » à l’aide du fournisseur « Microsoft. EntityFrameworkCore. sqlite » avec options : None».
 
 L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) contient une application console simple qui apporte des modifications à la base de données de blog et imprime les événements de diagnostic rencontrés.
 

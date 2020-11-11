@@ -4,12 +4,12 @@ description: Interception pour les opérations de base de données et d’autres
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 6ee54c0bd45c55de1fae3e1949bfa2d5b3b2566e
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431527"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503200"
 ---
 # <a name="interceptors"></a>Intercepteurs
 
@@ -502,7 +502,7 @@ L’idée générale de l’audit avec l’intercepteur est la suivante :
 * Si SaveChanges réussit, le message d’audit est mis à jour pour indiquer la réussite
 * Si SaveChanges échoue, le message d’audit est mis à jour pour indiquer l’échec
 
-La première étape est gérée avant l’envoi des modifications à la base de données à l’aide des remplacements de `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  et `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+La première étape est gérée avant l’envoi des modifications à la base de données à l’aide des remplacements de `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 --> les `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -594,7 +594,7 @@ Chaque méthode d’intercepteur a un `eventData` paramètre qui fournit des inf
 Le résultat est une `SaveChangesAudit` entité avec une collection d' `EntityAudit` entités, une pour chaque insertion, mise à jour ou suppression. L’intercepteur insère ensuite ces entités dans la base de données d’audit.
 
 > [!TIP]
-> ToString est substitué dans chaque classe de données d’événement EF Core pour générer le message de journal équivalent pour l’événement. Par exemple, l’appel de `ContextInitializedEventData.ToString` génère « Entity Framework Core 5.0.0-RC. 2.20475.6 a initialisé «BlogsContext » à l’aide du fournisseur « Microsoft. EntityFrameworkCore. sqlite » avec les options : None».
+> ToString est substitué dans chaque classe de données d’événement EF Core pour générer le message de journal équivalent pour l’événement. Par exemple, l’appel de `ContextInitializedEventData.ToString` génère « Entity Framework Core 5.0.0 a initialisé «BlogsContext » à l’aide du fournisseur « Microsoft. EntityFrameworkCore. sqlite » avec options : None».
 
 #### <a name="detecting-success"></a>Détection du succès
 

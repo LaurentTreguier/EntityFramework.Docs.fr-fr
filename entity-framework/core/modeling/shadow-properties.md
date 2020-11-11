@@ -4,16 +4,18 @@ description: Configuration des propriétés d’ombre et de l’indexeur dans un
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: f03dc000bb111253ae74c05a668703f2e6237a57
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430415"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503187"
 ---
 # <a name="shadow-and-indexer-properties"></a>Propriétés de l’instantané et de l’indexeur
 
-Les propriétés Shadow sont des propriétés qui ne sont pas définies dans votre classe d’entité .NET, mais qui sont définies pour ce type d’entité dans le modèle EF Core. La valeur et l’état de ces propriétés sont gérés uniquement dans le dispositif de suivi des modifications. Les propriétés Shadow sont utiles lorsque la base de données contient des données qui ne doivent pas être exposées sur les types d’entités mappés.
+Les propriétés Shadow sont des propriétés qui ne sont pas définies dans votre classe d’entité .NET, mais qui sont définies pour ce type d’entité dans le modèle EF Core. La valeur et l’état de ces propriétés sont gérés uniquement dans le dispositif de suivi des modifications. Les propriétés Shadow sont utiles quand il y a des données dans la base de données qui ne doivent pas être exposées sur les types d’entités mappés.
+
+Les propriétés de l’indexeur sont des propriétés de type d’entité, qui sont sauvegardées par un [indexeur](/dotnet/csharp/programming-guide/indexers/) dans une classe d’entité .net. Ils sont accessibles à l’aide de l’indexeur sur les instances de classe .NET. Elle vous permet également d’ajouter des propriétés supplémentaires au type d’entité sans modifier la classe CLR.
 
 ## <a name="foreign-key-shadow-properties"></a>Propriétés de l’ombre de la clé étrangère
 
@@ -50,11 +52,19 @@ var blogs = context.Blogs
 
 Les propriétés Shadow ne sont pas accessibles après une requête de non-suivi, car les entités retournées ne sont pas suivies par le dispositif de suivi des modifications.
 
+## <a name="configuring-indexer-properties"></a>Configuration des propriétés de l’indexeur
+
+Vous pouvez utiliser l’API Fluent pour configurer les propriétés de l’indexeur. Une fois que vous avez appelé la méthode `IndexerProperty` , vous pouvez chaîner n’importe quel appel de configuration que vous feriez pour d’autres propriétés. Dans l’exemple suivant, `Blog` a un indexeur défini et il sera utilisé pour créer une propriété d’indexeur.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexerProperty.cs?name=ShadowProperty&highlight=3)]
+
+Si le nom fourni à la `IndexerProperty` méthode correspond au nom d’une propriété d’indexeur existante, le code configurera cette propriété existante. Si le type d’entité a une propriété, qui est stockée par une propriété sur la classe d’entité, une exception est levée, car les propriétés de l’indexeur ne doivent être accessibles qu’à l’aide de l’indexeur.
+
 ## <a name="property-bag-entity-types"></a>Types d’entités du conteneur des propriétés
 
 > [!NOTE]
 > La prise en charge des types d’entités du conteneur de propriétés a été ajoutée dans EF Core 5,0.
 
-Les types d’entités qui contiennent uniquement des propriétés d’indexeur sont connus sous le nom de types d’entité de conteneur de propriétés. Ces types d’entités n’ont pas de propriétés Shadow. Actuellement `Dictionary<string, object>` , seul est pris en charge en tant que type d’entité de conteneur de propriétés. Cela signifie qu’elle doit être configurée en tant que type d’entité partagée avec un nom unique et que la `DbSet` propriété correspondante doit être implémentée à l’aide d’un `Set` appel.
+Les types d’entités qui contiennent uniquement des propriétés d’indexeur sont connus sous le nom de types d’entité de conteneur de propriétés. Ces types d’entités n’ont pas de propriétés Shadow, à la place, EF crée des propriétés d’indexeur. Actuellement `Dictionary<string, object>` , seul est pris en charge en tant que type d’entité de conteneur de propriétés. Elle doit être configurée en tant que type d’entité partagée avec un nom unique et la `DbSet` propriété correspondante doit être implémentée à l’aide d’un `Set` appel.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/SharedType.cs?name=SharedType&highlight=3,7)]

@@ -2,14 +2,14 @@
 title: Mise en production et planification d’EF Core
 description: Versions actuelles d’EF Core et détails sur le planning des versions ultérieures
 author: ajcvickers
-ms.date: 06/11/2020
+ms.date: 10/11/2020
 uid: core/what-is-new/index
-ms.openlocfilehash: 24b814bd906ece9cc485bf96713b9f8feac5eb2c
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 983a8b21d353481df4f1db232d00761e070d893b
+ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430532"
+ms.lasthandoff: 11/11/2020
+ms.locfileid: "94503138"
 ---
 # <a name="ef-core-releases-and-planning"></a>Mise en production et planification d’EF Core
 
@@ -17,7 +17,8 @@ ms.locfileid: "94430532"
 
 | Libérer | Version cible de .NET Framework | Pris en charge jusqu’à | Liens
 |:--------|------------------|-----------------|------
-| [EF Core 3.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore) | .NET Standard 2.0 | 3 décembre 2022 (LTS) | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-3-1-and-entity-framework-6-4/)
+| [EF Core 5.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore) | .NET Standard 2.1 | Mi-février, 2022 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-the-release-of-ef-core-5-0/) / [Changements cassants](xref:core/what-is-new/ef-core-5.0/breaking-changes)
+| [EF Core 3.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.1.10) | .NET Standard 2.0 | 3 décembre 2022 (LTS) | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-3-1-and-entity-framework-6-4/)
 | ~~[EF Core 3.0](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/3.0.3)~~ | .NET Standard 2.1 | Expiré le 3 mars 2020 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-ef-core-3-0-and-ef-6-3-general-availability/) / [Changements cassants](xref:core/what-is-new/ef-core-3.x/breaking-changes)
 | ~~[EF Core 2.2](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.2.6)~~ | .NET Standard 2.0 | Expiration le 23 décembre 2019 | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-2/)
 | [EF Core 2.1](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/2.1.14) | .NET Standard 2.0 | 21 août 2021 (LTS) | [Annonce](https://devblogs.microsoft.com/dotnet/announcing-entity-framework-core-2-1/)
@@ -31,7 +32,7 @@ Pour plus d’informations sur les versions à expiration du support et les vers
 
 ## <a name="guidance-on-updating-to-new-releases"></a>Aide sur la mise à jour vers les nouvelles versions
 
-* La sécurité et d’autres bogues critiques sont corrigés dans les versions prises en charge. Utilisez toujours le dernier correctif d’une version donnée (par exemple, 2.1.14 pour EF Core 2.1).
+* La sécurité et d’autres bogues critiques sont corrigés dans les versions prises en charge. Utilisez toujours le dernier correctif d’une version donnée Par exemple, pour EF Core 2,1, utilisez 2.1. x pour le « x » le plus élevé disponible.
 * Les mises à jour de versions majeures (par exemple, de EF Core 2 à EF Core 3) présentent souvent des changements cassants. Un test approfondi est recommandé dans ce cas de figure. Suivez les liens ci-dessus pour savoir comment gérer les changements cassants.
 * Les mises à jour de versions mineures ne contiennent généralement pas de changements cassants. Toutefois, des tests poussés sont toujours recommandés, car les nouvelles fonctionnalités sont susceptibles d’introduire des régressions.
 
@@ -45,11 +46,11 @@ Nous nous efforçons d’améliorer ce point.
 Pour plus d’informations sur la façon dont nous sélectionnons les éléments à envoyer dans chaque version, consultez le [processus de planification des versions](xref:core/what-is-new/release-planning).
 En règle générale, nous ne procédons pas à une planification détaillée au-delà de la prochaine version majeure ou mineure.
 
-## <a name="ef-core-50"></a>EF Core 5.0
+## <a name="ef-core-60"></a>EF Core 6,0
 
-La prochaine version stable planifiée est **EF Core 5.0** , prévue pour novembre 2020.
+La prochaine version stable planifiée est **EF Core 6,0** , planifiée pour le **2021 novembre**.
 
-Un [plan global pour EF Core 5.0](xref:core/what-is-new/ef-core-5.0/plan) a été créé en suivant le [processus de planification des versions](xref:core/what-is-new/release-planning) documenté.
+Nous travaillons actuellement sur un plan de haut niveau basé sur le [processus de planification des versions](xref:core/what-is-new/release-planning).
 
 Vos commentaires sur la planification sont importants.
 La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut 👍) pour ce problème sur GitHub.
@@ -57,12 +58,12 @@ Ces données sont ensuite intégrées dans le processus de planification de la p
 
 ### <a name="get-it-now"></a>Obtenir maintenant
 
-Les packages EF Core 5.0 sont **désormais disponibles**  sous forme de :
+Les packages EF Core 6,0 sont **désormais disponibles** en tant que
 
 * [Builds quotidiennes](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md)
   * Toutes les fonctionnalités et tous les correctifs de bogues les plus récents. Généralement très stables (plus de 57 000 séries de tests pour chaque build).
-* [Préversions NuGet](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
-  * En retard par rapport aux builds quotidiennes, mais testées pour fonctionner avec les préversions correspondantes d’ASP.NET Core et de .NET Core.
+
+En outre, à mesure que nous progressons, des préversions fréquentes sont envoyées à NuGet. Notez que les préversions sont en retard par rapport aux builds quotidiennes, mais qu’elles sont testées pour fonctionner avec les ASP.NET Core et les versions préliminaires .NET Core correspondantes.
 
 Les préversions et les builds quotidiennes constituent un excellent moyen de détecter des problèmes et de fournir un retour d’expérience le plus tôt possible.
 Plus tôt nous recevons ces commentaires, plus ils ont de chances d’être exploitables avant la version officielle suivante.
