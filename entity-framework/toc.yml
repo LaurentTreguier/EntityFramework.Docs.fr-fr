@@ -17,8 +17,26 @@
           href: efcore-and-ef6/side-by-side.md
     - name: Entity Framework Core
       items:
-        - name: Vue d'ensemble
+        - name: "Bienvenue\_!"
           href: core/index.md
+        - name: "Répondre à l’enquête EF\_Core\_6 >>"
+          href: 'https://www.surveymonkey.com/r/XRL3JBL'
+        - name: Prise en main
+          items:
+            - name: "Vue d’ensemble d’EF\_Core"
+              items:
+                - name: Installer EF Core
+                  href: core/get-started/overview/install.md
+                - name: "Votre première application EF\_Core"
+                  href: core/get-started/overview/first-app.md
+            - name: Tutoriel ASP.NET Core >>
+              href: /aspnet/core/data/ef-rp/intro
+            - name: Serveur Blazor avec de l’aide sur EF Core >>
+              href: /aspnet/core/blazor/blazor-server-ef-core
+            - name: Tutoriel WPF .NET Core
+              href: core/get-started/wpf.md
+            - name: Tutoriel Xamarin
+              href: core/get-started/xamarin.md
         - name: Mises en production et planification (feuille de route)
           items:
             - name: Mises en production actuelles et planifiées
@@ -33,7 +51,7 @@
                   href: core/what-is-new/ef-core-5.0/whatsnew.md
                 - name: Modifications avec rupture
                   href: core/what-is-new/ef-core-5.0/breaking-changes.md
-            - name: EF Core 3.x
+            - name: EF Core 3.1
               items:
                 - name: Nouvelles fonctionnalités
                   href: core/what-is-new/ef-core-3.x/index.md
@@ -43,6 +61,8 @@
               href: core/what-is-new/ef-core-2.1.md
             - name: Hors support
               items:
+                - name: EF Core 3.0
+                  href: core/what-is-new/ef-core-3.0.md
                 - name: "EF Core\_2.2"
                   href: core/what-is-new/ef-core-2.2.md
                 - name: EF Core 2.0
@@ -55,50 +75,10 @@
                   href: core/what-is-new/ef-core-1.1.md
                 - name: EF Core 1.0
                   href: core/what-is-new/ef-core-1.0.md
-        - name: Prise en main
+        - name: Configuration et initialisation de DbContext
           items:
-            - name: Tutoriel EF Core
-              href: core/get-started/index.md
-            - name: Installer EF Core
-              href: core/get-started/install/index.md
-            - name: Tutoriel ASP.NET Core >>
-              href: /aspnet/core/data/ef-rp/intro
-            - name: Serveur Blazor avec de l’aide sur EF Core >>
-              href: /aspnet/core/blazor/blazor-server-ef-core
-            - name: Tutoriel WPF .NET Core
-              href: core/get-started/wpf.md
-            - name: Tutoriel Xamarin
-              href: core/get-started/xamarin.md
-        - name: Notions de base
-          items:
-            - name: Chaînes de connexion
-              href: core/miscellaneous/connection-strings.md
-            - name: Programmation asynchrone
-              href: core/miscellaneous/async.md
-            - name: Journalisation
-              href: core/miscellaneous/logging.md
-            - name: Regroupement contextuel
-              href: core/miscellaneous/context-pooling.md
-            - name: Résilience de la connexion
-              href: core/miscellaneous/connection-resiliency.md
-            - name: Test
-              items:
-                - name: Test de code qui utilise EF Core
-                  href: core/miscellaneous/testing/index.md
-                - name: Exemple de test EF Core
-                  href: core/miscellaneous/testing/testing-sample.md
-                - name: Partage des bases de données entre les tests
-                  href: core/miscellaneous/testing/sharing-databases.md
-                - name: Tester avec SQLite
-                  href: core/miscellaneous/testing/sqlite.md
-                - name: Tester avec InMemory
-                  href: core/miscellaneous/testing/in-memory.md
-            - name: Configurer un DbContext
-              href: core/miscellaneous/configuring-dbcontext.md
-            - name: Types références Nullables
-              href: core/miscellaneous/nullable-reference-types.md
-            - name: Classements et respect de la casse
-              href: core/miscellaneous/collations-and-case-sensitivity.md
+            - name: Vue d’ensemble
+              href: core/dbcontext-configuration/index.md
         - name: Créer un modèle
           items:
             - name: Vue d'ensemble
@@ -190,6 +170,8 @@
               href: core/querying/client-eval.md
             - name: Suivi et non-suivi
               href: core/querying/tracking.md
+            - name: Fractionner des requêtes
+              href: core/querying/single-split-queries.md
             - name: Opérateurs de requête complexes
               href: core/querying/complex-query-operators.md
             - name: Requêtes SQL brutes
@@ -218,8 +200,48 @@
               href: core/saving/disconnected-entities.md
             - name: Valeurs explicites des propriétés générées
               href: core/saving/explicit-values-generated-properties.md
-        - name: Implémentations de .NET prises en charge
-          href: core/platforms/index.md
+        - name: 'Journalisation, événements et diagnostics'
+          items:
+            - name: Vue d’ensemble
+              href: core/logging-events-diagnostics/index.md
+            - name: Journalisation simple
+              href: core/logging-events-diagnostics/simple-logging.md
+            - name: Microsoft.Extensions.Logging
+              href: core/logging-events-diagnostics/extensions-logging.md
+            - name: Événements
+              href: core/logging-events-diagnostics/events.md
+            - name: Intercepteurs
+              href: core/logging-events-diagnostics/interceptors.md
+            - name: Écouteurs de diagnostic
+              href: core/logging-events-diagnostics/diagnostic-listeners.md
+        - name: Test
+          items:
+            - name: Test de code qui utilise EF Core
+              href: core/testing/index.md
+            - name: Exemple de test EF Core
+              href: core/testing/testing-sample.md
+            - name: Partage des bases de données entre les tests
+              href: core/testing/sharing-databases.md
+            - name: Tester avec SQLite
+              href: core/testing/sqlite.md
+            - name: Tester avec InMemory
+              href: core/testing/in-memory.md
+        - name: Divers
+          items:
+            - name: Implémentations de .NET prises en charge
+              href: core/miscellaneous/platforms.md
+            - name: Programmation asynchrone
+              href: core/miscellaneous/async.md
+            - name: Types références Nullables
+              href: core/miscellaneous/nullable-reference-types.md
+            - name: Classements et respect de la casse
+              href: core/miscellaneous/collations-and-case-sensitivity.md
+            - name: Résilience de connexion
+              href: core/miscellaneous/connection-resiliency.md
+            - name: Chaînes de connexion
+              href: core/miscellaneous/connection-strings.md
+            - name: Regroupement contextuel
+              href: core/miscellaneous/context-pooling.md
         - name: Fournisseurs de bases de données
           items:
             - name: Vue d'ensemble
@@ -273,15 +295,15 @@
         - name: Informations de référence sur la ligne de commande
           items:
             - name: Vue d'ensemble
-              href: core/miscellaneous/cli/index.md
+              href: core/cli/index.md
             - name: Console du Gestionnaire de package (Visual Studio)
-              href: core/miscellaneous/cli/powershell.md
+              href: core/cli/powershell.md
             - name: CLI .NET Core
-              href: core/miscellaneous/cli/dotnet.md
+              href: core/cli/dotnet.md
             - name: Création de DbContext au moment de la conception
-              href: core/miscellaneous/cli/dbcontext-creation.md
+              href: core/cli/dbcontext-creation.md
             - name: Services à la conception
-              href: core/miscellaneous/cli/services.md
+              href: core/cli/services.md
         - name: Informations de référence sur l’API EF Core >>
           href: /dotnet/api/?view=efcore-3.1
     - name: Entity Framework 6
