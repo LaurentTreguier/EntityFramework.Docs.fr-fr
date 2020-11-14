@@ -154,6 +154,10 @@
           items:
             - name: Vue d'ensemble
               href: core/querying/index.md
+            - name: Évaluation du client/serveur
+              href: core/querying/client-eval.md
+            - name: Suivi et non-suivi
+              href: core/querying/tracking.md
             - name: Charger les données associées
               items:
                 - name: Vue d’ensemble
@@ -166,16 +170,14 @@
                   href: core/querying/related-data/lazy.md
                 - name: Données associées et sérialisation
                   href: core/querying/related-data/serialization.md
-            - name: Évaluation du client/serveur
-              href: core/querying/client-eval.md
-            - name: Suivi et non-suivi
-              href: core/querying/tracking.md
             - name: Fractionner des requêtes
               href: core/querying/single-split-queries.md
             - name: Opérateurs de requête complexes
               href: core/querying/complex-query-operators.md
             - name: Requêtes SQL brutes
               href: core/querying/raw-sql.md
+            - name: Fonctions de base de données
+              href: core/querying/database-functions.md
             - name: Filtres de requête globale
               href: core/querying/filters.md
             - name: Balises de requête
