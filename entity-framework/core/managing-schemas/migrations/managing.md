@@ -4,12 +4,12 @@ description: Ajout, suppression et gestion des migrations de schémas de base de
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: 81f7cec54510d95b1e2432d56ff95110224fd9bf
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429848"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003274"
 ---
 # <a name="managing-migrations"></a>Gestion des migrations
 
@@ -40,8 +40,8 @@ Le nom de la migration peut être utilisé comme un message de validation dans u
 
 Trois fichiers sont ajoutés à votre projet sous le répertoire **Migrations** :
 
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs** : fichier de migration principal. Contient les opérations nécessaires à l’application de la migration (dans `Up`) et à sa restauration (dans `Down`).
-* **XXXXXXXXXXXXXX_AddCreatedTimestamp. Designer. cs** : fichier de métadonnées de migrations. Contient des informations utilisées par EF.
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. cs**: fichier de migration principal. Contient les opérations nécessaires à l’application de la migration (dans `Up`) et à sa restauration (dans `Down`).
+* **XXXXXXXXXXXXXX_AddCreatedTimestamp. Designer. cs**: fichier de métadonnées de migrations. Contient des informations utilisées par EF.
 * **MyContextModelSnapshot.cs** : instantané de votre modèle actuel. Permet de déterminer ce qui a changé pendant l’ajout de la migration suivante.
 
 L’horodatage dans le nom des fichiers permet de conserver ces derniers dans l’ordre chronologique et de voir ainsi la progression des modifications.
@@ -168,7 +168,7 @@ _ Procédures stockées
 * Recherche en texte intégral
 * Fonctions
 * Déclencheurs
-* Vues
+* Affichages
 
 Dans la plupart des cas, EF Core encapsule automatiquement chaque migration dans sa propre transaction lors de l’application des migrations. Malheureusement, certaines opérations de migration ne peuvent pas être effectuées au sein d’une transaction dans certaines bases de données ; dans ce cas, vous pouvez refuser la transaction en passant `suppressTransaction: true` à `migrationBuilder.Sql` .
 
@@ -210,7 +210,7 @@ dotnet ef migrations list
 ### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 > [!NOTE]
-> Cette commande a été ajoutée dans EF Core 5,0.
+> Cette commande a été introduite dans EF Core 5,0.
 
 ```powershell
 Get-Migration
@@ -220,7 +220,7 @@ Get-Migration
 
 ## <a name="resetting-all-migrations"></a>Réinitialisation de toutes les migrations
 
-Dans certains cas extrêmes, il peut être nécessaire de supprimer toutes les migrations et de recommencer. Vous pouvez facilement effectuer cette opération en supprimant votre dossier _ *migrations* * et en supprimant votre base de données. à ce stade, vous pouvez créer une nouvelle migration initiale, qui contiendra l’ensemble du schéma actuel.
+Dans certains cas extrêmes, il peut être nécessaire de supprimer toutes les migrations et de recommencer. Vous pouvez facilement effectuer cette opération en supprimant votre dossier _ *migrations** et en supprimant votre base de données. à ce stade, vous pouvez créer une nouvelle migration initiale, qui contiendra l’ensemble du schéma actuel.
 
 Il est également possible de réinitialiser toutes les migrations et d’en créer une seule sans perdre vos données. Cela est parfois appelé « débogage » et implique un travail manuel :
 

@@ -4,22 +4,22 @@ description: Utilisation de comparateurs de valeur pour contrôler la façon don
 author: ajcvickers
 ms.date: 03/20/2020
 uid: core/modeling/value-comparers
-ms.openlocfilehash: d07aee866a542f55c4e1074c5782e67cb4035a89
-ms.sourcegitcommit: 7c3939504bb9da3f46bea3443638b808c04227c2
+ms.openlocfilehash: d59ab093c7e9d251aac80420972d3e35edabae0b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/09/2020
-ms.locfileid: "89616675"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003612"
 ---
 # <a name="value-comparers"></a>Comparateurs de valeurs
 
 > [!NOTE]  
-> Cette fonctionnalité est une nouveauté de EF Core 3,0.
+> Cette fonctionnalité a été introduite dans EF Core 3,0.
 
 > [!TIP]  
 > Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
 
-## <a name="background"></a>Contexte
+## <a name="background"></a>Arrière-plan
 
 EF Core doit comparer les valeurs de propriété dans les cas suivants :
 

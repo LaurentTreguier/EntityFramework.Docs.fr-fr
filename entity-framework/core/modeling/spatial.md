@@ -4,21 +4,21 @@ description: Utilisation de données spatiales dans un modèle de Entity Framewo
 author: bricelam
 ms.date: 10/02/2020
 uid: core/modeling/spatial
-ms.openlocfilehash: fa9cf30ddb4291d96486934544b568b67b126846
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a38e75e150b3d3404f2ed7619d05ba478c411117
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430519"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003443"
 ---
 # <a name="spatial-data"></a>Données spatiales
 
 > [!NOTE]
-> Cette fonctionnalité a été ajoutée dans EF Core 2,2.
+> Cette fonctionnalité a été introduite dans EF Core 2,2.
 
 Les données spatiales représentent l’emplacement physique et la forme des objets. De nombreuses bases de données prennent en charge ce type de données afin qu’elles puissent être indexées et interrogées avec d’autres données. Les scénarios courants incluent l’interrogation d’objets situés à une distance donnée à partir d’un emplacement ou la sélection de l’objet dont la bordure contient un emplacement donné. EF Core prend en charge le mappage aux types de données spatiales à l’aide de la bibliothèque spatiale NetTopologySuite.
 
-## <a name="installing"></a>Installation de
+## <a name="installing"></a>En cours d'installation
 
 Pour pouvoir utiliser les données spatiales avec EF Core, vous devez installer le package NuGet de prise en charge approprié. Le package que vous devez installer dépend du fournisseur que vous utilisez.
 
@@ -78,7 +78,7 @@ Dans LINQ, les méthodes et propriétés NTS disponibles en tant que fonctions d
 
 ## <a name="reverse-engineering"></a>Rétroconception
 
-Les packages NuGet spatiaux activent également les modèles d' [ingénierie à rebours](xref:core/managing-schemas/scaffolding) avec des propriétés spatiales, mais vous devez installer le package * *_avant_* _ exécuter `Scaffold-DbContext` ou `dotnet ef dbcontext scaffold` . Si vous ne le souhaitez pas, vous recevrez des avertissements sur les mappages de type pour les colonnes et les colonnes seront ignorées.
+Les packages NuGet spatiaux activent également les modèles d' [ingénierie à rebours](xref:core/managing-schemas/scaffolding) avec des propriétés spatiales, mais vous devez installer le package **_avant_* _ exécuter `Scaffold-DbContext` ou `dotnet ef dbcontext scaffold` . Si vous ne le souhaitez pas, vous recevrez des avertissements sur les mappages de type pour les colonnes et les colonnes seront ignorées.
 
 ## <a name="srid-ignored-during-client-operations"></a>SRID ignoré pendant les opérations du client
 

@@ -4,12 +4,12 @@ description: Comment configurer et mapper des propriétés d’entité à l’ai
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 55c6f31543d4ce3257cf203eaf9fd2191301ea7e
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 67ea6eb9cc62c01c16ef33d4d1d1597576ec8b3d
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429594"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003407"
 ---
 # <a name="entity-properties"></a>Propriétés d'entité
 
@@ -157,7 +157,7 @@ Une propriété qui serait facultative par convention peut être configurée com
 ## <a name="column-collations"></a>Classements de colonnes
 
 > [!NOTE]
-> Cette fonctionnalité est introduite dans EF Core 5,0.
+> Cette fonctionnalité a été introduite dans EF Core 5,0.
 
 Un classement peut être défini sur des colonnes de texte, en déterminant comment elles sont comparées et triées. Par exemple, l’extrait de code suivant configure un SQL Server colonne pour qu’il ne respecte pas la casse :
 

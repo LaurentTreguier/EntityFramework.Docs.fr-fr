@@ -4,12 +4,12 @@ description: Interception pour les opérations de base de données et d’autres
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 61ec6968344798af8ecffb878a1e47a6a8e031cd
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503200"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003408"
 ---
 # <a name="interceptors"></a>Intercepteurs
 
@@ -21,7 +21,7 @@ Les intercepteurs sont inscrits par instance DbContext lorsque le contexte est c
 
 ## <a name="registering-interceptors"></a>Inscription des intercepteurs
 
-Les intercepteurs sont inscrits à l’aide <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> [de lors de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cela se fait généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
+Les intercepteurs sont inscrits à l’aide <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> [de lors de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cela se fait généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Exemple :
 
 <!--
 public class ExampleContext : BlogsContext
@@ -37,7 +37,7 @@ Vous pouvez également `AddInterceptors` appeler dans le cadre de <xref:Microsof
 > [!TIP]
 > OnConfiguring est toujours appelé lorsque AddDbContext est utilisé ou qu’une instance DbContextOptions est passée au constructeur DbContext. C’est ainsi l’emplacement idéal pour appliquer la configuration du contexte, quelle que soit la façon dont la méthode DbContext est construite.
 
-Les intercepteurs sont souvent sans État, ce qui signifie qu’une seule instance d’intercepteur peut être utilisée pour toutes les instances de DbContext. Par exemple :
+Les intercepteurs sont souvent sans État, ce qui signifie qu’une seule instance d’intercepteur peut être utilisée pour toutes les instances de DbContext. Exemple :
 
 <!--
 public class TaggedQueryCommandInterceptorContext : BlogsContext
@@ -56,8 +56,8 @@ Chaque instance d’intercepteur doit implémenter une ou plusieurs interfaces d
 ## <a name="database-interception"></a>Interception de base de données
 
 > [!NOTE]
-> L’interception de base de données a été ajoutée dans EF Core 3,0 et n’est disponible que pour les fournisseurs de bases de données relationnelles.
-> La prise en charge des point d’enregistrement a été ajoutée dans EF Core 5,0.
+> L’interception de base de données a été introduite dans EF Core 3,0 et n’est disponible que pour les fournisseurs de bases de données relationnelles.
+> La prise en charge des point de enregistrement a été introduite dans EF Core 5,0.
 
 L’interception de base de données de bas niveau est divisée en trois interfaces, présentées dans le tableau suivant.
 
@@ -80,7 +80,7 @@ Chaque paire de méthodes a des variantes synchrones et asynchrones. Cela permet
 
 Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor> peut être utilisé pour modifier SQL avant d’être envoyé à la base de données. Cet exemple montre comment modifier le SQL pour inclure un indicateur de requête.
 
-Souvent, la partie la plus délicate de l’interception consiste à déterminer quand la commande correspond à la requête qui doit être modifiée. L’analyse de SQL est une option, mais elle a tendance à être fragile. Une autre option consiste à utiliser des [balises de requête EF Core](xref:core/querying/tags) pour baliser chaque requête qui doit être modifiée. Par exemple :
+Souvent, la partie la plus délicate de l’interception consiste à déterminer quand la commande correspond à la requête qui doit être modifiée. L’analyse de SQL est une option, mais elle a tendance à être fragile. Une autre option consiste à utiliser des [balises de requête EF Core](xref:core/querying/tags) pour baliser chaque requête qui doit être modifiée. Exemple :
 
 <!--
             var blogs1 = context.Blogs.TagWith("Use hint: robust plan").ToList();
@@ -151,7 +151,7 @@ FROM [Blogs] AS [b]
 > [!TIP]  
 > Vous pouvez [Télécharger l’exemple d’intercepteur de connexion](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) à partir de github.
 
-Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> peut être utilisé pour manipuler le <xref:System.Data.Common.DbConnection> avant qu’il ne soit utilisé pour se connecter à la base de données. Cela peut être utilisé pour obtenir un jeton d’accès Azure Active Directory (AAD). Par exemple :
+Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> peut être utilisé pour manipuler le <xref:System.Data.Common.DbConnection> avant qu’il ne soit utilisé pour se connecter à la base de données. Cela peut être utilisé pour obtenir un jeton d’accès Azure Active Directory (AAD). Exemple :
 
 <!--
 public class AadAuthenticationInterceptor : DbConnectionInterceptor
@@ -396,7 +396,7 @@ Notez que dans la sortie du journal, l’application continue à utiliser le mes
 ## <a name="savechanges-interception"></a>Interception d’SaveChanges
 
 > [!NOTE]
-> L’interception d’SaveChanges a été ajoutée dans EF Core 5,0.
+> L’interception d’SaveChanges a été introduite dans EF Core 5,0.
 
 > [!TIP]  
 > Vous pouvez [Télécharger l’exemple d’intercepteur SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) à partir de github.
@@ -502,7 +502,7 @@ L’idée générale de l’audit avec l’intercepteur est la suivante :
 * Si SaveChanges réussit, le message d’audit est mis à jour pour indiquer la réussite
 * Si SaveChanges échoue, le message d’audit est mis à jour pour indiquer l’échec
 
-La première étape est gérée avant l’envoi des modifications à la base de données à l’aide des remplacements de `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 --> les `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+La première étape est gérée avant l’envoi des modifications à la base de données à l’aide des remplacements de `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  et `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(

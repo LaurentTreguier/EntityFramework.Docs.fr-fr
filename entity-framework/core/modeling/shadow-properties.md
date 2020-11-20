@@ -4,12 +4,12 @@ description: Configuration des propriétés d’ombre et de l’indexeur dans un
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/modeling/shadow-properties
-ms.openlocfilehash: 180478212b683a271d2519cc1a4c79be5d3f11b9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: d419de2da2a9fc29e675dde76e824217347d2e9c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503187"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003430"
 ---
 # <a name="shadow-and-indexer-properties"></a>Propriétés de l’instantané et de l’indexeur
 
@@ -63,7 +63,7 @@ Si le nom fourni à la `IndexerProperty` méthode correspond au nom d’une prop
 ## <a name="property-bag-entity-types"></a>Types d’entités du conteneur des propriétés
 
 > [!NOTE]
-> La prise en charge des types d’entités du conteneur de propriétés a été ajoutée dans EF Core 5,0.
+> La prise en charge des types d’entité de conteneur de propriétés a été introduite dans EF Core 5,0.
 
 Les types d’entités qui contiennent uniquement des propriétés d’indexeur sont connus sous le nom de types d’entité de conteneur de propriétés. Ces types d’entités n’ont pas de propriétés Shadow, à la place, EF crée des propriétés d’indexeur. Actuellement `Dictionary<string, object>` , seul est pris en charge en tant que type d’entité de conteneur de propriétés. Elle doit être configurée en tant que type d’entité partagée avec un nom unique et la `DbSet` propriété correspondante doit être implémentée à l’aide d’un `Set` appel.
 

@@ -4,12 +4,12 @@ description: Chargement hâtif des données associées avec Entity Framework Cor
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/eager
-ms.openlocfilehash: bd9c9045c1c2707d69ee4070bea59ad8066789f3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 66956fcd85bb21a08c69fa93b93c12382bbfc8eb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430103"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003573"
 ---
 # <a name="eager-loading-of-related-data"></a>Chargement hâtif des données associées
 
@@ -47,10 +47,15 @@ Vous pourriez souhaiter inclure plusieurs entités associées pour une entité q
 
 [!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#MultipleLeafIncludes)]
 
+> [!TIP]
+> Vous pouvez également charger plusieurs navigations à l’aide d’une `Include` méthode unique. Cela est possible pour les « chaînes » de navigation qui sont toutes des références, ou lorsqu’elles se terminent par une collection unique.
+
+[!code-csharp[Main](../../../../samples/core/Querying/RelatedData/Program.cs#IncludeMultipleNavigationsWithSingleInclude)]
+
 ## <a name="filtered-include"></a>Include filtré
 
 > [!NOTE]
-> Cette fonctionnalité est introduite dans EF Core 5,0.
+> Cette fonctionnalité a été introduite dans EF Core 5,0.
 
 Lorsque vous appliquez include pour charger des données associées, vous pouvez ajouter certaines opérations énumérables à la navigation de collection incluse, ce qui permet de filtrer et de trier les résultats.
 
@@ -71,7 +76,7 @@ Au lieu de cela, des opérations identiques peuvent être appliquées pour chaqu
 > [!CAUTION]
 > En cas de requêtes de suivi, les résultats de l’inclusion filtrée peuvent être inattendus en raison de la correction de la [navigation](xref:core/querying/tracking). Toutes les entités pertinentes qui ont été interrogées précédemment et qui ont été stockées dans le dispositif de suivi des modifications sont présentes dans les résultats de la requête include filtrée, même si elles ne répondent pas aux exigences du filtre. Envisagez d’utiliser des `NoTracking` requêtes ou de recréer DbContext lors de l’utilisation de l’inclusion filtrée dans ces situations.
 
-Exemple :
+Exemple :
 
 ```csharp
 var orders = context.Orders.Where(o => o.Id > 1000).ToList();

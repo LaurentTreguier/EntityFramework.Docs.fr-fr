@@ -4,12 +4,12 @@ description: Outils et extensions externes pour Entity Framework Core.
 author: ErikEJ
 ms.date: 04/11/2020
 uid: core/extensions/index
-ms.openlocfilehash: c7056bcb0831ae1919b3060aacf73dc5cb9c8cb1
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: dc8125ab522b5b0c5126fda2d7c8093c2babdc29
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429934"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003300"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -240,3 +240,9 @@ Implémentation pour la suppression réversible d’entités. Pour EF Core : 3.
 Étend EF Core pour résoudre les chaînes de connexion à partir de App.config. Pour EF Core : 3.
 
 [Dépôt GitHub](https://github.com/efcore/EFCore.ConfigurationManager)
+
+### <a name="detached-mapper"></a>Mappeur détaché
+
+Mappeur DTO-Entity avec gestion de la composition/de l’agrégation (semblable à GraphDiff). Pour EF Core : 3, 5.
+
+[NuGet](https://www.nuget.org/packages/Detached.Mappers.EntityFramework)

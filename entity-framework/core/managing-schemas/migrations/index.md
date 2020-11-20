@@ -4,12 +4,12 @@ description: Vue d’ensemble de la gestion des schémas de la base de données 
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 9f1c9e266d60b7ed4aed783bb8e01864c93867ea
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429817"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003393"
 ---
 # <a name="migrations-overview"></a>Vue d’ensemble des migrations
 
@@ -61,7 +61,7 @@ Add-Migration InitialCreate
 
 **_
 
-EF Core créera un répertoire appelé _ *migrations* * dans votre projet et générera des fichiers. Il est judicieux d’inspecter précisément les fichiers en question, et éventuellement de les modifier, mais nous allons nous en passer pour l’instant.
+EF Core créera un répertoire appelé _ *migrations** dans votre projet et générera des fichiers. Il est judicieux d’inspecter précisément les fichiers en question, et éventuellement de les modifier, mais nous allons nous en passer pour l’instant.
 
 ### <a name="create-your-database-and-schema"></a>Création d’une base de données et d’un schéma
 
@@ -141,7 +141,7 @@ Cette fois, EF détecte que la base de données existe déjà. Par ailleurs, lor
 ### <a name="excluding-parts-of-your-model"></a>Exclusion de parties de votre modèle
 
 > [!NOTE]
-> Cette fonctionnalité a été ajoutée dans EF Core 5,0.
+> Cette fonctionnalité a été introduite EF dans Core 5,0.
 
 Parfois, vous pouvez faire référence à des types à partir d’un autre DbContext. Cela peut entraîner des conflits de migration. Pour éviter cela, excluez le type des migrations de l’un des DbContexts.
 

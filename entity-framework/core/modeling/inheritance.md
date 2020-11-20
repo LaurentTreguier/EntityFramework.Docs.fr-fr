@@ -4,12 +4,12 @@ description: Comment configurer l’héritage de type d’entité à l’aide de
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 3ec6e7bd98f9c9716c460d69fc707d95e5e47a05
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429518"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003625"
 ---
 # <a name="inheritance"></a>Héritage
 
@@ -64,7 +64,7 @@ Par défaut, lorsque deux types d’entités frères dans la hiérarchie ont une
 ## <a name="table-per-type-configuration"></a>Configuration TPT (table par type)
 
 > [!NOTE]
-> La table par type (TPT) est une nouvelle fonctionnalité de EF Core 5,0. Le type de table par point concret (TPC) est pris en charge par EF6, mais n’est pas encore pris en charge par EF Core.
+> La fonctionnalité table par type (TPT) a été introduite dans EF Core 5,0. Le type de table par point concret (TPC) est pris en charge par EF6, mais n’est pas encore pris en charge par EF Core.
 
 Dans le modèle de mappage TPT, tous les types sont mappés à des tables individuelles. Les propriétés qui appartiennent uniquement à un type de base ou à un type dérivé sont stockées dans une table qui mappe à ce type. Les tables mappées à des types dérivés stockent également une clé étrangère qui joint la table dérivée à la table de base.
 

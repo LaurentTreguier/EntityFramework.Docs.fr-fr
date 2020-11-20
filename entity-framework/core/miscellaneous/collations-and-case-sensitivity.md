@@ -4,23 +4,23 @@ description: Configuration des classements et du respect de la casse dans la bas
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: cced7e11f7bf02223d3f181677ad1707c1da4051
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: eca68af6e658f76e1480b1e1083212f160fa765c
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429739"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003456"
 ---
 # <a name="collations-and-case-sensitivity"></a>Classements et respect de la casse
 
 > [!NOTE]
-> Cette fonctionnalité est introduite dans EF Core 5,0.
+> Cette fonctionnalité a été introduite dans EF Core 5,0.
 
 Le traitement de texte dans les bases de données peut être complexe et nécessite plus d’attention à l’utilisateur. Pour une chose, les bases de données varient considérablement dans la façon dont elles gèrent le texte. par exemple, bien que certaines bases de données respectent la casse par défaut (par exemple, SQLite, PostgreSQL), d’autres ne sont pas sensibles à la casse (SQL Server, MySQL). En outre, en raison de l’utilisation de l’index, le respect de la casse et les aspects similaires peuvent avoir un impact important sur les performances des requêtes : s’il peut être tentant d’utiliser pour forcer une comparaison ne respectant pas la casse `string.Lower` dans une base de données qui respecte la casse, cela peut empêcher votre application d’utiliser des index. Cette page explique comment configurer le respect de la casse, ou plus généralement, les classements et comment le faire de manière efficace sans compromettre les performances des requêtes.
 
 ## <a name="introduction-to-collations"></a>Présentation des classements
 
-Un concept fondamental du traitement du texte est le *classement* , qui est un ensemble de règles déterminant comment les valeurs de texte sont classées et comparées à des fins d’égalité. Par exemple, bien qu’un classement ne respectant pas la casse ignore les différences entre les lettres majuscules et minuscules dans le cadre de la comparaison d’égalité, le classement qui respecte la casse ne le fait pas. Toutefois, étant donné que le respect de la casse est dépendant de la culture (par exemple, `i` et `I` représente une lettre différente en turc), il existe plusieurs classements qui ne respectent pas la casse, chacun avec son propre ensemble de règles. L’étendue des classements s’étend également au-delà du respect de la casse, aux autres aspects des données de caractères. en allemand, par exemple, il est parfois (mais pas toujours) souhaitable de traiter `ä` et `ae` comme identiques. Enfin, les classements définissent également le mode de *Tri* des valeurs de texte : en Allemand `ä` `a` , le place à la fin de l’alphabet.
+Un concept fondamental du traitement du texte est le *classement*, qui est un ensemble de règles déterminant comment les valeurs de texte sont classées et comparées à des fins d’égalité. Par exemple, bien qu’un classement ne respectant pas la casse ignore les différences entre les lettres majuscules et minuscules dans le cadre de la comparaison d’égalité, le classement qui respecte la casse ne le fait pas. Toutefois, étant donné que le respect de la casse est dépendant de la culture (par exemple, `i` et `I` représente une lettre différente en turc), il existe plusieurs classements qui ne respectent pas la casse, chacun avec son propre ensemble de règles. L’étendue des classements s’étend également au-delà du respect de la casse, aux autres aspects des données de caractères. en allemand, par exemple, il est parfois (mais pas toujours) souhaitable de traiter `ä` et `ae` comme identiques. Enfin, les classements définissent également le mode de *Tri* des valeurs de texte : en Allemand `ä` `a` , le place à la fin de l’alphabet.
 
 Toutes les opérations de texte dans une base de données utilisent un classement, qu’il s’agisse de manière explicite ou implicite, pour déterminer comment l’opération compare et trie les chaînes. La liste réelle des classements disponibles et leurs schémas de nommage sont spécifiques à la base de données. consultez [la section ci-dessous](#database-specific-information) pour obtenir des liens vers des pages de documentation pertinentes de différentes bases de données. Heureusement, la base de données permet généralement de définir un classement par défaut au niveau de la base de données ou de la colonne, et de spécifier explicitement le classement à utiliser pour des opérations spécifiques dans une requête.
 
