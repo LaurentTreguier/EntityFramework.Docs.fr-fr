@@ -4,12 +4,12 @@ description: Traduction de la requête en requêtes Single et Split dans SQL ave
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: 1c99d931c01b99de199710ffe661e1aac7a37263
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: ba282a0c5242b2eb87d681906571036d4751f6ac
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431626"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003560"
 ---
 # <a name="single-vs-split-queries"></a>Requêtes Single et Split
 
@@ -26,10 +26,10 @@ ORDER BY [b].[BlogId], [p].[PostId]
 
 Si un blog classique contient plusieurs publications connexes, les lignes de ces publications dupliqueront les informations du blog. Cette duplication porte sur le problème de « explosion cartésien ». À mesure que des relations un-à-plusieurs sont chargées, la quantité de données dupliquées peut croître et nuire aux performances de votre application.
 
-## <a name="split-queries"></a>Fractionner les requêtes
+## <a name="split-queries"></a>Fractionner des requêtes
 
 > [!NOTE]
-> Cette fonctionnalité est introduite dans EF Core 5,0. Elle fonctionne uniquement lorsque vous utilisez `Include` . [Ce problème concerne le](https://github.com/dotnet/efcore/issues/21234) suivi de la prise en charge des requêtes fractionnées lors du chargement des données associées dans la projection sans `Include` .
+> Cette fonctionnalité a été introduite dans EF Core 5,0. Elle fonctionne uniquement lorsque vous utilisez `Include` . [Ce problème concerne le](https://github.com/dotnet/efcore/issues/21234) suivi de la prise en charge des requêtes fractionnées lors du chargement des données associées dans la projection sans `Include` .
 
 EF vous permet de spécifier qu’une requête LINQ donnée doit être *fractionnée* en plusieurs requêtes SQL. Au lieu de JOINTUREs, les requêtes Split génèrent une requête SQL supplémentaire pour chaque navigation dans la collection incluse :
 

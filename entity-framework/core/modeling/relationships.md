@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: c92fa1904436ec43ff8918354a99440079e2a96a
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503213"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003261"
 ---
 # <a name="relationships"></a>Relations
 
@@ -149,7 +149,7 @@ Si vous n’avez qu’une seule propriété de navigation, il y a des surcharges
 ### <a name="configuring-navigation-properties"></a>Configuration des propriétés de navigation
 
 > [!NOTE]
-> Cette fonctionnalité a été ajoutée dans EF Core 5,0.
+> Cette fonctionnalité a été introduite dans EF Core 5,0.
 
 Une fois la propriété de navigation créée, vous devrez peut-être la configurer ultérieurement.
 
@@ -269,7 +269,7 @@ Avec cette configuration, les colonnes correspondantes `ShippingAddress` sont ma
 > Si vous utilisez des [types de référence n’acceptant pas les valeurs NULL,](/dotnet/csharp/nullable-references) l’appel de `IsRequired` n’est pas nécessaire.
 
 > [!NOTE]
-> La possibilité de configurer si le dépendant est requis a été ajoutée dans EF Core 5,0.
+> La possibilité de configurer si le dépendant est requis a été introduite dans EF Core 5,0.
 
 ### <a name="many-to-many"></a>Plusieurs-à-plusieurs
 
@@ -320,11 +320,11 @@ Des données supplémentaires peuvent être stockées dans le type d’entité d
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
 > [!NOTE]
-> La possibilité de configurer des relations plusieurs-à-plusieurs a été ajoutée dans EF Core 5,0, pour la version précédente, utilisez l’approche suivante.
+> La possibilité de configurer des relations plusieurs-à-plusieurs a été introduite dans EF Core 5,0, pour la version précédente, utilisez l’approche suivante.
 
 Vous pouvez également représenter une relation plusieurs-à-plusieurs en ajoutant simplement le type d’entité de jointure et en mappant deux relations un-à-plusieurs distinctes.
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=11-14,16-19,39-46)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToMany.cs?name=ManyToMany&highlight=16-19,21-24)]
 
 > [!NOTE]
 > La prise en charge de la génération de modèles automatique de relations plusieurs-à-plusieurs à partir de la base de données n’est pas encore ajoutée. Voir le [problème de suivi](https://github.com/dotnet/efcore/issues/22475).

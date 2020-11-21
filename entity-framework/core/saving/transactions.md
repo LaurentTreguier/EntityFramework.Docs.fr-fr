@@ -4,12 +4,12 @@ description: Gestion des transactions pour l’atomicité lors de l’enregistre
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: 2cefe23068a40122b7a37c21536213456eef7b66
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: b5e1fa2a0bcc466f22f03fee7ecaef9dcea1efaf
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063619"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003547"
 ---
 # <a name="using-transactions"></a>Utilisation de transactions
 
@@ -34,7 +34,13 @@ Bien que tous les fournisseurs de base de données relationnelle prennent en cha
 
 ## <a name="savepoints"></a>Points
 
+> [!NOTE]
+> Cette fonctionnalité a été introduite dans EF Core 5,0.
+
 Lorsque `SaveChanges` est appelé et qu’une transaction est déjà en cours sur le contexte, EF crée automatiquement un *point* de sauvegarde avant d’enregistrer les données. Les points d’enregistrement sont des points dans une transaction de base de données qui peuvent être restaurés ultérieurement vers, si une erreur se produit ou pour toute autre raison. Si `SaveChanges` rencontre une erreur, il restaure automatiquement la transaction jusqu’au point de sauvegarde, ce qui laisse la transaction dans le même État que si elle n’avait jamais démarré. Cela vous permet de corriger éventuellement des problèmes et de réessayer d’enregistrer, en particulier lorsque des problèmes d' [accès concurrentiel optimiste](xref:core/saving/concurrency) se produisent.
+
+> [!WARNING]
+> Les points de sauvegarde sont incompatibles avec les jeux de résultats actifs multiples de SQL Server et ne sont pas utilisés. Si une erreur se produit pendant `SaveChanges` , la transaction peut être laissée dans un état inconnu.
 
 Il est également possible de gérer manuellement les points de enregistrement, comme c’est le cas avec les transactions. L’exemple suivant crée un point de sauvegarde dans une transaction, puis le restaure en cas d’échec :
 

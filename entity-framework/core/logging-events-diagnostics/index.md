@@ -4,12 +4,12 @@ description: Vue d’ensemble de la journalisation, des événements, des interc
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: fdf536dc6ec15e6e520d574b14527a4e7a7b1d72
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
+ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431528"
+ms.lasthandoff: 11/20/2020
+ms.locfileid: "95003521"
 ---
 # <a name="overview-of-logging-and-interception"></a>Vue d’ensemble de la journalisation et de l’interception
 
@@ -32,9 +32,9 @@ Le tableau ci-dessous fournit une référence rapide pour les différences entre
 ## <a name="simple-logging"></a>Journalisation simple
 
 > [!NOTE]
-> Cette fonctionnalité a été ajoutée dans EF Core 5,0.
+> Cette fonctionnalité a été introduite dans EF Core 5,0.
 
-Les journaux de EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> lors [de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
+Les journaux de EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> lors [de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -55,7 +55,7 @@ Pour plus d’informations, consultez [utilisation de Microsoft. extensions. Log
 ## <a name="events"></a>Événements
 
 > [!NOTE]
-> Des événements supplémentaires ont été ajoutés dans EF Core 5,0.
+> Des événements supplémentaires ont été introduits dans EF Core 5,0.
 
 EF Core expose des [événements .net](/dotnet/standard/events/) pour agir en tant que rappels lorsque certains événements se produisent dans le code EF Core. Les événements sont plus simples que les intercepteurs et permettent une inscription plus flexible. Toutefois, ils sont synchronisés uniquement et ne peuvent donc pas effectuer d’e/s Async non bloquantes.
 
@@ -66,7 +66,7 @@ Pour plus d’informations, consultez [événements .net dans EF Core](xref:core
 ## <a name="interception"></a>Interception
 
 > [!NOTE]
-> Cette fonctionnalité a été ajoutée dans EF Core 3,0. Des intercepteurs supplémentaires ont été ajoutés dans EF Core 5,0.
+> Cette fonctionnalité a été introduite dans EF Core 3,0. Des intercepteurs supplémentaires ont été introduits dans EF Core 5,0.
 
 Les intercepteurs de EF Core permettent l’interception, la modification et/ou la suppression d’opérations de EF Core. Cela comprend les opérations de base de données de bas niveau telles que l’exécution d’une commande, ainsi que les opérations de niveau supérieur, telles que les appels à SaveChanges.
 
