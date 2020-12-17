@@ -4,12 +4,12 @@ description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
 ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 3efa883cdfac1ecd412112ef06c7763f1a7e12f1
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7737a143b9478412cdafe3c2fe5e8d7a106c9a3f
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429245"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635495"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
@@ -321,7 +321,7 @@ Notez que :
 * L’expéditeur de l’événement est l' `DbContext` instance
 * Les arguments de l' `SavedChanges` événement contiennent le nombre d’entités enregistrées dans la base de données
 
-L’intercepteur est défini par `ISaveChangesInterceptor` , mais il est souvent convienient d’hériter de `SaveChangesInterceptor` pour éviter d’implémenter chaque méthode. Par exemple :
+L’intercepteur est défini par `ISaveChangesInterceptor` , mais il est souvent pratique d’hériter de `SaveChangesInterceptor` pour éviter d’implémenter chaque méthode. Par exemple :
 
 ```csharp
 public class MySaveChangesInterceptor : SaveChangesInterceptor
@@ -617,7 +617,7 @@ if (entry.CurrentValues.TryGetValue(propertyName, out var value))
 
 ### <a name="default-environment-to-development"></a>Développement de l’environnement par défaut
 
-Les outils en ligne de commande EF Core configurent désormais automatiquement les `ASPNETCORE_ENVIRONMENT` _and_ `DOTNET_ENVIRONMENT` variables d’environnement et en « développement ». Cela permet d’utiliser l’hôte générique en fonction de l’expérience de ASP.NET Core pendant le développement. Consultez [#19903](https://github.com/dotnet/efcore/issues/19903).
+Les outils en ligne de commande EF Core configurent désormais automatiquement les `ASPNETCORE_ENVIRONMENT`  `DOTNET_ENVIRONMENT` variables d’environnement et en « développement ». Cela permet d’utiliser l’hôte générique en fonction de l’expérience de ASP.NET Core pendant le développement. Consultez [#19903](https://github.com/dotnet/efcore/issues/19903).
 
 ### <a name="better-migrations-column-ordering"></a>Meilleur classement des colonnes de migrations
 
@@ -715,7 +715,7 @@ CREATE TABLE [Animals] (
     [Species] nvarchar(max) NULL,
     [Discriminator] nvarchar(max) NOT NULL,
     [Name] nvarchar(max) NULL,
-    [EdcuationLevel] nvarchar(max) NULL,
+    [EducationLevel] nvarchar(max) NULL,
     [FavoriteToy] nvarchar(max) NULL,
     CONSTRAINT [PK_Animals] PRIMARY KEY ([Id])
 );
@@ -739,7 +739,7 @@ CREATE TABLE [Pets] (
 
 CREATE TABLE [Cats] (
     [Id] int NOT NULL,
-    [EdcuationLevel] nvarchar(max) NULL,
+    [EducationLevel] nvarchar(max) NULL,
     CONSTRAINT [PK_Cats] PRIMARY KEY ([Id]),
     CONSTRAINT [FK_Cats_Animals_Id] FOREIGN KEY ([Id]) REFERENCES [Animals] ([Id]) ON DELETE NO ACTION,
     CONSTRAINT [FK_Cats_Pets_Id] FOREIGN KEY ([Id]) REFERENCES [Pets] ([Id]) ON DELETE NO ACTION
@@ -775,7 +775,7 @@ public class Pet : Animal
 [Table("Cats")]
 public class Cat : Pet
 {
-    public string EdcuationLevel { get; set; }
+    public string EducationLevel { get; set; }
 }
 
 [Table("Dogs")]

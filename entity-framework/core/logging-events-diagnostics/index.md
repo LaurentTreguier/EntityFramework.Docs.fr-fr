@@ -4,28 +4,28 @@ description: Vue d’ensemble de la journalisation, des événements, des interc
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: 2c44772b22112645f85cf0bffa680bc510ea5afb
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003521"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635677"
 ---
 # <a name="overview-of-logging-and-interception"></a>Vue d’ensemble de la journalisation et de l’interception
 
 Entity Framework Core (EF Core) contient plusieurs mécanismes permettant de générer des journaux, de répondre aux événements et d’obtenir des Diagnostics. Chacune d’elles est adaptée à différentes situations, et il est important de sélectionner le mécanisme le mieux adapté à la tâche, même lorsque plusieurs mécanismes peuvent fonctionner. Par exemple, un intercepteur de base de données peut être utilisé pour journaliser SQL, mais il est mieux géré par l’un des mécanismes adaptés à la journalisation. Cette page présente une vue d’ensemble de chacun de ces mécanismes et décrit les cas d’utilisation de chacun d’entre eux.
 
-## <a name="quick-reference"></a>Aide-mémoire
+## <a name="quick-reference"></a>Référence rapide
 
 Le tableau ci-dessous fournit une référence rapide pour les différences entre les mécanismes décrits ici.
 
 | Mechanism |  Async | Étendue | Inscrit | Usage prévu
 |:----------|--------|-------|------------|-------------
-| Journalisation simple | Non | Par contexte | Configuration du contexte | Journalisation au moment du développement
-| Microsoft.Extensions.Logging | Non | Par contexte * | D.I. configuration du contexte ou | Journalisation de la production
-| Événements | Non | Par contexte | N'importe quand | Réagir aux événements EF
+| Journalisation simple | No | Par contexte | Configuration du contexte | Journalisation au moment du développement
+| Microsoft.Extensions.Logging | No | Par contexte * | D.I. configuration du contexte ou | Journalisation de la production
+| Événements | No | Par contexte | N'importe quand | Réagir aux événements EF
 | Intercepteurs | Oui | Par contexte | Configuration du contexte | Manipulation des opérations EF
-| Écouteurs de diagnostic | Non | Process | Globalement | Diagnostic d'application
+| Écouteurs de diagnostic | No | Processus | Globalement | Diagnostic d'application
 
 * `Microsoft.Extensions.Logging` Est généralement configuré par application via l’injection de dépendances, mais au niveau d’EF, chaque contexte _peut_ être configuré avec un journal différent si nécessaire.
 
@@ -34,7 +34,7 @@ Le tableau ci-dessous fournit une référence rapide pour les différences entre
 > [!NOTE]
 > Cette fonctionnalité a été introduite dans EF Core 5,0.
 
-Les journaux de EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> lors [de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Exemple :
+Les journaux EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de lors de la <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

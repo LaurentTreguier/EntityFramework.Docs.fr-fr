@@ -4,12 +4,12 @@ description: La documentation du fournisseur de base de données qui permet d’
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: b167f53515799efdaead232f44ad5eab37fb0b14
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 8bfce78465e8194544562c3ecac4d3398ca91265
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003599"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635586"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Fournisseur Azure Cosmos DB EF Core
 
@@ -103,12 +103,12 @@ Par défaut EF Core crée des conteneurs avec la clé de partition définie sur 
 > [!NOTE]
 >La propriété de clé de partition peut être de n’importe quel type tant qu’elle est [convertie en chaîne](xref:core/modeling/value-conversions).
 
-Une fois configurée, la propriété de clé de partition doit toujours avoir une valeur non Null. Une requête peut être transformée en une seule partition en ajoutant un `WithPartitionKey` appel.
+Une fois configurée, la propriété de clé de partition doit toujours avoir une valeur non Null. Une requête peut être transformée en une seule partition en ajoutant un <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> appel.
 
 [!code-csharp[PartitionKey](../../../../samples/core/Cosmos/ModelBuilding/Sample.cs?name=PartitionKey&highlight=15)]
 
 > [!NOTE]
-> `WithPartitionKey` a été introduite dans EF Core 5,0.
+> <xref:Microsoft.EntityFrameworkCore.CosmosQueryableExtensions.WithPartitionKey%2A> a été introduite dans EF Core 5,0.
 
 Il est généralement recommandé d’ajouter la clé de partition à la clé primaire, car la meilleure reflète la sémantique du serveur et permet des optimisations, par exemple dans `FindAsync` .
 
@@ -212,10 +212,10 @@ Voici le code JSON résultant :
 > [!NOTE]
 > La prise en charge de l’accès concurrentiel eTag a été introduite dans EF Core 5,0.
 
-Pour configurer un type d’entité afin d’utiliser l’appel d' [accès concurrentiel optimiste](xref:core/modeling/concurrency) `UseETagConcurrency` . Cet appel crée une `_etag` propriété dans l' [État Shadow](xref:core/modeling/shadow-properties) et la définit comme jeton d’accès concurrentiel.
+Pour configurer un type d’entité afin d’utiliser l’appel d' [accès concurrentiel optimiste](xref:core/modeling/concurrency) <xref:Microsoft.EntityFrameworkCore.CosmosEntityTypeBuilderExtensions.UseETagConcurrency%2A> . Cet appel crée une `_etag` propriété dans l' [État Shadow](xref:core/modeling/shadow-properties) et la définit comme jeton d’accès concurrentiel.
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETag)]
 
-Pour faciliter la résolution des erreurs d’accès concurrentiel, vous pouvez mapper l’eTag à une propriété CLR à l’aide de `IsETagConcurrency` .
+Pour faciliter la résolution des erreurs d’accès concurrentiel, vous pouvez mapper l’eTag à une propriété CLR à l’aide de <xref:Microsoft.EntityFrameworkCore.CosmosPropertyBuilderExtensions.IsETagConcurrency%2A> .
 
 [!code-csharp[Main](../../../../samples/core/Cosmos/ModelBuilding/OrderContext.cs?name=ETagProperty)]

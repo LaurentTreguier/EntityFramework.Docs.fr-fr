@@ -4,12 +4,12 @@ description: Journalisation à partir d’un DbContext de EF Core à l’aide de
 author: ajcvickers
 ms.date: 10/03/2020
 uid: core/logging-events-diagnostics/simple-logging
-ms.openlocfilehash: 274fca39c45c4e2ccfd47f3c4eeb0834e00d18aa
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 076c4b12aa033b51a2b839686c520a76520ee415
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003508"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635612"
 ---
 # <a name="simple-logging"></a>Journalisation simple
 
@@ -26,7 +26,7 @@ Entity Framework Core (EF Core) la journalisation simple peut être utilisée po
 
 ## <a name="configuration"></a>Configuration
 
-Les journaux de EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de [LogTo](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/DbContextOptionsBuilder.cs#L135) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> --> lors [de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Exemple :
+Les journaux EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de lors de la <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -49,7 +49,7 @@ La <xref:System.Console.WriteLine%2A?displayProperty=nameWithType> méthode est 
 
 ### <a name="logging-to-the-debug-window"></a>Journalisation dans la fenêtre de débogage
 
-<xref:System.Diagnostics.Debug.WriteLine%2A?displayProperty=nameWithType> peut être utilisé pour envoyer la sortie vers la fenêtre de débogage dans Visual Studio ou d’autres IDE. La [syntaxe lambda](/dotnet/csharp/language-reference/operators/lambda-expressions) doit être utilisée dans ce cas, car la `Debug` classe est compilée en dehors des versions release. Exemple :
+<xref:System.Diagnostics.Debug.WriteLine%2A?displayProperty=nameWithType> peut être utilisé pour envoyer la sortie vers la fenêtre de débogage dans Visual Studio ou d’autres IDE. La [syntaxe lambda](/dotnet/csharp/language-reference/operators/lambda-expressions) doit être utilisée dans ce cas, car la `Debug` classe est compilée en dehors des versions release. Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -59,7 +59,7 @@ La <xref:System.Console.WriteLine%2A?displayProperty=nameWithType> méthode est 
 
 ### <a name="logging-to-a-file"></a>Journalisation dans un fichier
 
-L’écriture dans un fichier requiert la création d’un <xref:System.IO.StreamWriter> ou similaire pour le fichier. La <xref:System.IO.StreamWriter.WriteLine%2A> méthode peut ensuite être utilisée comme dans les autres exemples ci-dessus. N’oubliez pas de vérifier que le fichier est fermé correctement en supprimant l’enregistreur lorsque le contexte est supprimé. Exemple :
+L’écriture dans un fichier requiert la création d’un <xref:System.IO.StreamWriter> ou similaire pour le fichier. La <xref:System.IO.StreamWriter.WriteLine%2A> méthode peut ensuite être utilisée comme dans les autres exemples ci-dessus. N’oubliez pas de vérifier que le fichier est fermé correctement en supprimant l’enregistreur lorsque le contexte est supprimé. Par exemple :
 
 <!--
     private readonly StreamWriter _logStream = new StreamWriter("mylog.txt", append: true); 
@@ -90,7 +90,7 @@ L’écriture dans un fichier requiert la création d’un <xref:System.IO.Strea
 
 Par défaut, EF Core n’inclut pas les valeurs des données dans les messages d’exception. Cela est dû au fait que ces données peuvent être confidentielles et peuvent être révélées en production si une exception n’est pas gérée.
 
-Toutefois, le fait de connaître les valeurs de données, en particulier pour les clés, peut être très utile lors du débogage. Vous pouvez l’activer dans EF Core en appelant <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging> . Exemple :
+Toutefois, le fait de connaître les valeurs de données, en particulier pour les clés, peut être très utile lors du débogage. Vous pouvez l’activer dans EF Core en appelant <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableSensitiveDataLogging> . Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -104,7 +104,7 @@ Toutefois, le fait de connaître les valeurs de données, en particulier pour le
 
 Pour des raisons de performances, EF Core n’encapsule pas chaque appel pour lire une valeur à partir du fournisseur de base de données dans un bloc try-catch. Toutefois, cela entraîne parfois des exceptions difficiles à diagnostiquer, en particulier lorsque la base de données retourne une valeur NULL lorsqu’elle n’est pas autorisée par le modèle.
 
-Si vous activez la fonction, <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A> EF introduira ces blocs try-catch et fournira des erreurs plus détaillées. Exemple :
+Si vous activez la fonction, <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.EnableDetailedErrors%2A> EF introduira ces blocs try-catch et fournira des erreurs plus détaillées. Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -116,7 +116,7 @@ Si vous activez la fonction, <xref:Microsoft.EntityFrameworkCore.DbContextOption
 
 ## <a name="filtering"></a>Filtrage
 
-### <a name="log-levels"></a>Niveaux de journal
+### <a name="log-levels"></a>Niveaux de journalisation
 
 Chaque message de journal EF Core est affecté à un niveau défini par l' <xref:Microsoft.Extensions.Logging.LogLevel> énumération. Par défaut, EF Core la journalisation simple comprend chaque message au `Debug` niveau ou au-dessus. `LogTo` un niveau minimum plus élevé peut être passé pour filtrer certains messages. Par exemple, le passage de `Information` résultats dans un ensemble minimal de journaux limité à l’accès aux bases de données et à certains messages de maintenance.
 
@@ -188,7 +188,7 @@ Notez que la <xref:Microsoft.EntityFrameworkCore.DbLoggerCategory> classe fourni
 [!code-csharp[CustomFilter](../../../samples/core/Miscellaneous/Logging/SimpleLogging/Program.cs?name=CustomFilter)]
 
 > [!TIP]
-> Le filtrage à l’aide de filtres personnalisés ou de l’une des autres options présentées ici est plus efficace que le filtrage dans le délégué LogTo. En effet, si le filtre détermine que le message ne doit pas être consigné, le message du journal n’est même pas créé.
+> Le filtrage à l’aide de filtres personnalisés ou de l’une des autres options présentées ici est plus efficace que le filtrage dans le `LogTo` délégué. En effet, si le filtre détermine que le message ne doit pas être consigné, le message du journal n’est même pas créé.
 
 ## <a name="configuration-for-specific-messages"></a>Configuration de messages spécifiques
 
@@ -214,7 +214,7 @@ L’exemple précédent utilisait un filtre personnalisé pour enregistrer chaqu
 
 ### <a name="suppress-logging-an-event"></a>Supprimer la journalisation d’un événement
 
-De la même façon, un événement individuel peut être supprimé de la journalisation. Cela est particulièrement utile pour ignorer un avertissement qui a été révisé et compris. Exemple :
+De la même façon, un événement individuel peut être supprimé de la journalisation. Cela est particulièrement utile pour ignorer un avertissement qui a été révisé et compris. Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -245,7 +245,7 @@ Le contenu par défaut de `LogTo` est mis en forme sur plusieurs lignes. La prem
 * <xref:Microsoft.Extensions.Logging.EventId>Dans le formulaire qui peut être copié/collé pour récupérer le membre de <xref:Microsoft.EntityFrameworkCore.Diagnostics.CoreEventId> ou de l’une des autres `EventId` classes, plus la valeur d’ID brute
 * Catégorie d’événement, comme décrit ci-dessus.
 
-Exemple :
+Par exemple :
 
 ```output
 info: 10/6/2020 10:52:45.581 RelationalEventId.CommandExecuted[20101] (Microsoft.EntityFrameworkCore.Database.Command)
@@ -260,14 +260,14 @@ dbug: 10/6/2020 10:52:45.585 RelationalEventId.TransactionCommitted[20202] (Micr
       Committed transaction.
 ```
 
-Ce contenu peut être personnalisé en passant des valeurs à partir de [DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> -->, comme indiqué dans les sections suivantes.
+Ce contenu peut être personnalisé en passant des valeurs à partir de <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> , comme indiqué dans les sections suivantes.
 
 > [!TIP]
 > Envisagez d’utiliser [Microsoft. extensions. Logging](/aspnet/core/fundamentals/logging) pour davantage de contrôle sur la mise en forme des journaux.
 
 ### <a name="using-utc-time"></a>Utilisation de l’heure UTC
 
-Par défaut, les timestamnps sont conçus pour la consommation locale pendant le débogage. Utilisez `DbContextLoggerOptions.DefaultWithUtcTime` plutôt pour utiliser des horodatages UTC indépendantes de la culture, mais conservez tout le reste. Exemple :
+Par défaut, les horodateurs sont conçus pour la consommation locale pendant le débogage. Utilisez <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.DefaultWithUtcTime?displayProperty=nameWithType> plutôt pour utiliser des horodatages UTC indépendantes de la culture, mais conservez tout le reste. Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -295,7 +295,7 @@ dbug: 2020-10-06T17:55:39.0351684Z RelationalEventId.TransactionCommitted[20202]
 
 ### <a name="single-line-logging"></a>Journalisation sur une seule ligne
 
-Il est parfois utile d’avoir une seule ligne par message de journal. Cette option peut être activée par `DbContextLoggerOptions.SingleLine` . Exemple :
+Il est parfois utile d’avoir une seule ligne par message de journal. Cette option peut être activée par <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions.SingleLine?displayProperty=nameWithType> . Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -316,7 +316,7 @@ dbug: 10/6/2020 10:52:45.725 RelationalEventId.TransactionCommitted[20202] (Micr
 
 ### <a name="other-content-options"></a>Autres options de contenu
 
-Autres indicateurs dans [DbContextLoggerOptions](https://github.com/dotnet/efcore/blob/ec3df8fd7e4ea4ebeebfa747619cef37b23ab2c6/src/EFCore/Diagnostics/DbContextLoggerOptions.cs#L15) <!-- Issue #2748 <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> --> peut être utilisé pour réduire la quantité de métadonnées incluses dans le journal. Cela peut être utile conjointement avec la journalisation sur une seule ligne. Exemple :
+D’autres indicateurs dans <xref:Microsoft.EntityFrameworkCore.Diagnostics.DbContextLoggerOptions> peuvent être utilisés pour réduire la quantité de métadonnées incluses dans le journal. Cela peut être utile conjointement avec la journalisation sur une seule ligne. Par exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

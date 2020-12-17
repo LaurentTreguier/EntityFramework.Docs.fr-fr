@@ -4,12 +4,12 @@ description: Interrogation et enregistrement de données de façon asynchrone av
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: cefbe32b34a38ed6d749ef3ddfff210d5db12332
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: d887bf898d741070f3f3d64b3baf0311b0ab2b63
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071898"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635794"
 ---
 # <a name="asynchronous-programming"></a>Programmation asynchrone
 
@@ -23,6 +23,9 @@ Pour plus d’informations, consultez [les documents généraux sur la programma
 
 > [!WARNING]
 > EF Core ne prend pas en charge l’exécution de plusieurs opérations parallèles sur la même instance de contexte. Vous devez toujours attendre qu’opération se termine avant de commencer l’opération suivante. Cela s’effectue généralement en utilisant le `await` mot clé sur chaque opération asynchrone.
+
+> [!WARNING]
+> L’implémentation Async de [Microsoft. Data. SqlClient](https://github.com/dotnet/SqlClient) présente malheureusement des problèmes connus (par exemple, [#593](https://github.com/dotnet/SqlClient/issues/593), [#601](https://github.com/dotnet/SqlClient/issues/601)et d’autres).
 
 > [!NOTE]
 > EF Core passe des jetons d’annulation au fournisseur de base de données sous-jacent en cours d’utilisation (par exemple, Microsoft. Data. SqlClient). Ces jetons peuvent être ou non honorés-consultez la documentation de votre fournisseur de base de données.  

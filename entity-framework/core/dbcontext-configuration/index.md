@@ -4,12 +4,12 @@ description: Modèles pour la création et la gestion des instances DbContext av
 author: ajcvickers
 ms.date: 11/07/2020
 uid: core/dbcontext-configuration/index
-ms.openlocfilehash: f4d51e10555844b5a14000a464f86d3440d5749e
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 93d5942fbc81ee0ae9aeff0c5c8b9e20b160d512
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003287"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635390"
 ---
 # <a name="dbcontext-lifetime-configuration-and-initialization"></a>Durée de vie de DbContext, configuration et initialisation
 
@@ -42,7 +42,7 @@ Une unité de travail standard lors de l’utilisation de Entity Framework Core 
 
 Dans de nombreuses applications Web, chaque requête HTTP correspond à une unité de travail unique. Cela permet de lier la durée de vie du contexte à celle de la demande d’une bonne valeur par défaut pour les applications Web.
 
-ASP.NET Core applications sont [configurées à l’aide de l’injection de dépendances](/aspnet/core/fundamentals/startup). EF Core peuvent être ajoutés à cette configuration à l’aide de <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> dans la [`ConfigurureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) méthode de `Startup.cs` . Exemple :
+ASP.NET Core applications sont [configurées à l’aide de l’injection de dépendances](/aspnet/core/fundamentals/startup). EF Core peuvent être ajoutés à cette configuration à l’aide de <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> dans la [`ConfigureServices`](/aspnet/core/fundamentals/startup#the-configureservices-method) méthode de `Startup.cs` . Par exemple :
 
 <!--
         public void ConfigureServices(IServiceCollection services)
@@ -57,7 +57,7 @@ ASP.NET Core applications sont [configurées à l’aide de l’injection de dé
 
 Cet exemple inscrit une sous- `DbContext` classe appelée `ApplicationDbContext` en tant que service étendu dans le fournisseur de services d’application ASP.net Core (également appelé conteneur d’injection de dépendances). Le contexte est configuré pour utiliser le fournisseur de base de données SQL Server et lira la chaîne de connexion à partir de la configuration de ASP.NET Core. Cela n’a généralement pas _d’importance dans_ `ConfigureServices` l’appel à `AddDbContext` .
 
-La `ApplicationDbContext` classe doit exposer un constructeur public avec un `DbContextOptions<ApplicationDbContext>` paramètre. C’est ainsi que la configuration contextuelle de `AddDbContext` est transmise au `DbContext` . Exemple :
+La `ApplicationDbContext` classe doit exposer un constructeur public avec un `DbContextOptions<ApplicationDbContext>` paramètre. C’est ainsi que la configuration contextuelle de `AddDbContext` est transmise au `DbContext` . Par exemple :
 
 <!--
     public class ApplicationDbContext : DbContext
@@ -70,7 +70,7 @@ La `ApplicationDbContext` classe doit exposer un constructeur public avec un `Db
 -->
 [!code-csharp[ApplicationDbContext](../../../samples/core/Miscellaneous/ConfiguringDbContext/WebApp/ApplicationDbContext.cs?name=ApplicationDbContext)]
 
-`ApplicationDbContext` peut ensuite être utilisé dans les contrôleurs de ASP.NET Core ou d’autres services via l’injection de constructeur. Exemple :
+`ApplicationDbContext` peut ensuite être utilisé dans les contrôleurs de ASP.NET Core ou d’autres services via l’injection de constructeur. Par exemple :
 
 <!--
     public class MyController
@@ -93,7 +93,7 @@ Pour en savoir plus sur les options de configuration, consultez cet article. En 
 
 ## <a name="simple-dbcontext-initialization-with-new"></a>Initialisation de DbContext simple avec’New'
 
-`DbContext` les instances peuvent être construites dans le sens .NET normal, par exemple avec `new` en C#. La configuration peut être effectuée en substituant la `OnConfiguring` méthode ou en passant des options au constructeur. Exemple :
+`DbContext` les instances peuvent être construites dans le sens .NET normal, par exemple avec `new` en C#. La configuration peut être effectuée en substituant la `OnConfiguring` méthode ou en passant des options au constructeur. Par exemple :
 
 <!--
     public class ApplicationDbContext : DbContext
@@ -106,7 +106,7 @@ Pour en savoir plus sur les options de configuration, consultez cet article. En 
 -->
 [!code-csharp[ApplicationDbContext](../../../samples/core/Miscellaneous/ConfiguringDbContext/WithNew/ApplicationDbContext.cs?name=ApplicationDbContext)]
 
-Ce modèle facilite également la réussite de la configuration comme la chaîne de connexion par le biais du `DbContext` constructeur. Exemple :
+Ce modèle facilite également la réussite de la configuration comme la chaîne de connexion par le biais du `DbContext` constructeur. Par exemple :
 
 <!--
     public class ApplicationDbContext : DbContext
@@ -154,7 +154,7 @@ Le `DbContextOptions` peut être créé et le constructeur peut être appelé ex
 
 Certains types d’applications (par exemple, [ASP.net Core éblouissant](/aspnet/core/blazor/)) utilisent l’injection de dépendances, mais ne créent pas une étendue de service qui s’aligne sur la `DbContext` durée de vie souhaitée. Même dans ce cas, l’application devra peut-être effectuer plusieurs unités de travail au sein de cette étendue. Par exemple, plusieurs unités de travail au sein d’une même requête HTTP.
 
-Dans ces cas-là, <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContextFactory%2A> peut être utilisé pour inscrire une fabrique pour la création d' `DbContext` instances de. Exemple :
+Dans ces cas-là, <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContextFactory%2A> peut être utilisé pour inscrire une fabrique pour la création d' `DbContext` instances de. Par exemple :
 
 <!--
         public void ConfigureServices(IServiceCollection services)
@@ -178,7 +178,7 @@ La `ApplicationDbContext` classe doit exposer un constructeur public avec un `Db
 -->
 [!code-csharp[ApplicationDbContext](../../../samples/core/Miscellaneous/ConfiguringDbContext/WebApp/ApplicationDbContext.cs?name=ApplicationDbContext)]
 
-La `DbContextFactory` fabrique peut ensuite être utilisée dans d’autres services via l’injection de constructeur. Exemple :
+La `DbContextFactory` fabrique peut ensuite être utilisée dans d’autres services via l’injection de constructeur. Par exemple :
 
 <!--
         private readonly IDbContextFactory<ApplicationDbContext> _contextFactory;
@@ -190,7 +190,7 @@ La `DbContextFactory` fabrique peut ensuite être utilisée dans d’autres serv
 -->
 [!code-csharp[Construct](../../../samples/core/Miscellaneous/ConfiguringDbContext/WithContextFactory/MyController.cs?name=Construct)]
 
-La fabrique injectée peut ensuite être utilisée pour construire des instances DbContext dans le code de service. Exemple :
+La fabrique injectée peut ensuite être utilisée pour construire des instances DbContext dans le code de service. Par exemple :
 
 <!--
         public void DoSomething()
@@ -316,7 +316,7 @@ Le tableau suivant contient des exemples de méthodes courantes appelées sur `D
 
 ### <a name="dbcontextoptions-verses-dbcontextoptionstcontext"></a>`DbContextOptions` contre `DbContextOptions<TContext>`
 
-La plupart des `DbContext` sous-classes qui acceptent un `DbContextOptions` doivent utiliser la variation [générique](/dotnet/csharp/programming-guide/generics/) `DbContextOptions<TContext>` . Exemple :
+La plupart des `DbContext` sous-classes qui acceptent un `DbContextOptions` doivent utiliser la variation [générique](/dotnet/csharp/programming-guide/generics/) `DbContextOptions<TContext>` . Par exemple :
 
 <!--
     public sealed class SealedApplicationDbContext : DbContext
@@ -334,7 +334,7 @@ Cela permet de s’assurer que les options correctes pour le `DbContext` sous-ty
 > [!TIP]
 > Votre DbContext n’a pas besoin d’être sealed, mais la fermeture est recommandée pour les classes qui ne sont pas destinées à être héritées de.
 
-Toutefois, si le `DbContext` sous-type est lui-même destiné à être hérité de, il doit exposer un constructeur protégé qui prend un non générique `DbContextOptions` . Exemple :
+Toutefois, si le `DbContext` sous-type est lui-même destiné à être hérité de, il doit exposer un constructeur protégé qui prend un non générique `DbContextOptions` . Par exemple :
 
 <!--
     public abstract class ApplicationDbContextBase : DbContext
@@ -347,7 +347,7 @@ Toutefois, si le `DbContext` sous-type est lui-même destiné à être hérité 
 -->
 [!code-csharp[ApplicationDbContextBase](../../../samples/core/Miscellaneous/ConfiguringDbContext/InheritDbContext/ApplicationDbContext.cs?name=ApplicationDbContextBase)]
 
-Cela permet à plusieurs sous-classes concrètes d’appeler ce constructeur de base à l’aide de leurs différentes `DbContextOptions<TContext>` instances génériques. Exemple :
+Cela permet à plusieurs sous-classes concrètes d’appeler ce constructeur de base à l’aide de leurs différentes `DbContextOptions<TContext>` instances génériques. Par exemple :
 
 <!--
     public sealed class ApplicationDbContext1 : ApplicationDbContextBase
@@ -370,7 +370,7 @@ Cela permet à plusieurs sous-classes concrètes d’appeler ce constructeur de 
 
 Notez qu’il s’agit exactement du même modèle que lorsqu’il hérite `DbContext` directement de. Autrement dit, le `DbContext` constructeur lui-même accepte un non générique `DbContextOptions` pour cette raison.
 
-Une `DbContext` sous-classe destinée à être instanciée et héritée de doit exposer les deux formes de constructeur. Exemple :
+Une `DbContext` sous-classe destinée à être instanciée et héritée de doit exposer les deux formes de constructeur. Par exemple :
 
 <!--
     public class ApplicationDbContext : DbContext

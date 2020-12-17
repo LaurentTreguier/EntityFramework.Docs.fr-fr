@@ -4,12 +4,12 @@ description: Événements .NET définis par EF Core
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 21ee65b7a2c5155c4d5b45350f3f47bdcee22921
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 51c0bba5cf25e1d9ddd1fd9aebea50b9a03481a3
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431533"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635690"
 ---
 # <a name="net-events-in-ef-core"></a>Événements .NET dans EF Core
 
@@ -26,9 +26,9 @@ Les événements suivants sont déclenchés par EF Core :
 
 | Événement | Version introduite | En cas de déclenchement
 |:------|--------------------|-------
-| `DbContext.SavingChanges` <!-- Issue #2748 -->| 5.0 | Au début de <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> ou <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SavedChanges`  <!-- Issue #2748 -->| 5.0 | À la fin d’une opération réussie <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> ou <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
-| `DbContext.SaveChangesFailed`  <!-- Issue #2748 -->| 5.0 | À la fin d’un échec <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> ou <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavingChanges?displayProperty=nameWithType> | 5.0 | Au début de <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> ou <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SavedChanges?displayProperty=nameWithType> | 5.0 | À la fin d’une opération réussie <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> ou <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
+| <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesFailed?displayProperty=nameWithType> | 5.0 | À la fin d’un échec <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> ou <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Tracked?displayProperty=nameWithType> | 2.1 | Lorsqu’une entité est suivie par le contexte
 | <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.StateChanged?displayProperty=nameWithType> | 2.1 | Quand une entité suivie change d’État
 

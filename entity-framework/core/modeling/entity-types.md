@@ -4,12 +4,12 @@ description: Comment configurer et mapper des types d’entité à l’aide de E
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: 9d86b959b5e0360df6d782d8d1c1c2f9393fdf8b
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: ca8cb8560afe374218e763bc0476839187a40ece
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003495"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635768"
 ---
 # <a name="entity-types"></a>Types d'entités
 
@@ -84,7 +84,7 @@ Vous pouvez configurer des tables à créer dans un schéma spécifique comme su
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-_**
+_*_
 
 Au lieu de spécifier le schéma pour chaque table, vous pouvez également définir le schéma par défaut au niveau du modèle à l’aide de l’API Fluent :
 
@@ -105,3 +105,63 @@ Les types d’entités peuvent être mappés à des vues de base de données à 
 
 > [!TIP]
 > Pour tester les types d’entités mappés à des vues à l’aide du fournisseur en mémoire, mappez-les à une requête via `ToInMemoryQuery` . Pour plus d’informations, consultez un [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) à l’aide de cette technique.
+
+## <a name="table-valued-function-mapping"></a>Mappage de fonction table
+
+Il est possible de mapper un type d’entité à une fonction table (TVF) au lieu d’une table dans la base de données. Pour illustrer cela, nous allons définir une autre entité qui représente le blog avec plusieurs publications. Dans l’exemple, l’entité est [sans clé](xref:core/modeling/keyless-entity-types), mais elle n’a pas besoin d’être.
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs#BlogWithMultiplePostsEntity)]
+
+Ensuite, créez la fonction table suivante dans la base de données, qui retourne uniquement les blogs avec plusieurs publications, ainsi que le nombre de publications associées à chacun de ces blogs :
+
+```sql
+CREATE FUNCTION dbo.BlogsWithMultiplePosts()
+RETURNS TABLE
+AS
+RETURN
+(
+    SELECT b.Url, COUNT(p.BlogId) AS PostCount
+    FROM Blogs AS b
+    JOIN Posts AS p ON b.BlogId = p.BlogId
+    GROUP BY b.BlogId, b.Url
+    HAVING COUNT(p.BlogId) > 1
+)
+```
+
+À présent, l’entité `BlogWithMultiplePost` peut être mappée à cette fonction de la façon suivante :
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/EntityTypes.cs#QueryableFunctionConfigurationToFunction)]
+
+> [!NOTE]
+> Pour mapper une entité à une fonction table, la fonction doit être sans paramètre.
+
+Conventionnellement, les propriétés d’entité sont mappées aux colonnes correspondantes retournées par la fonction TVF. Si les colonnes retournées par TVF ont un nom différent de la propriété d’entité, elle peut être configurée à l’aide de la `HasColumnName` méthode, comme lors du mappage à une table normale.
+
+Lorsque le type d’entité est mappé à une fonction table, la requête :
+
+[!code-csharp[Main](../../../samples/core/Modeling/Conventions/Program.cs#ToFunctionQuery)]
+
+Génère l’instruction SQL suivante :
+
+```sql
+SELECT [b].[Url], [b].[PostCount]
+FROM [dbo].[BlogsWithMultiplePosts]() AS [b]
+WHERE [b].[PostCount] > 3
+```
+
+## <a name="table-comments"></a>Commentaires de table
+
+Vous pouvez définir un commentaire de texte arbitraire qui est défini sur la table de base de données, ce qui vous permet de documenter votre schéma dans la base de données :
+
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+> [!NOTE]
+> La définition de commentaires via des annotations de données a été introduite dans EF Core 5,0.
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/TableComment.cs?name=TableComment&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableComment.cs?name=TableComment&highlight=4)]
+
+_**

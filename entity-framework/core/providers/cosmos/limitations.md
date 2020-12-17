@@ -4,21 +4,22 @@ description: Limitations du fournisseur Entity Framework Core Azure Cosmos DB pa
 author: AndriySvyryd
 ms.date: 11/05/2020
 uid: core/providers/cosmos/limitations
-ms.openlocfilehash: f7517954b854c8ea1020c039e490b4fb0dea7181
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 088f593dddd9b5691d87566d7e31a699ba90d7c5
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430194"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635716"
 ---
 # <a name="ef-core-azure-cosmos-db-provider-limitations"></a>Limitations des fournisseurs de EF Core Azure Cosmos DB
 
 Le fournisseur Cosmos présente un certain nombre de limitations. La plupart de ces limitations résultent de limitations dans le moteur de base de données Cosmos sous-jacent et ne sont pas spécifiques à EF. Mais la plupart [n’ont pas encore été implémentées](https://github.com/dotnet/efcore/issues?page=1&q=is%3Aissue+is%3Aopen+Cosmos+in%3Atitle+label%3Atype-enhancement+sort%3Areactions-%2B1-desc).
 
-## <a name="temporary-limitations"></a>Limitations temporaires
+Voici quelques-unes des fonctionnalités couramment demandées :
 
-- `Include` les appels ne sont pas pris en charge
-- `Join` les appels ne sont pas pris en charge
+- [`Include` supporter](https://github.com/dotnet/efcore/issues/16920)
+- [`Join` supporter](https://github.com/dotnet/efcore/issues/17314)
+- [Les collections de types primitifs prennent en charge](https://github.com/dotnet/efcore/issues/14762)
 
 ## <a name="azure-cosmos-db-sdk-limitations"></a>Limitations du kit de développement logiciel Azure Cosmos DB
 

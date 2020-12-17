@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 716c034bd73d831996b727da18c2c1f83dd55290
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 9c8fe469c4e0b8714a36624ff5bcf236e5b1652f
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003261"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635742"
 ---
 # <a name="relationships"></a>Relations
 
@@ -301,11 +301,13 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-En interne, EF crée un type d’entité pour représenter la table de jointure qui sera désignée comme type d’entité de jointure. Il n’existe pas de type CLR spécifique qui peut être utilisé pour ce. par conséquent, `Dictionary<string, object>` est utilisé. Plus d’une relation plusieurs-à-plusieurs peut exister dans le modèle ; par conséquent, le type d’entité de jointure doit avoir un nom unique, dans ce cas `PostTag` . La fonctionnalité qui permet cela est appelée type d’entité de type partagé.
+En interne, EF crée un type d’entité pour représenter la table de jointure qui sera désignée comme type d’entité de jointure. `Dictionary<string, object>` est utilisé pour qu’il gère une combinaison de propriétés de clé étrangère, consultez [types d’entité du conteneur des propriétés](shadow-properties.md#property-bag-entity-types) pour plus d’informations. Plus d’une relation plusieurs-à-plusieurs peut exister dans le modèle ; par conséquent, le type d’entité de jointure doit avoir un nom unique, dans ce cas `PostTag` . La fonctionnalité qui permet cela est appelée type d’entité de type partagé.
 
-Les navigations plusieurs-à-plusieurs sont appelées ignorer les navigations, car elles ignorent le type d’entité de jointure. Si vous utilisez la configuration en bloc, toutes les navigations ignorées peuvent être obtenues à partir de `GetSkipNavigations` .
+Les navigations plusieurs-à-plusieurs sont appelées ignorer les navigations, car elles ignorent le type d’entité de jointure. Si vous utilisez la configuration en bloc, toutes les navigations ignorées peuvent être obtenues à partir de <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Metadata)]
+
+#### <a name="join-entity-type-configuration"></a>Joindre la configuration du type d’entité
 
 Il est courant d’appliquer la configuration au type d’entité de jointure. Cette action peut être effectuée via `UsingEntity` .
 
@@ -319,8 +321,16 @@ Des données supplémentaires peuvent être stockées dans le type d’entité d
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyPayload.cs?name=ManyToManyPayload)]
 
+#### <a name="joining-relationships-configuration"></a>Jointure de la configuration des relations
+
+EF utilise des relations 2 1-à-plusieurs sur le type d’entité de jointure pour représenter la relation plusieurs-à-plusieurs. Vous pouvez configurer ces relations dans les `UsingEntity` arguments.
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Relationships/ManyToManyShared.cs?name=Components)]
+
 > [!NOTE]
 > La possibilité de configurer des relations plusieurs-à-plusieurs a été introduite dans EF Core 5,0, pour la version précédente, utilisez l’approche suivante.
+
+#### <a name="indirect-many-to-many-relationships"></a>Relations plusieurs-à-plusieurs indirectes
 
 Vous pouvez également représenter une relation plusieurs-à-plusieurs en ajoutant simplement le type d’entité de jointure et en mappant deux relations un-à-plusieurs distinctes.
 

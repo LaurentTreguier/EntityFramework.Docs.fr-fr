@@ -2,14 +2,14 @@
 title: Outils et extensions - EF Core
 description: Outils et extensions externes pour Entity Framework Core.
 author: ErikEJ
-ms.date: 04/11/2020
+ms.date: 11/22/2020
 uid: core/extensions/index
-ms.openlocfilehash: dc8125ab522b5b0c5126fda2d7c8093c2babdc29
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 4136710567d0f6b088a0dd5ad9895d8b93313e5e
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003300"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635404"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -22,13 +22,13 @@ Ces outils et extensions fournissent des fonctionnalités supplémentaires pour 
 
 ### <a name="llblgen-pro"></a>LLBLGen Pro
 
-LLBLGen Pro est une solution de modélisation d’entités qui prend en charge Entity Framework et Entity Framework Core. Il vous permet de définir facilement votre modèle d’entités et de le mapper à votre base de données, en utilisant Database First ou Model First : vous pouvez donc commencer à écrire des requêtes immédiatement. Pour EF Core : 2, 3
+LLBLGen Pro est une solution de modélisation d’entités qui prend en charge Entity Framework et Entity Framework Core. Il vous permet de définir facilement votre modèle d’entités et de le mapper à votre base de données, en utilisant Database First ou Model First : vous pouvez donc commencer à écrire des requêtes immédiatement. Pour EF Core : 2, 3.
 
 [Site web](https://www.llblgen.com/)
 
 ### <a name="devart-entity-developer"></a>Devart Entity Developer
 
-Entity Developer est un Concepteur O/RM puissant pour ADO.NET Entity Framework, NHibernate, LinqConnect, Telerik Data Access et LINQ to SQL. Il prend en charge la conception visuelle de modèles EF Core, selon une approche Model First ou Database First, et la génération de code C# ou Visual Basic. Pour EF Core : 1, 2, 3, 5.
+Entity Developer est un Concepteur O/RM puissant pour ADO.NET Entity Framework, NHibernate, LinqConnect, Telerik Data Access et LINQ to SQL. Il prend en charge la conception visuelle de modèles EF Core, selon une approche Model First ou Database First, et la génération de code C# ou Visual Basic. Pour EF Core : 2, 3, 5.
 
 [Site web](https://www.devart.com/entitydeveloper/)
 
@@ -40,13 +40,13 @@ Un O/RM qui crée des classes fortement typées et extensibles pour Entity Frame
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
-EF Core Power Tools est une extension Visual Studio qui expose différentes tâches EF Core au moment du design dans une interface utilisateur simple. Elle inclut l’ingénierie à rebours des classes DbContext et d’entité à partir de bases de données existantes et des [packages DAC SQL Server](/sql/relational-databases/data-tier-applications/data-tier-applications), la gestion des migrations de base de données et les visualisations de modèles. Pour EF Core : 2, 3.
+EF Core Power Tools est une extension Visual Studio qui expose différentes tâches EF Core au moment du design dans une interface utilisateur simple. Elle inclut l’ingénierie à rebours des classes DbContext et d’entité à partir de bases de données existantes et des [packages DAC SQL Server](/sql/relational-databases/data-tier-applications/data-tier-applications), la gestion des migrations de base de données et les visualisations de modèles. Pour EF Core : 3, 5.
 
 [Wiki GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki)
 
 ### <a name="entity-framework-visual-editor"></a>Entity Framework Visual Editor
 
-Entity Framework éditeur visuel est une extension Visual Studio qui ajoute un Concepteur O/RM pour la conception visuelle d’EF 6 et des classes EF Core. Le code étant généré à l’aide de modèles T4, il peut être personnalisé pour répondre à tous les besoins. Il prend en charge les associations d’héritage, unidirectionnelles et bidirectionnelles, les énumérations ainsi que la possibilité de colorer le code de vos classes et d’ajouter des blocs de texte pour expliquer les parties potentiellement obscures de votre conception. Pour EF Core : 2.
+Entity Framework éditeur visuel est une extension Visual Studio qui ajoute un Concepteur O/RM pour la conception visuelle d’EF 6 et des classes EF Core. Le code étant généré à l’aide de modèles T4, il peut être personnalisé pour répondre à tous les besoins. Il prend en charge les associations d’héritage, unidirectionnelles et bidirectionnelles, les énumérations ainsi que la possibilité de colorer le code de vos classes et d’ajouter des blocs de texte pour expliquer les parties potentiellement obscures de votre conception. Pour EF Core : 2, 3, 5.
 
 [Marketplace](https://marketplace.visualstudio.com/items?itemName=michaelsawczyn.EFDesigner)
 
@@ -67,13 +67,13 @@ Entity Framework Core Generator (efg) est un outil CLI .NET Core qui peut géné
 
 ### <a name="microsoftentityframeworkcoreautohistory"></a>Microsoft.EntityFrameworkCore.AutoHistory
 
-Bibliothèque de plug-ins qui permet l’enregistrement automatique des changements de données effectués par EF Core dans une table d’historique. Pour EF Core : 2.
+Bibliothèque de plug-ins qui permet l’enregistrement automatique des changements de données effectués par EF Core dans une table d’historique. Pour EF Core : 2, 3.
 
 [Dépôt GitHub](https://github.com/Arch/AutoHistory/)
 
 ### <a name="efcoresecondlevelcacheinterceptor"></a>EFCoreSecondLevelCacheInterceptor
 
-La mise en cache de second niveau est un cache de requêtes. Les résultats des commandes EF sont stockés dans le cache, de façon que les mêmes commandes EF récupèrent leurs données auprès du cache au lieu d’être réexécutées sur la base de données. Pour EF Core : 3.
+La mise en cache de second niveau est un cache de requêtes. Les résultats des commandes EF sont stockés dans le cache, de façon que les mêmes commandes EF récupèrent leurs données auprès du cache au lieu d’être réexécutées sur la base de données. Pour EF Core : 3, 5.
 
 [Dépôt GitHub](https://github.com/VahidN/EFCoreSecondLevelCacheInterceptor)
 
@@ -85,19 +85,19 @@ Geco (Generator Console) est un générateur de code simple basé sur un projet 
 
 ### <a name="entityframeworkcorescaffoldinghandlebars"></a>EntityFrameworkCore.Scaffolding.Handlebars
 
-Permet de personnaliser des classes ayant fait l’objet d’une rétroconception à partir d’une base de données existante à l’aide de la chaîne d’outils Entity Framework Core avec des modèles Handlebars. Pour EF Core : 2, 3.
+Permet de personnaliser des classes ayant fait l’objet d’une rétroconception à partir d’une base de données existante à l’aide de la chaîne d’outils Entity Framework Core avec des modèles Handlebars. Pour EF Core : 2, 3, 5.
 
 [Dépôt GitHub](https://github.com/TrackableEntities/EntityFrameworkCore.Scaffolding.Handlebars)
 
 ### <a name="neinlinqentityframeworkcore"></a>NeinLinq.EntityFrameworkCore
 
-NeinLinq étend les fonctionnalités des fournisseurs LINQ comme Entity Framework pour permettre la réutilisation de fonctions, la réécriture des requêtes et la génération de requêtes dynamiques à l’aide de sélecteurs et de prédicats traduisibles. Pour EF Core : 2, 3.
+NeinLinq étend les fonctionnalités des fournisseurs LINQ comme Entity Framework pour permettre la réutilisation de fonctions, la réécriture des requêtes et la génération de requêtes dynamiques à l’aide de sélecteurs et de prédicats traduisibles. Pour EF Core : 2, 3, 5.
 
 [Dépôt GitHub](https://github.com/axelheer/nein-linq/)
 
 ### <a name="microsoftentityframeworkcoreunitofwork"></a>Microsoft.EntityFrameworkCore.UnitOfWork
 
-Plug-in pour Microsoft.EntityFrameworkCore prenant en charge un dépôt, les modèles d’unités de travail et les bases de données multiples avec des transactions distribuées. Pour EF Core : 2.
+Plug-in pour Microsoft.EntityFrameworkCore prenant en charge un dépôt, les modèles d’unités de travail et les bases de données multiples avec des transactions distribuées. Pour EF Core : 2, 3.
 
 [Dépôt GitHub](https://github.com/Arch/UnitOfWork/)
 
@@ -109,13 +109,13 @@ Extensions EF Core pour les opérations en bloc (Insert, Update, Delete). Pour E
 
 ### <a name="bricelamentityframeworkcorepluralizer"></a>Bricelam.EntityFrameworkCore.Pluralizer
 
-Ajoute la pluralisation au moment du design. Pour EF Core : 2.
+Ajoute la pluralisation au moment du design. Pour EF Core : 2, 3.
 
 [Dépôt GitHub](https://github.com/bricelam/EFCore.Pluralizer)
 
 ### <a name="toolbeltentityframeworkcoreindexattribute"></a>Toolbelt.EntityFrameworkCore.IndexAttribute
 
-Reprise de l’attribut [Index] (avec extension pour la création de modèles). Pour EF Core : 2, 3.
+Reprise de l’attribut [Index] (avec extension pour la création de modèles). Pour EF Core : 2, 3, 5.
 
 [Dépôt GitHub](https://github.com/jsakamoto/EntityFrameworkCore.IndexAttribute)
 
@@ -137,15 +137,9 @@ Exécutez facilement des requêtes temporelles sur votre base de données favori
 
 [Dépôt GitHub](https://github.com/glautrou/EfCoreTemporalTable)
 
-### <a name="efcoretimetraveler"></a>EFCore.TimeTraveler
-
-Autorisez des requêtes Entity Framework Core complètes sur [la table d’historique temporelle SQL Server](/sql/relational-databases/tables/temporal-table-usage-scenarios#point-in-time-analysis-time-travel) à l’aide du code, des entités et des mappages EF Core que vous avez déjà définis.  Voyagez dans le temps en encapsulant votre code dans `using (TemporalQuery.AsOf(targetDateTime)) {...}`. Pour EF Core : 3.
-
-[Dépôt GitHub](https://github.com/VantageSoftware/EFCore.TimeTraveler)
-
 ### <a name="entityframeworkcoretemporaltables"></a>EntityFrameworkCore. TemporalTables
 
-Bibliothèque d’extensions pour Entity Framework Core qui permet aux développeurs qui utilisent SQL Server de se servir facilement des tables temporelles. Pour EF Core : 2.
+Bibliothèque d’extensions pour Entity Framework Core qui permet aux développeurs qui utilisent SQL Server de se servir facilement des tables temporelles. Pour EF Core : 2, 3.
 
 [Dépôt GitHub](https://github.com/findulov/EntityFrameworkCore.TemporalTables)
 
@@ -157,13 +151,19 @@ Cache des requêtes de second niveau hautes performances. Pour EF Core : 2.
 
 ### <a name="entityframeworkcorencache"></a>EntityFrameworkCore.NCache
 
-Le fournisseur d’Entity Framework Core NCache est un fournisseur de cache de second niveau distribué pour la mise en cache des résultats de requêtes. L’architecture distribuée de NCache la rend plus évolutive et hautement disponible. Pour EF Core 2.
+Le fournisseur d’Entity Framework Core NCache est un fournisseur de cache de second niveau distribué pour la mise en cache des résultats de requêtes. L’architecture distribuée de NCache la rend plus évolutive et hautement disponible. Par EF Core 2, 3.
 
 [Site web](https://www.alachisoft.com/ncache/ef-core-cache.html)
 
+### <a name="entityframeworkcoretriggered"></a>EntityFrameworkCore. déclenché
+
+Déclencheurs pour EF Core. Répondez aux modifications dans votre DbContext avant et après qu’elles ont été validées dans la base de données. Les déclencheurs sont entièrement asynchrones et prennent en charge l’injection de dépendances, l’héritage, la cascade et bien plus encore. Pour EF Core : 3, 5.
+
+[Dépôt GitHub](https://github.com/koenbeuk/EntityFrameworkCore.Triggered)
+
 ### <a name="entity-framework-plus"></a>Entity Framework Plus
 
-Étend votre DbContext avec des fonctionnalités telles que : Include Filter (Inclure le filtre), Auditing (Audit), Caching (Mise en cache), Query Future (Requête ultérieure), Batch Delete (Suppression par lot), Batch Update (Mise à jour par lot), et bien plus encore. Pour EF Core : 2, 3.
+Étend votre DbContext avec des fonctionnalités telles que : Include Filter (Inclure le filtre), Auditing (Audit), Caching (Mise en cache), Query Future (Requête ultérieure), Batch Delete (Suppression par lot), Batch Update (Mise à jour par lot), et bien plus encore. Pour EF Core : 2, 3, 5.
 
 [Site web](https://entityframework-plus.net/)
 [Référentiel GitHub](https://github.com/zzzprojects/EntityFramework-Plus)
@@ -180,16 +180,16 @@ Ajoutez la prise en charge de l’appel des méthodes d’extension dans les exp
 
 [Dépôt GitHub](https://github.com/ClaveConsulting/Expressionify)
 
-### <a name="xlinq"></a>XLinq
+### <a name="elinq"></a>ELinq
 
 Technologie LINQ (Language Integrated Query) pour les bases de données relationnelles. Elle vous permet d’utiliser C# pour écrire des requêtes fortement typées. Pour EF Core : 3.
 
 - Prise en charge complète de C# pour la création de requêtes : plusieurs instructions dans une expression lambda, variables, fonctions, et ainsi de suite
-- Aucun écart sémantique avec SQL. XLinq déclare les instructions SQL (comme `SELECT`, `FROM` et `WHERE`) en tant que méthodes C# de première classe, combinant la syntaxe familière avec IntelliSense, la cohérence des types et la refactorisation.
+- Aucun écart sémantique avec SQL. ELinq déclare des instructions SQL (comme `SELECT` , `FROM` , `WHERE` ) en tant que méthodes C# de première classe, en combinant la syntaxe familière avec IntelliSense, la cohérence des types et la refactorisation.
 
 Ainsi, SQL devient simplement « une autre » bibliothèque de classes qui expose son API localement, littéralement *« Language Integrated SQL »* .
 
-[Site web](http://xlinq.live/)
+[Site web](https://entitylinq.com/)
 
 ### <a name="ramses"></a>Ramses
 
@@ -205,7 +205,7 @@ Tous les noms de table et de colonne deviennent automatiquement snake_case, tout
 
 ### <a name="simplersoftwareentityframeworkcoresqlservernodatime"></a>SimplerSoftware.EntityFrameworkCore.SqlServer.NodaTime
 
-Ajoute une prise en charge native à EntityFrameworkCore pour SQL Server pour les types NodaTime. Pour EF Core : 3.
+Ajoute une prise en charge native à EntityFrameworkCore pour SQL Server pour les types NodaTime. Pour EF Core : 3, 5.
 
 [Dépôt GitHub](https://github.com/StevenRasmussen/EFCore.SqlServer.NodaTime)
 
@@ -223,7 +223,7 @@ Ajoute la prise en charge de hierarchyid au fournisseur SQL Server EF Core. Pour
 
 ### <a name="linq2dbentityframeworkcore"></a>linq2db.EntityFrameworkCore
 
-Autre traducteur de requêtes LINQ pour les expressions SQL. Pour EF Core : 3.
+Autre traducteur de requêtes LINQ pour les expressions SQL. Pour EF Core : 3, 5.
 
 Prend en charge les fonctionnalités SQL avancées, telles que les CTE, la copie en bloc, les indicateurs de table, les fonctions de fenêtrage, les tables temporaires et les opérations de création/mise à jour/suppression côté base de données.
 

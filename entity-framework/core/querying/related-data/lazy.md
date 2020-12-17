@@ -4,18 +4,18 @@ description: Chargement différé de données associées avec Entity Framework C
 author: roji
 ms.date: 9/8/2020
 uid: core/querying/related-data/lazy
-ms.openlocfilehash: c42cde469e2be38d53a46cb6c5c252a088978e5c
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: 55622b9c5a8f70ef4e7246d6eb14678036948f18
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90078945"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635456"
 ---
 # <a name="lazy-loading-of-related-data"></a>Chargement différé de données associées
 
 ## <a name="lazy-loading-with-proxies"></a>Chargement différé avec des proxies
 
-La façon la plus simple d’utiliser le chargement différé est d’installer le package [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) et de l’activer avec un appel à `UseLazyLoadingProxies`. Exemple :
+La façon la plus simple d’utiliser le chargement différé est d’installer le package [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) et de l’activer avec un appel à `UseLazyLoadingProxies`. Par exemple :
 
 ```csharp
 protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -53,9 +53,12 @@ public class Post
 }
 ```
 
+> [!WARNING]
+> Le chargement différé peut entraîner des allers-retours supplémentaires sur la base de données (le problème appelé N + 1). vous devez donc veiller à éviter cela. Pour plus d’informations, consultez la [section relative aux performances](xref:core/performance/efficient-querying#beware-of-lazy-loading) .
+
 ## <a name="lazy-loading-without-proxies"></a>Chargement différé sans proxy
 
-Les proxys à chargement différé fonctionnent en injectant le service `ILazyLoader` dans une entité, comme décrit dans [Constructeurs de type d’entité](xref:core/modeling/constructors). Exemple :
+Les proxys à chargement différé fonctionnent en injectant le service `ILazyLoader` dans une entité, comme décrit dans [Constructeurs de type d’entité](xref:core/modeling/constructors). Par exemple :
 
 ```csharp
 public class Blog
@@ -110,7 +113,7 @@ public class Post
 }
 ```
 
-Cette méthode ne requiert pas l’héritage des types d’entités ou des propriétés de navigation virtuelles, et permet aux instances d’entité créées avec la `new` valeur de chargement différé une fois attachées à un contexte. Toutefois, il requiert une référence au service `ILazyLoader`, qui est défini dans le package [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/). Ce package contient un ensemble minimal de types afin qu’il n’y ait qu’un faible impact en fonction de celui-ci. Toutefois, pour éviter complètement en fonction des packages d’EF Core dans les types d’entité, il est possible d’injecter la `ILazyLoader.Load` méthode en tant que délégué. Exemple :
+Cette méthode ne requiert pas l’héritage des types d’entités ou des propriétés de navigation virtuelles, et permet aux instances d’entité créées avec la `new` valeur de chargement différé une fois attachées à un contexte. Toutefois, il requiert une référence au service `ILazyLoader`, qui est défini dans le package [Microsoft.EntityFrameworkCore.Abstractions](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Abstractions/). Ce package contient un ensemble minimal de types afin qu’il n’y ait qu’un faible impact en fonction de celui-ci. Toutefois, pour éviter complètement en fonction des packages d’EF Core dans les types d’entité, il est possible d’injecter la `ILazyLoader.Load` méthode en tant que délégué. Par exemple :
 
 ```csharp
 public class Blog

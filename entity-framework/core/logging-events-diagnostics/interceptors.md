@@ -4,12 +4,12 @@ description: Interception pour les opérations de base de données et d’autres
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 22d860a083c5ece9be109be630c3ce01dd742bf2
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003408"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635807"
 ---
 # <a name="interceptors"></a>Intercepteurs
 
@@ -21,7 +21,7 @@ Les intercepteurs sont inscrits par instance DbContext lorsque le contexte est c
 
 ## <a name="registering-interceptors"></a>Inscription des intercepteurs
 
-Les intercepteurs sont inscrits à l’aide <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> [de lors de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cela se fait généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Exemple :
+Les intercepteurs sont inscrits à l’aide <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> [de lors de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cela se fait généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
 
 <!--
 public class ExampleContext : BlogsContext
@@ -37,7 +37,7 @@ Vous pouvez également `AddInterceptors` appeler dans le cadre de <xref:Microsof
 > [!TIP]
 > OnConfiguring est toujours appelé lorsque AddDbContext est utilisé ou qu’une instance DbContextOptions est passée au constructeur DbContext. C’est ainsi l’emplacement idéal pour appliquer la configuration du contexte, quelle que soit la façon dont la méthode DbContext est construite.
 
-Les intercepteurs sont souvent sans État, ce qui signifie qu’une seule instance d’intercepteur peut être utilisée pour toutes les instances de DbContext. Exemple :
+Les intercepteurs sont souvent sans État, ce qui signifie qu’une seule instance d’intercepteur peut être utilisée pour toutes les instances de DbContext. Par exemple :
 
 <!--
 public class TaggedQueryCommandInterceptorContext : BlogsContext
@@ -80,7 +80,7 @@ Chaque paire de méthodes a des variantes synchrones et asynchrones. Cela permet
 
 Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor> peut être utilisé pour modifier SQL avant d’être envoyé à la base de données. Cet exemple montre comment modifier le SQL pour inclure un indicateur de requête.
 
-Souvent, la partie la plus délicate de l’interception consiste à déterminer quand la commande correspond à la requête qui doit être modifiée. L’analyse de SQL est une option, mais elle a tendance à être fragile. Une autre option consiste à utiliser des [balises de requête EF Core](xref:core/querying/tags) pour baliser chaque requête qui doit être modifiée. Exemple :
+Souvent, la partie la plus délicate de l’interception consiste à déterminer quand la commande correspond à la requête qui doit être modifiée. L’analyse de SQL est une option, mais elle a tendance à être fragile. Une autre option consiste à utiliser des [balises de requête EF Core](xref:core/querying/tags) pour baliser chaque requête qui doit être modifiée. Par exemple :
 
 <!--
             var blogs1 = context.Blogs.TagWith("Use hint: robust plan").ToList();
@@ -151,7 +151,7 @@ FROM [Blogs] AS [b]
 > [!TIP]  
 > Vous pouvez [Télécharger l’exemple d’intercepteur de connexion](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) à partir de github.
 
-Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> peut être utilisé pour manipuler le <xref:System.Data.Common.DbConnection> avant qu’il ne soit utilisé pour se connecter à la base de données. Cela peut être utilisé pour obtenir un jeton d’accès Azure Active Directory (AAD). Exemple :
+Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> peut être utilisé pour manipuler le <xref:System.Data.Common.DbConnection> avant qu’il ne soit utilisé pour se connecter à la base de données. Cela peut être utilisé pour obtenir un jeton d’accès Azure Active Directory (AAD). Par exemple :
 
 <!--
 public class AadAuthenticationInterceptor : DbConnectionInterceptor
@@ -401,7 +401,7 @@ Notez que dans la sortie du journal, l’application continue à utiliser le mes
 > [!TIP]  
 > Vous pouvez [Télécharger l’exemple d’intercepteur SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) à partir de github.
 
-<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>les points d’interception et sont définis par le`ISaveChangesInterceptor` <!-- Issue #2748 --> interface. Comme pour les autres intercepteurs, le `SaveChangesInterceptor` <!-- Issue #2748 --> la classe de base avec des méthodes sans op est fournie à titre de commodité.
+<xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>les points d’interception et sont définis par l' <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> interface. Comme pour les autres intercepteurs, la <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> classe de base avec des méthodes sans op est fournie à titre de commodité.
 
 > [!TIP]
 > Les intercepteurs sont puissants. Toutefois, dans de nombreux cas, il peut être plus facile de remplacer la méthode SaveChanges ou [d’utiliser les événements .net pour SaveChanges](xref:core/logging-events-diagnostics/events) exposés sur DbContext.
@@ -502,7 +502,7 @@ L’idée générale de l’audit avec l’intercepteur est la suivante :
 * Si SaveChanges réussit, le message d’audit est mis à jour pour indiquer la réussite
 * Si SaveChanges échoue, le message d’audit est mis à jour pour indiquer l’échec
 
-La première étape est gérée avant l’envoi des modifications à la base de données à l’aide des remplacements de `ISaveChangesInterceptor.SavingChanges` <!-- Issue #2748 -->  et `ISaveChangesInterceptor.SavingChangesAsync`<!-- Issue #2748 -->.
+La première étape est gérée avant l’envoi des modifications à la base de données à l’aide des remplacements de <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChanges%2A?displayProperty=nameWithType> et <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavingChangesAsync%2A?displayProperty=nameWithType> .
 
 <!--
     public async ValueTask<InterceptionResult<int>> SavingChangesAsync(
@@ -538,7 +538,7 @@ La première étape est gérée avant l’envoi des modifications à la base de 
 -->
 [!code-csharp[SavingChanges](../../../samples/core/Miscellaneous/SaveChangesInterception/AuditingInterceptor.cs?name=SavingChanges)]
 
-La substitution des méthodes synchrones et asynchrones garantit que l’audit aura lieu indépendamment du fait que SaveChanges ou SaveChangesAsync sont appelés. Notez également que la surcharge Async est elle-même en mesure d’effectuer des e/s asynchrones non bloquantes dans la base de données d’audit. Vous pouvez effectuer une exception à partir de la méthode Sync SavingChanges pour vous assurer que toutes les e/s de base de données sont asynchrones. Cela nécessite ensuite que l’application appelle toujours SaveChangesAsync et jamais SaveChanges.
+La substitution des méthodes synchrones et asynchrones garantit que l’audit aura lieu indépendamment du fait que `SaveChanges` ou `SaveChangesAsync` soient appelés. Notez également que la surcharge Async est elle-même en mesure d’effectuer des e/s asynchrones non bloquantes dans la base de données d’audit. Vous pouvez effectuer une exception à partir de la `SavingChanges` méthode Sync pour vous assurer que toutes les e/s de base de données sont asynchrones. Cela nécessite ensuite que l’application appelle toujours `SaveChangesAsync` et jamais `SaveChanges` .
 
 #### <a name="the-audit-message"></a>Message d’audit
 
@@ -598,7 +598,7 @@ Le résultat est une `SaveChangesAudit` entité avec une collection d' `EntityAu
 
 #### <a name="detecting-success"></a>Détection du succès
 
-L’entité d’audit est stockée sur l’intercepteur afin de pouvoir y accéder à nouveau une fois que SaveChanges réussit ou échoue. En cas de réussite, `ISaveChangesInterceptor.SavedChanges` <!-- Issue #2748 --> ou `ISaveChangesInterceptor.SavedChangesAsync` <!-- Issue #2748 --> La méthode  est appelée.
+L’entité d’audit est stockée sur l’intercepteur afin de pouvoir y accéder à nouveau une fois que SaveChanges réussit ou échoue. En cas de réussite, <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChanges%2A?displayProperty=nameWithType> ou <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SavedChangesAsync%2A?displayProperty=nameWithType> est appelée.
 
 <!--
     public int SavedChanges(SaveChangesCompletedEventData eventData, int result)
@@ -638,7 +638,7 @@ L’entité d’audit est attachée au contexte d’audit, car elle existe déj�
 
 #### <a name="detecting-failure"></a>Détection de défaillance
 
-L’échec est géré à peu près de la même façon que le succès, mais dans la `ISaveChangesInterceptor.SaveChangesFailed` <!-- Issue #2748 --> ou `ISaveChangesInterceptor.SaveChangesFailedAsync` <!-- Issue #2748 --> . Les données d’événement contiennent l’exception qui a été levée.
+L’échec est géré à peu près de la même façon que le succès, mais dans la <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailed%2A?displayProperty=nameWithType> <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor.SaveChangesFailedAsync%2A?displayProperty=nameWithType> méthode ou. Les données d’événement contiennent l’exception qui a été levée.
 
 <!--
     public void SaveChangesFailed(DbContextErrorEventData eventData)

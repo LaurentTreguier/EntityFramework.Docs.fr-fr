@@ -4,12 +4,12 @@ description: Utilisation de la résilience des connexions pour retenter automati
 author: AndriySvyryd
 ms.date: 11/15/2016
 uid: core/miscellaneous/connection-resiliency
-ms.openlocfilehash: db0666a49cbd41ef3eacf447eaeed1fb54ffcbf4
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bcafdf5de26ecfd7539d426388154550a39332ab
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92061916"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635781"
 ---
 # <a name="connection-resiliency"></a>Résilience des connexions
 
@@ -32,6 +32,9 @@ public void ConfigureServices(IServiceCollection services)
             providerOptions => providerOptions.EnableRetryOnFailure()));
 }
 ```
+
+> [!NOTE]
+> L’activation de la nouvelle tentative en cas d’échec force EF à mettre en mémoire tampon le ResultSet en interne, ce qui peut augmenter considérablement la mémoire requise pour les requêtes qui retournent des jeux de résultats volumineux. Pour plus d’informations, consultez [mise en mémoire tampon et diffusion en continu](xref:core/performance/efficient-querying#buffering-and-streaming) .
 
 ## <a name="custom-execution-strategy"></a>Stratégie d’exécution personnalisée
 

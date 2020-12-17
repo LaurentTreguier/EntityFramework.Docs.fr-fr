@@ -4,12 +4,12 @@ description: Suivi des performances de EF Core et diagnostic des anomalies avec 
 author: roji
 ms.date: 11/17/2020
 uid: core/logging-events-diagnostics/event-counters
-ms.openlocfilehash: 46acfe82d8aeb7d16146bae0cc2cd4ff733e2831
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 73d360b266db3d3252defbf4a4035c0eb430e22e
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003704"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635820"
 ---
 # <a name="event-counters"></a>Compteurs d’événements
 
@@ -77,7 +77,7 @@ Press p to pause, r to resume, q to quit.
 
 Nom du compteur                          | Description
 ------------------------------------- | ----
-DbContexts active                     | Nombre d’instances de DbContext actives et inactives actuellement dans votre application. Si ce nombre augmente continuellement, vous pouvez avoir une fuite, car les instances de DbContext ne sont pas correctement supprimées. Notez que si le [regroupement de contexte](xref:core/miscellaneous/context-pooling) est activé, ce nombre comprend les instances de DbContext regroupées qui ne sont pas en cours d’utilisation.
+DbContexts active                     | Nombre d’instances de DbContext actives et inactives actuellement dans votre application. Si ce nombre augmente continuellement, vous pouvez avoir une fuite, car les instances de DbContext ne sont pas correctement supprimées. Notez que si le [regroupement de contexte](xref:core/performance/advanced-performance-topics#dbcontext-pooling) est activé, ce nombre comprend les instances de DbContext regroupées qui ne sont pas en cours d’utilisation.
 Échecs de l’opération de stratégie d’exécution | Nombre de fois qu’une opération de base de données n’a pas pu s’exécuter. Si une stratégie de nouvelle tentative d’exécution est activée, cela comprend chaque échec individuel dans plusieurs tentatives sur la même opération. Cela peut être utilisé pour détecter les problèmes temporaires liés à votre infrastructure.
 Échecs d’accès concurrentiel optimiste       | Nombre d' `SaveChanges` échecs en raison d’une erreur d’accès concurrentiel optimiste, car les données du magasin de données ont été modifiées depuis le chargement du code. Cela correspond à une <xref:Microsoft.EntityFrameworkCore.DbUpdateConcurrencyException> levée.
 Requêtes                               | Nombre de requêtes exécutées.

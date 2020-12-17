@@ -4,12 +4,12 @@ description: Comment configurer l’héritage de type d’entité à l’aide de
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/inheritance
-ms.openlocfilehash: 33429bbc4a9941ff8ea98a8f99cc652c8ea26455
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 11bd653a53767aa732790b1222da1beff8ad26a9
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003625"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635755"
 ---
 # <a name="inheritance"></a>Héritage
 
@@ -90,6 +90,9 @@ CREATE TABLE [RssBlogs] (
 > [!NOTE]
 > Si la contrainte de clé primaire est renommée, le nouveau nom est appliqué à toutes les tables mappées à la hiérarchie. les futures versions EF autorisent le changement de nom de la contrainte uniquement pour une table particulière lorsque le [problème 19970](https://github.com/dotnet/efcore/issues/19970) est résolu.
 
-Si vous employez la configuration en bloc, vous pouvez récupérer le nom de colonne d’une table spécifique en appelant <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName%2A> .
+Si vous employez la configuration en bloc, vous pouvez récupérer le nom de colonne d’une table spécifique en appelant <xref:Microsoft.EntityFrameworkCore.RelationalPropertyExtensions.GetColumnName(Microsoft.EntityFrameworkCore.Metadata.IProperty,Microsoft.EntityFrameworkCore.Metadata.StoreObjectIdentifier@)> .
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TPTConfiguration.cs?name=Metadata&highlight=10)]
+
+> [!WARNING]
+> Dans de nombreux cas, TPT présente des performances inférieures par rapport à TPH. [Pour plus d’informations, consultez les documents sur les performances](xref:core/performance/modeling-for-performance#inheritance-mapping).

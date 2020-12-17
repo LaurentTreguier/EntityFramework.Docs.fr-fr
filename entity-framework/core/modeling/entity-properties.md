@@ -4,12 +4,12 @@ description: Comment configurer et mapper des propriétés d’entité à l’ai
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: 67ea6eb9cc62c01c16ef33d4d1d1597576ec8b3d
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
+ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003407"
+ms.lasthandoff: 12/17/2020
+ms.locfileid: "97635547"
 ---
 # <a name="entity-properties"></a>Propriétés d'entité
 
@@ -152,7 +152,7 @@ Une propriété qui serait facultative par convention peut être configurée com
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Required.cs?name=Required&highlight=3-5)]
 
-***
+**_
 
 ## <a name="column-collations"></a>Classements de colonnes
 
@@ -166,3 +166,20 @@ Un classement peut être défini sur des colonnes de texte, en déterminant comm
 Si toutes les colonnes d’une base de données doivent utiliser un classement donné, définissez plutôt le classement au niveau de la base de données.
 
 Vous trouverez des informations générales sur la prise en charge de EF Core pour les classements dans la [page de documentation collation](xref:core/miscellaneous/collations-and-case-sensitivity).
+
+## <a name="column-comments"></a>Commentaires de colonne
+
+Vous pouvez définir un commentaire de texte arbitraire qui est défini sur la colonne de base de données, ce qui vous permet de documenter votre schéma dans la base de données :
+
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+> [!NOTE]
+> La définition de commentaires via des annotations de données a été introduite dans EF Core 5,0.
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=4)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnComment.cs?name=ColumnComment&highlight=5)]
+
+_**
