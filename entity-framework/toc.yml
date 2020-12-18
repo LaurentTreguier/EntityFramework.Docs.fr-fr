@@ -176,6 +176,8 @@
               href: core/querying/raw-sql.md
             - name: Fonctions de base de données
               href: core/querying/database-functions.md
+            - name: Mappage de fonctions définies par l’utilisateur
+              href: core/querying/user-defined-function-mapping.md
             - name: Filtres de requête globale
               href: core/querying/filters.md
             - name: Balises de requête
@@ -228,6 +230,20 @@
               href: core/testing/sqlite.md
             - name: Tester avec InMemory
               href: core/testing/in-memory.md
+        - name: Performances
+          items:
+            - name: Introduction
+              href: core/performance/index.md
+            - name: Diagnostic des performances
+              href: core/performance/performance-diagnosis.md
+            - name: Interrogation efficace
+              href: core/performance/efficient-querying.md
+            - name: Mise à jour efficace
+              href: core/performance/efficient-updating.md
+            - name: Modélisation pour les performances
+              href: core/performance/modeling-for-performance.md
+            - name: Rubriques sur les performances avancées
+              href: core/performance/advanced-performance-topics.md
         - name: Divers
           items:
             - name: Implémentations de .NET prises en charge
@@ -307,7 +323,7 @@
             - name: Services à la conception
               href: core/cli/services.md
         - name: Informations de référence sur l’API EF Core >>
-          href: /dotnet/api/?view=efcore-3.1
+          href: /dotnet/api/?view=efcore-5.0
     - name: Entity Framework 6
       items:
         - name: Vue d’ensemble
