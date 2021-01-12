@@ -11,12 +11,12 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 9666bbde8ae9608dcebbea3ad37c51883960a942
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7af516421a6ec3040b636507a6cd7976cabce3a9
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431606"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128795"
 ---
 # <a name="ef-core-testing-sample"></a>Exemple de test EF Core
 
@@ -131,7 +131,7 @@ Ce sujet est abordé plus en détail ci-dessous.
 
 XUnit, comme la plupart des frameworks de test, créera une nouvelle instance de classe de test pour chaque série de tests.
 En outre, XUnit n’exécutera pas de tests dans une classe de test donnée en parallèle.
-Cela signifie que nous pouvons configurer et configurer la base de données dans le constructeur de test et qu’elle sera dans un état connu pour chaque test.
+Cela signifie que nous pouvons configurer et configurer la base de données dans le constructeur de test et qu’elle sera dans un état bien connu pour chaque test.
 
 > [!TIP]
 > Cet exemple recrée la base de données pour chaque test.
@@ -149,7 +149,7 @@ Quand chaque test est exécuté :
 [!code-csharp[Seeding](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=Seeding)]
 
 Chaque classe de test concrète hérite ensuite de cette.
-Par exemple :
+Exemple :
 
 [!code-csharp[SqliteItemsControllerTest](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/SqliteItemsControllerTest.cs?name=SqliteItemsControllerTest)]
 
@@ -160,7 +160,7 @@ Il serait intéressant d’utiliser l’injection de dépendances ici, mais le c
 Au lieu de cela, une DbContext est créée à l’aide de `new` , puis directement transmise en tant que dépendance au contrôleur.
 
 Chaque test exécute ensuite la méthode testée sur le contrôleur et Assert les résultats comme prévu.
-Par exemple :
+Exemple :
 
 [!code-csharp[CanGetItems](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
@@ -170,7 +170,7 @@ Il correspond également mieux à ce qui se passe dans les services et applicati
 
 Les tests qui transforment la base de données créent une deuxième instance DbContext dans le test pour des raisons similaires.
 Autrement dit, créer un nouveau contexte propre, puis le lire dans la base de données pour vous assurer que les modifications ont été enregistrées dans la base de données.
-Par exemple :
+Exemple :
 
 [!code-csharp[CanAddItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 

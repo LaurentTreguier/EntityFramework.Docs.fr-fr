@@ -4,12 +4,12 @@ description: Différentes approches possibles pour tester les applications qui u
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: db25a51ec83bff15ff8c8a959a5f1707dbcf7f0f
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431614"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129068"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test de code qui utilise EF Core
 
@@ -19,7 +19,7 @@ Pour tester le code qui accède à une base de données, vous devez adopter l’
 * Exécuter des requêtes et des mises à jour sur un autre système de base de données plus facile à gérer.
 * Utiliser des doubles de test ou un autre mécanisme pour éviter d’utiliser une base de données.
 
-Ce document décrit les compromis liés à chacun de ces choix et montre comment utiliser EF Core avec chaque approche.  
+Ce document décrit les compromis liés à chacun de ces choix et montre comment utiliser EF Core avec chaque approche.
 
 > [!TIP]
 > Pour obtenir du code illustrant les concepts introduits ici, consultez l’[exemple de test EF Core](xref:core/testing/testing-sample).
@@ -35,7 +35,7 @@ Fondamentalement, cela signifie que le fait de changer de fournisseur de base de
 Cela dit, dans de nombreux cas cela fonctionnera car il existe un degré élevé de normalisation entre les bases de données relationnelles.
 C’est à la fois bien et embêtant.
 Bien, car le passage d’un système de base de données à un autre peut être relativement simple.
-Embêtant, car cela risque de procurer un faux sentiment de sécurité si l’application n’est pas entièrement testée sur le nouveau système de base de données.  
+Embêtant, car cela risque de procurer un faux sentiment de sécurité si l’application n’est pas entièrement testée sur le nouveau système de base de données.
 
 ## <a name="approach-1-production-database-system"></a>Approche 1 : système de base de données de production
 
@@ -65,7 +65,7 @@ LocalDB n’est pas sans problème :
 Personnellement, je n’ai jamais pensé que c’était un problème d’avoir un service de base de données en cours d’exécution sur mon ordinateur de développement, et je recommande généralement d’utiliser Developer Edition à la place.
 Toutefois, LocalDB peut convenir à certaines personnes, en particulier sur les ordinateurs de développement moins puissants.
 
-[L’exécution de SQL Server](/sql/linux/quickstart-install-connect-docker) (ou de tout autre système de base de données) dans un conteneur Docker (ou similaire) est une autre façon d’éviter d’exécuter le système de base de données directement sur votre ordinateur de développement.  
+[L’exécution de SQL Server](/sql/linux/quickstart-install-connect-docker) (ou de tout autre système de base de données) dans un conteneur Docker (ou similaire) est une autre façon d’éviter d’exécuter le système de base de données directement sur votre ordinateur de développement.
 
 ## <a name="approach-2-sqlite"></a>Approche 2 : SQLite
 

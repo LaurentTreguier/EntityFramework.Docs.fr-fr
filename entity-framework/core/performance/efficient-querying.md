@@ -4,12 +4,12 @@ description: Guide des performances pour l’interrogation efficace à l’aide 
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-querying
-ms.openlocfilehash: acd5388745e74a42925c8500ce610aef83e75384
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e945a1e0f734d62ce8948904bcbe819455fcbefa
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657807"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128483"
 ---
 # <a name="efficient-querying"></a>Interrogation efficace
 
@@ -17,7 +17,7 @@ L’interrogation efficace est un vaste sujet qui couvre des sujets aussi larges
 
 ## <a name="use-indexes-properly"></a>Utiliser correctement les index
 
-Le principal facteur déterminant si une requête s’exécute rapidement ou non est qu’elle utilise correctement les index quand cela est approprié : les bases de données sont généralement utilisées pour stocker de grandes quantités de données, et les requêtes qui traversent des tables entières sont généralement des sources de problèmes de performances graves. Les problèmes d’indexation ne sont pas faciles à repérer, car il n’est pas immédiatement évident qu’une requête donnée utilise ou non un index. Par exemple :
+Le principal facteur déterminant si une requête s’exécute rapidement ou non est qu’elle utilise correctement les index quand cela est approprié : les bases de données sont généralement utilisées pour stocker de grandes quantités de données, et les requêtes qui traversent des tables entières sont généralement des sources de problèmes de performances graves. Les problèmes d’indexation ne sont pas faciles à repérer, car il n’est pas immédiatement évident qu’une requête donnée utilise ou non un index. Exemple :
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#Indexes)]
 
@@ -136,7 +136,7 @@ info: Microsoft.EntityFrameworkCore.Database.Command[20101]
 
 Comment cela se fait-il ? Pourquoi toutes ces requêtes sont-elles envoyées pour les boucles simples ci-dessus ? Avec le chargement différé, les publications d’un blog sont chargées uniquement (différées) lors de l’accès à la propriété Posts. par conséquent, chaque itération dans le foreach interne déclenche une requête de base de données supplémentaire, dans son propre aller-retour. Par conséquent, une fois que la requête initiale a chargé tous les blogs, nous avons une autre requête *par blog*, en chargeant toutes ses publications. C’est ce que l’on appelle parfois le problème *N + 1* et cela peut entraîner des problèmes de performances très importants.
 
-En supposant que nous aurons besoin de tous les billets de blog, il est judicieux d’utiliser le chargement hâtif ici à la place. Nous pouvons utiliser l’opérateur [include](xref:core/querying/related-data/eager#eager-loading) pour effectuer le chargement, mais puisque nous avons uniquement besoin des URL des blogs (et nous devrions uniquement [charger ce qui est nécessaire](xref:core/performance/efficient-updating#project-only-properties-you-need)). Nous allons donc utiliser une projection à la place :
+En supposant que nous aurons besoin de tous les billets de blog, il est judicieux d’utiliser le chargement hâtif ici à la place. Nous pouvons utiliser l’opérateur [include](xref:core/querying/related-data/eager#eager-loading) pour effectuer le chargement, mais puisque nous avons uniquement besoin des URL des blogs (et nous devrions uniquement [charger ce qui est nécessaire](xref:core/performance/efficient-querying#project-only-properties-you-need)). Nous allons donc utiliser une projection à la place :
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#EagerlyLoadRelatedAndProject)]
 
@@ -147,7 +147,7 @@ Ainsi, EF Core récupérer tous les blogs, ainsi que leurs publications, en une 
 
 ## <a name="buffering-and-streaming"></a>Mise en mémoire tampon et diffusion en continu
 
-La mise en mémoire tampon fait référence au chargement de tous les résultats de votre requête dans la mémoire, tandis que la diffusion en continu signifie que EF envoie un résultat unique à l’application à chaque fois, et ne contient jamais l’intégralité du jeu de résultats en mémoire. En principe, les besoins en mémoire d’une requête de streaming sont fixes : ils sont les mêmes si la requête retourne 1 ligne ou 1000 ; en revanche, une requête de mise en mémoire tampon requiert plus de mémoire, plus les lignes sont retournées. Pour les requêtes qui génèrent des jeux de résultats volumineux, il peut s’agir d’un facteur de performance important.
+La mise en mémoire tampon fait référence au chargement de tous les résultats de votre requête dans la mémoire, tandis que la diffusion en continu signifie que EF envoie un résultat unique à l’application à chaque fois, sans jamais contenir l’intégralité du jeu de résultats en mémoire. En principe, les besoins en mémoire d’une requête de streaming sont fixes : ils sont les mêmes si la requête retourne 1 ligne ou 1000 ; en revanche, une requête de mise en mémoire tampon requiert plus de mémoire, plus les lignes sont retournées. Pour les requêtes qui génèrent des jeux de résultats volumineux, il peut s’agir d’un facteur de performance important.
 
 La façon dont les mémoires tampons ou les flux de requête dépendent de la façon dont elles sont évaluées :
 
@@ -208,3 +208,7 @@ Pour plus d’informations, consultez la page sur la [programmation asynchrone](
 
 > [!WARNING]
 > Évitez de mélanger du code synchrone et asynchrone au sein d’une même application. il est très facile de déclencher par inadvertance des problèmes de privation subtils de pool de threads.
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+Consultez la [section performances](xref:core/querying/null-comparisons#writing-performant-queries) de la page de documentation de comparaison null pour connaître les meilleures pratiques lors de la comparaison de valeurs Nullable.

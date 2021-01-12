@@ -2,20 +2,20 @@
 title: Outils et extensions - EF Core
 description: Outils et extensions externes pour Entity Framework Core.
 author: ErikEJ
-ms.date: 11/22/2020
+ms.date: 01/06/2021
 uid: core/extensions/index
-ms.openlocfilehash: 4136710567d0f6b088a0dd5ad9895d8b93313e5e
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 1198cd586902cd6222a94225056d076c847c9197
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635404"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129016"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
 Ces outils et extensions fournissent des fonctionnalités supplémentaires pour Entity Framework Core 2.1 et versions ultérieures.
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Les extensions sont générées par des sources diverses et ne sont pas gérées dans le cadre du projet Entity Framework Core. Quand vous envisagez une extension tierce, veillez à évaluer ses caractéristiques, notamment en termes de qualité, de gestion des licences, de compatibilité et de prise en charge, pour vérifier qu’elle répond à vos besoins. En particulier, une extension créée pour une version antérieure d’EF Core peut nécessiter une mise à jour avant de fonctionner avec les versions les plus récentes.
 
 ## <a name="tools"></a>Outils
@@ -36,7 +36,7 @@ Entity Developer est un Concepteur O/RM puissant pour ADO.NET Entity Framework, 
 
 Un O/RM qui crée des classes fortement typées et extensibles pour Entity Framework. Le code généré est Entity Framework Core. Il n’y a aucune différence. Il ne s’agit pas d’un remplacement d’EF ou d’un O/RM personnalisé. Il s’agit d’une couche de modélisation visuelle qui permet à une équipe de gérer des schémas de base de données complexes. Il convient aux logiciels SCM tels que Git, permettant à plusieurs utilisateurs d’accéder à votre modèle avec un minimum de conflits. Le programme d’installation effectue le suivi des modifications du modèle et crée des scripts de mise à niveau. Pour EF Core : 3.
 
-[Site Github](https://github.com/nHydrate/nHydrate)
+[Dépôt github](https://github.com/nHydrate/nHydrate)
 
 ### <a name="ef-core-power-tools"></a>EF Core Power Tools
 
@@ -119,11 +119,23 @@ Reprise de l’attribut [Index] (avec extension pour la création de modèles). 
 
 [Dépôt GitHub](https://github.com/jsakamoto/EntityFrameworkCore.IndexAttribute)
 
-### <a name="efcoreinmemoryhelpers"></a>EfCore.InMemoryHelpers
+### <a name="verifyentityframework"></a>Verify. EntityFramework
 
-Fournit un wrapper autour du fournisseur de base de données In-Memory EF Core. Il fonctionne alors plus comme un fournisseur relationnel. Pour EF Core : 2.
+Étend [verify](https://github.com/VerifyTests/Verify) pour autoriser les tests d’instantané avec EntityFramework. Pour EF Core : 3, 5.
 
-[Dépôt GitHub](https://github.com/SimonCropp/EfCore.InMemoryHelpers)
+[Dépôt GitHub](https://github.com/VerifyTests/Verify.EntityFramework)
+
+### <a name="localdb"></a>LocalDb
+
+Fournit un wrapper autour de [SQL Server Express](https://docs.microsoft.com/sql/database-engine/configure-windows/sql-server-express-localdb) base de données locale pour simplifier l’exécution de tests sur Entity Framework. Pour EF Core : 3, 5.
+
+[Dépôt GitHub](https://github.com/SimonCropp/LocalDb)
+
+### <a name="effluentvalidation"></a>EfFluentValidation
+
+Ajoute la prise en charge de [FluentValidation](https://fluentvalidation.net/) à Entity Framework. Pour EF Core : 3, 5.
+
+[Dépôt GitHub](https://github.com/SimonCropp/EfFluentValidation)
 
 ### <a name="efcoretemporalsupport"></a>EFCore.TemporalSupport
 
@@ -170,7 +182,7 @@ Déclencheurs pour EF Core. Répondez aux modifications dans votre DbContext ava
 
 ### <a name="entity-framework-extensions"></a>Extensions d’Entity Framework
 
-Étend votre DbContext avec des opérations en bloc hautes performances : BulkSaveChanges, BulkInsert, BulkUpdate, BulkDelete, BulkMerge, et bien plus encore. Pour EF Core : 2, 3.
+Étend votre DbContext avec des opérations en bloc hautes performances : BulkSaveChanges, BulkInsert, BulkUpdate, BulkDelete, BulkMerge, et bien plus encore. Pour EF Core : 2, 3, 5.
 
 [Site web](https://entityframework-extensions.net/)
 
@@ -246,3 +258,21 @@ Implémentation pour la suppression réversible d’entités. Pour EF Core : 3.
 Mappeur DTO-Entity avec gestion de la composition/de l’agrégation (semblable à GraphDiff). Pour EF Core : 3, 5.
 
 [NuGet](https://www.nuget.org/packages/Detached.Mappers.EntityFramework)
+
+### <a name="entityframeworkcoresqlitenodatime"></a>EntityFrameworkCore. sqlite. NodaTime
+
+Ajoute la prise en charge des types [NodaTime](https://nodatime.org) lors de l’utilisation de [SQLite](https://sqlite.org). Pour EF Core : 5.
+
+[Dépôt GitHub](https://github.com/khellang/EFCore.Sqlite.NodaTime)
+
+### <a name="erikejentityframeworkcoresqlserverdacpac"></a>ErikEJ. EntityFrameworkCore. SqlServer. dacpac
+
+Active l’ingénierie à rebours d’un modèle de EF Core à partir d’un SQL Server package d’application de la couche données (. dacpac). Pour EF Core : 3, 5.
+
+[Wiki GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki/ErikEJ.EntityFrameworkCore.SqlServer.Dacpac)
+
+### <a name="erikejentityframeworkcoredgmlbuilder"></a>ErikEJ. EntityFrameworkCore. DgmlBuilder
+
+Générez du contenu DGML (Graph) qui visualise votre DbContext. Ajoute la méthode d’extension AsDgml () à la classe DbContext. Pour EF Core : 3, 5.
+
+[Wiki GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki/Inspect-your-DbContext-model)

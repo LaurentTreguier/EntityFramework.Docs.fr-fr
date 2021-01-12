@@ -4,12 +4,12 @@ description: Utilisation d’entités déconnectées et non suivies sur plusieur
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/disconnected-entities
-ms.openlocfilehash: f21cc71ef11ee4ef37618a68d5a5219e8174bf8b
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 4ddae08b68aa99fb81de77fed8a195c60927e0bb
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063567"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128847"
 ---
 # <a name="disconnected-entities"></a>Entités déconnectées
 
@@ -45,7 +45,7 @@ Toutefois, EF a également un moyen intégré de faire cela pour n’importe que
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#IsItNewGeneral)]
 
-> [!TIP]  
+> [!TIP]
 > Les clés sont définies dès que les entités sont suivies par le contexte, même si l’entité est dans l’état Ajouté. Cela est utile lors du parcours d’un graphique d’entités pour décider quelles actions effectuer avec chacune, par exemple lors de l’utilisation de l’API TrackGraph. La valeur de clé doit uniquement être utilisée de la manière illustrée ici _avant_ qu’un appel soit envoyé pour effectuer le suivi de l’entité.
 
 ### <a name="with-other-keys"></a>Avec d’autres clés
@@ -84,7 +84,7 @@ Les étapes ici sont :
   * Ensuite, nous utilisons SetValues pour définir les valeurs de toutes les propriétés de cette entité sur celles envoyées par le client.
   * L’appel à SetValues marque l’entité à mettre à jour en fonction des besoins.
 
-> [!TIP]  
+> [!TIP]
 > SetValues marque uniquement comme modifiées les propriétés qui ont des valeurs différentes de celles de l’entité suivie. Cela signifie que lorsque la mise à jour est envoyée, seules les colonnes qui ont été modifiées seront mises à jour. (Et si rien n’a changé, alors aucune mise à jour ne sera envoyée du tout).
 
 ## <a name="working-with-graphs"></a>Travail avec les graphiques
@@ -127,7 +127,7 @@ Comme précédemment, lorsque vous n’utilisez pas les clés générées automa
 
 La suppression peut être compliquée à gérer, car souvent l’absence d’une entité signifie qu’elle droit être supprimée. Une façon de gérer cela consiste est d’utiliser des « suppressions récupérables » par exemple en marquant l’entité comme supprimée plutôt que la supprimer réellement. Les suppressions s’apparentent alors à des mises à jour. Les suppressions récupérables peuvent être implémentées à l’aide de [filtres de requête](xref:core/querying/filters).
 
-Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Par exemple :
+Pour les vraies suppressions, il est courant d’utiliser une extension du modèle de requête pour effectuer ce qui est essentiellement une comparaison de graphique. Exemple :
 
 [!code-csharp[Main](../../../samples/core/Saving/Disconnected/Sample.cs#InsertUpdateOrDeleteGraphWithFind)]
 

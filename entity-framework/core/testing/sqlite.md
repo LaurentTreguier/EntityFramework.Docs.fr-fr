@@ -4,19 +4,19 @@ description: Utilisation de SQLite pour tester une application Entity Framework 
 author: ajcvickers
 ms.date: 04/24/2020
 uid: core/testing/sqlite
-ms.openlocfilehash: ebfcd36bf236cb83cab8683a8c31d4752d437998
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: da2504cfe7997a10a5ee8c447b1c6ef00dd02369
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431613"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129055"
 ---
 # <a name="using-sqlite-to-test-an-ef-core-application"></a>Utilisation de SQLite pour tester une application EF Core
 
 > [!WARNING]
 > L’utilisation de SQLite peut être un moyen efficace de tester une application EF Core.
 > Toutefois, des problèmes peuvent survenir lorsque SQLite se comporte différemment des autres systèmes de base de données.
-> Consultez [test du code qui utilise EF Core](xref:core/testing/index) pour en savoir plus sur les problèmes et les compromis.  
+> Consultez [test du code qui utilise EF Core](xref:core/testing/index) pour en savoir plus sur les problèmes et les compromis.
 
 Ce document génère des utilisations sur les concepts introduits dans l' [exemple illustrant comment tester des applications qui utilisent EF Core](xref:core/testing/testing-sample).
 Les exemples de code présentés ici proviennent de cet exemple.
@@ -33,7 +33,7 @@ Cela est facile à utiliser avec EF Core tant que vous comprenez la durée de vi
 * La base de données est supprimée lors de la fermeture de la connexion à celle-ci
 
 EF Core utilisera une connexion déjà ouverte lorsque vous en aurez donné une, et ne tentera pas de la fermer.
-La clé d’utilisation d’EF Core avec une base de données SQLite en mémoire consiste donc à ouvrir la connexion avant de la transmettre à EF.  
+La clé d’utilisation d’EF Core avec une base de données SQLite en mémoire consiste donc à ouvrir la connexion avant de la transmettre à EF.
 
 L' [exemple](xref:core/testing/testing-sample) atteint ce code avec le code suivant :
 

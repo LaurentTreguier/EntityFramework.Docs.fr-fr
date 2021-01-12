@@ -4,12 +4,12 @@ description: Utilisation des types de référence Nullable C# lors de l’utilis
 author: roji
 ms.date: 09/09/2019
 uid: core/miscellaneous/nullable-reference-types
-ms.openlocfilehash: 648b79576838d2ba424b5216d5ad6811912f8ccb
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 749fef8560c6777dcb2314126b11d2dd6a3562f8
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429713"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128561"
 ---
 # <a name="working-with-nullable-reference-types"></a>Utilisation des types de référence Nullable
 
@@ -76,4 +76,4 @@ Si vous effectuez cette tâche beaucoup et que les types d’entité en question
 ## <a name="limitations"></a>Limites
 
 * L’ingénierie à rebours ne prend actuellement pas en charge les [types référence Nullable C# 8 (NRTs)](/dotnet/csharp/tutorials/nullable-reference-types): EF Core génère toujours du code c# qui suppose que la fonctionnalité est désactivée. Par exemple, les colonnes de texte Nullable seront échafaudées en tant que propriété de type `string` , et non `string?` , avec l’API Fluent ou les annotations de données utilisées pour configurer si une propriété est requise ou non. Vous pouvez modifier le code de génération de modèles automatique et les remplacer par des annotations de possibilité de valeur null. La prise en charge de la génération de modèles automatique pour les types de référence Nullable est suivie par le problème [#15520](https://github.com/dotnet/efcore/issues/15520).
-* La surface de l’API publique de EF Core n’a pas encore été annotée pour la possibilité de valeur null (l’API publique est « null-oublie »), ce qui peut parfois être difficile à utiliser lorsque la fonctionnalité Diagnostics proactifs NRT est activée. Cela comprend notamment les opérateurs LINQ Async exposés par EF Core, tels que [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_). Nous prévoyons de le résoudre pour la version 5,0.
+* La surface de l’API publique de EF Core n’a pas encore été annotée pour la possibilité de valeur null (l’API publique est « null-oublie »), ce qui peut parfois être difficile à utiliser lorsque la fonctionnalité Diagnostics proactifs NRT est activée. Cela comprend notamment les opérateurs LINQ Async exposés par EF Core, tels que [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_). Nous prévoyons de le résoudre pour la version 6,0.

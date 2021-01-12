@@ -4,35 +4,66 @@ description: Configuration des index dans un modèle de Entity Framework Core
 author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
-ms.openlocfilehash: 3a89f1ae9727dcd8f086e915e666721572636314
-ms.sourcegitcommit: abda0872f86eefeca191a9a11bfca976bc14468b
+ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90071405"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128535"
 ---
 # <a name="indexes"></a>Index
 
-Les index sont un concept commun entre de nombreux magasins de données. Bien que leur implémentation dans le magasin de données puisse varier, elles sont utilisées pour rendre les recherches basées sur une colonne (ou un ensemble de colonnes) plus efficaces.
+Les index sont un concept commun entre de nombreux magasins de données. Bien que leur implémentation dans le magasin de données puisse varier, elles sont utilisées pour rendre les recherches basées sur une colonne (ou un ensemble de colonnes) plus efficaces. Pour plus d’informations sur l’utilisation correcte des index, consultez la [section index](xref:core/performance/efficient-querying#use-indexes-properly) de la documentation sur les performances.
 
-Les index ne peuvent pas être créés à l’aide d’annotations de données. Vous pouvez utiliser l’API Fluent pour spécifier un index sur une seule colonne comme suit :
+Vous pouvez spécifier un index sur une colonne comme suit :
+
+## <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Index.cs?name=Index&highlight=1)]
+
+> [!NOTE]
+> La configuration d’index à l’aide d’annotations de données a été introduite dans EF Core 5,0.
+
+## <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/Index.cs?name=Index&highlight=4)]
 
-Vous pouvez également spécifier un index sur plusieurs colonnes :
-
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+***
 
 > [!NOTE]
 > Par Convention, un index est créé dans chaque propriété (ou ensemble de propriétés) utilisée comme clé étrangère.
 >
-> EF Core ne prend en charge qu’un seul index par jeu de propriétés distinct. Si vous utilisez l’API Fluent pour configurer un index sur un ensemble de propriétés pour lequel un index est déjà défini, soit par Convention, soit par configuration précédente, vous allez modifier la définition de cet index. Cela est utile si vous souhaitez configurer davantage un index qui a été créé par Convention.
+> EF Core ne prend en charge qu’un seul index par jeu de propriétés distinct. Si vous configurez un index sur un ensemble de propriétés pour lequel un index est déjà défini, soit par Convention, soit par configuration précédente, vous modifiez la définition de cet index. Cela est utile si vous souhaitez configurer davantage un index qui a été créé par Convention.
+
+## <a name="composite-index"></a>Index composite
+
+Un index peut également s’étendre sur plusieurs colonnes :
+
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexComposite.cs?name=Composite&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
+
+**_
+
+Les index sur plusieurs colonnes, également appelés index _composite *, accélèrent les requêtes qui filtrent sur les colonnes de l’index, mais interrogent également les requêtes qui filtrent uniquement sur les *premières* colonnes couvertes par l’index. Pour plus d’informations, consultez les documents sur les [performances](xref:core/performance/efficient-querying#use-indexes-properly) .
 
 ## <a name="index-uniqueness"></a>Unicité de l’index
 
 Par défaut, les index ne sont pas uniques : plusieurs lignes peuvent avoir la même valeur (s) pour le jeu de colonnes de l’index. Vous pouvez rendre un index unique comme suit :
 
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexUnique.cs?name=IndexUnique&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexUnique.cs?name=IndexUnique&highlight=5)]
+
+***
 
 Toute tentative d’insertion de plusieurs entités avec les mêmes valeurs pour le jeu de colonnes de l’index entraîne la levée d’une exception.
 
@@ -40,9 +71,17 @@ Toute tentative d’insertion de plusieurs entités avec les mêmes valeurs pour
 
 Par Convention, les index créés dans une base de données relationnelle sont nommés `IX_<type name>_<property name>` . Pour les index composites, `<property name>` devient une liste de noms de propriétés séparés par un trait de soulignement.
 
-Vous pouvez utiliser l’API Fluent pour définir le nom de l’index créé dans la base de données :
+Vous pouvez définir le nom de l’index créé dans la base de données :
+
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/IndexName.cs?name=IndexName&highlight=1)]
+
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexName.cs?name=IndexName&highlight=5)]
+
+***
 
 ## <a name="index-filter"></a>Filtre d’index
 

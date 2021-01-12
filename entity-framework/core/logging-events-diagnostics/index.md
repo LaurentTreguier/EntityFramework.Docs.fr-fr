@@ -4,12 +4,12 @@ description: Vue d’ensemble de la journalisation, des événements, des interc
 author: ajcvickers
 ms.date: 10/01/2020
 uid: core/logging-events-diagnostics/index
-ms.openlocfilehash: d85a506167661523bf70b62d3a075a6248180d11
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 5ddbffc8d39e97065f2e06af14443c62b4a9465d
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635677"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129224"
 ---
 # <a name="overview-of-logging-and-interception"></a>Vue d’ensemble de la journalisation et de l’interception
 
@@ -21,11 +21,11 @@ Le tableau ci-dessous fournit une référence rapide pour les différences entre
 
 | Mechanism |  Async | Étendue | Inscrit | Usage prévu
 |:----------|--------|-------|------------|-------------
-| Journalisation simple | No | Par contexte | Configuration du contexte | Journalisation au moment du développement
-| Microsoft.Extensions.Logging | No | Par contexte * | D.I. configuration du contexte ou | Journalisation de la production
-| Événements | No | Par contexte | N'importe quand | Réagir aux événements EF
+| Journalisation simple | Non | Par contexte | Configuration du contexte | Journalisation au moment du développement
+| Microsoft.Extensions.Logging | Non | Par contexte * | D.I. configuration du contexte ou | Journalisation de la production
+| Événements | Non | Par contexte | N'importe quand | Réagir aux événements EF
 | Intercepteurs | Oui | Par contexte | Configuration du contexte | Manipulation des opérations EF
-| Écouteurs de diagnostic | No | Processus | Globalement | Diagnostic d'application
+| Écouteurs de diagnostic | Non | Process | Globalement | Diagnostic d'application
 
 * `Microsoft.Extensions.Logging` Est généralement configuré par application via l’injection de dépendances, mais au niveau d’EF, chaque contexte _peut_ être configuré avec un journal différent si nécessaire.
 
@@ -34,7 +34,7 @@ Le tableau ci-dessous fournit une référence rapide pour les différences entre
 > [!NOTE]
 > Cette fonctionnalité a été introduite dans EF Core 5,0.
 
-Les journaux EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de lors de la <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
+Les journaux EF Core sont accessibles à partir de n’importe quel type d’application par le biais de l’utilisation de lors de la <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.LogTo%2A> [configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cette configuration s’effectue généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Exemple :
 
 <!--
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

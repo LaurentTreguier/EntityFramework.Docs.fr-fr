@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: a08c5582b063f4a7748a43811c2bf28e8f3e5c14
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429908"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128782"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Prise en main avec EF Core et Xamarin
 
@@ -121,7 +121,7 @@ La `BloggingContext` classe se trouve dans le `Services` dossier et hérite de l
 
 Voici quelques exemples de l’application dans laquelle EF Core est utilisé pour accéder à SQLite.
 
-### <a name="read"></a>Lire
+### <a name="read"></a>Lecture
 
 * Retourne tous les enregistrements.
   * La `OnAppearing` fonction de `BlogsPage.xaml.cs` retourne tous les `Blog` enregistrements et les stocke dans une `List` variable.
@@ -165,7 +165,7 @@ using (var blogContext = new BloggingContext())
 
 * Mettre à jour un enregistrement existant.
   * La `Save_Clicked` fonction de `AddPostPage.xaml.cs` met à jour un `Blog` objet existant avec un nouveau `Post` .
-  
+
 ```csharp
 var newPost = new Post
 {
@@ -186,7 +186,7 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a>DELETE
+### <a name="delete"></a>Supprimer
 
 * Supprimer tous les enregistrements avec des enregistrements en cascade vers enfants.
   * La `DeleteAll_Clicked` fonction de `BlogsPage.xaml.cs` supprime tous les `Blog` enregistrements de la base de données SQLite et répercute les suppressions sur tous les `Blog` enregistrements enfants `Post` .

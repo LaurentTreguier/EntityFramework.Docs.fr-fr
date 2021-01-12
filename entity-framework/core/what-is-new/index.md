@@ -2,14 +2,14 @@
 title: Mise en production et planification d’EF Core
 description: Versions actuelles d’EF Core et détails sur le planning des versions ultérieures
 author: ajcvickers
-ms.date: 10/11/2020
+ms.date: 01/12/2021
 uid: core/what-is-new/index
-ms.openlocfilehash: 983a8b21d353481df4f1db232d00761e070d893b
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: 18d8055840b5a38dc62d20e7e18c440b7360c9e4
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503138"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128327"
 ---
 # <a name="ef-core-releases-and-planning"></a>Mise en production et planification d’EF Core
 
@@ -48,9 +48,9 @@ En règle générale, nous ne procédons pas à une planification détaillée au
 
 ## <a name="ef-core-60"></a>EF Core 6,0
 
-La prochaine version stable planifiée est **EF Core 6,0** , planifiée pour le **2021 novembre**.
+La prochaine version stable planifiée est **EF Core 6,0**, planifiée pour le **2021 novembre**.
 
-Nous travaillons actuellement sur un plan de haut niveau basé sur le [processus de planification des versions](xref:core/what-is-new/release-planning).
+Un [plan de haut niveau pour EF Core 6,0](xref:core/what-is-new/ef-core-6.0/plan) a été créé en suivant le [processus de planification des versions](xref:core/what-is-new/release-planning)documenté.
 
 Vos commentaires sur la planification sont importants.
 La meilleure façon d’indiquer l’importance d’un problème est de voter (pouce vers le haut 👍) pour ce problème sur GitHub.
@@ -61,7 +61,7 @@ Ces données sont ensuite intégrées dans le processus de planification de la p
 Les packages EF Core 6,0 sont **désormais disponibles** en tant que
 
 * [Builds quotidiennes](https://github.com/dotnet/aspnetcore/blob/master/docs/DailyBuilds.md)
-  * Toutes les fonctionnalités et tous les correctifs de bogues les plus récents. Généralement très stables (plus de 57 000 séries de tests pour chaque build).
+  * Toutes les fonctionnalités et tous les correctifs de bogues les plus récents. Généralement très stables ; 75000 + tests s’exécutent sur chaque Build.
 
 En outre, à mesure que nous progressons, des préversions fréquentes sont envoyées à NuGet. Notez que les préversions sont en retard par rapport aux builds quotidiennes, mais qu’elles sont testées pour fonctionner avec les ASP.NET Core et les versions préliminaires .NET Core correspondantes.
 

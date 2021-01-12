@@ -4,12 +4,12 @@ description: Vue d’ensemble de la création et de la configuration d’un mod�
 author: AndriySvyryd
 ms.date: 10/13/2020
 uid: core/modeling/index
-ms.openlocfilehash: b18db0059efd335abe2fc44bbc78e0106717e058
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 709e2bde60c8e2c31f0a39390624c5d31a9cfa08
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429609"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129198"
 ---
 # <a name="creating-and-configuring-a-model"></a>Création et configuration d’un modèle
 
@@ -17,7 +17,7 @@ Entity Framework utilise un ensemble de conventions pour créer un modèle basé
 
 Cet article traite de la configuration qui peut être appliquée à un modèle ciblant n’importe quel magasin de données et qui peut être appliquée pendant le ciblage d’une base de données relationnelle. Les fournisseurs peuvent également activer la configuration qui est spécifique à un magasin de données particulier. Pour plus d’informations sur la configuration spécifique du fournisseur, consultez la section [Fournisseurs de base de données](xref:core/providers/index).
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez consulter l' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples) de cet article sur GitHub.
 
 ## <a name="use-fluent-api-to-configure-a-model"></a>Utiliser l’API Fluent pour configurer un modèle

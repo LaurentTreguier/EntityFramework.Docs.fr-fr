@@ -4,12 +4,12 @@ description: Présentation générale de Entity Framework Core
 author: ajcvickers
 ms.date: 9/20/2020
 uid: core/index
-ms.openlocfilehash: ccb1fa4cbc0bd1a02e1aeb613475bfe4b2c1d118
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: f2905fc55419e196a6f5b8883cf2a2a76b8a1ab2
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429895"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128600"
 ---
 # <a name="entity-framework-core"></a>Entity Framework Core
 

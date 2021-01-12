@@ -4,12 +4,12 @@ description: Informations générales sur la façon dont Entity Framework Core c
 author: ajcvickers
 ms.date: 03/17/2020
 uid: core/querying/how-query-works
-ms.openlocfilehash: 7b3014cf64f8467ccbec10598ea1bb47304dfe43
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 4f856bf7e084d020edee1585d5c6c64873a5ed15
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430467"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129003"
 ---
 # <a name="how-queries-work"></a>Fonctionnement des requêtes
 
@@ -43,5 +43,5 @@ Les opérations qui génèrent les requêtes envoyées à la base de données le
 * Itération des résultats dans une boucle `for`
 * Utilisation d’un opérateur tel que,,, `ToList` `ToArray` `Single` `Count` ou les surcharges Async équivalentes
 
-> [!WARNING]  
+> [!WARNING]
 > **Toujours valider l’entrée d’utilisateur :** bien qu’EF Core protège contre les attaques par injection SQL au moyen de paramètres et de l’échappement des littéraux dans les requêtes, il ne valide pas les entrées. La validation appropriée, conformément aux exigences de l’application, doit être effectuée avant que les valeurs de sources non approuvées ne soient utilisées dans les requêtes LINQ, affectées aux propriétés d’entité ou transmises à d’autres API de EF Core. Cela inclut toute entrée utilisateur utilisée pour construire des requêtes de façon dynamique. Même si vous utilisez LINQ, si vous acceptez les entrées d’utilisateur pour générer des expressions, vous devez vous assurer que seules les expressions prévues peuvent être construites.

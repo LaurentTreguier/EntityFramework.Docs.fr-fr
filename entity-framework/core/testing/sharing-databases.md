@@ -4,12 +4,12 @@ description: Exemple illustrant comment partager une base de données entre plus
 author: ajcvickers
 ms.date: 04/25/2020
 uid: core/testing/sharing-databases
-ms.openlocfilehash: 95b756c80b983356a07fd836aa1b02f2835e6629
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7a90a144271d5c34e9d5043aa439f84db805c6af
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431504"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128834"
 ---
 # <a name="sharing-databases-between-tests"></a>Partage des bases de données entre les tests
 
@@ -29,7 +29,7 @@ Pour cela, vous devez comprendre :
 
 * Comment partager en toute sécurité des objets entre des tests
 * Lorsque l’infrastructure de test exécute des tests en parallèle
-* Comment conserver la base de données dans un état propre pour chaque test  
+* Comment conserver la base de données dans un état propre pour chaque test
 
 ## <a name="the-fixture"></a>Le contexte
 
@@ -65,7 +65,7 @@ Cela garantit que la base de données correspond au modèle EF actuel même si e
 La connexion de base de données est supprimée lorsque le contexte est supprimé.
 Vous pouvez également envisager de supprimer la base de données de test à ce stade.
 Toutefois, cette opération nécessite un verrouillage supplémentaire et un décompte de références si le contexte est partagé par plusieurs classes de test.
-En outre, il est souvent utile que la base de données de test soit toujours disponible pour le débogage des tests ayant échoué.  
+En outre, il est souvent utile que la base de données de test soit toujours disponible pour le débogage des tests ayant échoué.
 
 ## <a name="using-the-fixture"></a>Utilisation du contexte
 
@@ -85,7 +85,7 @@ Les tests doivent souvent muter les données de test avec les insertions, les mi
 Toutefois, ces modifications ont un impact sur les autres tests qui attendent une base de données propre et amorcée.
 
 Cela peut être traité en exécutant des tests mutants à l’intérieur d’une transaction.
-Par exemple :
+Exemple :
 
 [!code-csharp[CanAddItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/SharedDatabaseTests/SharedDatabaseTest.cs?name=CanAddItem)]
 

@@ -4,12 +4,12 @@ description: Interception pour les opérations de base de données et d’autres
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: fba9f3d02b8cf504c2cadca8eb844cd3e818e915
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e3b2f1a0f1a97d211bcaba0633955a7fe9c0aa91
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635807"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128587"
 ---
 # <a name="interceptors"></a>Intercepteurs
 
@@ -21,12 +21,12 @@ Les intercepteurs sont inscrits par instance DbContext lorsque le contexte est c
 
 ## <a name="registering-interceptors"></a>Inscription des intercepteurs
 
-Les intercepteurs sont inscrits à l’aide <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> [de lors de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cela se fait généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Par exemple :
+Les intercepteurs sont inscrits à l’aide <xref:Microsoft.EntityFrameworkCore.DbContextOptionsBuilder.AddInterceptors%2A> [de lors de la configuration d’une instance DbContext](xref:core/dbcontext-configuration/index). Cela se fait généralement dans une substitution de <xref:Microsoft.EntityFrameworkCore.DbContext.OnConfiguring%2A?displayProperty=nameWithType> . Exemple :
 
 <!--
 public class ExampleContext : BlogsContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(new TaggedQueryCommandInterceptor());
 }
 -->
@@ -37,15 +37,15 @@ Vous pouvez également `AddInterceptors` appeler dans le cadre de <xref:Microsof
 > [!TIP]
 > OnConfiguring est toujours appelé lorsque AddDbContext est utilisé ou qu’une instance DbContextOptions est passée au constructeur DbContext. C’est ainsi l’emplacement idéal pour appliquer la configuration du contexte, quelle que soit la façon dont la méthode DbContext est construite.
 
-Les intercepteurs sont souvent sans État, ce qui signifie qu’une seule instance d’intercepteur peut être utilisée pour toutes les instances de DbContext. Par exemple :
+Les intercepteurs sont souvent sans État, ce qui signifie qu’une seule instance d’intercepteur peut être utilisée pour toutes les instances de DbContext. Exemple :
 
 <!--
 public class TaggedQueryCommandInterceptorContext : BlogsContext
 {
-    private static readonly TaggedQueryCommandInterceptor _interceptor 
+    private static readonly TaggedQueryCommandInterceptor _interceptor
         = new TaggedQueryCommandInterceptor();
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.AddInterceptors(_interceptor);
 }
 -->
@@ -75,12 +75,12 @@ Chaque paire de méthodes a des variantes synchrones et asynchrones. Cela permet
 
 ### <a name="example-command-interception-to-add-query-hints"></a>Exemple : interception de commande pour ajouter des indicateurs de requête
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez [Télécharger l’exemple d’intercepteur de commande](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CommandInterception) à partir de github.
 
 Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbCommandInterceptor> peut être utilisé pour modifier SQL avant d’être envoyé à la base de données. Cet exemple montre comment modifier le SQL pour inclure un indicateur de requête.
 
-Souvent, la partie la plus délicate de l’interception consiste à déterminer quand la commande correspond à la requête qui doit être modifiée. L’analyse de SQL est une option, mais elle a tendance à être fragile. Une autre option consiste à utiliser des [balises de requête EF Core](xref:core/querying/tags) pour baliser chaque requête qui doit être modifiée. Par exemple :
+Souvent, la partie la plus délicate de l’interception consiste à déterminer quand la commande correspond à la requête qui doit être modifiée. L’analyse de SQL est une option, mais elle a tendance à être fragile. Une autre option consiste à utiliser des [balises de requête EF Core](xref:core/querying/tags) pour baliser chaque requête qui doit être modifiée. Exemple :
 
 <!--
             var blogs1 = context.Blogs.TagWith("Use hint: robust plan").ToList();
@@ -148,10 +148,10 @@ FROM [Blogs] AS [b]
 
 ### <a name="example-connection-interception-for-sql-azure-authentication-using-add"></a>Exemple : interception de connexion pour l’authentification SQL Azure à l’aide de ADD
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez [Télécharger l’exemple d’intercepteur de connexion](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/ConnectionInterception) à partir de github.
 
-Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> peut être utilisé pour manipuler le <xref:System.Data.Common.DbConnection> avant qu’il ne soit utilisé pour se connecter à la base de données. Cela peut être utilisé pour obtenir un jeton d’accès Azure Active Directory (AAD). Par exemple :
+Un <xref:Microsoft.EntityFrameworkCore.Diagnostics.IDbConnectionInterceptor> peut être utilisé pour manipuler le <xref:System.Data.Common.DbConnection> avant qu’il ne soit utilisé pour se connecter à la base de données. Cela peut être utilisé pour obtenir un jeton d’accès Azure Active Directory (AAD). Exemple :
 
 <!--
 public class AadAuthenticationInterceptor : DbConnectionInterceptor
@@ -192,7 +192,7 @@ public class AadAuthenticationInterceptor : DbConnectionInterceptor
 
 ### <a name="example-advanced-command-interception-for-caching"></a>Exemple : interception de commande avancée pour la mise en cache
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez [Télécharger l’exemple d’intercepteur de commandes avancé](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/CachingInterception) à partir de github.
 
 Les intercepteurs de EF Core peuvent :
@@ -343,7 +343,7 @@ L' [exemple d’intercepteur de mise en cache](https://github.com/dotnet/EntityF
         {
             Console.WriteLine(await GetDailyMessage(context));
         }
-        
+
         #region GetDailyMessage
         async Task<string> GetDailyMessage(DailyMessageContext context)
             => (await context.DailyMessages.TagWith("Get_Daily_Message").OrderBy(e => e.Id).LastAsync()).Message;
@@ -398,7 +398,7 @@ Notez que dans la sortie du journal, l’application continue à utiliser le mes
 > [!NOTE]
 > L’interception d’SaveChanges a été introduite dans EF Core 5,0.
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez [Télécharger l’exemple d’intercepteur SaveChanges](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/SaveChangesInterception) à partir de github.
 
 <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A><xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A>les points d’interception et sont définis par l' <xref:Microsoft.EntityFrameworkCore.Diagnostics.ISaveChangesInterceptor> interface. Comme pour les autres intercepteurs, la <xref:Microsoft.EntityFrameworkCore.Diagnostics.SaveChangesInterceptor> classe de base avec des méthodes sans op est fournie à titre de commodité.

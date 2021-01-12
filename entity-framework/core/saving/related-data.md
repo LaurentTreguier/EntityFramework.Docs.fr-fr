@@ -4,18 +4,18 @@ description: Informations sur l’enregistrement de graphiques d’entités asso
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/related-data
-ms.openlocfilehash: 25b4e265f19e658097be7332f9cba6fec3b560db
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: f1cc752587e6a3eb58d070f5f573450b51986f70
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92062943"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129094"
 ---
 # <a name="saving-related-data"></a>Enregistrement des données associées
 
 En plus des entités isolées, vous pouvez également utiliser les relations définies dans votre modèle.
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) sur GitHub.
 
 ## <a name="adding-a-graph-of-new-entities"></a>Ajout d’un graphique de nouvelles entités
@@ -26,8 +26,8 @@ Dans l’exemple suivant, le blog et trois billets associés sont tous insérés
 
 [!code-csharp[Main](../../../samples/core/Saving/RelatedData/Sample.cs#AddingGraphOfEntities)]
 
-> [!TIP]  
-> Utilisez la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
+> [!TIP]
+> Utilisez la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple : `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="adding-a-related-entity"></a>Ajout d’une entité associée
 

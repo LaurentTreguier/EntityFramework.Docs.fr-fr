@@ -4,18 +4,18 @@ description: Informations de base sur l’ajout, la mise à jour et la suppressi
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: c6288fc8ca79b78b6c377f25e3874211b38059b2
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 8c98f95dee85641f11af716290333b47f340bff8
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063632"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129107"
 ---
 # <a name="basic-save"></a>Enregistrement de base
 
 Découvrez comment ajouter, modifier et supprimer des données à l’aide de vos classes de contexte et d’entité.
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) sur GitHub.
 
 ## <a name="adding-data"></a>Ajout de données
@@ -24,8 +24,8 @@ Utilisez la méthode *DbSet.Add* pour ajouter de nouvelles instances de vos clas
 
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#Add)]
 
-> [!TIP]  
-> Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](xref:core/saving/related-data). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple, `context.Entry(blog).State = EntityState.Modified`.
+> [!TIP]
+> Les méthodes Add, Attach et Update fonctionnent toutes sur le graphique complet des entités passées, comme décrit dans la section [Données associées](xref:core/saving/related-data). Vous pouvez aussi utiliser la propriété EntityEntry.State pour définir l’état d’une seule entité. Par exemple : `context.Entry(blog).State = EntityState.Modified`.
 
 ## <a name="updating-data"></a>Mise à jour des données
 
@@ -47,7 +47,7 @@ Si l’entité existe déjà dans la base de données, elle sera supprimée pend
 
 Vous pouvez combiner plusieurs opérations d’ajout/mise à jour/suppression en un seul appel à *SaveChanges*.
 
-> [!NOTE]  
+> [!NOTE]
 > Pour la plupart des fournisseurs de base de données, *SaveChanges* est transactionnel. Cela signifie que toutes les opérations réussissent ou échouent complètement et que les opérations ne sont jamais partiellement appliquées.
 
 [!code-csharp[Main](../../../samples/core/Saving/Basics/Sample.cs#MultipleOperations)]

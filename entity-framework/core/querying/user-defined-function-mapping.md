@@ -3,15 +3,15 @@ title: Mappage des fonctions définies par l’utilisateur-EF Core
 description: Mappage de fonctions définies par l’utilisateur à des fonctions de base de données
 author: maumar
 ms.date: 11/23/2020
-uid: core/user-defined-function-mapping
-ms.openlocfilehash: ba60abdc9c81b34b8f4ed8f501cf2f7e52ba9d7d
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+uid: core/querying/user-defined-function-mapping
+ms.openlocfilehash: 3e49ed9c49b38b98430128ffdc7ceef0b844b9df
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657818"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129120"
 ---
-# <a name="user-defined-function-mapping"></a>Mappage des fonctions définies par l’utilisateur
+# <a name="user-defined-function-mapping"></a>Mappage de fonctions définies par l’utilisateur
 
 EF Core permet d’utiliser des fonctions SQL définies par l’utilisateur dans des requêtes. Pour ce faire, les fonctions doivent être mappées à une méthode CLR lors de la configuration du modèle. Lors de la traduction de la requête LINQ en SQL, la fonction définie par l’utilisateur est appelée à la place de la fonction CLR à laquelle elle a été mappée.
 
@@ -94,6 +94,52 @@ Génère l’instruction SQL suivante :
 SELECT 100 * (ABS(CAST([p].[BlogId] AS float) - 3) / ((CAST([p].[BlogId] AS float) + 3) / 2))
 FROM [Posts] AS [p]
 ```
+
+## <a name="configuring-nullability-of-user-defined-function-based-on-its-arguments"></a>Configuration de la possibilité de valeur null d’une fonction définie par l’utilisateur en fonction de ses arguments
+
+Si la fonction définie par l’utilisateur ne peut retourner que `null` lorsqu’un ou plusieurs de ses arguments sont `null` , EFCore offre la possibilité de spécifier cela, ce qui génère un SQL plus performant. Pour ce faire, vous pouvez ajouter un `PropagatesNullability()` appel à la configuration de modèle de paramètres de fonction appropriée.
+
+Pour illustrer cela, définissez la fonction utilisateur `ConcatStrings` :
+
+```sql
+CREATE FUNCTION [dbo].[ConcatStrings] (@prm1 nvarchar(max), @prm2 nvarchar(max))
+RETURNS nvarchar(max)
+AS
+BEGIN
+    RETURN @prm1 + @prm2;
+END
+```
+
+et deux méthodes CLR qui sont mappées à celle-ci :
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationFunctionDefinition)]
+
+La configuration du modèle (à l’intérieur de la `OnModelCreating` méthode) est la suivante :
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Model.cs#NullabilityPropagationModelConfiguration)]
+
+La première fonction est configurée de manière standard. La deuxième fonction est configurée pour tirer parti de l’optimisation de la propagation de la possibilité de valeur null, en fournissant plus d’informations sur le comportement de la fonction autour des paramètres null.
+
+Lors de l’émission des requêtes suivantes :
+
+[!code-csharp[Main](../../../samples/core/Querying/UserDefinedFunctionMapping/Program.cs#NullabilityPropagationExamples)]
+
+Nous obtenons ce SQL :
+
+```sql
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR [dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) IS NULL
+
+SELECT [b].[BlogId], [b].[Rating], [b].[Url]
+FROM [Blogs] AS [b]
+WHERE ([dbo].[ConcatStrings]([b].[Url], CONVERT(VARCHAR(11), [b].[Rating])) <> N'Lorem ipsum...') OR ([b].[Url] IS NULL OR [b].[Rating] IS NULL)
+```
+
+La deuxième requête n’a pas besoin de réévaluer la fonction elle-même pour tester sa possibilité de valeur null.
+
+> [!NOTE]
+> Cette optimisation ne doit être utilisée que si la fonction ne peut être retournée que `null` lorsqu’il s’agit de paramètres `null` .
 
 ## <a name="mapping-a-queryable-function-to-a-table-valued-function"></a>Mappage d’une fonction interrogeable à une fonction table
 

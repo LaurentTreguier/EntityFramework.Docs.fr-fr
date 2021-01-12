@@ -4,12 +4,12 @@ description: Comment configurer des agrégats ou des types d’entités détenus
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/owned-entities
-ms.openlocfilehash: 36f756b70c9ad1727c48b5c789fd324c9dc6cd29
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 0cd6bfd25d4462509a3e6c112b892d652d29e45e
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429435"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128626"
 ---
 # <a name="owned-entity-types"></a>Types d’entité détenus
 
@@ -48,7 +48,7 @@ Pour plus de contexte, consultez l' [exemple de projet complet](https://github.c
 
 ## <a name="implicit-keys"></a>Clés implicites
 
-Les types détenus configurés `OwnsOne` ou découverts via une navigation de référence ont toujours une relation un-à-un avec le propriétaire, donc ils n’ont pas besoin de leurs propres valeurs de clés, car les valeurs de clé étrangère sont uniques. Dans l’exemple précédent, le `StreetAddress` type n’a pas besoin de définir une propriété de clé.  
+Les types détenus configurés `OwnsOne` ou découverts via une navigation de référence ont toujours une relation un-à-un avec le propriétaire, donc ils n’ont pas besoin de leurs propres valeurs de clés, car les valeurs de clé étrangère sont uniques. Dans l’exemple précédent, le `StreetAddress` type n’a pas besoin de définir une propriété de clé.
 
 Pour comprendre comment EF Core effectue le suivi de ces objets, il est utile de savoir qu’une clé primaire est créée en tant que [propriété Shadow](xref:core/modeling/shadow-properties) pour le type détenu. La valeur de la clé d’une instance du type détenu sera identique à la valeur de la clé de l’instance propriétaire.
 
@@ -130,7 +130,7 @@ Notez également l' `Navigation` appel. Dans EFCore 5,0, les propriétés de nav
 
 Le modèle ci-dessus est mappé au schéma de base de données suivant :
 
-![Sceenshot du modèle de base de données pour l’entité contenant des références d’appartenance imbriquées](_static/owned-entities-nested.png)
+![Capture d’écran du modèle de base de données pour l’entité contenant des références d’appartenance imbriquées](_static/owned-entities-nested.png)
 
 ## <a name="storing-owned-types-in-separate-tables"></a>Stockage des types détenus dans des tables distinctes
 

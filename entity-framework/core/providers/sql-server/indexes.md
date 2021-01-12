@@ -4,12 +4,12 @@ description: Fonctionnalités d’index spécifiques au fournisseur de SQL Serve
 author: roji
 ms.date: 9/1/2020
 uid: core/providers/sql-server/indexes
-ms.openlocfilehash: 66b4e3ce5ab1d4da855c106a6a2d2e75c43081f7
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 42411a562b4741ba39b4eb855bb84c66e100456b
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003158"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129159"
 ---
 # <a name="index-features-specific-to-the-entity-framework-core-sql-server-provider"></a>Fonctionnalités d’index spécifiques au fournisseur de SQL Server Entity Framework Core
 
@@ -24,6 +24,9 @@ Par défaut, la colonne de clé primaire d’une table est implicitement sauvega
 Vous pouvez configurer un index ou une clé à mettre en cluster comme suit :
 
 [!code-csharp[ClusteredIndex](../../../../samples/core/SqlServer/Indexes/ClusteredIndexContext.cs?name=ClusteredIndex)]
+
+> [!NOTE]
+> SQL Server ne prend en charge qu’un seul index cluster par table, et la clé primaire est par défaut en cluster. Si vous souhaitez avoir un index cluster sur une colonne non-clé, vous devez explicitement rendre votre clé non cluster.
 
 ## <a name="fill-factor"></a>Facteur de remplissage
 

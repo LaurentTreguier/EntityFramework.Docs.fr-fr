@@ -4,12 +4,12 @@ description: Comment configurer des clés pour des types d’entités lors de l�
 author: AndriySvyryd
 ms.date: 11/06/2019
 uid: core/modeling/keys
-ms.openlocfilehash: ea744315514b19465aba9a311055a9b5e49fa3f8
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 805396a13227aa62ed86ac17c742d055d7a22bbf
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063788"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129185"
 ---
 # <a name="keys"></a>Keys
 
@@ -34,7 +34,7 @@ Vous pouvez configurer une propriété unique comme clé primaire d’une entit�
 
 ***
 
-Vous pouvez également configurer plusieurs propriétés comme clé d’une entité. il s’agit d’une clé composite. Les clés composites ne peuvent être configurées qu’à l’aide de l’API Fluent. les conventions ne configureront jamais de clé composite et vous ne pourrez pas utiliser d’annotations de données pour en configurer une.
+Vous pouvez également configurer plusieurs propriétés comme clé d’une entité. il s’agit d’une clé composite. Les clés composites ne peuvent être configurées qu’à l’aide de l’API Fluent. les conventions ne configurent jamais de clé composite et vous ne pouvez pas utiliser d’annotations de données pour en configurer une.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyComposite.cs?name=KeyComposite&highlight=4)]
 

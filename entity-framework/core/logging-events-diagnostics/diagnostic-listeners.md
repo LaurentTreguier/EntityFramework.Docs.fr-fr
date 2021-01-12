@@ -4,16 +4,16 @@ description: Utilisation de DiagnosticListener pour la consommation mondiale de 
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: a2a962ac714cf80c42c269cee3770699aaa4c0c9
-ms.sourcegitcommit: 42bbf7f68e92c364c5fff63092d3eb02229f568d
+ms.openlocfilehash: afb80aa8f05f70761e423f58653f681938079858
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/11/2020
-ms.locfileid: "94503226"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98129263"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>Utilisation d’écouteurs de diagnostic dans EF Core
 
-> [!TIP]  
+> [!TIP]
 > Vous pouvez [Télécharger l’exemple de cet article](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) à partir de github.
 
 Les écouteurs de diagnostic permettent d’écouter les EF Core événement qui se produit dans le processus .NET actuel. La <xref:System.Diagnostics.DiagnosticListener> classe fait partie d’un [mécanisme commun à travers .net](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) pour obtenir des informations de diagnostic à partir d’applications en cours d’exécution.
@@ -29,10 +29,10 @@ La résolution des événements de EF Core est un processus en deux étapes. Tou
 <!--
 public class DiagnosticObserver : IObserver<DiagnosticListener>
 {
-    public void OnCompleted() 
+    public void OnCompleted()
         => throw new NotImplementedException();
-    
-    public void OnError(Exception error) 
+
+    public void OnError(Exception error)
         => throw new NotImplementedException();
 
     public void OnNext(DiagnosticListener value)
@@ -55,15 +55,15 @@ Cet observateur doit ensuite être inscrit globalement, par exemple dans la mét
 -->
 [!code-csharp[RegisterDiagnosticListener](../../../samples/core/Miscellaneous/DiagnosticListeners/Program.cs?name=RegisterDiagnosticListener)]
 
-Deuxièmement, une fois que le EF Core DiagnosticListener est trouvé, un nouvel observateur clé-valeur est créé pour s’abonner aux événements EF Core réels. Par exemple :
+Deuxièmement, une fois que le EF Core DiagnosticListener est trouvé, un nouvel observateur clé-valeur est créé pour s’abonner aux événements EF Core réels. Exemple :
 
 <!--
 public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
 {
-    public void OnCompleted() 
+    public void OnCompleted()
         => throw new NotImplementedException();
-    
-    public void OnError(Exception error) 
+
+    public void OnError(Exception error)
         => throw new NotImplementedException();
 
     public void OnNext(KeyValuePair<string, object> value)
@@ -105,12 +105,12 @@ L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/
         #region RegisterDiagnosticListener
         DiagnosticListener.AllListeners.Subscribe(new DiagnosticObserver());
         #endregion
-        
+
         using (var context = new BlogsContext())
         {
             context.Database.EnsureDeleted();
             context.Database.EnsureCreated();
-            
+
             context.Add(
                 new Blog
                 {

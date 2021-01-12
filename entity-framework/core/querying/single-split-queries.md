@@ -4,14 +4,14 @@ description: Traduction de la requête en requêtes Single et Split dans SQL ave
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: ba282a0c5242b2eb87d681906571036d4751f6ac
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 8615e7ba5247a90a1f980e9f7b1b23c81170971f
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003560"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128990"
 ---
-# <a name="single-vs-split-queries"></a>Requêtes Single et Split
+# <a name="split-queries"></a>Fractionner des requêtes
 
 ## <a name="single-queries"></a>Requêtes uniques
 
