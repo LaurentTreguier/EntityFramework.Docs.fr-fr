@@ -10,12 +10,12 @@ metadata:
   author: WadePickett
   ms.author: wpickett
   ms.date: 04/15/2020
-  ms.openlocfilehash: 644d3ad0654e8d97835d4a2e6ee3d2ba3cbaf370
-  ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+  ms.openlocfilehash: 2ef9ee31ef84d779f911ec7c6da1e631889e693a
+  ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
   ms.translationtype: MT
   ms.contentlocale: fr-FR
-  ms.lasthandoff: 12/17/2020
-  ms.locfileid: "97635833"
+  ms.lasthandoff: 01/12/2021
+  ms.locfileid: "98129289"
 highlightedContent:
   items:
   - title: Entity Framework Core
@@ -137,9 +137,11 @@ additionalContent:
       - url: core/querying/raw-sql.md
         text: Requêtes SQL brutes
       - url: core/querying/user-defined-function-mapping.md
-        text: Mappage des fonctions définies par l’utilisateur
+        text: Mappage de fonctions définies par l’utilisateur
       - url: core/querying/filters.md
         text: Filtres de requête globale
+      - url: core/querying/null-comparisons.md
+        text: Comparaisons avec les valeurs NULL dans les requêtes
     - title: Gérer des schémas de base de données
       links:
       - url: core/managing-schemas/index.md

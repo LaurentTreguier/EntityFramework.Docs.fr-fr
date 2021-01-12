@@ -4,106 +4,106 @@ description: Exemple illustrant comment partager une base de données entre plus
 author: ajcvickers
 ms.date: 04/25/2020
 uid: core/testing/sharing-databases
-ms.openlocfilehash: 95b756c80b983356a07fd836aa1b02f2835e6629
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 7a90a144271d5c34e9d5043aa439f84db805c6af
+ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431504"
+ms.lasthandoff: 01/12/2021
+ms.locfileid: "98128834"
 ---
-# <a name="sharing-databases-between-tests"></a><span data-ttu-id="ac1e1-103">Partage des bases de données entre les tests</span><span class="sxs-lookup"><span data-stu-id="ac1e1-103">Sharing databases between tests</span></span>
+# <a name="sharing-databases-between-tests"></a><span data-ttu-id="28dcc-103">Partage des bases de données entre les tests</span><span class="sxs-lookup"><span data-stu-id="28dcc-103">Sharing databases between tests</span></span>
 
-<span data-ttu-id="ac1e1-104">L' [exemple de test EF Core](xref:core/testing/testing-sample) a montré comment tester des applications sur différents systèmes de base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-104">The [EF Core testing sample](xref:core/testing/testing-sample) showed how to test applications against different database systems.</span></span>
-<span data-ttu-id="ac1e1-105">Pour cet exemple, chaque test a créé une nouvelle base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-105">For that sample, each test created a new database.</span></span>
-<span data-ttu-id="ac1e1-106">Il s’agit d’un bon modèle lors de l’utilisation de SQLite ou de la base de données en mémoire EF, mais cela peut impliquer une surcharge importante lors de l’utilisation d’autres systèmes de base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-106">This is a good pattern when using SQLite or the EF in-memory database, but it can involve significant overhead when using other database systems.</span></span>
+<span data-ttu-id="28dcc-104">L' [exemple de test EF Core](xref:core/testing/testing-sample) a montré comment tester des applications sur différents systèmes de base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-104">The [EF Core testing sample](xref:core/testing/testing-sample) showed how to test applications against different database systems.</span></span>
+<span data-ttu-id="28dcc-105">Pour cet exemple, chaque test a créé une nouvelle base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-105">For that sample, each test created a new database.</span></span>
+<span data-ttu-id="28dcc-106">Il s’agit d’un bon modèle lors de l’utilisation de SQLite ou de la base de données en mémoire EF, mais cela peut impliquer une surcharge importante lors de l’utilisation d’autres systèmes de base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-106">This is a good pattern when using SQLite or the EF in-memory database, but it can involve significant overhead when using other database systems.</span></span>
 
-<span data-ttu-id="ac1e1-107">Cet exemple s’appuie sur l’exemple précédent en déplaçant la création de la base de données dans un contexte de test.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-107">This sample builds on the previous sample by moving database creation into a test fixture.</span></span>
-<span data-ttu-id="ac1e1-108">Cela permet de créer une seule base de données SQL Server et de l’amorcer une seule fois pour tous les tests.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-108">This allows a single SQL Server database to be created and seeded only once for all tests.</span></span>
-
-> [!TIP]
-> <span data-ttu-id="ac1e1-109">Veillez à utiliser l' [exemple de test EF Core](xref:core/testing/testing-sample) avant de continuer.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-109">Make sure to work through the [EF Core testing sample](xref:core/testing/testing-sample) before continuing here.</span></span>
-
-<span data-ttu-id="ac1e1-110">Il n’est pas difficile d’écrire plusieurs tests sur la même base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-110">It's not difficult to write multiple tests against the same database.</span></span>
-<span data-ttu-id="ac1e1-111">L’astuce consiste à le faire de manière à ce que les tests ne s’exécutent pas les uns sur les autres au fur et à mesure de leur exécution.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-111">The trick is doing it in a way that the tests don't trip over each other as they run.</span></span>
-<span data-ttu-id="ac1e1-112">Pour cela, vous devez comprendre :</span><span class="sxs-lookup"><span data-stu-id="ac1e1-112">This requires understanding:</span></span>
-
-* <span data-ttu-id="ac1e1-113">Comment partager en toute sécurité des objets entre des tests</span><span class="sxs-lookup"><span data-stu-id="ac1e1-113">How to safely share objects between tests</span></span>
-* <span data-ttu-id="ac1e1-114">Lorsque l’infrastructure de test exécute des tests en parallèle</span><span class="sxs-lookup"><span data-stu-id="ac1e1-114">When the test framework runs tests in parallel</span></span>
-* <span data-ttu-id="ac1e1-115">Comment conserver la base de données dans un état propre pour chaque test</span><span class="sxs-lookup"><span data-stu-id="ac1e1-115">How to keep the database in a clean state for every test</span></span>  
-
-## <a name="the-fixture"></a><span data-ttu-id="ac1e1-116">Le contexte</span><span class="sxs-lookup"><span data-stu-id="ac1e1-116">The fixture</span></span>
-
-<span data-ttu-id="ac1e1-117">Nous utiliserons un contexte de test pour partager des objets entre les tests.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-117">We will use a test fixture for sharing objects between tests.</span></span>
-<span data-ttu-id="ac1e1-118">La [documentation xUnit](https://xunit.net/docs/shared-context.html) stipule qu’un ablocage doit être utilisé quand vous souhaitez créer un contexte de test unique et le partager entre tous les tests de la classe et le nettoyer une fois tous les tests de la classe terminés.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-118">The [XUnit documentation](https://xunit.net/docs/shared-context.html) states that a fixture should be used "when you want to create a single test context and share it among all the tests in the class, and have it cleaned up after all the tests in the class have finished."</span></span>
+<span data-ttu-id="28dcc-107">Cet exemple s’appuie sur l’exemple précédent en déplaçant la création de la base de données dans un contexte de test.</span><span class="sxs-lookup"><span data-stu-id="28dcc-107">This sample builds on the previous sample by moving database creation into a test fixture.</span></span>
+<span data-ttu-id="28dcc-108">Cela permet de créer une seule base de données SQL Server et de l’amorcer une seule fois pour tous les tests.</span><span class="sxs-lookup"><span data-stu-id="28dcc-108">This allows a single SQL Server database to be created and seeded only once for all tests.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="ac1e1-119">Cet exemple utilise [xUnit](https://xunit.net/), mais des concepts similaires existent dans d’autres infrastructures de test, y compris [nunit](https://nunit.org/).</span><span class="sxs-lookup"><span data-stu-id="ac1e1-119">This sample uses [XUnit](https://xunit.net/), but similar concepts exist in other testing frameworks, including [NUnit](https://nunit.org/).</span></span>
+> <span data-ttu-id="28dcc-109">Veillez à utiliser l' [exemple de test EF Core](xref:core/testing/testing-sample) avant de continuer.</span><span class="sxs-lookup"><span data-stu-id="28dcc-109">Make sure to work through the [EF Core testing sample](xref:core/testing/testing-sample) before continuing here.</span></span>
 
-<span data-ttu-id="ac1e1-120">Cela signifie que nous devons déplacer la création et l’amorçage de la base de données vers une classe de contexte.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-120">This means that we need to move database creation and seeding to a fixture class.</span></span>
-<span data-ttu-id="ac1e1-121">Voici à quoi il ressemble :</span><span class="sxs-lookup"><span data-stu-id="ac1e1-121">Here's what it looks like:</span></span>
+<span data-ttu-id="28dcc-110">Il n’est pas difficile d’écrire plusieurs tests sur la même base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-110">It's not difficult to write multiple tests against the same database.</span></span>
+<span data-ttu-id="28dcc-111">L’astuce consiste à le faire de manière à ce que les tests ne s’exécutent pas les uns sur les autres au fur et à mesure de leur exécution.</span><span class="sxs-lookup"><span data-stu-id="28dcc-111">The trick is doing it in a way that the tests don't trip over each other as they run.</span></span>
+<span data-ttu-id="28dcc-112">Pour cela, vous devez comprendre :</span><span class="sxs-lookup"><span data-stu-id="28dcc-112">This requires understanding:</span></span>
+
+* <span data-ttu-id="28dcc-113">Comment partager en toute sécurité des objets entre des tests</span><span class="sxs-lookup"><span data-stu-id="28dcc-113">How to safely share objects between tests</span></span>
+* <span data-ttu-id="28dcc-114">Lorsque l’infrastructure de test exécute des tests en parallèle</span><span class="sxs-lookup"><span data-stu-id="28dcc-114">When the test framework runs tests in parallel</span></span>
+* <span data-ttu-id="28dcc-115">Comment conserver la base de données dans un état propre pour chaque test</span><span class="sxs-lookup"><span data-stu-id="28dcc-115">How to keep the database in a clean state for every test</span></span>
+
+## <a name="the-fixture"></a><span data-ttu-id="28dcc-116">Le contexte</span><span class="sxs-lookup"><span data-stu-id="28dcc-116">The fixture</span></span>
+
+<span data-ttu-id="28dcc-117">Nous utiliserons un contexte de test pour partager des objets entre les tests.</span><span class="sxs-lookup"><span data-stu-id="28dcc-117">We will use a test fixture for sharing objects between tests.</span></span>
+<span data-ttu-id="28dcc-118">La [documentation xUnit](https://xunit.net/docs/shared-context.html) stipule qu’un ablocage doit être utilisé quand vous souhaitez créer un contexte de test unique et le partager entre tous les tests de la classe et le nettoyer une fois tous les tests de la classe terminés.</span><span class="sxs-lookup"><span data-stu-id="28dcc-118">The [XUnit documentation](https://xunit.net/docs/shared-context.html) states that a fixture should be used "when you want to create a single test context and share it among all the tests in the class, and have it cleaned up after all the tests in the class have finished."</span></span>
+
+> [!TIP]
+> <span data-ttu-id="28dcc-119">Cet exemple utilise [xUnit](https://xunit.net/), mais des concepts similaires existent dans d’autres infrastructures de test, y compris [nunit](https://nunit.org/).</span><span class="sxs-lookup"><span data-stu-id="28dcc-119">This sample uses [XUnit](https://xunit.net/), but similar concepts exist in other testing frameworks, including [NUnit](https://nunit.org/).</span></span>
+
+<span data-ttu-id="28dcc-120">Cela signifie que nous devons déplacer la création et l’amorçage de la base de données vers une classe de contexte.</span><span class="sxs-lookup"><span data-stu-id="28dcc-120">This means that we need to move database creation and seeding to a fixture class.</span></span>
+<span data-ttu-id="28dcc-121">Voici à quoi il ressemble :</span><span class="sxs-lookup"><span data-stu-id="28dcc-121">Here's what it looks like:</span></span>
 
 [!code-csharp[SharedDatabaseFixture](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/SharedDatabaseTests/SharedDatabaseFixture.cs?name=SharedDatabaseFixture)]
 
-<span data-ttu-id="ac1e1-122">Pour le moment, Notez comment le constructeur :</span><span class="sxs-lookup"><span data-stu-id="ac1e1-122">For now, notice how the constructor:</span></span>
+<span data-ttu-id="28dcc-122">Pour le moment, Notez comment le constructeur :</span><span class="sxs-lookup"><span data-stu-id="28dcc-122">For now, notice how the constructor:</span></span>
 
-* <span data-ttu-id="ac1e1-123">Crée une connexion de base de données unique pour la durée de vie de l’appareil</span><span class="sxs-lookup"><span data-stu-id="ac1e1-123">Creates a single database connection for the lifetime of the fixture</span></span>
-* <span data-ttu-id="ac1e1-124">Crée et amorce cette base de données en appelant la `Seed` méthode.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-124">Creates and seeds that database by calling the `Seed` method</span></span>
+* <span data-ttu-id="28dcc-123">Crée une connexion de base de données unique pour la durée de vie de l’appareil</span><span class="sxs-lookup"><span data-stu-id="28dcc-123">Creates a single database connection for the lifetime of the fixture</span></span>
+* <span data-ttu-id="28dcc-124">Crée et amorce cette base de données en appelant la `Seed` méthode.</span><span class="sxs-lookup"><span data-stu-id="28dcc-124">Creates and seeds that database by calling the `Seed` method</span></span>
 
-<span data-ttu-id="ac1e1-125">Ignorer le verrouillage pour l’instant ; Nous y reviendrons plus tard.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-125">Ignore the locking for now; we will come back to it later.</span></span>
-
-> [!TIP]
-> <span data-ttu-id="ac1e1-126">Le code de création et d’amorçage n’a pas besoin d’être asynchrone.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-126">The creation and seeding code does not need to be async.</span></span>
-> <span data-ttu-id="ac1e1-127">Le fait de le rendre asynchrone complique le code et n’améliore pas les performances ou le débit des tests.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-127">Making it async will complicate the code and will not improve performance or throughput of tests.</span></span>
-
-<span data-ttu-id="ac1e1-128">La base de données est créée en supprimant d’abord toute base de données existante, puis en créant une nouvelle base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-128">The database is created by first deleting any existing database and then creating a new database.</span></span>
-<span data-ttu-id="ac1e1-129">Cela garantit que la base de données correspond au modèle EF actuel même si elle a été modifiée depuis la dernière série de tests.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-129">This ensures that the database matches the current EF model even if it has been changed since the last test run.</span></span>
+<span data-ttu-id="28dcc-125">Ignorer le verrouillage pour l’instant ; Nous y reviendrons plus tard.</span><span class="sxs-lookup"><span data-stu-id="28dcc-125">Ignore the locking for now; we will come back to it later.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="ac1e1-130">Il peut être plus rapide de « nettoyer » la base de données existante à l’aide d’un exemple de [regénération](https://jimmybogard.com/tag/respawn/) , plutôt que de la recréer à chaque fois.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-130">It can be faster to "clean" the existing database using something like [respawn](https://jimmybogard.com/tag/respawn/) rather than re-create it each time.</span></span>
-> <span data-ttu-id="ac1e1-131">Toutefois, il est nécessaire de veiller à ce que le schéma de base de données soit à jour avec le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-131">However, care must be taken to ensure that the database schema is up-to-date with the EF model when doing this.</span></span>
+> <span data-ttu-id="28dcc-126">Le code de création et d’amorçage n’a pas besoin d’être asynchrone.</span><span class="sxs-lookup"><span data-stu-id="28dcc-126">The creation and seeding code does not need to be async.</span></span>
+> <span data-ttu-id="28dcc-127">Le fait de le rendre asynchrone complique le code et n’améliore pas les performances ou le débit des tests.</span><span class="sxs-lookup"><span data-stu-id="28dcc-127">Making it async will complicate the code and will not improve performance or throughput of tests.</span></span>
 
-<span data-ttu-id="ac1e1-132">La connexion de base de données est supprimée lorsque le contexte est supprimé.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-132">The database connection is disposed when the fixture is disposed.</span></span>
-<span data-ttu-id="ac1e1-133">Vous pouvez également envisager de supprimer la base de données de test à ce stade.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-133">You may also consider deleting the test database at this point.</span></span>
-<span data-ttu-id="ac1e1-134">Toutefois, cette opération nécessite un verrouillage supplémentaire et un décompte de références si le contexte est partagé par plusieurs classes de test.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-134">However, this will require additional locking and reference counting if the fixture is being shared by multiple test classes.</span></span>
-<span data-ttu-id="ac1e1-135">En outre, il est souvent utile que la base de données de test soit toujours disponible pour le débogage des tests ayant échoué.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-135">Also, it is often useful to have the test database still available for debugging failed tests.</span></span>  
+<span data-ttu-id="28dcc-128">La base de données est créée en supprimant d’abord toute base de données existante, puis en créant une nouvelle base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-128">The database is created by first deleting any existing database and then creating a new database.</span></span>
+<span data-ttu-id="28dcc-129">Cela garantit que la base de données correspond au modèle EF actuel même si elle a été modifiée depuis la dernière série de tests.</span><span class="sxs-lookup"><span data-stu-id="28dcc-129">This ensures that the database matches the current EF model even if it has been changed since the last test run.</span></span>
 
-## <a name="using-the-fixture"></a><span data-ttu-id="ac1e1-136">Utilisation du contexte</span><span class="sxs-lookup"><span data-stu-id="ac1e1-136">Using the fixture</span></span>
+> [!TIP]
+> <span data-ttu-id="28dcc-130">Il peut être plus rapide de « nettoyer » la base de données existante à l’aide d’un exemple de [regénération](https://jimmybogard.com/tag/respawn/) , plutôt que de la recréer à chaque fois.</span><span class="sxs-lookup"><span data-stu-id="28dcc-130">It can be faster to "clean" the existing database using something like [respawn](https://jimmybogard.com/tag/respawn/) rather than re-create it each time.</span></span>
+> <span data-ttu-id="28dcc-131">Toutefois, il est nécessaire de veiller à ce que le schéma de base de données soit à jour avec le modèle EF.</span><span class="sxs-lookup"><span data-stu-id="28dcc-131">However, care must be taken to ensure that the database schema is up-to-date with the EF model when doing this.</span></span>
 
-<span data-ttu-id="ac1e1-137">XUnit a un modèle commun pour associer un contexte de test à une classe de tests :</span><span class="sxs-lookup"><span data-stu-id="ac1e1-137">XUnit has a common pattern for associating a test fixture with a class of tests:</span></span>
+<span data-ttu-id="28dcc-132">La connexion de base de données est supprimée lorsque le contexte est supprimé.</span><span class="sxs-lookup"><span data-stu-id="28dcc-132">The database connection is disposed when the fixture is disposed.</span></span>
+<span data-ttu-id="28dcc-133">Vous pouvez également envisager de supprimer la base de données de test à ce stade.</span><span class="sxs-lookup"><span data-stu-id="28dcc-133">You may also consider deleting the test database at this point.</span></span>
+<span data-ttu-id="28dcc-134">Toutefois, cette opération nécessite un verrouillage supplémentaire et un décompte de références si le contexte est partagé par plusieurs classes de test.</span><span class="sxs-lookup"><span data-stu-id="28dcc-134">However, this will require additional locking and reference counting if the fixture is being shared by multiple test classes.</span></span>
+<span data-ttu-id="28dcc-135">En outre, il est souvent utile que la base de données de test soit toujours disponible pour le débogage des tests ayant échoué.</span><span class="sxs-lookup"><span data-stu-id="28dcc-135">Also, it is often useful to have the test database still available for debugging failed tests.</span></span>
+
+## <a name="using-the-fixture"></a><span data-ttu-id="28dcc-136">Utilisation du contexte</span><span class="sxs-lookup"><span data-stu-id="28dcc-136">Using the fixture</span></span>
+
+<span data-ttu-id="28dcc-137">XUnit a un modèle commun pour associer un contexte de test à une classe de tests :</span><span class="sxs-lookup"><span data-stu-id="28dcc-137">XUnit has a common pattern for associating a test fixture with a class of tests:</span></span>
 
 [!code-csharp[UsingTheFixture](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/SharedDatabaseTests/SharedDatabaseTest.cs?name=UsingTheFixture)]
 
-<span data-ttu-id="ac1e1-138">XUnit va maintenant créer une instance de bride unique et la passer à chaque instance de la classe de test.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-138">XUnit will now create a single fixture instance and pass it to each instance of the test class.</span></span>
-<span data-ttu-id="ac1e1-139">(N’oubliez pas à partir du premier [exemple](xref:core/testing/testing-sample) de test que xUnit crée une nouvelle instance de classe de test chaque fois qu’il exécute un test.) Cela signifie que la base de données sera créée et amorcée une fois, puis que chaque test utilisera cette base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-139">(Remember from the first [testing sample](xref:core/testing/testing-sample) that XUnit creates a new test class instance every time it runs a test.) This means that the database will be created and seeded once and then each test will use this database.</span></span>
+<span data-ttu-id="28dcc-138">XUnit va maintenant créer une instance de bride unique et la passer à chaque instance de la classe de test.</span><span class="sxs-lookup"><span data-stu-id="28dcc-138">XUnit will now create a single fixture instance and pass it to each instance of the test class.</span></span>
+<span data-ttu-id="28dcc-139">(N’oubliez pas à partir du premier [exemple](xref:core/testing/testing-sample) de test que xUnit crée une nouvelle instance de classe de test chaque fois qu’il exécute un test.) Cela signifie que la base de données sera créée et amorcée une fois, puis que chaque test utilisera cette base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-139">(Remember from the first [testing sample](xref:core/testing/testing-sample) that XUnit creates a new test class instance every time it runs a test.) This means that the database will be created and seeded once and then each test will use this database.</span></span>
 
-<span data-ttu-id="ac1e1-140">Notez que les tests au sein d’une même classe ne seront pas exécutés en parallèle.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-140">Note that tests within a single class will not be run in parallel.</span></span>
-<span data-ttu-id="ac1e1-141">Cela signifie qu’il est possible pour chaque test d’utiliser la même connexion de base de données, même si l' `DbConnection` objet n’est pas thread-safe.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-141">This means it is safe for each test to use the same database connection, even though the `DbConnection` object is not thread-safe.</span></span>
+<span data-ttu-id="28dcc-140">Notez que les tests au sein d’une même classe ne seront pas exécutés en parallèle.</span><span class="sxs-lookup"><span data-stu-id="28dcc-140">Note that tests within a single class will not be run in parallel.</span></span>
+<span data-ttu-id="28dcc-141">Cela signifie qu’il est possible pour chaque test d’utiliser la même connexion de base de données, même si l' `DbConnection` objet n’est pas thread-safe.</span><span class="sxs-lookup"><span data-stu-id="28dcc-141">This means it is safe for each test to use the same database connection, even though the `DbConnection` object is not thread-safe.</span></span>
 
-## <a name="maintaining-database-state"></a><span data-ttu-id="ac1e1-142">Maintien de l’état de la base de données</span><span class="sxs-lookup"><span data-stu-id="ac1e1-142">Maintaining database state</span></span>
+## <a name="maintaining-database-state"></a><span data-ttu-id="28dcc-142">Maintien de l’état de la base de données</span><span class="sxs-lookup"><span data-stu-id="28dcc-142">Maintaining database state</span></span>
 
-<span data-ttu-id="ac1e1-143">Les tests doivent souvent muter les données de test avec les insertions, les mises à jour et les suppressions.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-143">Tests often need to mutate the test data with inserts, updates, and deletes.</span></span>
-<span data-ttu-id="ac1e1-144">Toutefois, ces modifications ont un impact sur les autres tests qui attendent une base de données propre et amorcée.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-144">But these changes will then impact other tests which are expecting a clean, seeded database.</span></span>
+<span data-ttu-id="28dcc-143">Les tests doivent souvent muter les données de test avec les insertions, les mises à jour et les suppressions.</span><span class="sxs-lookup"><span data-stu-id="28dcc-143">Tests often need to mutate the test data with inserts, updates, and deletes.</span></span>
+<span data-ttu-id="28dcc-144">Toutefois, ces modifications ont un impact sur les autres tests qui attendent une base de données propre et amorcée.</span><span class="sxs-lookup"><span data-stu-id="28dcc-144">But these changes will then impact other tests which are expecting a clean, seeded database.</span></span>
 
-<span data-ttu-id="ac1e1-145">Cela peut être traité en exécutant des tests mutants à l’intérieur d’une transaction.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-145">This can be dealt with by running mutating tests inside a transaction.</span></span>
-<span data-ttu-id="ac1e1-146">Par exemple :</span><span class="sxs-lookup"><span data-stu-id="ac1e1-146">For example:</span></span>
+<span data-ttu-id="28dcc-145">Cela peut être traité en exécutant des tests mutants à l’intérieur d’une transaction.</span><span class="sxs-lookup"><span data-stu-id="28dcc-145">This can be dealt with by running mutating tests inside a transaction.</span></span>
+<span data-ttu-id="28dcc-146">Exemple :</span><span class="sxs-lookup"><span data-stu-id="28dcc-146">For example:</span></span>
 
 [!code-csharp[CanAddItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/SharedDatabaseTests/SharedDatabaseTest.cs?name=CanAddItem)]
 
-<span data-ttu-id="ac1e1-147">Notez que la transaction est créée lors du démarrage du test et de sa suppression une fois l’opération terminée.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-147">Notice that the transaction is created as the test starts and disposed when it is finished.</span></span>
-<span data-ttu-id="ac1e1-148">Si vous supprimez la transaction, celle-ci est restaurée, de sorte qu’aucune des modifications ne sera visible par les autres tests.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-148">Disposing the transaction causes it to be rolled back, so none of the changes will be seen by other tests.</span></span>
+<span data-ttu-id="28dcc-147">Notez que la transaction est créée lors du démarrage du test et de sa suppression une fois l’opération terminée.</span><span class="sxs-lookup"><span data-stu-id="28dcc-147">Notice that the transaction is created as the test starts and disposed when it is finished.</span></span>
+<span data-ttu-id="28dcc-148">Si vous supprimez la transaction, celle-ci est restaurée, de sorte qu’aucune des modifications ne sera visible par les autres tests.</span><span class="sxs-lookup"><span data-stu-id="28dcc-148">Disposing the transaction causes it to be rolled back, so none of the changes will be seen by other tests.</span></span>
 
-<span data-ttu-id="ac1e1-149">La méthode d’assistance pour créer un contexte (voir le code de la bride ci-dessus) accepte cette transaction et l’utilise pour l’utiliser.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-149">The helper method for creating a context (see the fixture code above) accepts this transaction and opts the DbContext into using it.</span></span>
+<span data-ttu-id="28dcc-149">La méthode d’assistance pour créer un contexte (voir le code de la bride ci-dessus) accepte cette transaction et l’utilise pour l’utiliser.</span><span class="sxs-lookup"><span data-stu-id="28dcc-149">The helper method for creating a context (see the fixture code above) accepts this transaction and opts the DbContext into using it.</span></span>
 
-## <a name="sharing-the-fixture"></a><span data-ttu-id="ac1e1-150">Partage du contexte</span><span class="sxs-lookup"><span data-stu-id="ac1e1-150">Sharing the fixture</span></span>
+## <a name="sharing-the-fixture"></a><span data-ttu-id="28dcc-150">Partage du contexte</span><span class="sxs-lookup"><span data-stu-id="28dcc-150">Sharing the fixture</span></span>
 
-<span data-ttu-id="ac1e1-151">Vous avez peut-être remarqué le verrouillage du code autour de la création et de l’amorçage de la base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-151">You may have noticed locking code around database creation and seeding.</span></span>
-<span data-ttu-id="ac1e1-152">Cela n’est pas nécessaire pour cet exemple, car une seule classe de tests utilise l’ablocage, de sorte qu’une seule instance de contexte est créée.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-152">This is not needed for this sample since only one class of tests use the fixture, so only a single fixture instance is created.</span></span>
+<span data-ttu-id="28dcc-151">Vous avez peut-être remarqué le verrouillage du code autour de la création et de l’amorçage de la base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-151">You may have noticed locking code around database creation and seeding.</span></span>
+<span data-ttu-id="28dcc-152">Cela n’est pas nécessaire pour cet exemple, car une seule classe de tests utilise l’ablocage, de sorte qu’une seule instance de contexte est créée.</span><span class="sxs-lookup"><span data-stu-id="28dcc-152">This is not needed for this sample since only one class of tests use the fixture, so only a single fixture instance is created.</span></span>
 
-<span data-ttu-id="ac1e1-153">Toutefois, vous souhaiterez peut-être utiliser le même contexte avec plusieurs classes de tests.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-153">However, you may want to use the same fixture with multiple classes of tests.</span></span>
-<span data-ttu-id="ac1e1-154">XUnit créera une instance de bride pour chacune de ces classes.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-154">XUnit will create one fixture instance for each of these classes.</span></span>
-<span data-ttu-id="ac1e1-155">Elles peuvent être utilisées par différents threads exécutant des tests en parallèle.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-155">These may be used by different threads running tests in parallel.</span></span>
-<span data-ttu-id="ac1e1-156">Par conséquent, il est important de disposer d’un verrouillage approprié pour s’assurer qu’un seul thread effectue la création et l’amorçage de la base de données.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-156">Therefore, it is important to have appropriate locking to ensure only one thread does the database creation and seeding.</span></span>
+<span data-ttu-id="28dcc-153">Toutefois, vous souhaiterez peut-être utiliser le même contexte avec plusieurs classes de tests.</span><span class="sxs-lookup"><span data-stu-id="28dcc-153">However, you may want to use the same fixture with multiple classes of tests.</span></span>
+<span data-ttu-id="28dcc-154">XUnit créera une instance de bride pour chacune de ces classes.</span><span class="sxs-lookup"><span data-stu-id="28dcc-154">XUnit will create one fixture instance for each of these classes.</span></span>
+<span data-ttu-id="28dcc-155">Elles peuvent être utilisées par différents threads exécutant des tests en parallèle.</span><span class="sxs-lookup"><span data-stu-id="28dcc-155">These may be used by different threads running tests in parallel.</span></span>
+<span data-ttu-id="28dcc-156">Par conséquent, il est important de disposer d’un verrouillage approprié pour s’assurer qu’un seul thread effectue la création et l’amorçage de la base de données.</span><span class="sxs-lookup"><span data-stu-id="28dcc-156">Therefore, it is important to have appropriate locking to ensure only one thread does the database creation and seeding.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="ac1e1-157">Un simple `lock` est parfait ici.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-157">A simple `lock` is fine here.</span></span>
-> <span data-ttu-id="ac1e1-158">Il n’est pas nécessaire d’essayer quelque chose de plus complexe, comme les modèles sans verrou.</span><span class="sxs-lookup"><span data-stu-id="ac1e1-158">There is no need to attempt anything more complex, such as any lock-free patterns.</span></span>
+> <span data-ttu-id="28dcc-157">Un simple `lock` est parfait ici.</span><span class="sxs-lookup"><span data-stu-id="28dcc-157">A simple `lock` is fine here.</span></span>
+> <span data-ttu-id="28dcc-158">Il n’est pas nécessaire d’essayer quelque chose de plus complexe, comme les modèles sans verrou.</span><span class="sxs-lookup"><span data-stu-id="28dcc-158">There is no need to attempt anything more complex, such as any lock-free patterns.</span></span>
