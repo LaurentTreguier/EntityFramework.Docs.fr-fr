@@ -19,6 +19,8 @@
       items:
         - name: "Bienvenue\_!"
           href: core/index.md
+        - name: "Nouveautés dans EF Core\_5.0"
+          href: /ef/core/what-is-new/ef-core-5.0/whatsnew
         - name: Prise en main
           items:
             - name: "Vue d’ensemble d’EF\_Core"
@@ -41,6 +43,14 @@
               href: core/what-is-new/index.md
             - name: Processus de planning des versions
               href: core/what-is-new/release-planning.md
+            - name: EF Core 6.0
+              items:
+                - name: Plan global
+                  href: core/what-is-new/ef-core-6.0/plan.md
+                - name: Nouveautés
+                  href: core/what-is-new/ef-core-6.0/whatsnew.md
+                - name: Modifications avec rupture
+                  href: core/what-is-new/ef-core-6.0/breaking-changes.md
             - name: EF Core 5.0
               items:
                 - name: Plan global
@@ -182,6 +192,8 @@
               href: core/querying/filters.md
             - name: Balises de requête
               href: core/querying/tags.md
+            - name: Comparaisons avec les valeurs NULL dans les requêtes
+              href: core/querying/null-comparisons.md
             - name: Fonctionnement des requêtes
               href: core/querying/how-query-works.md
         - name: Enregistrer les données
@@ -202,6 +214,24 @@
               href: core/saving/disconnected-entities.md
             - name: Valeurs explicites des propriétés générées
               href: core/saving/explicit-values-generated-properties.md
+        - name: Change tracking
+          items:
+            - name: Vue d'ensemble
+              href: core/change-tracking/index.md
+            - name: Entités de suivi explicites
+              href: core/change-tracking/explicit-tracking.md
+            - name: Accès aux entités suivies
+              href: core/change-tracking/entity-entries.md
+            - name: Modification des clés étrangères et des navigations
+              href: core/change-tracking/relationship-changes.md
+            - name: Détection et notifications des modifications
+              href: core/change-tracking/change-detection.md
+            - name: Résolution de l'identité
+              href: core/change-tracking/identity-resolution.md
+            - name: Autres fonctionnalités de suivi des modifications
+              href: core/change-tracking/miscellaneous.md
+            - name: Débogage du dispositif de suivi des modifications
+              href: core/change-tracking/debug-views.md
         - name: 'Journalisation, événements et diagnostics'
           items:
             - name: Vue d’ensemble
@@ -326,7 +356,7 @@
           href: /dotnet/api/?view=efcore-5.0
     - name: Entity Framework 6
       items:
-        - name: Vue d’ensemble
+        - name: Vue d'ensemble
           href: ef6/index.md
         - name: Nouveautés
           items:
