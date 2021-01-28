@@ -4,12 +4,12 @@ description: Informations sur la façon dont Entity Framework Core gère les com
 author: maumar
 ms.date: 11/11/2020
 uid: core/querying/null-comparisons
-ms.openlocfilehash: d1235eb8df7fd22c7a930b3661ec38a99f75e5fa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fc63d0e0e6aea09e46b1700152312d4b74270219
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129777"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983350"
 ---
 # <a name="query-null-semantics"></a>Sémantique de requête null
 

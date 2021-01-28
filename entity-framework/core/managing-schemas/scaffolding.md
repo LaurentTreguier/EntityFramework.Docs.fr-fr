@@ -4,18 +4,18 @@ description: Rétroconception d’un modèle à partir d’une base de données 
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 11ffa2e62136e47959ebbfd54ccb55c2b9e23e04
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429765"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983571"
 ---
 # <a name="reverse-engineering"></a> Reconstitution de la logique des produits
 
 L’ingénierie à rebours est le processus de génération de modèles automatique des classes de type d’entité et une classe DbContext basée sur un schéma de base de données. Il peut être effectué à l’aide `Scaffold-DbContext` de la commande des outils de la console du gestionnaire de package (PMC) EF Core ou `dotnet ef dbcontext scaffold` de la commande des outils de l’interface de ligne de commande (CLI) .net.
 
-## <a name="installing"></a>Installation de
+## <a name="installing"></a>Installation
 
 Avant l’ingénierie à rebours, vous devez installer les [Outils PMC](xref:core/cli/powershell) (Visual Studio uniquement) ou les [Outils CLI](xref:core/cli/dotnet). Pour plus d’informations, consultez les liens.
 
@@ -48,8 +48,8 @@ Si vous avez un projet ASP.NET Core, vous pouvez utiliser la `Name=<connection-s
 Cela fonctionne bien avec l' [outil secret Manager](/aspnet/core/security/app-secrets#secret-manager) pour conserver le mot de passe de votre base de données distinct de votre code base.
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.Chinook "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.Chinook Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:Chinook "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Chinook"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:Chinook Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="provider-name"></a>Nom du fournisseur
@@ -70,7 +70,7 @@ Pour inclure plusieurs tables, spécifiez l’option plusieurs fois :
 dotnet ef dbcontext scaffold ... --table Artist --table Album
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 L' `-Schemas` option peut être utilisée pour inclure chaque table dans un schéma, tandis que `-Tables` peut être utilisé pour inclure des tables spécifiques.
 
@@ -128,7 +128,7 @@ Par défaut, l’espace de noms est l’espace de noms racine, ainsi que les nom
 dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace Your.DbContext.Namespace
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 Vous pouvez spécifier le répertoire dans lequel les classes sont échafaudées à l’aide de `-OutputDir` , et `-ContextDir` peut être utilisé pour générer un modèle de structure de la classe DbContext dans un répertoire distinct de celui des classes de type d’entité :
 
@@ -152,7 +152,7 @@ Ensuite, il utilise les informations de schéma pour créer un modèle de EF Cor
 
 Enfin, le modèle est utilisé pour générer le code. Les classes de type d’entité, l’API Fluent et les annotations de données correspondantes sont échafaudées afin de recréer le même modèle à partir de votre application.
 
-## <a name="limitations"></a>Limites
+## <a name="limitations"></a>Limitations
 
 * Tout ce qui concerne un modèle peut être représenté à l’aide d’un schéma de base de données. Par exemple, les informations sur les [**hiérarchies d’héritage**](xref:core/modeling/inheritance), les [**types détenus**](xref:core/modeling/owned-entities)et le [**fractionnement de table**](xref:core/modeling/table-splitting) ne sont pas présentes dans le schéma de la base de données. Pour cette raison, ces constructions ne feront jamais l’effet d’une rétroconception.
 * En outre, **certains types de colonne** peuvent ne pas être pris en charge par le fournisseur EF Core. Ces colonnes ne sont pas incluses dans le modèle.

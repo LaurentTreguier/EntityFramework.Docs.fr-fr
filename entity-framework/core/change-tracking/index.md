@@ -4,12 +4,12 @@ description: Vue d’ensemble du suivi des modifications pour EF Core
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/index
-ms.openlocfilehash: 52223e5472b09271d19ac9449a3989b4a0e277f7
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 8cfa4590af07ec1715eb48ec0c7acb3426b6a6b4
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129738"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983259"
 ---
 # <a name="change-tracking-in-ef-core"></a>Change Tracking dans EF Core
 
@@ -181,7 +181,7 @@ Notez spécifiquement :
 
 ## <a name="query-then-insert-update-and-delete"></a>Requête, insérer, mettre à jour et supprimer
 
-Les mises à jour telles que celles de l’exemple précédent peuvent être combinées avec des insertions et des suppressions dans la même unité de travail. Exemple :
+Les mises à jour telles que celles de l’exemple précédent peuvent être combinées avec des insertions et des suppressions dans la même unité de travail. Par exemple :
 
 <!--
             using var context = new BlogsContext();

@@ -4,12 +4,12 @@ description: Suivi explicite d’entités avec DbContext à l’aide de l’ajou
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 28a6ec3e3c25dad70882b8681f78744a5979efe6
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129745"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983272"
 ---
 # <a name="explicitly-tracking-entities"></a>Suivi explicite des entités
 
@@ -311,7 +311,7 @@ Post {Id: 2} Unchanged
 Il s’agit exactement du même état final que l’exemple précédent qui utilisait des valeurs de clés explicites.
 
 > [!TIP]
-> Une valeur de clé explicite peut encore être définie même en cas d’utilisation de valeurs de clé générées. EF Core essaiera ensuite d’insérer à l’aide de cette valeur de clé. Certaines configurations de base de données, y compris les SQL Server avec des colonnes d’identité, ne prennent pas en charge ces insertions et lèveront une exception.
+> Une valeur de clé explicite peut encore être définie même en cas d’utilisation de valeurs de clé générées. EF Core essaiera ensuite d’insérer à l’aide de cette valeur de clé. Certaines configurations de base de données, y compris les SQL Server avec des colonnes d’identité, ne prennent pas en charge les insertions et lèvent ([consultez ces documents pour une solution de contournement](xref:core/providers/sql-server/value-generation#inserting-explicit-values-into-identity-columns)).
 
 ## <a name="attaching-existing-entities"></a>Attachement d’entités existantes
 
@@ -394,35 +394,6 @@ L’appel de SaveChanges à ce stade n’aura aucun effet. Toutes les entités s
 ### <a name="generated-key-values"></a>Valeurs de clés générées
 
 Comme indiqué ci-dessus, les [Propriétés de clé](xref:core/modeling/keys) de type entier et GUID sont configurées pour utiliser par défaut des [valeurs de clés générées automatiquement](xref:core/modeling/generated-properties) . Cela présente un avantage majeur lorsque vous travaillez avec des entités déconnectées : une valeur de clé non définie indique que l’entité n’a pas encore été insérée dans la base de données. Cela permet au dispositif de suivi des modifications de détecter automatiquement les nouvelles entités et de les placer dans l' `Added` État. Par exemple, envisagez d’attacher ce graphique à un blog et à des billets :
-
-```c#
-            context.Attach(
-                new Blog
-                {
-                    Id = 1,
-                    Name = ".NET Blog",
-                    Posts =
-                    {
-                        new Post
-                        {
-                            Id = 1,
-                            Title = "Announcing the Release of EF Core 5.0",
-                            Content = "Announcing the release of EF Core 5.0, a full featured cross-platform..."
-                        },
-                        new Post
-                        {
-                            Id = 2,
-                            Title = "Announcing F# 5",
-                            Content = "F# 5 is the latest version of F#, the functional programming language..."
-                        },
-                        new Post
-                        {
-                            Title = "Announcing .NET 5.0",
-                            Content = ".NET 5.0 includes many enhancements, including single file applications, more..."
-                        },
-                    }
-                });
-```
 
 <!--
             context.Attach(
@@ -722,7 +693,7 @@ Par exemple, le code de la section précédente est plus susceptible d’obtenir
 
 Cela se comporte exactement de la même façon que dans l’exemple précédent, puisque l’appel `Remove` de sur une entité non suivie provoque l’attachement préalable de celui-ci, puis il est marqué comme `Deleted` .
 
-Dans des exemples plus réalistes, un graphique d’entités est d’abord attaché, puis certaines de ces entités sont marquées comme supprimées. Exemple :
+Dans des exemples plus réalistes, un graphique d’entités est d’abord attaché, puis certaines de ces entités sont marquées comme supprimées. Par exemple :
 
 <!--
             // Attach a blog and associated posts
@@ -793,7 +764,7 @@ Pour plus d’informations sur le suivi des modifications et les relations, cons
 
 ### <a name="optional-relationships"></a>Relations facultatives
 
-La `Post.BlogId` propriété de clé étrangère accepte la valeur null dans le modèle que nous utilisons. Cela signifie que la relation est facultative et, par conséquent, le comportement par défaut de EF Core consiste à définir des `BlogId` Propriétés de clé étrangère sur Null lorsque le blog est supprimé. Exemple :
+La `Post.BlogId` propriété de clé étrangère accepte la valeur null dans le modèle que nous utilisons. Cela signifie que la relation est facultative et, par conséquent, le comportement par défaut de EF Core consiste à définir des `BlogId` Propriétés de clé étrangère sur Null lorsque le blog est supprimé. Par exemple :
 
 <!--
             // Attach a blog and associated posts
@@ -922,7 +893,7 @@ Une fois SaveChanges terminé, toutes les entités supprimées sont détachées 
 
 <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> fonctionne comme `Add` `Attach` et, `Update` à ceci près qu’il génère un rappel pour chaque instance d’entité avant de le suivre. Cela permet d’utiliser une logique personnalisée pour déterminer comment suivre les entités individuelles dans un graphique.
 
-Par exemple, considérez la règle utilisée par EF Core lors du suivi des entités ayant des valeurs de clé générées : si la valeur Kye est égale à zéro, l’entité est nouvelle et doit être insérée. Nous allons étendre cette règle pour indiquer si la valeur de clé est négative, puis l’entité doit être supprimée. Cela nous permet de modifier les valeurs de clé primaire dans les entités d’un graphique déconnecté pour marquer les entités supprimées :
+Par exemple, considérez la règle utilisée par EF Core lors du suivi des entités ayant des valeurs de clé générées : si la valeur de clé est égale à zéro, l’entité est nouvelle et doit être insérée. Nous allons étendre cette règle pour indiquer si la valeur de clé est négative, puis l’entité doit être supprimée. Cela nous permet de modifier les valeurs de clé primaire dans les entités d’un graphique déconnecté pour marquer les entités supprimées :
 
 <!--
             blog.Posts.Add(

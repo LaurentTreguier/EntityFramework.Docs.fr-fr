@@ -4,12 +4,12 @@ description: Configuration des comportements en cascade déclenchés lorsqu’un
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 7c35de900930cf42da0e534df76124b5fb19ca52
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128860"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983337"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -65,7 +65,7 @@ Considérons ce modèle simple `Blog` , où est le principal/le parent dans une 
 
 Par Convention, cette relation est configurée en tant que obligatoire, car la `Post.BlogId` propriété de clé étrangère n’accepte pas les valeurs NULL. Les relations requises sont configurées pour utiliser des suppressions en cascade par défaut. Pour plus d’informations sur les relations de modélisation, consultez [relations](xref:core/modeling/relationships) .
 
-Lors de la suppression d’un blog, toutes les publications sont supprimées en cascade. Exemple :
+Lors de la suppression d’un blog, toutes les publications sont supprimées en cascade. Par exemple :
 
 <!--
             using var context = new BlogsContext();
@@ -183,7 +183,7 @@ CREATE TABLE [Posts] (
 
 Notez que la contrainte de clé étrangère définissant la relation entre les blogs et les publications est configurée avec `ON DELETE CASCADE` .
 
-Si nous savons que la base de données est configurée de la même manière, nous pouvons supprimer un blog _sans charger au préalable les publications_ et la base de données s’occupera de la suppression de toutes les publications associées à ce blog. Exemple :
+Si nous savons que la base de données est configurée de la même manière, nous pouvons supprimer un blog _sans charger au préalable les publications_ et la base de données s’occupera de la suppression de toutes les publications associées à ce blog. Par exemple :
 
 <!--
             using var context = new BlogsContext();
@@ -447,7 +447,7 @@ Les bases de données peuvent également être configurées pour mettre en casca
 > [!TIP]
 > Veillez à lire les sections ci-dessus avant de vous y trouver. Les options de configuration n’auront probablement pas de sens si la matière précédente n’est pas comprise.
 
-Les comportements en cascade sont configurés par relation à l’aide <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.ReferenceCollectionBuilder.OnDelete%2A> de la méthode dans <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> . Exemple :
+Les comportements en cascade sont configurés par relation à l’aide <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.ReferenceCollectionBuilder.OnDelete%2A> de la méthode dans <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> . Par exemple :
 
 <!--
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -473,11 +473,11 @@ Le tableau suivant indique le résultat de chaque `OnDelete` valeur sur la contr
 |:----------------------|--------------------------
 | Cascade               | ON DELETE CASCADE
 | Restreindre              | ON DELETE NO ACTION
-| NoAction              | <database default>
+| NoAction              | base de données par défaut
 | SetNull               | ON DELETE SET NULL
 | ClientSetNull         | ON DELETE NO ACTION
 | ClientCascade         | ON DELETE NO ACTION
-| ClientNoAction        | <database default>
+| ClientNoAction        | base de données par défaut
 
 > [!NOTE]
 > Ce tableau est confus et nous prévoyons de le revoir dans une version ultérieure. Consultez [#21252 du problème GitHub](https://github.com/dotnet/efcore/issues/21252).

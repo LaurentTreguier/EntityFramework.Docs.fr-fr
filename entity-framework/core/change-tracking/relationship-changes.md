@@ -4,12 +4,12 @@ description: Comment modifier les relations entre les entités en manipulant les
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/relationship-changes
-ms.openlocfilehash: ac2110509b6748e85411dbb14989522465925ecf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: b1ebe77ed29291beeef3708b603db026c38bbbec
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129742"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983610"
 ---
 # <a name="changing-foreign-keys-and-navigations"></a>Modification des clés étrangères et des navigations
 
@@ -184,8 +184,8 @@ La correction de la relation se produit également entre les entités retournée
         var posts = context.Posts.ToList();
         Console.WriteLine(context.ChangeTracker.DebugView.LongView);
 -->
-[ ! code-CSharp[Relationship_fixup_2](../../../ samples / core / ChangeTracking / ChangingFKsAndNavigations / OptionalRelationshipsSamples.cs ? name = Relationship_fixup_2
-) ] En regardant à nouveau dans les vues de débogage, après la première requête, seuls les deux blogs sont suivis :
+[!code-csharp[Relationship_fixup_2](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/OptionalRelationshipsSamples.cs?name=Relationship_fixup_2)]
+En regardant à nouveau dans les vues de débogage, après la première requête, seuls les deux blogs sont suivis :
 
 ```output
 Blog {Id: 1} Unchanged
@@ -374,7 +374,7 @@ SELECT changes();
 
 ### <a name="changing-reference-navigations"></a>Modification des navigations de référence
 
-Dans l’exemple précédent, une publication a été déplacée d’un blog à un autre en modifiant la navigation dans la collection des publications sur chaque blog. La même chose peut être obtenue en modifiant la `Post.Blog` navigation de référence pour qu’elle pointe vers le nouveau blog. Exemple :
+Dans l’exemple précédent, une publication a été déplacée d’un blog à un autre en modifiant la navigation dans la collection des publications sur chaque blog. La même chose peut être obtenue en modifiant la `Post.Blog` navigation de référence pour qu’elle pointe vers le nouveau blog. Par exemple :
 
 <!--
         var post = vsBlog.Posts.Single(e => e.Title.StartsWith("Disassembly improvements"));
@@ -528,7 +528,7 @@ SELECT changes();
 
 #### <a name="delete-orphans-timing-and-re-parenting"></a>Supprimer le minutage des orphelins et le nouveau parenté
 
-Par défaut, le marquage des orphelins `Deleted` se produit dès que le changement de relation est [détecté](xref:core/change-tracking/change-detection). Toutefois, ce processus peut être retardé jusqu’à ce que SaveChanges soit réellement appelé. Cela peut être utile pour éviter d’effectuer des orphelins d’entités qui ont été supprimées d’un principal/parent, mais qui seront à nouveau apparentés à un nouveau principal/parent avant l’appel de SaveChanges. <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DeleteOrphansTiming?displayProperty=nameWithType> est utilisé pour définir ce minutage. Exemple :
+Par défaut, le marquage des orphelins `Deleted` se produit dès que le changement de relation est [détecté](xref:core/change-tracking/change-detection). Toutefois, ce processus peut être retardé jusqu’à ce que SaveChanges soit réellement appelé. Cela peut être utile pour éviter d’effectuer des orphelins d’entités qui ont été supprimées d’un principal/parent, mais qui seront à nouveau apparentés à un nouveau principal/parent avant l’appel de SaveChanges. <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DeleteOrphansTiming?displayProperty=nameWithType> est utilisé pour définir ce minutage. Par exemple :
 
 <!--
         context.ChangeTracker.DeleteOrphansTiming = CascadeTiming.OnSaveChanges;
@@ -600,7 +600,7 @@ La modification de la navigation de référence d’une relation un-à-plusieurs
 
 #### <a name="optional-one-to-one-relationships"></a>Relations un-à-un facultatives
 
-Pour les relations un-à-un, la modification d’une navigation de référence provoque la gravité d’une relation précédente. Pour les relations facultatives, cela signifie que la valeur FK sur le dépendant/enfant précédemment associé est définie sur null. Exemple :
+Pour les relations un-à-un, la modification d’une navigation de référence provoque la gravité d’une relation précédente. Pour les relations facultatives, cela signifie que la valeur FK sur le dépendant/enfant précédemment associé est définie sur null. Par exemple :
 
 <!--
         using var context = new BlogsContext();
@@ -832,7 +832,7 @@ Considérez cette EF Core modèle qui crée une relation plusieurs-à-plusieurs 
     -->
 [!code-csharp[Model](../../../samples/core/ChangeTracking/ChangingFKsAndNavigations/ExplicitJoinEntitySamples.cs?name=Model)]
 
-Notez que le `PostTag` type d’entité de jointure contient deux propriétés de clé étrangère. Dans ce modèle, pour une publication à associer à une balise, il doit y avoir une entité de jointure PostTag où la valeur de clé `PostTag.PostId` étrangère correspond à la `Post.Id` valeur de clé primaire, et où la valeur de clé `PostTag.TagId` étrangère correspond à la `Tag.Id` valeur de clé primaire. Exemple :
+Notez que le `PostTag` type d’entité de jointure contient deux propriétés de clé étrangère. Dans ce modèle, pour une publication à associer à une balise, il doit y avoir une entité de jointure PostTag où la valeur de clé `PostTag.PostId` étrangère correspond à la `Post.Id` valeur de clé primaire, et où la valeur de clé `PostTag.TagId` étrangère correspond à la `Tag.Id` valeur de clé primaire. Par exemple :
 
 <!--
             using var context = new BlogsContext();
@@ -1145,7 +1145,7 @@ Une fois l’entité de jointure localisée, elle peut être manipulée de mani�
 > [!NOTE]
 > Notez qu’un appel à <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges?displayProperty=nameWithType> est requis ici pour permettre à EF Core de détecter la modification de la propriété de navigation et de créer l’instance de l’entité de jointure avant que `Find` ne soit utilisé. Pour plus d’informations, consultez Modification de la [détection et des notifications](xref:core/change-tracking/change-detection) .
 
-L’entité de jointure peut également être créée explicitement pour associer un billet à une balise. Exemple :
+L’entité de jointure peut également être créée explicitement pour associer un billet à une balise. Par exemple :
 
 <!--
             using var context = new BlogsContext();

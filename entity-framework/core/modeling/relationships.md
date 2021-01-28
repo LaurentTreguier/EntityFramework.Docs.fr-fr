@@ -4,12 +4,12 @@ description: Comment configurer des relations entre des types d’entités lors 
 author: AndriySvyryd
 ms.date: 10/01/2020
 uid: core/modeling/relationships
-ms.openlocfilehash: 2bc17365adb802f2e813077731ae70c68f8e3be3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 93d129435a3583ac5f741cc27952fb702f415a01
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129172"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983467"
 ---
 # <a name="relationships"></a>Relations
 
@@ -104,7 +104,7 @@ L’inclusion d’une seule propriété de navigation (aucune navigation inverse
 
 [!code-csharp[Main](../../../samples/core/Modeling/Conventions/Relationships/OneNavigation.cs?name=OneNavigation&highlight=6)]
 
-### <a name="limitations"></a>Limites
+### <a name="limitations"></a>Limitations
 
 Lorsqu’il existe plusieurs propriétés de navigation définies entre deux types (autrement dit, plusieurs paires de navigation qui pointent les unes vers les autres), les relations représentées par les propriétés de navigation sont ambiguës. Vous devrez les configurer manuellement pour résoudre l’ambiguïté.
 
@@ -301,7 +301,10 @@ CREATE TABLE [PostTag] (
 );
 ```
 
-En interne, EF crée un type d’entité pour représenter la table de jointure qui sera désignée comme type d’entité de jointure. `Dictionary<string, object>` est utilisé pour qu’il gère une combinaison de propriétés de clé étrangère, consultez [types d’entité du conteneur des propriétés](shadow-properties.md#property-bag-entity-types) pour plus d’informations. Plus d’une relation plusieurs-à-plusieurs peut exister dans le modèle ; par conséquent, le type d’entité de jointure doit avoir un nom unique, dans ce cas `PostTag` . La fonctionnalité qui permet cela est appelée type d’entité de type partagé.
+En interne, EF crée un type d’entité pour représenter la table de jointure qui sera désignée comme type d’entité de jointure. `Dictionary<string, object>` est actuellement utilisé pour gérer toute combinaison de propriétés de clé étrangère, consultez [types d’entités de conteneur de propriétés](shadow-properties.md#property-bag-entity-types) pour plus d’informations. Plus d’une relation plusieurs-à-plusieurs peut exister dans le modèle ; par conséquent, le type d’entité de jointure doit avoir un nom unique, dans ce cas `PostTag` . La fonctionnalité qui permet cela est appelée type d’entité de type partagé.
+
+> [!IMPORTANT]
+> Le type CLR utilisé pour les types d’entité de jointure par convention peut changer dans les versions ultérieures pour améliorer les performances. Ne dépendez pas du type de jointure `Dictionary<string, object>` , sauf si cette configuration a été explicitement configurée, comme décrit dans la section suivante.
 
 Les navigations plusieurs-à-plusieurs sont appelées ignorer les navigations, car elles ignorent le type d’entité de jointure. Si vous utilisez la configuration en bloc, toutes les navigations ignorées peuvent être obtenues à partir de <xref:Microsoft.EntityFrameworkCore.Metadata.IEntityType.GetSkipNavigations%2A> .
 

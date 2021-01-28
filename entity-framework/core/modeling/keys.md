@@ -2,18 +2,20 @@
 title: Clés-EF Core
 description: Comment configurer des clés pour des types d’entités lors de l’utilisation de Entity Framework Core
 author: AndriySvyryd
-ms.date: 11/06/2019
+ms.date: 1/10/2021
 uid: core/modeling/keys
-ms.openlocfilehash: 805396a13227aa62ed86ac17c742d055d7a22bbf
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: c79ab0445e80b0b6f4a8b49ef0d4c063bf938851
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129185"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983531"
 ---
 # <a name="keys"></a>Keys
 
 Une clé sert d’identificateur unique pour chaque instance d’entité. La plupart des entités dans EF ont une clé unique, qui correspond au concept d’une *clé primaire* dans les bases de données relationnelles (pour les entités sans clés, consultez la rubrique ne pas utiliser les [entités](xref:core/modeling/keyless-entity-types)). Les entités peuvent avoir des clés supplémentaires au-delà de la clé primaire (pour plus d’informations, consultez [autres clés](#alternate-keys) ).
+
+## <a name="configuring-a-primary-key"></a>Configuration d’une clé primaire
 
 Par Convention, une propriété nommée `Id` ou `<type name>Id` sera configurée comme clé primaire d’une entité.
 
@@ -24,11 +26,11 @@ Par Convention, une propriété nommée `Id` ou `<type name>Id` sera configurée
 
 Vous pouvez configurer une propriété unique comme clé primaire d’une entité comme suit :
 
-## <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
+### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
 [!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/KeySingle.cs?name=KeySingle&highlight=3)]
 
-## <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
+### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeySingle.cs?name=KeySingle&highlight=4)]
 
@@ -37,6 +39,10 @@ Vous pouvez configurer une propriété unique comme clé primaire d’une entit�
 Vous pouvez également configurer plusieurs propriétés comme clé d’une entité. il s’agit d’une clé composite. Les clés composites ne peuvent être configurées qu’à l’aide de l’API Fluent. les conventions ne configurent jamais de clé composite et vous ne pouvez pas utiliser d’annotations de données pour en configurer une.
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/KeyComposite.cs?name=KeyComposite&highlight=4)]
+
+## <a name="value-generation"></a>Génération de valeur
+
+Pour les clés primaires non composite numériques et GUID, EF Core configure la génération de valeur pour vous par Convention. Par exemple, une clé primaire numérique dans SQL Server est automatiquement configurée pour être une colonne d’identité. Pour plus d’informations, consultez [la documentation sur la génération de valeurs](xref:core/modeling/generated-properties).
 
 ## <a name="primary-key-name"></a>Nom de la clé primaire
 
@@ -51,7 +57,7 @@ Si EF Core prend en charge l’utilisation de propriétés de n’importe quel t
 Les propriétés de clé doivent toujours avoir une valeur non définie par défaut lors de l’ajout d’une nouvelle entité au contexte, mais certains types sont [générés par la base de données](xref:core/modeling/generated-properties). Dans ce cas, EF tente de générer une valeur temporaire lorsque l’entité est ajoutée à des fins de suivi. Une fois [SaveChanges](/dotnet/api/Microsoft.EntityFrameworkCore.DbContext.SaveChanges) appelé, la valeur temporaire est remplacée par la valeur générée par la base de données.
 
 > [!Important]
-> Si une propriété de clé a sa valeur générée par la base de données et qu’une valeur non définie par défaut est spécifiée lors de l’ajout d’une entité, EF suppose que l’entité existe déjà dans la base de données et essaiera de la mettre à jour au lieu d’en insérer une nouvelle. Pour éviter cela, désactivez la génération de valeur ou consultez [comment spécifier des valeurs explicites pour les propriétés générées](xref:core/saving/explicit-values-generated-properties).
+> Si une propriété de clé a sa valeur générée par la base de données et qu’une valeur non définie par défaut est spécifiée lors de l’ajout d’une entité, EF suppose que l’entité existe déjà dans la base de données et essaiera de la mettre à jour au lieu d’en insérer une nouvelle. Pour éviter cela, désactivez la génération de valeur ou consultez [comment spécifier des valeurs explicites pour les propriétés générées](xref:core/modeling/generated-properties#overriding-value-generation).
 
 ## <a name="alternate-keys"></a>Clés secondaires
 

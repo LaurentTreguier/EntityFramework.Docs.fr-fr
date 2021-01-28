@@ -4,12 +4,12 @@ description: Guide de référence pour les outils de CLI .NET Core Entity Framew
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 83989b8690236dbec3466cda78c204ab67fd10c4
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 60655c03a7fc29137ccb8d9304c94dac6b803cb2
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431582"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983584"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Informations de référence sur les outils de Entity Framework Core-CLI .NET Core
 
@@ -43,7 +43,7 @@ Avant de pouvoir utiliser les outils sur un projet spécifique, vous devez y ajo
 dotnet add package Microsoft.EntityFrameworkCore.Design
 ```
 
-### <a name="verify-installation"></a>Vérifier l’installation
+### <a name="verify-installation"></a>Vérifier l'installation
 
 Exécutez les commandes suivantes pour vérifier que EF Core outils CLI sont correctement installés :
 
@@ -223,8 +223,8 @@ dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;Tr
 L’exemple suivant lit la chaîne de connexion à partir du jeu de configuration du projet à l’aide de l' [outil secret Manager](/aspnet/core/security/app-secrets#secret-manager).
 
 ```dotnetcli
-dotnet user-secrets set ConnectionStrings.Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
-dotnet ef dbcontext scaffold Name=ConnectionStrings.Blogging Microsoft.EntityFrameworkCore.SqlServer
+dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Blogging"
+dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
 ## <a name="dotnet-ef-dbcontext-script"></a>script dotnet EF DbContext

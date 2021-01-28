@@ -4,12 +4,12 @@ description: Traduction de la requête en requêtes Single et Split dans SQL ave
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/single-split-queries
-ms.openlocfilehash: 8615e7ba5247a90a1f980e9f7b1b23c81170971f
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 1857e05d45979c5530a349b9c7470407e7574fdf
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128990"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983428"
 ---
 # <a name="split-queries"></a>Fractionner des requêtes
 
@@ -74,7 +74,7 @@ Pour désactiver l’avertissement, configurez le mode de fractionnement des req
 Si la requête Split évite les problèmes de performances associés aux JOINTUREs et à l’explosion cartésienne, elle présente également certains inconvénients :
 
 - Alors que la plupart des bases de données garantissent la cohérence des données pour les requêtes uniques, il n’existe pas de garantie de ce type pour plusieurs requêtes. Si la base de données est mise à jour en même temps lors de l’exécution de vos requêtes, les données résultantes peuvent ne pas être cohérentes. Vous pouvez l’atténuer en encapsulant les requêtes dans une transaction sérialisable ou d’instantané, même si cela peut entraîner des problèmes de performances. Pour plus d’informations, consultez la documentation de votre base de données.
-- Chaque requête implique actuellement un aller-retour réseau supplémentaire vers votre base de données. Plusieurs allers-retours sur le réseau peuvent dégrader les performances, notamment lorsque la latence est élevée pour la base de données (par exemple, les services Cloud).
+- Chaque requête implique actuellement un aller-retour réseau supplémentaire vers votre base de données. Plusieurs allers-retours réseau peuvent dégrader les performances, en particulier lorsque la latence est élevée pour la base de données (par exemple, les services Cloud).
 - Bien que certaines bases de données autorisent l’utilisation des résultats de plusieurs requêtes en même temps (SQL Server avec MARS, SQLite), la plupart n’autorisent l’activation que d’une seule requête à un moment donné. Ainsi, tous les résultats des requêtes antérieures doivent être mis en mémoire tampon dans la mémoire de votre application avant d’exécuter des requêtes ultérieures, ce qui entraîne une augmentation des besoins en mémoire.
 
 Malheureusement, il n’existe aucune stratégie pour charger des entités associées qui s’adaptent à tous les scénarios. Examinez attentivement les avantages et les inconvénients des requêtes simples et fractionnées pour sélectionner celle qui répond à vos besoins.

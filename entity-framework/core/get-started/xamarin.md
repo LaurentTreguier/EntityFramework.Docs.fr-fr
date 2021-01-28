@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: c19c70903926c2c8ff4b51cca7781859af7e3567
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128782"
+ms.lasthandoff: 01/28/2021
+ms.locfileid: "98983597"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Prise en main avec EF Core et Xamarin
 
@@ -78,8 +78,7 @@ Il est supposé que vous êtes familiarisé avec les rubriques Xamarin. Forms re
 >
 > * La première consiste à ajouter des `--linkskip System.Core` **arguments mTouch supplémentaires** dans les options de **génération iOS** .
 > * Vous pouvez également définir le comportement de l' **éditeur de liens** Xamarin. iOS sur `Don't Link` dans les options de **génération iOS** .
-> [Cet article explique plus en détail l’éditeur de liens Xamarin. iOS](/xamarin/ios/deploy-test/linker) , y compris comment définir le comportement sur Xamarin. iOS.
->
+> [Cet article explique plus en détail l’éditeur de liens Xamarin. iOS](/xamarin/ios/deploy-test/linker) , y compris comment définir le comportement sur Xamarin. iOS. (Cette approche n’est pas idéale, car elle peut entraîner le rejet du magasin).
 
 ## <a name="entity-framework-core-nuget-packages"></a>Packages NuGet Entity Framework Core
 
@@ -121,7 +120,7 @@ La `BloggingContext` classe se trouve dans le `Services` dossier et hérite de l
 
 Voici quelques exemples de l’application dans laquelle EF Core est utilisé pour accéder à SQLite.
 
-### <a name="read"></a>Lecture
+### <a name="read"></a>Lire
 
 * Retourne tous les enregistrements.
   * La `OnAppearing` fonction de `BlogsPage.xaml.cs` retourne tous les `Blog` enregistrements et les stocke dans une `List` variable.
