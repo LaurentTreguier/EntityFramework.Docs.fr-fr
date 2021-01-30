@@ -212,8 +212,6 @@
               href: core/saving/transactions.md
             - name: Entités déconnectées
               href: core/saving/disconnected-entities.md
-            - name: Valeurs explicites des propriétés générées
-              href: core/saving/explicit-values-generated-properties.md
         - name: Change tracking
           items:
             - name: Vue d'ensemble
@@ -298,6 +296,8 @@
               items:
                 - name: Vue d'ensemble
                   href: core/providers/sql-server/index.md
+                - name: Génération de valeur
+                  href: core/providers/sql-server/value-generation.md
                 - name: Mappages de fonctions
                   href: core/providers/sql-server/functions.md
                 - name: Index
@@ -356,7 +356,7 @@
           href: /dotnet/api/?view=efcore-5.0
     - name: Entity Framework 6
       items:
-        - name: Vue d'ensemble
+        - name: Vue d’ensemble
           href: ef6/index.md
         - name: Nouveautés
           items:
