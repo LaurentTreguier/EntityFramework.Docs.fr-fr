@@ -8,7 +8,7 @@ ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
 ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98983571"
 ---
 # <a name="reverse-engineering"></a> Reconstitution de la logique des produits
@@ -80,7 +80,7 @@ Pour inclure plusieurs tables, utilisez un tableau :
 Scaffold-DbContext ... -Tables Artist, Album
 ```
 
-**_
+***
 
 ## <a name="preserving-names"></a>Préservation des noms
 
@@ -108,7 +108,7 @@ public string Title { get; set; }
 
 ## <a name="dbcontext-name"></a>Nom de DbContext
 
-Le nom de classe DbContext généré par l’échafaudage sera le nom de la base de données avec le suffixe _Context * par défaut. Pour spécifier un autre, utilisez `-Context` dans PMC et `--context` dans le CLI .net core.
+Le nom de classe DbContext généré par génération de modèles automatique sera le nom de la base de données suffixée *par défaut* . Pour spécifier un autre, utilisez `-Context` dans PMC et `--context` dans le CLI .net core.
 
 ## <a name="directories-and-namespaces"></a>Répertoires et espaces de noms
 
@@ -152,7 +152,7 @@ Ensuite, il utilise les informations de schéma pour créer un modèle de EF Cor
 
 Enfin, le modèle est utilisé pour générer le code. Les classes de type d’entité, l’API Fluent et les annotations de données correspondantes sont échafaudées afin de recréer le même modèle à partir de votre application.
 
-## <a name="limitations"></a>Limitations
+## <a name="limitations"></a>Limites
 
 * Tout ce qui concerne un modèle peut être représenté à l’aide d’un schéma de base de données. Par exemple, les informations sur les [**hiérarchies d’héritage**](xref:core/modeling/inheritance), les [**types détenus**](xref:core/modeling/owned-entities)et le [**fractionnement de table**](xref:core/modeling/table-splitting) ne sont pas présentes dans le schéma de la base de données. Pour cette raison, ces constructions ne feront jamais l’effet d’une rétroconception.
 * En outre, **certains types de colonne** peuvent ne pas être pris en charge par le fournisseur EF Core. Ces colonnes ne sont pas incluses dans le modèle.

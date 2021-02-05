@@ -5,10 +5,10 @@ author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
 ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "95003274"
 ---
 # <a name="managing-migrations"></a>Gestion des migrations
@@ -59,7 +59,7 @@ dotnet ef migrations add InitialCreate --output-dir Your/Directory
 > [!NOTE]
 > Dans EF Core 5,0, vous pouvez également modifier l’espace de noms indépendamment du répertoire à l’aide de `--namespace` .
 
-#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Add-Migration InitialCreate -OutputDir Your\Directory
@@ -68,7 +68,7 @@ Add-Migration InitialCreate -OutputDir Your\Directory
 > [!NOTE]
 > Dans EF Core 5,0, vous pouvez également modifier l’espace de noms indépendamment du répertoire à l’aide de `-Namespace` .
 
-**_
+***
 
 ## <a name="customize-migration-code"></a>Personnaliser le code de migration
 
@@ -164,7 +164,7 @@ migrationBuilder.Sql(
 
 Cela peut être utilisé pour gérer tous les aspects de votre base de données, notamment :
 
-_ Procédures stockées
+* Procédures stockées
 * Recherche en texte intégral
 * Fonctions
 * Déclencheurs
@@ -216,11 +216,11 @@ dotnet ef migrations list
 Get-Migration
 ```
 
-**_
+***
 
 ## <a name="resetting-all-migrations"></a>Réinitialisation de toutes les migrations
 
-Dans certains cas extrêmes, il peut être nécessaire de supprimer toutes les migrations et de recommencer. Vous pouvez facilement effectuer cette opération en supprimant votre dossier _ *migrations** et en supprimant votre base de données. à ce stade, vous pouvez créer une nouvelle migration initiale, qui contiendra l’ensemble du schéma actuel.
+Dans certains cas extrêmes, il peut être nécessaire de supprimer toutes les migrations et de recommencer. Vous pouvez facilement effectuer cette opération en supprimant votre dossier **migrations** et en supprimant votre base de données. à ce stade, vous pouvez créer une nouvelle migration initiale, qui contiendra l’ensemble du schéma actuel.
 
 Il est également possible de réinitialiser toutes les migrations et d’en créer une seule sans perdre vos données. Cela est parfois appelé « débogage » et implique un travail manuel :
 

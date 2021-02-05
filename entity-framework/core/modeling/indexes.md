@@ -5,10 +5,10 @@ author: roji
 ms.date: 12/16/2019
 uid: core/modeling/indexes
 ms.openlocfilehash: ab81b108c4ff518cf98b7e835da3553c0c41efed
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
+ms.lasthandoff: 02/05/2021
 ms.locfileid: "98128535"
 ---
 # <a name="indexes"></a>Index
@@ -47,9 +47,9 @@ Un index peut également s’étendre sur plusieurs colonnes :
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/IndexComposite.cs?name=Composite&highlight=4)]
 
-**_
+***
 
-Les index sur plusieurs colonnes, également appelés index _composite *, accélèrent les requêtes qui filtrent sur les colonnes de l’index, mais interrogent également les requêtes qui filtrent uniquement sur les *premières* colonnes couvertes par l’index. Pour plus d’informations, consultez les documents sur les [performances](xref:core/performance/efficient-querying#use-indexes-properly) .
+Les index sur plusieurs colonnes, également appelés *index composites*, accélèrent les requêtes qui filtrent sur les colonnes de l’index, mais également les requêtes qui filtrent uniquement sur les *premières* colonnes couvertes par l’index. Pour plus d’informations, consultez les documents sur les [performances](xref:core/performance/efficient-querying#use-indexes-properly) .
 
 ## <a name="index-uniqueness"></a>Unicité de l’index
 
