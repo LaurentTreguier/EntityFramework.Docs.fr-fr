@@ -4,12 +4,12 @@ description: Suivi explicite d’entités avec DbContext à l’aide de l’ajou
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 1428096b362c8016f7924c72ec9ac3e2f9203ed6
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3d9142cecf272c635c3a041fe6c5d9c49a26c33d
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983272"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543183"
 ---
 # <a name="explicitly-tracking-entities"></a>Suivi explicite des entités
 
@@ -42,7 +42,7 @@ L’application Web doit à présent rattacher ces entités afin qu’elles soie
 > [!TIP]
 > Il n’est normalement pas nécessaire d’attacher des entités à la _même instance DbContext_ à partir de laquelle elles ont été interrogées. N’effectuez pas régulièrement une requête de non-suivi, puis attachez les entités retournées au même contexte. Cette opération est plus lente que l’utilisation d’une requête de suivi et peut également entraîner des problèmes tels que des valeurs de propriété Shadow manquantes, ce qui rend plus difficile la récupération.
 
-### <a name="generated-verses-explicit-key-values"></a>Valeurs de clé explicites des formules générées
+### <a name="generated-versus-explicit-key-values"></a>Valeurs de clés générées et explicites
 
 Par défaut, les propriétés de [clé](xref:core/modeling/keys) de type entier et GUID sont configurées pour utiliser des [valeurs de clés générées automatiquement](xref:core/modeling/generated-properties). Cela présente un **avantage majeur pour le suivi des modifications : une valeur de clé non définie indique que l’entité est « New »**. Par « nouveau », nous entendons qu’elle n’a pas encore été insérée dans la base de données.
 

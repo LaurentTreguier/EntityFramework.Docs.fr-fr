@@ -4,12 +4,12 @@ description: Différentes approches possibles pour tester les applications qui u
 author: ajcvickers
 ms.date: 04/22/2020
 uid: core/testing/index
-ms.openlocfilehash: d94c40bdb1082473ee88e7c3c1fbfecee90ba4ff
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5ac7954a87697e43b68845e925e2510c027b7135
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129068"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543573"
 ---
 # <a name="testing-code-that-uses-ef-core"></a>Test de code qui utilise EF Core
 
@@ -86,7 +86,7 @@ SQLite est un bon choix pour les raisons suivantes :
 
 Toutefois, n’oubliez pas que :
 
-* SQLite ne prend pas en charge toutes les opérations prises en charge par votre système de base de données de production.
+* SQLite ne prend inévitablement pas en charge ce que fait votre système de base de données de production.
 * SQLite se comportera différemment de votre système de base de données de production pour certaines requêtes.
 
 Par conséquent, si vous utilisez SQLite pour certains tests, veillez également à tester votre système de base de données réel.

@@ -4,18 +4,18 @@ description: Rétroconception d’un modèle à partir d’une base de données 
 author: bricelam
 ms.date: 11/13/2018
 uid: core/managing-schemas/scaffolding
-ms.openlocfilehash: 4cad43f4b1300e1ef3cb31e60d3e9890826d974d
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 0f33ee23393819aa86bf1e28ee0eca48110203f6
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "98983571"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543378"
 ---
 # <a name="reverse-engineering"></a> Reconstitution de la logique des produits
 
 L’ingénierie à rebours est le processus de génération de modèles automatique des classes de type d’entité et une classe DbContext basée sur un schéma de base de données. Il peut être effectué à l’aide `Scaffold-DbContext` de la commande des outils de la console du gestionnaire de package (PMC) EF Core ou `dotnet ef dbcontext scaffold` de la commande des outils de l’interface de ligne de commande (CLI) .net.
 
-## <a name="installing"></a>Installation
+## <a name="installing"></a>Installing
 
 Avant l’ingénierie à rebours, vous devez installer les [Outils PMC](xref:core/cli/powershell) (Visual Studio uniquement) ou les [Outils CLI](xref:core/cli/dotnet). Pour plus d’informations, consultez les liens.
 
@@ -70,7 +70,7 @@ Pour inclure plusieurs tables, spécifiez l’option plusieurs fois :
 dotnet ef dbcontext scaffold ... --table Artist --table Album
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 L' `-Schemas` option peut être utilisée pour inclure chaque table dans un schéma, tandis que `-Tables` peut être utilisé pour inclure des tables spécifiques.
 
@@ -128,7 +128,7 @@ Par défaut, l’espace de noms est l’espace de noms racine, ainsi que les nom
 dotnet ef dbcontext scaffold ... --namespace Your.Namespace --context-namespace Your.DbContext.Namespace
 ```
 
-### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 Vous pouvez spécifier le répertoire dans lequel les classes sont échafaudées à l’aide de `-OutputDir` , et `-ContextDir` peut être utilisé pour générer un modèle de structure de la classe DbContext dans un répertoire distinct de celui des classes de type d’entité :
 

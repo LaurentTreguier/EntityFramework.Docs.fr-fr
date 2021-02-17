@@ -4,12 +4,12 @@ description: Comment configurer la génération de valeurs pour les propriétés
 author: AndriySvyryd
 ms.date: 1/10/2021
 uid: core/modeling/generated-properties
-ms.openlocfilehash: 76fa4454c88a5ef7afb9864c2a4b1063ac75e37e
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a9e43f3b755bf028bc76581135988e831a42d0d1
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983545"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543339"
 ---
 # <a name="generated-values"></a>Valeurs générées
 
@@ -52,7 +52,7 @@ Nous avons vu plus haut que EF Core configure automatiquement la génération de
 
 ### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAdd.cs?name=ValueGeneratedOnAdd&highlight=6)]
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -64,16 +64,16 @@ De même, une propriété peut être configurée de manière à ce que sa valeur
 
 ### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=6)]
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ValueGeneratedOnAddOrUpdate.cs?name=ValueGeneratedOnAddOrUpdate&highlight=5)]
 
-**_
+***
 
 > [!WARNING]
-> Contrairement aux valeurs par défaut ou aux colonnes calculées, nous ne spécifions pas _how * les valeurs doivent être générées ; Cela dépend du fournisseur de base de données utilisé. Les fournisseurs de bases de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, mais d’autres peuvent vous obliger à configurer manuellement la manière dont la valeur est générée.
+> Contrairement aux valeurs par défaut ou aux colonnes calculées, nous ne spécifions pas *Comment* les valeurs doivent être générées ; Cela dépend du fournisseur de base de données utilisé. Les fournisseurs de bases de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, mais d’autres peuvent vous obliger à configurer manuellement la manière dont la valeur est générée.
 >
 > Par exemple, sur SQL Server, quand une propriété GUID est configurée en tant que valeur générée lors de l’ajout, le fournisseur effectue automatiquement la génération de valeur côté client, à l’aide d’un algorithme pour générer des valeurs GUID séquentielles optimales. Toutefois, `ValueGeneratedOnAdd()` la spécification de sur une propriété DateTime n’a aucun effet ([consultez la section ci-dessous pour la génération de la valeur DateTime](#datetime-value-generation)).
 >

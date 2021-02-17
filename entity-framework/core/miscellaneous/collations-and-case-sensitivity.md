@@ -4,12 +4,12 @@ description: Configuration des classements et du respect de la casse dans la bas
 author: roji
 ms.date: 04/27/2020
 uid: core/miscellaneous/collations-and-case-sensitivity
-ms.openlocfilehash: eca68af6e658f76e1480b1e1083212f160fa765c
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 48e0a6b316742dc1467134ae81f90086bb93d011
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003456"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543534"
 ---
 # <a name="collations-and-case-sensitivity"></a>Classements et respect de la casse
 
@@ -30,7 +30,7 @@ Dans la plupart des systèmes de base de données, un classement par défaut est
 
 Lors de l’utilisation de EF Core migrations pour gérer votre schéma de base de données, le code suivant dans la méthode de votre modèle `OnModelCreating` configure une base de données SQL Server pour utiliser un classement qui respecte la casse :
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=40)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=DatabaseCollation)]
 
 ## <a name="column-collation"></a>Classement par colonnes
 
@@ -38,7 +38,7 @@ Les classements peuvent également être définis sur des colonnes de texte, rem
 
 Lors de l’utilisation de EF Core migrations pour gérer votre schéma de base de données, le code suivant configure la colonne pour `Name` que la propriété ne respecte pas la casse dans une base de données configurée pour respecter la casse :
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=OnModelCreating&highlight=6)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 ## <a name="explicit-collation-in-a-query"></a>Classement explicite dans une requête
 

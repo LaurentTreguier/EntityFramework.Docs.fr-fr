@@ -4,12 +4,12 @@ description: Comment configurer et mapper des propriétés d’entité à l’ai
 author: roji
 ms.date: 05/27/2020
 uid: core/modeling/entity-properties
-ms.openlocfilehash: fe6dd2c24b8f8ffffa8e0101f69966b7b7c74036
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 3c64f5ac1c86a83b6456df9e29472dc0b22d8524
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "97635547"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543365"
 ---
 # <a name="entity-properties"></a>Propriétés d'entité
 
@@ -57,11 +57,11 @@ Vous pouvez également configurer vos colonnes pour spécifier un type de donné
 
 ### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=4,6)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnDataType.cs?name=ColumnDataType&highlight=5,8)]
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
-[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=5-6)]
+[!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/ColumnDataType.cs?name=ColumnDataType&highlight=6-7)]
 
 ***
 
@@ -76,7 +76,7 @@ Dans l’exemple suivant, la configuration d’une longueur maximale de 500 entr
 
 #### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/MaxLength.cs?name=MaxLength&highlight=5)]
 
 #### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -125,7 +125,7 @@ L’exemple suivant montre un type d’entité avec des propriétés obligatoire
 
 #### <a name="without-nrt-default"></a>[Sans Diagnostics proactifs NRT (par défaut)](#tab/without-nrt)
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=4-8)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/NullableReferenceTypes/CustomerWithoutNullableReferenceTypes.cs?name=Customer&highlight=5,8)]
 
 #### <a name="with-nrt"></a>[Avec Diagnostics proactifs NRT](#tab/with-nrt)
 
@@ -146,7 +146,7 @@ Une propriété qui serait facultative par convention peut être configurée com
 
 #### <a name="data-annotations"></a>[Annotations de données](#tab/data-annotations)
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/Required.cs?name=Required&highlight=5)]
 
 #### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 
@@ -161,7 +161,7 @@ Une propriété qui serait facultative par convention peut être configurée com
 
 Un classement peut être défini sur des colonnes de texte, en déterminant comment elles sont comparées et triées. Par exemple, l’extrait de code suivant configure un SQL Server colonne pour qu’il ne respecte pas la casse :
 
-[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?range=42-43)]
+[!code-csharp[Main](../../../samples/core/Miscellaneous/Collations/Program.cs?name=ColumnCollation)]
 
 Si toutes les colonnes d’une base de données doivent utiliser un classement donné, définissez plutôt le classement au niveau de la base de données.
 
@@ -176,7 +176,7 @@ Vous pouvez définir un commentaire de texte arbitraire qui est défini sur la c
 > [!NOTE]
 > La définition de commentaires via des annotations de données a été introduite dans EF Core 5,0.
 
-[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=4)]
+[!code-csharp[Main](../../../samples/core/Modeling/DataAnnotations/ColumnComment.cs?name=ColumnComment&highlight=5)]
 
 ### <a name="fluent-api"></a>[API Fluent](#tab/fluent-api)
 

@@ -4,12 +4,12 @@ description: Fonctionnalités et scénarios divers impliquant le suivi des modif
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/miscellaneous
-ms.openlocfilehash: db1e32948b2a60ad1b85e300bbbccd54d49a84e5
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 9eb3186f4eef300e4824dc86700497444ece4a2c
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129741"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543417"
 ---
 # <a name="additional-change-tracking-features"></a>Fonctionnalités de Change Tracking supplémentaires
 
@@ -21,7 +21,7 @@ Ce document traite des divers scénarios et fonctionnalités impliquant le suivi
 > [!TIP]
 > Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures).
 
-## <a name="add-verses-addasync"></a>Ajouter des inscriptions AddAsync
+## <a name="add-versus-addasync"></a>`Add` alternative `AddAsync`
 
 Entity Framework Core (EF Core) fournit des méthodes Async chaque fois que l’utilisation de cette méthode peut entraîner une interaction avec la base de données. Des méthodes synchrones sont également fournies pour éviter une surcharge lors de l’utilisation de bases de données qui ne prennent pas en charge l’accès asynchrone haute performance.
 
@@ -29,16 +29,16 @@ Entity Framework Core (EF Core) fournit des méthodes Async chaque fois que l’
 
 D’autres méthodes similaires comme `Update` , `Attach` et `Remove` n’ont pas de surcharges asynchrones, car elles ne génèrent jamais de nouvelles valeurs de clés, et n’ont donc jamais besoin d’accéder à la base de données.
 
-## <a name="addrange-updaterange-attachrange-and-removerange"></a>AddRange, UpdateRange, AttachRange et RemoveRange
+## <a name="addrange-updaterange-attachrange-and-removerange"></a>`AddRange`, `UpdateRange`, `AttachRange` et `RemoveRange`
 
-<xref:Microsoft.EntityFrameworkCore.DbSet%601> et <xref:Microsoft.EntityFrameworkCore.DbContext> fournissent d’autres versions de `Add` ,, `Update` `Attach` et `Remove` qui acceptent plusieurs instances en un seul appel. Ces méthodes sont appelées `AddRange` ,, `UpdateRange` `AttachRange` et `RemoveRange` respectivement.
+<xref:Microsoft.EntityFrameworkCore.DbSet%601> et <xref:Microsoft.EntityFrameworkCore.DbContext> fournissent d’autres versions de `Add` ,, `Update` `Attach` et `Remove` qui acceptent plusieurs instances en un seul appel. Ces méthodes sont <xref:Microsoft.EntityFrameworkCore.DbSet%601.AddRange%2A> , <xref:Microsoft.EntityFrameworkCore.DbSet%601.UpdateRange%2A> , <xref:Microsoft.EntityFrameworkCore.DbSet%601.AttachRange%2A> et <xref:Microsoft.EntityFrameworkCore.DbSet%601.RemoveRange%2A> respectivement.
 
 Ces méthodes sont fournies à titre de commodité. L’utilisation d’une méthode « Range » a les mêmes fonctionnalités que les appels multiples à la méthode non-Range équivalente. Il n’existe aucune différence de performances significative entre les deux approches.
 
 > [!NOTE]
-> Cela diffère de EF6, où AddRange et ajoutent tous les deux automatiquement appelés DetectChanges, mais l’appel de Add multiple a entraîné l’appel de DetectChanges à plusieurs reprises au lieu d’une fois. Ainsi, AddRange a été plus efficace dans EF6. Dans EF Core, aucune de ces méthodes n’appelle automatiquement DetectChanges.
+> Cela diffère de EF6, où `AddRange` et `Add` les deux appellent automatiquement `DetectChanges` , mais l’appel `Add` de plusieurs fois a entraîné l’appel de DetectChanges à plusieurs reprises au lieu d’une fois. Cela a été `AddRange` plus efficace dans EF6. Dans EF Core, aucune de ces méthodes n’appelle automatiquement `DetectChanges` .
 
-## <a name="dbcontext-verses-dbset-methods"></a>Méthodes DbSet des formules DbContext
+## <a name="dbcontext-versus-dbset-methods"></a>Méthodes DbContext et DbSet
 
 De nombreuses méthodes, notamment `Add` ,, `Update` `Attach` et `Remove` , ont des implémentations sur <xref:Microsoft.EntityFrameworkCore.DbSet%601> et <xref:Microsoft.EntityFrameworkCore.DbContext> . Ces méthodes ont _exactement le même comportement_ pour les types d’entités normaux. Cela est dû au fait que le type CLR de l’entité est mappé sur un et un seul type d’entité dans le modèle de EF Core. Par conséquent, le type CLR définit complètement l’emplacement de l’entité dans le modèle, de sorte que le DbSet à utiliser peut être déterminé implicitement.
 
@@ -89,14 +89,14 @@ La [modification des clés étrangères et des navigations](xref:core/change-tra
 
             context.SaveChanges();
 -->
-[!code-csharp[DbContext_verses_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_verses_DbSet_methods_1)]
+[!code-csharp[DbContext_versus_DbSet_methods_1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/Samples.cs?name=DbContext_versus_DbSet_methods_1)]
 
 Notez que <xref:Microsoft.EntityFrameworkCore.DbContext.Set%60%601(System.String)?displayProperty=nameWithType> est utilisé pour créer un DbSet pour le `PostTag` type d’entité. Ce DbSet peut ensuite être utilisé pour appeler `Add` avec la nouvelle instance d’entité de jointure.
 
 > [!IMPORTANT]
 > Le type CLR utilisé pour les types d’entité de jointure par convention peut changer dans les versions ultérieures pour améliorer les performances. Ne dépendez d’aucun type d’entité de jointure spécifique, sauf s’il a été explicitement configuré comme c’est le cas pour `Dictionary<string, int>` dans le code ci-dessus.
 
-## <a name="property-verses-field-access"></a>Accès au champ des formules de propriété
+## <a name="property-versus-field-access"></a>Accès aux propriétés et aux champs
 
 À compter de EF Core 3,0, l’accès aux propriétés d’entité utilise le champ de stockage de la propriété par défaut. Cela est efficace et évite de déclencher des effets secondaires de l’appel des accesseurs get et des accesseurs set de propriété. Par exemple, il s’agit de la façon dont le chargement différé est capable d’éviter le déclenchement de boucles infinies. Pour plus d’informations sur la configuration des champs de stockage dans le modèle, consultez [champs de stockage](xref:core/modeling/backing-field) .
 
@@ -287,7 +287,7 @@ La `ValidFrom` propriété est configurée pour obtenir une valeur par défaut d
 -->
 [!code-csharp[OnModelCreating_Token](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/DefaultValueSamples.cs?name=OnModelCreating_Token)]
 
-Lors de l’insertion d’une entité de ce type, EF Core permet à la base de données de générer la valeur, sauf si une valeur explicite a été définie à la place. Exemple :
+Lors de l’insertion d’une entité de ce type, EF Core permet à la base de données de générer la valeur, sauf si une valeur explicite a été définie à la place. Par exemple :
 
 <!--
             using var context = new BlogsContext();
@@ -341,7 +341,7 @@ Où cette propriété est configurée pour avoir la valeur par défaut de la bas
 -->
 [!code-csharp[OnModelCreating_Foo1](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/DefaultValueSamples.cs?name=OnModelCreating_Foo1)]
 
-L’objectif est que la valeur par défaut-1 est utilisée chaque fois qu’une valeur explicite n’est pas définie. Toutefois, il n’est pas possible d’attribuer la valeur 0 (valeur par défaut du CLR pour les entiers) à EF Core de ne pas définir de valeur, ce qui signifie qu’il n’est pas possible d’insérer 0 pour cette propriété. Exemple :
+L’objectif est que la valeur par défaut-1 est utilisée chaque fois qu’une valeur explicite n’est pas définie. Toutefois, il n’est pas possible d’attribuer la valeur 0 (valeur par défaut du CLR pour les entiers) à EF Core de ne pas définir de valeur, ce qui signifie qu’il n’est pas possible d’insérer 0 pour cette propriété. Par exemple :
 
 <!--
         using var context = new BlogsContext();
@@ -395,7 +395,7 @@ Cela rend la valeur par défaut du CLR null, au lieu de 0, ce qui signifie que 0
 
 Le problème lié à la création de la propriété Nullable qui peut ne pas être Nullable conceptuellement dans le modèle de domaine. Le fait de forcer la propriété à accepter les valeurs NULL compromet le modèle.
 
-À compter de EF Core 5,0, la propriété peut être laissée non Nullable, avec uniquement le champ de stockage Nullable. Exemple :
+À compter de EF Core 5,0, la propriété peut être laissée non Nullable, avec uniquement le champ de stockage Nullable. Par exemple :
 
 <!--
 public class Foo3
@@ -412,7 +412,7 @@ public class Foo3
 -->
 [!code-csharp[Foo3](../../../samples/core/ChangeTracking/AdditionalChangeTrackingFeatures/DefaultValueSamples.cs?name=Foo3)]
 
-Cela permet d’insérer la valeur CLR par défaut (0) si la propriété a explicitement la valeur 0, tout en n’ayant pas besoin d’exposer la propriété comme Nullable dans le modèle de domaine. Exemple :
+Cela permet d’insérer la valeur CLR par défaut (0) si la propriété a explicitement la valeur 0, tout en n’ayant pas besoin d’exposer la propriété comme Nullable dans le modèle de domaine. Par exemple :
 
 <!--
             using var context = new BlogsContext();

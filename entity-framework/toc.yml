@@ -29,6 +29,8 @@
                   href: core/get-started/overview/install.md
                 - name: "Votre première application EF\_Core"
                   href: core/get-started/overview/first-app.md
+                - name: Packages NuGet
+                  href: core/what-is-new/nuget-packages.md
             - name: Tutoriel ASP.NET Core >>
               href: /aspnet/core/data/ef-rp/intro
             - name: Serveur Blazor avec de l’aide sur EF Core >>

@@ -2,14 +2,14 @@
 title: Mappages de fonction-fournisseur de base de données Microsoft SQL Server EF Core
 description: Mappages de fonctions du fournisseur de base de données Microsoft SQL Server
 author: bricelam
-ms.date: 10/07/2020
+ms.date: 1/26/2021
 uid: core/providers/sql-server/functions
-ms.openlocfilehash: 8eb66521b00f2f4879a098200239849c7219a095
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: c39e81fca52854e7fa7d5b2e81b80511e8184b90
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92066635"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543222"
 ---
 # <a name="function-mappings-of-the-microsoft-sql-server-provider"></a>Mappages de fonctions du fournisseur Microsoft SQL Server
 
@@ -20,8 +20,10 @@ Cette page affiche les membres .NET qui sont traduits en fonctions SQL lors de l
 .NET                         | SQL                           | Ajouté à
 ---------------------------- | ----------------------------- | --------
 bits. Contains (valeur)        | CHARINDEX ( @value , @bytes ) > 0 | EF Core 5.0
+bits. First ()                | Substring ( @bytes 1,1)       | EF Core 6.0
 bits. Base                 | DATALENGTH ( @bytes )            | EF Core 5.0
 bits. SequenceEqual (seconde)  | @bytes = @second              | EF Core 5.0
+octets [i]                     | Substring ( @bytes , @i + 1, 1)  | EF Core 6.0
 EF. Functions. DataLength (ARG) | DATALENGTH ( @arg )              | EF Core 5.0
 
 ## <a name="conversion-functions"></a>Fonctions de conversion
@@ -121,8 +123,9 @@ timeSpan. seconds                                            | DATEPART (seconde
 
 ## <a name="numeric-functions"></a>Fonctions Numériques
 
-.NET                    | SQL
------------------------ | ---
+.NET                    | SQL                  | Ajouté à
+----------------------- | -------------------- | --------
+EF. Functions. Random ()   | RAND ()               | EF Core 6.0
 Math. ABS (valeur)         | ABS ( @value )
 Math. Acos (d)            | ACOS ( @d )
 Math. Asin (d)            | ASIN ( @d )
@@ -153,11 +156,12 @@ EF. Functions. Contains (une PropertyReference, searchCondition)               |
 EF. Functions. Contains (une PropertyReference, searchCondition, languageTerm) | CONTAINs ( @propertyReference , @searchCondition , langue @languageTerm ) | EF Core 2.2
 EF. Functions. FreeText (une PropertyReference, freeText)                      | FREETEXT ( @propertyReference , @freeText )
 EF. Functions. FreeText (une PropertyReference, freeText, languageTerm)        | FREETEXT ( @propertyReference , @freeText , langue @languageTerm )
+EF. Functions. IsNumeric (expression)                                      | ISNUMERIC ( @expression )                                                 | EF Core 6.0
 EF. Functions. like (matchExpression, pattern)                             | @matchExpression PARENT @pattern
 EF. Functions. like (matchExpression, pattern, escapeCharacter)            | @matchExpression COMME @pattern Escape @escapeCharacter
 String. Compare (strA, strB)                                              | CAS quand @strA = @strB Then 0... EFFET
 chaîne. Concat (str0, str1)                                               | @str0 + @str1
-chaîne. IsNullOrEmpty (valeur)                                             | @value EST NULL ou @value = N' '
+chaîne. IsNullOrEmpty (valeur)                                             | @value EST NULL ou @value Like N' '
 chaîne. IsNullOrWhiteSpace (valeur)                                        | @value EST NULL ou LTRIM (RTRIM ( @value )) = N' '
 stringValue. CompareTo (strB)                                             | CAS quand @stringValue = @strB Then 0... EFFET
 stringValue. Contains (valeur)                                             | @stringValue LIKE N'% ' + @value + n'% '
@@ -188,6 +192,6 @@ Nullable. GetValueOrDefault (defaultValue) | COALESCE ( @nullable , @defaultValu
 > [!NOTE]
 > Certains SQL ont été simplifiés à des fins d’illustration. Le SQL réel est plus complexe pour gérer une plus grande plage de valeurs.
 
-## <a name="see-also"></a>Voir également
+## <a name="see-also"></a>Voir aussi
 
 * [Mappages de fonctions spatiales](xref:core/providers/sql-server/spatial#spatial-function-mappings)

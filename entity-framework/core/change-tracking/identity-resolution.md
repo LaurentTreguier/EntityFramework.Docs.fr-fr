@@ -4,12 +4,12 @@ description: Résolution de plusieurs instances d’entité en une seule instanc
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/identity-resolution
-ms.openlocfilehash: f94b61371dcead27853799719dabc7849500d466
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: d4c8f935c8d0ab92eaecd8fc7a4156bd824713d4
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129771"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543612"
 ---
 # <a name="identity-resolution-in-ef-core"></a>Résolution d’identité dans EF Core
 
@@ -66,7 +66,7 @@ Il existe plusieurs approches pour mettre à jour une entité avec de nouvelles 
 
 ### <a name="call-update"></a>Appel de mise à jour
 
-Souvent, l’entité à mettre à jour ne provient pas d’une requête sur le DbContext que nous allons utiliser pour SaveChanges. Par exemple, dans une application Web, une instance d’entité peut être créée à partir des informations contenues dans une demande de publication. La façon la plus simple de gérer cela consiste à utiliser <xref:Microsoft.EntityFrameworkCore.DbContext.Update%2A?displayProperty=nameWithType> ou <xref:Microsoft.EntityFrameworkCore.DbSet%601.Update%2A?displayProperty=nameWithType> . Exemple :
+Souvent, l’entité à mettre à jour ne provient pas d’une requête sur le DbContext que nous allons utiliser pour SaveChanges. Par exemple, dans une application Web, une instance d’entité peut être créée à partir des informations contenues dans une demande de publication. La façon la plus simple de gérer cela consiste à utiliser <xref:Microsoft.EntityFrameworkCore.DbContext.Update%2A?displayProperty=nameWithType> ou <xref:Microsoft.EntityFrameworkCore.DbSet%601.Update%2A?displayProperty=nameWithType> . Par exemple :
 
 <!--
     public static void UpdateFromHttpPost1(Blog blog)
@@ -89,7 +89,7 @@ Dans ce cas :
 
 ### <a name="query-then-apply-changes"></a>Requête, appliquer les modifications
 
-En règle générale, il n’est pas possible de connaître les valeurs de propriété qui ont été réellement modifiées lorsqu’une entité est créée à partir d’informations dans une requête de publication ou similaire. Il est souvent plus simple de mettre à jour toutes les valeurs de la base de données, comme nous l’avons fait dans l’exemple précédent. Toutefois, si l’application gère de nombreuses entités et qu’un petit nombre de celles-ci ont des modifications réelles, il peut être utile de limiter les mises à jour envoyées. Pour ce faire, vous pouvez exécuter une requête pour suivre les entités telles qu’elles existent actuellement dans la base de données, puis appliquer les modifications à ces entités suivies. Exemple :
+En règle générale, il n’est pas possible de connaître les valeurs de propriété qui ont été réellement modifiées lorsqu’une entité est créée à partir d’informations dans une requête de publication ou similaire. Il est souvent plus simple de mettre à jour toutes les valeurs de la base de données, comme nous l’avons fait dans l’exemple précédent. Toutefois, si l’application gère de nombreuses entités et qu’un petit nombre de celles-ci ont des modifications réelles, il peut être utile de limiter les mises à jour envoyées. Pour ce faire, vous pouvez exécuter une requête pour suivre les entités telles qu’elles existent actuellement dans la base de données, puis appliquer les modifications à ces entités suivies. Par exemple :
 
 <!--
     public static void UpdateFromHttpPost2(Blog blog)
@@ -129,7 +129,7 @@ EF Core a des assistances pour transférer des valeurs de propriété comme cell
 -->
 [!code-csharp[Updating_an_entity_3](../../../samples/core/ChangeTracking/IdentityResolutionInEFCore/IdentityResolutionSamples.cs?name=Updating_an_entity_3)]
 
-`SetValues` accepte divers types d’objets, y compris les objets DTO (Data Transfer Objects) avec des noms de propriété qui correspondent aux propriétés du type d’entité. Exemple :
+`SetValues` accepte divers types d’objets, y compris les objets DTO (Data Transfer Objects) avec des noms de propriété qui correspondent aux propriétés du type d’entité. Par exemple :
 
 <!--
     public static void UpdateFromHttpPost4(BlogDto dto)
@@ -165,7 +165,7 @@ Pour plus d’informations sur l’utilisation des valeurs de propriété, consu
 
 ### <a name="use-original-values"></a>Utiliser les valeurs d’origine
 
-Jusqu’à présent, chaque approche a exécuté une requête avant d’effectuer la mise à jour, ou mis à jour toutes les valeurs de propriété, qu’elles aient ou non été modifiées. Pour mettre à jour uniquement les valeurs qui ont été modifiées sans interroger dans le cadre de la mise à jour, vous devez disposer d’informations spécifiques sur les valeurs de propriété qui ont changé. Pour obtenir ces informations, il est courant de renvoyer les valeurs actuelles et d’origine dans la publication HTTP ou de manière similaire. Exemple :
+Jusqu’à présent, chaque approche a exécuté une requête avant d’effectuer la mise à jour, ou mis à jour toutes les valeurs de propriété, qu’elles aient ou non été modifiées. Pour mettre à jour uniquement les valeurs qui ont été modifiées sans interroger dans le cadre de la mise à jour, vous devez disposer d’informations spécifiques sur les valeurs de propriété qui ont changé. Pour obtenir ces informations, il est courant de renvoyer les valeurs actuelles et d’origine dans la publication HTTP ou de manière similaire. Par exemple :
 
 <!--
     public static void UpdateFromHttpPost6(Blog blog, Dictionary<string, object> originalValues)
@@ -290,7 +290,7 @@ Notez qu’il n’existe aucun blog ou billet en double dans le JSON. Cela signi
 
 ### <a name="handling-duplicates"></a>Gestion des doublons
 
-Le code de l’exemple précédent a sérialisé chaque blog avec les publications qui lui sont associées. Si vous modifiez cette valeur pour sérialiser chaque publication avec le blog qui lui est associé, les doublons sont introduits dans le JSON sérialisé. Exemple :
+Le code de l’exemple précédent a sérialisé chaque blog avec les publications qui lui sont associées. Si vous modifiez cette valeur pour sérialiser chaque publication avec le blog qui lui est associé, les doublons sont introduits dans le JSON sérialisé. Par exemple :
 
 <!--
             using var context = new BlogsContext();
@@ -403,7 +403,7 @@ Nous pouvons résoudre ce problème de deux manières :
 
 #### <a name="preserve-references"></a>Préserver les références
 
-Json.NET offre la `PreserveReferencesHandling` possibilité de gérer cela. Exemple :
+Json.NET offre la `PreserveReferencesHandling` possibilité de gérer cela. Par exemple :
 
 <!--
             var serialized = JsonConvert.SerializeObject(
@@ -490,7 +490,7 @@ Le JSON obtenu se présente désormais comme suit :
 
 Notez que ce JSON a remplacé les doublons par des références telles `"$ref": "5"` que qui font référence à l’instance déjà existante dans le graphique. Ce graphique peut encore être suivi à l’aide des appels simples à `Update` , comme indiqué ci-dessus.
 
-La <xref:System.Text.Json> prise en charge dans les bibliothèques de classes de base .net (BCL) a une option similaire qui produit le même résultat. Exemple :
+La <xref:System.Text.Json> prise en charge dans les bibliothèques de classes de base .net (BCL) a une option similaire qui produit le même résultat. Par exemple :
 
 <!--
             var serialized = System.Text.Json.JsonSerializer.Serialize(posts, new System.Text.Json.JsonSerializerOptions
@@ -503,7 +503,7 @@ La <xref:System.Text.Json> prise en charge dans les bibliothèques de classes de
 
 #### <a name="resolve-duplicates"></a>Résoudre les doublons
 
-S’il n’est pas possible d’éliminer les doublons dans le processus de sérialisation, <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> fournit un moyen de gérer cela. TrackGraph fonctionne comme `Add` `Attach` et, `Update` à ceci près qu’il génère un rappel pour chaque instance d’entité avant de le suivre. Ce rappel peut être utilisé pour effectuer le suivi de l’entité ou l’ignorer. Exemple :
+S’il n’est pas possible d’éliminer les doublons dans le processus de sérialisation, <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.TrackGraph%2A?displayProperty=nameWithType> fournit un moyen de gérer cela. TrackGraph fonctionne comme `Add` `Attach` et, `Update` à ceci près qu’il génère un rappel pour chaque instance d’entité avant de le suivre. Ce rappel peut être utilisé pour effectuer le suivi de l’entité ou l’ignorer. Par exemple :
 
 <!--
         public static void UpdatePostsFromJsonWithIdentityResolution(string json)
@@ -617,7 +617,7 @@ Pour résoudre ce problème, vous pouvez soit définir explicitement des valeurs
 
 ## <a name="identity-resolution-and-queries"></a>Résolution et requêtes d’identité
 
-La résolution d’identité s’effectue automatiquement lorsque les entités sont suivies à partir d’une requête. Cela signifie que si une instance d’entité avec une valeur de clé donnée est déjà suivie, cette instance suivie existante est utilisée au lieu de créer une nouvelle instance. Cela a une conséquence importante : si les données ont été modifiées dans la base de données, elles ne seront pas reflétées dans les résultats de la requête. C’est angood raison d’utiliser une nouvelle instance de DbContext pour chaque unité de travail, comme décrit dans [initialisation et configuration de DbContext](xref:core/dbcontext-configuration/index), et élaborée dans [change Tracking dans EF Core](xref:core/change-tracking/index).
+La résolution d’identité s’effectue automatiquement lorsque les entités sont suivies à partir d’une requête. Cela signifie que si une instance d’entité avec une valeur de clé donnée est déjà suivie, cette instance suivie existante est utilisée au lieu de créer une nouvelle instance. Cela a une conséquence importante : si les données ont été modifiées dans la base de données, elles ne seront pas reflétées dans les résultats de la requête. Il s’agit d’une bonne raison d’utiliser une nouvelle instance de DbContext pour chaque unité de travail, comme décrit dans [initialisation et configuration de DbContext](xref:core/dbcontext-configuration/index), et élaborée dans [change Tracking dans EF Core](xref:core/change-tracking/index).
 
 > [!IMPORTANT]
 > Il est important de comprendre que EF Core exécute toujours une requête LINQ sur un DbSet sur la base de données et renvoie uniquement les résultats en fonction de ce qui se trouve dans la base de données. Toutefois, pour une requête de suivi, si les entités retournées sont déjà suivies, les instances suivies sont utilisées au lieu de créer des instances à partir des données de la base de données.
@@ -657,7 +657,7 @@ Pour cette raison, il est recommandé d’éviter l’égalité des entités de 
 
 (À compter de .NET 5, il est inclus dans la bibliothèque de classes de base en tant que <xref:System.Collections.Generic.ReferenceEqualityComparer> .)
 
-Ce comparateur peut ensuite être utilisé lors de la création de navigations de collection. Exemple :
+Ce comparateur peut ensuite être utilisé lors de la création de navigations de collection. Par exemple :
 
 <!--
         public ICollection<Order> Orders { get; set; }

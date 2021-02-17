@@ -4,12 +4,12 @@ description: Guide de référence pour les outils de CLI .NET Core Entity Framew
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 60655c03a7fc29137ccb8d9304c94dac6b803cb2
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 5f25ad67060e59507285af6e78269baa784c5288
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983584"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543391"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Informations de référence sur les outils de Entity Framework Core-CLI .NET Core
 
@@ -128,7 +128,7 @@ dotnet ef database update -- --environment Production
 
 À partir de EF Core 5,0, tous les arguments supplémentaires sont passés à l’application.
 
-## <a name="dotnet-ef-database-drop"></a>dépôt de base de données EF dotnet
+## `dotnet ef database drop`
 
 Supprime la base de données.
 
@@ -141,7 +141,7 @@ Options :
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
-## <a name="dotnet-ef-database-update"></a>mise à jour de la base de données dotnet EF
+## `dotnet ef database update`
 
 Met à jour la base de données jusqu’à la dernière migration ou à une migration spécifiée.
 
@@ -166,19 +166,19 @@ dotnet ef database update InitialCreate
 dotnet ef database update 20180904195021_InitialCreate --connection your_connection_string
 ```
 
-## <a name="dotnet-ef-dbcontext-info"></a>informations sur la DbContext dotnet EF
+## `dotnet ef dbcontext info`
 
 Obtient des informations sur un `DbContext` type.
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
-## <a name="dotnet-ef-dbcontext-list"></a>liste de DbContext EF dotnet
+## `dotnet ef dbcontext list`
 
 Répertorie les `DbContext` types disponibles.
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
-## <a name="dotnet-ef-dbcontext-scaffold"></a>structure de l’DbContext dotnet EF
+## `dotnet ef dbcontext scaffold`
 
 Génère du code pour les `DbContext` types d’entité et pour une base de données. Pour que cette commande génère un type d’entité, la table de base de données doit avoir une clé primaire.
 
@@ -227,7 +227,7 @@ dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLL
 dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-## <a name="dotnet-ef-dbcontext-script"></a>script dotnet EF DbContext
+## `dotnet ef dbcontext script`
 
 Génère un script SQL à partir de DbContext. Ignore les migrations. Ajouté dans EF Core 3,0.
 
@@ -239,7 +239,7 @@ Options :
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
-## <a name="dotnet-ef-migrations-add"></a>ajout des migrations dotnet EF
+## `dotnet ef migrations add`
 
 Ajoute une nouvelle migration.
 
@@ -258,7 +258,7 @@ Options :
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
-## <a name="dotnet-ef-migrations-list"></a>Liste des migrations dotnet EF
+## `dotnet ef migrations list`
 
 Répertorie les migrations disponibles.
 
@@ -271,7 +271,7 @@ Options :
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
-## <a name="dotnet-ef-migrations-remove"></a>suppression des migrations dotnet EF
+## `dotnet ef migrations remove`
 
 Supprime la dernière migration (restaure les modifications de code qui ont été effectuées pour la migration).
 
@@ -283,7 +283,7 @@ Options :
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
-## <a name="dotnet-ef-migrations-script"></a>script de migrations dotnet EF
+## `dotnet ef migrations script`
 
 Génère un script SQL à partir des migrations.
 

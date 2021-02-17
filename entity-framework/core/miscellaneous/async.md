@@ -4,12 +4,12 @@ description: Interrogation et enregistrement de données de façon asynchrone av
 author: roji
 ms.date: 9/2/2020
 uid: core/miscellaneous/async
-ms.openlocfilehash: 52b3ac20a50babbed6937ebe3365ac1947dcaef1
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 78c109e9fd73dbb0451f9e29562799e4d22d66c9
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128574"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543352"
 ---
 # <a name="asynchronous-programming"></a>Programmation asynchrone
 
@@ -43,7 +43,7 @@ Notez qu’il n’existe aucune version asynchrone de certains opérateurs LINQ,
 
 ## <a name="client-side-async-linq-operators"></a>Opérateurs LINQ Async côté client
 
-Les opérateurs LINQ asynchrones décrits ci-dessus ne peuvent être utilisés que sur des requêtes EF. vous ne pouvez pas les utiliser avec une requête de LINQ to Objects côté client. Pour effectuer des opérations LINQ asynchrones côté client en dehors d’EF, utilisez le [package System. interactive. Async.](https://www.nuget.org/packages/System.Interactive.Async) Ce package peut être particulièrement utile pour effectuer des opérations sur le client qui ne peuvent pas être traduites à des fins d’évaluation sur le serveur.
+Les opérateurs LINQ asynchrones décrits ci-dessus ne peuvent être utilisés que sur des requêtes EF. vous ne pouvez pas les utiliser avec une requête de LINQ to Objects côté client. Pour effectuer des opérations LINQ asynchrones côté client en dehors d’EF, utilisez le [package System. Linq. Async.](https://www.nuget.org/packages/System.Linq.Async) Ce package peut être particulièrement utile pour effectuer des opérations sur le client qui ne peuvent pas être traduites à des fins d’évaluation sur le serveur.
 
 Malheureusement, la référencement de System. interactive. Async provoque des erreurs de compilation d’appel ambigu sur les opérateurs LINQ appliqués au DbSets d’EF. Cela rend difficile l’utilisation à la fois d’EF et de System. interactive. Async dans le même projet. Pour contourner ce problème, ajoutez AsQueryable à votre DbSet :
 

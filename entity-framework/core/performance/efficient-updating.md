@@ -4,12 +4,12 @@ description: Guide des performances pour une mise à jour efficace à l’aide d
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-updating
-ms.openlocfilehash: 92766d2339fb04ed5ebc3123429171cc9be424b1
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: f8e222991af52cd7cae6089e95ad6634b6b949f8
+ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657826"
+ms.lasthandoff: 02/16/2021
+ms.locfileid: "100543131"
 ---
 # <a name="efficient-updating"></a>Mise à jour efficace
 
@@ -19,7 +19,7 @@ EF Core permet de réduire les boucles en regroupant automatiquement toutes les 
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#SaveChangesBatching)]
 
-La version ci-dessus charge un blog à partir de la base de données, modifie son nom, puis ajoute deux nouveaux blogs. pour cela, deux instructions SQL INSERT et une instruction UPDATE sont envoyées à la base de données. Au lieu de les envoyer une par une, lorsque des instances de blog sont ajoutées, EF Core effectue le suivi de ces modifications en interne et les exécute dans un seul aller-retour lorsque <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> est appelé.
+La version ci-dessus charge un blog à partir de la base de données, modifie son URL, puis ajoute deux nouveaux blogs. pour cela, deux instructions SQL INSERT et une instruction UPDATE sont envoyées à la base de données. Au lieu de les envoyer une par une, lorsque des instances de blog sont ajoutées, EF Core effectue le suivi de ces modifications en interne et les exécute dans un seul aller-retour lorsque <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> est appelé.
 
 Le nombre d’instructions que les lots EF dans un seul aller-retour dépend du fournisseur de base de données utilisé. Par exemple, l’analyse des performances a montré que le traitement par lots est généralement moins efficace pour SQL Server lorsque moins de 4 instructions sont impliquées. De même, les avantages du traitement par lot se dégradent après environ 40 instructions pour SQL Server. par conséquent, EF Core n’exécutera par défaut que jusqu’à 42 instructions dans un lot unique et exécutera des instructions supplémentaires dans des allers-retours distincts.
 
