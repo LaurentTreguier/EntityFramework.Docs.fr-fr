@@ -4,12 +4,12 @@ description: Évaluation du client et du serveur des requêtes avec Entity Frame
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/client-eval
-ms.openlocfilehash: a1ddfb625be36cb05f01da08eb3be29512c54ab5
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: a1f37cb4f9c10f825d7dcbe54e9eecf75fa109a3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430142"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023781"
 ---
 # <a name="client-vs-server-evaluation"></a>Comparaison entre client et serveur
 
@@ -19,7 +19,7 @@ En règle générale, Entity Framework Core tente d’évaluer autant que possib
 > Avant la version 3,0, Entity Framework Core l’évaluation du client prise en charge n’importe où dans la requête. Pour plus d’informations, consultez la [section versions précédentes](#previous-versions).
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ClientEvaluation) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/ClientEvaluation) sur GitHub.
 
 ## <a name="client-evaluation-in-the-top-level-projection"></a>Évaluation du client dans la projection de niveau supérieur
 
@@ -53,9 +53,9 @@ Dans ce cas, vous pouvez choisir explicitement l’évaluation du client en appe
 
 Étant donné que la traduction et la compilation des requêtes sont coûteuses, EF Core met en cache le plan de requête compilé. Le délégué mis en cache peut utiliser le code client lors de l’évaluation du client de la projection de niveau supérieur. EF Core génère des paramètres pour les parties évaluées par le client de l’arborescence et réutilise le plan de requête en remplaçant les valeurs des paramètres. Toutefois, certaines constantes de l’arborescence de l’expression ne peuvent pas être converties en paramètres. Si le délégué mis en cache contient des constantes, ces objets ne peuvent pas être récupérés par le garbage collector, car ils sont toujours référencés. Si un tel objet contient un DbContext ou d’autres services qu’il contient, cela peut entraîner une augmentation de l’utilisation de la mémoire de l’application au fil du temps. Ce comportement est généralement le signe d’une fuite de mémoire. EF Core lève une exception chaque fois qu’il s’agit d’une constante d’un type qui ne peut pas être mappé à l’aide du fournisseur de base de données actuel. Les causes courantes et leurs solutions sont les suivantes :
 
-- **Utilisation d’une méthode d’instance** : lors de l’utilisation de méthodes d’instance dans une projection cliente, l’arborescence de l’expression contient une constante de l’instance. Si votre méthode n’utilise pas de données de l’instance, envisagez de rendre la méthode statique. Si vous avez besoin de données d’instance dans le corps de la méthode, transmettez les données spécifiques en tant qu’argument à la méthode.
-- **Passage d’arguments de constante à la méthode** : ce cas se produit généralement à l’aide `this` de dans un argument de la méthode cliente. Envisagez de fractionner l’argument dans en plusieurs arguments scalaires, qui peuvent être mappés par le fournisseur de base de données.
-- **Autres constantes** : si une constante est parvenue dans un autre cas, vous pouvez évaluer si la constante est nécessaire dans le traitement. S’il est nécessaire d’avoir la constante, ou si vous ne pouvez pas utiliser une solution des cas ci-dessus, créez une variable locale pour stocker la valeur et utilisez la variable locale dans la requête. EF Core convertira la variable locale en paramètre.
+- **Utilisation d’une méthode d’instance**: lors de l’utilisation de méthodes d’instance dans une projection cliente, l’arborescence de l’expression contient une constante de l’instance. Si votre méthode n’utilise pas de données de l’instance, envisagez de rendre la méthode statique. Si vous avez besoin de données d’instance dans le corps de la méthode, transmettez les données spécifiques en tant qu’argument à la méthode.
+- **Passage d’arguments de constante à la méthode**: ce cas se produit généralement à l’aide `this` de dans un argument de la méthode cliente. Envisagez de fractionner l’argument dans en plusieurs arguments scalaires, qui peuvent être mappés par le fournisseur de base de données.
+- **Autres constantes**: si une constante est parvenue dans un autre cas, vous pouvez évaluer si la constante est nécessaire dans le traitement. S’il est nécessaire d’avoir la constante, ou si vous ne pouvez pas utiliser une solution des cas ci-dessus, créez une variable locale pour stocker la valeur et utilisez la variable locale dans la requête. EF Core convertira la variable locale en paramètre.
 
 ## <a name="previous-versions"></a>Versions précédentes
 

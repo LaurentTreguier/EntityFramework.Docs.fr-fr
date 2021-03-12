@@ -4,12 +4,12 @@ description: Utilisation du DebugView ChangeTracker et des messages du journal p
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/debug-views
-ms.openlocfilehash: 76108120cf7f532d085fef12121bb639b065add0
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: cda81728beb5ffbc8604c191e84b3553a7343ec0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129729"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023170"
 ---
 # <a name="change-tracker-debugging"></a>Débogage du dispositif de suivi des modifications
 
@@ -22,7 +22,7 @@ Le dispositif de suivi des modifications de Entity Framework Core (EF Core) gén
 > Ce document suppose que les États d’entité et les principes de base du suivi des modifications de EF Core sont compris. Pour plus d’informations sur ces rubriques, consultez [change Tracking dans EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackerDebugging).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeTrackerDebugging).
 
 ## <a name="change-tracker-debug-view"></a>Modifier l’affichage de débogage du dispositif de suivi
 
@@ -199,7 +199,7 @@ Chaque entité suivie et son état s’affichent comme avant. Toutefois, l’aff
 
 #### <a name="property-values"></a>Valeurs de propriétés
 
-Pour chaque propriété, l’affichage long indique si la propriété fait partie d’une clé primaire (PK), d’une clé secondaire (AK) ou d’une clé étrangère (FK). Exemple :
+Pour chaque propriété, l’affichage long indique si la propriété fait partie d’une clé primaire (PK), d’une clé secondaire (AK) ou d’une clé étrangère (FK). Par exemple :
 
 - `Blog.Id` est une propriété de clé primaire : `Id: 1 PK`
 - `Blog.AssetsId` est une propriété de clé secondaire : `AssetsId: 'ed727978-1ffe-4709-baee-73913e8e44a0' AK`

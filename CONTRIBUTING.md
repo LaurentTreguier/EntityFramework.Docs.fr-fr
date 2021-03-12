@@ -12,12 +12,12 @@ Vous devez avoir une connaissance de base de [Git et GitHub.com](https://guides.
 
 * Ouvrez un [dossier](https://github.com/dotnet/EntityFramework.Docs/issues/new) décrivant ce que vous voulez faire, par exemple modifier un article existant ou en créer un. Attendez l’approbation de l’équipe EF avant de vous investir davantage.
 * EMBRANCHEZ les référentiels [dotnet/EntityFramework.Doc](https://github.com/dotnet/EntityFramework.Docs/) et créez une branche pour vos modifications.
-* Soumettez une demande de tirage dans la branche principale avec vos modifications.
+* Envoyez une demande de tirage (pull request) (PR) à main avec vos modifications.
 * Répondez aux commentaires sur la demande de tirage.
 
 ## <a name="markdown-syntax"></a>Syntaxe Markdown
 
-Les articles sont écrits en [DocFX Flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), un sur-ensemble de [GitHub Flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/). Pour obtenir des exemples de syntaxe et métadonnées DFM illustrant les fonctionnalités d’interface utilisateur couramment utilisées dans la documentation EF, consultez [Metadata and Markdown Template](https://github.com/dotnet/docs/blob/master/styleguide/template.md) dans le guide de style du dépôt .NET Core.
+Les articles sont écrits en [DocFX Flavored Markdown (DFM)](http://dotnet.github.io/docfx/spec/docfx_flavored_markdown.html), un sur-ensemble de [GitHub Flavored Markdown (GFM)](https://guides.github.com/features/mastering-markdown/). Pour obtenir des exemples de syntaxe et de métadonnées DFM pour les fonctionnalités de l’interface utilisateur communément utilisées dans la documentation d’EF, consultez [modèle de métadonnées et de démarques](https://docs.microsoft.com/contribute/dotnet/dotnet-style-guide).
 
 ## <a name="folder-structure-conventions"></a>Conventions relatives à la structure des dossiers
 
@@ -96,4 +96,4 @@ DocFX nécessite le .NET Framework sur Windows ou Mono pour Linux ou macOS.
 
 ## <a name="voice-and-tone"></a>Voix et ton
 
-Notre objectif est d’écrire une documentation facile à comprendre par le plus grand nombre. À cette fin, nous avons établi des recommandations pour le style rédactionnel que nous invitons nos contributeurs à suivre. Pour plus d’informations, consultez [Voice and tone guidelines](https://github.com/dotnet/docs/blob/master/styleguide/voice-tone.md) dans le dépôt .NET Core.
+Notre objectif est d’écrire une documentation facile à comprendre par le plus grand nombre. À cette fin, nous avons établi des recommandations pour le style rédactionnel que nous invitons nos contributeurs à suivre. Pour plus d’informations, consultez [recommandations relatives aux voix et aux tons](https://docs.microsoft.com/contribute/dotnet/dotnet-voice-tone).

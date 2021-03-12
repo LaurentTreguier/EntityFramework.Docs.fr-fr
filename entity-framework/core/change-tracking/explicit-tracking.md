@@ -4,12 +4,12 @@ description: Suivi explicite d’entités avec DbContext à l’aide de l’ajou
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/explicit-tracking
-ms.openlocfilehash: 3d9142cecf272c635c3a041fe6c5d9c49a26c33d
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: a0e51db4a70338e725ed40caa57a7f02245f0707
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543183"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024470"
 ---
 # <a name="explicitly-tracking-entities"></a>Suivi explicite des entités
 
@@ -21,10 +21,10 @@ Le suivi des modifications de Entity Framework Core (EF Core) fonctionne mieux l
 > Ce document suppose que les États d’entité et les principes de base du suivi des modifications de EF Core sont compris. Pour plus d’informations sur ces rubriques, consultez [change Tracking dans EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeTrackingInEFCore).
 
 > [!TIP]
-> Par souci de simplicité, ce document utilise et référence des méthodes synchrones, par exemple <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> plutôt que leurs équivalents Async, tels que <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> . L’appel et l’attente de la méthode Async peuvent être substitués sauf indication contraire.
+> Par souci de simplicité, ce document utilise et référence des méthodes synchrones, par exemple, <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> plutôt que leurs équivalents Async, tels que <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> . L’appel et l’attente de la méthode Async peuvent être substitués sauf indication contraire.
 
 ## <a name="introduction"></a>Introduction
 

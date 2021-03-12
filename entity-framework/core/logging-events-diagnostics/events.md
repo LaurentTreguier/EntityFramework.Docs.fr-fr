@@ -4,17 +4,17 @@ description: Événements .NET définis par EF Core
 author: ajcvickers
 ms.date: 10/15/2020
 uid: core/logging-events-diagnostics/events
-ms.openlocfilehash: 0888009af0bedfb63690e72c4a0e08979a9e9cf3
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: c26032d19d7bc05d30d4576534c7425da4472072
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129250"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024236"
 ---
 # <a name="net-events-in-ef-core"></a>Événements .NET dans EF Core
 
 > [!TIP]
-> Vous pouvez [Télécharger l’exemple Events](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) à partir de github.
+> Vous pouvez [Télécharger l’exemple Events](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Events) à partir de github.
 
 Entity Framework Core (EF Core) expose les [événements .net](/dotnet/standard/events/) pour agir en tant que rappels lorsque certains événements se produisent dans le code de EF Core. Les événements sont plus simples que les [intercepteurs](xref:core/logging-events-diagnostics/interceptors) et permettent une inscription plus flexible. Toutefois, ils sont synchronisés uniquement et ne peuvent donc pas effectuer d’e/s Async non bloquantes.
 
@@ -90,7 +90,7 @@ Cette méthode a la signature appropriée à utiliser comme gestionnaire d’év
 
 Les deux événements sont nécessaires, car les nouvelles entités déclenchent des `Tracked` événements lorsqu’ils sont suivis pour la première fois. `StateChanged` les événements sont déclenchés uniquement pour les entités qui changent d’État pendant qu’elles font _déjà_ l’objet d’un suivi.
 
-L’exemple de cet exemple contient une application console simple qui [apporte des modifications](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Events) à la base de données de blog :
+L’exemple de cet exemple contient une application console simple qui [apporte des modifications](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Events) à la base de données de blog :
 
 <!--
         using (var context = new BlogsContext())

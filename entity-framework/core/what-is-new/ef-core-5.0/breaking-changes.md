@@ -4,12 +4,12 @@ description: Liste complète des modifications avec rupture introduites dans Ent
 author: bricelam
 ms.date: 11/07/2020
 uid: core/what-is-new/ef-core-5.0/breaking-changes
-ms.openlocfilehash: 4a463e785edaceaf5dd96164c39e2cc9b5f86de4
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e52b77e8c19ab3005aee50e1cf4e170d3ee1f502
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128743"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023443"
 ---
 # <a name="breaking-changes-in-ef-core-50"></a>Modifications avec rupture dans EF Core 5,0
 
@@ -19,14 +19,14 @@ Les modifications d’API et de comportement suivantes peuvent bloquer les mises
 
 | **Modification critique**                                                                                                                   | **Impact** |
 |:--------------------------------------------------------------------------------------------------------------------------------------|------------|
-| [EF Core 5,0 ne prend pas en charge .NET Framework](#netstandard21)                                                                         | Medium     |
-| [Nouvel IProperty. GetColumnName () est désormais obsolète](#getcolumnname-obsolete)                                                                  | Medium     |
-| [La précision et l’échelle sont requises pour les décimales](#decimals)                                                                            | Medium     |
-| [Obligatoire sur la navigation du principal au dépendant a une sémantique différente](#required-dependent)                                 | Medium     |
-| [La définition de la requête est remplacée par des méthodes spécifiques au fournisseur](#defining-query)                                                          | Medium     |
-| [Les navigations de référence non NULL ne sont pas remplacées par les requêtes](#nonnullreferences)                                                   | Medium     |
-| [ToView () est traité différemment par les migrations](#toview)                                                                              | Medium     |
-| [ToTable (null) marque le type d’entité comme non mappé à une table](#totable)                                                              | Medium     |
+| [EF Core 5,0 ne prend pas en charge .NET Framework](#netstandard21)                                                                         | Moyenne     |
+| [Nouvel IProperty. GetColumnName () est désormais obsolète](#getcolumnname-obsolete)                                                                  | Moyenne     |
+| [La précision et l’échelle sont requises pour les décimales](#decimals)                                                                            | Moyenne     |
+| [Obligatoire sur la navigation du principal au dépendant a une sémantique différente](#required-dependent)                                 | Moyenne     |
+| [La définition de la requête est remplacée par des méthodes spécifiques au fournisseur](#defining-query)                                                          | Moyenne     |
+| [Les navigations de référence non NULL ne sont pas remplacées par les requêtes](#nonnullreferences)                                                   | Moyenne     |
+| [ToView () est traité différemment par les migrations](#toview)                                                                              | Moyenne     |
+| [ToTable (null) marque le type d’entité comme non mappé à une table](#totable)                                                              | Moyenne     |
 | [Suppression de la méthode HasGeometricDimension de l’extension NTS SQLite](#geometric-sqlite)                                                   | Faible        |
 | [Cosmos : la clé de partition est maintenant ajoutée à la clé primaire](#cosmos-partition-key)                                                        | Faible        |
 | [Cosmos : `id` propriété renommée en `__id`](#cosmos-id)                                                                                 | Faible        |
@@ -64,7 +64,7 @@ Cela fait partie du déplacement plus vaste entre les équipes .NET, visant à l
 
 #### <a name="mitigations"></a>Corrections
 
-.NET Framework applications peuvent continuer à utiliser EF Core 3,1, qui est une [version de support à long terme (LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core). Vous pouvez également mettre à jour les applications pour qu’elles utilisent .NET Core 2,1, .NET Core 3,1 ou .NET 5, qui prennent toutes en charge .NET Standard 2,1.
+.NET Framework applications peuvent continuer à utiliser EF Core 3,1, qui est une [version de support à long terme (LTS)](https://dotnet.microsoft.com/platform/support/policy/dotnet-core). Les applications peuvent également être mises à jour pour utiliser .NET Core 3,1 ou .NET 5, qui prennent toutes deux en charge .NET Standard 2,1.
 
 <a name="getcolumnname-obsolete"></a>
 
@@ -112,7 +112,7 @@ Les nouvelles fonctionnalités de SQL Server, y compris les Always Encrypted, re
 
 #### <a name="mitigations"></a>Corrections
 
-Mappez vos propriétés décimales à l’aide d’un nom de type qui comprend la précision et l’échelle. Exemple :
+Mappez vos propriétés décimales à l’aide d’un nom de type qui comprend la précision et l’échelle. Par exemple :
 
 ```csharp
 public class Blog
@@ -124,7 +124,7 @@ public class Blog
 }
 ```
 
-Ou utilisez `HasPrecision` dans les API de génération de modèle. Exemple :
+Ou utilisez `HasPrecision` dans les API de génération de modèle. Par exemple :
 
 ```csharp
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -219,7 +219,7 @@ Notez que l’initialisation hâtif d’une _collection_ de navigation vers une 
 
 #### <a name="why"></a>Pourquoi
 
-L’initialisation d’une propriété de navigation de référence en une instance d’entité « Empty » produit un État ambigu. Exemple :
+L’initialisation d’une propriété de navigation de référence en une instance d’entité « Empty » produit un État ambigu. Par exemple :
 
 ```csharp
 public class Blog
@@ -648,7 +648,7 @@ Ces requêtes ne sont plus prises en charge. Une exception est levée et indique
 
 Pour les scénarios de collecte corrélée, nous avons besoin de connaître la clé primaire de l’entité pour affecter des entités de regroupement au parent approprié. Lorsque la collection interne n’utilise pas `GroupBy` ou `Distinct` , la clé primaire manquante peut simplement être ajoutée à la projection. Toutefois, dans le cas de `GroupBy` , `Distinct` elle ne peut pas être effectuée car elle modifie le résultat d’une `GroupBy` `Distinct` opération or.
 
-**Atténuations**
+**Corrections**
 
 Réécrivez la requête de façon à ne pas utiliser les `GroupBy` `Distinct` opérations ou sur la collection interne, et effectuez ces opérations sur le client à la place.
 
@@ -689,7 +689,7 @@ Ces requêtes ne sont plus prises en charge. Une exception est levée, indiquant
 
 Nous ne pouvons pas matérialiser un objet d’un type pouvant faire l’objet d’une requête. il est donc créé automatiquement à l’aide du `List<T>` type. Cela entraînerait souvent une exception en raison d’une incompatibilité de type, ce qui n’était pas très clair et pourrait être surprenant pour certains utilisateurs. Nous avons décidé de reconnaître le modèle et de lever une exception plus significative.
 
-**Atténuations**
+**Corrections**
 
 Ajouter `ToList()` un appel après l’objet interrogeable dans la projection :
 

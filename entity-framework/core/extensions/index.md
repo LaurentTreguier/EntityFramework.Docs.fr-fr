@@ -2,14 +2,14 @@
 title: Outils et extensions - EF Core
 description: Outils et extensions externes pour Entity Framework Core.
 author: ErikEJ
-ms.date: 01/06/2021
+ms.date: 02/21/2021
 uid: core/extensions/index
-ms.openlocfilehash: 1198cd586902cd6222a94225056d076c847c9197
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 67d078250d8bfdb845cf98949ee1412a8fe842bd
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129016"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024379"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -276,3 +276,13 @@ Active l’ingénierie à rebours d’un modèle de EF Core à partir d’un SQL
 Générez du contenu DGML (Graph) qui visualise votre DbContext. Ajoute la méthode d’extension AsDgml () à la classe DbContext. Pour EF Core : 3, 5.
 
 [Wiki GitHub](https://github.com/ErikEJ/EFCorePowerTools/wiki/Inspect-your-DbContext-model)
+
+### <a name="entityframeworkexceptions"></a>EntityFramework. exceptions
+
+Lorsque vous utilisez Entity Framework Core toutes les exceptions de base de données sont encapsulées dans exception dbupdateexception. EntityFramework. exceptions gère tous les détails spécifiques à la base de données pour rechercher la contrainte qui a été violée et vous permet d’utiliser des exceptions typées telles que `UniqueConstraintException` , `CannotInsertNullException` ,, `MaxLengthExceededException` `NumericOverflowException` , `ReferenceConstraintException` lorsque votre requête enfreint des contraintes de base de données.
+
+Prend en charge SQL Server, Postgres, MySql, SQLite et Oracle
+
+Pour EF Core : 3, 5.
+
+[Dépôt GitHub](https://github.com/Giorgi/EntityFramework.Exceptions)

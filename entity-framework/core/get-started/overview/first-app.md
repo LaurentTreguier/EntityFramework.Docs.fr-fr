@@ -4,12 +4,12 @@ description: Tutoriel de prise en main d’Entity Framework Core.
 author: rick-anderson
 ms.date: 09/17/2019
 uid: core/get-started/overview/first-app
-ms.openlocfilehash: ee2b8f87e48f466f8385548b0b9e20a3791ba2a3
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 560a6f293e32f4e1f75c13367291c4e31e83b157
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94431558"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024340"
 ---
 # <a name="getting-started-with-ef-core"></a>Bien démarrer avec EF Core
 
@@ -17,7 +17,7 @@ Dans ce tutoriel, vous allez créer une application console .NET Core qui effect
 
 Vous pouvez suivre le tutoriel à l’aide de Visual Studio sur Windows, ou à l’aide de l’interface CLI .NET Core sur Windows, macOS ou Linux.
 
-[Affichez l’exemple proposé dans cet article sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/GetStarted).
+[Affichez l’exemple proposé dans cet article sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/GetStarted).
 
 ## <a name="prerequisites"></a>Prérequis
 
@@ -30,7 +30,7 @@ Installez les logiciels suivants :
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * [Visual Studio 2019 version 16.3 ou ultérieure](https://www.visualstudio.com/downloads/) avec cette charge de travail :
-  * **Développement multiplateforme .NET Core** (sous **Autres ensembles d’outils** )
+  * **Développement multiplateforme .NET Core** (sous **Autres ensembles d’outils**)
 
 ---
 
@@ -144,20 +144,7 @@ dotnet run
 
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio utilise un répertoire de travail incohérent lors de l’exécution d’applications console .NET Core. (voir [dotnet/project-system#3619](https://github.com/dotnet/project-system/issues/3619)). Cela entraîne la levée d’une exception : *aucune table correspondante : Blogs*. Pour mettre à jour le répertoire de travail :
-
-* Cliquez avec le bouton droit sur le projet et sélectionnez **Modifier le fichier de projet**.
-* Juste en dessous de la propriété *TargetFramework* , ajoutez ce qui suit :
-
-  ```xml
-  <StartWorkingDirectory>$(MSBuildProjectDirectory)</StartWorkingDirectory>
-  ```
-
-* Enregistrez le fichier
-
-Vous pouvez maintenant exécuter l’application :
-
-* **Déboguer > Démarrer sans débogage**
+**Déboguer > Démarrer sans débogage**
 
 ---
 

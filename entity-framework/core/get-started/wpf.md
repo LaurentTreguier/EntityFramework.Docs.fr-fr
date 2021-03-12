@@ -5,12 +5,12 @@ author: jeremylikness
 ms.author: jeliknes
 ms.date: 07/24/2020
 uid: core/get-started/wpf
-ms.openlocfilehash: f183064fafbe2d0e7b8dbdafa921169afc9ffe78
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 8b489207c297f0de5bb23b46c71a302300f538b0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429921"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024327"
 ---
 # <a name="getting-started-with-wpf"></a>Bien démarrer avec WPF
 
@@ -21,7 +21,7 @@ Le modèle définit deux types qui participent à une relation un-à-plusieurs 
 Les captures d’écran et les listes de code de cette procédure pas à pas sont extraites de Visual Studio 2019 16.6.5.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/WPF).
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/WPF).
 
 ## <a name="pre-requisites"></a>Prérequis
 
@@ -32,7 +32,7 @@ Vous devez avoir installé Visual Studio 2019 16,3 ou version ultérieure avec l
 1. Ouvrez Visual Studio.
 2. Dans la fenêtre de démarrage, choisissez **Créer un projet**.
 3. Recherchez « WPF », choisissez **application WPF (.net Core)** , puis choisissez **suivant**.
-4. Dans l’écran suivant, donnez un nom au projet, par exemple, **GetStartedWPF** , puis choisissez **créer.**
+4. Dans l’écran suivant, donnez un nom au projet, par exemple, **GetStartedWPF**, puis choisissez **créer.**
 
 ## <a name="install-the-entity-framework-nuget-packages"></a>Installer les packages NuGet Entity Framework
 
@@ -95,7 +95,7 @@ La propriété **Products** de la classe **Category** et la propriété **Catego
 
 EF Core vous donne la possibilité de charger automatiquement des entités associées à partir de la base de données la première fois que vous accédez à la propriété de navigation. Avec ce type de chargement (appelé chargement différé), sachez que la première fois que vous accédez à chaque propriété de navigation, une requête distincte est exécutée sur la base de données si le contenu n’est pas déjà dans le contexte.
 
-Lors de l’utilisation des types d’entités POCO (Plain Old C# Object), EF Core réalise un chargement différé en créant des instances de types de proxy dérivés au cours de l’exécution, puis en substituant les propriétés virtuelles dans vos classes pour ajouter le raccordement de chargement. Pour bénéficier du chargement différé d’objets connexes, vous devez déclarer les accesseurs get de propriété de navigation comme **public** et **virtuel** ( **substituable** dans Visual Basic) et votre classe ne doit pas être **sealed** ( **NotOverridable** dans Visual Basic). Lorsque vous utilisez Database First, les propriétés de navigation sont automatiquement configurées pour permettre le chargement différé.
+Lors de l’utilisation des types d’entités POCO (Plain Old C# Object), EF Core réalise un chargement différé en créant des instances de types de proxy dérivés au cours de l’exécution, puis en substituant les propriétés virtuelles dans vos classes pour ajouter le raccordement de chargement. Pour bénéficier du chargement différé d’objets connexes, vous devez déclarer les accesseurs get de propriété de navigation comme **public** et **virtuel** (**substituable** dans Visual Basic) et votre classe ne doit pas être **sealed** (**NotOverridable** dans Visual Basic). Lorsque vous utilisez Database First, les propriétés de navigation sont automatiquement configurées pour permettre le chargement différé.
 
 ## <a name="bind-object-to-controls"></a>Lier un objet à des contrôles
 

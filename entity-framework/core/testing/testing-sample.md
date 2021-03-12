@@ -11,24 +11,24 @@ no-loc:
 - Tags
 - items
 - tags
-ms.openlocfilehash: 7af516421a6ec3040b636507a6cd7976cabce3a9
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: a1c858333ee8ebe5a0ad82358c518c86576cdd32
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128795"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023456"
 ---
 # <a name="ef-core-testing-sample"></a>Exemple de test EF Core
 
 > [!TIP]
-> Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/).
+> Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/).
 > Notez que certains de ces tests **sont censés échouer**. Les raisons sont expliquées ci-dessous.
 
 Ce document décrit un exemple de test de code qui utilise EF Core.
 
 ## <a name="the-application"></a>L'application
 
-L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) contient deux projets :
+L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/) contient deux projets :
 
 - ItemsWebApi : [API Web très simple sauvegardée par ASP.net Core](/aspnet/core/tutorials/first-web-api) avec un seul contrôleur
 - Tests : projet de test [xUnit](https://xunit.net/) pour tester le contrôleur
@@ -43,7 +43,7 @@ Le modèle qui stocke cette API a deux types d’entité : Items et Tags .
   - Si un élément est balisé plusieurs fois avec la même étiquette, le décompte de la balise existante avec cette étiquette est incrémenté au lieu d’une nouvelle balise créée.
 - La suppression d’un Item doit supprimer tous les associés Tags .
 
-#### <a name="the-no-locitem-entity-type"></a>Le Item type d’entité
+#### <a name="the-item-entity-type"></a>Le Item type d’entité
 
 Le `Item` type d’entité :
 
@@ -68,7 +68,7 @@ Notez que le type d’entité limite la manière dont il peut être utilisé pou
   - En outre, Tag ne définit pas une propriété de clé étrangère.
     Dans ce cas, EF crée et gère une propriété en état Shadow.
 
-#### <a name="the-no-loctag-entity-type"></a>Le Tag type d’entité
+#### <a name="the-tag-entity-type"></a>Le Tag type d’entité
 
 Le `Tag` type d’entité :
 
@@ -80,7 +80,7 @@ Et sa configuration dans `DbContext.OnModelCreating` :
 
 De même Item que, Tag masque sa clé primaire et définit la `Label` propriété en lecture seule.
 
-### <a name="the-no-locitemscontroller"></a>Le Items contrôleur
+### <a name="the-itemscontroller"></a>Le Items contrôleur
 
 Le contrôleur d’API Web est plutôt basique.
 Elle obtient un `DbContext` à partir du conteneur d’injection de dépendances via l’injection de constructeur :
@@ -149,7 +149,7 @@ Quand chaque test est exécuté :
 [!code-csharp[Seeding](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=Seeding)]
 
 Chaque classe de test concrète hérite ensuite de cette.
-Exemple :
+Par exemple :
 
 [!code-csharp[SqliteItemsControllerTest](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/SqliteItemsControllerTest.cs?name=SqliteItemsControllerTest)]
 
@@ -160,7 +160,7 @@ Il serait intéressant d’utiliser l’injection de dépendances ici, mais le c
 Au lieu de cela, une DbContext est créée à l’aide de `new` , puis directement transmise en tant que dépendance au contrôleur.
 
 Chaque test exécute ensuite la méthode testée sur le contrôleur et Assert les résultats comme prévu.
-Exemple :
+Par exemple :
 
 [!code-csharp[CanGetItems](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanGetItems)]
 
@@ -170,7 +170,7 @@ Il correspond également mieux à ce qui se passe dans les services et applicati
 
 Les tests qui transforment la base de données créent une deuxième instance DbContext dans le test pour des raisons similaires.
 Autrement dit, créer un nouveau contexte propre, puis le lire dans la base de données pour vous assurer que les modifications ont été enregistrées dans la base de données.
-Exemple :
+Par exemple :
 
 [!code-csharp[CanAddItem](../../../samples/core/Miscellaneous/Testing/ItemsWebApi/Tests/ItemsControllerTest.cs?name=CanAddItem)]
 

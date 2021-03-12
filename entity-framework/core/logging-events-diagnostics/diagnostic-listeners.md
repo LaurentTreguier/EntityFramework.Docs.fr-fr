@@ -4,17 +4,17 @@ description: Utilisation de DiagnosticListener pour la consommation mondiale de 
 author: ajcvickers
 ms.date: 10/16/2020
 uid: core/logging-events-diagnostics/diagnostic-listeners
-ms.openlocfilehash: afb80aa8f05f70761e423f58653f681938079858
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 7035acaa6d306e73a0a2c071532ece0d8e9a0a1d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129263"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024249"
 ---
 # <a name="using-diagnostic-listeners-in-ef-core"></a>Utilisation d’écouteurs de diagnostic dans EF Core
 
 > [!TIP]
-> Vous pouvez [Télécharger l’exemple de cet article](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) à partir de github.
+> Vous pouvez [Télécharger l’exemple de cet article](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/DiagnosticListeners) à partir de github.
 
 Les écouteurs de diagnostic permettent d’écouter les EF Core événement qui se produit dans le processus .NET actuel. La <xref:System.Diagnostics.DiagnosticListener> classe fait partie d’un [mécanisme commun à travers .net](https://github.com/dotnet/runtime/blob/master/src/libraries/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md) pour obtenir des informations de diagnostic à partir d’applications en cours d’exécution.
 
@@ -55,7 +55,7 @@ Cet observateur doit ensuite être inscrit globalement, par exemple dans la mét
 -->
 [!code-csharp[RegisterDiagnosticListener](../../../samples/core/Miscellaneous/DiagnosticListeners/Program.cs?name=RegisterDiagnosticListener)]
 
-Deuxièmement, une fois que le EF Core DiagnosticListener est trouvé, un nouvel observateur clé-valeur est créé pour s’abonner aux événements EF Core réels. Exemple :
+Deuxièmement, une fois que le EF Core DiagnosticListener est trouvé, un nouvel observateur clé-valeur est créé pour s’abonner aux événements EF Core réels. Par exemple :
 
 <!--
 public class KeyValueObserver : IObserver<KeyValuePair<string, object>>
@@ -97,7 +97,7 @@ Par exemple, le code ci-dessus gère les <xref:Microsoft.EntityFrameworkCore.Dia
 > [!TIP]
 > ToString est substitué dans chaque classe de données d’événement EF Core pour générer le message de journal équivalent pour l’événement. Par exemple, l’appel de `ContextInitializedEventData.ToString` génère « Entity Framework Core 5.0.0 a initialisé «BlogsContext » à l’aide du fournisseur « Microsoft. EntityFrameworkCore. sqlite » avec options : None».
 
-L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/DiagnosticListeners) contient une application console simple qui apporte des modifications à la base de données de blog et imprime les événements de diagnostic rencontrés.
+L' [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/DiagnosticListeners) contient une application console simple qui apporte des modifications à la base de données de blog et imprime les événements de diagnostic rencontrés.
 
 <!--
     public static void Main()

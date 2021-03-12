@@ -4,12 +4,12 @@ description: Fonctionnalités et scénarios divers impliquant le suivi des modif
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/miscellaneous
-ms.openlocfilehash: 9eb3186f4eef300e4824dc86700497444ece4a2c
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 63d96227b6862e920d900a5cc3f1f85d7c6d85ac
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543417"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024431"
 ---
 # <a name="additional-change-tracking-features"></a>Fonctionnalités de Change Tracking supplémentaires
 
@@ -19,7 +19,7 @@ Ce document traite des divers scénarios et fonctionnalités impliquant le suivi
 > Ce document suppose que les États d’entité et les principes de base du suivi des modifications de EF Core sont compris. Pour plus d’informations sur ces rubriques, consultez [change Tracking dans EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/AdditionalChangeTrackingFeatures).
 
 ## <a name="add-versus-addasync"></a>`Add` alternative `AddAsync`
 

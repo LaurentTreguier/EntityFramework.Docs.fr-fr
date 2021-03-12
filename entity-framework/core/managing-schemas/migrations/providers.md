@@ -4,12 +4,12 @@ description: Utilisation de migrations pour gérer les schémas de base de donn�
 author: bricelam
 ms.date: 10/29/2020
 uid: core/managing-schemas/migrations/providers
-ms.openlocfilehash: fb8c6121a4baccf573e57b52ebeb3fcd29fe2cba
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: feed19abb188eebc473386b67fac62848e682d96
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429778"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024093"
 ---
 # <a name="migrations-with-multiple-providers"></a>Migrations avec plusieurs fournisseurs
 
@@ -53,7 +53,7 @@ Add-Migration InitialCreate -Context SqliteBlogContext -OutputDir Migrations\Sql
 Il est également possible d’utiliser un type DbContext. Cela nécessite actuellement le déplacement des migrations dans un assembly distinct. Pour obtenir des instructions sur la configuration de vos projets, reportez-vous à [la rubrique utilisation d’un projet de migration distinct](xref:core/managing-schemas/migrations/projects) .
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Schemas/TwoProjectMigrations).
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Schemas/TwoProjectMigrations).
 
 À partir de EF Core 5,0, vous pouvez passer des arguments dans l’application à partir des outils. Cela peut permettre un flux de travail plus rationalisé qui évite d’avoir à apporter des modifications manuelles au projet lors de l’exécution des outils.
 

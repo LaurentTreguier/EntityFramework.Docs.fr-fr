@@ -4,12 +4,12 @@ description: Utilisation de balises de requête pour aider à identifier des req
 author: smitpatel
 ms.date: 11/14/2018
 uid: core/querying/tags
-ms.openlocfilehash: f7cd3558682b1c19e03fc6d04957c7112e870734
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: bd71b8ce1cdb33aae417a90e84861de92224daa3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92065730"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023768"
 ---
 # <a name="query-tags"></a>Balises de requête
 
@@ -17,7 +17,7 @@ Les balises de requête permettent de mettre en corrélation les requêtes LINQ 
 Vous annotez une requête LINQ à l’aide de la nouvelle méthode `TagWith()` :
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Tags) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/Tags) sur GitHub.
 
 [!code-csharp[Main](../../../samples/core/Querying/Tags/Program.cs#BasicQueryTag)]
 

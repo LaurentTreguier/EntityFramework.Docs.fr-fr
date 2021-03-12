@@ -4,12 +4,12 @@ description: Vue d’ensemble du suivi des modifications pour EF Core
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/index
-ms.openlocfilehash: 8cfa4590af07ec1715eb48ec0c7acb3426b6a6b4
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: ccd14947cf53e3f8a38d2e0ddf2601b29e845775
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983259"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024444"
 ---
 # <a name="change-tracking-in-ef-core"></a>Change Tracking dans EF Core
 
@@ -18,10 +18,10 @@ Chaque <xref:Microsoft.EntityFrameworkCore.DbContext> instance suit les modifica
 Ce document présente une vue d’ensemble du suivi des modifications de Entity Framework Core (EF Core) et de son lien avec les requêtes et les mises à jour.
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeTrackingInEFCore).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeTrackingInEFCore).
 
 > [!TIP]
-> Par souci de simplicité, ce document utilise et référence des méthodes synchrones, par exemple <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> plutôt que leurs équivalents Async, tels que <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> . L’appel et l’attente de la méthode Async peuvent être substitués sauf indication contraire.
+> Par souci de simplicité, ce document utilise et référence des méthodes synchrones, par exemple, <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChanges%2A> plutôt que leurs équivalents Async, tels que <xref:Microsoft.EntityFrameworkCore.DbContext.SaveChangesAsync%2A> . L’appel et l’attente de la méthode Async peuvent être substitués sauf indication contraire.
 
 ## <a name="how-to-track-entities"></a>Comment suivre les entités
 

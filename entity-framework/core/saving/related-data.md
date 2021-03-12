@@ -4,19 +4,19 @@ description: Informations sur l’enregistrement de graphiques d’entités asso
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/related-data
-ms.openlocfilehash: f1cc752587e6a3eb58d070f5f573450b51986f70
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: abb8c0ddd146f38935753a5883dbbf3c1c40e3c9
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129094"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023469"
 ---
 # <a name="saving-related-data"></a>Enregistrement des données associées
 
 En plus des entités isolées, vous pouvez également utiliser les relations définies dans votre modèle.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/RelatedData/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/RelatedData/) sur GitHub.
 
 ## <a name="adding-a-graph-of-new-entities"></a>Ajout d’un graphique de nouvelles entités
 

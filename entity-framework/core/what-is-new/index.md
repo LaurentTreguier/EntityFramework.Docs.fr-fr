@@ -4,12 +4,12 @@ description: Versions actuelles d’EF Core et détails sur le planning des vers
 author: ajcvickers
 ms.date: 01/12/2021
 uid: core/what-is-new/index
-ms.openlocfilehash: 18d8055840b5a38dc62d20e7e18c440b7360c9e4
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 15e0f50bfe27e52c8c545c56c3ee5b4b141152c1
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128327"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023560"
 ---
 # <a name="ef-core-releases-and-planning"></a>Mise en production et planification d’EF Core
 
@@ -38,7 +38,7 @@ Pour plus d’informations sur les versions à expiration du support et les vers
 
 ## <a name="release-planning-and-schedules"></a>Planification et planification des versions
 
-Les versions d’EF Core s’alignent sur la [planification d’expédition .NET Core](https://github.com/dotnet/core/blob/master/roadmap.md).
+Les versions d’EF Core s’alignent sur la [planification d’expédition .NET Core](https://github.com/dotnet/core/blob/main/roadmap.md).
 
 Les mises à jour correctives sont généralement envoyées tous les mois, mais avec un délai assez long.
 Nous nous efforçons d’améliorer ce point.
@@ -46,7 +46,7 @@ Nous nous efforçons d’améliorer ce point.
 Pour plus d’informations sur la façon dont nous sélectionnons les éléments à envoyer dans chaque version, consultez le [processus de planification des versions](xref:core/what-is-new/release-planning).
 En règle générale, nous ne procédons pas à une planification détaillée au-delà de la prochaine version majeure ou mineure.
 
-## <a name="ef-core-60"></a>EF Core 6,0
+## <a name="ef-core-60"></a>EF Core 6.0
 
 La prochaine version stable planifiée est **EF Core 6,0**, planifiée pour le **2021 novembre**.
 

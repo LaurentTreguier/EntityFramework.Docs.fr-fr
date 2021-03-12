@@ -5,12 +5,12 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: edec7dfec3d6ac8313f9fc07af8844e4a19c3bb2
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983597"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024275"
 ---
 # <a name="getting-started-with-ef-core-and-xamarin"></a>Prise en main avec EF Core et Xamarin
 
@@ -19,7 +19,7 @@ Dans ce didacticiel, vous allez créer une application [Xamarin. Forms](/xamarin
 Vous pouvez suivre le didacticiel à l’aide de Visual Studio sur Windows ou Visual Studio pour Mac.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin).
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Xamarin).
 
 ## <a name="prerequisites"></a>Prérequis
 

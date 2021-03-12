@@ -4,12 +4,12 @@ description: Détection des modifications des propriétés et des relations à l
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/change-detection
-ms.openlocfilehash: 39dc66a3ba74be89d3e470cfe788a357401965d1
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: fae8bdb1a89478531535b377f4ba8b02d1c848f4
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129733"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023183"
 ---
 # <a name="change-detection-and-notifications"></a>Détection des modifications et notifications
 
@@ -18,7 +18,7 @@ Chaque <xref:Microsoft.EntityFrameworkCore.DbContext> instance suit les modifica
 Les modifications de propriété et de relation de suivi requièrent que DbContext soit en mesure de détecter ces modifications. Ce document explique comment cette détection se produit, et comment utiliser les notifications de propriétés ou les proxys de suivi des modifications pour forcer la détection immédiate des modifications.
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangeDetectionAndNotifications).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangeDetectionAndNotifications).
 
 ## <a name="snapshot-change-tracking"></a>Suivi des modifications par instantané
 
@@ -202,7 +202,7 @@ Le suivi des modifications d’instantané est recommandé pour la plupart des a
 
 ### <a name="implementing-notification-entities"></a>Implémentation des entités de notification
 
-Les entités de notification utilisent les <xref:System.ComponentModel.INotifyPropertyChanging> <xref:System.ComponentModel.INotifyPropertyChanged> interfaces et, qui font partie de la bibliothèque de classes de base .net (BCL). Ces interfaces définissent les événements qui doivent être déclenchés avant et après la modification d’une valeur de propriété. Exemple :
+Les entités de notification utilisent les <xref:System.ComponentModel.INotifyPropertyChanging> <xref:System.ComponentModel.INotifyPropertyChanged> interfaces et, qui font partie de la bibliothèque de classes de base .net (BCL). Ces interfaces définissent les événements qui doivent être déclenchés avant et après la modification d’une valeur de propriété. Par exemple :
 
 <!--
     public class Blog : INotifyPropertyChanging, INotifyPropertyChanged
@@ -241,7 +241,7 @@ Les entités de notification utilisent les <xref:System.ComponentModel.INotifyPr
 
 En outre, les navigations dans les collections doivent implémenter `INotifyCollectionChanged` ; dans l’exemple ci-dessus, cela satisfait à l’aide d’un <xref:System.Collections.ObjectModel.ObservableCollection%601> de publications. EF Core est également fourni avec une <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ObservableHashSet%601> implémentation qui offre des recherches plus efficaces au détriment du classement stable.
 
-La majeure partie de ce code de notification est généralement déplacée dans une classe de base non mappée. Exemple :
+La majeure partie de ce code de notification est généralement déplacée dans une classe de base non mappée. Par exemple :
 
 <!--
     public class Blog : NotifyingEntity
@@ -288,7 +288,7 @@ La majeure partie de ce code de notification est généralement déplacée dans 
 
 Il n’existe aucun moyen pour EF Core de valider que `INotifyPropertyChanging` ou `INotifyPropertyChanged` sont entièrement implémentés pour une utilisation avec EF Core. En particulier, certaines utilisations de ces interfaces le font avec des notifications uniquement sur certaines propriétés, plutôt que sur toutes les propriétés (y compris les navigations) requises par EF Core. C’est la raison pour laquelle EF Core ne se raccorde pas automatiquement à ces événements.
 
-Au lieu de cela, EF Core doit être configuré pour utiliser ces entités de notification. Cette opération est généralement effectuée pour tous les types d’entité en appelant <xref:Microsoft.EntityFrameworkCore.ModelBuilder.HasChangeTrackingStrategy%2A?displayProperty=nameWithType> . Exemple :
+Au lieu de cela, EF Core doit être configuré pour utiliser ces entités de notification. Cette opération est généralement effectuée pour tous les types d’entité en appelant <xref:Microsoft.EntityFrameworkCore.ModelBuilder.HasChangeTrackingStrategy%2A?displayProperty=nameWithType> . Par exemple :
 
 <!--
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -313,7 +313,7 @@ Les différentes <xref:Microsoft.EntityFrameworkCore.ChangeTrackingStrategy> val
 
 ### <a name="using-notification-entities"></a>Utilisation des entités de notification
 
-Les entités de notification se comportent comme n’importe quelle autre entité, sauf que les modifications apportées aux instances d’entité ne nécessitent pas d’appel à <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges?displayProperty=nameWithType> pour détecter ces modifications. Exemple :
+Les entités de notification se comportent comme n’importe quelle autre entité, sauf que les modifications apportées aux instances d’entité ne nécessitent pas d’appel à <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges?displayProperty=nameWithType> pour détecter ces modifications. Par exemple :
 
 <!--
             using var context = new BlogsContext();

@@ -4,12 +4,12 @@ description: Configuration des comportements en cascade déclenchés lorsqu’un
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 27ba84fa5d7e0d72e66ccbd96df9b6a5008791fb
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 6e897be6b4f5e6550d9ed3590445df60bef4fb3c
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983337"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023612"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -30,7 +30,7 @@ La deuxième option est valide pour tout type de relation et est connue sous le 
 > Ce document décrit les suppressions en cascade (et la suppression des orphelins) du point de vue de la mise à jour de la base de données. Cela permet d’utiliser de façon intensive les concepts introduits dans [change Tracking dans EF Core](xref:core/change-tracking/index) et de [modifier les clés étrangères et les navigations](xref:core/change-tracking/relationship-changes). Veillez à bien comprendre ces concepts avant de traiter le matériel ici.
 
 > [!TIP]  
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/CascadeDeletes).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/CascadeDeletes).
 
 ## <a name="when-cascading-behaviors-happen"></a>Quand des comportements en cascade se produisent
 

@@ -4,12 +4,12 @@ description: Comment configurer et mapper des types d’entité à l’aide de E
 author: roji
 ms.date: 10/06/2020
 uid: core/modeling/entity-types
-ms.openlocfilehash: ca8cb8560afe374218e763bc0476839187a40ece
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 6c8029b64210dd9bc69fd53d9a3b4aa06bf519e0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635768"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023989"
 ---
 # <a name="entity-types"></a>Types d'entités
 
@@ -68,7 +68,7 @@ Vous pouvez configurer manuellement le nom de la table :
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableName.cs?Name=TableName&highlight=3-4)]
 
-**_
+***
 
 ## <a name="table-schema"></a>Schéma de table
 
@@ -84,7 +84,7 @@ Vous pouvez configurer des tables à créer dans un schéma spécifique comme su
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableNameAndSchema.cs?name=TableNameAndSchema&highlight=3-4)]
 
-_*_
+***
 
 Au lieu de spécifier le schéma pour chaque table, vous pouvez également définir le schéma par défaut au niveau du modèle à l’aide de l’API Fluent :
 
@@ -104,7 +104,7 @@ Les types d’entités peuvent être mappés à des vues de base de données à 
  Le mappage à une vue supprime le mappage de table par défaut, mais à partir d’EF 5,0, le type d’entité peut également être mappé à une table de manière explicite. Dans ce cas, le mappage de requête est utilisé pour les requêtes et le mappage de table est utilisé pour les mises à jour.
 
 > [!TIP]
-> Pour tester les types d’entités mappés à des vues à l’aide du fournisseur en mémoire, mappez-les à une requête via `ToInMemoryQuery` . Pour plus d’informations, consultez un [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) à l’aide de cette technique.
+> Pour tester les types d’entités mappés à des vues à l’aide du fournisseur en mémoire, mappez-les à une requête via `ToInMemoryQuery` . Pour plus d’informations, consultez un [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/) à l’aide de cette technique.
 
 ## <a name="table-valued-function-mapping"></a>Mappage de fonction table
 
@@ -164,4 +164,4 @@ Vous pouvez définir un commentaire de texte arbitraire qui est défini sur la t
 
 [!code-csharp[Main](../../../samples/core/Modeling/FluentAPI/TableComment.cs?name=TableComment&highlight=4)]
 
-_**
+***

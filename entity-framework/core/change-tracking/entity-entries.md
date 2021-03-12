@@ -4,12 +4,12 @@ description: Utilisation de EntityEntry, DbContext. Entries et DbSet. local pour
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/entity-entries
-ms.openlocfilehash: f385016aba61535f33e34c622dd43ce6dc823fc5
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 758d21f44dfeb8b1de2702165df0d705edfb91b6
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129734"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024509"
 ---
 # <a name="accessing-tracked-entities"></a>Accès aux entités suivies
 
@@ -26,7 +26,7 @@ Chacun d’eux est décrit plus en détail dans les sections ci-dessous.
 > Ce document suppose que les États d’entité et les principes de base du suivi des modifications de EF Core sont compris. Pour plus d’informations sur ces rubriques, consultez [change Tracking dans EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/AccessingTrackedEntities).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/AccessingTrackedEntities).
 
 ## <a name="using-dbcontextentry-and-entityentry-instances"></a>Utilisation d’instances DbContext. Entry et EntityEntry
 
@@ -39,7 +39,7 @@ Pour chaque entité suivie, Entity Framework Core (EF Core) effectue le suivi de
 - Valeurs de propriété qui ont été modifiées depuis leur interrogation.
 - Autres informations sur les valeurs de propriété, par exemple si la valeur est [temporaire](xref:core/change-tracking/miscellaneous#temporary-values)ou non.
 
-Le passage d’une instance d’entité à <xref:System.Data.Entity.DbContext.Entry%2A?displayProperty=nameWithType> entraîne <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601> la fourniture d’un accès à ces informations pour l’entité donnée. Exemple :
+Le passage d’une instance d’entité à <xref:System.Data.Entity.DbContext.Entry%2A?displayProperty=nameWithType> entraîne <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601> la fourniture d’un accès à ces informations pour l’entité donnée. Par exemple :
 
 <!--
         using var context = new BlogsContext();
@@ -54,7 +54,7 @@ Les sections suivantes montrent comment utiliser un EntityEntry pour accéder à
 
 ### <a name="working-with-the-entity"></a>Utilisation de l’entité
 
-L’utilisation la plus courante de <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601> est d’accéder au actuel <xref:Microsoft.EntityFrameworkCore.EntityState> d’une entité. Exemple :
+L’utilisation la plus courante de <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601> est d’accéder au actuel <xref:Microsoft.EntityFrameworkCore.EntityState> d’une entité. Par exemple :
 
 <!--
         var currentState = context.Entry(blog).State;
@@ -100,7 +100,7 @@ Plusieurs surcharges de <xref:Microsoft.EntityFrameworkCore.ChangeTracking.Entit
 -->
 [!code-csharp[Work_with_a_single_property_1a](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=Work_with_a_single_property_1a)]
 
-Le nom de la propriété peut être passé en tant que chaîne. Exemple :
+Le nom de la propriété peut être passé en tant que chaîne. Par exemple :
 
 <!--
             PropertyEntry<Blog, string> propertyEntry = context.Entry(blog).Property<string>("Name");
@@ -122,7 +122,7 @@ Les deux méthodes de propriété utilisées ci-dessus retournent une instance g
 -->
 [!code-csharp[Work_with_a_single_property_1c](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=Work_with_a_single_property_1c)]
 
-Cela permet d’accéder aux informations de propriété pour toute propriété, quel que soit son type, aux dépens des types valeur Boxing. Exemple :
+Cela permet d’accéder aux informations de propriété pour toute propriété, quel que soit son type, aux dépens des types valeur Boxing. Par exemple :
 
 <!--
             object blog = context.Blogs.Single(e => e.Id == 1);
@@ -153,7 +153,7 @@ Remarques :
 
 Plusieurs surcharges de <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601.Reference%2A?displayProperty=nameWithType> , <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601.Collection%2A?displayProperty=nameWithType> et <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Navigation%2A?displayProperty=nameWithType> autorisent l’accès aux informations relatives à une navigation individuelle.
 
-Les navigations de référence vers une entité associée unique sont accessibles par le biais des <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601.Reference%2A> méthodes. Les navigations de référence pointent vers les côtés « un » d’une relation un-à-plusieurs, et les deux côtés d’une relation un-à-un. Exemple :
+Les navigations de référence vers une entité associée unique sont accessibles par le biais des <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601.Reference%2A> méthodes. Les navigations de référence pointent vers les côtés « un » d’une relation un-à-plusieurs, et les deux côtés d’une relation un-à-un. Par exemple :
 
 <!--
         ReferenceEntry<Post, Blog> referenceEntry1 = context.Entry(post).Reference(e => e.Blog);
@@ -162,7 +162,7 @@ Les navigations de référence vers une entité associée unique sont accessible
 -->
 [!code-csharp[Work_with_a_single_navigation_1](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=Work_with_a_single_navigation_1)]
 
-Les navigations peuvent également être des collections d’entités associées lorsqu’elles sont utilisées pour les côtés « plusieurs » des relations un-à-plusieurs et plusieurs-à-plusieurs. Les <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601.Collection%2A> méthodes sont utilisées pour accéder aux navigations de collection. Exemple :
+Les navigations peuvent également être des collections d’entités associées lorsqu’elles sont utilisées pour les côtés « plusieurs » des relations un-à-plusieurs et plusieurs-à-plusieurs. Les <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry%601.Collection%2A> méthodes sont utilisées pour accéder aux navigations de collection. Par exemple :
 
 <!--
         CollectionEntry<Blog, Post> collectionEntry1 = context.Entry(blog).Collection(e => e.Posts);
@@ -171,7 +171,7 @@ Les navigations peuvent également être des collections d’entités associées
 -->
 [!code-csharp[Work_with_a_single_navigation_2a](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=Work_with_a_single_navigation_2a)]
 
-Certaines opérations sont courantes pour toutes les navigations. Ils sont accessibles à la fois pour les navigations de référence et de collection à l’aide de la <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Navigation%2A?displayProperty=nameWithType> méthode. Notez que seul un accès non générique est disponible lorsque vous accédez à toutes les navigations ensemble. Exemple :
+Certaines opérations sont courantes pour toutes les navigations. Ils sont accessibles à la fois pour les navigations de référence et de collection à l’aide de la <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Navigation%2A?displayProperty=nameWithType> méthode. Notez que seul un accès non générique est disponible lorsque vous accédez à toutes les navigations ensemble. Par exemple :
 
 <!--
         NavigationEntry navigationEntry = context.Entry(blog).Navigation("Posts");
@@ -203,7 +203,7 @@ Le tableau suivant récapitule les différentes façons d’utiliser <xref:Micro
 -->
 [!code-csharp[Work_with_all_properties_of_an_entity_1](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=Work_with_all_properties_of_an_entity_1)]
 
-En outre, EntityEntry contient plusieurs méthodes pour récupérer et définir toutes les valeurs de propriété en même temps. Ces méthodes utilisent la <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyValues> classe, qui représente une collection de propriétés et leurs valeurs. PropertyValues peut être obtenu pour les valeurs actuelles ou d’origine, ou pour les valeurs qui sont actuellement stockées dans la base de données. Exemple :
+En outre, EntityEntry contient plusieurs méthodes pour récupérer et définir toutes les valeurs de propriété en même temps. Ces méthodes utilisent la <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyValues> classe, qui représente une collection de propriétés et leurs valeurs. PropertyValues peut être obtenu pour les valeurs actuelles ou d’origine, ou pour les valeurs qui sont actuellement stockées dans la base de données. Par exemple :
 
 <!--
         var currentValues = context.Entry(blog).CurrentValues;
@@ -242,7 +242,7 @@ Notez que les propriétés ne sont marquées comme modifiées que si la valeur d
 
 #### <a name="setting-current-or-original-values-from-a-dictionary"></a>Définition des valeurs actuelles ou d’origine à partir d’un dictionnaire
 
-L’exemple précédent définit des valeurs à partir d’une instance d’entité ou de DTO. Le même comportement est disponible lorsque les valeurs de propriété sont stockées sous forme de paires nom/valeur dans un dictionnaire. Exemple :
+L’exemple précédent définit des valeurs à partir d’une instance d’entité ou de DTO. Le même comportement est disponible lorsque les valeurs de propriété sont stockées sous forme de paires nom/valeur dans un dictionnaire. Par exemple :
 
 <!--
         var blogDictionary = new Dictionary<string, object>
@@ -257,7 +257,7 @@ L’exemple précédent définit des valeurs à partir d’une instance d’enti
 
 #### <a name="setting-current-or-original-values-from-the-database"></a>Définition des valeurs actuelles ou d’origine de la base de données
 
-Les valeurs actuelles ou d’origine d’une entité peuvent être mises à jour avec les valeurs les plus récentes de la base de données en appelant <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.GetDatabaseValues> ou <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.GetDatabaseValuesAsync%2A> et en utilisant l’objet retourné pour définir les valeurs actuelles ou d’origine, ou les deux. Exemple :
+Les valeurs actuelles ou d’origine d’une entité peuvent être mises à jour avec les valeurs les plus récentes de la base de données en appelant <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.GetDatabaseValues> ou <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.GetDatabaseValuesAsync%2A> et en utilisant l’objet retourné pour définir les valeurs actuelles ou d’origine, ou les deux. Par exemple :
 
 <!--
         var databaseValues = context.Entry(blog).GetDatabaseValues();
@@ -268,7 +268,7 @@ Les valeurs actuelles ou d’origine d’une entité peuvent être mises à jour
 
 #### <a name="creating-a-cloned-object-containing-current-original-or-database-values"></a>Création d’un objet cloné contenant les valeurs actuelles, d’origine ou de base de données
 
-L’objet PropertyValues retourné par CurrentValues, OriginalValues ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité à l’aide de <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyValues.ToObject?displayProperty=nameWithType> . Exemple :
+L’objet PropertyValues retourné par CurrentValues, OriginalValues ou GetDatabaseValues peut être utilisé pour créer un clone de l’entité à l’aide de <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyValues.ToObject?displayProperty=nameWithType> . Par exemple :
 
 <!--
 var clonedBlog = context.Entry(blog).GetDatabaseValues().ToObject();
@@ -293,7 +293,7 @@ L’objet cloné peut être utile pour résoudre les problèmes liés aux mises 
 
 ### <a name="working-with-all-members-of-an-entity"></a>Utilisation de tous les membres d’une entité
 
-Les propriétés normales et les propriétés de navigation ont un État et un comportement différents. Il est donc courant de traiter les navigations et les non-navigations séparément, comme indiqué dans les sections ci-dessus. Toutefois, il peut parfois être utile d’effectuer une opération avec n’importe quel membre de l’entité, qu’il s’agisse d’une propriété normale ou d’une navigation. <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Member%2A?displayProperty=nameWithType> et <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Members?displayProperty=nameWithType> sont fournis à cet effet. Exemple :
+Les propriétés normales et les propriétés de navigation ont un État et un comportement différents. Il est donc courant de traiter les navigations et les non-navigations séparément, comme indiqué dans les sections ci-dessus. Toutefois, il peut parfois être utile d’effectuer une opération avec n’importe quel membre de l’entité, qu’il s’agisse d’une propriété normale ou d’une navigation. <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Member%2A?displayProperty=nameWithType> et <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry.Members?displayProperty=nameWithType> sont fournis à cet effet. Par exemple :
 
 <!--
         foreach (var memberEntry in context.Entry(blog).Members)
@@ -371,7 +371,7 @@ public class OrderLine
 -->
 [!code-csharp[OrderLine](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=OrderLine)]
 
-La clé composite doit être configurée dans <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A?displayProperty=nameWithType> pour définir les éléments clés _et leur ordre_. Exemple :
+La clé composite doit être configurée dans <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A?displayProperty=nameWithType> pour définir les éléments clés _et leur ordre_. Par exemple :
 
 <!--
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -383,7 +383,7 @@ La clé composite doit être configurée dans <xref:Microsoft.EntityFrameworkCor
 -->
 [!code-csharp[OnModelCreating](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=OnModelCreating)]
 
-Notez que `OrderId` est la première partie de la clé et `ProductId` est la deuxième partie de la clé. Cet ordre doit être utilisé lors du passage de valeurs de clés à rechercher. Exemple :
+Notez que `OrderId` est la première partie de la clé et `ProductId` est la deuxième partie de la clé. Cet ordre doit être utilisé lors du passage de valeurs de clés à rechercher. Par exemple :
 
 <!--
         var orderline = context.OrderLines.Find(orderId, productId);
@@ -392,7 +392,7 @@ Notez que `OrderId` est la première partie de la clé et `ProductId` est la deu
 
 ## <a name="using-changetrackerentries-to-access-all-tracked-entities"></a>Utilisation de ChangeTracker. Entries pour accéder à toutes les entités suivies
 
-Jusqu’à présent, nous n’avons accédé qu’à un seul <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry> à la fois. <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Entries?displayProperty=nameWithType> retourne un EntityEntry pour chaque entité actuellement suivie par DbContext. Exemple :
+Jusqu’à présent, nous n’avons accédé qu’à un seul <xref:Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry> à la fois. <xref:Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.Entries?displayProperty=nameWithType> retourne un EntityEntry pour chaque entité actuellement suivie par DbContext. Par exemple :
 
 <!--
         using var context = new BlogsContext();
@@ -443,7 +443,7 @@ public interface IEntityWithKey
 -->
 [!code-csharp[IEntityWithKey](../../../samples/core/ChangeTracking/AccessingTrackedEntities/Samples.cs?name=IEntityWithKey)]
 
-Cette interface peut être utilisée pour travailler avec la clé d’une entité suivie d’une manière fortement typée. Exemple :
+Cette interface peut être utilisée pour travailler avec la clé d’une entité suivie d’une manière fortement typée. Par exemple :
 
 <!--
         foreach (var entityEntry in context.ChangeTracker.Entries<IEntityWithKey>())
@@ -589,7 +589,7 @@ La sortie reste inchangée par rapport à l’exemple précédent, car les modif
 - <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToObservableCollection?displayProperty=nameWithType> retourne un <xref:System.Collections.ObjectModel.ObservableCollection%601> pour la liaison de données WPF.
 - <xref:Microsoft.EntityFrameworkCore.ChangeTracking.LocalView%601.ToBindingList?displayProperty=nameWithType> retourne un <xref:System.ComponentModel.BindingList%601> pour Windows Forms la liaison de données.
 
-Exemple :
+Par exemple :
 
 <!--
         ObservableCollection<Post> observableCollection = context.Posts.Local.ToObservableCollection();

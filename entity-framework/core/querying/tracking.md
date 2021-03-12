@@ -4,12 +4,12 @@ description: Informations sur le suivi et les requêtes sans suivi dans Entity F
 author: smitpatel
 ms.date: 11/09/2020
 uid: core/querying/tracking
-ms.openlocfilehash: cb18125fb3453bb533981afb36480b12727cd6f2
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a96ed4ebe12446d5d69fdf58046cade0aec6294d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983415"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023625"
 ---
 # <a name="tracking-vs-no-tracking-queries"></a>Suivi et requêtes de No-Tracking
 
@@ -19,7 +19,7 @@ Suivi des contrôles de comportement si Entity Framework Core conservera des inf
 > Les [types d’entité sans clé](xref:core/modeling/keyless-entity-types) ne sont jamais suivis. Chaque fois que cet article mentionne des types d’entités, il fait référence aux types d’entité qui ont une clé définie.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Tracking) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/Tracking) sur GitHub.
 
 ## <a name="tracking-queries"></a>Requêtes avec suivi
 

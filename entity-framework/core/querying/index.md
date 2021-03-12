@@ -4,19 +4,19 @@ description: Vue d’ensemble des informations sur les requêtes dans Entity Fra
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/index
-ms.openlocfilehash: da5177dda4f2df6537ee9133edf4f1240a4b5e94
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 733b44e2f571bd32689b9d8e5d7507bd90e7848d
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430116"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023729"
 ---
 # <a name="querying-data"></a>Interrogation des données
 
 Entity Framework Core utilise la requête Language-Integrated (LINQ) pour interroger les données de la base de données. LINQ vous permet d’utiliser C# (ou le langage .NET de votre choix) pour écrire des requêtes fortement typées. Il utilise vos classes de contexte et d’entité dérivées pour référencer les objet de base de données. EF Core passe une représentation de la requête LINQ au fournisseur de bases de données. Les fournisseurs de bases de données la traduisent à leur tour en langage de requête spécifique aux bases de données (par exemple, SQL pour une base de données relationnelle). Les requêtes sont toujours exécutées sur la base de données même si les entités retournées dans le résultat existent déjà dans le contexte.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/Overview) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/Overview) sur GitHub.
 
 Les extraits de code montrent quelques exemples illustrant comment accomplir des tâches courantes avec Entity Framework Core.
 

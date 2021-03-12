@@ -4,12 +4,12 @@ description: Comment modifier les relations entre les entités en manipulant les
 author: ajcvickers
 ms.date: 12/30/2020
 uid: core/change-tracking/relationship-changes
-ms.openlocfilehash: b1ebe77ed29291beeef3708b603db026c38bbbec
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 5d3a68a40ed8bd112c19bdaed466071b03e30a66
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983610"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024405"
 ---
 # <a name="changing-foreign-keys-and-navigations"></a>Modification des clés étrangères et des navigations
 
@@ -25,7 +25,7 @@ Les navigations peuvent être utilisées sur les deux côtés de la relation, su
 > Ce document suppose que les États d’entité et les principes de base du suivi des modifications de EF Core sont compris. Pour plus d’informations sur ces rubriques, consultez [change Tracking dans EF Core](xref:core/change-tracking/index) .
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/ChangeTracking/ChangingFKsAndNavigations).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/ChangeTracking/ChangingFKsAndNavigations).
 
 ### <a name="example-model"></a>Exemple de modèle
 

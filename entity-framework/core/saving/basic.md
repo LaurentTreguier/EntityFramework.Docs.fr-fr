@@ -4,19 +4,19 @@ description: Informations de base sur l’ajout, la mise à jour et la suppressi
 author: ajcvickers
 ms.date: 10/27/2016
 uid: core/saving/basic
-ms.openlocfilehash: 8c98f95dee85641f11af716290333b47f340bff8
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 5b75a6f7ac43243485dc6e27e25ee0bcdd3277e4
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129107"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023638"
 ---
 # <a name="basic-save"></a>Enregistrement de base
 
 Découvrez comment ajouter, modifier et supprimer des données à l’aide de vos classes de contexte et d’entité.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Basics/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Basics/) sur GitHub.
 
 ## <a name="adding-data"></a>Ajout de données
 

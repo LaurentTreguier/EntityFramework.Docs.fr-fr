@@ -4,12 +4,12 @@ description: Vue d’ensemble de la gestion des schémas de la base de données 
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: b9547298714af59453aeae6d05742a03c067708b
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 27f94ad24e0255f023025d16b0ae1950d0ed4cc7
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "95003393"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024184"
 ---
 # <a name="migrations-overview"></a>Vue d’ensemble des migrations
 
@@ -153,4 +153,6 @@ Cette page ne constitue qu’une courte initiation aux migrations. Pour plus d�
 
 ## <a name="additional-resources"></a>Ressources supplémentaires
 
+* [Entity Framework Core outils de référence-CLI .net Core](xref:core/cli/dotnet) : comprend des commandes pour mettre à jour, supprimer, ajouter, supprimer, etc.
+* [Référence des outils de Entity Framework Core-console du gestionnaire de package dans Visual Studio](xref:core/cli/powershell) : comprend des commandes pour mettre à jour, supprimer, ajouter, supprimer, etc.
 * [EF Core session réunions](https://www.youtube.com/watch?v=mSsGERmrhnE&list=PLdo4fOcmZ0oX-DBuRG4u58ZTAJgBAeQ-t&index=20) de la Communauté, en passant par les nouvelles fonctionnalités de migration de EF Core 5,0.

@@ -4,19 +4,19 @@ description: Configuration des convertisseurs de valeurs dans un modèle de Enti
 author: ajcvickers
 ms.date: 01/16/2021
 uid: core/modeling/value-conversions
-ms.openlocfilehash: d9d3753c7f0b257a2109e4af1f587df913c15b44
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 114a18e41804c85c97791047aa915c2ec38dea15
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983441"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023885"
 ---
 # <a name="value-conversions"></a>Conversions de valeurs
 
 Les convertisseurs de valeurs autorisent la conversion des valeurs de propriété lors de la lecture ou de l’écriture dans la base de données. Cette conversion peut être d’une valeur à une autre du même type (par exemple, le chiffrement de chaînes) ou d’une valeur d’un type à une valeur d’un autre type (par exemple, la conversion de valeurs enum vers et à partir de chaînes dans la base de données).
 
 > [!TIP]
-> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
+> Vous pouvez exécuter et déboguer dans tout le code de ce document en [téléchargeant l’exemple de code à partir de GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/ValueConversions/).
 
 ## <a name="overview"></a>Vue d’ensemble
 
@@ -258,7 +258,7 @@ Notez que tous les convertisseurs intégrés sont sans État et qu’une seule i
 
 ## <a name="column-facets-and-mapping-hints"></a>Facettes de colonne et indicateurs de mappage
 
-Certains types de bases de données ont des facettes qui modifient la façon dont les données sont stockées. À savoir :
+Certains types de bases de données ont des facettes qui modifient la façon dont les données sont stockées. Il s’agit notamment des paramètres suivants :
 
 * Précision et échelle pour les colonnes décimales et date/heure
 * Taille/longueur des colonnes binaires et de type chaîne
@@ -783,7 +783,7 @@ Les convertisseurs de valeurs peuvent être utilisés pour chiffrer les valeurs 
 > [!WARNING]
 > Veillez à bien comprendre toutes les implications si vous déployez votre propre chiffrement pour protéger les données sensibles. Envisagez plutôt d’utiliser des mécanismes de chiffrement prédéfinis, tels que [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine) sur SQL Server.
 
-## <a name="limitations"></a>Limitations
+## <a name="limitations"></a>Limites
 
 Il existe quelques limitations actuelles connues du système de conversion de valeurs :
 

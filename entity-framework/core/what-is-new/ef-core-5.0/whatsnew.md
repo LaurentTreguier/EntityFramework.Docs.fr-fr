@@ -4,12 +4,12 @@ description: Vue d’ensemble des nouvelles fonctionnalités de EF Core 5,0
 author: ajcvickers
 ms.date: 09/10/2020
 uid: core/what-is-new/ef-core-5.0/whatsnew
-ms.openlocfilehash: 64b72ba2a6f752b9d71ea9b64ab08f4cf92ef03d
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: ab6a49fa0b23aff83ee64446e498b7e94c632020
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129276"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023505"
 ---
 # <a name="whats-new-in-ef-core-50"></a>Nouveautés de EF Core 5,0
 
@@ -17,7 +17,7 @@ La liste suivante répertorie les principales nouvelles fonctionnalités de EF C
 
 En tant que version majeure, EF Core 5,0 contient également plusieurs [modifications avec rupture](xref:core/what-is-new/ef-core-5.0/breaking-changes), qui sont des améliorations d’API ou des changements de comportement qui peuvent avoir un impact négatif sur les applications existantes.
 
-## <a name="many-to-many"></a>Plusieurs-à-plusieurs
+## <a name="many-to-many"></a>Plusieurs à plusieurs
 
 EF Core 5,0 prend en charge les relations plusieurs-à-plusieurs sans mapper explicitement la table de jointure.
 
@@ -115,7 +115,7 @@ var blogs = context.Blogs
 
 Cette requête renverra les blogs avec chaque publication associée, mais uniquement lorsque le titre de publication contient « fromage ».
 
-Pour plus d’informations, [consultez la documentation complète sur les requêtes de fractionnement](xref:core/querying/related-data/eager#filtered-include).
+Pour plus d’informations, [consultez la documentation complète sur les includes filtrées](xref:core/querying/related-data/eager#filtered-include).
 
 ## <a name="table-per-type-tpt-mapping"></a>Mappage table par type (TPT)
 
@@ -224,7 +224,7 @@ Ces entités peuvent ensuite être interrogées et mises à jour de la même fa�
 
 Dans EF Core 3,1, la terminaison dépendante d’une relation un-à-un était toujours considérée comme facultative. Cela était surtout le cas lors de l’utilisation d’entités détenues, car toutes les colonnes de l’entité appartenant ont été créées en tant que valeurs NULL dans la base de données, même si elles ont été configurées comme requises dans le modèle.
 
-Dans EF Core 5,0, une navigation vers une entité détenue peut être configurée comme un dépendant obligatoire. Exemple :
+Dans EF Core 5,0, une navigation vers une entité détenue peut être configurée comme un dépendant obligatoire. Par exemple :
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -332,7 +332,7 @@ Pour plus d’informations, [consultez la documentation complète sur les compte
 * Un nouvel `[Keyless]` attribut peut être utilisé pour configurer un type d’entité [comme n’ayant aucune clé](xref:core/modeling/keyless-entity-types).
 * Par défaut, [EF Core considère maintenant les discriminateurs comme *terminés*](xref:core/modeling/inheritance#table-per-hierarchy-and-discriminator-configuration), ce qui signifie qu’il s’attend à ne jamais voir les valeurs de discriminateur non configurées par l’application dans le modèle. Cela permet d’améliorer les performances et peut être désactivé si votre colonne de discriminateur peut contenir des valeurs inconnues.
 
-### <a name="query"></a>Requête
+### <a name="query"></a>Query
 
 * Les exceptions d’échec de la traduction de requête contiennent désormais des raisons plus explicites concernant les raisons de l’échec, afin de vous aider à identifier le problème.
 * Les requêtes sans suivi peuvent désormais effectuer la [résolution d’identité](xref:core/querying/tracking#identity-resolution), ce qui évite le renvoi de plusieurs instances d’entité pour le même objet de base de données.
@@ -382,7 +382,7 @@ Pour plus d’informations, [consultez la documentation complète sur les compte
 * La récupération de données binaires et de chaîne avec GetBytes, GetChars et GetTextReader est désormais plus efficace grâce à l’utilisation de SqliteBlob et de flux.
 * L’initialisation de SqliteConnection est désormais différée.
 
-### <a name="other"></a>Autre
+### <a name="other"></a>Autres
 
 * Vous pouvez générer des proxys de suivi des modifications qui implémentent automatiquement [INotifyPropertyChanging](/dotnet/api/system.componentmodel.inotifypropertychanging) et [INotifyPropertyChanged](/dotnet/api/system.componentmodel.inotifypropertychanged). Cela constitue une autre approche pour le suivi des modifications qui n’analyse pas les modifications quand `SaveChanges` est appelé.
 * Une <xref:System.Data.Common.DbConnection> chaîne de connexion ou peut maintenant être modifiée sur un DbContext déjà initialisé.

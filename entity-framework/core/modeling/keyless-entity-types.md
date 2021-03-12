@@ -4,12 +4,12 @@ description: Comment configurer les types d’entité sans clé à l’aide de E
 author: AndriySvyryd
 ms.date: 9/13/2019
 uid: core/modeling/keyless-entity-types
-ms.openlocfilehash: d1a60e0504b22623b97c1a4963d2e3f70faa365c
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 488b21767993474d3e90677ee1e480a970b09edb
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429505"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023937"
 ---
 # <a name="keyless-entity-types"></a>Types d’entité sans clé
 
@@ -60,7 +60,7 @@ Voici quelques-uns des principaux scénarios d’utilisation pour les types d’
 
 ## <a name="mapping-to-database-objects"></a>Mapper à des objets de base de données
 
-Le mappage d’un type d’entité clé-inférieur à un objet de base de données s’effectue à l’aide de l' `ToTable` `ToView` API Fluent ou. Du point de vue de EF Core, l’objet de base de données spécifié dans cette méthode est une _vue_ , ce qui signifie qu’elle est traitée comme une source de requête en lecture seule et ne peut pas être la cible d’opérations de mise à jour, d’insertion ou de suppression. Toutefois, cela ne signifie pas que l’objet de base de données est réellement requis pour être une vue de base de données. Il peut également s’agir d’une table de base de données qui sera traitée en lecture seule. À l’inverse, pour les types d’entités standard, EF Core suppose qu’un objet de base de données spécifié dans la `ToTable` méthode peut être traité comme une _table_ , ce qui signifie qu’il peut être utilisé comme source de requête, mais également ciblé par les opérations Update, DELETE et insert. En fait, vous pouvez spécifier le nom d’une vue de base de données dans `ToTable` et tout fonctionne correctement tant que la vue est configurée pour être mise à jour sur la base de données.
+Le mappage d’un type d’entité clé-inférieur à un objet de base de données s’effectue à l’aide de l' `ToTable` `ToView` API Fluent ou. Du point de vue de EF Core, l’objet de base de données spécifié dans cette méthode est une _vue_, ce qui signifie qu’elle est traitée comme une source de requête en lecture seule et ne peut pas être la cible d’opérations de mise à jour, d’insertion ou de suppression. Toutefois, cela ne signifie pas que l’objet de base de données est réellement requis pour être une vue de base de données. Il peut également s’agir d’une table de base de données qui sera traitée en lecture seule. À l’inverse, pour les types d’entités standard, EF Core suppose qu’un objet de base de données spécifié dans la `ToTable` méthode peut être traité comme une _table_, ce qui signifie qu’il peut être utilisé comme source de requête, mais également ciblé par les opérations Update, DELETE et insert. En fait, vous pouvez spécifier le nom d’une vue de base de données dans `ToTable` et tout fonctionne correctement tant que la vue est configurée pour être mise à jour sur la base de données.
 
 > [!NOTE]
 > `ToView` suppose que l’objet existe déjà dans la base de données et qu’il n’est pas créé par des migrations.
@@ -70,7 +70,7 @@ Le mappage d’un type d’entité clé-inférieur à un objet de base de donné
 L’exemple suivant montre comment utiliser les types d’entités Keyless pour interroger une vue de base de données.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/KeylessEntityTypes) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/KeylessEntityTypes) sur GitHub.
 
 Tout d’abord, nous définissons un blog simple et un modèle de publication :
 
@@ -101,4 +101,4 @@ Enfin, nous pouvons interroger la vue de base de données de la manière standar
 > Notez que nous avons également défini une propriété de requête au niveau du contexte (DbSet) pour agir en tant que racine pour les requêtes sur ce type.
 
 > [!TIP]
-> Pour tester les types d’entité sans clé mappés aux vues à l’aide du fournisseur en mémoire, mappez-les à une requête via `ToInMemoryQuery` . Pour plus d’informations, consultez un [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Miscellaneous/Testing/ItemsWebApi/) à l’aide de cette technique.
+> Pour tester les types d’entité sans clé mappés aux vues à l’aide du fournisseur en mémoire, mappez-les à une requête via `ToInMemoryQuery` . Pour plus d’informations, consultez un [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/Testing/ItemsWebApi/) à l’aide de cette technique.

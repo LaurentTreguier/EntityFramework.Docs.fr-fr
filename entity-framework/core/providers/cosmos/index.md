@@ -4,12 +4,12 @@ description: La documentation du fournisseur de base de données qui permet d’
 author: AndriySvyryd
 ms.date: 10/09/2020
 uid: core/providers/cosmos/index
-ms.openlocfilehash: 8bfce78465e8194544562c3ecac4d3398ca91265
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: e4ceea32fda0d07e9dd19ac0de162c57b90b5f34
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97635586"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023833"
 ---
 # <a name="ef-core-azure-cosmos-db-provider"></a>Fournisseur Azure Cosmos DB EF Core
 
@@ -44,7 +44,7 @@ Install-Package Microsoft.EntityFrameworkCore.Cosmos
 ## <a name="get-started"></a>Bien démarrer
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Cosmos).
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Cosmos).
 
 Comme pour les autres fournisseurs, la première étape consiste à appeler [UseCosmos](/dotnet/api/Microsoft.EntityFrameworkCore.CosmosDbContextOptionsExtensions.UseCosmos):
 

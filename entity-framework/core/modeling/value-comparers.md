@@ -4,12 +4,12 @@ description: Utilisation de comparateurs de valeur pour contrôler la façon don
 author: ajcvickers
 ms.date: 01/16/2021
 uid: core/modeling/value-comparers
-ms.openlocfilehash: 5c5e5beee72230a331a8e1c88a2020dc5ad88ecf
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: 9318b41479b43b327c76a11cc99b4f7695fa88d3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983480"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023898"
 ---
 # <a name="value-comparers"></a>Comparateurs de valeurs
 
@@ -17,7 +17,7 @@ ms.locfileid: "98983480"
 > Cette fonctionnalité a été introduite dans EF Core 3,0.
 
 > [!TIP]
-> Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/ValueConversions/).
+> Vous trouverez le code de ce document sur GitHub en tant qu' [exemple exécutable](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/ValueConversions/).
 
 ## <a name="background"></a>Arrière-plan
 

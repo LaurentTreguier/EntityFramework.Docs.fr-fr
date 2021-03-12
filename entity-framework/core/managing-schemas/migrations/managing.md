@@ -4,12 +4,12 @@ description: Ajout, suppression et gestion des migrations de schémas de base de
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: ef5e1b9bb10d6f1cd428db2fee327ec513c3f528
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: a6e64bde753ae34b6dccb10b228d1ea87a79357b
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/05/2021
-ms.locfileid: "95003274"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024171"
 ---
 # <a name="managing-migrations"></a>Gestion des migrations
 
@@ -59,7 +59,7 @@ dotnet ef migrations add InitialCreate --output-dir Your/Directory
 > [!NOTE]
 > Dans EF Core 5,0, vous pouvez également modifier l’espace de noms indépendamment du répertoire à l’aide de `--namespace` .
 
-#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
+#### <a name="visual-studio"></a>[Visual Studio](#tab/vs)
 
 ```powershell
 Add-Migration InitialCreate -OutputDir Your\Directory
@@ -195,7 +195,7 @@ Remove-Migration
 Après avoir supprimé la migration, vous pouvez apporter les modifications supplémentaires au modèle et la rajouter.
 
 > [!WARNING]
-> Veillez à ne pas supprimer les migrations qui sont déjà appliquées aux bases de données de production. Si vous ne le faites pas, vous ne pourrez pas le restaurer et risquez de rompre les hypothèses formulées par les migrations suivantes.
+> Évitez de supprimer toutes les migrations qui ont déjà été appliquées aux bases de données de production. Cela signifie que vous ne pourrez pas restaurer ces migrations à partir des bases de données et que vous risquez de rompre les hypothèses formulées par les migrations suivantes.
 
 ## <a name="listing-migrations"></a>Liste des migrations
 
@@ -231,3 +231,8 @@ Il est également possible de réinitialiser toutes les migrations et d’en cr�
 
 > [!WARNING]
 > Tout [Code de migration personnalisé](#customize-migration-code) est perdu lorsque le dossier **migrations** est supprimé.  Toutes les personnalisations doivent être appliquées manuellement à la nouvelle migration initiale afin d’être conservées.
+
+## <a name="additional-resources"></a>Ressources supplémentaires
+
+* [Entity Framework Core outils de référence-CLI .net Core](xref:core/cli/dotnet) : comprend des commandes pour mettre à jour, supprimer, ajouter, supprimer, etc.
+* [Référence des outils de Entity Framework Core-console du gestionnaire de package dans Visual Studio](xref:core/cli/powershell) : comprend des commandes pour mettre à jour, supprimer, ajouter, supprimer, etc.

@@ -4,12 +4,12 @@ description: Comment configurer le fractionnement de table à l’aide de Entity
 author: AndriySvyryd
 ms.date: 01/03/2020
 uid: core/modeling/table-splitting
-ms.openlocfilehash: 71d332ec3f500f48e12863c71ac44ce4d60699f0
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 43261ea0dab57528ab14faf7f455c0ed72d1bfc3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92063034"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023924"
 ---
 # <a name="table-splitting"></a>Fractionnement de table
 
@@ -32,9 +32,9 @@ Outre la configuration requise, nous appelons `Property(o => o.Status).HasColumn
 [!code-csharp[TableSplittingConfiguration](../../../samples/core/Modeling/TableSplitting/TableSplittingContext.cs?name=TableSplitting)]
 
 > [!TIP]
-> Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Modeling/TableSplitting) .
+> Pour plus de contexte, consultez l' [exemple de projet complet](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Modeling/TableSplitting) .
 
-## <a name="usage"></a>Utilisation
+## <a name="usage"></a>Usage
 
 L’enregistrement et l’interrogation d’entités à l’aide du fractionnement de table s’effectuent de la même façon que les autres entités :
 

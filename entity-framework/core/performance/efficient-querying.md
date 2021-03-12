@@ -4,12 +4,12 @@ description: Guide des performances pour l’interrogation efficace à l’aide 
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/efficient-querying
-ms.openlocfilehash: e945a1e0f734d62ce8948904bcbe819455fcbefa
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: e14837b779f2fbe8d5bf10206c6a336a952fc35b
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98128483"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023872"
 ---
 # <a name="efficient-querying"></a>Interrogation efficace
 
@@ -17,7 +17,7 @@ L’interrogation efficace est un vaste sujet qui couvre des sujets aussi larges
 
 ## <a name="use-indexes-properly"></a>Utiliser correctement les index
 
-Le principal facteur déterminant si une requête s’exécute rapidement ou non est qu’elle utilise correctement les index quand cela est approprié : les bases de données sont généralement utilisées pour stocker de grandes quantités de données, et les requêtes qui traversent des tables entières sont généralement des sources de problèmes de performances graves. Les problèmes d’indexation ne sont pas faciles à repérer, car il n’est pas immédiatement évident qu’une requête donnée utilise ou non un index. Exemple :
+Le principal facteur déterminant si une requête s’exécute rapidement ou non est qu’elle utilise correctement les index quand cela est approprié : les bases de données sont généralement utilisées pour stocker de grandes quantités de données, et les requêtes qui traversent des tables entières sont généralement des sources de problèmes de performances graves. Les problèmes d’indexation ne sont pas faciles à repérer, car il n’est pas immédiatement évident qu’une requête donnée utilise ou non un index. Par exemple :
 
 [!code-csharp[Main](../../../samples/core/Performance/Program.cs#Indexes)]
 
@@ -180,7 +180,7 @@ Dans les scénarios en lecture seule où les modifications ne sont pas enregistr
 
 Pour illustrer cela, supposons que nous chargeons un grand nombre de publications à partir de la base de données, ainsi que le blog référencé par chaque publication. Si 100 publications se produisent pour faire référence au même blog, une requête de suivi le détecte via la résolution d’identité et toutes les instances post font référence à la même instance de blog dédupliquée. Une requête sans suivi, en revanche, duplique les mêmes heures du blog 100 et le code d’application doit être écrit en conséquence.
 
-Voici les résultats d’un test comparatif comparaison entre le suivi et le non-suivi pour une requête chargeant 10 blogs avec 20 publications chacun. [Le code source est disponible ici. n'](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/QueryTrackingBehavior.cs)hésitez pas à l’utiliser comme base pour vos propres mesures.
+Voici les résultats d’un test comparatif comparaison entre le suivi et le non-suivi pour une requête chargeant 10 blogs avec 20 publications chacun. [Le code source est disponible ici. n'](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/QueryTrackingBehavior.cs)hésitez pas à l’utiliser comme base pour vos propres mesures.
 
 |       Méthode | NumBlogs | NumPostsPerBlog |       Moyenne |    Erreur |   StdDev |     Médiane | Proportions | RatioSD |   Génération 0 |   GEN 1 | Génération 2 | Allocated |
 |------------- |--------- |---------------- |-----------:|---------:|---------:|-----------:|------:|--------:|--------:|--------:|------:|----------:|

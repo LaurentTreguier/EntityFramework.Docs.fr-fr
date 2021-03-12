@@ -4,12 +4,12 @@ description: Modélisation efficace lors de l’utilisation de Entity Framework 
 author: roji
 ms.date: 12/1/2020
 uid: core/performance/modeling-for-performance
-ms.openlocfilehash: fc16ec67c3865aa7b7a95519463ca7493a2709b0
-ms.sourcegitcommit: 4860d036ea0fb392c28799907bcc924c987d2d7b
+ms.openlocfilehash: 882398189cc828798c1682f849fac524d90d317f
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 12/17/2020
-ms.locfileid: "97657822"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023859"
 ---
 # <a name="modeling-for-performance"></a>Modélisation des performances
 
@@ -56,7 +56,7 @@ Les gens choisissent parfois TPT, car il s’agit d’une technique de « netto
 
 Toutefois, la mesure montre que TPT est dans la plupart des cas la technique de mappage inférieure du point de vue des performances ; Lorsque toutes les données de TPH proviennent d’une seule table, les requêtes TPT doivent rejoindre ensemble plusieurs tables, et les jointures sont l’une des principales sources de problèmes de performances dans les bases de données relationnelles. Les bases de données ont généralement tendance à gérer correctement les colonnes vides, et les fonctionnalités telles que les [SQL Server les colonnes éparses](/sql/relational-databases/tables/use-sparse-columns) peuvent encore réduire cette surcharge.
 
-Pour obtenir un exemple concret, [consultez ce test d’évaluation](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Benchmarks/Inheritance.cs) qui définit un modèle simple avec une hiérarchie de type 7. 5000 lignes sont amorcées pour chaque type-total 35000 lignes-et l’évaluation charge simplement toutes les lignes de la base de données :
+Pour obtenir un exemple concret, [consultez ce test d’évaluation](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Benchmarks/Inheritance.cs) qui définit un modèle simple avec une hiérarchie de type 7. 5000 lignes sont amorcées pour chaque type-total 35000 lignes-et l’évaluation charge simplement toutes les lignes de la base de données :
 
 | Méthode |     Moyenne |   Erreur |  StdDev |     Génération 0 |     GEN 1 |     Génération 2 | Allocated |
 |------- |---------:|--------:|--------:|----------:|----------:|----------:|----------:|

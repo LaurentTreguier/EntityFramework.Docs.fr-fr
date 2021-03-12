@@ -4,19 +4,19 @@ description: Gestion des transactions pour l’atomicité lors de l’enregistre
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: b5e1fa2a0bcc466f22f03fee7ecaef9dcea1efaf
-ms.sourcegitcommit: 788a56c2248523967b846bcca0e98c2ed7ef0d6b
+ms.openlocfilehash: 25bf615cffa36384de9fe04fe2b84d4a6bca98d0
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/20/2020
-ms.locfileid: "95003547"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023534"
 ---
 # <a name="using-transactions"></a>Utilisation de transactions
 
 Les transactions permettent à plusieurs opérations de base de données d’être traitées de manière atomique. Si la transaction est validée, toutes les opérations sont appliquées avec succès à la base de données. Si la transaction est restaurée, aucune des opérations n’est appliquée à la base de données.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Saving/Transactions/) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Saving/Transactions/) sur GitHub.
 
 ## <a name="default-transaction-behavior"></a>Comportement de transaction par défaut
 

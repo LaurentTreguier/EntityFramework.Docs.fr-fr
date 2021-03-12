@@ -4,12 +4,12 @@ description: Thèmes et fonctionnalités prévus pour EF Core 6,0
 author: ajcvickers
 ms.date: 01/12/2021
 uid: core/what-is-new/ef-core-6.0/plan
-ms.openlocfilehash: 612461bc6ad30778baa5c6d10dda5cabac91dcb2
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: d6d4f957a57d8ab6a11232b66a5b2a1238df59a3
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129783"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023482"
 ---
 # <a name="plan-for-entity-framework-core-60"></a>Planifier Entity Framework Core 6,0
 
@@ -78,7 +78,7 @@ Taille de T-shirt : petite
 
 Cette fonctionnalité permet un classement arbitraire des colonnes lors de **la création d’une table** avec des migrations ou `EnsureCreated` . Notez que la modification de l’ordre des colonnes dans les tables existantes nécessite la reconstruction de la table, et ce n’est pas un point que nous prévoyons de prendre en charge dans une version EF Core.
 
-## <a name="performance"></a>Performances
+## <a name="performance"></a>Niveau de performance
 
 Bien que EF Core soit généralement plus rapide que EF6, il existe toujours des zones où des améliorations significatives des performances sont possibles. Nous prévoyons de traiter plusieurs de ces domaines dans EF Core 6,0, tout en améliorant également notre infrastructure de performances et vos tests.
 

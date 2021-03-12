@@ -4,12 +4,12 @@ description: Guide de référence pour les outils de CLI .NET Core Entity Framew
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: 5f25ad67060e59507285af6e78269baa784c5288
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: f33d598c444eb9cb9aba754d629934b7b2240919
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543391"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024418"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Informations de référence sur les outils de Entity Framework Core-CLI .NET Core
 
@@ -273,13 +273,13 @@ Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
 ## `dotnet ef migrations remove`
 
-Supprime la dernière migration (restaure les modifications de code qui ont été effectuées pour la migration).
+Supprime la dernière migration en appelant la `Down` méthode de la dernière migration. La commande restaure les modifications de code qui ont été effectuées pour la dernière migration.
 
 Options :
 
 | Option                 | Court             | Description                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
-| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Rétablissez la migration (annulez les modifications qui ont été appliquées à la base de données). |
+| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Rétablissez la dernière migration, en annulant les modifications qui ont été appliquées à la base de données lors de la dernière migration. |
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 

@@ -4,12 +4,12 @@ description: Utilisation de filtres de requête globaux pour filtrer les résult
 author: maumar
 ms.date: 11/03/2017
 uid: core/querying/filters
-ms.openlocfilehash: 6436f9f8e2e09d44ef9528fd2022720d40095fe0
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: d28f34cd3846203675b5a03343e0211460797b0a
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430129"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023742"
 ---
 # <a name="global-query-filters"></a>Filtres de requête globale
 
@@ -23,7 +23,7 @@ Les filtres de requête globaux sont des prédicats de requête LINQ appliqués 
 L’exemple suivant montre comment utiliser des filtres de requête globaux pour implémenter des comportements de requête d’architecture mutualisée et de suppression réversible dans un modèle de blog simple.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/QueryFilters) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/QueryFilters) sur GitHub.
 
 Tout d’abord définissez les entités :
 

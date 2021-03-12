@@ -4,19 +4,19 @@ description: Utilisation d’un projet de migration distinct pour la gestion des
 author: bricelam
 ms.date: 11/06/2020
 uid: core/managing-schemas/migrations/projects
-ms.openlocfilehash: 2d1c093e0bb307584e2bf19cb93deec98aa10692
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: 9a6b8977f9d7bcdae0fb9aea6966a7eb43e9e7db
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94429804"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024145"
 ---
 # <a name="using-a-separate-migrations-project"></a>Utilisation d’un projet de migrations distinct
 
 Vous souhaiterez peut-être stocker vos migrations dans un autre projet que celui contenant votre `DbContext` . Vous pouvez également utiliser cette stratégie pour gérer plusieurs ensembles de migrations, par exemple, un pour le développement et un autre pour les mises à niveau vers la version finale.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Schemas/ThreeProjectMigrations).
+> Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Schemas/ThreeProjectMigrations).
 
 ## <a name="steps"></a>Étapes
 

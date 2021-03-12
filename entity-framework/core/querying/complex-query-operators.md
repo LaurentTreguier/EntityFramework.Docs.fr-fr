@@ -4,19 +4,19 @@ description: Informations détaillées sur les opérateurs de requête LINQ plus
 author: smitpatel
 ms.date: 10/03/2019
 uid: core/querying/complex-query-operators
-ms.openlocfilehash: 84c2518972355d31cf5a6a7bafc57b44162412c8
-ms.sourcegitcommit: f3512e3a98e685a3ba409c1d0157ce85cc390cf4
+ms.openlocfilehash: bdcb2f4d00ee4833ae9e0a10d307e5124bafb4b6
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 11/10/2020
-ms.locfileid: "94430480"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103023755"
 ---
 # <a name="complex-query-operators"></a>Opérateurs de requête complexes
 
 LINQ (Language Integrated Query) contient de nombreux opérateurs complexes, qui combinent plusieurs sources de données ou effectuent un traitement complexe. Les opérateurs LINQ n’ont pas tous des traductions appropriées côté serveur. Parfois, une requête dans un formulaire se traduit par le serveur, mais s’il est écrit dans un autre formulaire, même si le résultat est le même. Cette page décrit certains des opérateurs complexes et leurs variations prises en charge. Dans les versions ultérieures, nous pouvons reconnaître plus de modèles et ajouter les traductions correspondantes. Il est également important de garder à l’esprit que la prise en charge de la traduction varie d’un fournisseur à l’autre. Une requête particulière, qui est traduite dans SqlServer, peut ne pas fonctionner pour les bases de données SQLite.
 
 > [!TIP]
-> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Querying/ComplexQuery) sur GitHub.
+> Vous pouvez afficher cet [exemple](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Querying/ComplexQuery) sur GitHub.
 
 ## <a name="join"></a>Join
 
@@ -122,8 +122,8 @@ ORDER BY [p].[AuthorId]
 
 Les opérateurs d’agrégation EF Core prend en charge sont les suivants :
 
-- Average
-- Count
+- Moyenne
+- Nombre
 - LongCount
 - Max
 - Min
