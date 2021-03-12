@@ -5,125 +5,125 @@ author: codemillmatt
 ms.date: 07/07/2020
 ms.author: masoucou
 uid: core/get-started/xamarin
-ms.openlocfilehash: e4a26d7a0c6909002be0974ee9fe1c5db7c1046a
-ms.sourcegitcommit: 7700840119b1639275f3b64836e7abb59103f2e7
+ms.openlocfilehash: edec7dfec3d6ac8313f9fc07af8844e4a19c3bb2
+ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/28/2021
-ms.locfileid: "98983597"
+ms.lasthandoff: 03/11/2021
+ms.locfileid: "103024275"
 ---
-# <a name="getting-started-with-ef-core-and-xamarin"></a><span data-ttu-id="2560a-103">Prise en main avec EF Core et Xamarin</span><span class="sxs-lookup"><span data-stu-id="2560a-103">Getting Started with EF Core and Xamarin</span></span>
+# <a name="getting-started-with-ef-core-and-xamarin"></a><span data-ttu-id="9e055-103">Prise en main avec EF Core et Xamarin</span><span class="sxs-lookup"><span data-stu-id="9e055-103">Getting Started with EF Core and Xamarin</span></span>
 
-<span data-ttu-id="2560a-104">Dans ce didacticiel, vous allez créer une application [Xamarin. Forms](/xamarin/get-started/what-is-xamarin-forms) qui effectue l’accès aux données sur une base de données SQLite à l’aide de Entity Framework Core.</span><span class="sxs-lookup"><span data-stu-id="2560a-104">In this tutorial, you create a [Xamarin.Forms](/xamarin/get-started/what-is-xamarin-forms) application that performs data access against a SQLite database using Entity Framework Core.</span></span>
+<span data-ttu-id="9e055-104">Dans ce didacticiel, vous allez créer une application [Xamarin. Forms](/xamarin/get-started/what-is-xamarin-forms) qui effectue l’accès aux données sur une base de données SQLite à l’aide de Entity Framework Core.</span><span class="sxs-lookup"><span data-stu-id="9e055-104">In this tutorial, you create a [Xamarin.Forms](/xamarin/get-started/what-is-xamarin-forms) application that performs data access against a SQLite database using Entity Framework Core.</span></span>
 
-<span data-ttu-id="2560a-105">Vous pouvez suivre le didacticiel à l’aide de Visual Studio sur Windows ou Visual Studio pour Mac.</span><span class="sxs-lookup"><span data-stu-id="2560a-105">You can follow the tutorial by using Visual Studio on Windows or Visual Studio for Mac.</span></span>
+<span data-ttu-id="9e055-105">Vous pouvez suivre le didacticiel à l’aide de Visual Studio sur Windows ou Visual Studio pour Mac.</span><span class="sxs-lookup"><span data-stu-id="9e055-105">You can follow the tutorial by using Visual Studio on Windows or Visual Studio for Mac.</span></span>
 
 > [!TIP]
-> <span data-ttu-id="2560a-106">Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin).</span><span class="sxs-lookup"><span data-stu-id="2560a-106">You can view this article's [sample on GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/master/samples/core/Xamarin).</span></span>
+> <span data-ttu-id="9e055-106">Vous pouvez afficher cet [exemple sur GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Xamarin).</span><span class="sxs-lookup"><span data-stu-id="9e055-106">You can view this article's [sample on GitHub](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Xamarin).</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="2560a-107">Prérequis</span><span class="sxs-lookup"><span data-stu-id="2560a-107">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="9e055-107">Prérequis</span><span class="sxs-lookup"><span data-stu-id="9e055-107">Prerequisites</span></span>
 
-<span data-ttu-id="2560a-108">Installez l’un des éléments suivants :</span><span class="sxs-lookup"><span data-stu-id="2560a-108">Install one of the below:</span></span>
+<span data-ttu-id="9e055-108">Installez l’un des éléments suivants :</span><span class="sxs-lookup"><span data-stu-id="9e055-108">Install one of the below:</span></span>
 
-* <span data-ttu-id="2560a-109">[Visual Studio 2019 version 16,3 ou ultérieure](https://www.visualstudio.com/downloads/) avec cette charge de travail :</span><span class="sxs-lookup"><span data-stu-id="2560a-109">[Visual Studio 2019 version 16.3 or later](https://www.visualstudio.com/downloads/) with this workload:</span></span>
-  * <span data-ttu-id="2560a-110">**Développement mobile avec .NET**</span><span class="sxs-lookup"><span data-stu-id="2560a-110">**Mobile Development with .NET**</span></span>
-* [<span data-ttu-id="2560a-111">Visual Studio pour Mac</span><span class="sxs-lookup"><span data-stu-id="2560a-111">Visual Studio for Mac</span></span>](https://visualstudio.microsoft.com/vs/mac/)
+* <span data-ttu-id="9e055-109">[Visual Studio 2019 version 16,3 ou ultérieure](https://www.visualstudio.com/downloads/) avec cette charge de travail :</span><span class="sxs-lookup"><span data-stu-id="9e055-109">[Visual Studio 2019 version 16.3 or later](https://www.visualstudio.com/downloads/) with this workload:</span></span>
+  * <span data-ttu-id="9e055-110">**Développement mobile avec .NET**</span><span class="sxs-lookup"><span data-stu-id="9e055-110">**Mobile Development with .NET**</span></span>
+* [<span data-ttu-id="9e055-111">Visual Studio pour Mac</span><span class="sxs-lookup"><span data-stu-id="9e055-111">Visual Studio for Mac</span></span>](https://visualstudio.microsoft.com/vs/mac/)
 
-<span data-ttu-id="2560a-112">Cette [documentation fournit des instructions d’installation pas à pas détaillées](/xamarin/get-started/installation) pour chaque plateforme.</span><span class="sxs-lookup"><span data-stu-id="2560a-112">This [documentation provides detailed step-by-step installation instructions](/xamarin/get-started/installation) for each platform.</span></span>
+<span data-ttu-id="9e055-112">Cette [documentation fournit des instructions d’installation pas à pas détaillées](/xamarin/get-started/installation) pour chaque plateforme.</span><span class="sxs-lookup"><span data-stu-id="9e055-112">This [documentation provides detailed step-by-step installation instructions](/xamarin/get-started/installation) for each platform.</span></span>
 
-## <a name="download-and-run-the-sample-project"></a><span data-ttu-id="2560a-113">Télécharger et exécuter l’exemple de projet</span><span class="sxs-lookup"><span data-stu-id="2560a-113">Download and run the sample project</span></span>
+## <a name="download-and-run-the-sample-project"></a><span data-ttu-id="9e055-113">Télécharger et exécuter l’exemple de projet</span><span class="sxs-lookup"><span data-stu-id="9e055-113">Download and run the sample project</span></span>
 
-<span data-ttu-id="2560a-114">Pour exécuter et explorer cet exemple d’application, téléchargez le code sur GitHub.</span><span class="sxs-lookup"><span data-stu-id="2560a-114">To run and explore this sample application, download the code on GitHub.</span></span>
+<span data-ttu-id="9e055-114">Pour exécuter et explorer cet exemple d’application, téléchargez le code sur GitHub.</span><span class="sxs-lookup"><span data-stu-id="9e055-114">To run and explore this sample application, download the code on GitHub.</span></span>
 
-<span data-ttu-id="2560a-115">Une fois téléchargé, ouvrez le fichier solution `EFGettingStarted.sln` dans Visual Studio ou Visual Studio pour Mac et exécutez l’application sur la plateforme de votre choix.</span><span class="sxs-lookup"><span data-stu-id="2560a-115">Once downloaded, open the solution file `EFGettingStarted.sln` in Visual Studio or Visual Studio for Mac and run the application on the platform of your choice.</span></span>
+<span data-ttu-id="9e055-115">Une fois téléchargé, ouvrez le fichier solution `EFGettingStarted.sln` dans Visual Studio ou Visual Studio pour Mac et exécutez l’application sur la plateforme de votre choix.</span><span class="sxs-lookup"><span data-stu-id="9e055-115">Once downloaded, open the solution file `EFGettingStarted.sln` in Visual Studio or Visual Studio for Mac and run the application on the platform of your choice.</span></span>
 
-<span data-ttu-id="2560a-116">Lorsque l’application démarre pour la première fois, elle remplit la base de données SQLite locale avec deux entrées représentant les blogs.</span><span class="sxs-lookup"><span data-stu-id="2560a-116">When the app first starts, it will populate the local SQLite database with two entries representing blogs.</span></span>
+<span data-ttu-id="9e055-116">Lorsque l’application démarre pour la première fois, elle remplit la base de données SQLite locale avec deux entrées représentant les blogs.</span><span class="sxs-lookup"><span data-stu-id="9e055-116">When the app first starts, it will populate the local SQLite database with two entries representing blogs.</span></span>
 
 ![Capture d’écran de la page de liste de tous les blogs](_static/xamarin-tutorial-1.png)
 
-<span data-ttu-id="2560a-118">Cliquez sur le bouton **Ajouter** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="2560a-118">Click the **Add** button in the toolbar.</span></span>
+<span data-ttu-id="9e055-118">Cliquez sur le bouton **Ajouter** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="9e055-118">Click the **Add** button in the toolbar.</span></span>
 
-<span data-ttu-id="2560a-119">Une nouvelle page s’affiche et vous permet d’entrer des informations sur un nouveau blog.</span><span class="sxs-lookup"><span data-stu-id="2560a-119">A new page will appear that allows you to enter information about a new blog.</span></span>
+<span data-ttu-id="9e055-119">Une nouvelle page s’affiche et vous permet d’entrer des informations sur un nouveau blog.</span><span class="sxs-lookup"><span data-stu-id="9e055-119">A new page will appear that allows you to enter information about a new blog.</span></span>
 
 ![Capture d’écran de la page de modification de blog](_static/xamarin-tutorial-2.png)
 
-<span data-ttu-id="2560a-121">Renseignez toutes les informations et cliquez sur **Enregistrer** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="2560a-121">Fill out all the info and click **Save** from the toolbar.</span></span> <span data-ttu-id="2560a-122">Le nouveau blog est enregistré dans la base de données SQLite de l’application et s’affiche dans la liste.</span><span class="sxs-lookup"><span data-stu-id="2560a-122">The new blog will save to the app's SQLite database and will show in the list.</span></span>
+<span data-ttu-id="9e055-121">Renseignez toutes les informations et cliquez sur **Enregistrer** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="9e055-121">Fill out all the info and click **Save** from the toolbar.</span></span> <span data-ttu-id="9e055-122">Le nouveau blog est enregistré dans la base de données SQLite de l’application et s’affiche dans la liste.</span><span class="sxs-lookup"><span data-stu-id="9e055-122">The new blog will save to the app's SQLite database and will show in the list.</span></span>
 
-<span data-ttu-id="2560a-123">Vous pouvez cliquer sur l’une des entrées de blog de la liste pour afficher les publications de ce blog.</span><span class="sxs-lookup"><span data-stu-id="2560a-123">You can click on one of the blog entries in the list and see any posts for that blog.</span></span>
+<span data-ttu-id="9e055-123">Vous pouvez cliquer sur l’une des entrées de blog de la liste pour afficher les publications de ce blog.</span><span class="sxs-lookup"><span data-stu-id="9e055-123">You can click on one of the blog entries in the list and see any posts for that blog.</span></span>
 
 ![Capture d’écran de la page de liste des billets de blog](_static/xamarin-tutorial-3.png)
 
-<span data-ttu-id="2560a-125">Dans la barre d’outils, cliquez sur **Ajouter** .</span><span class="sxs-lookup"><span data-stu-id="2560a-125">Click **Add** in the toolbar.</span></span>
+<span data-ttu-id="9e055-125">Dans la barre d’outils, cliquez sur **Ajouter** .</span><span class="sxs-lookup"><span data-stu-id="9e055-125">Click **Add** in the toolbar.</span></span>
 
-<span data-ttu-id="2560a-126">Une page s’affiche, qui vous permet de renseigner des informations sur un nouveau billet de blog.</span><span class="sxs-lookup"><span data-stu-id="2560a-126">A page then appears that allows you to fill out information about a new blog post.</span></span>
+<span data-ttu-id="9e055-126">Une page s’affiche, qui vous permet de renseigner des informations sur un nouveau billet de blog.</span><span class="sxs-lookup"><span data-stu-id="9e055-126">A page then appears that allows you to fill out information about a new blog post.</span></span>
 
 ![Capture d’écran de la page Ajouter une nouvelle publication](_static/xamarin-tutorial-4.png)
 
-<span data-ttu-id="2560a-128">Renseignez toutes les informations et cliquez sur **Enregistrer** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="2560a-128">Fill out all the information and click **Save** in the toolbar.</span></span>
+<span data-ttu-id="9e055-128">Renseignez toutes les informations et cliquez sur **Enregistrer** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="9e055-128">Fill out all the information and click **Save** in the toolbar.</span></span>
 
-<span data-ttu-id="2560a-129">Le nouveau billet sera associé au billet de blog sur lequel vous avez cliqué à l’étape précédente et sera enregistré dans la base de données SQLite de l’application et affiché dans la liste.</span><span class="sxs-lookup"><span data-stu-id="2560a-129">The new post will be associated to the blog post you clicked on in a previous step and will save to the app's SQLite database and show in the list.</span></span>
+<span data-ttu-id="9e055-129">Le nouveau billet sera associé au billet de blog sur lequel vous avez cliqué à l’étape précédente et sera enregistré dans la base de données SQLite de l’application et affiché dans la liste.</span><span class="sxs-lookup"><span data-stu-id="9e055-129">The new post will be associated to the blog post you clicked on in a previous step and will save to the app's SQLite database and show in the list.</span></span>
 
-<span data-ttu-id="2560a-130">Revenez à la page de la liste des blogs.</span><span class="sxs-lookup"><span data-stu-id="2560a-130">Go back to the blog list page.</span></span> <span data-ttu-id="2560a-131">Et cliquez sur **Supprimer tout** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="2560a-131">And click **Delete All** in the toolbar.</span></span> <span data-ttu-id="2560a-132">Tous les blogs et leurs publications correspondantes seront ensuite supprimés de la base de données SQLite de l’application.</span><span class="sxs-lookup"><span data-stu-id="2560a-132">All blogs and their corresponding posts will then be deleted from the app's SQLite database.</span></span>
+<span data-ttu-id="9e055-130">Revenez à la page de la liste des blogs.</span><span class="sxs-lookup"><span data-stu-id="9e055-130">Go back to the blog list page.</span></span> <span data-ttu-id="9e055-131">Et cliquez sur **Supprimer tout** dans la barre d’outils.</span><span class="sxs-lookup"><span data-stu-id="9e055-131">And click **Delete All** in the toolbar.</span></span> <span data-ttu-id="9e055-132">Tous les blogs et leurs publications correspondantes seront ensuite supprimés de la base de données SQLite de l’application.</span><span class="sxs-lookup"><span data-stu-id="9e055-132">All blogs and their corresponding posts will then be deleted from the app's SQLite database.</span></span>
 
 ![Capture d’écran de l’application avec tous les blogs supprimés](_static/xamarin-tutorial-5.png)
 
-## <a name="explore-the-code"></a><span data-ttu-id="2560a-134">Explorer le code</span><span class="sxs-lookup"><span data-stu-id="2560a-134">Explore the code</span></span>
+## <a name="explore-the-code"></a><span data-ttu-id="9e055-134">Explorer le code</span><span class="sxs-lookup"><span data-stu-id="9e055-134">Explore the code</span></span>
 
-<span data-ttu-id="2560a-135">Les sections suivantes vous guident tout au long du code de l’exemple de projet qui lit, crée, met à jour et supprime des données d’une base de données SQLite à l’aide de EF Core avec Xamarin. Forms.</span><span class="sxs-lookup"><span data-stu-id="2560a-135">The following sections will walk you through the code in the sample project that reads, creates, updates, and deletes data from a SQLite database using EF Core with Xamarin.Forms.</span></span>
+<span data-ttu-id="9e055-135">Les sections suivantes vous guident tout au long du code de l’exemple de projet qui lit, crée, met à jour et supprime des données d’une base de données SQLite à l’aide de EF Core avec Xamarin. Forms.</span><span class="sxs-lookup"><span data-stu-id="9e055-135">The following sections will walk you through the code in the sample project that reads, creates, updates, and deletes data from a SQLite database using EF Core with Xamarin.Forms.</span></span>
 
-<span data-ttu-id="2560a-136">Il est supposé que vous êtes familiarisé avec les rubriques Xamarin. Forms relatives à l' [affichage des données](/xamarin/xamarin-forms/app-fundamentals/data-binding/) et à la [navigation entre les pages](/xamarin/xamarin-forms/app-fundamentals/navigation/).</span><span class="sxs-lookup"><span data-stu-id="2560a-136">It is assumed that you are familiar with the Xamarin.Forms topics of [displaying data](/xamarin/xamarin-forms/app-fundamentals/data-binding/) and [navigating between pages](/xamarin/xamarin-forms/app-fundamentals/navigation/).</span></span>
+<span data-ttu-id="9e055-136">Il est supposé que vous êtes familiarisé avec les rubriques Xamarin. Forms relatives à l' [affichage des données](/xamarin/xamarin-forms/app-fundamentals/data-binding/) et à la [navigation entre les pages](/xamarin/xamarin-forms/app-fundamentals/navigation/).</span><span class="sxs-lookup"><span data-stu-id="9e055-136">It is assumed that you are familiar with the Xamarin.Forms topics of [displaying data](/xamarin/xamarin-forms/app-fundamentals/data-binding/) and [navigating between pages](/xamarin/xamarin-forms/app-fundamentals/navigation/).</span></span>
 
 > [!IMPORTANT]
-> <span data-ttu-id="2560a-137">Entity Framework Core utilise la réflexion pour appeler des fonctions que l’éditeur de liens Xamarin. iOS peut supprimer en même temps que les configurations en mode **Release** .</span><span class="sxs-lookup"><span data-stu-id="2560a-137">Entity Framework Core uses reflection to invoke functions which the Xamarin.iOS linker may strip out while in **Release** mode configurations.</span></span> <span data-ttu-id="2560a-138">Vous pouvez éviter cela de deux manières.</span><span class="sxs-lookup"><span data-stu-id="2560a-138">You can avoid that in one of two ways.</span></span>
+> <span data-ttu-id="9e055-137">Entity Framework Core utilise la réflexion pour appeler des fonctions que l’éditeur de liens Xamarin. iOS peut supprimer en même temps que les configurations en mode **Release** .</span><span class="sxs-lookup"><span data-stu-id="9e055-137">Entity Framework Core uses reflection to invoke functions which the Xamarin.iOS linker may strip out while in **Release** mode configurations.</span></span> <span data-ttu-id="9e055-138">Vous pouvez éviter cela de deux manières.</span><span class="sxs-lookup"><span data-stu-id="9e055-138">You can avoid that in one of two ways.</span></span>
 >
-> * <span data-ttu-id="2560a-139">La première consiste à ajouter des `--linkskip System.Core` **arguments mTouch supplémentaires** dans les options de **génération iOS** .</span><span class="sxs-lookup"><span data-stu-id="2560a-139">The first is to add `--linkskip System.Core` to the **Additional mtouch arguments** in the **iOS Build** options.</span></span>
-> * <span data-ttu-id="2560a-140">Vous pouvez également définir le comportement de l' **éditeur de liens** Xamarin. iOS sur `Don't Link` dans les options de **génération iOS** .</span><span class="sxs-lookup"><span data-stu-id="2560a-140">Alternatively set the Xamarin.iOS **Linker behavior** to `Don't Link` in the **iOS Build** options.</span></span>
-> <span data-ttu-id="2560a-141">[Cet article explique plus en détail l’éditeur de liens Xamarin. iOS](/xamarin/ios/deploy-test/linker) , y compris comment définir le comportement sur Xamarin. iOS.</span><span class="sxs-lookup"><span data-stu-id="2560a-141">[This article explains more about the Xamarin.iOS linker](/xamarin/ios/deploy-test/linker) including how to set the behavior on Xamarin.iOS.</span></span> <span data-ttu-id="2560a-142">(Cette approche n’est pas idéale, car elle peut entraîner le rejet du magasin).</span><span class="sxs-lookup"><span data-stu-id="2560a-142">(This approach isn't ideal as it may result in rejection from the store).</span></span>
+> * <span data-ttu-id="9e055-139">La première consiste à ajouter des `--linkskip System.Core` **arguments mTouch supplémentaires** dans les options de **génération iOS** .</span><span class="sxs-lookup"><span data-stu-id="9e055-139">The first is to add `--linkskip System.Core` to the **Additional mtouch arguments** in the **iOS Build** options.</span></span>
+> * <span data-ttu-id="9e055-140">Vous pouvez également définir le comportement de l' **éditeur de liens** Xamarin. iOS sur `Don't Link` dans les options de **génération iOS** .</span><span class="sxs-lookup"><span data-stu-id="9e055-140">Alternatively set the Xamarin.iOS **Linker behavior** to `Don't Link` in the **iOS Build** options.</span></span>
+> <span data-ttu-id="9e055-141">[Cet article explique plus en détail l’éditeur de liens Xamarin. iOS](/xamarin/ios/deploy-test/linker) , y compris comment définir le comportement sur Xamarin. iOS.</span><span class="sxs-lookup"><span data-stu-id="9e055-141">[This article explains more about the Xamarin.iOS linker](/xamarin/ios/deploy-test/linker) including how to set the behavior on Xamarin.iOS.</span></span> <span data-ttu-id="9e055-142">(Cette approche n’est pas idéale, car elle peut entraîner le rejet du magasin).</span><span class="sxs-lookup"><span data-stu-id="9e055-142">(This approach isn't ideal as it may result in rejection from the store).</span></span>
 
-## <a name="entity-framework-core-nuget-packages"></a><span data-ttu-id="2560a-143">Packages NuGet Entity Framework Core</span><span class="sxs-lookup"><span data-stu-id="2560a-143">Entity Framework Core NuGet packages</span></span>
+## <a name="entity-framework-core-nuget-packages"></a><span data-ttu-id="9e055-143">Packages NuGet Entity Framework Core</span><span class="sxs-lookup"><span data-stu-id="9e055-143">Entity Framework Core NuGet packages</span></span>
 
-<span data-ttu-id="2560a-144">Pour créer des applications Xamarin. Forms avec EF Core, vous devez installer le package pour le ou les fournisseurs de base de données EF Core que vous souhaitez cibler dans tous les projets de la solution Xamarin. Forms.</span><span class="sxs-lookup"><span data-stu-id="2560a-144">To create Xamarin.Forms apps with EF Core, you install the package for the EF Core database provider(s) you want to target into all of the projects in the Xamarin.Forms solution.</span></span> <span data-ttu-id="2560a-145">Ce didacticiel utilise le fournisseur SQLite.</span><span class="sxs-lookup"><span data-stu-id="2560a-145">This tutorial uses the SQLite provider.</span></span>
+<span data-ttu-id="9e055-144">Pour créer des applications Xamarin. Forms avec EF Core, vous devez installer le package pour le ou les fournisseurs de base de données EF Core que vous souhaitez cibler dans tous les projets de la solution Xamarin. Forms.</span><span class="sxs-lookup"><span data-stu-id="9e055-144">To create Xamarin.Forms apps with EF Core, you install the package for the EF Core database provider(s) you want to target into all of the projects in the Xamarin.Forms solution.</span></span> <span data-ttu-id="9e055-145">Ce didacticiel utilise le fournisseur SQLite.</span><span class="sxs-lookup"><span data-stu-id="9e055-145">This tutorial uses the SQLite provider.</span></span>
 
-<span data-ttu-id="2560a-146">Le package NuGet suivant est nécessaire dans chacun des projets de la solution Xamarin. Forms.</span><span class="sxs-lookup"><span data-stu-id="2560a-146">The following NuGet package is needed in each of the projects in the Xamarin.Forms solution.</span></span>
+<span data-ttu-id="9e055-146">Le package NuGet suivant est nécessaire dans chacun des projets de la solution Xamarin. Forms.</span><span class="sxs-lookup"><span data-stu-id="9e055-146">The following NuGet package is needed in each of the projects in the Xamarin.Forms solution.</span></span>
 
 * `Microsoft.EntityFrameworkCore.Sqlite`
 
-## <a name="model-classes"></a><span data-ttu-id="2560a-147">Classes de modèle</span><span class="sxs-lookup"><span data-stu-id="2560a-147">Model classes</span></span>
+## <a name="model-classes"></a><span data-ttu-id="9e055-147">Classes de modèle</span><span class="sxs-lookup"><span data-stu-id="9e055-147">Model classes</span></span>
 
-<span data-ttu-id="2560a-148">Chaque table de la base de données SQLite accessible via EF Core est modélisée dans une classe.</span><span class="sxs-lookup"><span data-stu-id="2560a-148">Each table in the SQLite database accessed through EF Core is modeled in a class.</span></span> <span data-ttu-id="2560a-149">Dans cet exemple, deux classes sont utilisées : `Blog` et `Post` qui se trouvent dans le `Models` dossier.</span><span class="sxs-lookup"><span data-stu-id="2560a-149">In this sample, two classes are used: `Blog` and `Post` which can be found in the `Models` folder.</span></span>
+<span data-ttu-id="9e055-148">Chaque table de la base de données SQLite accessible via EF Core est modélisée dans une classe.</span><span class="sxs-lookup"><span data-stu-id="9e055-148">Each table in the SQLite database accessed through EF Core is modeled in a class.</span></span> <span data-ttu-id="9e055-149">Dans cet exemple, deux classes sont utilisées : `Blog` et `Post` qui se trouvent dans le `Models` dossier.</span><span class="sxs-lookup"><span data-stu-id="9e055-149">In this sample, two classes are used: `Blog` and `Post` which can be found in the `Models` folder.</span></span>
 
-<span data-ttu-id="2560a-150">Les classes de modèle sont composées uniquement de propriétés, qui modélisent les colonnes de la base de données.</span><span class="sxs-lookup"><span data-stu-id="2560a-150">The model classes are composed only of properties, which model columns in the database.</span></span>
+<span data-ttu-id="9e055-150">Les classes de modèle sont composées uniquement de propriétés, qui modélisent les colonnes de la base de données.</span><span class="sxs-lookup"><span data-stu-id="9e055-150">The model classes are composed only of properties, which model columns in the database.</span></span>
 
-* <span data-ttu-id="2560a-151">**Blog.cs**</span><span class="sxs-lookup"><span data-stu-id="2560a-151">**Blog.cs**</span></span>
+* <span data-ttu-id="9e055-151">**Blog.cs**</span><span class="sxs-lookup"><span data-stu-id="9e055-151">**Blog.cs**</span></span>
 
   [!code-csharp[](../../../samples/core/Xamarin/EFGetStarted/Models/Blog.cs)]
 
-* <span data-ttu-id="2560a-152">La `Posts` propriété définit une relation parent-enfant entre `Blog` et `Post` .</span><span class="sxs-lookup"><span data-stu-id="2560a-152">The `Posts` property defines a parent-child relationship between `Blog` and `Post`.</span></span>
+* <span data-ttu-id="9e055-152">La `Posts` propriété définit une relation parent-enfant entre `Blog` et `Post` .</span><span class="sxs-lookup"><span data-stu-id="9e055-152">The `Posts` property defines a parent-child relationship between `Blog` and `Post`.</span></span>
 
-* <span data-ttu-id="2560a-153">**Post.cs**</span><span class="sxs-lookup"><span data-stu-id="2560a-153">**Post.cs**</span></span>
+* <span data-ttu-id="9e055-153">**Post.cs**</span><span class="sxs-lookup"><span data-stu-id="9e055-153">**Post.cs**</span></span>
 
   [!code-csharp[](../../../samples/core/Xamarin/EFGetStarted/Models/Post.cs)]
 
-* <span data-ttu-id="2560a-154">Les `BlogId` `Blog` Propriétés et relient à l' `Blog` objet parent pour l’instance de `Post` .</span><span class="sxs-lookup"><span data-stu-id="2560a-154">The `BlogId` and `Blog` properties relate back to the parent `Blog` object for the instance of the `Post`.</span></span>
+* <span data-ttu-id="9e055-154">Les `BlogId` `Blog` Propriétés et relient à l' `Blog` objet parent pour l’instance de `Post` .</span><span class="sxs-lookup"><span data-stu-id="9e055-154">The `BlogId` and `Blog` properties relate back to the parent `Blog` object for the instance of the `Post`.</span></span>
 
-## <a name="data-context"></a><span data-ttu-id="2560a-155">Contexte de données</span><span class="sxs-lookup"><span data-stu-id="2560a-155">Data context</span></span>
+## <a name="data-context"></a><span data-ttu-id="9e055-155">Contexte de données</span><span class="sxs-lookup"><span data-stu-id="9e055-155">Data context</span></span>
 
-<span data-ttu-id="2560a-156">La `BloggingContext` classe se trouve dans le `Services` dossier et hérite de la `DbContext` classe EF Core.</span><span class="sxs-lookup"><span data-stu-id="2560a-156">The `BloggingContext` class is located in the `Services` folder and inherits from the EF Core `DbContext` class.</span></span> <span data-ttu-id="2560a-157">Un `DbContext` est utilisé pour regrouper les requêtes et les modifications de base de données.</span><span class="sxs-lookup"><span data-stu-id="2560a-157">A `DbContext` is used to group together database queries and changes.</span></span>
+<span data-ttu-id="9e055-156">La `BloggingContext` classe se trouve dans le `Services` dossier et hérite de la `DbContext` classe EF Core.</span><span class="sxs-lookup"><span data-stu-id="9e055-156">The `BloggingContext` class is located in the `Services` folder and inherits from the EF Core `DbContext` class.</span></span> <span data-ttu-id="9e055-157">Un `DbContext` est utilisé pour regrouper les requêtes et les modifications de base de données.</span><span class="sxs-lookup"><span data-stu-id="9e055-157">A `DbContext` is used to group together database queries and changes.</span></span>
 
   [!code-csharp[](../../../samples/core/Xamarin/EFGetStarted/Services/BloggingContext.cs)]
 
-* <span data-ttu-id="2560a-158">Les deux propriétés de cette classe de type `DbSet` sont utilisées pour fonctionner sur les tables sous-jacentes représentant les blogs et les publications.</span><span class="sxs-lookup"><span data-stu-id="2560a-158">Both properties in this class of type `DbSet` are used to operate on the underlying tables representing Blogs and Posts.</span></span>
-* <span data-ttu-id="2560a-159">`SQLitePCL.Batteries_V2.Init()`Est nécessaire dans le constructeur pour lancer SQLite sur iOS.</span><span class="sxs-lookup"><span data-stu-id="2560a-159">The `SQLitePCL.Batteries_V2.Init()` is needed in the constructor to initiate SQLite on iOS.</span></span>
-* <span data-ttu-id="2560a-160">La `OnConfiguring` fonction définit l’emplacement de la base de données SQLite sur l’appareil physique.</span><span class="sxs-lookup"><span data-stu-id="2560a-160">The `OnConfiguring` function sets up the location of the SQLite database on the physical device.</span></span>
+* <span data-ttu-id="9e055-158">Les deux propriétés de cette classe de type `DbSet` sont utilisées pour fonctionner sur les tables sous-jacentes représentant les blogs et les publications.</span><span class="sxs-lookup"><span data-stu-id="9e055-158">Both properties in this class of type `DbSet` are used to operate on the underlying tables representing Blogs and Posts.</span></span>
+* <span data-ttu-id="9e055-159">`SQLitePCL.Batteries_V2.Init()`Est nécessaire dans le constructeur pour lancer SQLite sur iOS.</span><span class="sxs-lookup"><span data-stu-id="9e055-159">The `SQLitePCL.Batteries_V2.Init()` is needed in the constructor to initiate SQLite on iOS.</span></span>
+* <span data-ttu-id="9e055-160">La `OnConfiguring` fonction définit l’emplacement de la base de données SQLite sur l’appareil physique.</span><span class="sxs-lookup"><span data-stu-id="9e055-160">The `OnConfiguring` function sets up the location of the SQLite database on the physical device.</span></span>
 
-## <a name="create-read-update--delete"></a><span data-ttu-id="2560a-161">Créer, lire, mettre à jour et supprimer</span><span class="sxs-lookup"><span data-stu-id="2560a-161">Create, read, update & delete</span></span>
+## <a name="create-read-update--delete"></a><span data-ttu-id="9e055-161">Créer, lire, mettre à jour et supprimer</span><span class="sxs-lookup"><span data-stu-id="9e055-161">Create, read, update & delete</span></span>
 
-<span data-ttu-id="2560a-162">Voici quelques exemples de l’application dans laquelle EF Core est utilisé pour accéder à SQLite.</span><span class="sxs-lookup"><span data-stu-id="2560a-162">The following are some instances in the app where EF Core is used to access SQLite.</span></span>
+<span data-ttu-id="9e055-162">Voici quelques exemples de l’application dans laquelle EF Core est utilisé pour accéder à SQLite.</span><span class="sxs-lookup"><span data-stu-id="9e055-162">The following are some instances in the app where EF Core is used to access SQLite.</span></span>
 
-### <a name="read"></a><span data-ttu-id="2560a-163">Lire</span><span class="sxs-lookup"><span data-stu-id="2560a-163">Read</span></span>
+### <a name="read"></a><span data-ttu-id="9e055-163">Lire</span><span class="sxs-lookup"><span data-stu-id="9e055-163">Read</span></span>
 
-* <span data-ttu-id="2560a-164">Retourne tous les enregistrements.</span><span class="sxs-lookup"><span data-stu-id="2560a-164">Return all records.</span></span>
-  * <span data-ttu-id="2560a-165">La `OnAppearing` fonction de `BlogsPage.xaml.cs` retourne tous les `Blog` enregistrements et les stocke dans une `List` variable.</span><span class="sxs-lookup"><span data-stu-id="2560a-165">The `OnAppearing` function of `BlogsPage.xaml.cs` returns all `Blog` records and stores them into a `List` variable.</span></span>
+* <span data-ttu-id="9e055-164">Retourne tous les enregistrements.</span><span class="sxs-lookup"><span data-stu-id="9e055-164">Return all records.</span></span>
+  * <span data-ttu-id="9e055-165">La `OnAppearing` fonction de `BlogsPage.xaml.cs` retourne tous les `Blog` enregistrements et les stocke dans une `List` variable.</span><span class="sxs-lookup"><span data-stu-id="9e055-165">The `OnAppearing` function of `BlogsPage.xaml.cs` returns all `Blog` records and stores them into a `List` variable.</span></span>
 
 ```csharp
 using (var blogContext = new BloggingContext())
@@ -132,8 +132,8 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-* <span data-ttu-id="2560a-166">Retourner des enregistrements spécifiques.</span><span class="sxs-lookup"><span data-stu-id="2560a-166">Return specific records.</span></span>
-  * <span data-ttu-id="2560a-167">La `OnAppearing` fonction de `PostsPage.xaml.cs` retourne des `Post` enregistrements qui contiennent un spécifique `BlogId` .</span><span class="sxs-lookup"><span data-stu-id="2560a-167">The `OnAppearing` function of `PostsPage.xaml.cs` returns `Post` records that contain a specific `BlogId`.</span></span>
+* <span data-ttu-id="9e055-166">Retourner des enregistrements spécifiques.</span><span class="sxs-lookup"><span data-stu-id="9e055-166">Return specific records.</span></span>
+  * <span data-ttu-id="9e055-167">La `OnAppearing` fonction de `PostsPage.xaml.cs` retourne des `Post` enregistrements qui contiennent un spécifique `BlogId` .</span><span class="sxs-lookup"><span data-stu-id="9e055-167">The `OnAppearing` function of `PostsPage.xaml.cs` returns `Post` records that contain a specific `BlogId`.</span></span>
 
 ```csharp
 using (var blogContext = new BloggingContext())
@@ -144,10 +144,10 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="create"></a><span data-ttu-id="2560a-168">Créer</span><span class="sxs-lookup"><span data-stu-id="2560a-168">Create</span></span>
+### <a name="create"></a><span data-ttu-id="9e055-168">Créer</span><span class="sxs-lookup"><span data-stu-id="9e055-168">Create</span></span>
 
-* <span data-ttu-id="2560a-169">Insérez un nouvel enregistrement.</span><span class="sxs-lookup"><span data-stu-id="2560a-169">Insert a new record.</span></span>
-  * <span data-ttu-id="2560a-170">La `Save_Clicked` fonction de `AddBlogPage.xaml.cs` insère un nouvel `Blog` objet dans la base de données SQLite.</span><span class="sxs-lookup"><span data-stu-id="2560a-170">The `Save_Clicked` function of `AddBlogPage.xaml.cs` inserts a new `Blog` object into the SQLite database.</span></span>
+* <span data-ttu-id="9e055-169">Insérez un nouvel enregistrement.</span><span class="sxs-lookup"><span data-stu-id="9e055-169">Insert a new record.</span></span>
+  * <span data-ttu-id="9e055-170">La `Save_Clicked` fonction de `AddBlogPage.xaml.cs` insère un nouvel `Blog` objet dans la base de données SQLite.</span><span class="sxs-lookup"><span data-stu-id="9e055-170">The `Save_Clicked` function of `AddBlogPage.xaml.cs` inserts a new `Blog` object into the SQLite database.</span></span>
 
 ```csharp
 var blog = new Blog { Url = blogUrl.Text };
@@ -160,10 +160,10 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="update"></a><span data-ttu-id="2560a-171">Update</span><span class="sxs-lookup"><span data-stu-id="2560a-171">Update</span></span>
+### <a name="update"></a><span data-ttu-id="9e055-171">Update</span><span class="sxs-lookup"><span data-stu-id="9e055-171">Update</span></span>
 
-* <span data-ttu-id="2560a-172">Mettre à jour un enregistrement existant.</span><span class="sxs-lookup"><span data-stu-id="2560a-172">Update an existing record.</span></span>
-  * <span data-ttu-id="2560a-173">La `Save_Clicked` fonction de `AddPostPage.xaml.cs` met à jour un `Blog` objet existant avec un nouveau `Post` .</span><span class="sxs-lookup"><span data-stu-id="2560a-173">The `Save_Clicked` function of `AddPostPage.xaml.cs` updates an existing `Blog` object with a new `Post`.</span></span>
+* <span data-ttu-id="9e055-172">Mettre à jour un enregistrement existant.</span><span class="sxs-lookup"><span data-stu-id="9e055-172">Update an existing record.</span></span>
+  * <span data-ttu-id="9e055-173">La `Save_Clicked` fonction de `AddPostPage.xaml.cs` met à jour un `Blog` objet existant avec un nouveau `Post` .</span><span class="sxs-lookup"><span data-stu-id="9e055-173">The `Save_Clicked` function of `AddPostPage.xaml.cs` updates an existing `Blog` object with a new `Post`.</span></span>
 
 ```csharp
 var newPost = new Post
@@ -185,10 +185,10 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-### <a name="delete"></a><span data-ttu-id="2560a-174">Supprimer</span><span class="sxs-lookup"><span data-stu-id="2560a-174">Delete</span></span>
+### <a name="delete"></a><span data-ttu-id="9e055-174">Supprimer</span><span class="sxs-lookup"><span data-stu-id="9e055-174">Delete</span></span>
 
-* <span data-ttu-id="2560a-175">Supprimer tous les enregistrements avec des enregistrements en cascade vers enfants.</span><span class="sxs-lookup"><span data-stu-id="2560a-175">Delete all records with cascade to child records.</span></span>
-  * <span data-ttu-id="2560a-176">La `DeleteAll_Clicked` fonction de `BlogsPage.xaml.cs` supprime tous les `Blog` enregistrements de la base de données SQLite et répercute les suppressions sur tous les `Blog` enregistrements enfants `Post` .</span><span class="sxs-lookup"><span data-stu-id="2560a-176">The `DeleteAll_Clicked` function of `BlogsPage.xaml.cs` deletes all the `Blog` records in the SQLite database and cascades the deletes to all of the `Blog` child `Post` records.</span></span>
+* <span data-ttu-id="9e055-175">Supprimer tous les enregistrements avec des enregistrements en cascade vers enfants.</span><span class="sxs-lookup"><span data-stu-id="9e055-175">Delete all records with cascade to child records.</span></span>
+  * <span data-ttu-id="9e055-176">La `DeleteAll_Clicked` fonction de `BlogsPage.xaml.cs` supprime tous les `Blog` enregistrements de la base de données SQLite et répercute les suppressions sur tous les `Blog` enregistrements enfants `Post` .</span><span class="sxs-lookup"><span data-stu-id="9e055-176">The `DeleteAll_Clicked` function of `BlogsPage.xaml.cs` deletes all the `Blog` records in the SQLite database and cascades the deletes to all of the `Blog` child `Post` records.</span></span>
 
 ```csharp
 using (var blogContext = new BloggingContext())
@@ -199,12 +199,12 @@ using (var blogContext = new BloggingContext())
 }
 ```
 
-## <a name="next-steps"></a><span data-ttu-id="2560a-177">Étapes suivantes</span><span class="sxs-lookup"><span data-stu-id="2560a-177">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="9e055-177">Étapes suivantes</span><span class="sxs-lookup"><span data-stu-id="9e055-177">Next steps</span></span>
 
-<span data-ttu-id="2560a-178">Dans ce guide de prise en main, vous avez appris à utiliser une application Xamarin. Forms pour accéder à une base de données SQLite à l’aide de Entity Framework Core.</span><span class="sxs-lookup"><span data-stu-id="2560a-178">In this getting started you have learned how to use a Xamarin.Forms application to access a SQLite database using Entity Framework Core.</span></span>
+<span data-ttu-id="9e055-178">Dans ce guide de prise en main, vous avez appris à utiliser une application Xamarin. Forms pour accéder à une base de données SQLite à l’aide de Entity Framework Core.</span><span class="sxs-lookup"><span data-stu-id="9e055-178">In this getting started you have learned how to use a Xamarin.Forms application to access a SQLite database using Entity Framework Core.</span></span>
 
-<span data-ttu-id="2560a-179">Autres Entity Framework Core sujets intéressants pour les développeurs Xamarin :</span><span class="sxs-lookup"><span data-stu-id="2560a-179">Other Entity Framework Core topics of interest to Xamarin developers:</span></span>
+<span data-ttu-id="9e055-179">Autres Entity Framework Core sujets intéressants pour les développeurs Xamarin :</span><span class="sxs-lookup"><span data-stu-id="9e055-179">Other Entity Framework Core topics of interest to Xamarin developers:</span></span>
 
-* [<span data-ttu-id="2560a-180">Configuration d’un `DbContext`</span><span class="sxs-lookup"><span data-stu-id="2560a-180">Configuring a `DbContext`</span></span>](xref:core/dbcontext-configuration/index)
-* <span data-ttu-id="2560a-181">Découvrir les [expressions de requête LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)</span><span class="sxs-lookup"><span data-stu-id="2560a-181">Learn more about [LINQ query expressions](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)</span></span>
-* <span data-ttu-id="2560a-182">[Configurer votre modèle](xref:core/modeling/index) pour spécifier des éléments tels que la longueur [requise](xref:core/modeling/entity-properties#required-and-optional-properties) et la longueur [maximale](xref:core/modeling/entity-properties#maximum-length)</span><span class="sxs-lookup"><span data-stu-id="2560a-182">[Configure your model](xref:core/modeling/index) to specify things like [required](xref:core/modeling/entity-properties#required-and-optional-properties) and [maximum length](xref:core/modeling/entity-properties#maximum-length)</span></span>
+* [<span data-ttu-id="9e055-180">Configuration d’un `DbContext`</span><span class="sxs-lookup"><span data-stu-id="9e055-180">Configuring a `DbContext`</span></span>](xref:core/dbcontext-configuration/index)
+* <span data-ttu-id="9e055-181">Découvrir les [expressions de requête LINQ](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)</span><span class="sxs-lookup"><span data-stu-id="9e055-181">Learn more about [LINQ query expressions](/dotnet/csharp/programming-guide/concepts/linq/basic-linq-query-operations)</span></span>
+* <span data-ttu-id="9e055-182">[Configurer votre modèle](xref:core/modeling/index) pour spécifier des éléments tels que la longueur [requise](xref:core/modeling/entity-properties#required-and-optional-properties) et la longueur [maximale](xref:core/modeling/entity-properties#maximum-length)</span><span class="sxs-lookup"><span data-stu-id="9e055-182">[Configure your model](xref:core/modeling/index) to specify things like [required](xref:core/modeling/entity-properties#required-and-optional-properties) and [maximum length](xref:core/modeling/entity-properties#maximum-length)</span></span>
