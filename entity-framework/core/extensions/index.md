@@ -4,12 +4,12 @@ description: Outils et extensions externes pour Entity Framework Core.
 author: ErikEJ
 ms.date: 02/21/2021
 uid: core/extensions/index
-ms.openlocfilehash: 67d078250d8bfdb845cf98949ee1412a8fe842bd
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: 5034454cc23e34d28b26ff28cccee818663376c6
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024379"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166116"
 ---
 # <a name="ef-core-tools--extensions"></a>Outils et extensions EF Core
 
@@ -286,3 +286,15 @@ Prend en charge SQL Server, Postgres, MySql, SQLite et Oracle
 Pour EF Core : 3, 5.
 
 [Dépôt GitHub](https://github.com/Giorgi/EntityFramework.Exceptions)
+
+### <a name="efcoreauditing"></a>EFCoreAuditing
+
+Bibliothèque pour Entity Framework Core prendre en charge l’enregistrement automatique de l’historique des modifications de données (journalisation d’audit), la suppression réversible et la fonctionnalité de convention d’affectation de noms snake_case. Pour EF Core : 3.
+
+[Dépôt GitHub](https://github.com/OKTAYKIR/EFCoreAuditing)
+
+### <a name="entityframeworkcorefsharp"></a>EntityFrameworkCore. FSharp
+
+Ajoute la prise en charge au moment du design F # à EF Core. Pour EF Core : 5.
+
+[Dépôt GitHub](https://github.com/efcore/EFCore.FSharp)

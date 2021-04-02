@@ -4,12 +4,12 @@ description: Guide de référence pour les outils de CLI .NET Core Entity Framew
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dotnet
-ms.openlocfilehash: f33d598c444eb9cb9aba754d629934b7b2240919
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: e1ee9af9fa4e2d863c8ef0ed2c019970b5e2967e
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024418"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166074"
 ---
 # <a name="entity-framework-core-tools-reference---net-core-cli"></a>Informations de référence sur les outils de Entity Framework Core-CLI .NET Core
 
@@ -31,7 +31,7 @@ dotnet tool install --global dotnet-ef
 
 Pour l’utiliser en tant qu’outil local, restaurez les dépendances d’un projet qui le déclare en tant que dépendance de l’outil à l’aide d’un [fichier manifeste d’outil](/dotnet/core/tools/global-tools#install-a-local-tool).
 
-Mettez à jour l’outil Tool à l’aide de la commande suivante :
+Mettez à jour l’outil à l’aide de la commande suivante :
 
 ```dotnetcli
 dotnet tool update --global dotnet-ef
@@ -227,6 +227,12 @@ dotnet user-secrets set ConnectionStrings:Blogging "Data Source=(localdb)\MSSQLL
 dotnet ef dbcontext scaffold Name=ConnectionStrings:Blogging Microsoft.EntityFrameworkCore.SqlServer
 ```
 
+L’exemple suivant ignore la génération de modèles automatique d’une `OnConfiguring` méthode. Cela peut être utile lorsque vous souhaitez configurer DbContext en dehors de la classe. Par exemple, les applications ASP.NET Core sont généralement configurées dans Startup.ConfigureServices. Ajouté dans EF Core 5,0.
+
+```dotnetcli
+dotnet ef dbcontext scaffold "Server=(localdb)\mssqllocaldb;Database=Blogging;User Id=myUsername;Password=myPassword;" Microsoft.EntityFrameworkCore.SqlServer --no-onconfiguring
+```
+
 ## `dotnet ef dbcontext script`
 
 Génère un script SQL à partir de DbContext. Ignore les migrations. Ajouté dans EF Core 3,0.
@@ -273,13 +279,13 @@ Les [Options communes](#common-options) sont répertoriées ci-dessus.
 
 ## `dotnet ef migrations remove`
 
-Supprime la dernière migration en appelant la `Down` méthode de la dernière migration. La commande restaure les modifications de code qui ont été effectuées pour la dernière migration.
+Supprime la dernière migration, en annulant les modifications de code effectuées pour la dernière migration.
 
 Options :
 
 | Option                 | Court             | Description                                                                     |
 |:-----------------------|:------------------|:--------------------------------------------------------------------------------|
-| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Rétablissez la dernière migration, en annulant les modifications qui ont été appliquées à la base de données lors de la dernière migration. |
+| <nobr>`--force`</nobr> | <nobr>`-f`</nobr> | Rétablissez la dernière migration, en annulant les modifications de code et de base de données qui ont été effectuées pour la dernière migration. Continue à restaurer uniquement les modifications de code si une erreur se produit lors de la connexion à la base de données. |
 
 Les [Options communes](#common-options) sont répertoriées ci-dessus.
 

@@ -4,12 +4,12 @@ description: Comment utiliser des Azure Cosmos DB des données non structurées 
 author: AndriySvyryd
 ms.date: 11/05/2019
 uid: core/providers/cosmos/unstructured-data
-ms.openlocfilehash: ac497c9f5540557b931db935f4f3ca480edf010d
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: a5149062db89fa8e2ae2097c45fe0f0f29f22017
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064022"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166026"
 ---
 # <a name="working-with-unstructured-data-in-ef-core-azure-cosmos-db-provider"></a>Utilisation de données non structurées dans EF Core fournisseur Azure Cosmos DB
 

@@ -4,12 +4,12 @@ description: Comment configurer la génération de valeurs pour les propriétés
 author: AndriySvyryd
 ms.date: 1/10/2021
 uid: core/modeling/generated-properties
-ms.openlocfilehash: a9e43f3b755bf028bc76581135988e831a42d0d1
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: e1eebd6c8b385cde71bc5ca556d8e348e2221494
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543339"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166036"
 ---
 # <a name="generated-values"></a>Valeurs générées
 
@@ -75,9 +75,9 @@ De même, une propriété peut être configurée de manière à ce que sa valeur
 > [!WARNING]
 > Contrairement aux valeurs par défaut ou aux colonnes calculées, nous ne spécifions pas *Comment* les valeurs doivent être générées ; Cela dépend du fournisseur de base de données utilisé. Les fournisseurs de bases de données peuvent configurer automatiquement la génération de valeur pour certains types de propriété, mais d’autres peuvent vous obliger à configurer manuellement la manière dont la valeur est générée.
 >
-> Par exemple, sur SQL Server, quand une propriété GUID est configurée en tant que valeur générée lors de l’ajout, le fournisseur effectue automatiquement la génération de valeur côté client, à l’aide d’un algorithme pour générer des valeurs GUID séquentielles optimales. Toutefois, `ValueGeneratedOnAdd()` la spécification de sur une propriété DateTime n’a aucun effet ([consultez la section ci-dessous pour la génération de la valeur DateTime](#datetime-value-generation)).
+> Par exemple, sur SQL Server, quand une propriété GUID est configurée en tant que valeur générée lors de l’ajout, le fournisseur effectue automatiquement la génération de valeur côté client, à l’aide d’un algorithme pour générer des valeurs GUID séquentielles optimales. Toutefois, <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.ValueGeneratedOnAdd%2A> la spécification de sur une propriété DateTime n’a aucun effet ([consultez la section ci-dessous pour la génération de la valeur DateTime](#datetime-value-generation)).
 >
-> De même, les propriétés Byte [] qui sont configurées comme générées lors de l’ajout ou de la mise à jour et marquées comme jetons d’accès concurrentiel sont configurées avec le type de données rowversion, afin que les valeurs soient générées automatiquement dans la base de données. Toutefois, si vous spécifiez, l’opération n’aura `ValueGeneratedOnAddOrUpdate()` aucun effet.
+> De même, les propriétés Byte [] qui sont configurées comme générées lors de l’ajout ou de la mise à jour et marquées comme jetons d’accès concurrentiel sont configurées avec le type de données rowversion, afin que les valeurs soient générées automatiquement dans la base de données. Toutefois, la spécification de n' <xref:Microsoft.EntityFrameworkCore.Metadata.Builders.PropertyBuilder.ValueGeneratedOnAdd%2A> a aucun effet.
 >
 > [!NOTE]
 > Selon le fournisseur de base de données utilisé, les valeurs peuvent être générées côté client par EF ou dans la base de données. Si la valeur est générée par la base de données, EF peut affecter une valeur temporaire lorsque vous ajoutez l’entité au contexte. Cette valeur temporaire sera ensuite remplacée par la valeur générée par la base de données pendant `SaveChanges()` . Pour plus d’informations, [consultez la documentation sur les valeurs temporaires](xref:core/change-tracking/explicit-tracking#temporary-values).

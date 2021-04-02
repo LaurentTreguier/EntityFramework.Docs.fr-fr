@@ -4,12 +4,12 @@ description: Stratégies de création d’un DbContext au moment du design avec 
 author: bricelam
 ms.date: 10/27/2020
 uid: core/cli/dbcontext-creation
-ms.openlocfilehash: 1a2c0e853047cf4ab54a320d0bef413a114e90bc
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: c5acf025407b6903d09cc1aff253d35a8801ab40
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100543404"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166101"
 ---
 # <a name="design-time-dbcontext-creation"></a>Création de DbContext au moment de la conception
 
@@ -36,7 +36,7 @@ Si la DbContext ne peut pas être obtenue à partir du fournisseur de services d
 
 ## <a name="from-a-design-time-factory"></a>À partir d’une fabrique au moment de la conception
 
-Vous pouvez également indiquer aux outils comment créer votre DbContext en implémentant l' `IDesignTimeDbContextFactory<TContext>` interface : si une classe qui implémente cette interface est trouvée dans le même projet que le dérivé `DbContext` ou dans le projet de démarrage de l’application, les outils ignorent les autres méthodes de création de DbContext et utilisent la fabrique au moment de la conception.
+Vous pouvez également indiquer aux outils comment créer votre DbContext en implémentant l' <xref:Microsoft.EntityFrameworkCore.Design.IDesignTimeDbContextFactory%601?displayProperty=nameWithType> interface : si une classe qui implémente cette interface est trouvée dans le même projet que le dérivé `DbContext` ou dans le projet de démarrage de l’application, les outils ignorent les autres méthodes de création de DbContext et utilisent la fabrique au moment de la conception.
 
 [!code-csharp[Main](../../../samples/core/Miscellaneous/CommandLine/BloggingContextFactory.cs#BloggingContextFactory)]
 

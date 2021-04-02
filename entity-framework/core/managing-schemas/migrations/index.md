@@ -4,16 +4,16 @@ description: Vue d’ensemble de la gestion des schémas de la base de données 
 author: bricelam
 ms.date: 10/28/2020
 uid: core/managing-schemas/migrations/index
-ms.openlocfilehash: 27f94ad24e0255f023025d16b0ae1950d0ed4cc7
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: 60546d92704e0bb350e1df7f3bcc69171109b85b
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024184"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166070"
 ---
 # <a name="migrations-overview"></a>Vue d’ensemble des migrations
 
-Dans la pratique, les modèles de données des projets évoluent au fur et à mesure que des fonctionnalités sont implémentées : de nouvelles entités et propriétés sont ajoutées et supprimées, et les schémas de la base de données doivent être modifiés en conséquence pour rester synchronisés avec l’application. La fonctionnalité de migration dans EF Core permet de mettre à jour de manière incrémentielle le schéma de la base de données pour qu’il reste synchronisé avec le modèle de données de l’application tout en conservant les données existantes dans la base de données.
+Dans les projets réels, les modèles de données changent à mesure que les fonctionnalités sont implémentées : de nouvelles entités ou propriétés sont ajoutées et supprimées, et les schémas de base de données doivent être modifiés en conséquence afin d’être synchronisés avec l’application. La fonctionnalité de migration dans EF Core permet de mettre à jour de manière incrémentielle le schéma de la base de données pour qu’il reste synchronisé avec le modèle de données de l’application tout en conservant les données existantes dans la base de données.
 
 Dans les grandes lignes, les migrations fonctionnent de la façon suivante :
 

@@ -4,12 +4,12 @@ description: Mappage de fonctions définies par l’utilisateur à des fonctions
 author: maumar
 ms.date: 11/23/2020
 uid: core/querying/user-defined-function-mapping
-ms.openlocfilehash: 3e49ed9c49b38b98430128ffdc7ceef0b844b9df
-ms.sourcegitcommit: 032a1767d7a6e42052a005f660b80372c6521e7e
+ms.openlocfilehash: 3b581a3e70112a3b538b55e47ed63da6571a179b
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 01/12/2021
-ms.locfileid: "98129120"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165960"
 ---
 # <a name="user-defined-function-mapping"></a>Mappage de fonctions définies par l’utilisateur
 

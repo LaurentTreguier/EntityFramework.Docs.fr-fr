@@ -4,12 +4,12 @@ description: Utilisation des transactions dans Entity Framework 6
 author: ajcvickers
 ms.date: 10/23/2016
 uid: ef6/saving/transactions
-ms.openlocfilehash: 525b5cf605c1b61225ee2b9f1e0559a8e13f3052
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: 992e2a6e16a95159759416b93d1e315f537a0f14
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92064430"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106166089"
 ---
 # <a name="working-with-transactions"></a>Utilisation des transactions
 > [!NOTE]
@@ -179,7 +179,7 @@ Vous verrez une exception de Database. UseTransaction () si vous transmettez une
 
 Cette section explique en détail comment les transactions ci-dessus interagissent avec :  
 
-- Résilience de connexion  
+- Résilience de la connexion  
 - Méthodes asynchrones  
 - Transactions TransactionScope  
 
@@ -282,6 +282,8 @@ namespace TransactionsExamples
                         await context.SaveChangesAsync();
                     }
                 }
+                
+                scope.Complete();
             }
         }
     }

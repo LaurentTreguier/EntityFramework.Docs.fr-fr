@@ -4,12 +4,12 @@ description: Interception pour les opérations de base de données et d’autres
 author: ajcvickers
 ms.date: 10/08/2020
 uid: core/logging-events-diagnostics/interceptors
-ms.openlocfilehash: 459c0495e9a2f81e2e84388988f04ca9787080cc
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: db65f8028fdb6fc3d1055b5c4eda871a49d7186c
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024223"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165883"
 ---
 # <a name="interceptors"></a>Intercepteurs
 
@@ -146,7 +146,7 @@ SELECT [b].[Id], [b].[Name]
 FROM [Blogs] AS [b]
 ```
 
-### <a name="example-connection-interception-for-sql-azure-authentication-using-add"></a>Exemple : interception de connexion pour l’authentification SQL Azure à l’aide de ADD
+### <a name="example-connection-interception-for-sql-azure-authentication-using-aad"></a>Exemple : interception de connexion pour l’authentification SQL Azure à l’aide d’AAD
 
 > [!TIP]
 > Vous pouvez [Télécharger l’exemple d’intercepteur de connexion](https://github.com/dotnet/EntityFramework.Docs/tree/main/samples/core/Miscellaneous/ConnectionInterception) à partir de github.

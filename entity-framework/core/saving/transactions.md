@@ -4,12 +4,12 @@ description: Gestion des transactions pour l’atomicité lors de l’enregistre
 author: roji
 ms.date: 9/26/2020
 uid: core/saving/transactions
-ms.openlocfilehash: 25bf615cffa36384de9fe04fe2b84d4a6bca98d0
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: 4e124747dc6dd9b57b6f60621c27d878d3f9be00
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103023534"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165909"
 ---
 # <a name="using-transactions"></a>Utilisation de transactions
 
@@ -115,4 +115,4 @@ Il est également possible de s’inscrire dans une transaction explicite.
    > [!IMPORTANT]
    > Il est recommandé de vérifier que l’API se comporte correctement avec votre fournisseur avant de l’utiliser pour la gestion des transactions. Nous vous invitons à contacter le chargé de maintenance du fournisseur de base de données si ce n’est pas le cas.
 
-2. À compter de .NET Core 2,1, l’implémentation System. transactions n’inclut pas la prise en charge des transactions distribuées. par conséquent, vous ne pouvez pas utiliser `TransactionScope` ou `CommittableTransaction` pour coordonner des transactions sur plusieurs gestionnaires de ressources.
+2. L’implémentation .NET Core de System. transactions n’inclut pas actuellement la prise en charge des transactions distribuées. par conséquent, vous ne pouvez pas utiliser `TransactionScope` ou `CommittableTransaction` pour coordonner des transactions sur plusieurs gestionnaires de ressources. Le support est suivi par [ce problème](https://github.com/dotnet/runtime/issues/715).

@@ -4,12 +4,12 @@ description: Ajout, suppression et gestion des migrations de schémas de base de
 author: bricelam
 ms.date: 10/27/2020
 uid: core/managing-schemas/migrations/managing
-ms.openlocfilehash: a6e64bde753ae34b6dccb10b228d1ea87a79357b
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: ea2bf0e14214369af61bd1aedc932d90fc5f90c5
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103024171"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165863"
 ---
 # <a name="managing-migrations"></a>Gestion des migrations
 
@@ -168,7 +168,7 @@ Cela peut être utilisé pour gérer tous les aspects de votre base de données,
 * Recherche en texte intégral
 * Fonctions
 * Déclencheurs
-* Affichages
+* Vues
 
 Dans la plupart des cas, EF Core encapsule automatiquement chaque migration dans sa propre transaction lors de l’application des migrations. Malheureusement, certaines opérations de migration ne peuvent pas être effectuées au sein d’une transaction dans certaines bases de données ; dans ce cas, vous pouvez refuser la transaction en passant `suppressTransaction: true` à `migrationBuilder.Sql` .
 
@@ -220,7 +220,7 @@ Get-Migration
 
 ## <a name="resetting-all-migrations"></a>Réinitialisation de toutes les migrations
 
-Dans certains cas extrêmes, il peut être nécessaire de supprimer toutes les migrations et de recommencer. Vous pouvez facilement effectuer cette opération en supprimant votre dossier **migrations** et en supprimant votre base de données. à ce stade, vous pouvez créer une nouvelle migration initiale, qui contiendra l’ensemble du schéma actuel.
+Dans certains cas extrêmes, il peut être nécessaire de supprimer toutes les migrations et de recommencer. Vous pouvez facilement effectuer cette opération en supprimant votre dossier **migrations** et en supprimant votre base de données. à ce stade, vous pouvez créer une nouvelle migration initiale, qui contiendra l’ensemble de votre schéma actuel.
 
 Il est également possible de réinitialiser toutes les migrations et d’en créer une seule sans perdre vos données. Cela est parfois appelé « débogage » et implique un travail manuel :
 

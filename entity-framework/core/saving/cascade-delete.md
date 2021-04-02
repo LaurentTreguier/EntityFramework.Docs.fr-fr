@@ -4,12 +4,12 @@ description: Configuration des comportements en cascade déclenchés lorsqu’un
 author: ajcvickers
 ms.date: 01/07/2021
 uid: core/saving/cascade-delete
-ms.openlocfilehash: 6e897be6b4f5e6550d9ed3590445df60bef4fb3c
-ms.sourcegitcommit: 4798ab8d04c1fdbe6dd204d94d770fcbf309d09b
+ms.openlocfilehash: d6d40159fa17e9237bc6d5ece1b7f3670d638bbe
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 03/11/2021
-ms.locfileid: "103023612"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165891"
 ---
 # <a name="cascade-delete"></a>Suppression en cascade
 
@@ -22,7 +22,7 @@ Il existe deux options pour éviter cette violation de contrainte référentiell
 1. Définir les valeurs FK sur null
 2. Supprimer également les entités dépendantes/enfants
 
-La première option dans valide uniquement pour les relations facultatives où la propriété de clé étrangère (et la colonne de base de données à laquelle elle est mappée) doit être Nullable.
+La première option est valide uniquement pour les relations facultatives où la propriété de clé étrangère (et la colonne de base de données à laquelle elle est mappée) doivent avoir la valeur null.
 
 La deuxième option est valide pour tout type de relation et est connue sous le nom de « suppression en cascade ».
 

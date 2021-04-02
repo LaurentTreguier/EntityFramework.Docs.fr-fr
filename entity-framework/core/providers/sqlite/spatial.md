@@ -4,12 +4,12 @@ description: Utilisation de données spatiales avec le fournisseur de base de do
 author: bricelam
 ms.date: 10/02/2020
 uid: core/providers/sqlite/spatial
-ms.openlocfilehash: 3296955dc046b91b53a1dcb09c51b340bc853b4a
-ms.sourcegitcommit: 0a25c03fa65ae6e0e0e3f66bac48d59eceb96a5a
+ms.openlocfilehash: aaf0dcd7dc4b670d56ac99567e2e129313427e40
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 10/14/2020
-ms.locfileid: "92066623"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165942"
 ---
 # <a name="spatial-data-in-the-sqlite-ef-core-provider"></a>Données spatiales dans le fournisseur de EF Core SQLite
 
@@ -48,11 +48,11 @@ DYLD_LIBRARY_PATH=/usr/local/opt/sqlite/lib
 
 ## <a name="configuring-srid"></a>Configuration de SRID
 
-Dans SpatiaLite, les colonnes doivent spécifier un SRID par colonne. La valeur par défaut de SRID est `0` . Spécifiez un autre SRID à l’aide de la méthode ForSqliteHasSrid.
+Dans SpatiaLite, les colonnes doivent spécifier un SRID par colonne. La valeur par défaut de SRID est `0` . Spécifiez un autre SRID à l’aide de la méthode HasSrid.
 
 ```csharp
 modelBuilder.Entity<City>().Property(c => c.Location)
-    .ForSqliteHasSrid(4326);
+    .HasSrid(4326);
 ```
 
 > [!NOTE]

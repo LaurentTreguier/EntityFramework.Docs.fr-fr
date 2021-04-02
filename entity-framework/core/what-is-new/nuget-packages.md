@@ -4,12 +4,12 @@ description: Vue d’ensemble des différents packages NuGet Entity Framework Co
 author: ajcvickers
 ms.date: 01/21/2021
 uid: core/what-is-new/nuget-packages
-ms.openlocfilehash: 4b6e210f2324ea97e006d681d399bfdd6918d1b4
-ms.sourcegitcommit: 704240349e18b6404e5a809f5b7c9d365b152e2e
+ms.openlocfilehash: 25042eef49ae906e9243b782ddcd9186492eae04
+ms.sourcegitcommit: 196ebb726d99c2fa3f702d599f4bdae5e938cb1f
 ms.translationtype: MT
 ms.contentlocale: fr-FR
-ms.lasthandoff: 02/16/2021
-ms.locfileid: "100544598"
+ms.lasthandoff: 04/01/2021
+ms.locfileid: "106165926"
 ---
 # <a name="ef-core-nuget-packages"></a>EF Core les packages NuGet
 
@@ -21,8 +21,8 @@ Entity Framework Core (EF Core) est fourni sous forme de packages [NuGet](https:
 Le processus habituel d’installation des packages est le suivant :
 
 - Choisissez un fournisseur de base de données et installez le package approprié ([voir ci-dessous](#database-providers))
-- Installez également [Microsoft. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)et [Microsoft. EntityFrameworkCore. Relational](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Relational/) si vous utilisez un fournisseur relationnel. Cela permet de s’assurer que les versions cohérentes sont utilisées, et cela signifie également que NuGet vous permet de savoir quand de nouvelles versions de package sont expédiées.
-- Si vous le souhaitez, vous pouvez choisir le type d’outils dont vous avez besoin et installer les packages appropriés pour cela (voir ci-dessous)
+- Installez également [Microsoft. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)et [Microsoft. EntityFrameworkCore. Relational](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Relational/) si vous utilisez un fournisseur de base de données relationnelle. Cela permet de s’assurer que les versions cohérentes sont utilisées, et cela signifie également que NuGet vous permet de savoir quand de nouvelles versions de package sont expédiées.
+- Si vous le souhaitez, vous pouvez choisir le type d’outils dont vous avez besoin et installer les packages appropriés pour cela ([voir ci-dessous](#tools))
 
 Consultez le [didacticiel de mise en route pour Entity Framework Core](xref:core/get-started/overview/first-app) pour obtenir de l’aide sur la prise en main de EF Core.
 
@@ -33,7 +33,7 @@ Veillez à installer la même version de tous les packages de EF Core fournis pa
 Assurez-vous également que tous les packages externes sont compatibles avec la version de EF Core utilisée. En particulier, vérifiez que le fournisseur de base de données externe prend en charge la version de EF Core que vous utilisez. Les nouvelles versions principales de EF Core nécessitent généralement un fournisseur de base de données mis à jour.
 
 > [!WARNING]
-> NuGet n’applique pas de version de package cohérente. Vérifiez toujours soigneusement les versions que vous référencez dans votre `csproj` fichier ou un équivalent.
+> NuGet n’applique pas de version de package cohérente. Vérifiez toujours soigneusement les versions de package que vous référencez dans votre `.csproj` fichier ou un équivalent.
 
 ## <a name="database-providers"></a>Fournisseurs de bases de données
 
@@ -59,18 +59,18 @@ Les fournisseurs de bases de données courants sont répertoriés dans le tablea
 L’utilisation d’outils pour [EF Core les migrations](xref:core/managing-schemas/migrations/index) et l' [ingénierie à rebours (génération de modèles automatique) à partir d’une base de données existante](xref:core/managing-schemas/scaffolding) nécessite l’installation du package d’outils approprié :
 
 - [Microsoft. EntityFrameworkCore. Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools/) pour les outils PowerShell qui fonctionnent dans la console du [Gestionnaire de package](/nuget/consume-packages/install-use-packages-powershell) Visual Studio
-- [dotnet-EF](https://www.nuget.org/packages/dotnet-ef/) et [Microsoft. EntityFrameworkCore. Design](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/) pour les outils de ligne de commande multiplateforme
+- [dotnet-EF](https://www.nuget.org/packages/dotnet-ef/) et [Microsoft.EntityFrameworkCore.Design](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Design/) pour les outils de ligne de commande multiplateforme
 
 Pour plus d’informations sur l’utilisation des outils de EF Core, consultez [Guide de référence des outils de Entity Framework Core](xref:core/cli/index) , notamment comment installer correctement l' `dotnet-ef` outil dans un projet ou globalement.
 
 > [!TIP]
-> Par défaut, le package Microsoft. EntityFrameworkCore. Design est installé de manière à ce qu’il ne soit pas déployé avec votre application. Cela signifie également que ses types ne peuvent pas être utilisés de manière transitivement dans d’autres projets. Utilisez un normal `PackageReference` dans votre `.csproj` fichier ou un équivalent si vous avez besoin d’accéder aux types du package. Pour plus d’informations, consultez [services au moment](xref:core/cli/services) de la conception.
+> Par défaut, le package Microsoft.EntityFrameworkCore.Design est installé de manière à ce qu’il ne soit pas déployé avec votre application. Cela signifie également que ses types ne peuvent pas être utilisés de manière transitivement dans d’autres projets. Utilisez un normal `PackageReference` dans votre `.csproj` fichier ou un équivalent si vous avez besoin d’accéder aux types dans ce package. Pour plus d’informations, consultez [services au moment](xref:core/cli/services) de la conception.
 
-## <a name="extension-packages"></a>Packages d’extension
+## <a name="extension-packages"></a>Packages d'extension
 
 Il existe [de nombreuses extensions pour les EF Core](xref:core/extensions/index) publiées par Microsoft et par des tiers en tant que packages NuGet. Les packages couramment utilisés sont les suivants :
 
-| Fonctionnalité                                | Paquet | Dépendances supplémentaires
+| Fonctionnalités                                | Paquet | Dépendances supplémentaires
 |:---------------------------------------------|---------|------------------------
 | Proxies pour le chargement différé et le suivi des modifications | [Microsoft. EntityFrameworkCore. proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) | [Castle. Core](https://www.nuget.org/packages/Castle.Core/)
 | Prise en charge spatiale pour SQL Server               | [Microsoft. EntityFrameworkCore. SqlServer. NetTopologySuite](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Sqlite.NetTopologySuite/) | [NetTopologySuite](https://www.nuget.org/packages/NetTopologySuite/) et [NetTopologySuite. IO. SqlServerBytes](https://www.nuget.org/packages/NetTopologySuite.IO.SqlServerBytes/)
@@ -82,7 +82,7 @@ Il existe [de nombreuses extensions pour les EF Core](xref:core/extensions/index
 
 D’autres packages de EF Core sont extraits en tant que dépendances du package du fournisseur de base de données. Toutefois, vous souhaiterez peut-être ajouter des références de package explicites pour ces packages afin que NuGet fournisse des notifications lors de la publication de nouvelles versions.
 
-| Fonctionnalité                                              | Paquet
+| Fonctionnalités                                              | Paquet
 |:-----------------------------------------------------------|--------
 | EF Core fonctionnalités de base                                | [Microsoft.EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore/)
 | Fonctionnalités courantes de base de données relationnelle                   | [Microsoft. EntityFrameworkCore. Relational](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Relational/)
@@ -94,7 +94,7 @@ D’autres packages de EF Core sont extraits en tant que dépendances du package
 
 Les packages suivants sont utilisés pour tester les fournisseurs de base de données générés dans des dépôts GitHub externes. Pour obtenir des exemples, consultez [efcore.PG](https://github.com/npgsql/efcore.pg) et [pomelo. EntityFrameworkCore. MySQL](https://github.com/PomeloFoundation/Pomelo.EntityFrameworkCore.MySql) . Les applications ne doivent pas installer ces packages.
 
-| Fonctionnalité                                              | Paquet
+| Fonctionnalités                                              | Paquet
 |:-----------------------------------------------------------|--------
 | Teste tous les fournisseurs de base de données                            | [Microsoft. EntityFrameworkCore. Specification. tests](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Specification.Tests/)
 | Tests pour les fournisseurs de bases de données relationnelles                    | [Microsoft. EntityFrameworkCore. Relational. Specification. tests](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Relational.Specification.Tests/)
@@ -103,8 +103,8 @@ Les packages suivants sont utilisés pour tester les fournisseurs de base de don
 
 N’installez **pas** les packages obsolètes suivants et supprimez-les s’ils sont actuellement installés dans vos projets :
 
-- Microsoft. EntityFrameworkCore. Relational. Design
+- Microsoft.EntityFrameworkCore.Relational.Design
 - Microsoft. EntityFrameworkCore. Tools. DotNet
-- Microsoft. EntityFrameworkCore. SqlServer. Design
-- Microsoft. EntityFrameworkCore. sqlite. Design
+- Microsoft.EntityFrameworkCore.SqlServer.Design
+- Microsoft.EntityFrameworkCore.Sqlite.Design
 - Microsoft. EntityFrameworkCore. Relational. Design. Specification. tests
