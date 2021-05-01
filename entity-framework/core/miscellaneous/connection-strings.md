@@ -36,7 +36,7 @@ Ou l’exemple suivant illustre la chaîne de connexion stockée dans `appsettin
 }
 ```
 
-Le contexte est alors généralement configuré dans `Startup.cs` avec la chaîne de connexion lue à partir de la configuration. Remarque la `GetConnectionString()` méthode recherche une valeur de configuration dont la clé est `ConnectionStrings:<connection string name>` . Vous devez importer l’espace de noms [Microsoft.Extensions.Configfiguration](/dotnet/api/microsoft.extensions.configuration) pour utiliser cette méthode d’extension.
+Le contexte est alors généralement configuré dans `Startup.cs` avec la chaîne de connexion lue à partir de la configuration. Remarque la `GetConnectionString()` méthode recherche une valeur de configuration dont la clé est `ConnectionStrings:<connection string name>` . Vous devez importer l’espace de noms [Microsoft.Extensions.Configuration](/dotnet/api/microsoft.extensions.configuration) pour utiliser cette méthode d’extension.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
